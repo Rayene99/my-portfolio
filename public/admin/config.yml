@@ -1,0 +1,84 @@
+backend:
+  name: github
+  repo: Rayene99/my-portfolio
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "hero"
+    label: "Hero"
+    files:
+      - file: "content/hero/index.md"
+        name: "hero"
+        label: "Hero Section"
+        fields:
+          - {label: "Name", name: "name", widget: "string"}
+          - {label: "Tagline", name: "tagline", widget: "string"}
+          - {label: "Intro", name: "intro", widget: "text"}
+          - {label: "Photo", name: "photo", widget: "image"}
+
+  - name: "experience"
+    label: "Experience"
+    folder: "content/experience"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Company", name: "company", widget: "string"}
+      - {label: "Role", name: "role", widget: "string"}
+      - {label: "Start Date", name: "start_date", widget: "date"}
+      - {label: "End Date", name: "end_date", widget: "date", required: false}
+      - {label: "Description", name: "body", widget: "text"}
+
+  - name: "projects"
+    label: "Projects"
+    folder: "content/projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Link", name: "link", widget: "string", required: false}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+
+  - name: "ebooks"
+    label: "Ebooks"
+    folder: "content/ebooks"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Cover", name: "cover", widget: "image"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "HTML File", name: "html_file", widget: "file"}
+
+  - name: "cv"
+    label: "CV"
+    files:
+      - file: "content/cv/index.md"
+        name: "cv"
+        label: "CV"
+        fields:
+          - {label: "Full Name", name: "name", widget: "string"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Summary", name: "summary", widget: "text"}
+          - label: "Experience"
+            name: "experience"
+            widget: "list"
+            fields:
+              - {label: "Company", name: "company", widget: "string"}
+              - {label: "Role", name: "role", widget: "string"}
+              - {label: "Dates", name: "dates", widget: "string"}
+              - {label: "Description", name: "description", widget: "text"}
+          - label: "Education"
+            name: "education"
+            widget: "list"
+            fields:
+              - {label: "School", name: "school", widget: "string"}
+              - {label: "Degree", name: "degree", widget: "string"}
+              - {label: "Dates", name: "dates", widget: "string"}
+          - label: "Skills"
+            name: "skills"
+            widget: "list"

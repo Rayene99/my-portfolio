@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #8B6BAE;
+  --color-primary-dark: #5D4480;
+  --color-primary-light: #D4C3E8;
+  --color-accent: #F4B8C8;
+  --color-accent-dark: #D4849A;
+  --color-accent-light: #FDE8EE;
+  --color-success: #7C8C4A;
+  --color-success-dark: #566230;
+  --color-success-light: #C8D4A0;
+  --color-bg: #FDFAF6;
+  --color-surface: #FFFFFF;
+  --color-text: #2C2C2C;
+  --color-text-muted: #5A5A5A;
+  --color-text-light: #9A9A9A;
+  --color-border: #EDE8E0;
+
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  --shadow-sm: 0 4px 24px rgba(139, 107, 174, 0.08);
+  --shadow-lg: 0 12px 48px rgba(139, 107, 174, 0.15);
+
+  --radius-card: 16px;
+  --radius-input: 10px;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    box-sizing: border-box;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+p {
+  color: var(--color-text-muted);
+}
+
+::selection {
+  background: var(--color-accent-light);
+  color: var(--color-primary-dark);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+.nav-link {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 0;
+  height: 1px;
+  background: #8B6BAE;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.testimonial-drop-cap::first-letter {
+  font-size: 3.2em;
+  line-height: 0.78;
+  float: left;
+  margin-right: 0.07em;
+  font-weight: 600;
+  font-style: italic;
+  font-family: var(--font-heading);
+  color: var(--color-text);
+}
