@@ -1,18 +1,26 @@
 ---
 name: "Your Name"
-title: "Frontend Developer"
-summary: "Frontend developer with 3 years of experience..."
+title: "Your Job Title"
+summary: "A short paragraph about who you are."
 experience:
-  - company: "Acme Corp"
-    role: "Frontend Developer"
-    dates: "2023 - 2024"
-    description: "Built the main dashboard."
+  - company: "Company Name"
+    role: "Your Role"
+    dates: "2022 – Present"
+    description: "What you did here."
 education:
-  - school: "University X"
-    degree: "BSc Computer Science"
-    dates: "2019 - 2023"
+  - institution: "University Name"
+    degree: "Your Degree"
+    dates: "2018 – 2022"
 skills:
-  - "React"
-  - "JavaScript"
-  - "CSS"
+  - category: "Design"
+    items: ["Figma", "Prototyping"]
+  - category: "Development"
+    items: ["React", "JavaScript"]
+languages:
+  - language: "English"
+    level: "Native"
+certifications:
+  - name: "Certificate Name"
+    issuer: "Issuer"
+    year: "2023"
 ---

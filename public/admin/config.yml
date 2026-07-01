@@ -29,7 +29,8 @@ collections:
       - {label: "Role", name: "role", widget: "string"}
       - {label: "Start Date", name: "start_date", widget: "date"}
       - {label: "End Date", name: "end_date", widget: "date", required: false}
-      - {label: "Description", name: "body", widget: "text"}
+      - {label: "Location", name: "location", widget: "string", required: false}
+      - {label: "Description", name: "body", widget: "text", hint: "Use '- ' at the start of each line for bullet points"}
 
   - name: "projects"
     label: "Projects"
@@ -39,7 +40,7 @@ collections:
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Description", name: "description", widget: "text"}
-      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Image", name: "image", widget: "image", required: false}
       - {label: "Link", name: "link", widget: "string", required: false}
       - {label: "Tags", name: "tags", widget: "list", required: false}
 
@@ -50,9 +51,27 @@ collections:
     slug: "{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Cover", name: "cover", widget: "image"}
+      - {label: "Author", name: "author", widget: "string", required: false}
+      - {label: "Cover", name: "cover", widget: "image", required: false}
       - {label: "Description", name: "description", widget: "text"}
-      - {label: "HTML File", name: "html_file", widget: "file"}
+      - {label: "HTML File", name: "html_file", widget: "file", required: false}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+
+  - name: "blogs"
+    label: "Blog"
+    folder: "content/blogs"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Date", name: "date", widget: "date"}
+      - {label: "Cover Image", name: "cover", widget: "image", required: false}
+      - {label: "Excerpt", name: "excerpt", widget: "text", hint: "Short summary shown in previews"}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        hint: "Use the toolbar to add headings, bold, images, file links, and more"
 
   - name: "cv"
     label: "CV"
@@ -62,7 +81,7 @@ collections:
         label: "CV"
         fields:
           - {label: "Full Name", name: "name", widget: "string"}
-          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Job Title", name: "title", widget: "string"}
           - {label: "Summary", name: "summary", widget: "text"}
           - label: "Experience"
             name: "experience"
@@ -70,15 +89,31 @@ collections:
             fields:
               - {label: "Company", name: "company", widget: "string"}
               - {label: "Role", name: "role", widget: "string"}
-              - {label: "Dates", name: "dates", widget: "string"}
+              - {label: "Dates", name: "dates", widget: "string", hint: "e.g. 2022 – Present"}
               - {label: "Description", name: "description", widget: "text"}
           - label: "Education"
             name: "education"
             widget: "list"
             fields:
-              - {label: "School", name: "school", widget: "string"}
+              - {label: "Institution", name: "institution", widget: "string"}
               - {label: "Degree", name: "degree", widget: "string"}
               - {label: "Dates", name: "dates", widget: "string"}
           - label: "Skills"
             name: "skills"
             widget: "list"
+            fields:
+              - {label: "Category", name: "category", widget: "string", hint: "e.g. Design, Development"}
+              - {label: "Items", name: "items", widget: "list"}
+          - label: "Languages"
+            name: "languages"
+            widget: "list"
+            fields:
+              - {label: "Language", name: "language", widget: "string"}
+              - {label: "Level", name: "level", widget: "string", hint: "e.g. Native, Professional"}
+          - label: "Certifications"
+            name: "certifications"
+            widget: "list"
+            fields:
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Issuer", name: "issuer", widget: "string"}
+              - {label: "Year", name: "year", widget: "string"}
