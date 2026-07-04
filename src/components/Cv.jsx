@@ -9,6 +9,7 @@ const NAV_SECTIONS = [
   { id: "cv-skills",          label: "Skills"          },
   { id: "cv-languages",       label: "Languages"       },
   { id: "cv-certifications",  label: "Certifications"  },
+  { id: "cv-recommendations",  label: "Recommendations"  },
 ];
 
 function useActiveSection(ids) {
@@ -91,7 +92,7 @@ export default function CvPage() {
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
-              Download PDF
+              Download CV
             </button>
           </div>
 

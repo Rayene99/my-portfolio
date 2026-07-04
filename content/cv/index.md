@@ -1,6 +1,6 @@
 ---
-name: "Your Name"
-title: "Your Job Title"
+name: "Medabis Rayene"
+title: "Curriculum & Instructional Designer"
 summary: "A short paragraph about who you are."
 experience:
   - company: "Company Name"
