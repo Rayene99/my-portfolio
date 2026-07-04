@@ -1,4 +1,5 @@
 import matter from "gray-matter";
+import { marked } from "marked";
 
 const projectFiles     = import.meta.glob("/content/projects/*.md",     { eager: true, query: "?raw", import: "default" });
 const ebookFiles       = import.meta.glob("/content/ebooks/*.md",       { eager: true, query: "?raw", import: "default" });
@@ -11,7 +12,7 @@ const cvFile             = import.meta.glob("/content/cv/index.md",     { eager:
 function parseFiles(files) {
   return Object.values(files).map((raw) => {
     const { data, content } = matter(raw);
-    return { ...data, body: content };
+    return { ...data, body: marked(content) };
   });
 }
 
@@ -19,7 +20,7 @@ function parseSingle(files) {
   const raw = Object.values(files)[0];
   if (!raw) return null;
   const { data, content } = matter(raw);
-  return { ...data, body: content };
+  return { ...data, body: marked(content) };
 }
 
 export const projects     = parseFiles(projectFiles);
