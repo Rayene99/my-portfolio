@@ -1,5 +1,5 @@
 import { hero } from "../lib/content";
-import profilePic from "../assets/profile-pic.jpg";
+
 
 const education = [
   {
@@ -87,7 +87,7 @@ export default function Hero() {
             <div className="absolute -top-4 -left-4 w-px h-16 bg-white/50" />
             <div className="absolute -bottom-4 -right-4 w-16 h-px bg-white/50" />
             <div className="absolute -bottom-4 -right-4 w-px h-16 bg-white/50" />
-            <img src={profilePic} alt={hero.name} className="w-full h-full object-cover" />
+            <img src={hero.photo} alt={hero.name} className="w-full h-full object-cover" />
           </div>
         </div>
       </div>
