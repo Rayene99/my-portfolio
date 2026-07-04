@@ -2,10 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { experience } from "../lib/content";
 
 /** "2024-03-01" -> "Mar 2024". Built from numeric parts to avoid timezone drift. */
-function formatDate(dateStr) {
-  if (!dateStr) return "Present";
-  const [year, month] = dateStr.split("-").map(Number);
-  const date = new Date(year, month - 1, 1);
+function formatDate(dateInput) {
+  if (!dateInput) return "Present";
+
+  const date = dateInput instanceof Date ? dateInput : new Date(dateInput);
+
+  if (isNaN(date.getTime())) return "Present";
+
   return date.toLocaleDateString("en-US", { year: "numeric", month: "short" });
 }
 
