@@ -1,8 +1,8 @@
 ---
-title: "Designing for Clarity"
-date: "2024-05-12"
-cover: "/images/blog-cover.jpg"
-excerpt: "How reducing cognitive load transforms the user experience."
+title: Designing for Clarity
+date: 2024-05-12
+cover: /images/chatgpt-image-31-mai-2026-02_41_02.png
+excerpt: How reducing cognitive load transforms the user experience.
 tags:
   - Design
   - UX
