@@ -1,4 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import * as pdfjsLib from "pdfjs-dist";
+
+// Load the pdf.js worker from a CDN matching the installed package version.
+// (Works regardless of bundler — no bundler-specific "?url" import needed.)
+pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
 
 const PROTECTION_SNIPPET = `
 <style>
@@ -28,6 +33,92 @@ function getExtension(src) {
   const clean = src.split("?")[0].split("#")[0];
   const parts = clean.split(".");
   return parts.length > 1 ? parts.pop().toLowerCase() : "";
+}
+
+/*
+ * Renders every page of a PDF onto its own <canvas>, inside our own DOM.
+ * Because it's plain pixels on a canvas we own (not the browser's native
+ * PDF plugin in an iframe), the modal's onContextMenu/onDragStart handlers
+ * actually apply to it — there's no separate native toolbar or right-click
+ * "Save as" to work around.
+ */
+function PdfCanvasViewer({ src }) {
+  const containerRef = useRef(null);
+  const [status, setStatus] = useState("loading"); // loading | error | done
+
+  useEffect(() => {
+    let cancelled = false;
+    let pdfDoc = null;
+
+    async function render() {
+      setStatus("loading");
+      try {
+        pdfDoc = await pdfjsLib.getDocument(src).promise;
+        if (cancelled) return;
+
+        const container = containerRef.current;
+        if (!container) return;
+        container.innerHTML = "";
+
+        const containerWidth = container.clientWidth || 760;
+
+        for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+          if (cancelled) return;
+
+          const page = await pdfDoc.getPage(pageNum);
+          const baseViewport = page.getViewport({ scale: 1 });
+          const scale = containerWidth / baseViewport.width;
+          const viewport = page.getViewport({ scale });
+
+          const canvas = document.createElement("canvas");
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          canvas.style.display = "block";
+          canvas.style.width = "100%";
+          canvas.style.marginBottom = "10px";
+          canvas.style.borderRadius = "4px";
+          canvas.style.boxShadow = "0 1px 6px rgba(0,0,0,0.15)";
+          canvas.draggable = false;
+
+          const ctx = canvas.getContext("2d");
+          await page.render({ canvasContext: ctx, viewport }).promise;
+
+          if (cancelled) return;
+          container.appendChild(canvas);
+        }
+
+        if (!cancelled) setStatus("done");
+      } catch (err) {
+        if (!cancelled) setStatus("error");
+      }
+    }
+
+    render();
+
+    return () => {
+      cancelled = true;
+      if (pdfDoc) pdfDoc.destroy();
+    };
+  }, [src]);
+
+  return (
+    <div
+      onContextMenu={(e) => e.preventDefault()}
+      onDragStart={(e) => e.preventDefault()}
+      style={{
+        flex: 1, overflow: "auto", background: "#f4efe7",
+        padding: "1rem", userSelect: "none", WebkitUserSelect: "none",
+      }}
+    >
+      {status === "loading" && (
+        <div style={{ textAlign: "center", color: "#9ca3af", padding: "2rem" }}>Loading…</div>
+      )}
+      {status === "error" && (
+        <div style={{ textAlign: "center", color: "#9ca3af", padding: "2rem" }}>Couldn't load this file.</div>
+      )}
+      <div ref={containerRef} style={{ maxWidth: "760px", margin: "0 auto" }} />
+    </div>
+  );
 }
 
 export default function SecureFileViewer({ src, title, onClose }) {
@@ -130,19 +221,11 @@ export default function SecureFileViewer({ src, title, onClose }) {
     }
 
     if (isPdf) {
-      // Browsers render PDFs with their own native viewer (own toolbar,
-      // own download/print buttons) that lives outside our DOM entirely —
-      // no script or CSS here can reach or restrict it. Hiding the native
-      // toolbar via URL params is the only lever available, and it is
-      // easily bypassed (e.g. browser's own PDF menu, dev tools, or just
-      // re-adding #toolbar=1 to the URL). This is a light deterrent only.
-      return (
-        <iframe
-          src={`${src}#toolbar=0&navpanes=0&scrollbar=0`}
-          title={title}
-          style={{ flex: 1, border: "none", width: "100%" }}
-        />
-      );
+      // Rendered page-by-page onto <canvas> elements in our own DOM
+      // (via pdf.js) instead of the browser's native PDF plugin in an
+      // iframe. The native viewer's toolbar/context-menu lived outside
+      // our DOM and couldn't be blocked; canvas pixels can.
+      return <PdfCanvasViewer src={src} />;
     }
 
     // Unrecognized file type — no safe way to render/protect it inline.
