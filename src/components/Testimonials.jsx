@@ -120,19 +120,20 @@ function TestimonialCard({ item, index }) {
         gap: "0.8rem",
         flex: 1,
       }}>
-        <p style={{
-          fontFamily: "var(--font-body)",
-          fontSize: "0.84rem",
-          lineHeight: 1.68,
-          color: "var(--color-text-muted)",
-          margin: 0,
-          display: "-webkit-box",
-          WebkitLineClamp: 5,
-          WebkitBoxOrient: "vertical",
-          overflow: "hidden",
-        }}>
-          {item.body || item.quote}
-        </p>
+        <div
+          className="testimonial-quote"
+          style={{
+            fontFamily: "var(--font-body)",
+            fontSize: "0.84rem",
+            lineHeight: 1.68,
+            color: "var(--color-text-muted)",
+            display: "-webkit-box",
+            WebkitLineClamp: 5,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+          dangerouslySetInnerHTML={{ __html: item.body || item.quote }}
+        />
 
         <div style={{ marginTop: "auto" }}>
           <p style={{
@@ -164,6 +165,7 @@ function TestimonialCard({ item, index }) {
           from { opacity: 0; transform: translateY(20px); }
           to   { opacity: 1; transform: translateY(0); }
         }
+        .testimonial-quote p { margin: 0; }
       `}</style>
     </div>
   );

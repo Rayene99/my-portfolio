@@ -49,7 +49,7 @@ export default function Contact() {
                   </svg>
                 ),
                 label: "Email",
-                value: "hello@yoursite.com",
+                value: "Rayene.educator@gmail.com",
               },
               {
                 icon: (
@@ -61,7 +61,7 @@ export default function Contact() {
                   </svg>
                 ),
                 label: "LinkedIn",
-                value: "linkedin.com/in/yourhandle",
+                value: "Rayene Medabis, M.Ed",
               },
             ].map(({ icon, label, value }) => (
               <div key={label} style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
@@ -89,7 +89,7 @@ export default function Contact() {
 
           {/* RIGHT: Form */}
           <form
-            action="https://formspree.io/f/YOUR_FORM_ID"
+            action="https://formspree.io/f/mlgyzper"
             method="POST"
             style={{
               display: "flex", flexDirection: "column", gap: "1.2rem",

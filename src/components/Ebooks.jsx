@@ -18,6 +18,11 @@ function useInView(options) {
   return [ref, inView];
 }
 
+function stripHtml(html) {
+  if (!html) return "";
+  return html.replace(/<[^>]*>/g, "");
+}
+
 function FeaturedEbook({ item, index }) {
   const initials = item.title?.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
   const href = `/ebooks/${item.html_file?.split("/").pop()}`;
@@ -38,6 +43,7 @@ function FeaturedEbook({ item, index }) {
           from { opacity: 0; transform: translateY(12px); }
           to   { opacity: 1; transform: translateY(0); }
         }
+        .ebook-description p { margin: 0; }
       `}</style>
 
       {/* Cover */}
@@ -79,13 +85,15 @@ function FeaturedEbook({ item, index }) {
           {item.title}
         </h3>
 
-        <p style={{
-          fontFamily: "var(--font-body)", fontSize: "0.78rem",
-          lineHeight: 1.65, color: "var(--color-text-muted)", margin: 0,
-          display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden",
-        }}>
-          {item.description || item.body}
-        </p>
+        <div
+          className="ebook-description"
+          style={{
+            fontFamily: "var(--font-body)", fontSize: "0.78rem",
+            lineHeight: 1.65, color: "var(--color-text-muted)",
+            display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden",
+          }}
+          dangerouslySetInnerHTML={{ __html: item.description || item.body }}
+        />
 
         <div style={{
           marginTop: "auto", paddingTop: "0.85rem",
@@ -143,6 +151,7 @@ function FeaturedEbook({ item, index }) {
 function ThumbCard({ item, index, active, onClick }) {
   const [hovered, setHovered] = useState(false);
   const initials = item.title?.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
+  const previewText = stripHtml(item.description || item.body);
 
   return (
     <div
@@ -208,8 +217,8 @@ function ThumbCard({ item, index, active, onClick }) {
           color: "var(--color-text-muted)", margin: "3px 0 0",
           whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
         }}>
-          {(item.description || item.body || "").slice(0, 55)}
-          {(item.description || item.body || "").length > 55 ? "…" : ""}
+          {previewText.slice(0, 55)}
+          {previewText.length > 55 ? "…" : ""}
         </p>
       </div>
 

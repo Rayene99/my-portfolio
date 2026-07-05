@@ -60,6 +60,7 @@ function EbookViewer({ item, index }) {
           from { opacity: 0; transform: translateY(10px); }
           to   { opacity: 1; transform: translateY(0); }
         }
+        .ebook-viewer-description p { margin: 0; }
       `}</style>
 
       <div style={{
@@ -121,10 +122,11 @@ function EbookViewer({ item, index }) {
 
           {/* Excerpt / description */}
           {(item.description || item.body) && (
-            <p className="font-body text-base leading-[1.75] italic text-[#533178] border-l-[3px] border-[#B8709C] pl-4 mb-6"
-              style={{ margin: "0 0 1.5rem" }}>
-              {item.description || item.body}
-            </p>
+            <div
+              className="font-body text-base leading-[1.75] italic text-[#533178] border-l-[3px] border-[#B8709C] pl-4 mb-6 ebook-viewer-description"
+              style={{ margin: "0 0 1.5rem" }}
+              dangerouslySetInnerHTML={{ __html: item.description || item.body }}
+            />
           )}
 
           <hr className="border-0 border-t border-gray-200 my-6" />
