@@ -40,7 +40,8 @@ collections:
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Image", name: "image", widget: "image", required: false}
-      - {label: "Link", name: "link", widget: "string", required: false}
+      - {label: "External Link", name: "link", widget: "string", required: false, hint: "Paste a URL if the project lives elsewhere (e.g. https://example.com)"}
+      - {label: "Attached File", name: "file", widget: "file", required: false, hint: "Or upload a file instead (PDF, doc, html, etc.) — leave External Link empty if using this"}
       - {label: "Tags", name: "tags", widget: "list", required: false}
       - {label: "Tagline", name: "tagline", widget: "string", required: false, hint: "One punchy sentence shown under the title"}
       - {label: "Summary", name: "summary", widget: "text", required: false, hint: "Short blurb shown next to the cover image"}

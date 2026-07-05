@@ -21,11 +21,32 @@ const PROTECTION_SNIPPET = `
 </script>
 `;
 
+const IMAGE_EXTENSIONS = ["png", "jpg", "jpeg", "gif", "webp", "svg", "avif"];
+
+function getExtension(src) {
+  if (!src) return "";
+  const clean = src.split("?")[0].split("#")[0];
+  const parts = clean.split(".");
+  return parts.length > 1 ? parts.pop().toLowerCase() : "";
+}
+
 export default function SecureFileViewer({ src, title, onClose }) {
   const [doc, setDoc] = useState(null);
   const [error, setError] = useState(false);
 
+  const ext = getExtension(src);
+  const isHtml = ext === "html" || ext === "htm";
+  const isImage = IMAGE_EXTENSIONS.includes(ext);
+  const isPdf = ext === "pdf";
+
   useEffect(() => {
+    // Only HTML files need the fetch-and-inject treatment
+    if (!isHtml) {
+      setDoc(null);
+      setError(false);
+      return;
+    }
+
     let cancelled = false;
     setDoc(null);
     setError(false);
@@ -39,13 +60,13 @@ export default function SecureFileViewer({ src, title, onClose }) {
         if (cancelled) return;
         const injected = /<\/head>/i.test(html)
           ? html.replace(/<\/head>/i, `${PROTECTION_SNIPPET}</head>`)
-          : PROTECTION_SNIPPET + html; // no <head> tag found — just prepend
+          : PROTECTION_SNIPPET + html;
         setDoc(injected);
       })
       .catch(() => { if (!cancelled) setError(true); });
 
     return () => { cancelled = true; };
-  }, [src]);
+  }, [src, isHtml]);
 
   useEffect(() => {
     function blockKeys(e) {
@@ -59,6 +80,82 @@ export default function SecureFileViewer({ src, title, onClose }) {
     window.addEventListener("keydown", blockKeys, true);
     return () => window.removeEventListener("keydown", blockKeys, true);
   }, []);
+
+  function renderContent() {
+    if (isHtml) {
+      if (error) {
+        return (
+          <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af" }}>
+            Couldn't load this file.
+          </div>
+        );
+      }
+      if (doc === null) {
+        return (
+          <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af" }}>
+            Loading…
+          </div>
+        );
+      }
+      return (
+        <iframe
+          srcDoc={doc}
+          title={title}
+          sandbox="allow-scripts"
+          style={{ flex: 1, border: "none", width: "100%" }}
+        />
+      );
+    }
+
+    if (isImage) {
+      // Rendered directly in our own DOM (not an iframe), so the
+      // contextmenu/dragstart/select-none handlers on the wrapper below
+      // apply to it natively — no injection needed.
+      return (
+        <div style={{
+          flex: 1, display: "flex", alignItems: "center", justifyContent: "center",
+          background: "#f4efe7", overflow: "auto", padding: "1rem",
+        }}>
+          <img
+            src={src}
+            alt={title}
+            draggable={false}
+            style={{
+              maxWidth: "100%", maxHeight: "100%", objectFit: "contain",
+              userSelect: "none", WebkitUserSelect: "none", pointerEvents: "none",
+            }}
+          />
+        </div>
+      );
+    }
+
+    if (isPdf) {
+      // Browsers render PDFs with their own native viewer (own toolbar,
+      // own download/print buttons) that lives outside our DOM entirely —
+      // no script or CSS here can reach or restrict it. Hiding the native
+      // toolbar via URL params is the only lever available, and it is
+      // easily bypassed (e.g. browser's own PDF menu, dev tools, or just
+      // re-adding #toolbar=1 to the URL). This is a light deterrent only.
+      return (
+        <iframe
+          src={`${src}#toolbar=0&navpanes=0&scrollbar=0`}
+          title={title}
+          style={{ flex: 1, border: "none", width: "100%" }}
+        />
+      );
+    }
+
+    // Unrecognized file type — no safe way to render/protect it inline.
+    return (
+      <div style={{
+        flex: 1, display: "flex", flexDirection: "column", gap: "0.5rem",
+        alignItems: "center", justifyContent: "center", color: "#9ca3af",
+        fontFamily: "var(--font-mono)", fontSize: "0.8rem", textAlign: "center", padding: "2rem",
+      }}>
+        <span>This file type can't be previewed here.</span>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -95,23 +192,8 @@ export default function SecureFileViewer({ src, title, onClose }) {
           </button>
         </div>
 
-        {error ? (
-          <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af" }}>
-            Couldn't load this ebook.
-          </div>
-        ) : doc === null ? (
-          <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af" }}>
-            Loading…
-          </div>
-        ) : (
-          <iframe
-            srcDoc={doc}
-            title={title}
-            sandbox="allow-scripts"
-            style={{ flex: 1, border: "none", width: "100%" }}
-          />
-        )}
+        {renderContent()}
       </div>
     </div>
   );
-} 
+}

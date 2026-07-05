@@ -2,9 +2,13 @@ import { useState } from "react";
 import { projects } from "../lib/content";
 import SecureFileViewer from "./SecureFileViewer";
 
-function isInternalFile(link) {
-  if (!link) return false;
-  return !link.startsWith("http://") && !link.startsWith("https://");
+function resolveLink(item) {
+  if (item.file) return { type: "file", href: item.file };
+  if (item.link) {
+    const internal = !item.link.startsWith("http://") && !item.link.startsWith("https://");
+    return { type: internal ? "internal" : "external", href: item.link };
+  }
+  return null;
 }
 
 function ProjectNavButton({ item, index, active, onClick }) {
@@ -67,7 +71,7 @@ function ProjectViewer({ item, index, onOpenInternal }) {
   );
 
   const initials = item.title?.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
-  const internal = isInternalFile(item.link);
+  const resolved = resolveLink(item);
 
   return (
     <div style={{ animation: "projectFadeIn 0.3s ease both" }}>
@@ -134,35 +138,20 @@ function ProjectViewer({ item, index, onOpenInternal }) {
           )}
 
           <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-            {item.link ? (
-              internal ? (
-                <button onClick={() => onOpenInternal(item)} style={{
-                  display: "inline-flex", alignItems: "center", gap: "0.5rem",
-                  fontFamily: "var(--font-mono)", fontSize: "0.72rem",
-                  background: "#533178", color: "white",
-                  padding: "0.7rem 1.6rem", borderRadius: "999px",
-                  border: "none", cursor: "pointer",
-                  letterSpacing: "0.08em", textTransform: "uppercase",
-                  fontWeight: 600, transition: "background 0.2s, transform 0.2s",
-                }}
-                  onMouseEnter={e => { e.currentTarget.style.background = "#8B6BAE"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = "#533178"; e.currentTarget.style.transform = "translateY(0)"; }}
-                >
-                  View Project
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </button>
-              ) : (
-                <a href={item.link} target="_blank" rel="noopener noreferrer" style={{
-                  display: "inline-flex", alignItems: "center", gap: "0.5rem",
-                  fontFamily: "var(--font-mono)", fontSize: "0.72rem",
-                  background: "#533178", color: "white",
-                  padding: "0.7rem 1.6rem", borderRadius: "999px",
-                  textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase",
-                  fontWeight: 600, transition: "background 0.2s, transform 0.2s",
-                }}
+            {resolved ? (
+              resolved.type === "external" ? (
+                <a
+                  href={resolved.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-flex", alignItems: "center", gap: "0.5rem",
+                    fontFamily: "var(--font-mono)", fontSize: "0.72rem",
+                    background: "#533178", color: "white",
+                    padding: "0.7rem 1.6rem", borderRadius: "999px",
+                    textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase",
+                    fontWeight: 600, transition: "background 0.2s, transform 0.2s",
+                  }}
                   onMouseEnter={e => { e.currentTarget.style.background = "#8B6BAE"; e.currentTarget.style.transform = "translateY(-2px)"; }}
                   onMouseLeave={e => { e.currentTarget.style.background = "#533178"; e.currentTarget.style.transform = "translateY(0)"; }}
                 >
@@ -172,6 +161,27 @@ function ProjectViewer({ item, index, onOpenInternal }) {
                     <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
                   </svg>
                 </a>
+              ) : (
+                <button
+                  onClick={() => onOpenInternal(item)}
+                  style={{
+                    display: "inline-flex", alignItems: "center", gap: "0.5rem",
+                    fontFamily: "var(--font-mono)", fontSize: "0.72rem",
+                    background: "#533178", color: "white",
+                    padding: "0.7rem 1.6rem", borderRadius: "999px",
+                    border: "none", cursor: "pointer",
+                    letterSpacing: "0.08em", textTransform: "uppercase",
+                    fontWeight: 600, transition: "background 0.2s, transform 0.2s",
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "#8B6BAE"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "#533178"; e.currentTarget.style.transform = "translateY(0)"; }}
+                >
+                  View Project
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </button>
               )
             ) : (
               <span style={{
@@ -252,7 +262,7 @@ export default function ProjectPage() {
   const activeProject = projects[activeIndex];
 
   function openInternal(item) {
-    setViewerSrc(item.link);
+    setViewerSrc(item.file || item.link);
     setViewerTitle(item.title);
   }
 
