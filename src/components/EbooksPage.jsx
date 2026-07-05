@@ -2,13 +2,6 @@ import { useState } from "react";
 import { ebooks } from "../lib/content";
 import SecureFileViewer from "./SecureFileViewer";
 
-function formatDate(iso) {
-  if (!iso) return "";
-  return new Date(iso).toLocaleDateString("en-GB", {
-    day: "numeric", month: "long", year: "numeric",
-  });
-}
-
 /* ── Sidebar nav button ── */
 function EbookNavButton({ item, index, active, onClick }) {
   return (
@@ -40,6 +33,19 @@ function EbookNavButton({ item, index, active, onClick }) {
   );
 }
 
+/* ── Section heading used across the details panel ── */
+function SectionLabel({ children }) {
+  return (
+    <h3 style={{
+      fontFamily: "var(--font-mono)", fontSize: "0.68rem",
+      letterSpacing: "0.12em", textTransform: "uppercase",
+      color: "#533178", fontWeight: 700, marginBottom: "0.55rem",
+    }}>
+      {children}
+    </h3>
+  );
+}
+
 /* ── Main viewer panel ── */
 function EbookViewer({ item, index, onRead }) {
   if (!item) return (
@@ -66,20 +72,24 @@ function EbookViewer({ item, index, onRead }) {
         gap: "2.5rem",
         alignItems: "start",
       }}>
-        {/* Cover */}
+        {/* Cover — objectFit: contain so nothing gets cropped */}
         <div style={{
           borderRadius: "12px",
           overflow: "hidden",
           border: "1px solid rgba(93,68,128,0.18)",
           boxShadow: "0 8px 32px rgba(93,68,128,0.12)",
           aspectRatio: "2/3",
+          background: "#f4efe7",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
           flexShrink: 0,
         }}>
           {item.cover ? (
             <img
               src={item.cover}
               alt={item.title}
-              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }}
+              style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
             />
           ) : (
             <div style={{
@@ -105,17 +115,62 @@ function EbookViewer({ item, index, onRead }) {
             {String(index + 1).padStart(2, "0")}
           </span>
 
-          <h1 className="font-heading italic font-semibold leading-tight m-0 mb-4"
+          <h1 className="font-heading italic font-semibold leading-tight m-0 mb-2"
             style={{ fontSize: "clamp(2rem, 4vw, 2.8rem)", color: "#533178" }}>
             {item.title}
           </h1>
 
           {item.author && (
-            <p className="font-mono text-[0.72rem] tracking-[0.08em] text-[#9ca3af] mb-4">
+            <p className="font-mono text-[0.72rem] tracking-[0.08em] text-[#9ca3af] mb-3">
               by {item.author}
             </p>
           )}
 
+          {/* Tagline */}
+          {item.tagline && (
+            <p style={{
+              fontFamily: "var(--font-heading)", fontStyle: "italic",
+              fontSize: "1.1rem", color: "#8B6BAE", margin: "0 0 1.5rem",
+            }}>
+              {item.tagline}
+            </p>
+          )}
+
+          {/* The Problem */}
+          {item.problem && (
+            <div style={{ marginBottom: "1.5rem" }}>
+              <SectionLabel>The Problem</SectionLabel>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "0.95rem", lineHeight: 1.7, color: "#4b4b4b", margin: 0 }}>
+                {item.problem}
+              </p>
+            </div>
+          )}
+
+          {/* What You'll Learn */}
+          {item.takeaways?.length > 0 && (
+            <div style={{ marginBottom: "1.5rem" }}>
+              <SectionLabel>What You'll Learn</SectionLabel>
+              <ul style={{ margin: 0, paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+                {item.takeaways.map((t, i) => (
+                  <li key={i} style={{ fontFamily: "var(--font-body)", fontSize: "0.9rem", color: "#4b4b4b", lineHeight: 1.6 }}>
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Who It's For */}
+          {item.audience && (
+            <p style={{
+              fontFamily: "var(--font-mono)", fontSize: "0.7rem",
+              color: "#8B6BAE", letterSpacing: "0.05em", marginBottom: "1.5rem",
+            }}>
+              <strong style={{ color: "#533178" }}>Written for:</strong> {item.audience}
+            </p>
+          )}
+
+          {/* Full description */}
           {(item.description || item.body) && (
             <div
               className="font-body text-base leading-[1.75] italic text-[#533178] border-l-[3px] border-[#B8709C] pl-4 mb-6 ebook-viewer-description"
@@ -177,10 +232,10 @@ export default function EbookPage() {
 
   const activeEbook = ebooks[activeIndex];
 
-function openEbook(item) {
-  setViewerSrc(item.html_file); // e.g. "/images/teaching-online-done-right.html"
-  setViewerTitle(item.title);
-}
+  function openEbook(item) {
+    setViewerSrc(item.html_file); // e.g. "/images/teaching-online-done-right.html"
+    setViewerTitle(item.title);
+  }
 
   return (
     <div className="min-h-screen bg-[#fafafa]">

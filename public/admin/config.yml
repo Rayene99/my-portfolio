@@ -43,6 +43,11 @@ collections:
       - {label: "Image", name: "image", widget: "image", required: false}
       - {label: "Link", name: "link", widget: "string", required: false}
       - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Tagline", name: "tagline", widget: "string", required: false, hint: "One punchy sentence shown under the title"}
+      - {label: "The Problem", name: "problem", widget: "text", required: false, hint: "What gap or pain point does this project address?"}
+      - {label: "My Approach", name: "approach", widget: "text", required: false, hint: "How did you tackle it?"}
+      - {label: "Tech Stack", name: "techStack", widget: "list", required: false, hint: "e.g. React, Node.js, PostgreSQL"}
+      - {label: "Outcome", name: "outcome", widget: "text", required: false, hint: "Result or impact of the project"}
 
   - name: "ebooks"
     label: "Ebooks"
@@ -56,6 +61,10 @@ collections:
       - {label: "Description", name: "description", widget: "text"}
       - {label: "HTML File", name: "html_file", widget: "file", required: false}
       - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Tagline", name: "tagline", widget: "string", required: false, hint: "One punchy sentence shown under the title"}
+      - {label: "The Problem", name: "problem", widget: "text", required: false, hint: "What gap or pain point does this book address?"}
+      - {label: "What You'll Learn", name: "takeaways", widget: "list", required: false, hint: "Bullet points — key things the reader gets"}
+      - {label: "Who It's For", name: "audience", widget: "string", required: false}
 
   - name: "blogs"
     label: "Blog"

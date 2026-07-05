@@ -38,6 +38,18 @@ function ProjectNavButton({ item, index, active, onClick }) {
   );
 }
 
+function SectionLabel({ children }) {
+  return (
+    <h3 style={{
+      fontFamily: "var(--font-mono)", fontSize: "0.68rem",
+      letterSpacing: "0.12em", textTransform: "uppercase",
+      color: "#533178", fontWeight: 700, marginBottom: "0.55rem",
+    }}>
+      {children}
+    </h3>
+  );
+}
+
 /* ── Main viewer panel ── */
 function ProjectViewer({ item, index, onOpenInternal }) {
   if (!item) return (
@@ -64,20 +76,24 @@ function ProjectViewer({ item, index, onOpenInternal }) {
         gap: "2.5rem",
         alignItems: "start",
       }}>
-        {/* Cover image */}
+        {/* Cover image — objectFit: contain so nothing gets cropped */}
         <div style={{
           borderRadius: "12px",
           overflow: "hidden",
           border: "1px solid rgba(93,68,128,0.18)",
           boxShadow: "0 8px 32px rgba(93,68,128,0.12)",
           aspectRatio: "4/3",
+          background: "#f4efe7",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
           flexShrink: 0,
         }}>
           {item.image ? (
             <img
               src={item.image}
               alt={item.title}
-              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }}
+              style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
             />
           ) : (
             <div style={{
@@ -103,11 +119,72 @@ function ProjectViewer({ item, index, onOpenInternal }) {
             {String(index + 1).padStart(2, "0")}
           </span>
 
-          <h1 className="font-heading italic font-semibold leading-tight m-0 mb-4"
+          <h1 className="font-heading italic font-semibold leading-tight m-0 mb-2"
             style={{ fontSize: "clamp(2rem, 4vw, 2.8rem)", color: "#533178" }}>
             {item.title}
           </h1>
 
+          {/* Tagline */}
+          {item.tagline && (
+            <p style={{
+              fontFamily: "var(--font-heading)", fontStyle: "italic",
+              fontSize: "1.1rem", color: "#8B6BAE", margin: "0 0 1.5rem",
+            }}>
+              {item.tagline}
+            </p>
+          )}
+
+          {/* The Problem */}
+          {item.problem && (
+            <div style={{ marginBottom: "1.5rem" }}>
+              <SectionLabel>The Problem</SectionLabel>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "0.95rem", lineHeight: 1.7, color: "#4b4b4b", margin: 0 }}>
+                {item.problem}
+              </p>
+            </div>
+          )}
+
+          {/* The Approach */}
+          {item.approach && (
+            <div style={{ marginBottom: "1.5rem" }}>
+              <SectionLabel>My Approach</SectionLabel>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "0.95rem", lineHeight: 1.7, color: "#4b4b4b", margin: 0 }}>
+                {item.approach}
+              </p>
+            </div>
+          )}
+
+          {/* Tech Stack */}
+          {item.techStack?.length > 0 && (
+            <div style={{ marginBottom: "1.5rem" }}>
+              <SectionLabel>Tech Stack</SectionLabel>
+              <div className="flex flex-wrap gap-2">
+                {item.techStack.map((tech) => (
+                  <span key={tech} style={{
+                    fontFamily: "var(--font-mono)", fontSize: "0.68rem",
+                    letterSpacing: "0.06em",
+                    color: "#533178", background: "rgba(93,68,128,0.07)",
+                    padding: "4px 10px", borderRadius: "6px",
+                    border: "1px solid rgba(93,68,128,0.15)",
+                  }}>
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Outcome */}
+          {item.outcome && (
+            <div style={{ marginBottom: "1.5rem" }}>
+              <SectionLabel>Outcome</SectionLabel>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "0.95rem", lineHeight: 1.7, color: "#4b4b4b", margin: 0 }}>
+                {item.outcome}
+              </p>
+            </div>
+          )}
+
+          {/* Fallback / general description */}
           {(item.description || item.body) && (
             <p className="font-body text-base leading-[1.75] italic text-[#533178] border-l-[3px] border-[#B8709C] pl-4"
               style={{ margin: "0 0 1.5rem" }}>
