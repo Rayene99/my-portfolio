@@ -142,7 +142,7 @@ function EbookViewer({ item, index, onRead }) {
           {item.tagline && (
             <p style={{
               fontFamily: "var(--font-heading)", fontStyle: "italic",
-              fontSize: "1.1rem", color: "#8B6BAE", margin: "0 0 1.25rem",
+              fontSize: "1.1rem", color: "#6c5287", margin: "0 0 1.25rem",
             }}>
               {item.tagline}
             </p>
