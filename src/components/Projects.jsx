@@ -25,6 +25,7 @@ function useInView(options) {
 function FeaturedCard({ item, index, onOpenInternal }) {
   const initials = item.title?.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
   const internal = isInternalFile(item.link);
+  const preview = item.summary || item.description || item.body;
 
   return (
     <div style={{
@@ -88,7 +89,7 @@ function FeaturedCard({ item, index, onOpenInternal }) {
           lineHeight: 1.65, color: "var(--color-text-muted)", margin: 0,
           display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden",
         }}>
-          {item.description || item.body}
+          {preview}
         </p>
 
         <div style={{
@@ -176,6 +177,7 @@ function FeaturedCard({ item, index, onOpenInternal }) {
 function ThumbCard({ item, index, active, onClick }) {
   const [hovered, setHovered] = useState(false);
   const initials = item.title?.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
+  const previewText = item.summary || item.description || item.body || "";
 
   return (
     <div
@@ -248,8 +250,8 @@ function ThumbCard({ item, index, active, onClick }) {
           color: "var(--color-text-muted)", margin: "3px 0 0",
           whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
         }}>
-          {(item.description || item.body || "").slice(0, 55)}
-          {(item.description || item.body || "").length > 55 ? "…" : ""}
+          {previewText.slice(0, 55)}
+          {previewText.length > 55 ? "…" : ""}
         </p>
       </div>
 

@@ -39,15 +39,15 @@ collections:
     slug: "{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Description", name: "description", widget: "text"}
       - {label: "Image", name: "image", widget: "image", required: false}
       - {label: "Link", name: "link", widget: "string", required: false}
       - {label: "Tags", name: "tags", widget: "list", required: false}
       - {label: "Tagline", name: "tagline", widget: "string", required: false, hint: "One punchy sentence shown under the title"}
-      - {label: "The Problem", name: "problem", widget: "text", required: false, hint: "What gap or pain point does this project address?"}
-      - {label: "My Approach", name: "approach", widget: "text", required: false, hint: "How did you tackle it?"}
-      - {label: "Tech Stack", name: "techStack", widget: "list", required: false, hint: "e.g. React, Node.js, PostgreSQL"}
+      - {label: "Summary", name: "summary", widget: "text", required: false, hint: "Short blurb shown next to the cover image"}
+      - {label: "The Problem", name: "problem", widget: "text", required: false, hint: "What gap or need does this project address?"}
+      - {label: "The Approach", name: "approach", widget: "text", required: false, hint: "How did you tackle it?"}
       - {label: "Outcome", name: "outcome", widget: "text", required: false, hint: "Result or impact of the project"}
+      - {label: "Description", name: "description", widget: "text", required: false, hint: "Longer description shown at the bottom"}
 
   - name: "ebooks"
     label: "Ebooks"
@@ -58,13 +58,14 @@ collections:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Author", name: "author", widget: "string", required: false}
       - {label: "Cover", name: "cover", widget: "image", required: false}
-      - {label: "Description", name: "description", widget: "text"}
       - {label: "HTML File", name: "html_file", widget: "file", required: false}
       - {label: "Tags", name: "tags", widget: "list", required: false}
-      - {label: "Tagline", name: "tagline", widget: "string", required: false, hint: "One punchy sentence shown under the title"}
+      - {label: "Tagline", name: "tagline", widget: "string", required: false, hint: "One punchy sentence shown under the author"}
+      - {label: "Summary", name: "summary", widget: "text", required: false, hint: "Short blurb shown next to the cover image"}
       - {label: "The Problem", name: "problem", widget: "text", required: false, hint: "What gap or pain point does this book address?"}
       - {label: "What You'll Learn", name: "takeaways", widget: "list", required: false, hint: "Bullet points — key things the reader gets"}
       - {label: "Who It's For", name: "audience", widget: "string", required: false}
+      - {label: "Description", name: "description", widget: "text", required: false, hint: "Longer description shown at the bottom"}
 
   - name: "blogs"
     label: "Blog"

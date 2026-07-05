@@ -26,6 +26,7 @@ function stripHtml(html) {
 
 function FeaturedEbook({ item, index, onRead }) {
   const initials = item.title?.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
+  const preview = item.summary || item.description || item.body;
 
   return (
     <div style={{
@@ -92,7 +93,7 @@ function FeaturedEbook({ item, index, onRead }) {
             lineHeight: 1.65, color: "var(--color-text-muted)",
             display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden",
           }}
-          dangerouslySetInnerHTML={{ __html: item.description || item.body }}
+          dangerouslySetInnerHTML={{ __html: preview }}
         />
 
         <div style={{
@@ -123,7 +124,7 @@ function FeaturedEbook({ item, index, onRead }) {
           </button>
 
           {/* Browse All */}
-           <a
+            <a
             href="/EbooksPage"
             style={{
               display: "inline-flex", alignItems: "center", gap: "0.5rem",
@@ -152,7 +153,7 @@ function FeaturedEbook({ item, index, onRead }) {
 function ThumbCard({ item, index, active, onClick }) {
   const [hovered, setHovered] = useState(false);
   const initials = item.title?.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
-  const previewText = stripHtml(item.description || item.body);
+  const previewText = stripHtml(item.summary || item.description || item.body);
 
   return (
     <div
@@ -247,10 +248,10 @@ export default function Ebooks() {
   const hasMore = ebooks.length > PREVIEW_COUNT;
   const featured = previewEbooks[activeIndex];
 
-function openEbook(item) {
-  setViewerSrc(item.html_file); // e.g. "/images/teaching-online-done-right.html"
-  setViewerTitle(item.title);
-}
+  function openEbook(item) {
+    setViewerSrc(item.html_file);
+    setViewerTitle(item.title);
+  }
 
   return (
     <section
@@ -288,7 +289,7 @@ function openEbook(item) {
         </div>
 
         {hasMore && (
-           <a
+            <a
             href="/EbooksPage"
             style={{
               display: "inline-flex", alignItems: "center", gap: "0.5rem",
@@ -363,7 +364,7 @@ function openEbook(item) {
           ))}
 
           {hasMore && (
-            <a
+             <a
               href="/EbooksPage"
               style={{
                 display: "flex", alignItems: "center", justifyContent: "center", gap: "0.4rem",
