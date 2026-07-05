@@ -27,8 +27,8 @@ collections:
     fields:
       - {label: "Company", name: "company", widget: "string"}
       - {label: "Role", name: "role", widget: "string"}
-      - {label: "Start Date", name: "start_date", widget: "date"}
-      - {label: "End Date", name: "end_date", widget: "date", required: false}
+      - {label: "Start Date", name: "start_date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true}
+      - {label: "End Date", name: "end_date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true, required: false}
       - {label: "Location", name: "location", widget: "string", required: false}
       - {label: "Description", name: "body", widget: "text", hint: "Use '- ' at the start of each line for bullet points"}
 
