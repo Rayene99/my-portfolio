@@ -247,11 +247,10 @@ export default function Ebooks() {
   const hasMore = ebooks.length > PREVIEW_COUNT;
   const featured = previewEbooks[activeIndex];
 
-  function openEbook(item) {
-    const href = `/ebooks/${item.html_file?.split("/").pop()}`;
-    setViewerSrc(href);
-    setViewerTitle(item.title);
-  }
+function openEbook(item) {
+  setViewerSrc(item.html_file); // e.g. "/images/teaching-online-done-right.html"
+  setViewerTitle(item.title);
+}
 
   return (
     <section

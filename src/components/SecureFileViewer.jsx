@@ -72,7 +72,7 @@ export default function SecureFileViewer({ src, title, onClose }) {
           src={src}
           title={title}
           onLoad={handleIframeLoad}
-          sandbox="allow-scripts allow-same-origin"
+          sandbox="allow-scripts"
           style={{ flex: 1, border: "none", width: "100%" }}
         />
       </div>
