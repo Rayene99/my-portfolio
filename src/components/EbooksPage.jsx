@@ -39,6 +39,32 @@ function SectionLabel({ children }) {
   );
 }
 
+/* Shared boxed/italic style used for both Summary and Description */
+function BoxedText({ label, html, plain }) {
+  return (
+    <div style={{ marginBottom: "1.75rem" }}>
+      <SectionLabel>{label}</SectionLabel>
+      {html ? (
+        <div
+          className="font-body boxed-text"
+          style={{
+            fontSize: "0.95rem", lineHeight: 1.8, color: "#533178",
+            borderLeft: "3px solid #B8709C", paddingLeft: "1rem", fontStyle: "italic",
+          }}
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      ) : (
+        <p style={{
+          fontFamily: "var(--font-body)", fontSize: "0.95rem", lineHeight: 1.8, color: "#533178",
+          borderLeft: "3px solid #B8709C", paddingLeft: "1rem", fontStyle: "italic", margin: 0,
+        }}>
+          {plain}
+        </p>
+      )}
+    </div>
+  );
+}
+
 /* ── Main viewer panel ── */
 function EbookViewer({ item, index, onRead }) {
   if (!item) return (
@@ -56,10 +82,10 @@ function EbookViewer({ item, index, onRead }) {
           from { opacity: 0; transform: translateY(10px); }
           to   { opacity: 1; transform: translateY(0); }
         }
-        .ebook-desc p, .ebook-summary p { margin: 0; }
+        .boxed-text p { margin: 0; }
       `}</style>
 
-      {/* ── TOP: cover left / title+author+tagline+button+summary right ── */}
+      {/* ── TOP: cover left / title+author+tagline+button right ── */}
       <div style={{
         display: "grid",
         gridTemplateColumns: "260px 1fr",
@@ -92,7 +118,7 @@ function EbookViewer({ item, index, onRead }) {
           )}
         </div>
 
-        {/* Title / author / tagline / button / summary */}
+        {/* Title / author / tagline / button */}
         <div>
           <span style={{
             display: "inline-block", fontFamily: "var(--font-mono)", fontSize: "0.65rem",
@@ -132,7 +158,6 @@ function EbookViewer({ item, index, onRead }) {
               border: "none", cursor: "pointer",
               letterSpacing: "0.08em", textTransform: "uppercase",
               fontWeight: 600, transition: "background 0.2s, transform 0.2s",
-              marginBottom: "1.5rem",
             }}
             onMouseEnter={e => { e.currentTarget.style.background = "#8B6BAE"; e.currentTarget.style.transform = "translateY(-2px)"; }}
             onMouseLeave={e => { e.currentTarget.style.background = "#533178"; e.currentTarget.style.transform = "translateY(0)"; }}
@@ -146,15 +171,12 @@ function EbookViewer({ item, index, onRead }) {
         </div>
       </div>
 
-      {/* ── BOTTOM: full width — tags, problem, takeaways, audience, description ── */}
+      {/* ── BOTTOM: full width — summary, tags, problem, takeaways, audience, description ── */}
       <div>
-         {item.summary && (
-            <div
-              className="ebook-summary"
-              style={{ fontFamily: "var(--font-body)", fontSize: "0.95rem", lineHeight: 1.75, color: "#4b4b4b" }}
-              dangerouslySetInnerHTML={{ __html: item.summary }}
-            />
-          )}
+        {item.summary && (
+          <BoxedText label="Summary" html={item.summary} />
+        )}
+
         {item.tags?.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-6">
             {item.tags.map((tag) => (
@@ -202,17 +224,7 @@ function EbookViewer({ item, index, onRead }) {
         )}
 
         {(item.description || item.body) && (
-          <div style={{ marginBottom: "1rem" }}>
-            <SectionLabel>Description</SectionLabel>
-            <div
-              className="font-body ebook-desc"
-              style={{
-                fontSize: "0.95rem", lineHeight: 1.8, color: "#533178",
-                borderLeft: "3px solid #B8709C", paddingLeft: "1rem", fontStyle: "italic",
-              }}
-              dangerouslySetInnerHTML={{ __html: item.description || item.body }}
-            />
-          </div>
+          <BoxedText label="Description" html={item.description || item.body} />
         )}
       </div>
     </div>

@@ -43,6 +43,21 @@ function SectionLabel({ children }) {
   );
 }
 
+/* Shared boxed/italic style used for both Summary and Description */
+function BoxedText({ label, text }) {
+  return (
+    <div style={{ marginBottom: "1.75rem" }}>
+      <SectionLabel>{label}</SectionLabel>
+      <p style={{
+        fontFamily: "var(--font-body)", fontSize: "0.95rem", lineHeight: 1.8, color: "#533178",
+        borderLeft: "3px solid #B8709C", paddingLeft: "1rem", fontStyle: "italic", margin: 0,
+      }}>
+        {text}
+      </p>
+    </div>
+  );
+}
+
 /* ── Main viewer panel ── */
 function ProjectViewer({ item, index, onOpenInternal }) {
   if (!item) return (
@@ -63,7 +78,7 @@ function ProjectViewer({ item, index, onOpenInternal }) {
         }
       `}</style>
 
-      {/* ── TOP: image left / title+tagline+button+summary right ── */}
+      {/* ── TOP: image left / title+tagline+button right ── */}
       <div style={{
         display: "grid",
         gridTemplateColumns: "260px 1fr",
@@ -118,7 +133,7 @@ function ProjectViewer({ item, index, onOpenInternal }) {
             </p>
           )}
 
-          <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", marginBottom: "1.5rem" }}>
+          <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
             {item.link ? (
               internal ? (
                 <button onClick={() => onOpenInternal(item)} style={{
@@ -168,17 +183,15 @@ function ProjectViewer({ item, index, onOpenInternal }) {
               </span>
             )}
           </div>
-
-          {item.summary && (
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "0.95rem", lineHeight: 1.75, color: "#4b4b4b", margin: 0 }}>
-              {item.summary}
-            </p>
-          )}
         </div>
       </div>
 
-      {/* ── BOTTOM: full width — tags, problem, approach, outcome, description ── */}
+      {/* ── BOTTOM: full width — summary, tags, problem, approach, outcome, description ── */}
       <div>
+        {item.summary && (
+          <BoxedText label="Summary" text={item.summary} />
+        )}
+
         {item.tags?.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-6">
             {item.tags.map((tag) => (
@@ -222,15 +235,7 @@ function ProjectViewer({ item, index, onOpenInternal }) {
         )}
 
         {(item.description || item.body) && (
-          <div style={{ marginBottom: "1rem" }}>
-            <SectionLabel>Description</SectionLabel>
-            <p style={{
-              fontFamily: "var(--font-body)", fontSize: "0.95rem", lineHeight: 1.8, color: "#533178",
-              borderLeft: "3px solid #B8709C", paddingLeft: "1rem", fontStyle: "italic", margin: 0,
-            }}>
-              {item.description || item.body}
-            </p>
-          </div>
+          <BoxedText label="Description" text={item.description || item.body} />
         )}
       </div>
     </div>
