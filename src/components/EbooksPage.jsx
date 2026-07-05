@@ -143,19 +143,18 @@ function EbookViewer({ item, index, onRead }) {
               <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
             </svg>
           </button>
+        </div>
+      </div>
 
-          {item.summary && (
+      {/* ── BOTTOM: full width — tags, problem, takeaways, audience, description ── */}
+      <div>
+         {item.summary && (
             <div
               className="ebook-summary"
               style={{ fontFamily: "var(--font-body)", fontSize: "0.95rem", lineHeight: 1.75, color: "#4b4b4b" }}
               dangerouslySetInnerHTML={{ __html: item.summary }}
             />
           )}
-        </div>
-      </div>
-
-      {/* ── BOTTOM: full width — tags, problem, takeaways, audience, description ── */}
-      <div>
         {item.tags?.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-6">
             {item.tags.map((tag) => (
