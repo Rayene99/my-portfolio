@@ -1,5 +1,5 @@
 ---
-title: LESSON CREATION FEEDBACK
+title: Lesson creation feedback
 image: /images/capture-d’écran-2026-07-05-230150.png
 file: /images/feedback_and_guidelines_for_lesson_creation_enhancing_quality_and_engagement.pdf
 tags:
