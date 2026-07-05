@@ -25,13 +25,6 @@ function ChevronRight() {
 }
 
 function TestimonialCard({ item, index }) {
-  const initials = item.author
-    ?.split(" ")
-    .map((n) => n[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-
   return (
     <div
       style={{
@@ -47,52 +40,20 @@ function TestimonialCard({ item, index }) {
         position: "relative",
       }}
     >
-      {/* Photo */}
-      <div style={{ position: "relative", width: "100%", height: "200px", flexShrink: 0 }}>
-        {item.avatar ? (
-          <img
-            src={item.avatar}
-            alt={item.author}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "top center",
-              display: "block",
-            }}
-          />
-        ) : (
-          <div style={{
-            width: "100%",
-            height: "100%",
-            background: "var(--color-primary-light)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontFamily: "var(--font-mono)",
-            fontSize: "2.5rem",
-            color: "var(--color-primary-dark)",
-            fontWeight: 500,
-          }}>
-            {initials}
-          </div>
-        )}
-
-        {/* Quote badge — fixed centering */}
+      {/* Quote badge */}
+      <div style={{
+        padding: "1.4rem 1.2rem 0",
+      }}>
         <div
           aria-hidden="true"
           style={{
-            position: "absolute",
-            bottom: "-15px",
-            left: "1.1rem",
-            width: "32px",
-            height: "32px",
+            width: "36px",
+            height: "36px",
             borderRadius: "50%",
             background: "var(--color-primary)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            zIndex: 2,
             boxShadow: "0 2px 8px rgba(0,0,0,0.18)",
           }}
         >
@@ -114,7 +75,7 @@ function TestimonialCard({ item, index }) {
 
       {/* Card body */}
       <div style={{
-        padding: "1.6rem 1.2rem 1.3rem",
+        padding: "1rem 1.2rem 1.3rem",
         display: "flex",
         flexDirection: "column",
         gap: "0.8rem",
@@ -128,7 +89,7 @@ function TestimonialCard({ item, index }) {
             lineHeight: 1.68,
             color: "var(--color-text-muted)",
             display: "-webkit-box",
-            WebkitLineClamp: 5,
+            WebkitLineClamp: 7,
             WebkitBoxOrient: "vertical",
             overflow: "hidden",
           }}
@@ -241,7 +202,6 @@ export default function Testimonials() {
         width: "100%",
       }}
     >
-      {/* Decorative quote circle — larger, like the blue reference */}
       <div
         aria-hidden="true"
         style={{
@@ -274,7 +234,6 @@ export default function Testimonials() {
         </span>
       </div>
 
-      {/* Inner layout */}
       <div
         className="max-w-[1100px] mx-auto px-8"
         style={{ position: "relative", zIndex: 1 }}
@@ -286,7 +245,6 @@ export default function Testimonials() {
           alignItems: "center",
         }}>
 
-          {/* LEFT panel */}
           <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem" }}>
             <h2 style={{
               ...W,
@@ -311,7 +269,6 @@ export default function Testimonials() {
               Kind words, thoughtful feedback, and reflections from the people I've had the pleasure of collaborating and working with throughout my professional journey.
             </p>
 
-            {/* Arrows */}
             <div style={{ display: "flex", gap: "0.45rem", marginTop: "1.25rem" }}>
               {[
                 { icon: <ChevronLeft />,  dir: "prev", label: "Previous" },
@@ -330,7 +287,6 @@ export default function Testimonials() {
               ))}
             </div>
 
-            {/* Dots */}
             <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>
               {Array.from({ length: dots }).map((_, i) => (
                 <button
@@ -352,7 +308,6 @@ export default function Testimonials() {
             </div>
           </div>
 
-          {/* RIGHT: cards */}
           <div style={{
             display: "flex",
             gap: "1rem",
