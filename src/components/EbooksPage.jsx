@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ebooks } from "../lib/content";
+import SecureFileViewer from "./SecureFileViewer";
 
 function formatDate(iso) {
   if (!iso) return "";
@@ -15,7 +16,6 @@ function EbookNavButton({ item, index, active, onClick }) {
       onClick={onClick}
       className="relative bg-transparent border-none cursor-pointer text-left py-[0.45rem] w-full transition-colors duration-200"
     >
-      {/* Active indicator bar */}
       {active && (
         <span
           className="absolute right-[-2rem] top-1/2 -translate-y-1/2 w-[3px] h-[18px] rounded-sm"
@@ -23,7 +23,6 @@ function EbookNavButton({ item, index, active, onClick }) {
         />
       )}
 
-      {/* Index label */}
       <span
         className={`block font-mono text-[0.62rem] tracking-[0.14em] uppercase mb-[2px] transition-colors duration-200
           ${active ? "text-[#B8709C] font-bold" : "text-[#c4b5d0]"}`}
@@ -31,7 +30,6 @@ function EbookNavButton({ item, index, active, onClick }) {
         {String(index + 1).padStart(2, "0")}
       </span>
 
-      {/* Title */}
       <span
         className={`block font-mono text-[0.72rem] tracking-[0.08em] uppercase leading-snug transition-colors duration-200
           ${active ? "text-[#533178] font-bold" : "text-[#9ca3af] font-normal hover:text-[#533178]"}`}
@@ -43,7 +41,7 @@ function EbookNavButton({ item, index, active, onClick }) {
 }
 
 /* ── Main viewer panel ── */
-function EbookViewer({ item, index }) {
+function EbookViewer({ item, index, onRead }) {
   if (!item) return (
     <div className="flex items-center justify-center h-[300px] text-[#9ca3af] font-mono text-[0.8rem] tracking-[0.1em] uppercase">
       Select an ebook
@@ -51,7 +49,6 @@ function EbookViewer({ item, index }) {
   );
 
   const initials = item.title?.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
-  const href = `/ebooks/${item.html_file?.split("/").pop()}`;
 
   return (
     <div style={{ animation: "ebookFadeIn 0.3s ease both" }}>
@@ -99,7 +96,6 @@ function EbookViewer({ item, index }) {
 
         {/* Details */}
         <div>
-          {/* Index badge */}
           <span style={{
             display: "inline-block",
             fontFamily: "var(--font-mono)", fontSize: "0.65rem",
@@ -120,7 +116,6 @@ function EbookViewer({ item, index }) {
             </p>
           )}
 
-          {/* Excerpt / description */}
           {(item.description || item.body) && (
             <div
               className="font-body text-base leading-[1.75] italic text-[#533178] border-l-[3px] border-[#B8709C] pl-4 mb-6 ebook-viewer-description"
@@ -131,7 +126,6 @@ function EbookViewer({ item, index }) {
 
           <hr className="border-0 border-t border-gray-200 my-6" />
 
-          {/* Tags */}
           {item.tags?.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-6">
               {item.tags.map((tag) => (
@@ -147,15 +141,16 @@ function EbookViewer({ item, index }) {
             </div>
           )}
 
-          {/* CTA */}
-          <a
-            href={href}
+          {/* CTA — opens protected in-page viewer */}
+          <button
+            onClick={onRead}
             style={{
               display: "inline-flex", alignItems: "center", gap: "0.5rem",
               fontFamily: "var(--font-mono)", fontSize: "0.72rem",
               background: "#533178", color: "white",
               padding: "0.7rem 1.6rem", borderRadius: "999px",
-              textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase",
+              border: "none", cursor: "pointer",
+              letterSpacing: "0.08em", textTransform: "uppercase",
               fontWeight: 600, transition: "background 0.2s, transform 0.2s",
             }}
             onMouseEnter={e => { e.currentTarget.style.background = "#8B6BAE"; e.currentTarget.style.transform = "translateY(-2px)"; }}
@@ -166,7 +161,7 @@ function EbookViewer({ item, index }) {
               stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
             </svg>
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -175,10 +170,18 @@ function EbookViewer({ item, index }) {
 
 export default function EbookPage() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [viewerSrc, setViewerSrc] = useState(null);
+  const [viewerTitle, setViewerTitle] = useState("");
 
   if (!Array.isArray(ebooks) || ebooks.length === 0) return null;
 
   const activeEbook = ebooks[activeIndex];
+
+  function openEbook(item) {
+    const href = `/ebooks/${item.html_file?.split("/").pop()}`;
+    setViewerSrc(href);
+    setViewerTitle(item.title);
+  }
 
   return (
     <div className="min-h-screen bg-[#fafafa]">
@@ -220,9 +223,22 @@ export default function EbookPage() {
 
         {/* RIGHT: ebook viewer */}
         <main className="pl-10 pt-8">
-          <EbookViewer key={activeIndex} item={activeEbook} index={activeIndex} />
+          <EbookViewer
+            key={activeIndex}
+            item={activeEbook}
+            index={activeIndex}
+            onRead={() => openEbook(activeEbook)}
+          />
         </main>
       </div>
+
+      {viewerSrc && (
+        <SecureFileViewer
+          src={viewerSrc}
+          title={viewerTitle}
+          onClose={() => setViewerSrc(null)}
+        />
+      )}
     </div>
   );
 }

@@ -1,5 +1,11 @@
 import { useState } from "react";
 import { projects } from "../lib/content";
+import SecureFileViewer from "./SecureFileViewer";
+
+function isInternalFile(link) {
+  if (!link) return false;
+  return !link.startsWith("http://") && !link.startsWith("https://");
+}
 
 /* ── Sidebar nav button ── */
 function ProjectNavButton({ item, index, active, onClick }) {
@@ -8,7 +14,6 @@ function ProjectNavButton({ item, index, active, onClick }) {
       onClick={onClick}
       className="relative bg-transparent border-none cursor-pointer text-left py-[0.45rem] w-full transition-colors duration-200"
     >
-      {/* Active indicator bar */}
       {active && (
         <span
           className="absolute right-[-2rem] top-1/2 -translate-y-1/2 w-[3px] h-[18px] rounded-sm"
@@ -16,7 +21,6 @@ function ProjectNavButton({ item, index, active, onClick }) {
         />
       )}
 
-      {/* Index label */}
       <span
         className={`block font-mono text-[0.62rem] tracking-[0.14em] uppercase mb-[2px] transition-colors duration-200
           ${active ? "text-[#B8709C] font-bold" : "text-[#c4b5d0]"}`}
@@ -24,7 +28,6 @@ function ProjectNavButton({ item, index, active, onClick }) {
         {String(index + 1).padStart(2, "0")}
       </span>
 
-      {/* Title */}
       <span
         className={`block font-mono text-[0.72rem] tracking-[0.08em] uppercase leading-snug transition-colors duration-200
           ${active ? "text-[#533178] font-bold" : "text-[#9ca3af] font-normal hover:text-[#533178]"}`}
@@ -36,7 +39,7 @@ function ProjectNavButton({ item, index, active, onClick }) {
 }
 
 /* ── Main viewer panel ── */
-function ProjectViewer({ item, index }) {
+function ProjectViewer({ item, index, onOpenInternal }) {
   if (!item) return (
     <div className="flex items-center justify-center h-[300px] text-[#9ca3af] font-mono text-[0.8rem] tracking-[0.1em] uppercase">
       Select a project
@@ -44,6 +47,7 @@ function ProjectViewer({ item, index }) {
   );
 
   const initials = item.title?.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
+  const internal = isInternalFile(item.link);
 
   return (
     <div style={{ animation: "projectFadeIn 0.3s ease both" }}>
@@ -90,7 +94,6 @@ function ProjectViewer({ item, index }) {
 
         {/* Details */}
         <div>
-          {/* Index badge */}
           <span style={{
             display: "inline-block",
             fontFamily: "var(--font-mono)", fontSize: "0.65rem",
@@ -105,7 +108,6 @@ function ProjectViewer({ item, index }) {
             {item.title}
           </h1>
 
-          {/* Description */}
           {(item.description || item.body) && (
             <p className="font-body text-base leading-[1.75] italic text-[#533178] border-l-[3px] border-[#B8709C] pl-4"
               style={{ margin: "0 0 1.5rem" }}>
@@ -115,7 +117,6 @@ function ProjectViewer({ item, index }) {
 
           <hr className="border-0 border-t border-gray-200 my-6" />
 
-          {/* Tags */}
           {item.tags?.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-6">
               {item.tags.map((tag) => (
@@ -134,27 +135,50 @@ function ProjectViewer({ item, index }) {
           {/* CTA */}
           <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
             {item.link ? (
-              <a
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "inline-flex", alignItems: "center", gap: "0.5rem",
-                  fontFamily: "var(--font-mono)", fontSize: "0.72rem",
-                  background: "#533178", color: "white",
-                  padding: "0.7rem 1.6rem", borderRadius: "999px",
-                  textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase",
-                  fontWeight: 600, transition: "background 0.2s, transform 0.2s",
-                }}
-                onMouseEnter={e => { e.currentTarget.style.background = "#8B6BAE"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-                onMouseLeave={e => { e.currentTarget.style.background = "#533178"; e.currentTarget.style.transform = "translateY(0)"; }}
-              >
-                View Project
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                </svg>
-              </a>
+              internal ? (
+                <button
+                  onClick={() => onOpenInternal(item)}
+                  style={{
+                    display: "inline-flex", alignItems: "center", gap: "0.5rem",
+                    fontFamily: "var(--font-mono)", fontSize: "0.72rem",
+                    background: "#533178", color: "white",
+                    padding: "0.7rem 1.6rem", borderRadius: "999px",
+                    border: "none", cursor: "pointer",
+                    letterSpacing: "0.08em", textTransform: "uppercase",
+                    fontWeight: 600, transition: "background 0.2s, transform 0.2s",
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "#8B6BAE"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "#533178"; e.currentTarget.style.transform = "translateY(0)"; }}
+                >
+                  View Project
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </button>
+              ) : (
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-flex", alignItems: "center", gap: "0.5rem",
+                    fontFamily: "var(--font-mono)", fontSize: "0.72rem",
+                    background: "#533178", color: "white",
+                    padding: "0.7rem 1.6rem", borderRadius: "999px",
+                    textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase",
+                    fontWeight: 600, transition: "background 0.2s, transform 0.2s",
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "#8B6BAE"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "#533178"; e.currentTarget.style.transform = "translateY(0)"; }}
+                >
+                  View Project
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </a>
+              )
             ) : (
               <span style={{
                 fontFamily: "var(--font-mono)", fontSize: "0.72rem",
@@ -173,10 +197,17 @@ function ProjectViewer({ item, index }) {
 
 export default function ProjectPage() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [viewerSrc, setViewerSrc] = useState(null);
+  const [viewerTitle, setViewerTitle] = useState("");
 
   if (!Array.isArray(projects) || projects.length === 0) return null;
 
   const activeProject = projects[activeIndex];
+
+  function openInternal(item) {
+    setViewerSrc(item.link);
+    setViewerTitle(item.title);
+  }
 
   return (
     <div className="min-h-screen bg-[#fafafa]">
@@ -218,9 +249,17 @@ export default function ProjectPage() {
 
         {/* RIGHT: project viewer */}
         <main className="pl-10 pt-8">
-          <ProjectViewer key={activeIndex} item={activeProject} index={activeIndex} />
+          <ProjectViewer key={activeIndex} item={activeProject} index={activeIndex} onOpenInternal={openInternal} />
         </main>
       </div>
+
+      {viewerSrc && (
+        <SecureFileViewer
+          src={viewerSrc}
+          title={viewerTitle}
+          onClose={() => setViewerSrc(null)}
+        />
+      )}
     </div>
   );
 }

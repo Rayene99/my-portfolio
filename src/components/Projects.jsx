@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { projects } from "../lib/content";
+import SecureFileViewer from "./SecureFileViewer";
+
+function isInternalFile(link) {
+  if (!link) return false;
+  return !link.startsWith("http://") && !link.startsWith("https://");
+}
 
 function useInView(options) {
   const ref = useRef(null);
@@ -16,8 +22,9 @@ function useInView(options) {
   return [ref, inView];
 }
 
-function FeaturedCard({ item, index }) {
+function FeaturedCard({ item, index, onOpenInternal }) {
   const initials = item.title?.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
+  const internal = isInternalFile(item.link);
 
   return (
     <div style={{
@@ -91,23 +98,46 @@ function FeaturedCard({ item, index }) {
         }}>
           {/* View Project */}
           {item.link ? (
-            <a href={item.link} target="_blank" rel="noopener noreferrer" style={{
-              display: "inline-flex", alignItems: "center", gap: "0.5rem",
-              fontFamily: "var(--font-mono)", fontSize: "0.68rem",
-              background: "#533178", color: "white",
-              padding: "0.55rem 1.2rem", borderRadius: "999px",
-              textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase",
-              fontWeight: 600, transition: "background 0.2s, transform 0.2s",
-            }}
-              onMouseEnter={e => { e.currentTarget.style.background = "#8B6BAE"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-              onMouseLeave={e => { e.currentTarget.style.background = "#533178"; e.currentTarget.style.transform = "translateY(0)"; }}
-            >
-              View Project
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-              </svg>
-            </a>
+            internal ? (
+              <button
+                onClick={() => onOpenInternal(item)}
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: "0.5rem",
+                  fontFamily: "var(--font-mono)", fontSize: "0.68rem",
+                  background: "#533178", color: "white",
+                  padding: "0.55rem 1.2rem", borderRadius: "999px",
+                  border: "none", cursor: "pointer",
+                  letterSpacing: "0.08em", textTransform: "uppercase",
+                  fontWeight: 600, transition: "background 0.2s, transform 0.2s",
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = "#8B6BAE"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                onMouseLeave={e => { e.currentTarget.style.background = "#533178"; e.currentTarget.style.transform = "translateY(0)"; }}
+              >
+                View Project
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                </svg>
+              </button>
+            ) : (
+              <a href={item.link} target="_blank" rel="noopener noreferrer" style={{
+                display: "inline-flex", alignItems: "center", gap: "0.5rem",
+                fontFamily: "var(--font-mono)", fontSize: "0.68rem",
+                background: "#533178", color: "white",
+                padding: "0.55rem 1.2rem", borderRadius: "999px",
+                textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase",
+                fontWeight: 600, transition: "background 0.2s, transform 0.2s",
+              }}
+                onMouseEnter={e => { e.currentTarget.style.background = "#8B6BAE"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                onMouseLeave={e => { e.currentTarget.style.background = "#533178"; e.currentTarget.style.transform = "translateY(0)"; }}
+              >
+                View Project
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                </svg>
+              </a>
+            )
           ) : (
             <span style={{
               fontFamily: "var(--font-mono)", fontSize: "0.68rem",
@@ -117,7 +147,7 @@ function FeaturedCard({ item, index }) {
           )}
 
           {/* Browse All */}
-           <a
+            <a
             href="/projectPage"
             style={{
               display: "inline-flex", alignItems: "center", gap: "0.5rem",
@@ -238,10 +268,17 @@ function ThumbCard({ item, index, active, onClick }) {
 export default function Projects() {
   const [sectionRef, inView] = useInView({ threshold: 0.05 });
   const [activeIndex, setActiveIndex] = useState(0);
+  const [viewerSrc, setViewerSrc] = useState(null);
+  const [viewerTitle, setViewerTitle] = useState("");
 
   if (!Array.isArray(projects) || projects.length === 0) return null;
 
   const featured = projects[activeIndex];
+
+  function openInternal(item) {
+    setViewerSrc(item.link);
+    setViewerTitle(item.title);
+  }
 
   return (
     <section
@@ -293,7 +330,7 @@ export default function Projects() {
       >
         {/* LEFT: featured — sticky */}
         <div style={{ position: "sticky", top: "2rem" }}>
-          <FeaturedCard key={activeIndex} item={featured} index={activeIndex} />
+          <FeaturedCard key={activeIndex} item={featured} index={activeIndex} onOpenInternal={openInternal} />
         </div>
 
         {/* RIGHT: scrollable thumbnail list */}
@@ -318,6 +355,14 @@ export default function Projects() {
           ))}
         </div>
       </div>
+
+      {viewerSrc && (
+        <SecureFileViewer
+          src={viewerSrc}
+          title={viewerTitle}
+          onClose={() => setViewerSrc(null)}
+        />
+      )}
     </section>
   );
 }

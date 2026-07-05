@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ebooks } from "../lib/content";
+import SecureFileViewer from "./SecureFileViewer";
 
 const PREVIEW_COUNT = 4;
 
@@ -23,9 +24,8 @@ function stripHtml(html) {
   return html.replace(/<[^>]*>/g, "");
 }
 
-function FeaturedEbook({ item, index }) {
+function FeaturedEbook({ item, index, onRead }) {
   const initials = item.title?.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
-  const href = `/ebooks/${item.html_file?.split("/").pop()}`;
 
   return (
     <div style={{
@@ -100,15 +100,16 @@ function FeaturedEbook({ item, index }) {
           borderTop: "1px solid var(--color-border)",
           display: "flex", gap: "0.65rem", flexWrap: "wrap",
         }}>
-          {/* Read Ebook */}
-          <a
-            href={href}
+          {/* Read Ebook — opens protected in-page viewer */}
+          <button
+            onClick={onRead}
             style={{
               display: "inline-flex", alignItems: "center", gap: "0.5rem",
               fontFamily: "var(--font-mono)", fontSize: "0.68rem",
               background: "#533178", color: "white",
               padding: "0.55rem 1.2rem", borderRadius: "999px",
-              textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase",
+              border: "none", cursor: "pointer",
+              letterSpacing: "0.08em", textTransform: "uppercase",
               fontWeight: 600, transition: "background 0.2s, transform 0.2s",
             }}
             onMouseEnter={e => { e.currentTarget.style.background = "#8B6BAE"; e.currentTarget.style.transform = "translateY(-2px)"; }}
@@ -119,10 +120,10 @@ function FeaturedEbook({ item, index }) {
               stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
             </svg>
-          </a>
+          </button>
 
           {/* Browse All */}
-          <a
+           <a
             href="/EbooksPage"
             style={{
               display: "inline-flex", alignItems: "center", gap: "0.5rem",
@@ -237,12 +238,20 @@ function ThumbCard({ item, index, active, onClick }) {
 export default function Ebooks() {
   const [sectionRef, inView] = useInView({ threshold: 0.05 });
   const [activeIndex, setActiveIndex] = useState(0);
+  const [viewerSrc, setViewerSrc] = useState(null);
+  const [viewerTitle, setViewerTitle] = useState("");
 
   if (!Array.isArray(ebooks) || ebooks.length === 0) return null;
 
   const previewEbooks = ebooks.slice(0, PREVIEW_COUNT);
   const hasMore = ebooks.length > PREVIEW_COUNT;
   const featured = previewEbooks[activeIndex];
+
+  function openEbook(item) {
+    const href = `/ebooks/${item.html_file?.split("/").pop()}`;
+    setViewerSrc(href);
+    setViewerTitle(item.title);
+  }
 
   return (
     <section
@@ -280,7 +289,7 @@ export default function Ebooks() {
         </div>
 
         {hasMore && (
-          <a
+           <a
             href="/EbooksPage"
             style={{
               display: "inline-flex", alignItems: "center", gap: "0.5rem",
@@ -325,7 +334,12 @@ export default function Ebooks() {
       >
         {/* LEFT: featured — sticky */}
         <div style={{ position: "sticky", top: "2rem" }}>
-          <FeaturedEbook key={activeIndex} item={featured} index={activeIndex} />
+          <FeaturedEbook
+            key={activeIndex}
+            item={featured}
+            index={activeIndex}
+            onRead={() => openEbook(featured)}
+          />
         </div>
 
         {/* RIGHT: scrollable thumb list */}
@@ -380,6 +394,14 @@ export default function Ebooks() {
           )}
         </div>
       </div>
+
+      {viewerSrc && (
+        <SecureFileViewer
+          src={viewerSrc}
+          title={viewerTitle}
+          onClose={() => setViewerSrc(null)}
+        />
+      )}
     </section>
   );
 }

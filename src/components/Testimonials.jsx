@@ -1,10 +1,32 @@
 import { useState, useEffect, useRef } from "react";
-import { testimonials } from "../lib/content";
+
+const testimonials = [
+  {
+    author: "Benmamou Safa",
+    role: "English Teacher",
+    body: "I highly recommend Mrs. Rayene Medabis, having worked under her exceptional leadership during a demanding month-long project. She is an incredibly organized and proactive project manager who anticipates obstacles while providing targeted, actionable guidance. Beyond her technical expertise, she creates a motivating, genuinely enjoyable environment, balancing high expectations with supportive mentorship.",
+  },
+  {
+    author: "Nesrine Siad",
+    role: "English Teacher",
+    body: "I enthusiastically recommend Mrs. Rayene Medabis, based on my experience as her trainee in a professional development program. She is an incredibly organized and punctual trainer who models high standards while adapting her methods to each participant's needs. She maintains a calm, motivating environment even under pressure, and her clear communication makes her an exceptional educator.",
+  },
+  {
+    author: "Israa Mellaki",
+    role: "English Teacher",
+    body: "As a trainee of Mrs. Rayene Medabis, I can attest to her exceptional caliber as an educator and trainer. She possesses immense pedagogical knowledge and uses a creative, visual, relatable approach that makes complex concepts accessible. Her organizational skills are outstanding, and she balances professional rigor with genuine care, making her invaluable to any institution.",
+  },
+  {
+    author: "Soumia Mezhoud",
+    role: "Head of Quality Department",
+    body: "I highly recommend Mrs. Rayene Medabis, who has consistently distinguished herself through creative instructional design and meticulous organization. She excels at developing high-quality, visually engaging materials with clear learning objectives, and her commitment to academic integrity shows in her precise, rubric-based assessments. Her proactive communication and collaborative spirit model true professional excellence.",
+  },
+];
 
 const W   = { color: "rgba(255,255,255,1)"    };
 const W80 = { color: "rgba(255,255,255,0.80)" };
 
-const CARDS_VISIBLE = 3;
+const CARDS_VISIBLE = 2;
 
 function ChevronLeft() {
   return (
@@ -41,9 +63,7 @@ function TestimonialCard({ item, index }) {
       }}
     >
       {/* Quote badge */}
-      <div style={{
-        padding: "1.4rem 1.2rem 0",
-      }}>
+      <div style={{ padding: "1.4rem 1.4rem 0" }}>
         <div
           aria-hidden="true"
           style={{
@@ -73,34 +93,30 @@ function TestimonialCard({ item, index }) {
         </div>
       </div>
 
-      {/* Card body */}
+      {/* Card body — grows to fit content, no clamp */}
       <div style={{
-        padding: "1rem 1.2rem 1.3rem",
+        padding: "1rem 1.4rem 1.5rem",
         display: "flex",
         flexDirection: "column",
-        gap: "0.8rem",
+        gap: "1rem",
         flex: 1,
       }}>
-        <div
-          className="testimonial-quote"
-          style={{
-            fontFamily: "var(--font-body)",
-            fontSize: "0.84rem",
-            lineHeight: 1.68,
-            color: "var(--color-text-muted)",
-            display: "-webkit-box",
-            WebkitLineClamp: 7,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-          }}
-          dangerouslySetInnerHTML={{ __html: item.body || item.quote }}
-        />
+        <p style={{
+          fontFamily: "var(--font-body)",
+          fontSize: "0.88rem",
+          lineHeight: 1.7,
+          fontStyle: "italic",
+          color: "var(--color-text-muted)",
+          margin: 0,
+        }}>
+         " {item.body} "
+        </p>
 
         <div style={{ marginTop: "auto" }}>
           <p style={{
             fontFamily: "var(--font-body)",
             fontWeight: 600,
-            fontSize: "0.92rem",
+            fontSize: "0.95rem",
             color: "var(--color-text)",
             margin: "0 0 3px",
           }}>
@@ -109,7 +125,7 @@ function TestimonialCard({ item, index }) {
           {(item.role || item.company) && (
             <p style={{
               fontFamily: "var(--font-mono)",
-              fontSize: "0.7rem",
+              fontSize: "0.72rem",
               color: "var(--color-primary)",
               margin: 0,
               letterSpacing: "0.02em",
@@ -126,7 +142,6 @@ function TestimonialCard({ item, index }) {
           from { opacity: 0; transform: translateY(20px); }
           to   { opacity: 1; transform: translateY(0); }
         }
-        .testimonial-quote p { margin: 0; }
       `}</style>
     </div>
   );
@@ -161,7 +176,7 @@ export default function Testimonials() {
     clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
       setStart((prev) => (prev + CARDS_VISIBLE) % total);
-    }, 5000);
+    }, 6000);
   }
 
   useEffect(() => {
@@ -310,7 +325,7 @@ export default function Testimonials() {
 
           <div style={{
             display: "flex",
-            gap: "1rem",
+            gap: "1.25rem",
             alignItems: "stretch",
             opacity: anim ? 0 : 1,
             transform: anim ? "translateY(8px)" : "translateY(0)",
