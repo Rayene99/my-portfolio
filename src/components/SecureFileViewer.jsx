@@ -1,7 +1,51 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
+
+const PROTECTION_SNIPPET = `
+<style>
+  * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+</style>
+<script>
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('dragstart', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    const k = e.key?.toLowerCase();
+    if ((e.ctrlKey || e.metaKey) && ['s', 'p', 'c', 'u', 'a'].includes(k)) {
+      e.preventDefault();
+    }
+  });
+</script>
+`;
 
 export default function SecureFileViewer({ src, title, onClose }) {
-  const iframeRef = useRef(null);
+  const [doc, setDoc] = useState(null);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    setDoc(null);
+    setError(false);
+
+    fetch(src)
+      .then((res) => {
+        if (!res.ok) throw new Error("fetch failed");
+        return res.text();
+      })
+      .then((html) => {
+        if (cancelled) return;
+        const injected = /<\/head>/i.test(html)
+          ? html.replace(/<\/head>/i, `${PROTECTION_SNIPPET}</head>`)
+          : PROTECTION_SNIPPET + html; // no <head> tag found — just prepend
+        setDoc(injected);
+      })
+      .catch(() => { if (!cancelled) setError(true); });
+
+    return () => { cancelled = true; };
+  }, [src]);
 
   useEffect(() => {
     function blockKeys(e) {
@@ -15,23 +59,6 @@ export default function SecureFileViewer({ src, title, onClose }) {
     window.addEventListener("keydown", blockKeys, true);
     return () => window.removeEventListener("keydown", blockKeys, true);
   }, []);
-
-  function handleIframeLoad() {
-    try {
-      const doc = iframeRef.current.contentDocument;
-      if (!doc) return;
-      doc.addEventListener("contextmenu", (e) => e.preventDefault());
-      doc.addEventListener("keydown", (e) => {
-        const key = e.key?.toLowerCase();
-        const blocked = (e.ctrlKey || e.metaKey) && ["s", "p", "u", "c"].includes(key);
-        if (blocked) e.preventDefault();
-      });
-      doc.body.style.userSelect = "none";
-      doc.body.style.webkitUserSelect = "none";
-    } catch (err) {
-      // Ignore — some environments restrict contentDocument access
-    }
-  }
 
   return (
     <div
@@ -67,15 +94,24 @@ export default function SecureFileViewer({ src, title, onClose }) {
             ✕
           </button>
         </div>
-        <iframe
-          ref={iframeRef}
-          src={src}
-          title={title}
-          onLoad={handleIframeLoad}
-          sandbox="allow-scripts"
-          style={{ flex: 1, border: "none", width: "100%" }}
-        />
+
+        {error ? (
+          <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af" }}>
+            Couldn't load this ebook.
+          </div>
+        ) : doc === null ? (
+          <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af" }}>
+            Loading…
+          </div>
+        ) : (
+          <iframe
+            srcDoc={doc}
+            title={title}
+            sandbox="allow-scripts"
+            style={{ flex: 1, border: "none", width: "100%" }}
+          />
+        )}
       </div>
     </div>
   );
-}
+} 
