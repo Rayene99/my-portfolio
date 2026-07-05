@@ -9,13 +9,7 @@ tags:
   - ""
 tagline: Across seventeen interconnected chapters, the book examines topics such
   as reducing unnecessary teacher talk, balancing content with context,
-  understanding adult learners, overcoming cognitive barriers like the affective
-  filter and language freeze, designing aligned curricula, scaffolding mastery,
-  cultivating classroom culture, and supporting teacher wellbeing. Rather than
-  focusing on isolated teaching techniques, it presents education as an
-  integrated architecture in which every element—from learning outcomes and
-  assessment to presence, relationships, and instructional design—works together
-  to produce meaningful learning.
+  understanding adult learners,
 summary: " balancing content with context, understanding adult learners,
   overcoming cognitive barriers like the affective filter and language freeze,
   designing aligned curricula, scaffolding mastery, cultivating classroom
