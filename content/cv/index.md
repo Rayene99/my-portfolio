@@ -86,4 +86,9 @@ certifications:
   - name: Google Certified Educator Level 2
     issuer: Google
     year: "2026"
+    image: /images/1778830995858.jpg
+recommendations:
+  - name: Ramzi Zouaghi
+    title: English Teacher & Teacher Trainer
+    file: /images/recommendation-letter-colleague-.pdf
 ---
