@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { cv } from "../lib/content";
-import profilePic from "../assets/profile-pic.jpg";
+import profilePic from "../assets/output-image.png";
 import SecureFileViewer from "./SecureFileViewer";
 
 const NAV_SECTIONS = [
@@ -227,9 +227,12 @@ export default function Cv() {
             <h1 className="font-heading italic font-semibold text-5xl text-white leading-tight m-0">
               {cv.name}
             </h1>
-            <p className="font-mono text-sm text-white/90 tracking-wide m-0">
-              {cv.title}
-            </p>
+<p
+  className="font-mono text-sm tracking-wide m-0"
+  style={{ color: "rgba(255,255,255,0.9)" }}
+>
+  {cv.title}
+</p>
           </div>
 
           <div className="flex-shrink-0 w-40 h-40 rounded-full overflow-hidden mr-16">
