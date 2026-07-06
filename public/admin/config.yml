@@ -128,3 +128,14 @@ collections:
               - {label: "Name", name: "name", widget: "string"}
               - {label: "Issuer", name: "issuer", widget: "string"}
               - {label: "Year", name: "year", widget: "string"}
+              - {label: "Image", name: "image", widget: "image", required: false, hint: "Badge, logo, or a photo of the certificate"}
+              - {label: "File", name: "file", widget: "file", required: false, hint: "Optional certificate document (PDF, image, etc.) — opens in the secure viewer when the card is clicked"}
+          - label: "Recommendations"
+            name: "recommendations"
+            widget: "list"
+            fields:
+              - {label: "Recommender Name", name: "name", widget: "string", hint: "Who gave this recommendation"}
+              - {label: "Title", name: "title", widget: "string", required: false, hint: "Their role/position"}
+              - {label: "Issuer", name: "issuer", widget: "string", required: false, hint: "Their company or organization"}
+              - {label: "Image", name: "image", widget: "image", required: false, hint: "Photo of the person, or a screenshot of the recommendation"}
+              - {label: "File", name: "file", widget: "file", required: false, hint: "Optional recommendation letter or document — opens in the secure viewer when the card is clicked"}
