@@ -1,7 +1,7 @@
 ---
 name: "Rayene Medabis "
 tagline: TESOL-Certified Teacher | Google Certified Educator | ELT Trainer |
-  Curriculum & Instructional Designer
+  Curriculum & Instructional Designer | English teacher
 intro: >-
   Results-driven English language educator and instructional leader with 5+
   years of progressive experience across the
