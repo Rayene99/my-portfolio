@@ -1,5 +1,5 @@
 ---
-name: Rayene Medabis gggg
+name: "Rayene Medabis "
 tagline: TESOL-Certified Teacher | Google Certified Educator | ELT Trainer |
   Curriculum & Instructional Designer
 intro: >-
