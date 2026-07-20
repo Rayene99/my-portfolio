@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conflict Resolution &amp; Negotiation — Rayene Medabis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Nunito+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0B1F3A; --navy-light: #142847;
+      --amber: #E8A020; --amber-dim: rgba(232,160,32,0.13);
+      --forest: #2B7A5F; --conflict: #C44B2A;
+      --conflict-bg: #FDF1EE; --info: #1C5FA0; --info-bg: #EEF4FC;
+      --resolution: #2B7A5F; --resolution-bg: #EDF7F3;
+      --bg: #ECF1F9; --card: #FFFFFF; --text: #1A2736;
+      --muted: #607282; --border: #CDD8E8; --sidebar-text: #7AACD6;
+      --font-serif: 'Lora', Georgia, serif;
+      --font-sans: 'Nunito Sans', 'Helvetica Neue', Arial, sans-serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --radius-sm: 4px; --radius: 8px; --radius-lg: 14px;
+      --shadow-sm: 0 1px 4px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow: 0 4px 14px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.05);
+      --shadow-lg: 0 10px 32px rgba(0,0,0,0.12);
+      --sidebar-w: 278px; --transition: 0.2s ease;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.65; }
+
+    /* LAYOUT */
+    .layout { display: grid; grid-template-columns: var(--sidebar-w) 1fr; min-height: 100vh; }
+
+    /* SIDEBAR */
+    .sidebar { position: fixed; top: 0; left: 0; width: var(--sidebar-w); height: 100vh; background: var(--navy); display: flex; flex-direction: column; overflow: hidden; z-index: 100; }
+    .sidebar-header { padding: 26px 22px 18px; border-bottom: 1px solid rgba(255,255,255,0.06); flex-shrink: 0; }
+    .sidebar-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+    .logo-icon { width: 38px; height: 38px; flex-shrink: 0; }
+    .sidebar-title { font-family: var(--font-serif); color: #fff; font-size: 0.82rem; font-weight: 600; line-height: 1.35; }
+    .sidebar-author { font-family: var(--font-mono); font-size: 0.6rem; color: var(--amber); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 3px; }
+    .progress-label { font-family: var(--font-mono); font-size: 0.58rem; color: rgba(255,255,255,0.28); text-transform: uppercase; letter-spacing: 0.1em; display: flex; justify-content: space-between; margin-bottom: 6px; }
+    .progress-track { height: 3px; background: rgba(255,255,255,0.08); border-radius: 10px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--amber); border-radius: 10px; width: 0%; transition: width 0.12s linear; }
+    .chapter-nav { flex: 1; overflow-y: auto; padding: 14px 0 20px; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.12) transparent; }
+    .chapter-nav::-webkit-scrollbar { width: 3px; }
+    .chapter-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 10px; }
+    .nav-section { padding: 10px 22px 4px; font-family: var(--font-mono); font-size: 0.56rem; color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 0.14em; }
+    .nav-link { display: flex; align-items: center; gap: 10px; padding: 8px 22px; text-decoration: none; color: var(--sidebar-text); font-size: 0.8rem; font-weight: 400; transition: all var(--transition); border-left: 2px solid transparent; line-height: 1.3; }
+    .nav-link:hover { color: #fff; background: rgba(255,255,255,0.04); }
+    .nav-link.active { color: var(--amber); border-left-color: var(--amber); background: var(--amber-dim); font-weight: 600; }
+    .nav-num { font-family: var(--font-mono); font-size: 0.6rem; color: rgba(255,255,255,0.2); flex-shrink: 0; width: 24px; }
+    .nav-link.active .nav-num { color: rgba(232,160,32,0.55); }
+    .sidebar-footer { padding: 14px 22px; border-top: 1px solid rgba(255,255,255,0.06); font-family: var(--font-mono); font-size: 0.58rem; color: rgba(255,255,255,0.18); flex-shrink: 0; line-height: 1.6; }
+
+    /* MAIN */
+    .main-content { grid-column: 2; min-height: 100vh; }
+
+    /* HERO */
+    .hero { background: var(--navy); padding: 76px 58px 68px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: 0; right: 0; width: 55%; height: 100%; background: radial-gradient(ellipse at 90% 20%, rgba(232,160,32,0.11) 0%, transparent 65%); pointer-events: none; }
+    .hero-eyebrow { font-family: var(--font-mono); font-size: 0.68rem; color: var(--amber); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
+    .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--amber); }
+    .hero-title { font-family: var(--font-serif); font-size: clamp(1.9rem, 3.5vw, 3rem); font-weight: 700; color: #fff; line-height: 1.14; margin-bottom: 14px; max-width: 560px; }
+    .hero-title em { color: var(--amber); font-style: normal; }
+    .hero-subtitle { font-size: 0.97rem; color: rgba(255,255,255,0.5); max-width: 500px; line-height: 1.65; margin-bottom: 42px; }
+    .hero-meta { display: flex; gap: 34px; flex-wrap: wrap; }
+    .meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .meta-label { font-family: var(--font-mono); font-size: 0.58rem; color: rgba(255,255,255,0.28); text-transform: uppercase; letter-spacing: 0.1em; }
+    .meta-value { font-size: 0.86rem; color: rgba(255,255,255,0.72); font-weight: 500; }
+    .hero-svg { position: absolute; right: 58px; bottom: 44px; opacity: 0.3; }
+
+    /* CHAPTERS */
+    .chapter { padding: 58px 58px 50px; border-bottom: 1px solid var(--border); scroll-margin-top: 20px; }
+    .chapter:last-of-type { border-bottom: none; }
+    .chapter-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .chapter-num { font-family: var(--font-mono); font-size: 0.68rem; color: var(--amber); letter-spacing: 0.08em; flex-shrink: 0; }
+    .chapter-rule { width: 48px; height: 1px; background: var(--border); }
+    .chapter-tag { font-family: var(--font-mono); font-size: 0.58rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .chapter h2 { font-family: var(--font-serif); font-size: clamp(1.45rem, 2.4vw, 2rem); font-weight: 700; color: var(--text); line-height: 1.2; margin-bottom: 26px; }
+    .chapter h3 { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600; color: var(--text); margin-top: 38px; margin-bottom: 14px; }
+    .chapter h4 { font-size: 0.88rem; font-weight: 800; color: var(--text); margin-top: 22px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .chapter p { color: #2C3D50; margin-bottom: 16px; font-size: 0.96rem; line-height: 1.7; }
+    .chapter ul, .chapter ol { padding-left: 22px; margin-bottom: 18px; }
+    .chapter li { margin-bottom: 9px; font-size: 0.95rem; color: #2C3D50; line-height: 1.6; }
+
+    /* FOREWORD */
+    .foreword-card { background: var(--navy); padding: 36px 42px; border-radius: var(--radius-lg); font-family: var(--font-serif); font-style: italic; font-size: 1.04rem; line-height: 1.78; color: rgba(255,255,255,0.82); border-left: 3px solid var(--amber); position: relative; }
+    .foreword-card::before { content: '\201C'; font-size: 5.5rem; color: var(--amber); opacity: 0.25; position: absolute; top: -12px; left: 22px; line-height: 1; font-style: normal; pointer-events: none; }
+    .foreword-card p { color: rgba(255,255,255,0.8) !important; margin-bottom: 14px !important; }
+    .foreword-sig { margin-top: 22px; font-style: normal; font-family: var(--font-sans); font-size: 0.83rem; color: rgba(255,255,255,0.42); }
+    .foreword-sig strong { display: block; color: var(--amber); font-family: var(--font-serif); font-size: 0.94rem; font-style: normal; font-weight: 600; margin-bottom: 3px; }
+
+    /* CALLOUTS */
+    .callout { border-radius: var(--radius); padding: 18px 22px; margin: 24px 0; border-left: 4px solid; display: flex; gap: 14px; }
+    .callout-icon { font-size: 1.1rem; flex-shrink: 0; padding-top: 2px; }
+    .callout-body { flex: 1; }
+    .callout-title { font-weight: 700; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 6px; }
+    .callout p { margin-bottom: 0 !important; font-size: 0.91rem !important; color: var(--text) !important; }
+    .callout.info { background: var(--info-bg); border-color: var(--info); }
+    .callout.info .callout-title { color: var(--info); }
+    .callout.conflict { background: var(--conflict-bg); border-color: var(--conflict); }
+    .callout.conflict .callout-title { color: var(--conflict); }
+    .callout.resolution { background: var(--resolution-bg); border-color: var(--resolution); }
+    .callout.resolution .callout-title { color: var(--resolution); }
+    .callout.amber { background: #FEF9EE; border-color: var(--amber); }
+    .callout.amber .callout-title { color: #9A6400; }
+
+    /* PULL QUOTE */
+    .pull-quote { margin: 38px 0; padding: 26px 38px; border-top: 2px solid var(--amber); border-bottom: 1px solid var(--border); }
+    .pull-quote p { font-family: var(--font-serif) !important; font-size: 1.22rem !important; font-style: italic; color: var(--text) !important; line-height: 1.55; margin-bottom: 10px !important; }
+    .pull-quote cite { font-family: var(--font-mono); font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+    /* CARDS GRID */
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 18px; margin: 22px 0; }
+    .strategy-card { background: var(--card); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow-sm); border-top: 3px solid var(--amber); transition: transform var(--transition), box-shadow var(--transition); }
+    .strategy-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .card-icon { width: 38px; height: 38px; background: #FEF9EE; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; margin-bottom: 14px; }
+    .strategy-card h4 { font-size: 0.88rem; font-weight: 700; margin-top: 0; margin-bottom: 9px; text-transform: none; letter-spacing: 0; }
+    .strategy-card p { font-size: 0.85rem !important; color: var(--muted) !important; margin-bottom: 0 !important; line-height: 1.55; }
+
+    /* STYLE CARDS */
+    .style-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin: 22px 0; }
+    .style-card { background: var(--card); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow-sm); border-top: 3px solid var(--border); }
+    .style-card.competing    { border-top-color: var(--conflict); }
+    .style-card.collaborating{ border-top-color: var(--forest); }
+    .style-card.compromising { border-top-color: var(--amber); }
+    .style-card.avoiding     { border-top-color: #7C8DA0; }
+    .style-card.accommodating{ border-top-color: #6B50A8; }
+    .style-name { font-family: var(--font-serif); font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .style-desc { font-size: 0.82rem; color: var(--muted); margin-bottom: 12px; line-height: 1.5; }
+    .style-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.58rem; padding: 3px 7px; border-radius: 20px; background: var(--bg); color: var(--muted); margin: 2px 2px 2px 0; }
+
+    /* SCENARIO CARDS */
+    .scenario { background: var(--card); border-radius: var(--radius-lg); padding: 26px 30px; box-shadow: var(--shadow-sm); margin: 26px 0; border-left: 4px solid var(--amber); }
+    .scenario-label { font-family: var(--font-mono); font-size: 0.58rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
+    .scenario h4 { font-family: var(--font-serif); font-size: 1.02rem; font-weight: 700; margin-top: 0; margin-bottom: 12px; text-transform: none; letter-spacing: 0; }
+    .scenario p { font-size: 0.93rem; }
+    .scenario-resolution { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+    .scenario-resolution-label { font-family: var(--font-mono); font-size: 0.58rem; color: var(--forest); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; font-weight: 700; }
+
+    /* COMPARISON TABLE */
+    .comparison-table { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border-radius: var(--radius); overflow: hidden; margin: 22px 0; box-shadow: var(--shadow-sm); }
+    .comparison-col { background: var(--card); padding: 22px; }
+    .comparison-header { font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; padding: 11px 14px; margin: -22px -22px 18px; }
+    .comparison-col:first-child .comparison-header { background: var(--resolution-bg); color: var(--resolution); }
+    .comparison-col:last-child  .comparison-header { background: var(--conflict-bg); color: var(--conflict); }
+    .comparison-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 11px; font-size: 0.87rem; line-height: 1.5; }
+    .comparison-col:first-child .comparison-item::before { content: '✓'; color: var(--resolution); font-weight: 800; flex-shrink: 0; }
+    .comparison-col:last-child  .comparison-item::before { content: '✕'; color: var(--conflict);   font-weight: 800; flex-shrink: 0; }
+
+    /* REFRAME TABLE */
+    .reframe-table { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border-radius: var(--radius); overflow: hidden; margin: 22px 0; box-shadow: var(--shadow-sm); }
+    .reframe-col { background: var(--card); padding: 22px; }
+    .reframe-header { font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; padding: 11px 14px; margin: -22px -22px 18px; }
+    .reframe-col:first-child .reframe-header { background: var(--conflict-bg); color: var(--conflict); }
+    .reframe-col:last-child  .reframe-header { background: var(--info-bg); color: var(--info); }
+    .reframe-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 14px; font-size: 0.87rem; font-style: italic; line-height: 1.5; }
+    .reframe-col:first-child .reframe-item::before { content: '\201C'; font-size: 1.1rem; color: var(--muted); flex-shrink: 0; line-height: 1.3; }
+    .reframe-col:last-child  .reframe-item::before { content: '\2192'; color: var(--info); font-weight: 700; flex-shrink: 0; font-style: normal; margin-top: 2px; }
+
+    /* NVC MODEL */
+    .nvc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 22px 0; }
+    .nvc-step { background: var(--card); border-radius: var(--radius); padding: 20px 14px; text-align: center; box-shadow: var(--shadow-sm); }
+    .nvc-letter { font-family: var(--font-serif); font-size: 2.4rem; font-weight: 700; color: var(--amber); line-height: 1; margin-bottom: 9px; }
+    .nvc-word { font-weight: 700; font-size: 0.83rem; margin-bottom: 7px; }
+    .nvc-desc { font-size: 0.74rem; color: var(--muted); line-height: 1.45; }
+
+    /* STOP MODEL */
+    .stop-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 22px 0; }
+    .stop-card { background: var(--card); border-radius: var(--radius); padding: 20px 14px; text-align: center; box-shadow: var(--shadow-sm); border-bottom: 3px solid var(--forest); }
+    .stop-letter { font-family: var(--font-serif); font-size: 2.6rem; font-weight: 700; color: var(--forest); line-height: 1; margin-bottom: 8px; }
+    .stop-word { font-weight: 700; font-size: 0.82rem; margin-bottom: 7px; }
+    .stop-desc { font-size: 0.74rem; color: var(--muted); line-height: 1.45; }
+
+    /* HARVARD GRID */
+    .harvard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 22px 0; }
+    .harvard-card { background: var(--card); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow-sm); display: flex; gap: 14px; }
+    .harvard-num { font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--amber); line-height: 1; flex-shrink: 0; }
+    .harvard-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 6px; }
+    .harvard-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.5; }
+
+    /* MEDIATION STAGES */
+    .stage-list { counter-reset: stage; list-style: none; padding-left: 0; }
+    .stage-item { counter-increment: stage; display: flex; gap: 18px; margin-bottom: 22px; position: relative; }
+    .stage-item::before { content: counter(stage); width: 34px; height: 34px; background: var(--navy); color: var(--amber); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; flex-shrink: 0; }
+    .stage-item:not(:last-child)::after { content: ''; position: absolute; left: 16px; top: 34px; width: 2px; height: calc(100% - 10px); background: linear-gradient(to bottom, var(--border), transparent); }
+    .stage-title { font-weight: 700; margin-bottom: 5px; font-size: 0.95rem; }
+    .stage-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.55; }
+
+    /* QUICK REF */
+    .quick-ref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 18px; margin: 22px 0; }
+    .qref-card { background: var(--navy); border-radius: var(--radius-lg); padding: 22px; }
+    .qref-title { font-family: var(--font-mono); font-size: 0.62rem; color: var(--amber); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+    .qref-card ul { padding-left: 17px; }
+    .qref-card li { color: rgba(255,255,255,0.68); font-size: 0.86rem; margin-bottom: 8px; }
+
+    /* QUIZ */
+    .quiz-container { background: var(--card); border-radius: var(--radius-lg); padding: 34px; box-shadow: var(--shadow); margin: 26px 0; }
+    .quiz-label { font-family: var(--font-mono); font-size: 0.62rem; color: var(--amber); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+    .quiz-container h3 { font-family: var(--font-serif); font-size: 1.25rem; margin-top: 0; margin-bottom: 8px; }
+    .quiz-intro { font-size: 0.88rem; color: var(--muted); margin-bottom: 0 !important; }
+    .quiz-progress { display: flex; gap: 7px; margin: 22px 0 24px; }
+    .qprog-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border); transition: background var(--transition), transform var(--transition); }
+    .qprog-dot.answered { background: var(--amber); transform: scale(1.2); }
+    .quiz-question-block { display: none; }
+    .quiz-question-block.active { display: block; }
+    .quiz-q-num { font-family: var(--font-mono); font-size: 0.62rem; color: var(--muted); margin-bottom: 10px; }
+    .quiz-q-text { font-family: var(--font-serif); font-size: 1.02rem; font-weight: 600; color: var(--text); margin-bottom: 18px; line-height: 1.5; }
+    .quiz-options { display: flex; flex-direction: column; gap: 9px; }
+    .quiz-option { background: var(--bg); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 12px 16px; cursor: pointer; font-size: 0.9rem; color: var(--text); text-align: left; transition: all var(--transition); font-family: var(--font-sans); line-height: 1.5; }
+    .quiz-option:hover { border-color: var(--amber); background: #FEF9EE; }
+    .quiz-option.selected { border-color: var(--amber); background: #FEF9EE; font-weight: 600; box-shadow: 0 0 0 2px rgba(232,160,32,0.2); }
+    .quiz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 22px; }
+    .btn { padding: 9px 20px; border-radius: var(--radius); font-family: var(--font-sans); font-size: 0.86rem; font-weight: 700; cursor: pointer; border: none; transition: all var(--transition); }
+    .btn-primary { background: var(--navy); color: #fff; }
+    .btn-primary:hover { background: var(--amber); color: var(--navy); }
+    .btn-secondary { background: transparent; color: var(--muted); border: 1.5px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--navy); color: var(--text); }
+    .btn:disabled { opacity: 0.38; cursor: not-allowed; pointer-events: none; }
+    .quiz-result { display: none; }
+    .quiz-result.visible { display: block; }
+    .quiz-result-hr { border: none; border-top: 1px solid var(--border); margin: 26px 0; }
+    .result-styles { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+    .result-style-card { padding: 20px; border-radius: var(--radius); border: 1.5px solid var(--border); }
+    .result-style-card.primary { border-color: var(--amber); background: #FEF9EE; }
+    .result-style-card.secondary { background: var(--bg); }
+    .result-label { font-family: var(--font-mono); font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+    .result-style-card.primary .result-label { color: var(--amber); }
+    .result-style-card.secondary .result-label { color: var(--muted); }
+    .result-style-name { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700; margin-bottom: 9px; }
+    .result-style-desc { font-size: 0.84rem; color: var(--muted); margin-bottom: 12px; line-height: 1.55; }
+    .result-tip { font-size: 0.82rem; padding: 10px 13px; background: rgba(255,255,255,0.7); border-radius: var(--radius-sm); border-left: 3px solid var(--amber); line-height: 1.5; }
+    .result-growth { margin-top: 14px; padding: 16px 20px; background: var(--bg); border-radius: var(--radius); font-size: 0.89rem; color: var(--muted); line-height: 1.6; }
+    .btn-reset { background: transparent; border: 1.5px solid var(--border); padding: 8px 16px; border-radius: var(--radius); cursor: pointer; font-size: 0.8rem; color: var(--muted); margin-top: 18px; font-family: var(--font-sans); transition: all var(--transition); }
+    .btn-reset:hover { border-color: var(--navy); color: var(--text); }
+
+    /* FOOTER */
+    .footer { background: var(--navy); padding: 40px 58px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+    .footer-title { font-family: var(--font-serif); font-size: 0.94rem; color: rgba(255,255,255,0.82); margin-bottom: 6px; }
+    .footer-author { color: var(--amber); font-weight: 600; }
+    .footer-sub { font-size: 0.78rem; color: rgba(255,255,255,0.3); margin-top: 4px; }
+    .footer-meta { font-family: var(--font-mono); font-size: 0.58rem; color: rgba(255,255,255,0.22); text-align: right; line-height: 1.8; }
+
+    /* MOBILE */
+    .menu-toggle { display: none; position: fixed; top: 14px; left: 14px; z-index: 200; background: var(--navy); border: none; color: #fff; width: 40px; height: 40px; border-radius: var(--radius); cursor: pointer; font-size: 1.15rem; align-items: center; justify-content: center; box-shadow: var(--shadow); }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { transform: translateX(-100%); transition: transform 0.28s ease; }
+      .sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+      .main-content { grid-column: 1; }
+      .menu-toggle { display: flex; }
+      .hero { padding: 70px 26px 52px; }
+      .chapter { padding: 44px 26px 38px; }
+      .hero-svg { display: none; }
+      .nvc-grid  { grid-template-columns: 1fr 1fr; }
+      .stop-grid { grid-template-columns: 1fr 1fr; }
+      .harvard-grid { grid-template-columns: 1fr; }
+      .result-styles { grid-template-columns: 1fr; }
+      .comparison-table, .reframe-table { grid-template-columns: 1fr; }
+      .footer { padding: 36px 26px; }
+    }
+    @media (max-width: 600px) {
+      .cards-grid { grid-template-columns: 1fr; }
+      .style-grid  { grid-template-columns: 1fr; }
+    }
+    @media print {
+      .sidebar, .menu-toggle { display: none; }
+      .layout { display: block; }
+      .chapter { padding: 28px 0; }
+      .hero { background: none; border-bottom: 2px solid var(--text); padding: 20px 0; }
+      .hero-title { color: var(--text) !important; }
+      .hero-subtitle { color: var(--muted) !important; }
+      body { font-size: 11pt; }
+    }
+  </style>
+</head>
+<body>
+<button class="menu-toggle" id="menuToggle" aria-label="Open navigation">&#9776;</button>
+
+<div class="layout">
+
+<!-- ═══════ SIDEBAR ═══════ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <svg class="logo-icon" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="14" cy="19" r="11" stroke="#E8A020" stroke-width="1.5" stroke-dasharray="3.5 2.8" opacity="0.75"/>
+        <circle cx="24" cy="19" r="11" stroke="#2B7A5F" stroke-width="1.5" stroke-dasharray="3.5 2.8" opacity="0.75"/>
+        <circle cx="19" cy="19" r="3.8" fill="#E8A020" fill-opacity="0.22" stroke="#E8A020" stroke-width="1.2" opacity="0.9"/>
+        <circle cx="19" cy="19" r="1.8" fill="#E8A020"/>
+      </svg>
+      <div>
+        <div class="sidebar-title">Conflict Resolution<br>&amp; Negotiation</div>
+        <div class="sidebar-author">Rayene Medabis</div>
+      </div>
+    </div>
+    <div class="progress-label">
+      <span>Reading Progress</span>
+      <span id="progressPercent">0%</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+  <nav class="chapter-nav">
+    <div class="nav-section">Introduction</div>
+    <a href="#foreword"   class="nav-link"><span class="nav-num">00</span>Foreword</a>
+    <div class="nav-section">Foundations</div>
+    <a href="#chapter-1"  class="nav-link"><span class="nav-num">01</span>Understanding Conflict</a>
+    <a href="#chapter-2"  class="nav-link"><span class="nav-num">02</span>Know Your Conflict Style</a>
+    <div class="nav-section">Core Skills</div>
+    <a href="#chapter-3"  class="nav-link"><span class="nav-num">03</span>Communication</a>
+    <a href="#chapter-4"  class="nav-link"><span class="nav-num">04</span>Negotiation Strategies</a>
+    <a href="#chapter-5"  class="nav-link"><span class="nav-num">05</span>De-escalation</a>
+    <div class="nav-section">Application</div>
+    <a href="#chapter-6"  class="nav-link"><span class="nav-num">06</span>Mediation</a>
+    <a href="#chapter-7"  class="nav-link"><span class="nav-num">07</span>Real Scenarios</a>
+    <a href="#chapter-8"  class="nav-link"><span class="nav-num">08</span>Documentation</a>
+    <div class="nav-section">Long-Term</div>
+    <a href="#chapter-9"  class="nav-link"><span class="nav-num">09</span>Culture Building</a>
+    <a href="#chapter-10" class="nav-link"><span class="nav-num">10</span>Quick Reference</a>
+    <a href="#references" class="nav-link"><span class="nav-num">&#8212;&nbsp;</span>References</a>
+  </nav>
+  <div class="sidebar-footer">Professional Handbook &middot; Edition 1.0 &middot; 2025<br>Educational Institutions Series</div>
+</aside>
+
+<!-- ═══════ MAIN ═══════ -->
+<main class="main-content">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Practitioner Handbook</div>
+  <h1 class="hero-title">Conflict Resolution<br>&amp; <em>Negotiation</em></h1>
+  <p class="hero-subtitle">Practical strategies for navigating, resolving, and learning from workplace disagreements in educational institutions.</p>
+  <div class="hero-meta">
+    <div class="meta-item"><span class="meta-label">Author</span><span class="meta-value">Rayene Medabis, M.Ed.</span></div>
+    <div class="meta-item"><span class="meta-label">Credential</span><span class="meta-value">TESOL-Certified Teacher Trainer</span></div>
+    <div class="meta-item"><span class="meta-label">Edition</span><span class="meta-value">First &middot; 2025</span></div>
+    <div class="meta-item"><span class="meta-label">Chapters</span><span class="meta-value">10 + Quick Reference</span></div>
+  </div>
+  <svg class="hero-svg" width="210" height="130" viewBox="0 0 210 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="72"  cy="65" r="54" stroke="#E8A020" stroke-width="2" stroke-dasharray="5.5 4.5" opacity="0.55"/>
+    <circle cx="138" cy="65" r="54" stroke="#2B7A5F" stroke-width="2" stroke-dasharray="5.5 4.5" opacity="0.55"/>
+    <circle cx="105" cy="65" r="14" fill="#E8A020" fill-opacity="0.18" stroke="#E8A020" stroke-width="1.5" opacity="0.75"/>
+    <circle cx="105" cy="65" r="5.5" fill="#E8A020" opacity="0.85"/>
+    <text x="47"  y="69" font-size="11" fill="rgba(255,255,255,0.35)" font-family="Georgia" font-style="italic">Party A</text>
+    <text x="118" y="69" font-size="11" fill="rgba(255,255,255,0.35)" font-family="Georgia" font-style="italic">Party B</text>
+  </svg>
+</section>
+
+<!-- ═══════ FOREWORD ═══════ -->
+<section class="chapter" id="foreword">
+  <div class="chapter-eyebrow"><span class="chapter-num">00</span><span class="chapter-rule"></span><span class="chapter-tag">Introduction</span></div>
+  <h2>Foreword</h2>
+  <div class="foreword-card">
+    <p>Conflict is not the enemy of a healthy workplace — avoidance is. In over a decade working in education across the MENA region and Europe, the most damaging situations I witnessed were rarely the ones that erupted loudly. They were the quiet ones: the feedback that was never given, the disagreement that was never named, the tension that hardened into resentment over months of silence.</p>
+    <p>This handbook was born from that observation. It is a practitioner's resource — not a theoretical treatise — designed for educators, trainers, and institutional leaders who want to move from avoidance to action. The strategies here are grounded in evidence, field-tested in real institutional settings, and written for people dealing with actual colleagues on actual Tuesdays.</p>
+    <p>Conflict handled well does not merely solve a problem. It builds trust, clarifies expectations, and — when managed with skill — can genuinely strengthen the professional relationships it temporarily strains. Consider this handbook an invitation to develop that skill.</p>
+    <div class="foreword-sig">
+      <strong>Rayene Medabis</strong>
+      M.Ed. &middot; TESOL-Certified &middot; Teacher Trainer &amp; Curriculum Designer
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CHAPTER 1 ═══════ -->
+<section class="chapter" id="chapter-1">
+  <div class="chapter-eyebrow"><span class="chapter-num">Chapter 01</span><span class="chapter-rule"></span><span class="chapter-tag">Foundations</span></div>
+  <h2>Understanding Conflict in Educational Institutions</h2>
+  <p>Workplace conflict is any situation in which the concerns, goals, or perceptions of two or more individuals are incompatible and both parties experience that incompatibility. Critically, conflict is <em>not</em> inherently destructive. Organisational psychology distinguishes between dysfunctional conflict — which erodes trust and wellbeing — and <strong>functional conflict</strong>, which challenges assumptions, surfaces better thinking, and produces stronger outcomes when handled well.</p>
+  <p>The goal of this handbook is not to eliminate conflict. It is to ensure that when conflict arises — and it will — it is navigated with intention, skill, and professional integrity.</p>
+
+  <div class="callout info">
+    <span class="callout-icon">💡</span>
+    <div class="callout-body">
+      <div class="callout-title">The Core Distinction</div>
+      <p>Conflict becomes harmful when it is <strong>avoided</strong>, <strong>mismanaged</strong>, or allowed to become <strong>personal</strong>. The presence of disagreement is not the problem — how we respond to it is.</p>
+    </div>
+  </div>
+
+  <h3>Types of Workplace Conflict</h3>
+  <div class="cards-grid">
+    <div class="strategy-card">
+      <div class="card-icon">📋</div>
+      <h4>Task Conflict</h4>
+      <p>Disagreements about the content, goals, or approach to work. Example: two teachers disagree on which assessment format best serves student learning.</p>
+    </div>
+    <div class="strategy-card">
+      <div class="card-icon">🤝</div>
+      <h4>Relationship Conflict</h4>
+      <p>Interpersonal friction driven by personality differences, broken trust, or communication failures. The most disruptive type if left unaddressed.</p>
+    </div>
+    <div class="strategy-card">
+      <div class="card-icon">⚙️</div>
+      <h4>Process Conflict</h4>
+      <p>Disagreements about how work gets done — roles, responsibilities, timelines, or resource allocation. Common in collaborative curriculum projects.</p>
+    </div>
+    <div class="strategy-card">
+      <div class="card-icon">🏛️</div>
+      <h4>Structural Conflict</h4>
+      <p>Conflict rooted in institutional design: overlapping responsibilities, unclear authority, scarce resources, or misaligned incentives between departments.</p>
+    </div>
+  </div>
+
+  <h3>Why Educational Institutions Are Uniquely Conflict-Prone</h3>
+  <ul>
+    <li><strong>High stakes, values-driven work.</strong> Teaching is personal. Methodology, curriculum, and assessment are not merely technical choices — they reflect deeply held beliefs about what education is <em>for</em>. This makes disagreements feel heavier than in most other sectors.</li>
+    <li><strong>Complex power dynamics.</strong> The teacher–administrator hierarchy coexists with strong professional autonomy claims. Educators often resist top-down directives more readily than employees in other fields, creating persistent friction around authority and ownership.</li>
+    <li><strong>Multiple competing stakeholders.</strong> Teachers, curriculum designers, department heads, quality managers, and institutional administrators all hold legitimate but sometimes incompatible interests — often simultaneously.</li>
+    <li><strong>Cultural diversity.</strong> In international and MENA-region contexts especially, multicultural teams bring different norms around directness, hierarchy, feedback, and conflict itself. What reads as efficient to one person may read as aggressive to another.</li>
+    <li><strong>Workload and resource scarcity.</strong> Limited classroom time, materials, and administrative support create conditions for competition and resentment that compound underlying tensions.</li>
+  </ul>
+
+  <div class="pull-quote">
+    <p>"The question is not whether your institution will experience conflict. It will. The question is whether it will be handled with the skill it deserves."</p>
+    <cite>— Rayene Medabis</cite>
+  </div>
+</section>
+
+<!-- ═══════ CHAPTER 2 ═══════ -->
+<section class="chapter" id="chapter-2">
+  <div class="chapter-eyebrow"><span class="chapter-num">Chapter 02</span><span class="chapter-rule"></span><span class="chapter-tag">Self-Awareness</span></div>
+  <h2>Know Your Conflict Style</h2>
+  <p>Before you can navigate conflict skillfully with others, you need to understand how <em>you</em> show up when conflict arises. The <strong>Thomas–Kilmann Conflict Mode Instrument (TKI)</strong> maps conflict behaviour along two dimensions: <em>assertiveness</em> (how strongly you pursue your own concerns) and <em>cooperativeness</em> (how much you attend to the other party's concerns). The result is five distinct conflict modes — none universally right or wrong, each appropriate in some situations and counterproductive in others.</p>
+
+  <div class="style-grid">
+    <div class="style-card competing">
+      <div class="style-name">Competing</div>
+      <div class="style-desc">High assertiveness, low cooperativeness. You pursue your own goals firmly, even at the expense of the other party's concerns.</div>
+      <span class="style-tag">✓ Emergencies</span><span class="style-tag">✓ Unpopular decisions</span><span class="style-tag">✗ Long-term relationships</span>
+    </div>
+    <div class="style-card collaborating">
+      <div class="style-name">Collaborating</div>
+      <div class="style-desc">High assertiveness, high cooperativeness. You work with the other party to find a solution that fully satisfies both sets of concerns.</div>
+      <span class="style-tag">✓ Complex problems</span><span class="style-tag">✓ Buy-in matters</span><span class="style-tag">✗ Time-sensitive situations</span>
+    </div>
+    <div class="style-card compromising">
+      <div class="style-name">Compromising</div>
+      <div class="style-desc">Moderate on both dimensions. You find a mutually acceptable middle ground where both parties give something up.</div>
+      <span class="style-tag">✓ Equal power</span><span class="style-tag">✓ Time pressure</span><span class="style-tag">✗ When a full solution exists</span>
+    </div>
+    <div class="style-card avoiding">
+      <div class="style-name">Avoiding</div>
+      <div class="style-desc">Low assertiveness, low cooperativeness. You sidestep or withdraw from the conflict, at least temporarily.</div>
+      <span class="style-tag">✓ Trivial issues</span><span class="style-tag">✓ Cooling down</span><span class="style-tag">✗ Repeated use</span>
+    </div>
+    <div class="style-card accommodating">
+      <div class="style-name">Accommodating</div>
+      <div class="style-desc">Low assertiveness, high cooperativeness. You yield to the other party, often prioritising the relationship over your position.</div>
+      <span class="style-tag">✓ You're wrong</span><span class="style-tag">✓ Preserving goodwill</span><span class="style-tag">✗ Important issues</span>
+    </div>
+  </div>
+
+  <h3>Self-Assessment: What Is Your Default Style?</h3>
+  <p>The five scenarios below will help you identify your primary and secondary conflict modes. Choose the response that most closely reflects how you would <em>actually</em> react — not how you think you should.</p>
+
+  <div class="quiz-container">
+    <div class="quiz-label">Interactive Assessment</div>
+    <h3>Conflict Style Identifier</h3>
+    <p class="quiz-intro">Five workplace scenarios. Select the response that best reflects your natural reaction.</p>
+    <div class="quiz-progress">
+      <div class="qprog-dot" id="dot0"></div>
+      <div class="qprog-dot" id="dot1"></div>
+      <div class="qprog-dot" id="dot2"></div>
+      <div class="qprog-dot" id="dot3"></div>
+      <div class="qprog-dot" id="dot4"></div>
+    </div>
+
+    <div class="quiz-question-block active" id="q0">
+      <div class="quiz-q-num">Scenario 1 of 5</div>
+      <div class="quiz-q-text">A colleague is consistently using a teaching approach you believe is ineffective, and you can see it affecting student results. What do you do?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="selectOption(0,'competing',this)">Present your evidence directly and advocate for a change, even if it creates tension.</button>
+        <button class="quiz-option" onclick="selectOption(0,'collaborating',this)">Propose a meeting to explore both approaches together and design something better than either alone.</button>
+        <button class="quiz-option" onclick="selectOption(0,'compromising',this)">Suggest piloting both methods with different groups and comparing the outcomes.</button>
+        <button class="quiz-option" onclick="selectOption(0,'avoiding',this)">Decide it is not your place to interfere and focus on your own classroom.</button>
+        <button class="quiz-option" onclick="selectOption(0,'accommodating',this)">Offer support for their approach and keep your concerns to yourself to preserve the relationship.</button>
+      </div>
+    </div>
+
+    <div class="quiz-question-block" id="q1">
+      <div class="quiz-q-num">Scenario 2 of 5</div>
+      <div class="quiz-q-text">A new institutional policy is introduced that you feel significantly undermines your professional autonomy. How do you respond?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="selectOption(1,'competing',this)">Challenge the policy formally through proper channels, making your objections clear and on record.</button>
+        <button class="quiz-option" onclick="selectOption(1,'collaborating',this)">Request a dialogue with leadership to understand the rationale and co-design reasonable modifications.</button>
+        <button class="quiz-option" onclick="selectOption(1,'compromising',this)">Comply with the policy overall while negotiating for flexibility in the areas that matter most to you.</button>
+        <button class="quiz-option" onclick="selectOption(1,'avoiding',this)">Implement the policy quietly and hope it gets revised in time.</button>
+        <button class="quiz-option" onclick="selectOption(1,'accommodating',this)">Fully embrace the policy and adjust your practice without raising any concerns.</button>
+      </div>
+    </div>
+
+    <div class="quiz-question-block" id="q2">
+      <div class="quiz-q-num">Scenario 3 of 5</div>
+      <div class="quiz-q-text">During a curriculum meeting you are facilitating, two team members get into a heated disagreement about assessment formats. What do you do?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="selectOption(2,'competing',this)">Redirect the meeting and make an executive call on the direction to keep things moving.</button>
+        <button class="quiz-option" onclick="selectOption(2,'collaborating',this)">Pause the agenda and facilitate a structured dialogue to surface both positions and build toward consensus.</button>
+        <button class="quiz-option" onclick="selectOption(2,'compromising',this)">Propose a blended format that incorporates key elements from both perspectives as a starting point.</button>
+        <button class="quiz-option" onclick="selectOption(2,'avoiding',this)">Table the discussion for now and move to the next agenda item to avoid derailing the meeting.</button>
+        <button class="quiz-option" onclick="selectOption(2,'accommodating',this)">Side with whichever person seems most distressed to reduce the tension immediately.</button>
+      </div>
+    </div>
+
+    <div class="quiz-question-block" id="q3">
+      <div class="quiz-q-num">Scenario 4 of 5</div>
+      <div class="quiz-q-text">Your supervisor gives feedback on your work that you strongly disagree with — you believe it reflects a misunderstanding of your approach. How do you handle it?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="selectOption(3,'competing',this)">Push back professionally in the moment with evidence, making your case clearly and directly.</button>
+        <button class="quiz-option" onclick="selectOption(3,'collaborating',this)">Request a follow-up conversation to understand the criteria better and align on shared expectations.</button>
+        <button class="quiz-option" onclick="selectOption(3,'compromising',this)">Accept part of the feedback while diplomatically flagging the aspects you believe are based on a misread.</button>
+        <button class="quiz-option" onclick="selectOption(3,'avoiding',this)">Thank them and walk away — you will decide later whether to address it or let it go.</button>
+        <button class="quiz-option" onclick="selectOption(3,'accommodating',this)">Thank them and implement the changes without raising any disagreement.</button>
+      </div>
+    </div>
+
+    <div class="quiz-question-block" id="q4">
+      <div class="quiz-q-num">Scenario 5 of 5</div>
+      <div class="quiz-q-text">Two teachers you supervise are in ongoing conflict over shared resources — classroom schedules and preparation time. They come to you. What is your move?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="selectOption(4,'competing',this)">Establish a clear, firm resource allocation rule and communicate it as non-negotiable.</button>
+        <button class="quiz-option" onclick="selectOption(4,'collaborating',this)">Bring them together to co-design a sharing system that addresses both of their core needs.</button>
+        <button class="quiz-option" onclick="selectOption(4,'compromising',this)">Split the available resources as evenly as possible and see if both parties can work within those limits.</button>
+        <button class="quiz-option" onclick="selectOption(4,'avoiding',this)">Encourage them to sort it out themselves and monitor from a distance.</button>
+        <button class="quiz-option" onclick="selectOption(4,'accommodating',this)">Allocate more to the more vocal teacher to reduce the immediate conflict.</button>
+      </div>
+    </div>
+
+    <div class="quiz-nav">
+      <button class="btn btn-secondary" id="prevBtn" onclick="navigate(-1)" disabled>&#8592; Previous</button>
+      <button class="btn btn-primary"   id="nextBtn" onclick="navigate(1)"  disabled>Next &#8594;</button>
+    </div>
+
+    <div class="quiz-result" id="quizResult">
+      <div class="quiz-result-hr"></div>
+      <div class="quiz-label">Your Results</div>
+      <div style="font-family:var(--font-serif);font-size:1.2rem;font-weight:700;margin-bottom:14px;">Your Conflict Profile</div>
+      <div class="result-styles" id="resultStyles"></div>
+      <div class="result-growth" id="resultGrowth"></div>
+      <button class="btn-reset" onclick="resetQuiz()">&#8635; Retake Assessment</button>
+    </div>
+  </div>
+
+  <div class="callout amber">
+    <span class="callout-icon">&#9888;&#65039;</span>
+    <div class="callout-body">
+      <div class="callout-title">Important Caveat</div>
+      <p>No single style is universally best. The most effective conflict handlers are those who can <strong>read the situation</strong> and flex their approach accordingly. A strong score in one style is your comfort zone — not your ceiling.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CHAPTER 3 ═══════ -->
+<section class="chapter" id="chapter-3">
+  <div class="chapter-eyebrow"><span class="chapter-num">Chapter 03</span><span class="chapter-rule"></span><span class="chapter-tag">Core Skills</span></div>
+  <h2>Communication as the Foundation</h2>
+  <p>Every conflict resolution model — regardless of theoretical framework — places communication at its core. Not communication in the generic sense of "talking to people," but specific, deliberate communication practices that lower defensiveness, build shared understanding, and create the conditions for resolution.</p>
+
+  <h3>Active Listening</h3>
+  <p>Active listening is the most underrated and least practiced skill in conflict resolution. It is not passive — it requires concentrated effort to hear not just the words spoken, but the concerns, emotions, and needs behind them.</p>
+
+  <div class="comparison-table">
+    <div class="comparison-col">
+      <div class="comparison-header">What Active Listening Looks Like</div>
+      <div class="comparison-item">Paraphrasing before responding: <em>"So what I am hearing is…"</em></div>
+      <div class="comparison-item">Asking clarifying questions: <em>"Can you say more about what you mean by…?"</em></div>
+      <div class="comparison-item">Noticing emotional tone alongside content</div>
+      <div class="comparison-item">Allowing silence — not rushing to fill pauses</div>
+      <div class="comparison-item">Withholding your response until the person has fully finished speaking</div>
+    </div>
+    <div class="comparison-col">
+      <div class="comparison-header">Common Active Listening Failures</div>
+      <div class="comparison-item">Preparing your rebuttal while the other person is still speaking</div>
+      <div class="comparison-item">Interrupting to correct factual errors mid-statement</div>
+      <div class="comparison-item">Assuming you already know what they are going to say</div>
+      <div class="comparison-item">Fixing or advising before fully understanding the concern</div>
+      <div class="comparison-item">Using "I understand" as a deflection rather than a genuine acknowledgment</div>
+    </div>
+  </div>
+
+  <h3>Non-Violent Communication (NVC)</h3>
+  <p>Developed by Marshall Rosenberg, Non-Violent Communication provides a structured framework for expressing concerns in a way that minimises defensiveness and keeps focus on needs rather than blame.</p>
+
+  <div class="nvc-grid">
+    <div class="nvc-step"><div class="nvc-letter">O</div><div class="nvc-word">Observe</div><div class="nvc-desc">State the specific, factual behaviour or situation — without evaluation, judgment, or interpretation.</div></div>
+    <div class="nvc-step"><div class="nvc-letter">F</div><div class="nvc-word">Feel</div><div class="nvc-desc">Name your emotional response — not your interpretation of what the other person intended.</div></div>
+    <div class="nvc-step"><div class="nvc-letter">N</div><div class="nvc-word">Need</div><div class="nvc-desc">Identify the underlying need, value, or expectation that is not being met.</div></div>
+    <div class="nvc-step"><div class="nvc-letter">R</div><div class="nvc-word">Request</div><div class="nvc-desc">Make a specific, actionable, positive request — not a demand or a vague wish.</div></div>
+  </div>
+
+  <div class="scenario">
+    <div class="scenario-label">NVC in Practice</div>
+    <h4>From Accusation to Dialogue</h4>
+    <p><strong>Without NVC:</strong> "You never share materials in advance. It is incredibly disrespectful and throws off my entire planning."</p>
+    <div class="scenario-resolution">
+      <div class="scenario-resolution-label">Rewritten with NVC</div>
+      <p><strong>Observe:</strong> "When lesson materials arrive the night before they are needed—" <strong>Feel:</strong> "I feel frustrated and under-prepared," <strong>Need:</strong> "because I need at least 48 hours to adapt resources for my different learner profiles." <strong>Request:</strong> "Would you be willing to share materials by Wednesday for Friday sessions?"</p>
+    </div>
+  </div>
+
+  <h3>Reframing: Redirecting Without Dismissing</h3>
+  <p>Reframing restates someone's concern accurately but shifts the focus from blame to possibility. It is one of the most powerful tools a conflict-aware educator can use — and one of the most underused.</p>
+
+  <div class="reframe-table">
+    <div class="reframe-col">
+      <div class="reframe-header">Blame-Focused Statement</div>
+      <div class="reframe-item">Management is completely unsupportive.</div>
+      <div class="reframe-item">She refuses to listen to any feedback.</div>
+      <div class="reframe-item">This curriculum is impossible to implement.</div>
+      <div class="reframe-item">He always undermines me in front of the team.</div>
+    </div>
+    <div class="reframe-col">
+      <div class="reframe-header">Need-Focused Reframe</div>
+      <div class="reframe-item">It sounds like you need more active support from leadership.</div>
+      <div class="reframe-item">You are looking for a more open dialogue about your concerns.</div>
+      <div class="reframe-item">You are facing real implementation challenges you would like help addressing.</div>
+      <div class="reframe-item">You need your professional judgement to be respected publicly.</div>
+    </div>
+  </div>
+
+  <h3>Language Traps to Avoid</h3>
+  <div class="callout conflict">
+    <span class="callout-icon">🚫</span>
+    <div class="callout-body">
+      <div class="callout-title">High-Risk Phrases in Conflict Conversations</div>
+      <p>Avoid: <strong>"You always / you never"</strong> (absolutes escalate), <strong>"Calm down"</strong> (perceived as dismissive), <strong>"That is not my problem"</strong> (closes dialogue), <strong>"I thought you understood"</strong> (implies incompetence), <strong>"With all due respect…"</strong> (signals the opposite of respect).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CHAPTER 4 ═══════ -->
+<section class="chapter" id="chapter-4">
+  <div class="chapter-eyebrow"><span class="chapter-num">Chapter 04</span><span class="chapter-rule"></span><span class="chapter-tag">Core Skills</span></div>
+  <h2>Negotiation Strategies</h2>
+  <p>Negotiation is not a corporate skill reserved for boardrooms. It is a daily reality in educational institutions — whether you are working out a timetable conflict, advocating for curriculum resources, or navigating a methodological disagreement with a senior colleague. The difference between educators who negotiate well and those who do not is rarely intelligence. It is usually strategy.</p>
+
+  <h3>Positions vs. Interests: The Most Important Distinction</h3>
+  <div class="callout info">
+    <span class="callout-icon">🔑</span>
+    <div class="callout-body">
+      <div class="callout-title">The Core Insight</div>
+      <p>A <strong>position</strong> is what someone says they want. An <strong>interest</strong> is <em>why</em> they want it. Positions are often incompatible. The interests behind them rarely are. Skilled negotiators move the conversation from positions to interests as quickly as possible.</p>
+    </div>
+  </div>
+
+  <div class="scenario">
+    <div class="scenario-label">Position vs. Interest in Action</div>
+    <h4>The Computer Lab Dispute</h4>
+    <p><strong>Teacher A's position:</strong> "I need the computer lab every Thursday morning."<br><strong>Teacher B's position:</strong> "I need the computer lab every Thursday morning."</p>
+    <p>The positions are identical and incompatible. But dig into the interests behind them:</p>
+    <div class="scenario-resolution">
+      <div class="scenario-resolution-label">What the Interests Reveal</div>
+      <p>Teacher A needs it for a recurring weekly digital assessment with 30 students. Teacher B needs it for a one-off project presentation that week. Understanding this opens multiple solutions: rotating weeks, splitting the morning session, using tablets as an alternative for the presentation, or rescheduling the one-off session. None of these solutions was visible at the level of positions.</p>
+    </div>
+  </div>
+
+  <h3>The Harvard Principled Negotiation Model</h3>
+  <p>Developed by Roger Fisher and William Ury, this four-principle framework remains the gold standard for interest-based negotiation in any professional context.</p>
+  <div class="harvard-grid">
+    <div class="harvard-card">
+      <div class="harvard-num">01</div>
+      <div>
+        <div class="harvard-title">Separate People from the Problem</div>
+        <div class="harvard-desc">Be hard on the issue, soft on the person. Attacks on positions must not become attacks on character. Name the problem — never the person.</div>
+      </div>
+    </div>
+    <div class="harvard-card">
+      <div class="harvard-num">02</div>
+      <div>
+        <div class="harvard-title">Focus on Interests, Not Positions</div>
+        <div class="harvard-desc">Ask "Why do you need that?" Listen carefully. Then ask "Why else?" Needs, fears, and hopes are the real negotiation currency.</div>
+      </div>
+    </div>
+    <div class="harvard-card">
+      <div class="harvard-num">03</div>
+      <div>
+        <div class="harvard-title">Generate Options Before Deciding</div>
+        <div class="harvard-desc">Brainstorm without judgment first. The worst negotiating error is locking in on the first acceptable solution rather than exploring the full solution space.</div>
+      </div>
+    </div>
+    <div class="harvard-card">
+      <div class="harvard-num">04</div>
+      <div>
+        <div class="harvard-title">Use Objective Criteria</div>
+        <div class="harvard-desc">Anchor decisions in shared standards: research, institutional policy, established best practice. Objective criteria depersonalise the negotiation.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Understanding BATNA</h3>
+  <p>Your <strong>BATNA (Best Alternative to a Negotiated Agreement)</strong> is what you will do if the negotiation fails. Knowing your BATNA prevents you from accepting a deal worse than your alternative — and from walking away from one that is actually better than what you would otherwise get.</p>
+
+  <div class="callout resolution">
+    <span class="callout-icon">⚖️</span>
+    <div class="callout-body">
+      <div class="callout-title">BATNA in Educational Settings</div>
+      <p>If you are negotiating for additional planning time and the negotiation fails, what is your alternative? Knowing this helps you negotiate from a grounded, clear-headed position rather than anxious acquiescence.</p>
+    </div>
+  </div>
+
+  <h3>Common Negotiation Mistakes in Educational Contexts</h3>
+  <ul>
+    <li><strong>Treating every disagreement as a debate to win.</strong> Winning an argument and solving a problem are not the same thing.</li>
+    <li><strong>Negotiating while emotionally flooded.</strong> Strong negative emotion significantly impairs prefrontal cortex function — precisely where strategic thinking happens.</li>
+    <li><strong>Making the first concession unnecessarily.</strong> Conceding without a reciprocal move signals weakness and devalues your position.</li>
+    <li><strong>Ignoring the relationship dimension.</strong> You will see these colleagues tomorrow. The solution matters, but so does how you reach it.</li>
+    <li><strong>Accepting ambiguous agreements.</strong> Vague resolutions ("we will figure it out") recreate the original conflict within weeks.</li>
+  </ul>
+</section>
+
+<!-- ═══════ CHAPTER 5 ═══════ -->
+<section class="chapter" id="chapter-5">
+  <div class="chapter-eyebrow"><span class="chapter-num">Chapter 05</span><span class="chapter-rule"></span><span class="chapter-tag">In-the-Moment</span></div>
+  <h2>De-escalation in Real Time</h2>
+  <p>Sometimes conflict does not give you time to reach for a framework. A meeting turns heated. A feedback conversation derails. A colleague's tone crosses a line. In these moments, the immediate goal is not resolution — it is <strong>de-escalation</strong>. You are buying time and reducing emotional temperature so that actual resolution becomes possible.</p>
+
+  <h3>Recognising the Escalation Ladder</h3>
+  <p>Conflicts rarely jump from calm to crisis. They climb. Recognising the early stages gives you room to intervene before a situation becomes entrenched:</p>
+  <ol>
+    <li><strong>Hardening</strong> — Positions become fixed; openness to other perspectives decreases. Still manageable.</li>
+    <li><strong>Debate and polemics</strong> — Both parties argue for their view rather than listening. Win/lose framing begins to emerge.</li>
+    <li><strong>Actions over words</strong> — The focus shifts from dialogue to demonstration. People stop seeking genuine exchange.</li>
+    <li><strong>Images and coalitions</strong> — Parties begin recruiting allies. Us-vs-them thinking solidifies into camps.</li>
+    <li><strong>Loss of face</strong> — Dignity is now at stake. Resolution requires each party to feel they have not "lost."</li>
+    <li><strong>Open threats</strong> — Formal warnings, ultimatums, or escalation threats emerge.</li>
+    <li><strong>Destructive</strong> — The conflict is actively harming institutional function and requires formal intervention.</li>
+  </ol>
+
+  <div class="callout conflict">
+    <span class="callout-icon">⚡</span>
+    <div class="callout-body">
+      <div class="callout-title">Intervene Early — Always</div>
+      <p>Conflicts addressed at stages 1–2 resolve quickly and often strengthen relationships. Conflicts that reach stage 5 or beyond require significantly more effort and leave lasting damage. <strong>Early and uncomfortable beats late and catastrophic.</strong></p>
+    </div>
+  </div>
+
+  <h3>The STOP Technique</h3>
+  <p>When you feel yourself escalating — or observe someone else doing so — STOP is a four-step self-regulation intervention you can use immediately.</p>
+  <div class="stop-grid">
+    <div class="stop-card">
+      <div class="stop-letter">S</div>
+      <div class="stop-word">Stop</div>
+      <div class="stop-desc">Pause whatever you were doing or about to say. Create a micro-break in the action — even a second counts.</div>
+    </div>
+    <div class="stop-card">
+      <div class="stop-letter">T</div>
+      <div class="stop-word">Take a Breath</div>
+      <div class="stop-desc">A slow exhale activates the parasympathetic nervous system, reducing cortisol's grip on your thinking and responses.</div>
+    </div>
+    <div class="stop-card">
+      <div class="stop-letter">O</div>
+      <div class="stop-word">Observe</div>
+      <div class="stop-desc">Notice: What am I feeling? What does the other person seem to be feeling? What is actually happening here beyond the surface?</div>
+    </div>
+    <div class="stop-card">
+      <div class="stop-letter">P</div>
+      <div class="stop-word">Proceed</div>
+      <div class="stop-desc">Re-engage from a more grounded place — or explicitly pause the conversation to return when both parties are ready.</div>
+    </div>
+  </div>
+
+  <h3>De-escalation Scripts</h3>
+  <ul>
+    <li><em>"I want to make sure I am understanding you correctly. Can I reflect back what I am hearing?"</em></li>
+    <li><em>"This is clearly important to both of us. Can we find time to sit down properly and give it the attention it deserves?"</em></li>
+    <li><em>"I notice this conversation is becoming difficult. I think we both want a good outcome. Can we take a short break and return to this?"</em></li>
+    <li><em>"I may have said that badly. Let me try again."</em></li>
+    <li><em>"I hear that you are frustrated. I want to address that — not dismiss it."</em></li>
+  </ul>
+</section>
+
+<!-- ═══════ CHAPTER 6 ═══════ -->
+<section class="chapter" id="chapter-6">
+  <div class="chapter-eyebrow"><span class="chapter-num">Chapter 06</span><span class="chapter-rule"></span><span class="chapter-tag">Facilitated Resolution</span></div>
+  <h2>Mediation &amp; Facilitated Dialogue</h2>
+  <p>Not every conflict can or should be resolved by the parties alone. Sometimes a neutral third party is needed — not to impose a solution, but to create the structured conditions under which the parties themselves can reach one. This is mediation.</p>
+
+  <h3>When to Bring in a Third Party</h3>
+  <div class="cards-grid">
+    <div class="strategy-card" style="border-top-color:var(--conflict);">
+      <div class="card-icon" style="background:var(--conflict-bg);">🔴</div>
+      <h4>Escalate to HR / Management</h4>
+      <p>Harassment, discrimination, repeated policy violations, threats, safety concerns, or complete and sustained communication breakdown.</p>
+    </div>
+    <div class="strategy-card" style="border-top-color:var(--amber);">
+      <div class="card-icon">🟡</div>
+      <h4>Bring in a Mediator</h4>
+      <p>Entrenched disagreements after two or more failed resolution attempts, significant power imbalances, deep mutual distrust, or when direct dialogue has broken down.</p>
+    </div>
+    <div class="strategy-card" style="border-top-color:var(--forest);">
+      <div class="card-icon" style="background:var(--resolution-bg);">🟢</div>
+      <h4>Handle Directly</h4>
+      <p>First-instance disagreements, task or process conflicts, situations where both parties are willing to engage and power is relatively balanced.</p>
+    </div>
+  </div>
+
+  <h3>The Five-Stage Mediation Process</h3>
+  <ol class="stage-list">
+    <li class="stage-item">
+      <div><div class="stage-title">Opening &amp; Ground Rules</div><div class="stage-desc">The mediator introduces the process, establishes confidentiality, and sets behavioural norms: speak for yourself, no interruptions, and a genuine commitment to good-faith engagement.</div></div>
+    </li>
+    <li class="stage-item">
+      <div><div class="stage-title">Storytelling</div><div class="stage-desc">Each party has uninterrupted time to share their perspective. The mediator listens, summarises, and reflects back — validating that each person has been heard, without endorsing any position.</div></div>
+    </li>
+    <li class="stage-item">
+      <div><div class="stage-title">Identifying Interests</div><div class="stage-desc">The mediator helps both parties move below their stated positions to the underlying needs, fears, and interests driving those positions. This is where the resolution space begins to emerge.</div></div>
+    </li>
+    <li class="stage-item">
+      <div><div class="stage-title">Generating Options</div><div class="stage-desc">Both parties jointly brainstorm possible solutions without evaluation or commitment. All ideas are valid at this stage. The goal is quantity, not quality — filtering comes next.</div></div>
+    </li>
+    <li class="stage-item">
+      <div><div class="stage-title">Agreement &amp; Follow-Through</div><div class="stage-desc">The parties select the most mutually satisfying options and codify them into a concrete, written agreement — specifying who does what, by when, and how adherence will be reviewed.</div></div>
+    </li>
+  </ol>
+
+  <div class="pull-quote">
+    <p>"A mediator's job is not to solve the problem. It is to create the conditions under which the people most affected by the problem can solve it themselves."</p>
+    <cite>— Harvard Negotiation Project</cite>
+  </div>
+</section>
+
+<!-- ═══════ CHAPTER 7 ═══════ -->
+<section class="chapter" id="chapter-7">
+  <div class="chapter-eyebrow"><span class="chapter-num">Chapter 07</span><span class="chapter-rule"></span><span class="chapter-tag">Applied Cases</span></div>
+  <h2>Real Scenarios in Educational Settings</h2>
+  <p>Theory becomes skill in context. The following scenarios reflect real patterns of conflict that arise in schools, training centres, and academies. Each includes an analysis of what is driving the conflict beneath the surface, and a recommended resolution pathway.</p>
+
+  <div class="scenario">
+    <div class="scenario-label">Scenario A</div>
+    <h4>Curriculum Disagreement Between Co-Teachers</h4>
+    <p>Two teachers co-delivering a course hold fundamentally different pedagogical views. One favours a structured, textbook-led approach; the other insists on project-based, communicative methods. Both are vocal, both feel the other is compromising student outcomes, and the disagreement has started affecting lesson planning meetings.</p>
+    <div class="scenario-resolution">
+      <div class="scenario-resolution-label">Resolution Pathway</div>
+      <p>Distinguish what is a <em>values conflict</em> (pedagogy as identity) versus a <em>task conflict</em> (specific lesson decisions). Focus the conversation on shared goals — student outcomes — rather than preferred methods. Use Harvard Principle 3: generate options first. A hybrid approach is often more defensible than either pure position. Anchor the final decision in learner data, not opinion.</p>
+    </div>
+  </div>
+
+  <div class="scenario">
+    <div class="scenario-label">Scenario B</div>
+    <h4>Teacher–Supervisor Tension Over Performance Feedback</h4>
+    <p>A teacher receives written feedback from their supervisor that they strongly disagree with — they feel their approach has been misread. They are considering a formal objection. The supervisor believes the feedback is fair and grounded in what was observed.</p>
+    <div class="scenario-resolution">
+      <div class="scenario-resolution-label">Resolution Pathway</div>
+      <p>Before escalating formally, request a feedback dialogue — not a defence hearing. Come with specific questions: "Can you walk me through what you observed that led to that assessment?" This surfaces the misread faster than a written rebuttal. If alignment is not reached, request the observation criteria in writing. This is a legitimate professional ask and benefits both parties.</p>
+    </div>
+  </div>
+
+  <div class="scenario">
+    <div class="scenario-label">Scenario C</div>
+    <h4>Cross-Cultural Misunderstanding in a Multicultural Team</h4>
+    <p>In a team with staff from several countries, a direct communication style read as efficient by one person is read as rude and aggressive by another. Over time, this creates avoidance, side conversations, and team fragmentation — none of it explicitly named or addressed.</p>
+    <div class="scenario-resolution">
+      <div class="scenario-resolution-label">Resolution Pathway</div>
+      <p>Name what is happening at the team level without attributing fault to individuals. Facilitate a team conversation about communication norms — not to homogenise, but to build explicit shared understanding. Use Erin Meyer's Culture Map as a neutral reference point. Establish team agreements around meeting conduct, feedback delivery, and expectations around directness vs. indirectness.</p>
+    </div>
+  </div>
+
+  <div class="scenario">
+    <div class="scenario-label">Scenario D</div>
+    <h4>Conflict Over an Institutional Policy Change</h4>
+    <p>A new assessment policy is rolled out with minimal teacher consultation. Experienced educators feel it contradicts best practice and was introduced without transparency. Resistance builds — first quietly, then openly.</p>
+    <div class="scenario-resolution">
+      <div class="scenario-resolution-label">Resolution Pathway</div>
+      <p>This is a structural conflict with legitimate professional grievance. Encourage a collective, organised response — a written rationale with specific, evidence-based concerns — rather than scattered individual complaints, which are easier to dismiss. Leadership must be helped to distinguish <em>resistance to change</em> from <em>substantive professional objection</em>. Creating a formal review mechanism is the most sustainable resolution.</p>
+    </div>
+  </div>
+
+  <div class="scenario">
+    <div class="scenario-label">Scenario E</div>
+    <h4>Values-Based Clash: Pedagogy as Identity</h4>
+    <p>Two colleagues disagree not about a specific lesson, but about the purpose of education itself. One prioritises academic rigour and measurable outcomes; the other prioritises student agency and intrinsic motivation. Neither is wrong — but their interaction has become adversarial, and it is affecting team cohesion.</p>
+    <div class="scenario-resolution">
+      <div class="scenario-resolution-label">Resolution Pathway</div>
+      <p>This requires a different framing: it is a values dialogue, not a dispute with a correct answer. The goal is <em>coexistence and collaboration</em>, not conversion. Find the shared commitments — student success, professional standards, institutional reputation — and build from there. Assign co-projects that require both strengths. The friction of different views, channelled well, often produces better outcomes than either alone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CHAPTER 8 ═══════ -->
+<section class="chapter" id="chapter-8">
+  <div class="chapter-eyebrow"><span class="chapter-num">Chapter 08</span><span class="chapter-rule"></span><span class="chapter-tag">Formal Record</span></div>
+  <h2>Documentation &amp; Resolution Agreements</h2>
+  <p>Documentation is not about building a paper trail to be used against someone. Done well, it is a professional practice that protects all parties, creates accountability, and ensures that verbal agreements do not dissolve into "but I thought we said…" six weeks later.</p>
+
+  <h3>When to Document</h3>
+  <div class="cards-grid">
+    <div class="strategy-card" style="border-top-color:var(--forest);">
+      <div class="card-icon" style="background:var(--resolution-bg);">📝</div>
+      <h4>Always Document When</h4>
+      <p>A formal mediation or resolution meeting takes place, an agreement involves changed behaviour or responsibilities, a grievance is raised formally, or a supervisor–supervisee conflict has been formally addressed.</p>
+    </div>
+    <div class="strategy-card" style="border-top-color:var(--amber);">
+      <div class="card-icon">📋</div>
+      <h4>Consider Documenting When</h4>
+      <p>An informal resolution involves ongoing commitments, the same issue has recurred before, or the conversation was emotionally significant and a shared reference point would be helpful.</p>
+    </div>
+    <div class="strategy-card" style="border-top-color:var(--border);">
+      <div class="card-icon">💬</div>
+      <h4>Documentation Is Optional When</h4>
+      <p>A minor misunderstanding was cleared up quickly, both parties are satisfied and the issue is fully resolved, and no future risk or recurrence is anticipated.</p>
+    </div>
+  </div>
+
+  <h3>Elements of a Strong Resolution Agreement</h3>
+  <ol>
+    <li><strong>Parties involved</strong> — full names and roles</li>
+    <li><strong>Brief, factual summary</strong> of the issue addressed — descriptive, not evaluative</li>
+    <li><strong>Agreed actions</strong> — who will do what, by when, and in what form</li>
+    <li><strong>Check-in mechanism</strong> — how and when progress will be reviewed</li>
+    <li><strong>Signatures and date</strong> of all parties</li>
+  </ol>
+
+  <div class="callout amber">
+    <span class="callout-icon">📌</span>
+    <div class="callout-body">
+      <div class="callout-title">The Language of Resolution Agreements</div>
+      <p>Write in neutral, descriptive language. Avoid evaluative language ("unacceptable behaviour"), blame language ("refused to comply"), or language that prejudges future conduct. The document should read as a <strong>shared plan — not a verdict</strong>.</p>
+    </div>
+  </div>
+
+  <h3>The Follow-Up Conversation</h3>
+  <p>Any agreement without a scheduled follow-up is at risk of erosion. Plan a brief check-in 2–4 weeks after the agreement is signed — not to review compliance punitively, but to genuinely ask: <em>Is what we agreed working? Does anything need to be adjusted?</em> This normalises the idea that conflict resolution is a process, not a single event — and catches small recurrences before they become large ones.</p>
+</section>
+
+<!-- ═══════ CHAPTER 9 ═══════ -->
+<section class="chapter" id="chapter-9">
+  <div class="chapter-eyebrow"><span class="chapter-num">Chapter 09</span><span class="chapter-rule"></span><span class="chapter-tag">Institutional Culture</span></div>
+  <h2>Building a Conflict-Resilient Culture</h2>
+  <p>Individual conflict resolution skills matter enormously. But they work best within an institutional culture that makes it <em>safe</em> to surface disagreements before they become damaging. That culture does not emerge by accident. It is built through deliberate leadership, structural design, and consistent professional behaviour over time.</p>
+
+  <h3>Psychological Safety: The Research Foundation</h3>
+  <p>Harvard Business School professor Amy Edmondson's research on psychological safety provides the most robust evidence base for conflict-resilient culture. Psychological safety is the shared belief that the team is a safe space to take interpersonal risks — including raising concerns, disagreeing with authority, and admitting mistakes.</p>
+  <p>Crucially, psychological safety is not the same as comfort. It does not mean conflict-free. It means people feel secure enough to engage honestly with difficult issues.</p>
+
+  <div class="callout resolution">
+    <span class="callout-icon">🌱</span>
+    <div class="callout-body">
+      <div class="callout-title">What Psychological Safety Looks Like in Practice</div>
+      <p>Leaders who model vulnerability ("I was wrong about that approach"), teams that treat disagreement as useful data rather than personal threat, and institutions that respond to raised concerns with curiosity rather than defensiveness.</p>
+    </div>
+  </div>
+
+  <h3>Proactive Conflict Practices</h3>
+  <div class="cards-grid">
+    <div class="strategy-card">
+      <div class="card-icon">🤝</div>
+      <h4>Team Working Agreements</h4>
+      <p>Co-designed norms for how the team will communicate, disagree, and make decisions together. Explicit is always better than assumed.</p>
+    </div>
+    <div class="strategy-card">
+      <div class="card-icon">🔄</div>
+      <h4>Regular Retrospectives</h4>
+      <p>Structured team check-ins — monthly or per-cycle — that ask: What is working? What is not? What do we want to change? These surface tension before it calcifies.</p>
+    </div>
+    <div class="strategy-card">
+      <div class="card-icon">💬</div>
+      <h4>Feedback Culture</h4>
+      <p>Normalise both giving and requesting feedback. When feedback is frequent and developmental, performance conversations no longer land as personal attacks.</p>
+    </div>
+    <div class="strategy-card">
+      <div class="card-icon">🎯</div>
+      <h4>Clear Role Definitions</h4>
+      <p>Many process and structural conflicts in educational institutions are caused by overlapping or ambiguous responsibilities. Clarity of role reduces the friction surface area significantly.</p>
+    </div>
+    <div class="strategy-card">
+      <div class="card-icon">🧩</div>
+      <h4>Conflict Literacy Training</h4>
+      <p>Regular professional development in communication, negotiation, and conflict resolution — not just for leaders, but for all staff. This handbook is one example.</p>
+    </div>
+    <div class="strategy-card">
+      <div class="card-icon">📣</div>
+      <h4>Named Escalation Pathways</h4>
+      <p>Everyone should know exactly who to approach, and through what process, when a conflict cannot be resolved informally. Ambiguity about process breeds avoidance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CHAPTER 10 ═══════ -->
+<section class="chapter" id="chapter-10">
+  <div class="chapter-eyebrow"><span class="chapter-num">Chapter 10</span><span class="chapter-rule"></span><span class="chapter-tag">Reference</span></div>
+  <h2>Quick Reference Guide</h2>
+  <p>This chapter is designed for quick access when you are in or approaching a conflict situation and need a practical anchor point.</p>
+
+  <h3>Which Strategy, When?</h3>
+  <div class="quick-ref-grid">
+    <div class="qref-card">
+      <div class="qref-title">When You Need a Fast Answer</div>
+      <ul><li>Use Competing or Compromising</li><li>Avoid collaborative processes that require significant time investment</li><li>Protect the relationship — speed does not justify aggression</li></ul>
+    </div>
+    <div class="qref-card">
+      <div class="qref-title">When the Relationship Matters Most</div>
+      <ul><li>Use Collaborating or Accommodating</li><li>Invest time in the process — it will pay back in trust</li><li>Be willing to disclose your own interests first as a show of good faith</li></ul>
+    </div>
+    <div class="qref-card">
+      <div class="qref-title">When Power Is Imbalanced</div>
+      <ul><li>Know your BATNA clearly before entering the conversation</li><li>Use objective criteria to depersonalise the negotiation</li><li>Propose instead of demand: "What if we tried…"</li></ul>
+    </div>
+    <div class="qref-card">
+      <div class="qref-title">When Emotions Are Running High</div>
+      <ul><li>Use STOP before responding to anything</li><li>Name the emotion without judging it: "I can see this matters to you"</li><li>Slow the pace deliberately: "Can we take a moment?"</li></ul>
+    </div>
+    <div class="qref-card">
+      <div class="qref-title">When You Are the Third Party</div>
+      <ul><li>Establish ground rules before any content</li><li>Summarise and reflect before you interpret anything</li><li>Move from positions to interests as early as possible</li></ul>
+    </div>
+    <div class="qref-card">
+      <div class="qref-title">When to Escalate</div>
+      <ul><li>Two or more failed direct resolution attempts</li><li>Harassment, discrimination, or any safety concern</li><li>Complete, sustained communication breakdown</li><li>The conflict is actively affecting students or institutional function</li></ul>
+    </div>
+  </div>
+
+  <h3>Ready-to-Use Scripts</h3>
+
+  <div class="scenario">
+    <div class="scenario-label">Opening a Difficult Conversation</div>
+    <h4>When you need to raise a concern with a colleague</h4>
+    <p><em>"I would like to talk to you about something that has been on my mind. I want to approach it as a conversation, not a confrontation — I value our working relationship and I think this is worth addressing properly. Do you have a few minutes?"</em></p>
+  </div>
+
+  <div class="scenario">
+    <div class="scenario-label">Receiving Difficult Feedback</div>
+    <h4>When you receive feedback you disagree with</h4>
+    <p><em>"Thank you for that — I want to make sure I understand it fully before I respond. Could you give me a specific example of what you observed? I would like to understand your perspective more clearly before I share mine."</em></p>
+  </div>
+
+  <div class="scenario">
+    <div class="scenario-label">Breaking an Impasse</div>
+    <h4>When a conversation keeps going in circles</h4>
+    <p><em>"We seem to be stuck. Let me suggest something: instead of arguing for our own positions, can we both take two minutes to explain what we are most worried about losing? That might help us find a different path forward."</em></p>
+  </div>
+
+  <div class="scenario">
+    <div class="scenario-label">Requesting a Pause</div>
+    <h4>When the temperature in the room is rising</h4>
+    <p><em>"I want to keep this conversation productive, and I am aware I am not at my best right now. Can we take a short break and come back to this? I will have more to offer in twenty minutes than I do at this moment."</em></p>
+  </div>
+</section>
+
+<!-- ═══════ REFERENCES ═══════ -->
+<section class="chapter" id="references">
+  <div class="chapter-eyebrow"><span class="chapter-num">References</span><span class="chapter-rule"></span><span class="chapter-tag">Sources</span></div>
+  <h2>References &amp; Further Reading</h2>
+
+  <h3>Foundational Texts</h3>
+  <ul>
+    <li>Fisher, R., Ury, W., &amp; Patton, B. (2011). <em>Getting to Yes: Negotiating Agreement Without Giving In</em> (3rd ed.). Penguin Books.</li>
+    <li>Rosenberg, M. B. (2015). <em>Nonviolent Communication: A Language of Life</em> (3rd ed.). PuddleDancer Press.</li>
+    <li>Thomas, K. W., &amp; Kilmann, R. H. (1974). <em>Thomas–Kilmann Conflict Mode Instrument.</em> Xicom.</li>
+    <li>Edmondson, A. (2018). <em>The Fearless Organization: Creating Psychological Safety in the Workplace for Learning, Innovation, and Growth.</em> Wiley.</li>
+  </ul>
+
+  <h3>On Educational Conflict</h3>
+  <ul>
+    <li>Johnson, D. W., &amp; Johnson, R. T. (2009). Energizing Learning: The Instructional Power of Conflict. <em>Educational Researcher, 38</em>(1), 37–51.</li>
+    <li>Darling-Hammond, L. (2017). <em>Empowered Educators: How High-Performing Systems Shape Teaching Quality Around the World.</em> Jossey-Bass.</li>
+    <li>Meyer, E. (2014). <em>The Culture Map: Breaking Through the Invisible Boundaries of Global Business.</em> PublicAffairs.</li>
+  </ul>
+
+  <h3>On Negotiation &amp; Communication</h3>
+  <ul>
+    <li>Stone, D., Patton, B., &amp; Heen, S. (2010). <em>Difficult Conversations: How to Discuss What Matters Most.</em> Penguin Books.</li>
+    <li>Voss, C., &amp; Raz, T. (2016). <em>Never Split the Difference: Negotiating as if Your Life Depended on It.</em> Harper Business.</li>
+    <li>Patterson, K., Grenny, J., McMillan, R., &amp; Switzler, A. (2011). <em>Crucial Conversations: Tools for Talking When Stakes Are High.</em> McGraw-Hill.</li>
+    <li>Ury, W. (2015). <em>Getting to Yes with Yourself.</em> Harper One.</li>
+  </ul>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-title">Conflict Resolution &amp; Negotiation: A Practitioner's Handbook</div>
+      <div class="footer-sub">Prepared by <span class="footer-author">Rayene Medabis</span>, M.Ed. &middot; TESOL-Certified Teacher Trainer &amp; Curriculum Designer</div>
+      <div class="footer-sub" style="margin-top:4px;">All rights reserved &middot; Educational Institutions Series</div>
+    </div>
+    <div class="footer-meta">First Edition &middot; 2025<br>10 Chapters &middot; Quick Reference<br>Professional Training Resource</div>
+  </div>
+</footer>
+
+</main>
+</div>
+
+<script>
+// ── Reading Progress ──────────────────────────────
+const progressFill    = document.getElementById('progressFill');
+const progressPercent = document.getElementById('progressPercent');
+window.addEventListener('scroll', () => {
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  const pct   = total > 0 ? Math.round((window.scrollY / total) * 100) : 0;
+  progressFill.style.width  = pct + '%';
+  progressPercent.textContent = pct + '%';
+});
+
+// ── Active Nav Section ────────────────────────────
+const sections  = document.querySelectorAll('section[id], .chapter[id]');
+const navLinks  = document.querySelectorAll('.nav-link');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector('.nav-link[href="#' + e.target.id + '"]');
+      if (link) { link.classList.add('active'); link.scrollIntoView({block:'nearest',behavior:'smooth'}); }
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+sections.forEach(s => io.observe(s));
+
+// ── Mobile Menu ───────────────────────────────────
+const menuToggle = document.getElementById('menuToggle');
+const sidebar    = document.getElementById('sidebar');
+menuToggle.addEventListener('click', () => {
+  sidebar.classList.toggle('open');
+  menuToggle.textContent = sidebar.classList.contains('open') ? '\u2715' : '\u2630';
+});
+navLinks.forEach(l => l.addEventListener('click', () => {
+  if (window.innerWidth <= 900) { sidebar.classList.remove('open'); menuToggle.textContent = '\u2630'; }
+}));
+
+// ── Quiz ──────────────────────────────────────────
+const state = { current: 0, answers: {}, total: 5 };
+
+const styleData = {
+  competing: {
+    name: 'Competing',
+    desc: 'You tend to be direct and assertive in conflict, prioritising outcomes over harmony. You are not afraid to take a stand — even an unpopular one.',
+    tip: 'Before leading with your position, spend 60 seconds genuinely exploring the other person\'s concern. What they want to protect often reveals a path you haven\'t considered.'
+  },
+  collaborating: {
+    name: 'Collaborating',
+    desc: 'You seek solutions that genuinely work for everyone. You are curious about others\' perspectives and willing to invest time in outcomes everyone can commit to.',
+    tip: 'You have a strong toolkit. The growth edge is knowing when to use it and when a quicker, lighter approach is equally effective — not every problem needs a full collaborative process.'
+  },
+  compromising: {
+    name: 'Compromising',
+    desc: 'You are practical and fair-minded. You understand that getting most of what you need is often better than holding out for everything — and that relationships matter.',
+    tip: 'Before settling for a split, ask: is there a collaborative solution that could actually satisfy both parties more fully? Compromise is sometimes the best option — but not always.'
+  },
+  avoiding: {
+    name: 'Avoiding',
+    desc: 'You tend to sidestep conflict, either by withdrawing, postponing, or redirecting. You prefer calm — and you are skilled at not escalating situations unnecessarily.',
+    tip: 'Ask yourself: "If I avoid this now, what is the likely state of this situation in three months?" That answer often clarifies whether action is needed sooner than feels comfortable.'
+  },
+  accommodating: {
+    name: 'Accommodating',
+    desc: 'You prioritise relationships and others\' needs, often at the cost of your own position. You smooth things over and are highly attuned to the emotional register of your team.',
+    tip: 'After listening and acknowledging the other person\'s need, practise voicing one of your own. Even once per difficult conversation is a meaningful start toward a more balanced approach.'
+  }
+};
+
+function selectOption(qIdx, style, btn) {
+  document.getElementById('q' + qIdx).querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  state.answers[qIdx] = style;
+  document.getElementById('dot' + qIdx).classList.add('answered');
+  const nextBtn = document.getElementById('nextBtn');
+  nextBtn.disabled = false;
+  nextBtn.textContent = (state.current === state.total - 1) ? 'See Results \u2192' : 'Next \u2192';
+}
+
+function navigate(dir) {
+  if (dir === 1 && state.current === state.total - 1 && state.answers[state.current] !== undefined) {
+    showResults(); return;
+  }
+  state.current = Math.max(0, Math.min(state.total - 1, state.current + dir));
+  document.querySelectorAll('.quiz-question-block').forEach(b => b.classList.remove('active'));
+  document.getElementById('q' + state.current).classList.add('active');
+  document.getElementById('prevBtn').disabled = (state.current === 0);
+  const nextBtn = document.getElementById('nextBtn');
+  const answered = state.answers[state.current] !== undefined;
+  nextBtn.disabled = !answered;
+  nextBtn.textContent = (state.current === state.total - 1) ? 'See Results \u2192' : 'Next \u2192';
+}
+
+function showResults() {
+  const counts = {};
+  Object.values(state.answers).forEach(s => { counts[s] = (counts[s] || 0) + 1; });
+  const sorted  = Object.entries(counts).sort((a,b) => b[1] - a[1]);
+  const primary   = sorted[0]?.[0] || 'collaborating';
+  const secondary = sorted[1]?.[0] || 'compromising';
+  const pd = styleData[primary];
+  const sd = styleData[secondary];
+
+  document.getElementById('resultStyles').innerHTML =
+    '<div class="result-style-card primary">' +
+      '<div class="result-label">Primary Style</div>' +
+      '<div class="result-style-name">' + pd.name + '</div>' +
+      '<div class="result-style-desc">' + pd.desc + '</div>' +
+      '<div class="result-tip">\uD83D\uDCA1 ' + pd.tip + '</div>' +
+    '</div>' +
+    '<div class="result-style-card secondary">' +
+      '<div class="result-label">Secondary Style</div>' +
+      '<div class="result-style-name">' + sd.name + '</div>' +
+      '<div class="result-style-desc">' + sd.desc + '</div>' +
+      '<div class="result-tip">\uD83D\uDCA1 ' + sd.tip + '</div>' +
+    '</div>';
+
+  document.getElementById('resultGrowth').innerHTML =
+    '<strong>What this tells you:</strong> Your natural tendency is toward <strong>' + pd.name +
+    '</strong>, with elements of <strong>' + sd.name + '</strong> as your secondary mode. ' +
+    'Use this as a starting point — not a fixed identity. The goal is contextual flexibility: knowing <em>when</em> each style is the right tool, not just defaulting to what feels comfortable.';
+
+  document.getElementById('quizResult').classList.add('visible');
+  document.querySelector('.quiz-nav').style.display = 'none';
+  document.getElementById('quizResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function resetQuiz() {
+  state.current = 0;
+  state.answers = {};
+  document.querySelectorAll('.qprog-dot').forEach(d => d.classList.remove('answered'));
+  document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.quiz-question-block').forEach(b => b.classList.remove('active'));
+  document.getElementById('q0').classList.add('active');
+  document.getElementById('prevBtn').disabled = true;
+  const nextBtn = document.getElementById('nextBtn');
+  nextBtn.disabled = true;
+  nextBtn.textContent = 'Next \u2192';
+  document.getElementById('quizResult').classList.remove('visible');
+  document.querySelector('.quiz-nav').style.display = 'flex';
+}
+</script>
+</body>
+</html>
