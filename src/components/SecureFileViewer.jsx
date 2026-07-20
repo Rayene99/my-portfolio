@@ -51,7 +51,7 @@ export default function SecureFileViewer({ src, title, onClose }) {
     setDoc(null);
     setError(false);
 
-    fetch(src)
+    fetch(`/api/proxy-ebook?url=${encodeURIComponent(src)}`)
       .then((res) => {
         if (!res.ok) throw new Error("fetch failed");
         return res.text();
