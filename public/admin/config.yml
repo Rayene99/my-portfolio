@@ -64,7 +64,7 @@ collections:
       - {label: "Tagline", name: "tagline", widget: "string", required: false, hint: "One punchy sentence shown under the author"}
       - {label: "Summary", name: "summary", widget: "text", required: false, hint: "Short blurb shown next to the cover image"}
       - {label: "The Problem", name: "problem", widget: "text", required: false, hint: "What gap or pain point does this book address?"}
-      - {label: "What You'll Learn", name: "takeaways", widget: "list", required: false, hint: "Bullet points — key things the reader gets"}
+      - {label: "What people will Learn", name: "takeaways", widget: "list", required: false, hint: "Bullet points — key things the reader gets"}
       - {label: "Who It's For", name: "audience", widget: "string", required: false}
       - {label: "Description", name: "description", widget: "text", required: false, hint: "Longer description shown at the bottom"}
 
