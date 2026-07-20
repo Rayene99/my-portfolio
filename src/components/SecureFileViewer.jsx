@@ -71,7 +71,15 @@ export default function SecureFileViewer({ src, title, onClose }) {
     setDoc(null);
     setError(false);
 
-    fetch(`/api/proxy-ebook?url=${encodeURIComponent(src)}`)
+    // Only route through the proxy for external URLs (e.g. GitHub Releases),
+    // which need it to bypass CORS. Local files (same-origin, e.g. /images/...)
+    // are fetched directly — no CORS issue, no need for the proxy.
+    const isExternal = /^https?:\/\//i.test(src);
+    const fetchUrl = isExternal
+      ? `/api/proxy-ebook?url=${encodeURIComponent(src)}`
+      : src;
+
+    fetch(fetchUrl)
       .then((res) => {
         if (!res.ok) throw new Error("fetch failed");
         return res.text();
