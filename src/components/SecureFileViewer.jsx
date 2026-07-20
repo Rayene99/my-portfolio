@@ -18,6 +18,26 @@ const PROTECTION_SNIPPET = `
       e.preventDefault();
     }
   });
+
+  // Prevent any link click from navigating the iframe away from the book.
+  // Pure #anchor links (table of contents, chapter jumps) still work via
+  // smooth scroll; anything else is blocked to stop the book from
+  // navigating out and loading the parent site instead.
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (!href) return;
+
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const id = href.slice(1);
+      const target = document.getElementById(id) || document.getElementsByName(id)[0];
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      e.preventDefault();
+    }
+  }, true);
 </script>
 `;
 
