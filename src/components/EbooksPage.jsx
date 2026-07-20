@@ -203,7 +203,7 @@ function EbookViewer({ item, index, onRead }) {
 
         {item.takeaways?.length > 0 && (
           <div style={{ marginBottom: "1.75rem" }}>
-            <SectionLabel>What You'll Learn</SectionLabel>
+            <SectionLabel>What People Will Learn</SectionLabel>
             <ul style={{ margin: 0, paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.45rem" }}>
               {item.takeaways.map((t, i) => (
                 <li key={i} style={{ fontFamily: "var(--font-body)", fontSize: "0.92rem", color: "#4b4b4b", lineHeight: 1.6 }}>
