@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)file:///C:/Users/rayen/OneDrive/Documents/Online%20Teaching%20Guide.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Teaching Guide — Follow Me Academy</title>
+<link href="file:///C:/Users/rayen/OneDrive/Documents/Online%20Teaching%20Guide_files/css2" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D2157;
+    --navy-deep: #091640;
+    --navy-mid: #163080;
+    --navy-soft: #1E3FA0;
+    --mustard: #A87CE0;
+    --mustard-deep: #8B5CC4;
+    --mustard-light: #C9A8ED;
+    --mustard-pale: #F3E9FA;
+    --white: #FFFFFF;
+    --off-white: #F9F7F2;
+    --light-gray: #EEF0F5;
+    --text-dark: #0D2157;
+    --text-mid: #3A4A7A;
+    --text-muted: #7A88B8;
+    --border: rgba(13,33,87,0.1);
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--off-white);
+    color: var(--text-dark);
+    line-height: 1.7;
+  }
+
+  .hero {
+    background: var(--navy-deep);
+    padding: 60px 48px 52px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 340px; height: 340px;
+    border-radius: 50%;
+    border: 60px solid rgba(168,124,224,0.12);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 30%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 40px solid rgba(168,124,224,0.07);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--mustard);
+    color: var(--navy-deep);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 22px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: 52px;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    max-width: 680px;
+  }
+  .hero h1 em {
+    color: var(--mustard);
+    font-style: italic;
+  }
+  .hero p {
+    color: rgba(255,255,255,0.65);
+    font-size: 16px;
+    max-width: 560px;
+    font-weight: 300;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 36px;
+  }
+  .hero-stat { text-align: left; }
+  .hero-stat strong {
+    display: block;
+    color: var(--mustard);
+    font-family: var(--serif);
+    font-size: 28px;
+  }
+  .hero-stat span {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .tab-nav {
+    background: var(--navy);
+    display: flex;
+    padding: 0 48px;
+    gap: 4px;
+  }
+  .tab-btn {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.5);
+    background: none;
+    border: none;
+    padding: 18px 28px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .tab-btn:hover { color: rgba(255,255,255,0.8); }
+  .tab-btn.active {
+    color: var(--mustard);
+    border-bottom-color: var(--mustard);
+  }
+
+  .content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px 80px;
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .age-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 40px 0 48px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .age-intro-main {
+    background: var(--navy);
+    padding: 40px;
+    color: white;
+  }
+  .age-intro-main h2 {
+    font-family: var(--serif);
+    font-size: 34px;
+    color: var(--white);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .age-intro-main h2 span { color: var(--mustard); }
+  .age-intro-main p {
+    color: rgba(255,255,255,0.7);
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .age-intro-traits {
+    background: var(--mustard-pale);
+    padding: 40px;
+  }
+  .age-intro-traits h3 {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--navy);
+    margin-bottom: 16px;
+  }
+  .trait-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: var(--text-dark);
+  }
+  .trait-dot {
+    width: 8px; height: 8px;
+    min-width: 8px;
+    background: var(--mustard);
+    border-radius: 50%;
+    margin-top: 7px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mustard-deep);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: 28px;
+    color: var(--navy);
+    margin-bottom: 28px;
+  }
+  .section-block { margin-bottom: 56px; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+  }
+  .card-icon {
+    width: 40px; height: 40px;
+    background: var(--mustard-pale);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+  .card h4 {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .card p {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  .card.mustard-card {
+    background: var(--mustard);
+    border-color: var(--mustard-deep);
+  }
+  .card.mustard-card h4 { color: var(--navy-deep); }
+  .card.mustard-card p { color: var(--navy); }
+  .card.mustard-card .card-icon { background: rgba(255,255,255,0.4); }
+
+  .card.navy-card {
+    background: var(--navy);
+    border-color: var(--navy-deep);
+  }
+  .card.navy-card h4 { color: var(--white); }
+  .card.navy-card p { color: rgba(255,255,255,0.7); }
+  .card.navy-card .card-icon { background: rgba(255,255,255,0.1); }
+
+  .tip-list {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .tip-item {
+    display: flex;
+    gap: 16px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    align-items: flex-start;
+  }
+  .tip-item:last-child { border-bottom: none; }
+  .tip-num {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--mustard);
+    min-width: 32px;
+    line-height: 1.1;
+  }
+  .tip-item-content strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .tip-item-content p {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.65;
+  }
+
+  .do-dont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .do-box, .dont-box {
+    border-radius: 14px;
+    padding: 28px;
+    border: 1px solid;
+  }
+  .do-box { background: #F0F7EE; border-color: #A8D5A0; }
+  .dont-box { background: #FEF3F0; border-color: #F0B8A8; }
+  .do-box h4 {
+    color: #2A6B22;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .dont-box h4 {
+    color: #8B2A1A;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .do-box h4::before { content: '✓'; font-size: 16px; }
+  .dont-box h4::before { content: '✗'; font-size: 16px; }
+  .do-item, .dont-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: 13.5px;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+  .do-item::before { content: '→'; color: #3E8F34; min-width: 14px; }
+  .dont-item::before { content: '→'; color: #C04030; min-width: 14px; }
+
+  .callout {
+    background: var(--navy);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin: 24px 0;
+    border-left: 5px solid var(--mustard);
+  }
+  .callout-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mustard);
+    margin-bottom: 8px;
+  }
+  .callout p {
+    color: rgba(255,255,255,0.85);
+    font-size: 15px;
+    font-style: italic;
+    line-height: 1.7;
+    font-family: var(--serif);
+  }
+
+  .divider { height: 1px; background: var(--border); margin: 48px 0; }
+
+  .phase-flow {
+    display: flex;
+    gap: 0;
+    margin-bottom: 24px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .phase {
+    flex: 1;
+    padding: 24px 20px;
+    background: var(--white);
+    border-right: 1px solid var(--border);
+    text-align: center;
+  }
+  .phase:last-child { border-right: none; }
+  .phase:hover { background: var(--mustard-pale); }
+  .phase-time {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--mustard-deep);
+    margin-bottom: 6px;
+  }
+  .phase-name {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .phase p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  .warning-box {
+    background: var(--mustard-pale);
+    border: 1px solid var(--mustard);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin: 20px 0;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .warning-icon { font-size: 22px; min-width: 28px; margin-top: 2px; }
+  .warning-box h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+  .warning-box p { font-size: 13.5px; color: var(--text-mid); line-height: 1.65; }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    margin: 2px;
+  }
+  .tag-navy { background: var(--navy); color: var(--white); }
+  .tag-mustard { background: var(--mustard); color: var(--navy-deep); }
+  .tag-light { background: var(--light-gray); color: var(--text-mid); }
+
+  .neglected-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .neglected-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    border-top: 4px solid var(--mustard);
+  }
+  .neglected-card h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
+  .neglected-card p { font-size: 13px; color: var(--text-mid); line-height: 1.65; }
+
+  .correction-example {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .correction-header {
+    background: var(--navy);
+    padding: 12px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .correction-body { padding: 20px; }
+  .correction-wrong {
+    font-size: 14px;
+    color: #C04030;
+    background: #FEF3F0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 3px solid #E06050;
+  }
+  .correction-right {
+    font-size: 14px;
+    color: #2A6B22;
+    background: #F0F7EE;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border-left: 3px solid #5AAF50;
+  }
+  .correction-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    color: var(--text-muted);
+  }
+
+  .student-profile {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .profile-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    border-top: 3px solid var(--navy);
+  }
+  .profile-card.type-2 { border-top-color: var(--mustard); }
+  .profile-card.type-3 { border-top-color: #E24B4A; }
+  .profile-card h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+  .profile-card .profile-type {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .profile-card p { font-size: 13px; color: var(--text-mid); line-height: 1.65; }
+
+  .expect-list {
+    list-style: none;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .expect-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    gap: 14px;
+    font-size: 14px;
+  }
+  .expect-item:last-child { border-bottom: none; }
+  .expect-icon {
+    min-width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    background: var(--mustard-pale);
+  }
+  .expect-item-body strong { display: block; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+  .expect-item-body p { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+
+  .guide-footer {
+    background: var(--navy-deep);
+    padding: 36px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-brand { font-family: var(--serif); font-size: 20px; color: var(--white); }
+  .footer-brand span { color: var(--mustard); }
+  .footer-note { font-size: 12px; color: rgba(255,255,255,0.4); }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--light-gray); }
+  ::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 3px; }
+
+  @media (max-width: 768px) {
+    .hero { padding: 40px 24px 36px; }
+    .hero h1 { font-size: 34px; }
+    .content { padding: 0 24px 60px; }
+    .tab-nav { padding: 0 24px; }
+    .age-intro, .do-dont, .student-profile { grid-template-columns: 1fr; }
+    .phase-flow { flex-direction: column; }
+    .phase { border-right: none; border-bottom: 1px solid var(--border); }
+    .guide-footer { flex-direction: column; gap: 12px; text-align: center; }
+    .hero-meta { flex-wrap: wrap; gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">Rayene Medabis - Teacher Trainer</div>
+  <h1>Teaching Online,<br><em>Done Right.</em></h1>
+  <p>A practical, no-fluff guide to managing, engaging, and supporting learners in live online sessions — from energetic kids to complex teens.</p>
+  <div class="hero-meta">
+    <div class="hero-stat"><strong>7–11</strong><span>Children</span></div>
+    <div class="hero-stat"><strong>12–17</strong><span>Teenagers</span></div>
+    <div class="hero-stat"><strong>Real</strong><span>Strategies</span></div>
+  </div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('kids')">Children — Ages 7 to 11</button>
+  <button class="tab-btn" onclick="switchTab('teens')">Teenagers — Ages 12 to 17</button>
+</div>
+
+<div id="tab-kids" class="tab-content active">
+<div class="content">
+
+  <div class="age-intro">
+    <div class="age-intro-main">
+      <h2>The <span>7–11</span> Learner</h2>
+      <p>Children in this range are curious, easily excitable, and live in the present moment. They have short attention spans, big imaginations, and a genuine desire to please — but they also need structure, consistency, and warmth to feel safe enough to participate. Online, they face extra challenges: distractions at home, limited self-regulation, and the absence of physical energy release. Your job is to be their anchor and their spark at the same time.</p>
+    </div>
+    <div class="age-intro-traits">
+      <h3>Who you're working with</h3>
+      <div class="trait-item"><div class="trait-dot"></div><span>Attention spans of roughly 5–15 minutes per activity — plan for variety</span></div>
+      <div class="trait-item"><div class="trait-dot"></div><span>Motivated by praise, stickers, games, and feeling "smart"</span></div>
+      <div class="trait-item"><div class="trait-dot"></div><span>Sensitive to tone — they read your face and voice more than your words</span></div>
+      <div class="trait-item"><div class="trait-dot"></div><span>Easily discouraged by public correction; easily thrilled by small wins</span></div>
+      <div class="trait-item"><div class="trait-dot"></div><span>Often sitting near parents — may perform for them, not for you</span></div>
+      <div class="trait-item"><div class="trait-dot"></div><span>Learn through repetition, movement, sound, and story</span></div>
+      <div class="trait-item"><div class="trait-dot"></div><span>Have a strong sense of fairness — "that's not fair!" is real to them</span></div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Session Design</div>
+    <div class="section-title">Building the Session Flow</div>
+    <div class="phase-flow">
+      <div class="phase"><div class="phase-name">Warm-Up Ritual</div><p>A predictable opener. Same format every class. Reduces anxiety and signals "we're starting."</p></div>
+      <div class="phase"><div class="phase-name">Review / Recall</div><p>Quick check of last session. Use games, questions, or a simple quiz. Keeps memory alive.</p></div>
+      <div class="phase"><div class="phase-name">New Input</div><p>Introduce new content. Keep it short, visual, and tied to something they already know.</p></div>
+      <div class="phase"><div class="phase-name">Controlled Practice</div><p>Guided activities. Answer together. Build confidence before they work alone.</p></div>
+      <div class="phase"><div class="phase-name">Wrap &amp; Reward</div><p>Summarize, praise specific effort, set a tiny homework challenge. End on energy.</p></div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Critical Principle</div>
+      <p>"Predictability is safety for young learners. When they know what comes next, they relax — and a relaxed child learns. Surprises should be fun, never structural."</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Energy &amp; Engagement</div>
+    <div class="section-title">Keeping the Session Alive</div>
+    <div class="tip-list">
+      <div class="tip-item"><div class="tip-num">01</div><div class="tip-item-content"><strong>Change activity every 8–10 minutes — maximum</strong><p>Children cannot sustain focus on one task. Rotate between listening, speaking, writing, and playing. Even switching from "answer verbally" to "type in chat" counts as a change and resets attention.</p></div></div>
+      <div class="tip-item"><div class="tip-num">02</div><div class="tip-item-content"><strong>Use your voice as a tool — don't speak in one tone</strong><p>Lower your voice to draw them in ("I'm going to tell you a secret…"), raise it for excitement, pause dramatically before asking a question. A monotone voice is an exit invitation for young learners.</p></div></div>
+      <div class="tip-item"><div class="tip-num">03</div><div class="tip-item-content"><strong>Give every child a "turn" — don't rely on volunteers only</strong><p>Kids who are never called on disengage fast. Rotate through students predictably or unpredictably. Even a shy child benefits from knowing they might be asked — it keeps them mentally present.</p></div></div>
+      <div class="tip-item"><div class="tip-num">04</div><div class="tip-item-content"><strong>Celebrate effort out loud, specifically</strong><p>Not "good job!" but "I love how you thought about that before answering — that shows you're really concentrating today!" Specific praise builds self-awareness and motivates repetition of the right behaviour.</p></div></div>
+      <div class="tip-item"><div class="tip-num">05</div><div class="tip-item-content"><strong>Use their names constantly — it creates presence</strong><p>"What do you think, Lina?" does two things: it snaps Lina back if she's drifting, and it shows the others that you notice each one individually. Name use = attention glue.</p></div></div>
+      <div class="tip-item"><div class="tip-num">06</div><div class="tip-item-content"><strong>Build competitive energy with low-stakes games</strong><p>Even simple point tallies written on a shared screen, "first to answer wins a star," or team vs. team spelling races can completely transform the energy in minutes. Competition is natural at this age — channel it.</p></div></div>
+      <div class="tip-item"><div class="tip-num">07</div><div class="tip-item-content"><strong>React visibly and enthusiastically to good answers</strong><p>Children perform for your reaction. If you respond flatly, they stop trying to impress you. Be genuinely delighted when they get things right — let them feel that they made your day. This isn't performing; it's effective teaching.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Classroom Management</div>
+    <div class="section-title">Handling Disruptive Behaviour</div>
+    <div class="student-profile">
+      <div class="profile-card"><h4>The Distracted Drifter</h4><div class="profile-type">Attention type</div><p>Not malicious — just easily pulled away by toys, siblings, or sounds. They forget you exist. Address them by name often, give them jobs ("your task is to count the stars we earn"), and shorten the time between their turns.</p></div>
+      <div class="profile-card type-2"><h4>The Class Clown</h4><div class="profile-type">Attention-seeking type</div><p>Craves your reaction and the group's laughter. Do not react to the silliness — react only to the learning moments. Redirect their energy by making them the "helper" or quiz master. If they feel important in a positive role, the disruption drops sharply.</p></div>
+      <div class="profile-card type-3"><h4>The Refuser</h4><div class="profile-type">Resistance type</div><p>Says "I don't know," "I don't want to," or simply goes silent. Usually anxious or afraid of looking silly. Lower the stakes: "It's okay if it's wrong — I just want to hear your idea." Give easier questions first to build momentum before harder ones.</p></div>
+    </div>
+    <div class="tip-list">
+      <div class="tip-item"><div class="tip-num">→</div><div class="tip-item-content"><strong>Never shame a child in front of others</strong><p>Public embarrassment shuts down participation immediately — not just for that child, but for every other child watching. Address misbehaviour privately whenever possible (a private chat message, or saving the conversation for after class).</p></div></div>
+      <div class="tip-item"><div class="tip-num">→</div><div class="tip-item-content"><strong>Use proximity — move the camera toward them</strong><p>In a physical classroom you'd walk closer to a disruptive student. Online, the equivalent is directing all your attention to them: make eye contact, use their name, ask them the next question. Spotlight attention often self-regulates behaviour.</p></div></div>
+      <div class="tip-item"><div class="tip-num">→</div><div class="tip-item-content"><strong>Give warnings, not immediate punishments</strong><p>Children respond better to "this is warning one — if it happens again, we'll talk to Mum/Dad" than to sudden consequences. The warning gives them a chance to self-correct, which is actually the learning moment you want them to have.</p></div></div>
+      <div class="tip-item"><div class="tip-num">→</div><div class="tip-item-content"><strong>Assume the misbehaviour has a cause</strong><p>A child being unusually disruptive is often tired, hungry, anxious, or dealing with something at home. Before escalating, check in: "Are you okay today? You seem a bit distracted." This alone can change the entire dynamic of the session.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Error Correction</div>
+    <div class="section-title">Correcting Without Crushing</div>
+    <p style="font-size:15px;color:var(--text-mid);margin-bottom:24px;line-height:1.75;">How you respond to mistakes shapes whether a child takes risks or stays silent. The goal is always to correct the error, not the child. Here are the techniques that work best at this age:</p>
+    <div class="correction-example"><div class="correction-header">Technique 1 — Recast (most natural)</div><div class="correction-body"><div class="correction-label">Student says</div><div class="correction-wrong">"Yesterday I goed to the park."</div><div class="correction-label">You say</div><div class="correction-right">"Oh, you went to the park! That sounds fun — what did you do there?" — Then continue the conversation naturally. The correct form lands without interruption.</div></div></div>
+    <div class="correction-example"><div class="correction-header">Technique 2 — Elicitation (gets them to self-correct)</div><div class="correction-body"><div class="correction-label">Student says</div><div class="correction-wrong">"She don't like swimming."</div><div class="correction-label">You say</div><div class="correction-right">"She... don't? Hmm, let's check — she...?" Pause and wait. Let them think. If they self-correct, celebrate it. If not, model it without making a big deal.</div></div></div>
+    <div class="correction-example"><div class="correction-header">Technique 3 — Focused correction (for persistent errors only)</div><div class="correction-body"><div class="correction-label">Student keeps making the same mistake</div><div class="correction-wrong">Ignoring it every time, or correcting it harshly each time.</div><div class="correction-label">Instead</div><div class="correction-right">Note it, address it at the end of the session as a mini-lesson for the whole group: "I noticed everyone mixing up 'have' and 'has' today — let's do one quick practice together." This removes the spotlight from the individual child.</div></div></div>
+    <div class="warning-box"><div class="warning-icon">⚠</div><div><h4>Never correct every single error in real time</h4><p>If a child says something with three mistakes and you stop to fix all three, they will dread speaking. Prioritise errors that block meaning first, accuracy second, style last. Let fluency develop — you can tighten accuracy once they're comfortable talking.</p></div></div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Student Support</div>
+    <div class="section-title">Supporting Every Learner in the Group</div>
+    <div class="cards-grid">
+      <div class="card"><div class="card-icon">🐢</div><h4>The Slow Processor</h4><p>Needs more "wait time" after a question. Silences feel uncomfortable but are productive. Count to 8 in your head before prompting again. Say "take your time" and mean it — never rush or move on just because another student is faster.</p></div>
+      <div class="card"><div class="card-icon">🚀</div><h4>The Fast Finisher</h4><p>Done in 30 seconds while others are still working. Keep a "bonus challenge" ready — a harder question, a creative extension task ("now make your own example"), or let them help a classmate. Never let them sit idle; it creates disruption.</p></div>
+      <div class="card"><div class="card-icon">😶</div><h4>The Silent One</h4><p>Not absent — watching and absorbing. Start with yes/no questions, then "point to the right answer," then short answers, then sentences. Build the ladder rung by rung. Never force long answers from a shy child in a group setting.</p></div>
+      <div class="card navy-card"><div class="card-icon">📝</div><h4>Give everyone an equal "visibility" moment</h4><p>Make sure no child goes an entire session without a moment that belongs to them. Even if it's small — answering one question, drawing something, reading one word aloud. Invisible students become disengaged students.</p></div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Practice Guide</div>
+    <div class="section-title">What to Do and What to Avoid</div>
+    <div class="do-dont">
+      <div class="do-box"><h4>Do This</h4>
+        <div class="do-item">Use visual timers and countdown clocks to manage transitions</div>
+        <div class="do-item">Establish a clear "raise hand" or thumbs-up signal before class begins</div>
+        <div class="do-item">Use their names at least 3 times per class, per child</div>
+        <div class="do-item">Have a backup activity ready if one falls flat</div>
+        <div class="do-item">Acknowledge feelings before asking for attention</div>
+        <div class="do-item">Use gestures and facial expressions actively — be expressive on camera</div>
+        <div class="do-item">Start each session with something fun, low-pressure, and familiar</div>
+        <div class="do-item">Send one specific positive note to parents occasionally</div>
+      </div>
+      <div class="dont-box"><h4>Avoid This</h4>
+        <div class="dont-item">Talking for more than 5 minutes without involving students</div>
+        <div class="dont-item">Using sarcasm — young children often take it literally</div>
+        <div class="dont-item">Comparing students to each other</div>
+        <div class="dont-item">Giving instructions all at once — one step at a time only</div>
+        <div class="dont-item">Ignoring a child who seems upset or withdrawn</div>
+        <div class="dont-item">Reacting with frustration to noise or silliness — it escalates</div>
+        <div class="dont-item">Letting the same 2–3 students dominate the session</div>
+        <div class="dont-item">Ending a session on a correction or negative note</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Expectations</div>
+    <div class="section-title">What to Expect — Especially in Early Sessions</div>
+    <ul class="expect-list">
+      <li class="expect-item"><div class="expect-icon">📵</div><div class="expect-item-body"><strong>Cameras going off — constantly</strong><p>Some children turn off their camera out of shyness, distraction, or parental instruction. Don't treat it as defiance. Set a gentle expectation at the start and give them a reason to want to be seen ("I want to see your amazing faces when you get the answer!").</p></div></li>
+      <li class="expect-item"><div class="expect-icon">🐈</div><div class="expect-item-body"><strong>Pets, siblings, and parents walking in</strong><p>It will happen. Use it as a connection moment — "Oh, who's that?" — then bring the attention back. Getting flustered about interruptions communicates to the child that their real life is an inconvenience. It isn't.</p></div></li>
+      <li class="expect-item"><div class="expect-icon">😴</div><div class="expect-item-body"><strong>Energy crashes mid-session</strong><p>Especially in sessions after school. Children may be genuinely exhausted. If the group's energy drops suddenly, don't push harder — introduce a physical element (stand up and show me, clap the answer), change the pace, or play a 2-minute game to reset.</p></div></li>
+      <li class="expect-item"><div class="expect-icon">🔁</div><div class="expect-item-body"><strong>Forgetting everything from last week</strong><p>This is normal and not a sign of failure. Young brains need more repetitions to retain than adults do. Build review into every single session. Never skip the warm-up recap — it's the most important 5 minutes of your class.</p></div></li>
+      <li class="expect-item"><div class="expect-icon">🎭</div><div class="expect-item-body"><strong>Different child, different day</strong><p>A child who was perfect last week may be uncooperative today — and vice versa. Children have limited ability to compartmentalise. Don't read their day-to-day behaviour as a statement about your teaching; adapt to who shows up in front of you each session.</p></div></li>
+    </ul>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Frequently Overlooked</div>
+    <div class="section-title">Important Things Teachers Often Forget</div>
+    <div class="neglected-grid">
+      <div class="neglected-card"><h4>The transition into class takes time</h4><p>Children are not in "school mode" when they join online. They've just come from a game, a nap, or lunch. You need 3–5 minutes of non-threatening, fun interaction before you ask them to think. Skipping this costs you 15 minutes of resistance later.</p></div>
+      <div class="neglected-card"><h4>Silence ≠ understanding</h4><p>A child nodding or staring quietly may be completely lost. Check comprehension actively: "Show me with your fingers — 1 for confused, 5 for totally got it." Assume nothing from quiet compliance.</p></div>
+      <div class="neglected-card"><h4>Your energy is contagious — in both directions</h4><p>If you start a session tired, flat, or distracted, the children will match that within minutes. Do whatever you need to arrive energised: stand up, speak louder than feels natural, smile before the session starts — even if it's forced at first.</p></div>
+      <div class="neglected-card"><h4>Celebrate the session itself, not just results</h4><p>End class with "I'm so proud of how hard you worked today" — regardless of academic outcome. Building a child's identity as a hardworking, capable learner is more valuable in the long run than any single lesson objective.</p></div>
+      <div class="neglected-card"><h4>Instructions must be visual AND verbal</h4><p>Telling a child what to do is often not enough — especially online where they can't see your full body language. Show the task on screen while you explain it. Demonstrate before they attempt. "Watch me do it first" is always time well spent.</p></div>
+      <div class="neglected-card"><h4>Parents are watching — that changes behaviour</h4><p>A child who knows their parent is nearby may perform for them, not for you. They may also refuse to make mistakes in front of a parent. If you notice this dynamic, acknowledge it kindly and try to create a "just us" atmosphere in the virtual space.</p></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div id="tab-teens" class="tab-content">
+<div class="content">
+
+  <div class="age-intro">
+    <div class="age-intro-main">
+      <h2>The <span>12–17</span> Learner</h2>
+      <p>Teenagers are not older children — they are fundamentally different learners with a different motivational architecture. Their brains are undergoing the most significant reorganisation since infancy. They are negotiating identity, social status, and autonomy simultaneously, and they bring all of that into your session. They can be deeply invested one week and completely checked out the next. The teachers who connect with teens are those who respect their intelligence, give them genuine agency, and never condescend.</p>
+    </div>
+    <div class="age-intro-traits">
+      <h3>Who you're working with</h3>
+      <div class="trait-item"><div class="trait-dot"></div><span>Highly sensitive to being talked down to or treated like children</span></div>
+      <div class="trait-item"><div class="trait-dot"></div><span>Motivated by relevance — "why does this matter to me?"</span></div>
+      <div class="trait-item"><div class="trait-dot"></div><span>Peer opinion matters enormously; fear of looking stupid is real</span></div>
+      <div class="trait-item"><div class="trait-dot"></div><span>Abstract thinking is developing — they can handle nuance and debate</span></div>
+      <div class="trait-item"><div class="trait-dot"></div><span>Need to feel seen as individuals, not just "students"</span></div>
+      <div class="trait-item"><div class="trait-dot"></div><span>Resistant to being told what to do, but responsive to being asked</span></div>
+      <div class="trait-item"><div class="trait-dot"></div><span>Can sustain focus for 20–25 minutes when genuinely engaged</span></div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Session Design</div>
+    <div class="section-title">Structuring a Session That Holds Their Attention</div>
+    <div class="phase-flow">
+      <div class="phase"><div class="phase-name">Hook / Challenge</div><p>Open with a provocation, a question, or a problem — something that makes them curious before you explain anything.</p></div>
+      <div class="phase"><div class="phase-name">Review + Context</div><p>Connect today's lesson to the last. Make them retrieve information themselves — don't recap for them.</p></div>
+      <div class="phase"><div class="phase-name">Exploration</div><p>New content, discussion, analysis. Give them something to wrestle with, not just absorb. Debate is fine.</p></div>
+      <div class="phase"><div class="phase-name">Application</div><p>Produce something with the new knowledge. Write, speak, explain, argue. Passive listening doesn't cement learning.</p></div>
+      <div class="phase"><div class="phase-name">Reflection</div><p>Ask: what clicked, what didn't. Let them self-evaluate. Ends with metacognition, not just content.</p></div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Critical Principle</div>
+      <p>"A teenager who understands why they are doing something will outperform a teenager who doesn't — every time. Spend 60 seconds explaining the 'why' of each task. This single habit transforms cooperation."</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Energy &amp; Engagement</div>
+    <div class="section-title">Keeping Teens Engaged Online</div>
+    <div class="tip-list">
+      <div class="tip-item"><div class="tip-num">01</div><div class="tip-item-content"><strong>Make it relevant — always connect to their real life</strong><p>Teens will engage with grammar exercises framed around a text conversation between friends. They'll shut down for the same exercise framed as "complete the sentences about the weather." The content is identical; the framing changes everything. Ask yourself: "How does this connect to a 14-year-old's actual world?"</p></div></div>
+      <div class="tip-item"><div class="tip-num">02</div><div class="tip-item-content"><strong>Ask real questions, not rhetorical ones</strong><p>Teens have excellent detection systems for questions teachers already know the answer to. Ask questions you're genuinely curious about their views on: "What do you actually think about that? I want your honest opinion." Then listen. Don't fill their silences immediately.</p></div></div>
+      <div class="tip-item"><div class="tip-num">03</div><div class="tip-item-content"><strong>Give them some control over the session</strong><p>Offer two routes to the same objective: "We could do this as a debate or as a written task — which do you prefer?" Small choices within your framework create ownership without losing structure. Teens who feel controlled disengage; teens who feel autonomous invest.</p></div></div>
+      <div class="tip-item"><div class="tip-num">04</div><div class="tip-item-content"><strong>Use silence strategically — it shows respect</strong><p>Don't rush to fill every pause. After asking a complex question, wait. Teens process slower than they let on, and they will often self-correct or go deeper if you give them space. The urge to jump in with hints too quickly is the teacher's fear, not the student's need.</p></div></div>
+      <div class="tip-item"><div class="tip-num">05</div><div class="tip-item-content"><strong>Acknowledge their intelligence explicitly</strong><p>"That's a genuinely smart observation" lands very differently from "good!" Teens crave intellectual respect. Name the thinking skill they used — "the way you connected those two ideas shows real analytical thinking." They'll try to do it again.</p></div></div>
+      <div class="tip-item"><div class="tip-num">06</div><div class="tip-item-content"><strong>Bring in real content from the world</strong><p>Clips, headlines, trending topics, real debates — not to be "cool" but because authentic material is inherently more engaging than textbook content. If you're teaching argument structure, use a real controversy they've likely encountered. The language they need exists in the world, not just in exercises.</p></div></div>
+      <div class="tip-item"><div class="tip-num">07</div><div class="tip-item-content"><strong>Don't perform enthusiasm — be genuine</strong><p>Teens see through performative energy instantly. You don't need to be a cheerleader. What works is being authentically interested in them and in the subject. Calm confidence and real curiosity are more compelling to a teenager than forced excitement.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Classroom Management</div>
+    <div class="section-title">Handling Difficult Teenage Behaviour</div>
+    <div class="student-profile">
+      <div class="profile-card"><h4>The Passive Resister</h4><div class="profile-type">Low-effort type</div><p>Answers in one word, camera off, mic on mute. Sends the minimum. Rarely defiant — just absent. Don't fight the resistance directly. Build a relationship outside the task: brief small talk at the start, remember something they told you, show curiosity about their interests. Investment comes through connection, not pressure.</p></div>
+      <div class="profile-card type-2"><h4>The Challenger</h4><div class="profile-type">Power-testing type</div><p>Questions your explanations, argues, pushes back. This is not always disrespectful — sometimes it's genuine intellectual engagement. Distinguish between the two. For the true challenger, take their pushback seriously: "Interesting — can you tell me more about why you think that?" Never crush the challenge; redirect it into the lesson.</p></div>
+      <div class="profile-card type-3"><h4>The Performer for Peers</h4><div class="profile-type">Social status type</div><p>Says something funny or off-topic to get a reaction from classmates. They're managing their social image in real-time, not sabotaging you. Don't take the bait. Respond calmly, name what you observed if needed ("I notice we're getting off track"), then immediately give everyone a task to refocus the group's attention.</p></div>
+    </div>
+    <div class="tip-list">
+      <div class="tip-item"><div class="tip-num">→</div><div class="tip-item-content"><strong>Never engage in a power struggle publicly</strong><p>You will not win. Even if you "win," you lose — because the relationship is damaged. If a teenager is being defiant, de-escalate publicly ("Let's come back to this") and address it privately afterward. The session continues; the issue is handled separately. This is not weakness — it's professional control.</p></div></div>
+      <div class="tip-item"><div class="tip-num">→</div><div class="tip-item-content"><strong>Give them a way out without losing face</strong><p>A teen who feels cornered will fight or shut down. Always offer an exit: "You don't have to answer right now — you can come back to it." "If you're not ready to share verbally, you can type it." Face-saving options keep the session moving and preserve the relationship.</p></div></div>
+      <div class="tip-item"><div class="tip-num">→</div><div class="tip-item-content"><strong>Address the pattern, not just the moment</strong><p>If a student is consistently disengaged, one firm session won't fix it. Schedule a brief 5-minute check-in outside of class: "I've noticed you seem less into it lately — is everything okay? Is there something about how we work that isn't working for you?" Teens respond profoundly to being asked, not told.</p></div></div>
+      <div class="tip-item"><div class="tip-num">→</div><div class="tip-item-content"><strong>Distinguish tiredness from defiance</strong><p>Many "problem behaviours" in teens are pure exhaustion, stress, or hunger. An academic session at 8pm after a full school day and sports practice will look very different from the same student at 10am on a weekend. Adjust your expectations based on context, not just the student's baseline.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Error Correction</div>
+    <div class="section-title">Correcting Teens Without Triggering Withdrawal</div>
+    <p style="font-size:15px;color:var(--text-mid);margin-bottom:24px;line-height:1.75;">Teenagers are hyper-aware of judgment. A correction handled badly in front of peers can silence a student for weeks. The same correction handled well becomes a learning moment. The difference is almost entirely in delivery.</p>
+    <div class="correction-example"><div class="correction-header">Technique 1 — Delayed correction (preserves flow and face)</div><div class="correction-body"><div class="correction-label">What happens</div><div class="correction-wrong">Student makes an error mid-explanation of a complex idea. Stopping to correct breaks their thought process and embarrasses them.</div><div class="correction-label">What to do instead</div><div class="correction-right">Let them finish. Acknowledge the idea fully first. Then: "One small thing to clean up — you said X; the accurate form is Y. But the idea itself was really strong." Content first, form second.</div></div></div>
+    <div class="correction-example"><div class="correction-header">Technique 2 — Peer correction (builds accountability)</div><div class="correction-body"><div class="correction-label">Setup</div><div class="correction-wrong">Teens often care more about peer feedback than teacher feedback — but it can also humiliate. Never ask "can someone correct Ahmed's sentence?" — this is public shaming by proxy.</div><div class="correction-label">How to use it well</div><div class="correction-right">Instead: "Let's all check this together — what could make this sentence even stronger?" Frame it as collaborative editing, not correction of a person. The student whose work it is often self-corrects before anyone else speaks.</div></div></div>
+    <div class="correction-example"><div class="correction-header">Technique 3 — Written feedback for sensitive errors</div><div class="correction-body"><div class="correction-label">When to use it</div><div class="correction-wrong">A student makes a significant or repeated error but is visibly anxious or resistant. Verbal correction in a group risks shutting them down entirely.</div><div class="correction-label">What to do</div><div class="correction-right">Send a private chat message during or after class: "Quick note — the form you want here is X because Y. You were close! Just worth remembering for next time." Private, specific, forward-looking. No audience, no shame.</div></div></div>
+    <div class="callout">
+      <div class="callout-label">The Golden Rule for Teens</div>
+      <p>"Praise publicly, correct privately. This isn't about avoiding hard truths — it's about giving corrections the best possible chance of actually being heard and acted on."</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Student Support</div>
+    <div class="section-title">Supporting Different Types of Teen Learners</div>
+    <div class="cards-grid">
+      <div class="card"><div class="card-icon">🧠</div><h4>The Anxious High-Achiever</h4><p>Terrified of being wrong. Will not attempt anything they're not already certain about. Build psychological safety by normalising mistakes — make your own deliberately and recover calmly from them. "Watch how I got that wrong and fixed it" is a powerful model for them.</p></div>
+      <div class="card"><div class="card-icon">😑</div><h4>The "Whatever" Student</h4><p>Appears not to care about anything. Often deeply sensitive underneath. Don't try to force enthusiasm — find the one thing they'll engage with and build from there. Ask about their interests genuinely and find legitimate ways to connect your content to them.</p></div>
+      <div class="card"><div class="card-icon">⚡</div><h4>The Dominant Talker</h4><p>Takes up all the space, cuts off quieter students, always has an answer. Appreciate them, then create structures that protect others: "I want to hear from someone we haven't heard from yet" — neutral, not a put-down, and naturally redistributes attention.</p></div>
+      <div class="card mustard-card"><div class="card-icon">🔑</div><h4>The non-negotiable for every teen</h4><p>They need to feel respected as people, not managed as learners. The relationship you build with a teenager determines how much they allow you to teach them. Invest in knowing who they are — it pays back tenfold in effort and cooperation.</p></div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Practice Guide</div>
+    <div class="section-title">What Works and What Backfires With Teens</div>
+    <div class="do-dont">
+      <div class="do-box"><h4>Do This</h4>
+        <div class="do-item">Set clear expectations at the start of the course, not just each session</div>
+        <div class="do-item">Ask for their feedback on your teaching — they will respect you for it</div>
+        <div class="do-item">Use humour that doesn't target anyone — self-deprecating works well</div>
+        <div class="do-item">Give challenging work — teens disengage faster from work that's too easy</div>
+        <div class="do-item">Build debate, discussion, and disagreement into the lesson design</div>
+        <div class="do-item">Acknowledge when something is genuinely difficult or complex</div>
+        <div class="do-item">Be consistent — same rules, same tone, every session</div>
+        <div class="do-item">Remember personal details they've shared and reference them later</div>
+      </div>
+      <div class="dont-box"><h4>Avoid This</h4>
+        <div class="dont-item">Trying to use their slang to seem relatable — it reads as cringe</div>
+        <div class="dont-item">Belittling questions or making any student feel unintelligent</div>
+        <div class="dont-item">Reacting with personal offense to pushback or low motivation</div>
+        <div class="dont-item">Filling every moment of the session — silence can be productive</div>
+        <div class="dont-item">Using rewards and stickers — they feel patronising at this age</div>
+        <div class="dont-item">Lecturing for extended periods without any student interaction</div>
+        <div class="dont-item">Asking "does everyone understand?" — they will always say yes</div>
+        <div class="dont-item">Taking their bad days personally — it's rarely about you</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Expectations</div>
+    <div class="section-title">What to Expect — The Reality of Teaching Teens Online</div>
+    <ul class="expect-list">
+      <li class="expect-item"><div class="expect-icon">📷</div><div class="expect-item-body"><strong>Cameras off as a default</strong><p>Many teens refuse to be on camera, especially in groups. This is partly self-consciousness, partly the social anxiety of being watched. Address this by creating a clear camera policy from session one, making it about participation rather than performance, and not making it punitive. You'll have more success with a gentle, consistent expectation than with confrontation.</p></div></li>
+      <li class="expect-item"><div class="expect-icon">📱</div><div class="expect-item-body"><strong>Their phone is competing with you — always</strong><p>You will never win a competition against a phone on raw entertainment value. What you can offer that a phone cannot: genuine human connection, the satisfaction of growing, and activities that require their active participation. Make them necessary to the session — not passive consumers of it.</p></div></li>
+      <li class="expect-item"><div class="expect-icon">🌊</div><div class="expect-item-body"><strong>Mood swings and inconsistent effort</strong><p>Emotional regulation in teenagers is genuinely hard — neurologically. A student who was brilliant last week may stare blankly at you this week. This is not regression; it is adolescence. Hold steady, adapt your expectations for the day, and don't make the mood worse by expressing disappointment about it.</p></div></li>
+      <li class="expect-item"><div class="expect-icon">💬</div><div class="expect-item-body"><strong>Reluctance to ask for help</strong><p>Asking for help feels like admitting weakness to many teens, especially in front of peers. Build in private ways to signal confusion: a thumbs-down emoji, a private chat message, an anonymous form. Check in individually rather than waiting for them to raise their hand in group settings.</p></div></li>
+      <li class="expect-item"><div class="expect-icon">⏰</div><div class="expect-item-body"><strong>Slow warm-up, intense engagement — eventually</strong><p>Teens often take 10–15 minutes to "arrive" in a session. The first quarter may feel like pulling teeth. Then something clicks and they're fully in. Build your session so the most demanding, interesting content comes after the warm-up phase, not during it.</p></div></li>
+    </ul>
+  </div>
+
+  <div class="section-block">
+    <div class="section-label">Frequently Overlooked</div>
+    <div class="section-title">What Teachers Often Miss With Teenagers</div>
+    <div class="neglected-grid">
+      <div class="neglected-card"><h4>They know when you don't believe in them</h4><p>Low expectations are felt immediately. If you signal — through tone, simplified tasks, or lack of challenge — that you don't think they're capable, they will meet exactly that expectation. Assume competence and watch the level of effort adjust upward to meet it.</p></div>
+      <div class="neglected-card"><h4>Wellbeing check-ins are part of your job</h4><p>A brief "how are you doing this week — outside of English?" at the start of a session builds more long-term engagement than any activity you could design. Teens learn from people they feel care about them. This is not therapy; it's relationship maintenance.</p></div>
+      <div class="neglected-card"><h4>Being honest about your limits builds trust</h4><p>"I'm not 100% sure about that — let me check and come back to you next session" is far more powerful with teens than a confident wrong answer. They value authenticity, and they will test whether you really know what you claim to know.</p></div>
+      <div class="neglected-card"><h4>They need to produce, not just receive</h4><p>A session where they mostly listened and answered questions was not a productive session for a teenager. They need to create, argue, write, present, or teach back. Output-based tasks are where real learning happens at this age. The more passive the session, the less they retain.</p></div>
+      <div class="neglected-card"><h4>Consistency matters more than intensity</h4><p>One brilliant session followed by three mediocre ones doesn't build the same relationship as four consistently solid sessions. Teens track reliability. They trust teachers who always show up the same way — prepared, calm, and genuinely interested in them.</p></div>
+      <div class="neglected-card"><h4>Group dynamics shape individual performance</h4><p>Who is in the room with a teenager directly affects how much they're willing to risk. A student who dominates in a 1-to-1 session may be entirely silent in a group with peers they want to impress. Adjust your interaction strategies based on the social context, not just the individual profile.</p></div>
+    </div>
+    <div class="warning-box"><div class="warning-icon">⚠</div><div><h4>The most damaging thing you can do to a teen learner</h4><p>Make them feel stupid in front of their peers. It takes one moment of public humiliation to destroy months of trust. No lesson objective, no correction, and no behaviour management goal is worth that cost. Always ask yourself: "If I do this, will this student still want to come back next week?"</p></div></div>
+  </div>
+
+</div>
+</div>
+
+<div class="guide-footer"></div>
+
+<script>
+function switchTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body></html>

@@ -46,16 +46,5 @@ takeaways:
   - What's structurally different about teaching adult learners vs. young
     learners
   - How to close the "age gap" in online teaching contexts
-audience: >
-  Educators and teacher trainers — particularly in EFL/ESL and adult education —
-  who want to move beyond isolated technique-collecting and understand teaching
-  as an integrated design discipline.
-description: >
-  The Modern Architect of Learning by Rayene Medabis is a collection of
-  thought-provoking essays for educators who want to move beyond traditional
-  teaching methods and embrace a design-oriented approach to learning. Blending
-  insights from educational psychology, neuroscience, curriculum design, and
-  classroom leadership, the book explores how teachers can create learning
-  environments that foster engagement, trust, autonomy, and lasting
-  understanding.
+
 ---
