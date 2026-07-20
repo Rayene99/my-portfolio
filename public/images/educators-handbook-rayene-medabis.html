@@ -1,0 +1,1944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Educator's Professional Handbook — Rayene Medabis</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== CSS VARIABLES ===== */
+:root {
+  --olive-darkest: #2F3D15;
+  --olive-dark:    #4A5C28;
+  --olive-mid:     #6B7C3F;
+  --olive-light:   #A8B87A;
+  --olive-pale:    #D8E4B4;
+  --olive-ghost:   #F2F6E8;
+  --coral:         #E8694F;
+  --coral-mid:     #EE8A76;
+  --coral-light:   #F4AFA4;
+  --coral-pale:    #FDE9E5;
+  --white:         #FFFFFF;
+  --off-white:     #F8F7F3;
+  --text-dark:     #1A1F0E;
+  --text-mid:      #454D30;
+  --text-light:    #7A8560;
+  --border:        #D4DBBC;
+  --sidebar-w:     285px;
+  --content-max:   800px;
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  color: var(--text-dark);
+  background: var(--off-white);
+}
+a { color: inherit; text-decoration: none; }
+
+/* ===== PROGRESS BAR ===== */
+#progress-bar {
+  position: fixed; top: 0; left: 0;
+  width: 0%; height: 3px;
+  background: linear-gradient(to right, var(--coral), var(--olive-mid));
+  z-index: 9999;
+  transition: width 0.15s linear;
+}
+
+/* ===================================
+   SIDEBAR
+=================================== */
+.sidebar {
+  position: fixed; top: 0; left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--olive-darkest);
+  overflow-y: auto;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: var(--olive-mid) transparent;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--olive-mid); border-radius: 2px; }
+
+.sidebar-brand {
+  padding: 30px 22px 22px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  flex-shrink: 0;
+}
+.sidebar-brand .s-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9.5px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--coral-mid); margin-bottom: 8px;
+}
+.sidebar-brand .s-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px; color: #fff; line-height: 1.4;
+}
+.sidebar-brand .s-author {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; color: var(--olive-light);
+  margin-top: 8px; font-style: italic;
+}
+
+.sidebar-nav { padding: 10px 0; flex: 1; }
+.nav-group-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 8.5px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(168,184,122,0.55);
+  padding: 14px 22px 4px;
+}
+.nav-link {
+  display: block; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px; font-weight: 400;
+  color: rgba(255,255,255,0.62);
+  padding: 7px 22px;
+  border-left: 2px solid transparent;
+  transition: all 0.18s;
+  line-height: 1.35;
+}
+.nav-link:hover { color: #fff; background: rgba(255,255,255,0.05); border-left-color: var(--coral-mid); }
+.nav-link.active { color: #fff; background: rgba(255,255,255,0.07); border-left-color: var(--coral); font-weight: 500; }
+.nav-link.ch { font-size: 12.5px; font-weight: 600; padding: 9px 22px; color: rgba(255,255,255,0.78); }
+.nav-link.sub { padding: 5px 22px 5px 34px; font-size: 11.5px; }
+
+.sidebar-footer {
+  padding: 14px 22px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9.5px; color: rgba(255,255,255,0.28);
+  flex-shrink: 0; line-height: 1.6;
+}
+
+/* ===================================
+   MAIN CONTENT
+=================================== */
+.main { margin-left: var(--sidebar-w); min-height: 100vh; }
+
+/* ===================================
+   COVER
+=================================== */
+.cover {
+  min-height: 100vh;
+  background: linear-gradient(145deg, var(--olive-darkest) 0%, #344A18 45%, #26380E 100%);
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center; padding: 70px 48px 60px;
+  position: relative; overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute; border-radius: 50%;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(232,105,79,0.13) 0%, transparent 65%);
+  top: -180px; right: -200px; pointer-events: none;
+}
+.cover::after {
+  content: '';
+  position: absolute; border-radius: 50%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(168,184,122,0.1) 0%, transparent 65%);
+  bottom: -100px; left: -100px; pointer-events: none;
+}
+.cover-badge {
+  display: inline-block;
+  font-family: 'DM Sans', sans-serif; font-size: 9.5px; font-weight: 700;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--coral-mid); border: 1px solid rgba(238,138,118,0.45);
+  padding: 7px 22px; border-radius: 2px;
+  margin-bottom: 36px; position: relative; z-index: 1;
+}
+.cover-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(34px, 4.5vw, 58px); font-weight: 700;
+  color: #fff; line-height: 1.15; max-width: 820px;
+  margin-bottom: 18px; position: relative; z-index: 1;
+}
+.cover-title em { color: var(--coral-light); font-style: italic; }
+.cover-rule {
+  width: 88px; height: 2px;
+  background: linear-gradient(to right, var(--coral), var(--olive-light));
+  margin: 0 auto 28px; position: relative; z-index: 1;
+}
+.cover-sub {
+  font-family: 'Source Serif 4', serif; font-weight: 300;
+  font-size: 17.5px; font-style: italic;
+  color: rgba(255,255,255,0.66); max-width: 640px;
+  line-height: 1.65; margin-bottom: 52px; position: relative; z-index: 1;
+}
+.cover-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 12px; max-width: 780px; width: 100%;
+  margin-bottom: 52px; position: relative; z-index: 1;
+}
+.cover-cell {
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px; padding: 16px 18px; text-align: left;
+  backdrop-filter: blur(4px);
+  background: rgba(255,255,255,0.03);
+}
+.cover-cell-n {
+  font-family: 'Playfair Display', serif; font-size: 11px;
+  color: var(--coral-mid); font-weight: 700; margin-bottom: 6px;
+  letter-spacing: 0.05em;
+}
+.cover-cell-t {
+  font-family: 'DM Sans', sans-serif; font-size: 12.5px;
+  color: rgba(255,255,255,0.78); line-height: 1.3;
+}
+.cover-author-wrap { position: relative; z-index: 1; }
+.cover-author-label {
+  font-family: 'DM Sans', sans-serif; font-size: 9.5px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--olive-light); margin-bottom: 6px;
+}
+.cover-author-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px; font-style: italic; color: #fff;
+}
+.scroll-hint {
+  position: absolute; bottom: 30px;
+  left: 50%; transform: translateX(-50%); z-index: 1;
+  text-align: center;
+}
+.scroll-hint-text {
+  font-family: 'DM Sans', sans-serif; font-size: 9.5px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+.scroll-arrow {
+  display: block; width: 1px; height: 44px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.35), transparent);
+  margin: 8px auto 0;
+  animation: breathe 2.2s ease-in-out infinite;
+}
+@keyframes breathe { 0%,100%{opacity:.3} 50%{opacity:.9} }
+
+/* ===================================
+   CONTENT WRAPPER
+=================================== */
+.content {
+  max-width: var(--content-max);
+  margin: 0 auto; padding: 72px 56px;
+}
+
+/* ===================================
+   CHAPTER COVER BANDS
+=================================== */
+.ch-band {
+  padding: 64px 56px 50px;
+  position: relative; overflow: hidden;
+}
+.ch-band.alt { background: var(--olive-ghost); }
+.ch-band.white { background: #fff; }
+.ch-band.default { background: var(--off-white); }
+.ch-eyebrow {
+  font-family: 'DM Sans', sans-serif; font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--coral);
+  display: flex; align-items: center; gap: 14px; margin-bottom: 16px;
+}
+.ch-eyebrow::after { content:''; display:block; width:36px; height:1.5px; background:var(--coral); }
+.ch-num {
+  position: absolute; right: 52px; top: 32px;
+  font-family: 'Playfair Display', serif;
+  font-size: 96px; font-weight: 900; line-height: 1;
+  color: var(--olive-pale); z-index: 0; user-select: none;
+}
+.ch-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 3.2vw, 42px); font-weight: 700;
+  color: var(--olive-dark); line-height: 1.2; max-width: 660px;
+  position: relative; z-index: 1; margin-bottom: 14px;
+}
+.ch-lead {
+  font-family: 'Source Serif 4', serif; font-weight: 300;
+  font-style: italic; font-size: 16.5px;
+  color: var(--text-mid); max-width: 580px; line-height: 1.7;
+  position: relative; z-index: 1;
+}
+
+/* ===================================
+   TYPOGRAPHY
+=================================== */
+.sec-h {
+  font-family: 'Playfair Display', serif;
+  font-size: 25px; font-weight: 700; color: var(--olive-dark);
+  margin-top: 52px; margin-bottom: 18px;
+  padding-bottom: 10px; border-bottom: 2px solid var(--olive-pale);
+}
+.sub-h {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14.5px; font-weight: 700;
+  color: var(--olive-mid); margin-top: 32px; margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+p { margin-bottom: 16px; }
+p:last-child { margin-bottom: 0; }
+.drop-cap::first-letter {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.4em; font-weight: 900; float: left;
+  line-height: 0.76; margin-right: 9px; margin-top: 8px;
+  color: var(--olive-dark);
+}
+ul, ol { padding-left: 22px; margin-bottom: 16px; }
+li { margin-bottom: 7px; }
+strong { font-weight: 600; color: var(--text-dark); }
+
+/* ===================================
+   COMPONENTS
+=================================== */
+
+/* Pull Quote */
+.pull-quote {
+  border-left: 4px solid var(--coral);
+  background: var(--coral-pale); padding: 22px 28px;
+  margin: 32px 0; border-radius: 0 8px 8px 0;
+}
+.pull-quote p {
+  font-family: 'Playfair Display', serif; font-size: 18.5px;
+  font-style: italic; color: var(--text-dark); margin: 0; line-height: 1.6;
+}
+.pull-quote cite {
+  display: block; font-family: 'DM Sans', sans-serif;
+  font-size: 11.5px; color: var(--text-light); margin-top: 10px;
+  font-style: normal; letter-spacing: 0.04em;
+}
+
+/* Callout / Info Box */
+.callout {
+  background: var(--olive-ghost); border: 1px solid var(--olive-pale);
+  border-left: 4px solid var(--olive-mid);
+  padding: 22px 26px; margin: 28px 0; border-radius: 0 8px 8px 0;
+}
+.callout.coral {
+  background: var(--coral-pale); border-color: var(--coral-light);
+  border-left-color: var(--coral);
+}
+.callout-title {
+  font-family: 'DM Sans', sans-serif; font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.13em; text-transform: uppercase; color: var(--olive-mid);
+  margin-bottom: 9px;
+}
+.callout.coral .callout-title { color: var(--coral); }
+.callout p { font-size: 15px; color: var(--text-mid); margin: 0; }
+
+/* Tip Box */
+.tip {
+  background: #FFF8E6; border: 1px solid #E4CFA0;
+  border-left: 4px solid #C8A030;
+  padding: 18px 24px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.tip-title {
+  font-family: 'DM Sans', sans-serif; font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; color: #9A7820;
+  margin-bottom: 7px;
+}
+.tip p { font-size: 14.5px; color: #3E3010; margin: 0; }
+
+/* Warning Box */
+.warn {
+  background: #FFF4F2; border: 1px solid #F0BAAF;
+  border-left: 4px solid var(--coral);
+  padding: 18px 24px; margin: 26px 0; border-radius: 0 8px 8px 0;
+}
+.warn-title {
+  font-family: 'DM Sans', sans-serif; font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral);
+  margin-bottom: 7px;
+}
+.warn p { font-size: 14.5px; color: #5A1A10; margin: 0; }
+
+/* Intro Box */
+.intro-box {
+  background: var(--olive-dark); color: #fff;
+  border-radius: 10px; padding: 28px 32px; margin: 32px 0;
+}
+.intro-box h3 {
+  font-family: 'Playfair Display', serif; font-size: 16px;
+  color: var(--olive-light); margin-bottom: 14px;
+}
+.intro-box ul { margin: 0; padding-left: 20px; }
+.intro-box li { font-family: 'DM Sans', sans-serif; font-size: 13.5px; color: rgba(255,255,255,0.82); margin-bottom: 7px; }
+
+/* ===================================
+   TABLES
+=================================== */
+.tbl-wrap { overflow-x: auto; margin: 24px 0; }
+table {
+  width: 100%; border-collapse: collapse;
+  font-family: 'DM Sans', sans-serif; font-size: 13.5px;
+}
+thead { background: var(--olive-dark); color: #fff; }
+th {
+  padding: 11px 15px; text-align: left;
+  font-weight: 600; font-size: 12px; letter-spacing: 0.04em;
+}
+td { padding: 10px 15px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+tbody tr:nth-child(even) { background: var(--olive-ghost); }
+tbody tr:hover { background: var(--olive-pale); }
+
+/* ===================================
+   GRID CARDS
+=================================== */
+.grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; margin: 22px 0; }
+.grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin: 22px 0; }
+.grid-5 { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin: 22px 0; }
+.grid-1 { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 22px 0; }
+
+/* KPI Card */
+.kpi-card {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: 10px; padding: 20px;
+  border-top: 3px solid var(--olive-mid);
+}
+.kpi-card.coral { border-top-color: var(--coral); }
+.kpi-card.full { grid-column: 1 / -1; }
+.kpi-label {
+  font-family: 'DM Sans', sans-serif; font-size: 9.5px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--text-light); margin-bottom: 5px;
+}
+.kpi-title {
+  font-family: 'DM Sans', sans-serif; font-size: 14.5px; font-weight: 700;
+  color: var(--text-dark); margin-bottom: 8px;
+}
+.kpi-desc { font-family: 'Source Serif 4', serif; font-size: 13.5px; color: var(--text-mid); line-height: 1.55; margin: 0; }
+
+/* Tool Card */
+.tool-card {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: 10px; padding: 22px;
+  transition: box-shadow .2s, transform .2s;
+}
+.tool-card:hover { box-shadow: 0 6px 28px rgba(74,92,40,.13); transform: translateY(-2px); }
+.tool-icon { font-size: 26px; margin-bottom: 10px; display: block; }
+.tool-name { font-family: 'DM Sans', sans-serif; font-size: 15.5px; font-weight: 700; color: var(--olive-dark); margin-bottom: 3px; }
+.tool-cat { font-family: 'DM Sans', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral); margin-bottom: 9px; }
+.tool-desc { font-family: 'Source Serif 4', serif; font-size: 13.5px; color: var(--text-mid); line-height: 1.6; margin: 0; }
+
+/* SAMR cards */
+.samr-card {
+  display: grid; grid-template-columns: auto 1fr; gap: 18px;
+  align-items: start;
+}
+.samr-letter {
+  width: 52px; height: 52px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 900;
+  flex-shrink: 0;
+}
+.samr-letter.ol { background: var(--olive-pale); color: var(--olive-dark); }
+.samr-letter.co { background: var(--coral-pale); color: var(--coral); }
+
+/* SMART letters */
+.smart-card { text-align: center; padding: 18px 10px; }
+.smart-big {
+  font-family: 'Playfair Display', serif;
+  font-size: 46px; font-weight: 900; line-height: 1;
+  margin-bottom: 6px; display: block;
+}
+.smart-big.ol { color: var(--olive-dark); }
+.smart-big.co { color: var(--coral); }
+.smart-word { font-family: 'DM Sans', sans-serif; font-size: 12.5px; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
+.smart-def { font-family: 'Source Serif 4', serif; font-size: 12px; color: var(--text-light); line-height: 1.4; }
+
+/* Stat Row */
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin: 26px 0; }
+.stat-card {
+  background: var(--olive-dark); color: #fff;
+  border-radius: 10px; padding: 24px 18px; text-align: center;
+}
+.stat-card.coral { background: var(--coral); }
+.stat-n { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 700; display: block; line-height: 1; margin-bottom: 6px; }
+.stat-l { font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(255,255,255,.72); line-height: 1.35; }
+
+/* Steps List */
+.steps { list-style: none; padding: 0; margin: 20px 0; counter-reset: steps; }
+.steps li {
+  display: flex; gap: 18px; align-items: flex-start;
+  padding: 18px 0; border-bottom: 1px solid var(--border);
+  counter-increment: steps;
+}
+.steps li::before {
+  content: counter(steps);
+  font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700;
+  color: #fff; background: var(--coral); width: 42px; height: 42px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+}
+.step-h { font-family: 'DM Sans', sans-serif; font-size: 14.5px; font-weight: 700; color: var(--olive-dark); margin-bottom: 4px; }
+.step-p { font-size: 13.5px; color: var(--text-mid); margin: 0; line-height: 1.6; }
+
+/* Checklist */
+.chklist { list-style: none; padding: 0; margin: 14px 0; }
+.chklist li {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 9px 0; border-bottom: 1px solid var(--border); margin: 0;
+  font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text-mid);
+}
+.chklist li::before {
+  content: '☐'; font-size: 16px; color: var(--olive-mid);
+  flex-shrink: 0; line-height: 1.4;
+}
+
+/* Section Divider */
+.divider { height: 1px; background: var(--border); margin: 48px 0; }
+.divider.deco {
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--olive-pale), var(--coral-light), var(--olive-pale), transparent);
+}
+
+/* Raci display */
+.raci-badge {
+  display: inline-block; font-family: 'DM Sans', sans-serif;
+  font-size: 9.5px; font-weight: 700; padding: 2px 8px;
+  border-radius: 3px; letter-spacing: 0.06em; text-transform: uppercase;
+}
+.raci-r { background: var(--coral-pale); color: var(--coral); }
+.raci-a { background: var(--olive-pale); color: var(--olive-dark); }
+.raci-c { background: #EEF3FF; color: #4060B0; }
+.raci-i { background: #F5F0FF; color: #7040C0; }
+
+/* ===================================
+   CONCLUSION / DARK SECTION
+=================================== */
+.conclusion {
+  background: linear-gradient(140deg, var(--olive-darkest), #344A18);
+  padding: 72px 56px; margin-top: 0;
+}
+.conclusion-inner { max-width: var(--content-max); margin: 0 auto; }
+.conclusion h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px; color: #fff; margin-bottom: 18px; line-height: 1.2;
+}
+.conclusion p { color: rgba(255,255,255,.78); font-size: 16px; line-height: 1.8; max-width: 640px; margin-bottom: 16px; }
+.author-card {
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+  border-radius: 12px; padding: 30px; margin-top: 38px; max-width: 640px;
+}
+.author-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-style: italic; color: #fff; margin-bottom: 4px; }
+.author-title { font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--olive-light); margin-bottom: 14px; letter-spacing: 0.08em; text-transform: uppercase; }
+.author-card p { font-size: 14.5px; color: rgba(255,255,255,.7); margin: 0; }
+
+/* ===================================
+   APPENDIX
+=================================== */
+.appendix { background: #fff; padding: 64px 56px; }
+.appendix-inner { max-width: var(--content-max); margin: 0 auto; }
+
+/* ===================================
+   COPYRIGHT BAR
+=================================== */
+.copyright {
+  background: var(--text-dark); padding: 18px 56px;
+  margin-left: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'DM Sans', sans-serif; font-size: 11px; color: rgba(255,255,255,.32);
+  flex-wrap: wrap; gap: 8px;
+}
+
+/* ===================================
+   RESPONSIVE
+=================================== */
+@media (max-width: 960px) {
+  :root { --sidebar-w: 0px; }
+  .sidebar { transform: translateX(-285px); transition: transform .3s; }
+  .sidebar.open { transform: translateX(0); --sidebar-w: 285px; }
+  .grid-2, .grid-5 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr; }
+  .stat-row { grid-template-columns: 1fr 1fr; }
+  .cover-grid { grid-template-columns: 1fr 1fr; }
+  .content, .ch-band, .appendix, .conclusion { padding-left: 28px; padding-right: 28px; }
+}
+@media print {
+  .sidebar, #progress-bar { display: none !important; }
+  .main { margin-left: 0 !important; }
+  .cover { min-height: auto; padding: 40px; }
+  body { font-size: 14px; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- ============================================================
+     SIDEBAR
+============================================================ -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <div class="s-label">Professional Handbook · 2025</div>
+    <div class="s-title">The Educator's Complete Guide to Reports, KPIs &amp; Leadership</div>
+    <div class="s-author">By Rayene Medabis</div>
+  </div>
+
+  <div class="sidebar-nav">
+    <div class="nav-group-label">Preface</div>
+    <a class="nav-link ch" href="#cover">Cover</a>
+    <a class="nav-link ch" href="#introduction">Introduction</a>
+
+    <div class="nav-group-label">Chapter 1</div>
+    <a class="nav-link ch" href="#chapter-1">Professional Educational Reports</a>
+    <a class="nav-link sub" href="#ch1-types">Types of Reports</a>
+    <a class="nav-link sub" href="#ch1-anatomy">Report Anatomy</a>
+    <a class="nav-link sub" href="#ch1-language">Language &amp; Tone</a>
+    <a class="nav-link sub" href="#ch1-data">Using Data in Reports</a>
+    <a class="nav-link sub" href="#ch1-checklist">Report Checklist</a>
+
+    <div class="nav-group-label">Chapter 2</div>
+    <a class="nav-link ch" href="#chapter-2">KPIs in Education</a>
+    <a class="nav-link sub" href="#ch2-what">What Are KPIs?</a>
+    <a class="nav-link sub" href="#ch2-student">Student KPIs</a>
+    <a class="nav-link sub" href="#ch2-teacher">Teacher KPIs</a>
+    <a class="nav-link sub" href="#ch2-institution">Institutional KPIs</a>
+    <a class="nav-link sub" href="#ch2-smart">SMART KPIs</a>
+    <a class="nav-link sub" href="#ch2-dashboard">KPI Dashboards</a>
+
+    <div class="nav-group-label">Chapter 3</div>
+    <a class="nav-link ch" href="#chapter-3">Measuring Student Progress</a>
+    <a class="nav-link sub" href="#ch3-formative">Formative Assessment</a>
+    <a class="nav-link sub" href="#ch3-summative">Summative Assessment</a>
+    <a class="nav-link sub" href="#ch3-digital">Digital Tracking Tools</a>
+    <a class="nav-link sub" href="#ch3-lms">Learning Management Systems</a>
+    <a class="nav-link sub" href="#ch3-data">Data-Driven Decisions</a>
+
+    <div class="nav-group-label">Chapter 4</div>
+    <a class="nav-link ch" href="#chapter-4">Project Management</a>
+    <a class="nav-link sub" href="#ch4-lifecycle">Project Lifecycle</a>
+    <a class="nav-link sub" href="#ch4-raci">RACI Matrix</a>
+    <a class="nav-link sub" href="#ch4-tools">PM Tools</a>
+    <a class="nav-link sub" href="#ch4-agile">Agile in Education</a>
+    <a class="nav-link sub" href="#ch4-risk">Risk Management</a>
+
+    <div class="nav-group-label">Chapter 5</div>
+    <a class="nav-link ch" href="#chapter-5">Strategic School Improvement</a>
+    <a class="nav-link sub" href="#ch5-sip">School Improvement Plan</a>
+    <a class="nav-link sub" href="#ch5-change">Change Management</a>
+    <a class="nav-link sub" href="#ch5-cpd">CPD Planning</a>
+    <a class="nav-link sub" href="#ch5-culture">Data Culture</a>
+
+    <div class="nav-group-label">Chapter 6</div>
+    <a class="nav-link ch" href="#chapter-6">Digital Transformation</a>
+    <a class="nav-link sub" href="#ch6-samr">SAMR Framework</a>
+    <a class="nav-link sub" href="#ch6-tools">Digital Collaboration Tools</a>
+    <a class="nav-link sub" href="#ch6-ai">AI in Education</a>
+
+    <div class="nav-group-label">Reference</div>
+    <a class="nav-link ch" href="#appendix">Glossary &amp; Quick Reference</a>
+  </div>
+
+  <div class="sidebar-footer">
+    © 2025 Rayene Medabis · All rights reserved<br>
+    For educational use only · Not for redistribution
+  </div>
+</nav>
+
+<!-- ============================================================
+     MAIN CONTENT
+============================================================ -->
+<main class="main">
+
+<!-- ==================== COVER ==================== -->
+<section id="cover" class="cover">
+  <div class="cover-badge">Professional Educator's Handbook · 2025</div>
+  <h1 class="cover-title">The <em>Educator's</em> Complete Guide to Reports, KPIs &amp; Leadership</h1>
+  <div class="cover-rule"></div>
+  <p class="cover-sub">A practical, evidence-based resource for teachers and school leaders on writing professional reports, deploying KPIs, measuring student progress, managing educational projects, and leading school improvement.</p>
+
+  <div class="cover-grid">
+    <div class="cover-cell"><div class="cover-cell-n">01</div><div class="cover-cell-t">Professional Educational Reports</div></div>
+    <div class="cover-cell"><div class="cover-cell-n">02</div><div class="cover-cell-t">KPIs in Education</div></div>
+    <div class="cover-cell"><div class="cover-cell-n">03</div><div class="cover-cell-t">Measuring Student Progress</div></div>
+    <div class="cover-cell"><div class="cover-cell-n">04</div><div class="cover-cell-t">Project Management Tools</div></div>
+    <div class="cover-cell"><div class="cover-cell-n">05</div><div class="cover-cell-t">Strategic School Improvement</div></div>
+    <div class="cover-cell"><div class="cover-cell-n">06</div><div class="cover-cell-t">Digital Transformation</div></div>
+  </div>
+
+  <div class="cover-rule"></div>
+  <div class="cover-author-wrap">
+    <div class="cover-author-label">Written by</div>
+    <div class="cover-author-name">Rayene Medabis</div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-hint-text">Scroll to begin reading</div>
+    <span class="scroll-arrow"></span>
+  </div>
+</section>
+
+<!-- ==================== INTRODUCTION ==================== -->
+<section id="introduction">
+  <div class="content">
+    <div class="ch-eyebrow" style="margin-bottom:12px;">Introduction</div>
+    <h2 class="ch-title" style="font-size:clamp(26px,3.5vw,40px); color:var(--olive-dark); margin-bottom:24px;">Why Every Educator Needs These Skills</h2>
+
+    <p class="drop-cap">Education is among the most complex and high-stakes professions on Earth. Teachers and school leaders are simultaneously instructors, data analysts, project managers, communicators, and strategic thinkers. Yet the professional frameworks that equip educators for these roles are often undertaught, underpracticed, and undervalued in initial teacher education programmes and leadership preparation.</p>
+
+    <p>This handbook bridges that gap. Whether you are a classroom teacher completing your first formal student report, a department head designing a KPI dashboard, a school principal navigating an inspection cycle, or a project lead managing a curriculum reform initiative — the chapters ahead provide the language, tools, and strategies you need to perform at the highest professional level.</p>
+
+    <div class="pull-quote">
+      <p>"What gets measured gets managed — and what gets communicated gets understood. The professional educator must be skilled at both."</p>
+    </div>
+
+    <p>Six interconnected competencies form the backbone of this handbook: the craft of professional writing for educational contexts; the use of key performance indicators to set, track, and communicate success; evidence-based strategies for measuring how students actually learn; project management frameworks adapted for school environments; strategic school improvement planning; and the digital tools transforming how education is delivered and led.</p>
+
+    <div class="callout">
+      <div class="callout-title">How to Use This Handbook</div>
+      <p>This resource is designed for both sequential reading and on-demand reference. Each chapter stands alone, so feel free to navigate directly to the section most relevant to your current professional challenge. Checklists, tables, and templates throughout the book are designed for immediate application in your school context.</p>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <span class="stat-n">6</span>
+        <div class="stat-l">Core Professional Competency Areas</div>
+      </div>
+      <div class="stat-card coral">
+        <span class="stat-n">40+</span>
+        <div class="stat-l">Practical Tools &amp; Strategies</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-n">30+</span>
+        <div class="stat-l">KPIs, Templates &amp; Checklists</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CHAPTER 1: PROFESSIONAL REPORTS
+============================================================ -->
+<section id="chapter-1">
+  <div class="ch-band default">
+    <div class="ch-eyebrow">Chapter One</div>
+    <div class="ch-num">01</div>
+    <h2 class="ch-title">Writing Professional Educational Reports</h2>
+    <p class="ch-lead">The art and science of transforming raw observations and data into documents that inform, persuade, and drive better educational outcomes for every stakeholder.</p>
+  </div>
+
+  <div class="content">
+    <div class="intro-box">
+      <h3>In This Chapter You Will Learn:</h3>
+      <ul>
+        <li>The different types of educational reports and their distinct purposes</li>
+        <li>The anatomy and seven-section structure of a professional report</li>
+        <li>Language, tone, and style conventions for education professionals</li>
+        <li>How to integrate data and evidence effectively without overwhelming readers</li>
+        <li>Common report-writing mistakes and how to avoid them</li>
+        <li>A comprehensive report-writing self-audit checklist</li>
+      </ul>
+    </div>
+
+    <!-- 1.1 TYPES -->
+    <h3 id="ch1-types" class="sec-h">1.1 Types of Educational Reports</h3>
+    <p class="drop-cap">Educational reports serve a wide range of purposes and speak to vastly different audiences. Understanding which type of report you are writing is the essential first step — it determines structure, tone, level of technical detail, and the specific data you must include.</p>
+
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Report Type</th><th>Primary Audience</th><th>Purpose</th><th>Typical Frequency</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Student Progress Report</strong></td><td>Parents, guardians, students</td><td>Communicate academic performance, behaviour, and wellbeing</td><td>Termly / Semesterly</td></tr>
+        <tr><td><strong>Teacher Performance Report</strong></td><td>School management, HR department</td><td>Evaluate teaching effectiveness and professional growth</td><td>Annually</td></tr>
+        <tr><td><strong>Department / Subject Report</strong></td><td>School leadership team</td><td>Summarise departmental results, challenges, and strategic goals</td><td>Termly</td></tr>
+        <tr><td><strong>School Improvement Plan Report</strong></td><td>Governing body, education authority</td><td>Track progress against school-wide improvement targets</td><td>Annually</td></tr>
+        <tr><td><strong>Inspection / Audit Report</strong></td><td>External inspectors, ministry</td><td>Demonstrate compliance with quality standards</td><td>As required (typically 3–5 years)</td></tr>
+        <tr><td><strong>Incident / Behaviour Report</strong></td><td>Administration, parents, safeguarding</td><td>Document disciplinary events objectively and factually</td><td>As needed</td></tr>
+        <tr><td><strong>Project Completion Report</strong></td><td>Leadership, project stakeholders</td><td>Evaluate outcomes of educational initiatives against original goals</td><td>End of each project</td></tr>
+        <tr><td><strong>Financial / Budget Report</strong></td><td>Board, governor, finance committee</td><td>Account for income, expenditure, and resource allocation</td><td>Termly / Annually</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <!-- 1.2 ANATOMY -->
+    <h3 id="ch1-anatomy" class="sec-h">1.2 The Anatomy of a Professional Report</h3>
+    <p>Every professional educational report — regardless of type — follows a recognisable structure. This is not bureaucratic convention; it is a design principle that helps readers navigate complex information efficiently and supports the writer in producing logically coherent, credible work.</p>
+
+    <h4 class="sub-h">The Seven Core Sections</h4>
+    <ol class="steps">
+      <li>
+        <div>
+          <div class="step-h">Title Page &amp; Header Information</div>
+          <p class="step-p">Report title, author name and role, institution name, date, reporting period, and intended audience. This section establishes authority, context, and traceability at a glance. Never omit it — even for internal documents.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="step-h">Executive Summary</div>
+          <p class="step-p">A concise passage of 200–300 words summarising the key findings, main conclusions, and top-priority recommendations. Many decision-makers read only this section, so it must stand alone as a complete and accurate picture of the full report.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="step-h">Introduction / Context</div>
+          <p class="step-p">Establishes the background: what was being evaluated or measured, the time period covered, the population (which students, staff, or programmes), and the methods used to gather evidence. Context makes findings credible.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="step-h">Findings &amp; Analysis</div>
+          <p class="step-p">The main body of the report. Present evidence clearly, organised by theme or subject area. Use tables, charts, and direct quotations where appropriate. Resist inserting conclusions in this section — findings are descriptive; conclusions are interpretive.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="step-h">Conclusions</div>
+          <p class="step-p">Synthesise the findings into clear statements about what the data means. What is working well? What needs improvement? What are the key patterns, trends, or concerns? Conclusions must be directly traceable to the findings.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="step-h">Recommendations</div>
+          <p class="step-p">Specific, prioritised, and actionable suggestions. Each recommendation should be linked explicitly to a finding, include a suggested responsible person, a target timeline, and a success measure. Vague recommendations are ignored.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="step-h">Appendices</div>
+          <p class="step-p">Supporting data, raw assessment results, survey instruments, observation logs, or interview transcripts. These give rigour and credibility to the findings without cluttering the main narrative.</p>
+        </div>
+      </li>
+    </ol>
+
+    <!-- 1.3 LANGUAGE -->
+    <h3 id="ch1-language" class="sec-h">1.3 Language, Tone &amp; Style</h3>
+    <p>Professional report writing in education requires a precise register: formal but human, evidence-based but not emotionally cold, technical where necessary but always accessible to a non-specialist audience. Getting this balance right is one of the most valuable professional skills an educator can develop.</p>
+
+    <h4 class="sub-h">Four Core Language Principles</h4>
+    <div class="grid-2">
+      <div class="kpi-card">
+        <div class="kpi-label">Principle 1</div>
+        <div class="kpi-title">Objective, Evidence-Based Language</div>
+        <p class="kpi-desc">Ground every claim in observable, specific evidence. Avoid "Ahmed is disorganised." Write: "Ahmed submitted 4 of 12 assigned tasks during Term 1, suggesting a need for structured support with independent work planning."</p>
+      </div>
+      <div class="kpi-card coral">
+        <div class="kpi-label">Principle 2</div>
+        <div class="kpi-title">Constructive Language for Challenges</div>
+        <p class="kpi-desc">Never label a student or teacher; describe behaviour and suggest forward-looking pathways. "Struggles with" becomes "would benefit from additional support in." "Fails to" becomes "is working towards" or "has not yet demonstrated."</p>
+      </div>
+      <div class="kpi-card coral">
+        <div class="kpi-label">Principle 3</div>
+        <div class="kpi-title">Specificity Over Vagueness</div>
+        <p class="kpi-desc">Avoid "Sara is doing well." Write: "Sara achieved 91% in her Mathematics Term 2 assessment, placing her in the top 12% of her year group, with particular strength in algebraic problem-solving."</p>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Principle 4</div>
+        <div class="kpi-title">Consistent Tense &amp; Voice</div>
+        <p class="kpi-desc">Past tense for observations made; present tense for ongoing characteristics; future tense for recommendations only. Use active voice as default. "The department achieved" is stronger than "It was achieved by the department."</p>
+      </div>
+    </div>
+
+    <h4 class="sub-h">Words to Use — and Words to Avoid</h4>
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Avoid</th><th>Use Instead</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Lazy, disruptive, difficult</td><td>Demonstrates inconsistent engagement / would benefit from structured support</td><td>Labels stigmatise; behaviour descriptions open productive dialogue</td></tr>
+        <tr><td>Always, never</td><td>Frequently, rarely, on [X] of [Y] occasions</td><td>Absolutes are rarely accurate and undermine professional credibility</td></tr>
+        <tr><td>Good, bad, nice</td><td>Proficient, below expected standard, demonstrates confidence in</td><td>Professional vocabulary conveys precision and serious assessment</td></tr>
+        <tr><td>I think, I feel, I believe</td><td>Evidence indicates / Assessment data shows / Observation records confirm</td><td>Reports require an objective stance, not personal opinion</td></tr>
+        <tr><td>Failed to / can't</td><td>Has not yet demonstrated / is developing / requires further support to achieve</td><td>Growth-oriented language reflects educational values and SEND law</td></tr>
+        <tr><td>As expected / as usual</td><td>Consistent with Term 1 performance / maintaining previous trajectory</td><td>Specific comparisons are more useful to parents and school leaders</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="tip">
+      <div class="tip-title">💡 Pro Tip: The STAR Method for Student Comments</div>
+      <p>Structure individual student report comments using <strong>Situation → Task → Action → Result</strong>. Describe the learning context (Situation), what was required (Task), what the student did (Action), and the measurable outcome (Result). This formula produces precise, evidence-rich feedback in 40–60 words — every time.</p>
+    </div>
+
+    <!-- 1.4 DATA -->
+    <h3 id="ch1-data" class="sec-h">1.4 Integrating Data &amp; Evidence in Reports</h3>
+    <p>Data transforms a narrative report into a credible professional document. But raw numbers without interpretation confuse rather than inform. The skill lies in presenting data clearly, contextualising it meaningfully, and drawing the right conclusions from it.</p>
+
+    <h4 class="sub-h">Types of Evidence to Include</h4>
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Evidence Type</th><th>Examples</th><th>Best Used For</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Quantitative Data</strong></td><td>Test scores, attendance %, pass rates, grade distributions</td><td>Establishing patterns, measuring progress, benchmarking</td></tr>
+        <tr><td><strong>Qualitative Data</strong></td><td>Observation notes, student voice quotes, teacher reflections</td><td>Explaining the "why" behind numbers; adding human dimension</td></tr>
+        <tr><td><strong>Comparative Data</strong></td><td>Year-on-year trends, cohort comparisons, national benchmarks</td><td>Contextualising performance; demonstrating relative improvement</td></tr>
+        <tr><td><strong>Photographic / Portfolio Evidence</strong></td><td>Work samples, project outcomes, event photos</td><td>Progress reports, project completion reports, inspection evidence</td></tr>
+        <tr><td><strong>Survey / Questionnaire Results</strong></td><td>Parent satisfaction, student wellbeing surveys</td><td>Stakeholder voice; school improvement planning evidence</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">The DATA–INSIGHT–ACTION Framework</div>
+      <p>When presenting any piece of data in a report, use this three-step structure:<br><br>
+      <strong>DATA</strong> — State the finding precisely. <em>"74% of Year 6 students achieved the expected reading standard in the Term 2 assessment."</em><br><br>
+      <strong>INSIGHT</strong> — Interpret it in context. <em>"This represents a 9-percentage-point increase from Term 1 (65%) and exceeds our mid-year target of 70%."</em><br><br>
+      <strong>ACTION</strong> — State the implication or next step. <em>"The structured reading intervention programme will continue, with a stretch target of 80% by end of year."</em></p>
+    </div>
+
+    <!-- 1.5 CHECKLIST -->
+    <h3 id="ch1-checklist" class="sec-h">1.5 Professional Report-Writing Checklist</h3>
+    <p>Before submitting any educational report, use this checklist for self-audit or peer review. Every box should be ticked before a report reaches its intended audience.</p>
+
+    <h4 class="sub-h">Structure &amp; Completeness</h4>
+    <ul class="chklist">
+      <li>Report has a clear title, date, author name and role, institution, and intended audience</li>
+      <li>Executive summary accurately reflects the full report in 200–300 words and stands alone</li>
+      <li>Context section explains the reporting period, cohort size, and evidence-gathering methods</li>
+      <li>All findings are supported by specific, named data sources — not personal opinion</li>
+      <li>Conclusions are logically derived from the findings presented</li>
+      <li>Each recommendation is specific, time-bound, linked to a finding, and assigned to a responsible person</li>
+      <li>Appendices included for supporting data, assessment instruments, and raw results</li>
+    </ul>
+
+    <h4 class="sub-h">Language &amp; Professionalism</h4>
+    <ul class="chklist">
+      <li>No labelling or subjective character judgements of students, staff, or families</li>
+      <li>All claims are evidence-based and traceable to a named source</li>
+      <li>Constructive, growth-oriented language used throughout — especially for areas of concern</li>
+      <li>Consistent tense and active voice maintained throughout the document</li>
+      <li>Spelling, grammar, and punctuation proofread — ideally by a second reader</li>
+      <li>Report free of unexplained jargon or acronyms unfamiliar to the target audience</li>
+      <li>All student names, grades, and personal data are accurate and correctly attributed</li>
+      <li>Data privacy and confidentiality requirements met (GDPR / relevant national legislation)</li>
+    </ul>
+
+    <div class="tip">
+      <div class="tip-title">💡 Common Mistakes to Avoid</div>
+      <p><strong>1.</strong> Writing conclusions before findings. <strong>2.</strong> Burying the key message in the middle of a long paragraph. <strong>3.</strong> Using identical report comments across multiple students. <strong>4.</strong> Omitting a timeline or owner from recommendations. <strong>5.</strong> Presenting a graph without interpreting what it means for the reader.</p>
+    </div>
+
+    <div class="divider deco"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CHAPTER 2: KPIs
+============================================================ -->
+<section id="chapter-2">
+  <div class="ch-band alt">
+    <div class="ch-eyebrow">Chapter Two</div>
+    <div class="ch-num">02</div>
+    <h2 class="ch-title">Using KPIs in Education</h2>
+    <p class="ch-lead">Key Performance Indicators transform educational intentions into measurable, trackable commitments — creating accountability, focusing energy, and making success visible to every stakeholder.</p>
+  </div>
+
+  <div class="content">
+    <div class="intro-box">
+      <h3>In This Chapter You Will Learn:</h3>
+      <ul>
+        <li>The definition and purpose of KPIs in an educational context</li>
+        <li>The three-level KPI hierarchy for schools</li>
+        <li>Essential student performance KPIs with targets and data sources</li>
+        <li>Teacher effectiveness KPIs that support professional growth</li>
+        <li>Institutional KPIs for school leaders and governors</li>
+        <li>How to write SMART KPIs — with a before/after example</li>
+        <li>Designing effective KPI dashboards for school management</li>
+      </ul>
+    </div>
+
+    <!-- 2.1 WHAT ARE KPIs -->
+    <h3 id="ch2-what" class="sec-h">2.1 What Are KPIs and Why Do They Matter?</h3>
+    <p class="drop-cap">A Key Performance Indicator (KPI) is a quantifiable measure used to evaluate the success of a person, programme, or institution in meeting defined objectives. In education, KPIs translate the school's mission — ensuring every student reaches their potential — into data points that can be tracked, compared, and acted upon with precision.</p>
+
+    <p>KPIs are not about bureaucracy. They are about clarity. When a school leadership team knows that 72% of students are reading at grade level and the annual target is 85%, they have both a problem statement and a goal. When they know that their teacher professional development participation rate is 60% and the target is 100%, they can investigate the barrier and remove it. Without KPIs, school improvement is largely guesswork dressed in good intentions.</p>
+
+    <div class="pull-quote">
+      <p>"Without data, you are just another person with an opinion. KPIs transform educational intuition into actionable intelligence."</p>
+    </div>
+
+    <h4 class="sub-h">The Three-Level KPI Hierarchy in Education</h4>
+    <div class="grid-2">
+      <div class="kpi-card coral" style="grid-column:1/-1; border-top-color:var(--coral);">
+        <div class="kpi-label">Level 1</div>
+        <div class="kpi-title">Institutional KPIs — School-Wide Performance</div>
+        <p class="kpi-desc">Headline metrics reported to boards, governors, and education authorities: overall pass rates, inspection outcomes, student enrolment trends, staff retention rates, and parent satisfaction scores. These speak to organisational health.</p>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Level 2</div>
+        <div class="kpi-title">Department &amp; Teacher KPIs</div>
+        <p class="kpi-desc">Subject-specific attainment rates, lesson quality observation scores, CPD completion rates, marking policy compliance, and curriculum delivery progress. These speak to professional effectiveness.</p>
+      </div>
+      <div class="kpi-card coral">
+        <div class="kpi-label">Level 3</div>
+        <div class="kpi-title">Individual Student KPIs</div>
+        <p class="kpi-desc">Individual assessment grades, attendance rates, personal learning target achievement, reading age progress, homework completion, and wellbeing indicators. These speak to individual growth.</p>
+      </div>
+    </div>
+
+    <!-- 2.2 STUDENT KPIs -->
+    <h3 id="ch2-student" class="sec-h">2.2 Essential Student Performance KPIs</h3>
+    <p>The following KPIs are the most educationally validated and widely used metrics for tracking student performance across all age groups and educational contexts. Targets should be adapted to your school's baseline data and context.</p>
+
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>KPI</th><th>What to Measure</th><th>Example Target</th><th>Primary Data Source</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Academic Attainment Rate</strong></td><td>% of students meeting grade-level expected standards</td><td>≥ 80% at expected level</td><td>Internal assessments, exams</td></tr>
+        <tr><td><strong>Student Attendance Rate</strong></td><td>% of school days attended per student / cohort</td><td>≥ 95% per student</td><td>Daily attendance register</td></tr>
+        <tr><td><strong>Learning Progress (Value-Added)</strong></td><td>Measurable growth from baseline to current assessment</td><td>At least 1 full level of progress</td><td>Baseline + current data comparison</td></tr>
+        <tr><td><strong>Reading Age Progress</strong></td><td>Months of reading age gained per academic year</td><td>≥ 12 months per academic year</td><td>Standardised reading assessments</td></tr>
+        <tr><td><strong>Homework Completion Rate</strong></td><td>% of assigned tasks submitted on time</td><td>≥ 85% completion rate</td><td>Teacher records / LMS data</td></tr>
+        <tr><td><strong>Exam Pass Rate</strong></td><td>% of students achieving a pass in national / standardised exams</td><td>≥ 90% pass rate</td><td>External examination results</td></tr>
+        <tr><td><strong>At-Risk Student Support Rate</strong></td><td>% of identified at-risk students with an active support plan</td><td>100% identified; ≥ 80% with plan</td><td>Assessment data + pastoral referrals</td></tr>
+        <tr><td><strong>Parent Engagement Rate</strong></td><td>% of parents attending consultations, reports, and key events</td><td>≥ 70% engagement</td><td>Event and meeting attendance records</td></tr>
+        <tr><td><strong>Digital Literacy Assessment</strong></td><td>% of students meeting digital competency standards</td><td>≥ 75% at competent level</td><td>Technology skills assessments</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <!-- 2.3 TEACHER KPIs -->
+    <h3 id="ch2-teacher" class="sec-h">2.3 Teacher Effectiveness KPIs</h3>
+    <p>Teacher KPIs must be designed to support professional growth, not punish underperformance. When communicated transparently and used in a culture of trust, they motivate teachers and provide leadership with the information needed to deploy support — not sanctions — strategically.</p>
+
+    <div class="grid-2">
+      <div class="kpi-card">
+        <div class="kpi-label">Category A</div>
+        <div class="kpi-title">Lesson Quality &amp; Delivery</div>
+        <p class="kpi-desc">% of lessons rated Good or Outstanding in structured peer / leader observations. <strong>Target:</strong> ≥ 85% Good or Outstanding. Measured via a shared, agreed observation rubric reviewed jointly with the teacher.</p>
+      </div>
+      <div class="kpi-card coral">
+        <div class="kpi-label">Category B</div>
+        <div class="kpi-title">Student Achievement in Subject</div>
+        <p class="kpi-desc">% of the teacher's students meeting expected attainment levels, compared against the school average and national benchmarks where available. Contextualised for cohort characteristics.</p>
+      </div>
+      <div class="kpi-card coral">
+        <div class="kpi-label">Category C</div>
+        <div class="kpi-title">Professional Development Engagement</div>
+        <p class="kpi-desc">Hours of CPD completed per academic year; % of agreed development targets achieved. <strong>Target:</strong> ≥ 30 hours CPD per year; 80% of personal development targets met or on track.</p>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Category D</div>
+        <div class="kpi-title">Feedback &amp; Assessment Quality</div>
+        <p class="kpi-desc">% of student work marked and returned within the agreed school policy timeframe. Quality verified through work-scrutiny exercises. <strong>Target:</strong> 90% of marking within policy timeline; feedback rated meaningful in student surveys.</p>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Category E</div>
+        <div class="kpi-title">Curriculum Coverage Rate</div>
+        <p class="kpi-desc">% of planned curriculum content delivered as scheduled. <strong>Target:</strong> ≥ 95% of curriculum coverage by end of term. Variance tracked and justified for each unit not delivered to plan.</p>
+      </div>
+      <div class="kpi-card coral">
+        <div class="kpi-label">Category F</div>
+        <div class="kpi-title">Collaboration &amp; Team Contribution</div>
+        <p class="kpi-desc">Participation in collaborative planning, department meetings, mentoring, and school improvement activities. Measured via meeting records, mentoring logs, and 360° peer feedback instruments.</p>
+      </div>
+    </div>
+
+    <!-- 2.4 INSTITUTIONAL KPIs -->
+    <h3 id="ch2-institution" class="sec-h">2.4 Institutional KPIs for School Leaders</h3>
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>KPI</th><th>Description</th><th>Typical Benchmark</th><th>Reporting Cycle</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Overall Academic Performance</strong></td><td>Whole-school attainment and value-added progress rates</td><td>At or above national / regional average</td><td>Annually</td></tr>
+        <tr><td><strong>Staff Retention Rate</strong></td><td>% of teaching staff remaining year-on-year</td><td>≥ 90% retention</td><td>Annually</td></tr>
+        <tr><td><strong>Student Enrolment Trend</strong></td><td>Year-on-year change in total student numbers</td><td>Stable or growing</td><td>Annually</td></tr>
+        <tr><td><strong>Budget Variance</strong></td><td>Actual vs. planned expenditure across all budget lines</td><td>Within ±5% of approved budget</td><td>Termly</td></tr>
+        <tr><td><strong>Inspection / Accreditation Outcome</strong></td><td>Rating achieved from relevant external inspection body</td><td>Good or Outstanding</td><td>Per inspection cycle</td></tr>
+        <tr><td><strong>Parent Satisfaction Score</strong></td><td>Annual survey: % of parents rating the school positively</td><td>≥ 80% positive rating</td><td>Annually</td></tr>
+        <tr><td><strong>Student Wellbeing Index</strong></td><td>Composite score from student wellbeing survey (belonging, safety, happiness)</td><td>≥ 75% positive indicators</td><td>Twice yearly</td></tr>
+        <tr><td><strong>SIP Target Achievement</strong></td><td>% of School Improvement Plan targets achieved or on track</td><td>≥ 75% on track or completed</td><td>Termly review</td></tr>
+        <tr><td><strong>CPD Investment Rate</strong></td><td>Hours of staff development per employee per year</td><td>≥ 30 hours per teacher</td><td>Annually</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <!-- 2.5 SMART -->
+    <h3 id="ch2-smart" class="sec-h">2.5 Writing SMART Educational KPIs</h3>
+    <p>Every KPI must pass the SMART test. Vague targets generate vague results — and make accountability impossible. The SMART framework ensures every goal is actionable, measurable, and evaluable when the time comes to review progress.</p>
+
+    <div class="grid-5">
+      <div class="kpi-card smart-card">
+        <span class="smart-big ol">S</span>
+        <div class="smart-word">Specific</div>
+        <div class="smart-def">Clearly defines what, who, and where</div>
+      </div>
+      <div class="kpi-card coral smart-card">
+        <span class="smart-big co">M</span>
+        <div class="smart-word">Measurable</div>
+        <div class="smart-def">Quantifiable with a defined metric</div>
+      </div>
+      <div class="kpi-card smart-card">
+        <span class="smart-big ol">A</span>
+        <div class="smart-word">Achievable</div>
+        <div class="smart-def">Ambitious but realistic given context</div>
+      </div>
+      <div class="kpi-card coral smart-card">
+        <span class="smart-big co">R</span>
+        <div class="smart-word">Relevant</div>
+        <div class="smart-def">Linked to a strategic school priority</div>
+      </div>
+      <div class="kpi-card smart-card">
+        <span class="smart-big ol">T</span>
+        <div class="smart-word">Time-Bound</div>
+        <div class="smart-def">Has a clear deadline and review point</div>
+      </div>
+    </div>
+
+    <h4 class="sub-h">SMART KPI Transformation — Before &amp; After</h4>
+    <div class="callout">
+      <div class="callout-title">✦ Before — Vague KPI</div>
+      <p>"Improve student reading across the school this year."</p>
+    </div>
+    <div class="callout coral">
+      <div class="callout-title">✦ After — SMART KPI</div>
+      <p>"By June 2025 (Time-bound), increase the percentage of Year 4 students (Specific) reading at or above their chronological reading age from 58% to 75% (Measurable — 17-point improvement), as measured by the Accelerated Reader standardised assessment (Measurable method), supported by a structured daily guided reading programme (Achievable — strategy identified), aligned to our School Improvement Plan Priority 2: Literacy (Relevant)."</p>
+    </div>
+
+    <!-- 2.6 DASHBOARD -->
+    <h3 id="ch2-dashboard" class="sec-h">2.6 Designing KPI Dashboards for School Management</h3>
+    <p>A KPI dashboard is a visual display of the school's most important metrics, updated at regular intervals, and accessible to the relevant decision-makers. Effective dashboards turn data into decisions.</p>
+
+    <h4 class="sub-h">Dashboard Design Principles</h4>
+    <div class="grid-2">
+      <div class="kpi-card">
+        <div class="kpi-label">Principle 1</div>
+        <div class="kpi-title">Fewer, Better Metrics</div>
+        <p class="kpi-desc">A dashboard showing 40 KPIs is not a dashboard — it is a data swamp. Limit school leadership dashboards to 8–12 headline KPIs. Detail lives in the sub-reports; clarity lives in the dashboard.</p>
+      </div>
+      <div class="kpi-card coral">
+        <div class="kpi-label">Principle 2</div>
+        <div class="kpi-title">RAG Rating (Red / Amber / Green)</div>
+        <p class="kpi-desc">Use colour-coding to signal status at a glance: <strong>Green</strong> = on or above target. <strong>Amber</strong> = within 5–10% of target but requires monitoring. <strong>Red</strong> = significantly below target and requiring immediate intervention.</p>
+      </div>
+      <div class="kpi-card coral">
+        <div class="kpi-label">Principle 3</div>
+        <div class="kpi-title">Trend Lines, Not Snapshots</div>
+        <p class="kpi-desc">A single data point tells you where you are. A trend line tells you where you are going. Always display KPIs with their historical trajectory (at least 3–4 data points) so movement — positive or negative — is immediately visible.</p>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Principle 4</div>
+        <div class="kpi-title">Right Data to the Right Audience</div>
+        <p class="kpi-desc">A teacher needs their class's data; a head of department needs their subject's data; a principal needs whole-school data; governors need institutional and compliance data. Build separate views for each audience.</p>
+      </div>
+    </div>
+
+    <h4 class="sub-h">Recommended Dashboard Tools for Schools</h4>
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Tool</th><th>Type</th><th>Best For</th><th>Cost</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Power BI</strong></td><td>Business Intelligence</td><td>Complex, multi-source data dashboards for leadership teams</td><td>Included with Microsoft O365 for Education</td></tr>
+        <tr><td><strong>Google Looker Studio</strong></td><td>Data Visualisation</td><td>Google Workspace schools; flexible, shareable dashboards</td><td>Free</td></tr>
+        <tr><td><strong>Arbor / SIMS</strong></td><td>MIS / School Data Platform</td><td>Integrated school data: attendance, grades, behaviour in one system</td><td>Subscription (varies)</td></tr>
+        <tr><td><strong>Tableau</strong></td><td>Advanced Analytics</td><td>Large school groups with dedicated data analysts</td><td>Discounted for education</td></tr>
+        <tr><td><strong>Excel / Google Sheets</strong></td><td>Spreadsheet</td><td>Small schools building their first dashboards; low cost</td><td>Free / Included</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="divider deco"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CHAPTER 3: MEASURING STUDENT PROGRESS
+============================================================ -->
+<section id="chapter-3">
+  <div class="ch-band white">
+    <div class="ch-eyebrow">Chapter Three</div>
+    <div class="ch-num">03</div>
+    <h2 class="ch-title">Effective Strategies &amp; Tools for Measuring Student Progress</h2>
+    <p class="ch-lead">Meaningful progress measurement goes far beyond test scores. It requires a layered system of daily formative insight, periodic summative evidence, and intelligent use of digital data.</p>
+  </div>
+
+  <div class="content">
+    <div class="intro-box">
+      <h3>In This Chapter You Will Learn:</h3>
+      <ul>
+        <li>The formative assessment toolkit — practical, classroom-ready techniques</li>
+        <li>Types of summative assessment with comparative strengths and limitations</li>
+        <li>Digital tools for tracking, visualising, and communicating student progress</li>
+        <li>Learning Management Systems (LMS) — key features and which to choose</li>
+        <li>Portfolio-based and project-based evidence approaches</li>
+        <li>A practical data-driven decision-making cycle for schools</li>
+      </ul>
+    </div>
+
+    <!-- 3.1 FORMATIVE -->
+    <h3 id="ch3-formative" class="sec-h">3.1 Formative Assessment Strategies</h3>
+    <p class="drop-cap">Formative assessment is assessment for learning — it happens during the learning process and provides real-time feedback to both teacher and student. Unlike summative assessment, which evaluates learning at the end of a unit or term, formative assessment shapes instruction moment-by-moment, enabling responsive, adaptive teaching.</p>
+
+    <div class="tip">
+      <div class="tip-title">📊 Research Insight</div>
+      <p>Dylan Wiliam's landmark research on assessment for learning found that effective formative assessment practices can produce learning effect sizes of 0.7 or higher — among the highest of any educational intervention. It is one of the most powerful and cost-effective tools a teacher possesses.</p>
+    </div>
+
+    <h4 class="sub-h">Essential Formative Assessment Techniques</h4>
+    <div class="grid-2">
+      <div class="tool-card">
+        <span class="tool-icon">🎯</span>
+        <div class="tool-name">Exit Tickets</div>
+        <div class="tool-cat">End-of-Lesson Strategy</div>
+        <p class="tool-desc">Students answer 1–3 targeted questions at the lesson's close. The teacher reviews responses before the next lesson to identify misconceptions and adjust instruction accordingly. Simple, high-impact, and takes under five minutes.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">🚦</span>
+        <div class="tool-name">Traffic Light Self-Assessment</div>
+        <div class="tool-cat">Self-Regulation Strategy</div>
+        <p class="tool-desc">Students signal their understanding using red (I don't understand), amber (I'm partially there), or green (I'm confident). Rapid, visual, and simultaneously teaches metacognitive self-awareness — a high-value learning skill in itself.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">💬</span>
+        <div class="tool-name">Think-Pair-Share</div>
+        <div class="tool-cat">Dialogue-Based Strategy</div>
+        <p class="tool-desc">Students think individually, discuss with a partner, then share with the class. Assesses understanding while simultaneously deepening it through peer articulation. Reveals common misconceptions very efficiently.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">📋</span>
+        <div class="tool-name">Mini-Whiteboards &amp; Digital Boards</div>
+        <div class="tool-cat">Whole-Class Strategy</div>
+        <p class="tool-desc">All students answer simultaneously on individual boards, revealed on the teacher's signal. The teacher sees every response at once — identifying who understands and who needs intervention without public embarrassment or raised-hands bias.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">❓</span>
+        <div class="tool-name">Socratic Questioning</div>
+        <div class="tool-cat">Depth-Probing Strategy</div>
+        <p class="tool-desc">Sequential questioning probes the depth of student thinking: "Why do you think that?" "What evidence supports that?" "What would happen if...?" Reveals genuine understanding versus surface-level recall. Powerful for higher-order learning.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">👥</span>
+        <div class="tool-name">Peer Assessment</div>
+        <div class="tool-cat">Collaborative Review Strategy</div>
+        <p class="tool-desc">Students evaluate each other's work using a shared rubric with clear success criteria. Effective when students are explicitly trained in giving feedback that is specific, kind, and helpful — not generic or merely positive.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">🗂️</span>
+        <div class="tool-name">Learning Checks &amp; Hinge Questions</div>
+        <div class="tool-cat">Decision-Point Strategy</div>
+        <p class="tool-desc">A single, carefully designed multiple-choice question placed at a critical "hinge point" in the lesson — where the teacher must decide whether to proceed, reteach, or redirect. Each wrong answer corresponds to a specific, diagnosable misconception.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">📓</span>
+        <div class="tool-name">Learning Journals &amp; Reflective Diaries</div>
+        <div class="tool-cat">Metacognitive Strategy</div>
+        <p class="tool-desc">Students regularly write brief reflections on what they learned, what confused them, and what questions they still have. Over time, journals provide a rich, student-authored record of cognitive and affective progress across a unit or year.</p>
+      </div>
+    </div>
+
+    <!-- 3.2 SUMMATIVE -->
+    <h3 id="ch3-summative" class="sec-h">3.2 Summative Assessment Approaches</h3>
+    <p>Summative assessments evaluate learning at the close of an instructional period. They provide the documented evidence base for reporting, progression decisions, qualification awarding, and strategic planning. No single summative format is superior — the best assessment matches the nature of the learning it is evaluating.</p>
+
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Assessment Type</th><th>Best Suited For</th><th>Key Strengths</th><th>Key Limitations</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Written Examinations</strong></td><td>Recall, comprehension, analysis, extended writing</td><td>Standardised; comparable across cohorts; familiar format</td><td>Single-moment snapshot; anxiety-sensitive; limited modality</td></tr>
+        <tr><td><strong>Practical / Performance Assessments</strong></td><td>Physical skills, applied knowledge, vocational competence</td><td>Authentic; hands-on; directly measures intended skills</td><td>Time-intensive to observe and assess; consistency challenges</td></tr>
+        <tr><td><strong>Portfolio Assessment</strong></td><td>Creative, process-based, and longitudinal learning</td><td>Shows growth over time; promotes student ownership and agency</td><td>Difficult to standardise across classes or schools</td></tr>
+        <tr><td><strong>Project-Based Assessment</strong></td><td>Higher-order thinking, collaboration, real-world application</td><td>Motivating; develops transferable skills; memorable</td><td>Group work complicates individual grade attribution</td></tr>
+        <tr><td><strong>Standardised Assessments</strong></td><td>Benchmarking against national or international norms</td><td>Comparative; externally validated; age-related norms available</td><td>May not directly reflect classroom curriculum priorities</td></tr>
+        <tr><td><strong>Oral Examinations / Presentations</strong></td><td>Communication, oracy, critical thinking, argumentation</td><td>Develops speaking skills; alternative modality; harder to rehearse</td><td>High anxiety for some students; resource-intensive to assess at scale</td></tr>
+        <tr><td><strong>Digital / Adaptive Assessments</strong></td><td>Personalised difficulty-level measurement; efficiency at scale</td><td>Immediate results; adapts to student level; generates rich data</td><td>Requires reliable technology infrastructure; screen fatigue</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <!-- 3.3 DIGITAL TOOLS -->
+    <h3 id="ch3-digital" class="sec-h">3.3 Digital Tools for Progress Tracking</h3>
+    <p>The educational technology ecosystem has expanded dramatically. The tools below represent the leading platforms for tracking, visualising, and communicating student progress in 2024–2025, organised by primary function.</p>
+
+    <h4 class="sub-h">Interactive Formative Assessment Platforms</h4>
+    <div class="grid-2">
+      <div class="tool-card">
+        <span class="tool-icon">🎮</span>
+        <div class="tool-name">Kahoot!</div>
+        <div class="tool-cat">Game-Based Quizzing</div>
+        <p class="tool-desc">Game-based platform generating instant, class-wide data on understanding. Results downloadable for record-keeping. Excellent for engagement, immediate feedback, and identifying the most common misconceptions across a whole class simultaneously.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">📊</span>
+        <div class="tool-name">Mentimeter</div>
+        <div class="tool-cat">Live Polling &amp; Word Clouds</div>
+        <p class="tool-desc">Real-time polls, word clouds, and Q&amp;A during lessons. Ideal for gauging prior knowledge at the lesson start, checking understanding mid-lesson, and gathering student questions anonymously — particularly valuable for quieter students.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">🌐</span>
+        <div class="tool-name">Nearpod</div>
+        <div class="tool-cat">Interactive Lesson Platform</div>
+        <p class="tool-desc">Embeds formative checks directly into interactive slides: polls, drawing tasks, open questions, virtual field trips. The teacher's dashboard displays live student responses. Every response is auto-saved and reportable after the lesson.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">📚</span>
+        <div class="tool-name">Accelerated Reader / Renaissance</div>
+        <div class="tool-cat">Standardised Progress Tracking</div>
+        <p class="tool-desc">Research-validated platform tracking reading and maths progress against standardised age norms. Produces cohort and individual reports comparing students to national benchmarks — ideal for KPI reporting and reading age progress tracking.</p>
+      </div>
+    </div>
+
+    <h4 class="sub-h">Portfolio &amp; Evidence Tools</h4>
+    <div class="grid-2">
+      <div class="tool-card">
+        <span class="tool-icon">📷</span>
+        <div class="tool-name">Seesaw</div>
+        <div class="tool-cat">Digital Portfolio (Primary Focus)</div>
+        <p class="tool-desc">Students document learning with photos, videos, drawings, and voice notes. Parents receive real-time updates and can comment positively. Teachers organise evidence by curriculum outcome. Exceptional evidence base for student progress reporting in primary schools.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">🗃️</span>
+        <div class="tool-name">ManageBac / Toddle</div>
+        <div class="tool-cat">Curriculum &amp; Portfolio (IB / International)</div>
+        <p class="tool-desc">Comprehensive platforms integrating curriculum planning, portfolio evidence, assessment reporting, and parent communication. Particularly popular in international and IB schools. Generates detailed learning profiles for each student.</p>
+      </div>
+    </div>
+
+    <!-- 3.4 LMS -->
+    <h3 id="ch3-lms" class="sec-h">3.4 Learning Management Systems (LMS) Comparison</h3>
+    <p>A Learning Management System is the central platform through which digital learning content is delivered, assignments are managed, and student progress is recorded. Choosing the right LMS for your school context is a significant decision with long-term implications.</p>
+
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Platform</th><th>Best For</th><th>Key Features</th><th>Cost</th><th>Ecosystem</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Google Classroom</strong></td><td>K-12; Google schools; beginner LMS users</td><td>Assignment management, peer review, Google Drive integration, basic gradebook, Classroom Analytics</td><td>Free with Google Workspace for Education</td><td>Google</td></tr>
+        <tr><td><strong>Microsoft Teams for Education</strong></td><td>Microsoft schools; secondary and university</td><td>Reading Progress, Insights dashboard, assignment rubrics, OneNote integration, video lessons</td><td>Included with Microsoft O365 for Education</td><td>Microsoft</td></tr>
+        <tr><td><strong>Moodle</strong></td><td>Schools wanting full customisation; technical capacity available</td><td>Competency tracking, open badges, H5P interactive content, comprehensive gradebook, plugins ecosystem</td><td>Free (open source); hosting costs apply</td><td>Open Source</td></tr>
+        <tr><td><strong>Canvas</strong></td><td>Secondary and higher education; data-focused schools</td><td>Advanced analytics, rubric grading, SpeedGrader, parent portal, SIS integration, video feedback</td><td>Subscription; education pricing available</td><td>Independent</td></tr>
+        <tr><td><strong>Schoology</strong></td><td>K-12 schools wanting deep SIS integration</td><td>Standards-based grading, mastery tracking, parent app, rich assessment types, strong LTI ecosystem</td><td>Subscription</td><td>PowerSchool</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <!-- 3.5 DATA DRIVEN -->
+    <h3 id="ch3-data" class="sec-h">3.5 Data-Driven Decision Making</h3>
+    <p>Collecting data is not the goal — using it to improve student outcomes is. A genuinely data-driven school culture requires not just the right tools, but the right processes for interpreting and acting on the information those tools generate. Data without response is just measurement for its own sake.</p>
+
+    <div class="callout">
+      <div class="callout-title">The Five-Stage Data Cycle for School Leaders</div>
+      <p>
+      <strong>1. Collect</strong> — Gather reliable assessment, attendance, and wellbeing data through consistent, agreed methods.<br><br>
+      <strong>2. Analyse</strong> — Identify patterns: which students, groups, subjects, or time periods show underperformance, unexpected growth, or significant variance?<br><br>
+      <strong>3. Interpret</strong> — Contextualise the data. Are attendance patterns linked to attainment dips? Are certain teachers' classes consistently outperforming — and why?<br><br>
+      <strong>4. Act</strong> — Design and implement targeted, evidence-based interventions. Allocate resources deliberately toward the areas of greatest need.<br><br>
+      <strong>5. Review</strong> — After a defined period, measure whether the intervention produced the expected change in the target KPI. Feed findings into the next data cycle and refine the approach.
+      </p>
+    </div>
+
+    <div class="warn">
+      <div class="warn-title">⚠️ Data Ethics in Schools</div>
+      <p>All student data must be handled in compliance with applicable data protection legislation (e.g., GDPR, FERPA, or equivalent national law). Obtain appropriate consent; store data securely; limit access on a need-to-know basis; and never input individually identifiable student data into unsecured third-party AI or analysis tools. Data governance policies must be reviewed and updated annually by school leadership.</p>
+    </div>
+
+    <div class="divider deco"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CHAPTER 4: PROJECT MANAGEMENT
+============================================================ -->
+<section id="chapter-4">
+  <div class="ch-band alt">
+    <div class="ch-eyebrow">Chapter Four</div>
+    <div class="ch-num">04</div>
+    <h2 class="ch-title">Project Management Tools for Educational Projects</h2>
+    <p class="ch-lead">Schools run multiple concurrent projects — curriculum reform, facility development, accreditation bids, staff development programmes. Effective project management turns ambitious plans into delivered, measurable outcomes.</p>
+  </div>
+
+  <div class="content">
+    <div class="intro-box">
+      <h3>In This Chapter You Will Learn:</h3>
+      <ul>
+        <li>The five phases of the educational project lifecycle</li>
+        <li>The RACI matrix — clarifying roles in school project teams</li>
+        <li>Agile and Scrum methodologies adapted for educational environments</li>
+        <li>The leading digital project management platforms — with honest comparisons</li>
+        <li>Gantt charts, Kanban boards, and when to use each</li>
+        <li>Risk identification and management in school-based projects</li>
+      </ul>
+    </div>
+
+    <!-- 4.1 LIFECYCLE -->
+    <h3 id="ch4-lifecycle" class="sec-h">4.1 The Educational Project Lifecycle</h3>
+    <p class="drop-cap">All educational projects — whether a classroom makeover or a whole-school curriculum reform — pass through five predictable phases. Understanding what each phase demands allows project leaders to apply the right level of energy and the right type of activity, and to anticipate the challenges that characteristically arise at each stage.</p>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <div class="step-h">Initiation — Defining the "Why"</div>
+          <p class="step-p">Clarify the problem the project addresses, define high-level goals and scope, identify all stakeholders, assess feasibility, and secure leadership approval. <strong>Key Output:</strong> Project Charter or Brief — a one-page document establishing the project's purpose, scope, timeline, budget, and sponsor.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="step-h">Planning — Building the "How"</div>
+          <p class="step-p">Develop detailed timelines (Gantt charts), assign tasks and responsibilities (RACI matrix), identify risks and mitigation strategies, establish a budget, define KPIs and success criteria. <strong>Key Output:</strong> Project Plan, Risk Register, Communication Plan.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="step-h">Execution — Doing the Work</div>
+          <p class="step-p">Implement the project plan, coordinate team members, manage stakeholder communication, monitor progress against the plan, address emerging issues in real time. <strong>Key Output:</strong> Project deliverables, interim progress reports, updated task boards.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="step-h">Monitoring &amp; Control — Tracking &amp; Adjusting</div>
+          <p class="step-p">Continuously compare actual progress against the plan, update the risk register, manage change requests formally, hold regular status meetings with the project team and sponsor. <strong>Key Output:</strong> Updated project plan, status reports, issue log.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="step-h">Closure — Reflecting &amp; Handing Over</div>
+          <p class="step-p">Complete all deliverables, evaluate outcomes against original KPIs and success criteria, document lessons learned, produce the final project report, and hand over to the relevant operational owner. <strong>Key Output:</strong> Project Completion Report, Lessons Learned Document, handover plan.</p>
+        </div>
+      </li>
+    </ol>
+
+    <!-- 4.2 RACI -->
+    <h3 id="ch4-raci" class="sec-h">4.2 The RACI Matrix in Educational Projects</h3>
+    <p>The RACI matrix is one of the most valuable project management tools available to school leaders. It clarifies — and documents — who is <strong>Responsible</strong> (does the work), <strong>Accountable</strong> (owns the outcome), <strong>Consulted</strong> (provides expertise or input), and <strong>Informed</strong> (kept up to date). In schools, where role boundaries frequently blur and multiple staff wear multiple hats, clarity about ownership prevents the most common project failure mode: duplicated effort and gaps in responsibility.</p>
+
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Project Task</th><th>Responsible (Does It)</th><th>Accountable (Owns It)</th><th>Consulted</th><th>Informed</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Curriculum Framework Design</td>
+          <td><span class="raci-badge raci-r">R</span> Head of Department</td>
+          <td><span class="raci-badge raci-a">A</span> Deputy Principal</td>
+          <td><span class="raci-badge raci-c">C</span> Subject Teachers, Curriculum Advisor</td>
+          <td><span class="raci-badge raci-i">I</span> Principal, Parents</td>
+        </tr>
+        <tr>
+          <td>Staff CPD Programme Delivery</td>
+          <td><span class="raci-badge raci-r">R</span> CPD Coordinator</td>
+          <td><span class="raci-badge raci-a">A</span> Principal</td>
+          <td><span class="raci-badge raci-c">C</span> All Staff, External Trainers</td>
+          <td><span class="raci-badge raci-i">I</span> Governing Body</td>
+        </tr>
+        <tr>
+          <td>LMS / Assessment Tool Rollout</td>
+          <td><span class="raci-badge raci-r">R</span> IT Lead / EdTech Coordinator</td>
+          <td><span class="raci-badge raci-a">A</span> Academic Director</td>
+          <td><span class="raci-badge raci-c">C</span> Teachers, IT Support</td>
+          <td><span class="raci-badge raci-i">I</span> All Staff, Parents</td>
+        </tr>
+        <tr>
+          <td>Parent Communication Campaign</td>
+          <td><span class="raci-badge raci-r">R</span> Admin / Communications Lead</td>
+          <td><span class="raci-badge raci-a">A</span> Principal</td>
+          <td><span class="raci-badge raci-c">C</span> HODs, Pastoral Team</td>
+          <td><span class="raci-badge raci-i">I</span> All Parents, School Board</td>
+        </tr>
+        <tr>
+          <td>Inspection Preparation</td>
+          <td><span class="raci-badge raci-r">R</span> Leadership Team collectively</td>
+          <td><span class="raci-badge raci-a">A</span> Principal</td>
+          <td><span class="raci-badge raci-c">C</span> All Staff, Governors</td>
+          <td><span class="raci-badge raci-i">I</span> Parents, Students</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <!-- 4.3 PM TOOLS -->
+    <h3 id="ch4-tools" class="sec-h">4.3 Project Management Tools for Education Leaders</h3>
+    <p>The following platforms are well-suited to educational project contexts, offering the collaboration features, visual planning capabilities, and accessibility that school leadership teams need — without requiring a dedicated project management professional to operate them.</p>
+
+    <div class="grid-2">
+      <div class="tool-card">
+        <span class="tool-icon">🟦</span>
+        <div class="tool-name">Trello</div>
+        <div class="tool-cat">Visual Kanban Board</div>
+        <p class="tool-desc"><strong>Best for:</strong> Small to medium educational projects; visual thinkers; teams new to project management. Trello's card-and-board interface is immediately intuitive. Excellent for curriculum planning, event management, and SIP action tracking. The free tier is generous and sufficient for most school projects.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">🗂️</span>
+        <div class="tool-name">Asana</div>
+        <div class="tool-cat">Task Management &amp; Timeline</div>
+        <p class="tool-desc"><strong>Best for:</strong> Multi-team projects requiring dependency tracking and timeline views. Asana supports Kanban, list views, Gantt-style timelines, and portfolio-level overviews. Ideal for school improvement plans, accreditation projects, and cross-departmental change initiatives. Non-profit/education pricing available.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">🟩</span>
+        <div class="tool-name">Monday.com</div>
+        <div class="tool-cat">Work OS / Highly Visual</div>
+        <p class="tool-desc"><strong>Best for:</strong> Leadership teams who value visual impact and flexible customisation. Monday's colour-coded boards, automation rules, and dashboard views make it very appealing for principals managing multiple parallel initiatives. Strong for reporting progress to governors and stakeholders visually.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">📌</span>
+        <div class="tool-name">Microsoft Planner &amp; Project</div>
+        <div class="tool-cat">Microsoft Ecosystem</div>
+        <p class="tool-desc"><strong>Best for:</strong> Schools already invested in Microsoft 365. Planner provides simple Kanban-style task management within Teams; Project offers full Gantt charts, resource management, and complex scheduling. Planner is free with most O365 school licences — a zero-cost entry point for Microsoft schools.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">🔷</span>
+        <div class="tool-name">Notion</div>
+        <div class="tool-cat">All-in-One Workspace</div>
+        <p class="tool-desc"><strong>Best for:</strong> Schools wanting to combine project management with documentation, policy management, and knowledge sharing. Notion's flexible databases allow departments to run project boards, maintain wikis, and share resources in a single, searchable workspace. Growing rapidly in educational adoption.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">⚡</span>
+        <div class="tool-name">ClickUp</div>
+        <div class="tool-cat">Feature-Rich PM Platform</div>
+        <p class="tool-desc"><strong>Best for:</strong> Schools that have outgrown simpler tools and need advanced capabilities: goals tracking, time recording, mind maps, and whiteboards in one platform. The free tier is extraordinarily generous — including features that cost money on competing platforms. Steeper learning curve than Trello or Asana.</p>
+      </div>
+    </div>
+
+    <h4 class="sub-h">PM Tool Selection at a Glance</h4>
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Tool</th><th>Ease of Use</th><th>Cost</th><th>Gantt Charts</th><th>Best School Context</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Trello</strong></td><td>⭐⭐⭐⭐⭐ Very Easy</td><td>Free / Low</td><td>Via Power-Up add-on</td><td>Small teams; simple projects; visual preference</td></tr>
+        <tr><td><strong>Asana</strong></td><td>⭐⭐⭐⭐ Easy</td><td>Freemium</td><td>✅ Yes (Premium)</td><td>Multi-department SIP and accreditation projects</td></tr>
+        <tr><td><strong>Monday.com</strong></td><td>⭐⭐⭐⭐ Easy</td><td>Medium</td><td>✅ Yes</td><td>Leadership teams; reporting to governors</td></tr>
+        <tr><td><strong>MS Planner</strong></td><td>⭐⭐⭐⭐ Easy</td><td>Free (O365)</td><td>❌ No (use MS Project)</td><td>Microsoft 365 schools; basic task tracking</td></tr>
+        <tr><td><strong>Notion</strong></td><td>⭐⭐⭐ Medium</td><td>Free / Low</td><td>Via third-party embed</td><td>Documentation-heavy environments; flexible workflows</td></tr>
+        <tr><td><strong>ClickUp</strong></td><td>⭐⭐⭐ Medium</td><td>Free / Low</td><td>✅ Yes</td><td>Power users; schools managing complex portfolios</td></tr>
+        <tr><td><strong>MS Project</strong></td><td>⭐⭐ Complex</td><td>High</td><td>✅ Full-Featured</td><td>Large building or institutional transformation projects</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <!-- 4.4 AGILE -->
+    <h3 id="ch4-agile" class="sec-h">4.4 Agile Methodologies in Education</h3>
+    <p>Originally developed in software engineering, Agile project management has found a natural and productive home in education — particularly for curriculum development, school improvement initiatives, and technology implementation, where requirements evolve, feedback is continuous, and rigid multi-year plans quickly become obsolete.</p>
+
+    <div class="pull-quote">
+      <p>"The best educational projects are not perfectly planned — they are perfectly responsive. Agile gives school leaders the framework to embrace that reality."</p>
+    </div>
+
+    <h4 class="sub-h">Core Agile Principles Applied to School Projects</h4>
+    <div class="grid-2">
+      <div class="kpi-card">
+        <div class="kpi-label">Agile Principle 1</div>
+        <div class="kpi-title">Iterative Planning (Sprints)</div>
+        <p class="kpi-desc">Break large projects into focused 2–4 week "sprints" with defined, deliverable outputs. Review and adapt at the end of each sprint, rather than following a rigid 12-month plan that becomes outdated within weeks.</p>
+      </div>
+      <div class="kpi-card coral">
+        <div class="kpi-label">Agile Principle 2</div>
+        <div class="kpi-title">Daily Stand-Up Check-Ins</div>
+        <p class="kpi-desc">Brief (10-minute) daily or weekly team check-ins where each member shares: what they accomplished, what they are working on, and any blockers they face. Eliminates communication silos rapidly and surfaces problems early.</p>
+      </div>
+      <div class="kpi-card coral">
+        <div class="kpi-label">Agile Principle 3</div>
+        <div class="kpi-title">Backlog Management</div>
+        <p class="kpi-desc">Maintain a prioritised master list of all project tasks (the "backlog"). At each sprint start, the team selects only the highest-priority items they can realistically complete in the time available. Nothing is lost — just sequenced by priority.</p>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Agile Principle 4</div>
+        <div class="kpi-title">Sprint Retrospectives</div>
+        <p class="kpi-desc">At each sprint's close, the team asks three structured questions: What went well? What didn't go as expected? What will we change in the next sprint? This embedded reflection cycle makes school projects continuously self-improving.</p>
+      </div>
+    </div>
+
+    <!-- 4.5 RISK -->
+    <h3 id="ch4-risk" class="sec-h">4.5 Risk Management in Educational Projects</h3>
+    <p>Every project carries risk. The objective of risk management is not to eliminate risk — that is impossible — but to identify, assess, and plan responses to the risks most likely to derail the project before they materialise.</p>
+
+    <h4 class="sub-h">Risk Register Template for School Projects</h4>
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Risk</th><th>Likelihood (1–5)</th><th>Impact (1–5)</th><th>Risk Score</th><th>Mitigation Strategy</th><th>Owner</th></tr></thead>
+      <tbody>
+        <tr><td>Key staff member leaves mid-project</td><td>3</td><td>4</td><td><strong>12</strong></td><td>Document all processes; cross-train a second team member</td><td>HR / Principal</td></tr>
+        <tr><td>Budget overspend</td><td>2</td><td>4</td><td><strong>8</strong></td><td>Build 10% contingency; monthly budget review</td><td>Business Manager</td></tr>
+        <tr><td>Low stakeholder engagement</td><td>3</td><td>3</td><td><strong>9</strong></td><td>Early, regular communication; include staff in planning</td><td>Project Lead</td></tr>
+        <tr><td>Technology failure / IT issues</td><td>2</td><td>3</td><td><strong>6</strong></td><td>Test systems before launch; maintain paper backup plan</td><td>IT Lead</td></tr>
+        <tr><td>Scope creep (project expanding beyond original brief)</td><td>4</td><td>3</td><td><strong>12</strong></td><td>Formal change control process; clearly defined scope document</td><td>Project Sponsor</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="tip">
+      <div class="tip-title">💡 Risk Score Interpretation</div>
+      <p><strong>1–4 (Low):</strong> Monitor periodically. <strong>5–9 (Medium):</strong> Active monitoring with a named mitigation strategy. <strong>10–25 (High):</strong> Immediate mitigation action required; escalate to senior leadership if score reaches 15+.</p>
+    </div>
+
+    <div class="divider deco"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CHAPTER 5: STRATEGIC SCHOOL IMPROVEMENT
+============================================================ -->
+<section id="chapter-5">
+  <div class="ch-band default">
+    <div class="ch-eyebrow">Chapter Five</div>
+    <div class="ch-num">05</div>
+    <h2 class="ch-title">Strategic Planning &amp; School Improvement</h2>
+    <p class="ch-lead">Great schools are not accidents. They are the product of deliberate planning, courageous leadership, and a school-wide culture of continuous, evidence-informed improvement.</p>
+  </div>
+
+  <div class="content">
+    <!-- 5.1 SIP -->
+    <h3 id="ch5-sip" class="sec-h">5.1 The School Improvement Plan (SIP)</h3>
+    <p class="drop-cap">The School Improvement Plan is the strategic backbone of every high-performing school. It translates the school's vision into time-bound, measurable commitments across all domains: teaching and learning, leadership and governance, student wellbeing, community engagement, and resource management. A great SIP is not a compliance document submitted to an authority and then forgotten — it is a living, working tool that guides every decision a school leader makes throughout the year.</p>
+
+    <div class="grid-2">
+      <div class="kpi-card">
+        <div class="kpi-label">SIP Section 1</div>
+        <div class="kpi-title">School Self-Evaluation (SEF)</div>
+        <p class="kpi-desc">An honest, evidence-based assessment of current performance using internal assessment data, external inspection evidence, stakeholder surveys, and comparison with peer schools. This is the diagnostic foundation on which all improvement priorities are built. Without honest self-evaluation, the SIP is fiction.</p>
+      </div>
+      <div class="kpi-card coral">
+        <div class="kpi-label">SIP Section 2</div>
+        <div class="kpi-title">Strategic Priority Areas &amp; Goals</div>
+        <p class="kpi-desc">The school selects 3–5 strategic priorities for the planning cycle, each supported by SMART goals and a clear rationale linked to the self-evaluation evidence. Common priority areas: Literacy &amp; Numeracy, Teaching Quality, Student Wellbeing, Digital Learning, Community Partnership.</p>
+      </div>
+      <div class="kpi-card coral">
+        <div class="kpi-label">SIP Section 3</div>
+        <div class="kpi-title">Action Plans (Per Priority)</div>
+        <p class="kpi-desc">For each strategic goal: specific, sequenced actions; a named responsible person; a target completion date; resource requirements; and measurable success indicators. This transforms strategic intention into an operational action list with built-in accountability.</p>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">SIP Section 4</div>
+        <div class="kpi-title">Monitoring &amp; Review Schedule</div>
+        <p class="kpi-desc">Structured half-termly or monthly review points where progress is evaluated against KPIs using RAG status. A clear escalation process for off-track priorities, and a celebration mechanism for milestones achieved. This makes the SIP a governance tool, not an annual report.</p>
+      </div>
+    </div>
+
+    <!-- 5.2 CHANGE MANAGEMENT -->
+    <h3 id="ch5-change" class="sec-h">5.2 Change Management in Schools</h3>
+    <p>Educational change is notoriously difficult. Research consistently shows that 60–70% of organisational change initiatives fail — not because the strategy was wrong, but because the human dimension was neglected. Effective change leadership in schools requires as much attention to culture, emotion, and trust as to plans, policies, and procedures.</p>
+
+    <div class="pull-quote">
+      <p>"The greatest barrier to school improvement is rarely the lack of a good idea. It is the consistent failure to bring people with you on the journey."</p>
+    </div>
+
+    <h4 class="sub-h">Kotter's 8-Step Change Model — Applied to Schools</h4>
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Step</th><th>Action</th><th>Educational Application</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1</strong></td><td>Create a sense of urgency</td><td>Share student outcome data, inspection reports, or comparison benchmarks that make the case for change compellingly — without blame</td></tr>
+        <tr><td><strong>2</strong></td><td>Build a guiding coalition</td><td>Identify respected teacher leaders, heads of department, and engaged governors who believe in the change and can champion it in their peer networks</td></tr>
+        <tr><td><strong>3</strong></td><td>Form a strategic vision</td><td>Articulate what the school will look and feel like once the change is embedded — in vivid, human, student-centred terms</td></tr>
+        <tr><td><strong>4</strong></td><td>Communicate the vision</td><td>Use every channel and every appropriate opportunity; repeat the message consistently across staff meetings, newsletters, and one-to-one conversations</td></tr>
+        <tr><td><strong>5</strong></td><td>Remove obstacles</td><td>Listen actively to staff concerns; identify and remove structural barriers (timetable constraints, resource gaps, workload pressures) that prevent implementation</td></tr>
+        <tr><td><strong>6</strong></td><td>Generate short-term wins</td><td>Identify and celebrate early evidence that the change is working — in student outcomes, staff confidence, or parent feedback</td></tr>
+        <tr><td><strong>7</strong></td><td>Sustain the acceleration</td><td>Use early wins to build momentum, not complacency; continue hiring and developing people who reflect the new direction</td></tr>
+        <tr><td><strong>8</strong></td><td>Anchor in culture</td><td>When the new approach becomes "how we do things here" — reflected in induction, performance review, and peer expectations — change is complete</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <!-- 5.3 CPD -->
+    <h3 id="ch5-cpd" class="sec-h">5.3 Professional Development Planning</h3>
+    <p>CPD (Continuing Professional Development) is the engine of sustainable school improvement. A school that invests systematically in teacher learning creates a culture of continuous growth that benefits every student in every classroom — every day.</p>
+
+    <div class="callout">
+      <div class="callout-title">The 70-20-10 Model for Teacher Professional Learning</div>
+      <p>Research on professional learning suggests that growth occurs through three modes: <strong>70% experiential learning</strong> — challenging new tasks, leadership responsibilities, problem-solving in context; <strong>20% social learning</strong> — coaching, mentoring, peer observation, and collaborative professional enquiry; and <strong>10% formal learning</strong> — courses, workshops, conferences, and reading. A high-impact CPD programme is designed to address all three — not just the 10% that is easiest to schedule and evidence.</p>
+    </div>
+
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>CPD Type</th><th>Format</th><th>Relative Cost</th><th>Evidence of Impact</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Lesson Study (Peer Observation Cycles)</strong></td><td>Collaborative; in-school</td><td>Low</td><td>Very High — directly linked to classroom change</td></tr>
+        <tr><td><strong>Instructional Coaching / Mentoring</strong></td><td>1:1 regular sessions</td><td>Medium</td><td>Very High — personalised, sustained, contextualised</td></tr>
+        <tr><td><strong>Teacher-Led Action Research</strong></td><td>Small group or individual</td><td>Low</td><td>High — builds inquiry culture; generates school-specific evidence</td></tr>
+        <tr><td><strong>Collaborative Planning (PLCs)</strong></td><td>Department or cross-school</td><td>Low</td><td>High — improves curriculum coherence and shared practice</td></tr>
+        <tr><td><strong>School-Based Workshops / INSET Days</strong></td><td>Whole-staff or groups</td><td>Low-Medium</td><td>Medium — depends entirely on quality of design and follow-up</td></tr>
+        <tr><td><strong>External Conferences &amp; Courses</strong></td><td>Keynotes, workshops, visits</td><td>High</td><td>Medium — valuable for inspiration; requires implementation plan</td></tr>
+        <tr><td><strong>Online / Blended Learning</strong></td><td>Self-paced digital modules</td><td>Low-Medium</td><td>Variable — high when structured; low when isolated</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <!-- 5.4 DATA CULTURE -->
+    <h3 id="ch5-culture" class="sec-h">5.4 Building a Data-Informed School Culture</h3>
+    <p>A data-informed culture is one in which professional conversations are routinely grounded in evidence, but where data is understood as one input among several — alongside professional judgement, student voice, and contextual awareness. Data-informed is not data-obsessed.</p>
+
+    <h4 class="sub-h">Characteristics of a Data-Informed School</h4>
+    <ul class="chklist">
+      <li>Data conversations happen at every level — from classroom to governing body — regularly and without blame</li>
+      <li>All staff understand the key metrics used to evaluate school performance and their own contribution to them</li>
+      <li>Data is used to celebrate success and identify support needs — not to punish individuals</li>
+      <li>Student and parent voice data is collected, valued, and acted upon alongside academic data</li>
+      <li>Decisions about resource allocation and programme investment are justified with evidence</li>
+      <li>Teachers have time protected for data analysis, professional dialogue, and collaborative planning</li>
+      <li>Data privacy and ethical data use are embedded in school policy and staff induction</li>
+    </ul>
+
+    <div class="divider deco"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CHAPTER 6: DIGITAL TRANSFORMATION
+============================================================ -->
+<section id="chapter-6">
+  <div class="ch-band alt">
+    <div class="ch-eyebrow">Chapter Six</div>
+    <div class="ch-num">06</div>
+    <h2 class="ch-title">Digital Transformation in Education</h2>
+    <p class="ch-lead">Digital transformation is not about replacing teachers with technology. It is about empowering educators and school leaders with tools that extend what is humanly possible in the time we have with students.</p>
+  </div>
+
+  <div class="content">
+    <!-- 6.1 SAMR -->
+    <h3 id="ch6-samr" class="sec-h">6.1 The SAMR Framework for EdTech Integration</h3>
+    <p class="drop-cap">The SAMR Model (Substitution, Augmentation, Modification, Redefinition), developed by Dr. Ruben Puentedura, provides school leaders and teachers with a practical framework for evaluating whether a technology is merely replacing what existed before, or genuinely transforming what is possible for student learning. The most powerful technology integrations operate at the Modification and Redefinition levels.</p>
+
+    <div class="grid-1">
+      <div class="kpi-card">
+        <div class="samr-card">
+          <div class="samr-letter ol">S</div>
+          <div>
+            <div class="kpi-title">Substitution — Technology as Direct Replacement</div>
+            <p class="kpi-desc">Technology replaces a traditional tool with no functional change. <em>Example: Students type an essay in Word instead of writing it by hand.</em> No pedagogical transformation yet — but it is the accessible entry point for teachers new to EdTech integration.</p>
+          </div>
+        </div>
+      </div>
+      <div class="kpi-card coral">
+        <div class="samr-card">
+          <div class="samr-letter co">A</div>
+          <div>
+            <div class="kpi-title">Augmentation — Technology Adds Functional Improvement</div>
+            <p class="kpi-desc">The same task, but technology adds meaningful functionality. <em>Example: Using Google Docs for live collaborative peer review with real-time commenting, revision history, and teacher access.</em> Some genuine pedagogical benefit through enhanced feedback loops and transparency.</p>
+          </div>
+        </div>
+      </div>
+      <div class="kpi-card">
+        <div class="samr-card">
+          <div class="samr-letter ol">M</div>
+          <div>
+            <div class="kpi-title">Modification — Technology Allows Significant Task Redesign</div>
+            <p class="kpi-desc">The task itself is fundamentally redesigned in ways technology makes possible. <em>Example: Students create multimedia documentaries on historical events, collaborating in real time with peers in partner schools internationally.</em> Significant pedagogical transformation — new skills, new relationships, new audiences.</p>
+          </div>
+        </div>
+      </div>
+      <div class="kpi-card coral">
+        <div class="samr-card">
+          <div class="samr-letter co">R</div>
+          <div>
+            <div class="kpi-title">Redefinition — Technology Creates Previously Impossible Tasks</div>
+            <p class="kpi-desc">Learning experiences that were simply impossible without technology. <em>Example: Year 9 students design, programme, and test a solar-powered water filter, collaborating with an NGO in a water-scarce region, presenting findings to the UN Sustainable Development Goals committee via live video link.</em> Complete pedagogical transformation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6.2 DIGITAL TOOLS -->
+    <h3 id="ch6-tools" class="sec-h">6.2 Digital Collaboration Tools for Schools</h3>
+    <p>Beyond the LMS, the following collaboration platforms are transforming how educational teams plan, communicate, and work together — whether in the same building or across sites.</p>
+
+    <div class="grid-2">
+      <div class="tool-card">
+        <span class="tool-icon">💬</span>
+        <div class="tool-name">Microsoft Teams</div>
+        <div class="tool-cat">Communication &amp; Collaboration Hub</div>
+        <p class="tool-desc">Central hub for school-wide communication, department channels, video meetings, file sharing, and LMS integration. The Insights add-in for education provides student activity analytics across all Teams interactions. Natural choice for Microsoft 365 schools.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">🌐</span>
+        <div class="tool-name">Google Workspace for Education</div>
+        <div class="tool-cat">Productivity &amp; Collaboration Suite</div>
+        <p class="tool-desc">Gmail, Docs, Slides, Sheets, Meet, Classroom, and Drive in a single integrated suite. Real-time co-authoring of documents is transformative for collaborative planning. Shared drives make curriculum resources accessible institution-wide. Free for verified schools.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">🎨</span>
+        <div class="tool-name">Canva for Education</div>
+        <div class="tool-cat">Visual Design &amp; Presentations</div>
+        <p class="tool-desc">Free for verified teachers and students. Enables professional-quality visual content for lessons, presentations, posters, newsletters, and social media. Canva for Teams supports collaborative design projects with class-wide templates and brand management for school communications.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">📋</span>
+        <div class="tool-name">Padlet</div>
+        <div class="tool-cat">Digital Collaborative Board</div>
+        <p class="tool-desc">Virtual pinboard where students and teachers post text, images, links, and video. Excellent for brainstorming, collaborative research, gallery walks, structured debates, and student portfolio showcases. Highly engaging and requires no student accounts for basic use.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">🔗</span>
+        <div class="tool-name">Wakelet</div>
+        <div class="tool-cat">Content Curation &amp; Collections</div>
+        <p class="tool-desc">Curate and organise web content, videos, tweets, and documents into visual collections. Teachers use it for lesson resource libraries; students for research curation. Free, intuitive, and integrates with Microsoft and Google ecosystems seamlessly.</p>
+      </div>
+      <div class="tool-card">
+        <span class="tool-icon">🎥</span>
+        <div class="tool-name">Loom / Screencastify</div>
+        <div class="tool-cat">Video Messaging &amp; Screencasting</div>
+        <p class="tool-desc">Record short video messages, lesson explanations, and feedback to students instantly. Transformative for flipped learning, asynchronous parent communication, and providing verbal feedback on student work far more efficiently than written comments alone.</p>
+      </div>
+    </div>
+
+    <!-- 6.3 AI -->
+    <h3 id="ch6-ai" class="sec-h">6.3 Artificial Intelligence in Education Management</h3>
+    <p>AI is already transforming educational management — not by replacing teachers, but by radically reducing the administrative burden that consumes so much teaching and leadership time. The most important AI applications for school leaders in 2024–2025 are pragmatic, immediate, and deployable without specialist expertise.</p>
+
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>AI Application</th><th>Leading Tools</th><th>Educational Use Case</th><th>Time Saved</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Report Writing Assistance</strong></td><td>ChatGPT, Claude, Gemini</td><td>Drafting student report comments; improving language quality; generating structured templates; proofreading</td><td>High</td></tr>
+        <tr><td><strong>Personalised Learning Pathways</strong></td><td>Khan Academy (Khanmigo), DreamBox, Century Tech</td><td>Adaptive content that adjusts difficulty and focus based on individual student performance data in real time</td><td>Medium</td></tr>
+        <tr><td><strong>Predictive Analytics &amp; Early Warning</strong></td><td>Panorama Education, EduClimber, Brightspace</td><td>Early identification of at-risk students based on attendance, grade trends, and engagement patterns before problems escalate</td><td>High</td></tr>
+        <tr><td><strong>Automated Assessment Grading</strong></td><td>Gradescope, Turnitin, Quizizz</td><td>Faster, consistent marking of structured and short-answer assessments; academic integrity checking; detailed mistake analytics</td><td>High</td></tr>
+        <tr><td><strong>Timetabling &amp; Scheduling</strong></td><td>Untis, ASC Timetables, iMagic</td><td>Algorithmic generation of conflict-free timetables optimising room use, teacher workload, and curriculum requirements simultaneously</td><td>Very High</td></tr>
+        <tr><td><strong>Professional Communication Drafting</strong></td><td>AI writing tools</td><td>Generating newsletters, parent letters, policy documents, meeting agendas, and professional development plans at speed</td><td>Medium</td></tr>
+        <tr><td><strong>Lesson Planning Support</strong></td><td>MagicSchool AI, Curipod, Diffit</td><td>Generating lesson plan drafts, differentiated materials, assessment rubrics, and reading-level-adapted texts from a topic prompt</td><td>High</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="warn">
+      <div class="warn-title">⚠️ AI Ethics &amp; Safeguarding in Schools</div>
+      <p>When using AI tools in educational settings, school leaders must consider: <strong>Data Privacy</strong> — never input identifiable student data into unsecured AI tools; review the data processing agreements of any AI platform used with students. <strong>Transparency</strong> — be clear with students about when AI is used in assessment or feedback. <strong>Bias Awareness</strong> — AI systems can embed and amplify biases; review AI-generated feedback for fairness and cultural sensitivity. <strong>Academic Integrity</strong> — develop and communicate a clear AI use policy in line with your examination body's guidance. <strong>Professional Judgement</strong> — AI augments educator expertise; it must never substitute for it in high-stakes decisions about students.</p>
+    </div>
+
+    <h4 class="sub-h">Questions Every School Leader Should Ask Before Adopting an AI Tool</h4>
+    <ul class="chklist">
+      <li>Where is our students' data stored, and who has access to it?</li>
+      <li>Has this tool been independently evaluated for educational effectiveness?</li>
+      <li>What is the vendor's data retention and deletion policy?</li>
+      <li>Has the tool been reviewed for potential algorithmic bias?</li>
+      <li>How will we train staff to use this tool effectively and ethically?</li>
+      <li>What is our exit strategy if the vendor's pricing, terms, or quality changes?</li>
+      <li>How will we communicate AI use transparently to students, parents, and staff?</li>
+    </ul>
+
+    <div class="divider deco"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONCLUSION
+============================================================ -->
+<div class="conclusion">
+  <div class="conclusion-inner">
+    <div style="font-family:'DM Sans',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--olive-light);margin-bottom:18px;">Conclusion</div>
+    <h2>The Informed, Strategic Educator</h2>
+    <p>The tools, strategies, and frameworks in this handbook are not bureaucratic impositions on an already demanding profession — they are the professional infrastructure that enables great educators to do their best work at scale, with evidence, and with impact that is visible and communicable to every stakeholder who needs to understand it.</p>
+    <p>When teachers write reports with precision and humanity, when leaders track KPIs with genuine purpose, when data drives decisions without dehumanising the people behind the numbers, when projects are managed with clarity and adaptability — students win. Every improvement in professional practice at the teacher or leadership level translates, directly or indirectly, into improved learning for the young people in their care.</p>
+    <p>The most effective schools are not those with the latest technology or the most elaborate frameworks. They are those in which every adult is committed to continuous improvement — and has the professional confidence, skills, and tools to make that commitment real, every term, every year.</p>
+
+    <div class="author-card">
+      <h3>Rayene Medabis</h3>
+      <div class="author-title">Educational Author &amp; School Leadership Specialist</div>
+      <p>This handbook represents a synthesis of internationally recognised research, evidence-based frameworks, and practical experience in educational leadership. All intellectual property contained within this publication is the original work of Rayene Medabis. All rights reserved. No part of this publication may be reproduced, distributed, stored in a retrieval system, or transmitted in any form or by any means — electronic, mechanical, photocopying, recording, or otherwise — without the express prior written permission of the author.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     APPENDIX / GLOSSARY
+============================================================ -->
+<section id="appendix">
+  <div class="appendix">
+    <div class="appendix-inner">
+      <div class="ch-eyebrow" style="margin-bottom:12px;">Appendix</div>
+      <h2 class="ch-title" style="font-size:clamp(24px,3vw,36px);color:var(--olive-dark);margin-bottom:32px;">Glossary of Key Terms &amp; Quick Reference</h2>
+
+      <h3 class="sec-h" style="margin-top:0;">Glossary</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Action Research</strong></td><td>A cyclical reflective process in which educators systematically investigate their own practice to improve it, typically involving planning, implementation, observation, and reflection.</td></tr>
+          <tr><td><strong>Agile</strong></td><td>An iterative, flexible project management methodology emphasising collaboration, customer feedback, and delivering working results in short, defined cycles called sprints.</td></tr>
+          <tr><td><strong>Backlog</strong></td><td>In Agile project management, a prioritised list of all tasks, features, or work items not yet completed, from which the team selects items for each sprint.</td></tr>
+          <tr><td><strong>Baseline Data</strong></td><td>Initial measurement of a student's ability or attainment level at the start of an intervention or academic year, used as the reference point for measuring subsequent progress.</td></tr>
+          <tr><td><strong>CPD</strong></td><td>Continuing Professional Development — the ongoing learning activities through which educators maintain and extend their professional knowledge, skills, and practice.</td></tr>
+          <tr><td><strong>Data-Informed Decision Making</strong></td><td>An approach to school leadership and teaching in which decisions are grounded in systematic evidence while also incorporating professional judgement, context, and student voice.</td></tr>
+          <tr><td><strong>Differentiation</strong></td><td>The deliberate adaptation of instruction, resources, and assessment to meet the varied learning needs, interests, and readiness levels of students within a classroom.</td></tr>
+          <tr><td><strong>EdTech</strong></td><td>Educational Technology — digital tools, platforms, software, and hardware designed to support, enhance, or transform learning and school management.</td></tr>
+          <tr><td><strong>Effect Size</strong></td><td>A statistical measure of the magnitude of an educational intervention's impact on student learning. An effect size of 0.4 is considered the average; above 0.7 is considered high impact.</td></tr>
+          <tr><td><strong>Formative Assessment</strong></td><td>Assessment for learning — carried out during the learning process to monitor progress and provide ongoing, actionable feedback to both teachers and students.</td></tr>
+          <tr><td><strong>Gantt Chart</strong></td><td>A visual project management tool displaying tasks as horizontal bars across a timeline, showing start and end dates, duration, and dependencies between tasks.</td></tr>
+          <tr><td><strong>Growth Mindset</strong></td><td>The belief, pioneered by Dr Carol Dweck, that abilities and intelligence can be developed through dedication, effort, and feedback — as opposed to a fixed mindset that views intelligence as innate and static.</td></tr>
+          <tr><td><strong>Kanban</strong></td><td>A visual workflow management method organising tasks into columns (e.g., To Do / In Progress / Done) to provide real-time visibility of work status and flow.</td></tr>
+          <tr><td><strong>KPI</strong></td><td>Key Performance Indicator — a quantifiable metric used to evaluate the success of a person, programme, department, or institution in meeting defined objectives.</td></tr>
+          <tr><td><strong>LMS</strong></td><td>Learning Management System — a software platform used to create, manage, and deliver educational content, track student engagement and progress, and manage assessments.</td></tr>
+          <tr><td><strong>Metacognition</strong></td><td>Awareness and regulation of one's own thinking and learning processes — "thinking about thinking." High-impact educational strategy with an evidence-based effect size of approximately 0.6.</td></tr>
+          <tr><td><strong>MIS</strong></td><td>Management Information System — a school's database system for storing and managing student records, attendance, assessment data, reporting, and operational information.</td></tr>
+          <tr><td><strong>PLCs</strong></td><td>Professional Learning Communities — collaborative groups of educators who regularly engage in joint professional enquiry, curriculum planning, and peer learning to improve student outcomes together.</td></tr>
+          <tr><td><strong>RACI Matrix</strong></td><td>A project management tool clarifying roles for each task: Responsible (does the work), Accountable (owns the outcome), Consulted (provides input), Informed (kept updated).</td></tr>
+          <tr><td><strong>RAG Status</strong></td><td>Red-Amber-Green colour-coding used in dashboards and monitoring reports to signal the status of a KPI or project: Green = on or above target; Amber = at risk; Red = significantly off track.</td></tr>
+          <tr><td><strong>SAMR Model</strong></td><td>A four-level framework (Substitution, Augmentation, Modification, Redefinition) for evaluating the depth of technology integration and its pedagogical transformation potential.</td></tr>
+          <tr><td><strong>Scope Creep</strong></td><td>The gradual expansion of a project beyond its original, agreed parameters — typically caused by uncontrolled additions of features or tasks without corresponding adjustments to timeline and budget.</td></tr>
+          <tr><td><strong>SIP</strong></td><td>School Improvement Plan — a strategic document outlining a school's self-evaluation, improvement priorities, SMART goals, action plans, and monitoring framework for a planning cycle.</td></tr>
+          <tr><td><strong>SMART Goals</strong></td><td>Goals designed to be Specific, Measurable, Achievable, Relevant, and Time-bound — ensuring that every goal has clear parameters for planning and evaluation.</td></tr>
+          <tr><td><strong>Sprint</strong></td><td>In Agile project management, a fixed-length period (typically 1–4 weeks) during which the team commits to completing a defined and prioritised set of tasks.</td></tr>
+          <tr><td><strong>Stakeholder</strong></td><td>Any individual or group with an interest in or affected by a school's activities — including students, parents, teachers, governors, education authorities, and the wider community.</td></tr>
+          <tr><td><strong>Summative Assessment</strong></td><td>Assessment of learning — conducted at the end of an instructional period to evaluate, record, and report what students have learned against defined standards or learning objectives.</td></tr>
+          <tr><td><strong>Value-Added (VA)</strong></td><td>A measure of student progress that accounts for prior attainment — comparing a student's actual progress to the progress expected based on their starting point, revealing the school's true contribution to learning.</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3 class="sec-h">Quick Reference: KPI Target Benchmarks</h3>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>KPI Category</th><th>Metric</th><th>Recommended Minimum Target</th></tr></thead>
+        <tbody>
+          <tr><td>Student</td><td>Academic attainment at expected level</td><td>≥ 80%</td></tr>
+          <tr><td>Student</td><td>Daily attendance rate</td><td>≥ 95%</td></tr>
+          <tr><td>Student</td><td>Homework completion rate</td><td>≥ 85%</td></tr>
+          <tr><td>Student</td><td>Reading age progress (per year)</td><td>≥ 12 months gain</td></tr>
+          <tr><td>Student</td><td>Exam pass rate</td><td>≥ 90%</td></tr>
+          <tr><td>Teacher</td><td>Lessons rated Good or Outstanding</td><td>≥ 85%</td></tr>
+          <tr><td>Teacher</td><td>Annual CPD hours completed</td><td>≥ 30 hours</td></tr>
+          <tr><td>Teacher</td><td>Marking within policy timeframe</td><td>≥ 90%</td></tr>
+          <tr><td>Institutional</td><td>Staff retention rate</td><td>≥ 90%</td></tr>
+          <tr><td>Institutional</td><td>Parent satisfaction score</td><td>≥ 80% positive</td></tr>
+          <tr><td>Institutional</td><td>SIP targets on track or achieved</td><td>≥ 75%</td></tr>
+          <tr><td>Institutional</td><td>Budget variance</td><td>Within ±5%</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     COPYRIGHT BAR
+============================================================ -->
+<div class="copyright">
+  <span>© 2025 Rayene Medabis · The Educator's Professional Handbook · All rights reserved</span>
+  <span>For educational reference only · No part of this work may be reproduced without written permission</span>
+</div>
+
+</main>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+  // Reading progress bar
+  window.addEventListener('scroll', () => {
+    const el = document.documentElement;
+    const scrolled = el.scrollTop || document.body.scrollTop;
+    const total = (el.scrollHeight || document.body.scrollHeight) - el.clientHeight;
+    document.getElementById('progress-bar').style.width = ((scrolled / total) * 100) + '%';
+  });
+
+  // Scroll-spy: active nav link
+  const allSections = document.querySelectorAll('section[id], div.conclusion, div.appendix');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + id) link.classList.add('active');
+        });
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '-8% 0px -78% 0px' });
+
+  document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+
+  // Smooth scroll on nav click
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
