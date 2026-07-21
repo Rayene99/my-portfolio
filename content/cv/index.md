@@ -169,15 +169,14 @@ skills:
       - Critical Thinking & Problem Solving
   - category: E-Learning/LMS Platforms
     items:
-      - Zoom
+      - Google Workspace
       - MS Office
-      - Canva
-      - Wayground
       - Canvas
+      - Moodle
   - category: Planning & Designing
     items:
       - Articulate 360
-      - Google Workspace
+      - Adobe Captivate
   - category: AI Literacy
     items:
       - Gemini
@@ -200,9 +199,6 @@ certifications:
   - name: Gemini Certified Educator
     issuer: Google
     year: "2026"
-  - name: EF SET English Certificate C1 Advanced
-    issuer: EF SET
-    year: "2025"
   - name: ICT Skills
     issuer: Specto
     year: "2020"
