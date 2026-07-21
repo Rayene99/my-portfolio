@@ -1,3 +1,4 @@
+---
 company: "Self-Employed (Freelance)"
 role: "Educational Consultant"
 location: "Remote"
