@@ -1,5 +1,6 @@
 ---
 title: The Online English Teacher's Handbook
+author: Rayene Medabis
 cover: /images/zz.png
 html_file: /images/online_english_teachers_handbook.html
 tags:
