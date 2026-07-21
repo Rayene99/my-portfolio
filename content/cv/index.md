@@ -193,18 +193,15 @@ certifications:
   - name: Google Certified Educator Level 2
     issuer: Google
     year: "2026"
+    image: /images/whatsapp-image-2026-07-21-at-2.51.54-pm.jpeg
   - name: Google Certified Educator Level 1
     issuer: Google
     year: "2026"
+    image: /images/level-one-2026-07-21-at-2.51.54-pm.jpeg
   - name: Gemini Certified Educator
     issuer: Google
     year: "2026"
-  - name: ICT Skills
-    issuer: Specto
-    year: "2020"
-  - name: Home Education Diploma
-    issuer: Centre of Excellence
-    year: "2020"
+    image: /images/gemini-2026-07-21-at-2.52.03-pm.jpeg
 recommendations:
   - name: Ramzi Zouaghi
     title: English Teacher & Teacher Trainer
