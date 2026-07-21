@@ -1,5 +1,6 @@
 ---
 title: Teaching Online, Done Right
+author: Rayene Medabis
 cover: /images/kkk.png
 html_file: /images/online_teaching_guide.html
 tags:
@@ -34,21 +35,21 @@ problem: "Most teacher training treats \"teaching online\" as a single skill,
   solves that by giving age-specific, actionable tactics instead of
   one-size-fits-all teaching theory."
 takeaways:
-  - "How to structure a session for each age group (warm-up → practice → wrap
-    for kids; hook → exploration → reflection for teens)"
+  - How to structure a session for each age group (warm-up → practice → wrap for
+    kids; hook → exploration → reflection for teens)
   - Concrete techniques to sustain attention and energy in a virtual setting
-  - "How to read and de-escalate specific behavior types (the Class Clown, the
+  - How to read and de-escalate specific behavior types (the Class Clown, the
     Refuser, the Passive Resister, the Challenger, etc.) without public
-    confrontation"
-  - "Age-appropriate error-correction techniques (recast, elicitation, delayed
-    correction, peer correction, private written feedback) that correct
-    without embarrassing the learner"
-  - "How to support diverse learners within one group (slow processors, fast
-    finishers, silent students, anxious high-achievers, dominant talkers)"
-  - "Realistic expectations for online teaching (cameras off, mood swings,
+    confrontation
+  - Age-appropriate error-correction techniques (recast, elicitation, delayed
+    correction, peer correction, private written feedback) that correct without
+    embarrassing the learner
+  - How to support diverse learners within one group (slow processors, fast
+    finishers, silent students, anxious high-achievers, dominant talkers)
+  - Realistic expectations for online teaching (cameras off, mood swings,
     forgotten material, phone competition) so teachers don't misread normal
-    behavior as failure"
-  - "Commonly overlooked practices that significantly improve outcomes
+    behavior as failure
+  - Commonly overlooked practices that significantly improve outcomes
     (transition time, checking real comprehension, teacher energy contagion,
-    honesty building trust)"
+    honesty building trust)
 ---
