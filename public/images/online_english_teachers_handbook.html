@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Online English Teacher's Handbook | Rayene Medabis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1B3A6B;
+  --navy-dark: #0F2347;
+  --navy-light: #2E5299;
+  --orange: #F4965A;
+  --orange-light: #FDDDCA;
+  --orange-pale: #FFF6F0;
+  --white: #FFFFFF;
+  --off-white: #F7F9FD;
+  --text: #1A2340;
+  --text-muted: #5A6A8A;
+  --border: #E2E8F4;
+  --sidebar-width: 270px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--off-white); display: flex; min-height: 100vh; }
+
+/* PROGRESS BAR */
+#progress-bar { position: fixed; top: 0; left: var(--sidebar-width); right: 0; height: 3px; background: var(--orange); transform-origin: left; transform: scaleX(0); z-index: 1000; transition: transform 0.1s linear; }
+
+/* SIDEBAR */
+#sidebar { width: var(--sidebar-width); background: var(--navy-dark); position: fixed; top: 0; left: 0; height: 100vh; overflow-y: auto; z-index: 100; display: flex; flex-direction: column; }
+.sidebar-header { padding: 28px 20px 22px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.sidebar-logo { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--orange); margin-bottom: 6px; }
+.sidebar-title { font-size: 14px; font-weight: 600; color: white; line-height: 1.4; }
+.sidebar-author { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 4px; font-style: italic; }
+.sidebar-nav { padding: 16px 0 32px; flex: 1; }
+.nav-part { padding: 16px 20px 5px; font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--orange); opacity: 0.85; }
+.nav-link { display: flex; align-items: center; padding: 7px 20px 7px 26px; color: rgba(255,255,255,0.6); text-decoration: none; font-size: 12px; font-weight: 400; transition: all 0.18s; border-left: 2px solid transparent; line-height: 1.4; }
+.nav-link:hover { color: white; background: rgba(255,255,255,0.05); border-left-color: rgba(244,150,90,0.45); }
+.nav-link.active { color: white; background: rgba(244,150,90,0.1); border-left-color: var(--orange); font-weight: 600; }
+
+/* MAIN */
+#main { margin-left: var(--sidebar-width); flex: 1; min-height: 100vh; }
+
+/* HERO */
+.hero { background: var(--navy); padding: 80px 64px 68px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -120px; right: -80px; width: 420px; height: 420px; background: radial-gradient(circle, rgba(244,150,90,0.13) 0%, transparent 68%); pointer-events: none; }
+.hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--orange) 0%, rgba(244,150,90,0.25) 100%); }
+.hero-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--orange); margin-bottom: 18px; }
+.hero-title { font-family: 'Playfair Display', serif; font-size: 54px; font-weight: 900; color: white; line-height: 1.08; max-width: 680px; margin-bottom: 22px; }
+.hero-title span { color: var(--orange); }
+.hero-subtitle { font-size: 16px; color: rgba(255,255,255,0.68); max-width: 560px; line-height: 1.75; margin-bottom: 38px; }
+.hero-meta { display: flex; gap: 36px; flex-wrap: wrap; }
+.hero-meta-item { display: flex; flex-direction: column; }
+.hero-meta-label { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 3px; }
+.hero-meta-value { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); }
+
+/* CONTENT WRAPPER */
+.content-wrapper { max-width: 840px; padding: 0 64px 80px; margin: 0 auto; }
+
+/* SECTIONS */
+.section { padding-top: 60px; }
+.section-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 10px; }
+.section-title { font-family: 'Playfair Display', serif; font-size: 33px; font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 14px; }
+.section-intro { font-size: 15.5px; line-height: 1.82; color: var(--text-muted); margin-bottom: 34px; max-width: 680px; }
+.section-divider { height: 1px; background: var(--border); margin: 56px 0; }
+
+/* SUBSECTION */
+.subsection { margin-bottom: 44px; }
+.subsection-title { font-size: 19px; font-weight: 700; color: var(--navy); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.subsection-title::before { content: ''; display: inline-block; width: 18px; height: 3px; background: var(--orange); border-radius: 2px; flex-shrink: 0; }
+.subsection-text { font-size: 14.5px; line-height: 1.82; color: var(--text); }
+.subsection-text p { margin-bottom: 11px; }
+.subsection-text p:last-child { margin-bottom: 0; }
+
+/* TECHNIQUE CARDS */
+.technique-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 18px; margin: 26px 0; }
+.technique-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(27,58,107,0.07); border: 1px solid var(--border); border-left: 4px solid var(--orange); transition: transform 0.18s, box-shadow 0.18s; }
+.technique-card:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(27,58,107,0.12); }
+.technique-card-header { background: var(--navy); padding: 13px 18px; }
+.technique-card-title { font-size: 12.5px; font-weight: 700; color: white; letter-spacing: 0.02em; }
+.technique-card-body { padding: 15px 18px; }
+.technique-card-body p { font-size: 13.5px; line-height: 1.72; color: var(--text); margin-bottom: 9px; }
+.technique-card-body p:last-child { margin-bottom: 0; }
+.technique-tag { display: inline-block; background: var(--orange-pale); color: var(--orange); font-size: 9.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; margin-bottom: 8px; }
+
+/* CALLOUT */
+.callout { background: var(--orange-pale); border-left: 4px solid var(--orange); border-radius: 0 8px 8px 0; padding: 17px 22px; margin: 22px 0; }
+.callout-label { font-size: 9.5px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--orange); margin-bottom: 6px; }
+.callout p { font-size: 14px; line-height: 1.72; color: var(--text); }
+
+/* INFO BOX */
+.info-box { background: var(--navy); border-radius: 10px; padding: 24px 28px; margin: 22px 0; }
+.info-box-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--orange); margin-bottom: 11px; }
+.info-box p { font-size: 14px; line-height: 1.76; color: rgba(255,255,255,0.78); margin-bottom: 8px; }
+.info-box p:last-child { margin-bottom: 0; }
+
+/* TOOL CHIPS */
+.tool-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+.tool-chip { display: inline-flex; align-items: center; gap: 6px; background: white; border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: var(--navy); box-shadow: 0 1px 4px rgba(27,58,107,0.06); }
+.tool-chip .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
+
+/* STYLED LIST */
+.styled-list { list-style: none; padding: 0; margin: 14px 0; }
+.styled-list li { font-size: 14px; line-height: 1.7; color: var(--text); padding: 8px 0 8px 20px; border-bottom: 1px solid var(--border); position: relative; }
+.styled-list li:last-child { border-bottom: none; }
+.styled-list li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; background: var(--orange); }
+
+/* TWO COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 18px 0; }
+.col-card { background: white; border-radius: 8px; padding: 20px; border: 1px solid var(--border); }
+.col-card-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 2px solid var(--orange-light); }
+.col-card p, .col-card li { font-size: 13px; line-height: 1.72; color: var(--text); }
+.col-card ul { padding-left: 16px; }
+.col-card ul li { margin-bottom: 5px; }
+
+/* PULLQUOTE */
+.pullquote { padding: 28px 40px; margin: 30px 0; position: relative; background: white; border-radius: 10px; box-shadow: 0 2px 14px rgba(27,58,107,0.07); }
+.pullquote::before { content: '\201C'; font-family: 'Playfair Display', serif; font-size: 90px; color: var(--orange-light); position: absolute; top: -14px; left: 14px; line-height: 1; }
+.pullquote p { font-family: 'Playfair Display', serif; font-size: 18px; font-style: italic; color: var(--navy); line-height: 1.62; position: relative; z-index: 1; }
+.pullquote cite { display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 12px; font-style: normal; }
+
+/* PROCESS STEPS */
+.process-steps { margin: 22px 0; }
+.process-step { display: flex; gap: 18px; margin-bottom: 22px; }
+.step-number { width: 34px; height: 34px; background: var(--navy); color: white; font-weight: 700; font-size: 13px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.step-content h4 { font-size: 14.5px; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
+.step-content p { font-size: 13.5px; line-height: 1.75; color: var(--text); }
+
+/* PART HEADER */
+.part-header { background: var(--navy); margin: 60px -64px 0; padding: 38px 64px; position: relative; overflow: hidden; }
+.part-header::before { content: ''; position: absolute; top: 0; right: 0; width: 220px; height: 100%; background: linear-gradient(90deg, transparent, rgba(244,150,90,0.07)); }
+.part-header .part-number { font-size: 9.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; }
+.part-header h2 { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; color: white; margin-bottom: 10px; }
+.part-header p { font-size: 14.5px; color: rgba(255,255,255,0.58); max-width: 560px; line-height: 1.65; }
+
+/* TABLE */
+.handbook-table { width: 100%; border-collapse: collapse; margin: 18px 0; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(27,58,107,0.06); }
+.handbook-table th { background: var(--navy); color: white; text-align: left; padding: 11px 15px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.05em; }
+.handbook-table td { padding: 10px 15px; font-size: 13px; color: var(--text); border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.6; }
+.handbook-table tr:last-child td { border-bottom: none; }
+.handbook-table tr:nth-child(even) td { background: var(--off-white); }
+
+/* MOBILE TOGGLE */
+.mobile-nav-toggle { display: none; position: fixed; top: 14px; left: 14px; z-index: 200; background: var(--navy); color: white; border: none; border-radius: 6px; padding: 8px 12px; cursor: pointer; font-size: 17px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+
+/* FOOTER */
+.handbook-footer { background: var(--navy-dark); padding: 40px 64px; margin: 60px -64px -80px; }
+.footer-title { font-family: 'Playfair Display', serif; font-size: 19px; color: white; margin-bottom: 8px; }
+.footer-meta { font-size: 12.5px; color: rgba(255,255,255,0.42); line-height: 1.75; }
+
+/* SIDEBAR SCROLLBAR */
+#sidebar::-webkit-scrollbar { width: 3px; }
+#sidebar::-webkit-scrollbar-track { background: transparent; }
+#sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 2px; }
+
+/* RESPONSIVE */
+@media (max-width: 920px) {
+  #sidebar { transform: translateX(-270px); width: 270px; transition: transform 0.28s ease; }
+  #sidebar.open { transform: translateX(0); }
+  #main { margin-left: 0; }
+  #progress-bar { left: 0; }
+  .mobile-nav-toggle { display: block; }
+  .hero { padding: 64px 24px 52px; }
+  .hero-title { font-size: 36px; }
+  .content-wrapper { padding: 0 24px 60px; }
+  .technique-grid { grid-template-columns: 1fr; }
+  .two-col { grid-template-columns: 1fr; }
+  .part-header { margin: 60px -24px 0; padding: 32px 24px; }
+  .handbook-footer { padding: 32px 24px; margin: 60px -24px -60px; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<button class="mobile-nav-toggle" onclick="toggleSidebar()">☰</button>
+
+<!-- ===== SIDEBAR ===== -->
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">Practitioner's Handbook</div>
+    <div class="sidebar-title">Online English Teaching</div>
+    <div class="sidebar-author">by Rayene Medabis, M.Ed.</div>
+  </div>
+  <div class="sidebar-nav">
+    <a href="#intro" class="nav-link">Introduction</a>
+
+    <div class="nav-part">Part I — Foundations</div>
+    <a href="#mindset" class="nav-link">The Online Teaching Mindset</a>
+    <a href="#learners" class="nav-link">Understanding Digital Learners</a>
+    <a href="#setup" class="nav-link">Your Virtual Classroom</a>
+
+    <div class="nav-part">Part II — Methodologies</div>
+    <a href="#clt" class="nav-link">CLT Online</a>
+    <a href="#tblt" class="nav-link">Task-Based Language Teaching</a>
+    <a href="#flipped" class="nav-link">The Flipped Classroom</a>
+    <a href="#blended" class="nav-link">Blended Learning</a>
+    <a href="#pbl" class="nav-link">Project-Based Learning</a>
+    <a href="#clil" class="nav-link">CLIL Online</a>
+
+    <div class="nav-part">Part III — Engagement</div>
+    <a href="#sync" class="nav-link">Synchronous Strategies</a>
+    <a href="#async" class="nav-link">Asynchronous Strategies</a>
+    <a href="#tools" class="nav-link">Digital Tools Deep Dive</a>
+
+    <div class="nav-part">Part IV — Levels & Ages</div>
+    <a href="#young" class="nav-link">Young Learners</a>
+    <a href="#teens" class="nav-link">Teenagers</a>
+    <a href="#adults" class="nav-link">Adult Learners</a>
+    <a href="#advanced" class="nav-link">Advanced Learners</a>
+
+    <div class="nav-part">Part V — Assessment</div>
+    <a href="#formative" class="nav-link">Formative Assessment</a>
+    <a href="#summative" class="nav-link">Summative Assessment</a>
+    <a href="#error" class="nav-link">Error Correction</a>
+    <a href="#feedback" class="nav-link">Feedback Strategies</a>
+
+    <div class="nav-part">Part VI — Differentiation</div>
+    <a href="#differentiation" class="nav-link">Meeting Diverse Needs</a>
+    <a href="#scaffolding" class="nav-link">Scaffolding Online</a>
+
+    <div class="nav-part">Part VII — Management</div>
+    <a href="#norms" class="nav-link">Virtual Norms & Culture</a>
+    <a href="#participation" class="nav-link">Managing Participation</a>
+    <a href="#techfail" class="nav-link">Handling Tech Failures</a>
+
+    <div class="nav-part">Part VIII — Wellbeing</div>
+    <a href="#burnout" class="nav-link">Avoiding Burnout</a>
+    <a href="#sustainability" class="nav-link">Sustainable Practice</a>
+    <a href="#cpd" class="nav-link">Professional Development</a>
+
+    <div class="nav-part">Closing</div>
+    <a href="#resources" class="nav-link">Resources & References</a>
+  </div>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main id="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">A Practitioner's Guide to Modern Online ELT</div>
+    <h1 class="hero-title">The Online English<br>Teacher's <span>Handbook</span></h1>
+    <p class="hero-subtitle">A comprehensive, research-informed guide to mastering the art and craft of teaching English in virtual environments — for every level, every age, and every context.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Author</span>
+        <span class="hero-meta-value">Rayene Medabis, M.Ed., TESOL</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Edition</span>
+        <span class="hero-meta-value">2025 — Current</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Focus</span>
+        <span class="hero-meta-value">EFL / ESL Online Instruction</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Role</span>
+        <span class="hero-meta-value">Teacher Trainer & Curriculum Designer</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+
+    <!-- ===== INTRO ===== -->
+    <div class="section" id="intro">
+      <div class="section-eyebrow">Introduction</div>
+      <h2 class="section-title">Welcome to the Handbook</h2>
+      <p class="section-intro">Online teaching is not simply teaching with a camera on. It is a distinct pedagogical practice that demands new skills, a redesigned relationship between teacher, learner, and content — and a willingness to rethink what a classroom can be.</p>
+      <div class="subsection-text">
+        <p>Whether you are transitioning from a physical classroom, already established as an online teacher, or training others to teach in virtual environments, this handbook provides concrete, evidence-informed guidance across every dimension of online English language teaching.</p>
+        <p>Each section is designed to be read independently, so you can navigate directly to what you need. If you are new to online teaching, I recommend reading Part I in full before exploring methodology or strategy.</p>
+      </div>
+      <div class="callout">
+        <div class="callout-label">How to Use This Handbook</div>
+        <p>Use the sidebar to navigate between sections. Technique cards highlight specific, actionable strategies. Callout boxes signal key principles. Tool chips identify specific digital tools. This handbook is a living professional reference — return to it often as your practice evolves.</p>
+      </div>
+      <div class="info-box">
+        <div class="info-box-title">A Note on Pedagogical Stance</div>
+        <p>This handbook takes a learner-centred, communicative stance on language teaching. Every methodology and strategy presented here is grounded in applied linguistics, instructional design, and educational technology research. Where theory and practice diverge, practice wins — this guide leans hard toward what actually works in real online classrooms.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- ===== PART I ===== -->
+    <div class="part-header">
+      <div class="part-number">Part I</div>
+      <h2>Foundations of Online English Teaching</h2>
+      <p>Before methodologies and tools, there is mindset. Understanding the landscape of online teaching — its constraints, its freedoms, and its learners — is what separates effective online teachers from those who simply broadcast lessons through a screen.</p>
+    </div>
+
+    <!-- MINDSET -->
+    <div class="section" id="mindset">
+      <div class="section-eyebrow">Part I · Chapter 1</div>
+      <h2 class="section-title">The Online Teaching Mindset</h2>
+      <p class="section-intro">Effective online teaching begins long before the lesson starts. It begins with how you conceptualise your role, your relationship to technology, and your understanding of what learning looks like through a screen.</p>
+
+      <div class="subsection">
+        <h3 class="subsection-title">From Deliverer to Designer</h3>
+        <div class="subsection-text">
+          <p>In a physical classroom, a skilled teacher can improvise, read the room, redirect energy, and use proximity to manage behaviour and motivation. Online, that spontaneity narrows. What expands, however, is intentionality. The online teacher must design experiences with far more precision — because the environment offers fewer organic moments of connection.</p>
+          <p>Shift your self-concept from deliverer of content to designer of learning experiences. Every moment of a virtual lesson should be purposefully structured so that students are actively doing something: speaking, writing, reading, thinking, deciding, or creating.</p>
+        </div>
+      </div>
+
+      <div class="technique-grid">
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Presence Over Performance</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Core Principle</span>
+            <p>Online learners disengage when they sense the teacher is going through the motions. Genuine presence — looking into the camera, responding to what students actually say, showing curiosity and warmth — is more powerful than polished slides or elaborate activities.</p>
+            <p>Practice social presence: address students by name, acknowledge responses generously, and let your personality come through the screen.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Embrace Asynchronous Thinking</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Mindset Shift</span>
+            <p>Many teachers default to thinking of online teaching as live lessons. But some of the most effective online learning happens outside the live session — in threaded discussions, video responses, collaborative documents, and self-paced tasks.</p>
+            <p>Consider what belongs live (interaction, debate, feedback, community) versus what can happen asynchronously (input, reading, vocabulary, writing drafts).</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Digital Literacy as Professional Skill</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Teacher Development</span>
+            <p>You do not need to master every tool. You need to confidently use a small core toolkit, know where to find new tools when a specific need arises, and evaluate new technologies critically before adopting them.</p>
+            <p>Digital literacy is not about being a tech expert. It is about purposeful, confident, and critical use of technology in service of learning.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">The Five C Framework</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Framework</span>
+            <p>Effective online teachers consistently demonstrate five qualities: <strong>Clarity</strong> (clear objectives, clear instructions), <strong>Connection</strong> (building relationships through the screen), <strong>Consistency</strong> (predictable routines learners rely on), <strong>Creativity</strong> (varied, engaging lesson design), and <strong>Care</strong> (genuine investment in learner progress).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pullquote">
+        <p>Teaching online is not a downgrade from the physical classroom. It is a different — and in many ways more demanding — form of teaching that rewards intentionality above all else.</p>
+        <cite>— Rayene Medabis, M.Ed., TESOL</cite>
+      </div>
+    </div>
+
+    <!-- DIGITAL LEARNERS -->
+    <div class="section" id="learners">
+      <div class="section-eyebrow">Part I · Chapter 2</div>
+      <h2 class="section-title">Understanding Your Digital Learners</h2>
+      <p class="section-intro">Every learner who joins your virtual classroom brings a different relationship with technology, a different home environment, different motivations, and a different tolerance for the frustrations of online learning. Understanding this diversity is the first step toward meeting it.</p>
+
+      <div class="two-col">
+        <div class="col-card">
+          <div class="col-card-title">What Online Learners Struggle With</div>
+          <ul>
+            <li>Maintaining focus without physical classroom cues</li>
+            <li>Feeling isolated or disconnected from peers</li>
+            <li>Managing their own time in self-paced elements</li>
+            <li>Technical anxiety and troubleshooting</li>
+            <li>Balancing online learning with home life demands</li>
+            <li>Speaking up in virtual spaces, especially cameras off</li>
+            <li>Processing complex instructions without body language</li>
+          </ul>
+        </div>
+        <div class="col-card">
+          <div class="col-card-title">What Online Learners Gain</div>
+          <ul>
+            <li>Greater autonomy and self-direction</li>
+            <li>Access to authentic digital content and English media</li>
+            <li>Flexibility around their schedule and personal pace</li>
+            <li>Reduced anxiety from smaller digital interaction spaces</li>
+            <li>A permanent record of shared work and written feedback</li>
+            <li>Access to global English-speaking communities online</li>
+            <li>Development of real digital communication skills</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Motivation in the Online Context</h3>
+        <div class="subsection-text">
+          <p>Motivation behaves differently online. Without the social energy of a physical classroom and without the accountability of showing up somewhere in person, learners require more intentional motivational scaffolding from their teacher.</p>
+          <p>Apply self-determination theory: support learners' sense of <strong>autonomy</strong> (give choices), <strong>competence</strong> (build in visible wins), and <strong>relatedness</strong> (cultivate genuine community). These three drivers, deliberately addressed in lesson design, produce significantly more motivated online learners.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Key Insight</div>
+        <p>The most common reason students disengage from online English classes is not the difficulty of the content — it is the feeling of invisibility. Design every lesson so that no learner can disappear into the background. Name them, prompt them, include them.</p>
+      </div>
+    </div>
+
+    <!-- SETUP -->
+    <div class="section" id="setup">
+      <div class="section-eyebrow">Part I · Chapter 3</div>
+      <h2 class="section-title">Setting Up Your Virtual Classroom</h2>
+      <p class="section-intro">Your virtual classroom is a combination of the platform you teach on, the tools that extend its functionality, and the physical environment you teach from. All three shape the learning experience your students receive.</p>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Platform Overview</h3>
+        <table class="handbook-table">
+          <thead>
+            <tr><th>Platform</th><th>Best For</th><th>Standout Feature</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Zoom</strong></td><td>Live instruction, interactive sessions</td><td>Breakout rooms, annotation, robust screen share</td></tr>
+            <tr><td><strong>Google Meet</strong></td><td>Google Workspace schools</td><td>Seamless Drive and Docs integration</td></tr>
+            <tr><td><strong>Microsoft Teams</strong></td><td>Corporate English, institutional settings</td><td>Channel-based organisation and file sharing</td></tr>
+            <tr><td><strong>Google Classroom</strong></td><td>Async task delivery and assignment tracking</td><td>Simple, clear assignment management</td></tr>
+            <tr><td><strong>Moodle / Canvas</strong></td><td>Full LMS for curriculum-scale delivery</td><td>Structured course pathways and analytics</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Your Physical Setup Matters</h3>
+        <div class="technique-grid">
+          <div class="technique-card">
+            <div class="technique-card-header"><div class="technique-card-title">Camera & Framing</div></div>
+            <div class="technique-card-body">
+              <p>Position your camera at eye level — not looking up (impersonal) or looking down (creates power imbalance). Frame yourself so your face and upper chest are visible. Look into the camera lens, not at yourself on screen, to create genuine eye contact with students.</p>
+            </div>
+          </div>
+          <div class="technique-card">
+            <div class="technique-card-header"><div class="technique-card-title">Lighting</div></div>
+            <div class="technique-card-body">
+              <p>Light from the front — natural window light or a ring light facing you. Avoid strong backlight (a window behind you creates a silhouette). Good lighting signals professionalism and makes your facial expressions readable, which learners rely on for teaching cues.</p>
+            </div>
+          </div>
+          <div class="technique-card">
+            <div class="technique-card-header"><div class="technique-card-title">Audio</div></div>
+            <div class="technique-card-body">
+              <p>Poor audio is the single biggest barrier to learning in virtual classrooms. Use a dedicated microphone or quality headset. Minimise background noise. Test audio before every session. Learners can compensate for imperfect video — they cannot compensate for unclear speech.</p>
+            </div>
+          </div>
+          <div class="technique-card">
+            <div class="technique-card-header"><div class="technique-card-title">Background & Space</div></div>
+            <div class="technique-card-body">
+              <p>A clean, uncluttered background keeps learner attention on you. If using a virtual background, ensure your camera supports it cleanly. Small personal touches — a plant, a bookshelf — humanise the space and give students something to connect with you over.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- ===== PART II ===== -->
+    <div class="part-header">
+      <div class="part-number">Part II</div>
+      <h2>Core Methodologies for Online ELT</h2>
+      <p>The approaches that underpin effective English language teaching all translate to online contexts — but each requires thoughtful adaptation. This section walks through the major methodologies and their practical application in virtual classrooms.</p>
+    </div>
+
+    <!-- CLT -->
+    <div class="section" id="clt">
+      <div class="section-eyebrow">Part II · Chapter 4</div>
+      <h2 class="section-title">Communicative Language Teaching Online</h2>
+      <p class="section-intro">Communicative Language Teaching (CLT) remains the most widely endorsed approach to English language instruction — and it is entirely achievable in virtual environments. The shift requires rethinking what "communication" looks like on screen.</p>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Principles of CLT in Virtual Spaces</h3>
+        <div class="subsection-text">
+          <p>CLT is built on the belief that language is learned through use — through authentic, purposeful communication rather than form-focused drills. Online, this means creating conditions for students to actually communicate: negotiate meaning, express opinions, solve problems, and interact with peers and real-world content in English.</p>
+        </div>
+      </div>
+
+      <div class="technique-grid">
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Digital Role Plays</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">CLT Strategy</span>
+            <p>Assign roles via breakout rooms or private chat. Students take on personas (customer/agent, journalist/interviewee, doctor/patient) and communicate through audio or video. Digital role plays often reduce anxiety for reticent speakers who feel protected by the screen distance.</p>
+            <p><strong>Tools:</strong> Zoom breakout rooms, Google Docs for written scenario cards</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Information Gap Activities</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">CLT Strategy</span>
+            <p>Send different information to each student via private chat or separate shared documents. Students must communicate to complete the picture. This creates genuine communicative need — the engine of CLT — which is easy to engineer in a digital environment.</p>
+            <p><strong>Tools:</strong> Google Docs, Zoom private chat, LMS for pre-session distribution</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Authentic Text Discussion</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">CLT Strategy</span>
+            <p>Use real online content — news articles, social media posts, video clips, podcasts — as discussion springboards. Authentic materials bring real language and cultural context into the virtual classroom, and are just a browser tab away when you teach online.</p>
+            <p><strong>Tools:</strong> Screen share, Padlet for response collection, embedded video</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Structured Speaking Tasks</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">CLT Strategy</span>
+            <p>Use timed formats: spot-the-difference (share two similar images), picture descriptions, mini debates, opinion roundtables, or "hot seat" question activities. Clear structure and time limits reduce paralysis while the communicative goal drives student output.</p>
+            <p><strong>Tools:</strong> Jamboard, Canva for visuals, Zoom countdown timer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TBLT -->
+    <div class="section" id="tblt">
+      <div class="section-eyebrow">Part II · Chapter 5</div>
+      <h2 class="section-title">Task-Based Language Teaching</h2>
+      <p class="section-intro">Task-Based Language Teaching (TBLT) organises instruction around meaningful tasks that mirror real-world language use. Online, TBLT gains a significant advantage: access to genuinely authentic digital tasks that students will encounter in their actual English-language lives.</p>
+
+      <div class="subsection">
+        <h3 class="subsection-title">The TBLT Lesson Cycle</h3>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Pre-Task</h4>
+              <p>Introduce the topic and task. Activate prior knowledge. Provide necessary vocabulary support without pre-teaching everything. In an online context, this can include a short video introduction, a Padlet brainstorm, or a shared Google Doc with stimulus material and guiding questions.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Task Cycle</h4>
+              <p>Students attempt the task in pairs or groups via breakout rooms. Monitor by moving between rooms. Resist the urge to correct during the task — the goal is fluency and meaning-making. Note recurring errors quietly for later focus during the language stage.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Planning & Report</h4>
+              <p>Groups prepare to report back to the class. This planning phase naturally raises attention to accuracy. Online, students can prepare a shared Google Slide, a Padlet post, or a short recorded video summary of their work.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h4>Language Focus</h4>
+              <p>After the task, analyse the language used and needed. Address errors noted during monitoring. Use a shared annotation document or a Google Doc to highlight real language from the task — anchoring correction to what students actually produced creates lasting relevance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">TBLT Task Ideas for Online Classes</div>
+        <p>Plan a virtual trip using real travel websites. Write and record a product review. Compose a formal email to a real organisation. Create an explainer video on a topic of choice. Research and present a real news story. Design a social media campaign for a cause they care about. Conduct an interview with a partner and report back.</p>
+      </div>
+    </div>
+
+    <!-- FLIPPED -->
+    <div class="section" id="flipped">
+      <div class="section-eyebrow">Part II · Chapter 6</div>
+      <h2 class="section-title">The Flipped Classroom</h2>
+      <p class="section-intro">The flipped model inverts the traditional lesson structure: input happens before the live session, and live time is used exclusively for interaction, practice, and production. Online, this model is especially powerful because pre-session materials are easy to distribute, track, and revisit.</p>
+
+      <div class="two-col">
+        <div class="col-card">
+          <div class="col-card-title">Before the Session (Student Task)</div>
+          <ul>
+            <li>Watch a short teacher-made or curated video (5–12 min)</li>
+            <li>Complete a vocabulary pre-task or quiz</li>
+            <li>Read a short text with guiding questions</li>
+            <li>Submit a brief reflection or Google Form quiz</li>
+            <li>Note questions and confusions to bring to the session</li>
+          </ul>
+        </div>
+        <div class="col-card">
+          <div class="col-card-title">During the Live Session (Teacher Focus)</div>
+          <ul>
+            <li>Clarify questions from pre-session work</li>
+            <li>Facilitate application and communication tasks</li>
+            <li>Run peer discussion, debate, and collaborative tasks</li>
+            <li>Provide targeted feedback and error correction</li>
+            <li>Extend understanding through interaction and reflection</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Tools for Flipping</h3>
+        <div class="tool-list">
+          <span class="tool-chip"><span class="dot"></span>Loom — record and share video lessons</span>
+          <span class="tool-chip"><span class="dot"></span>EdPuzzle — embed questions into videos</span>
+          <span class="tool-chip"><span class="dot"></span>Screencastify — screen recording with annotation</span>
+          <span class="tool-chip"><span class="dot"></span>Google Forms — pre-session comprehension checks</span>
+          <span class="tool-chip"><span class="dot"></span>YouTube (unlisted) — share video content privately</span>
+          <span class="tool-chip"><span class="dot"></span>Nearpod — interactive async lesson delivery</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLENDED -->
+    <div class="section" id="blended">
+      <div class="section-eyebrow">Part II · Chapter 7</div>
+      <h2 class="section-title">Blended Learning</h2>
+      <p class="section-intro">Blended learning combines structured asynchronous content with live synchronous sessions to create a learning experience that is greater than the sum of its parts. It offers learner flexibility while preserving the irreplaceable human element of live teaching.</p>
+
+      <div class="technique-grid">
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Self-Paced Modules</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Async Component</span>
+            <p>Deliver grammar explanations, vocabulary sets, listening exercises, and reading tasks as structured modules on an LMS. Students complete these at their own pace, freeing live sessions entirely for communication, practice, and genuine human interaction.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Live Application Sessions</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Sync Component</span>
+            <p>Use live sessions exclusively for what requires human interaction: discussions, role plays, speaking practice, peer feedback, Q&A, and community building. Guard this time from being diluted by content delivery that could happen asynchronously.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Progress Tracking</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Management</span>
+            <p>In blended models, tracking completion and progress is essential. Use LMS analytics to identify who is falling behind. Reach out proactively — a brief personalised message noticing a student's absence from modules often re-engages them before they disengage completely.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PBL -->
+    <div class="section" id="pbl">
+      <div class="section-eyebrow">Part II · Chapter 8</div>
+      <h2 class="section-title">Project-Based Learning</h2>
+      <p class="section-intro">Project-Based Learning (PBL) engages learners in sustained, meaningful investigation of real-world questions or challenges. In online English teaching, PBL produces some of the most authentic and memorable language use of any approach.</p>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Anatomy of an Online PBL Unit</h3>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Driving Question</h4>
+              <p>Launch with a compelling, open question. Examples: "How can we use English to explain our culture to the world?" or "What makes a great product, and how do companies convince people to buy it?" The question should be genuinely answerable in multiple valid ways.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Research & Input Phase</h4>
+              <p>Students gather information, read, watch, and discuss. Provide structured scaffolding through graphic organisers and guided note-taking on shared Google Docs. Live sessions during this phase focus on the specific language the project demands.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Creation Phase</h4>
+              <p>Students produce a tangible output: a presentation, video, podcast, report, or website. Collaborative tools like Canva, Google Slides, or Padlet make digital co-creation accessible, trackable, and genuinely engaging for modern learners.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h4>Public Presentation</h4>
+              <p>Share work with an audience beyond the classroom — post to a class blog, present to another group, share on a class Padlet wall. Authentic audience drives quality and purpose. Even in a small online class, showcasing work publicly raises the stakes in motivating ways.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <h4>Structured Reflection</h4>
+              <p>End every project unit with structured reflection — on language learned, skills developed, and process navigated. Use written journals, video responses on Flip, or a live debrief discussion. Reflection transforms experience into learning.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLIL -->
+    <div class="section" id="clil">
+      <div class="section-eyebrow">Part II · Chapter 9</div>
+      <h2 class="section-title">CLIL Online</h2>
+      <p class="section-intro">Content and Language Integrated Learning (CLIL) teaches subject matter through the medium of English, developing both content knowledge and language skills simultaneously. Online, CLIL works exceptionally well because authentic English-medium content is just a browser tab away.</p>
+
+      <div class="callout">
+        <div class="callout-label">CLIL in Practice Online</div>
+        <p>Use real English-language science articles, BBC documentaries, TED Talks, or National Geographic content as both language input and subject matter. Language becomes a vehicle for genuine intellectual engagement — which is precisely what CLIL intends, and what online environments make effortlessly accessible.</p>
+      </div>
+
+      <div class="two-col">
+        <div class="col-card">
+          <div class="col-card-title">Language Scaffolds for CLIL</div>
+          <ul>
+            <li>Glossaries and visual vocabulary banks per topic</li>
+            <li>Sentence frames for academic discussion and analysis</li>
+            <li>Graphic organisers for content comprehension</li>
+            <li>Pre-teaching key technical vocabulary before content</li>
+            <li>Bilingual support where appropriate and contextual</li>
+          </ul>
+        </div>
+        <div class="col-card">
+          <div class="col-card-title">Suitable Content Areas Online</div>
+          <ul>
+            <li>Science & environment (BBC, National Geographic)</li>
+            <li>History & culture (Smithsonian, Khan Academy)</li>
+            <li>Business & economics (FT, Harvard Business Review)</li>
+            <li>Technology (Wired, MIT Technology Review)</li>
+            <li>Social issues (TED Talks, Vox, Al Jazeera English)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- ===== PART III ===== -->
+    <div class="part-header">
+      <div class="part-number">Part III</div>
+      <h2>Engagement & Interaction</h2>
+      <p>Engagement is the central challenge of online English teaching. It is not a bonus — it is the precondition for learning. This section covers synchronous and asynchronous engagement strategies and the digital tools that make them possible.</p>
+    </div>
+
+    <!-- SYNC -->
+    <div class="section" id="sync">
+      <div class="section-eyebrow">Part III · Chapter 10</div>
+      <h2 class="section-title">Synchronous Engagement Strategies</h2>
+      <p class="section-intro">Live sessions are precious. Their power lies in real-time human interaction — the exchange that no asynchronous activity can fully replicate. Design every minute of live time to demand and reward active participation.</p>
+
+      <div class="subsection">
+        <h3 class="subsection-title">The First Five Minutes</h3>
+        <div class="subsection-text">
+          <p>The opening of an online lesson sets the tone for everything that follows. A weak opening leads to passive learners. A strong opening activates thinking, establishes energy, and signals that this session will demand genuine participation.</p>
+        </div>
+        <div class="technique-grid">
+          <div class="technique-card">
+            <div class="technique-card-header"><div class="technique-card-title">The Chat Warm-Up</div></div>
+            <div class="technique-card-body">
+              <p>Post a low-stakes question in the chat as students arrive: "Type one word to describe your week" or "Would you rather live in the city or countryside? Drop your answer." This normalises chat participation and warms students up before the lesson proper begins.</p>
+            </div>
+          </div>
+          <div class="technique-card">
+            <div class="technique-card-header"><div class="technique-card-title">Live Word Cloud</div></div>
+            <div class="technique-card-body">
+              <p>Open Mentimeter or Poll Everywhere and display a live word cloud as students type their responses to a prompt. Visual, immediate, and genuinely engaging — word clouds collectivise the class experience and create a shared artefact before the lesson content begins.</p>
+            </div>
+          </div>
+          <div class="technique-card">
+            <div class="technique-card-header"><div class="technique-card-title">Mystery Image Hook</div></div>
+            <div class="technique-card-body">
+              <p>Share a partially revealed image (zoomed in, blurred, or cropped) and ask students to speculate. "What do you think this is? Where is it? What might be happening?" Simple, visual, and immediately communicative. Gradually reveal the full image as students guess and interact.</p>
+            </div>
+          </div>
+          <div class="technique-card">
+            <div class="technique-card-header"><div class="technique-card-title">The Committed Chat Response</div></div>
+            <div class="technique-card-body">
+              <p>Display a thought-provoking question. Give students 60 seconds to type their response before anyone speaks aloud. "Everyone type your answer — hold it — 3, 2, 1, send!" This democratises participation: every student commits before the conversation narrows around vocal students.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Breakout Rooms: Best Practices</h3>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Give Explicit Instructions Before Breaking Out</h4>
+              <p>State the task, the time limit, the expected output, and what happens at the end. Share instructions in the chat before sending students to breakout rooms. No student should enter a breakout room uncertain of what they are doing.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Assign a Shared Workspace</h4>
+              <p>Give each group a shared Google Doc, Padlet card, or Jamboard sticky note area. This externalises the task, provides a visible record of their work, and gives you something concrete to reference during the debrief afterwards.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Visit Every Room</h4>
+              <p>Move through breakout rooms to monitor progress, answer questions, and note language use. Keep visits brief — 2–3 minutes per room. Your presence signals that the task is real and that you are actively invested in what is happening.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h4>Debrief Meaningfully</h4>
+              <p>Collect reports purposefully — not by going through every group sequentially, but by asking for highlights, points of disagreement, or surprising findings. Make the debrief a genuine conversation, not an administrative round-up.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Energisers & Brain Breaks</h3>
+        <div class="subsection-text">
+          <p>Online fatigue is neurologically real. Schedule a 3–5 minute break every 45–50 minutes of instruction. Use the break as a language opportunity, not just a pause — a quick game, a fun prompt, or a movement activity that keeps English at the centre.</p>
+        </div>
+        <div class="tool-list">
+          <span class="tool-chip"><span class="dot"></span>Kahoot — competitive quiz energiser</span>
+          <span class="tool-chip"><span class="dot"></span>Quizlet Live — vocabulary race</span>
+          <span class="tool-chip"><span class="dot"></span>Gartic Phone — collaborative drawing game</span>
+          <span class="tool-chip"><span class="dot"></span>Skribbl.io — online Pictionary</span>
+          <span class="tool-chip"><span class="dot"></span>Two Truths and a Lie — via chat</span>
+          <span class="tool-chip"><span class="dot"></span>Mentimeter — This or That opinion polls</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ASYNC -->
+    <div class="section" id="async">
+      <div class="section-eyebrow">Part III · Chapter 11</div>
+      <h2 class="section-title">Asynchronous Engagement Strategies</h2>
+      <p class="section-intro">Asynchronous tasks extend learning beyond the live session, build learner autonomy, and allow students to engage with content at their own pace — especially important for adult, working, and multilingual learners managing competing demands.</p>
+
+      <div class="technique-grid">
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Video Response Tasks</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Speaking Async</span>
+            <p>Use Flip (formerly Flipgrid) to assign short speaking tasks between sessions. Students record themselves responding to a prompt and watch classmates' responses. This creates genuine peer interaction and authentic speaking practice without requiring synchronous presence.</p>
+            <p><strong>Example:</strong> "Tell us about a time you had to use English outside of class. What happened?"</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Discussion Boards</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Writing Async</span>
+            <p>Post a discussion question on your LMS or Padlet. Require students to post an initial response and reply to at least two classmates. Set clear expectations: minimum word count, evidence-based responses, respectful engagement. Discussion boards also build academic writing skills.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Audio Journaling</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Speaking Async</span>
+            <p>Assign weekly audio journal entries using Vocaroo or SpeakPipe. Students record a 2–3 minute reflection on the week's learning or a prompt you set. You respond with a personal audio note — far more human than a written comment, and far more memorable.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Digital Portfolios</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Showcase</span>
+            <p>Have students build a digital portfolio throughout the course — a running collection of their best work, reflections, and evidence of progress. Use Google Sites, Seesaw (young learners), or Notion. Portfolios make learning visible, motivate sustained effort, and serve as powerful summative evidence.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOLS -->
+    <div class="section" id="tools">
+      <div class="section-eyebrow">Part III · Chapter 12</div>
+      <h2 class="section-title">Digital Tools Deep Dive</h2>
+      <p class="section-intro">The right tool, used at the right moment for the right purpose, can transform a flat lesson into a dynamic one. The wrong tool — adopted because it is new or because a colleague mentioned it — adds cognitive load without adding value.</p>
+
+      <div class="callout">
+        <div class="callout-label">The Tool Adoption Principle</div>
+        <p>Before adopting any new digital tool, ask: Does this serve a pedagogical purpose I cannot meet as effectively without it? If the answer is no, set it aside. The best online teachers use fewer tools with greater depth, rather than a rotating carousel of novelties that disorients learners.</p>
+      </div>
+
+      <table class="handbook-table">
+        <thead>
+          <tr><th>Tool</th><th>Primary Use</th><th>Best For</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Padlet</strong></td><td>Collaborative display board</td><td>Brainstorming, sharing work, class displays of all kinds</td></tr>
+          <tr><td><strong>Mentimeter</strong></td><td>Live polls, word clouds, quizzes</td><td>Warm-ups, formative checks, real-time opinion polls</td></tr>
+          <tr><td><strong>Quizlet</strong></td><td>Vocabulary study and games</td><td>All ages and levels for sustainable lexical development</td></tr>
+          <tr><td><strong>Nearpod</strong></td><td>Interactive lesson delivery</td><td>Embedding activities directly into live presentations</td></tr>
+          <tr><td><strong>Jamboard / Miro</strong></td><td>Collaborative whiteboard</td><td>Visual thinking, group tasks, mind mapping, brainstorming</td></tr>
+          <tr><td><strong>Flip (Flipgrid)</strong></td><td>Short video responses</td><td>Speaking tasks, peer interaction, reflection between sessions</td></tr>
+          <tr><td><strong>Canva</strong></td><td>Design and visual creation</td><td>Student output, infographics, presentation-based projects</td></tr>
+          <tr><td><strong>Kahoot</strong></td><td>Competitive quiz game</td><td>Review, warm-up energiser, end-of-unit game</td></tr>
+          <tr><td><strong>Wordwall</strong></td><td>Customisable language games</td><td>Grammar and vocabulary practice, especially young learners</td></tr>
+          <tr><td><strong>Loom</strong></td><td>Screen recording with webcam</td><td>Pre-lesson videos, personalised video feedback on student work</td></tr>
+          <tr><td><strong>Vocaroo / SpeakPipe</strong></td><td>Voice recording and sharing</td><td>Audio journals, async speaking tasks, teacher audio feedback</td></tr>
+          <tr><td><strong>Google Docs</strong></td><td>Collaborative writing</td><td>Shared drafts, peer editing, teacher annotation and feedback</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- ===== PART IV ===== -->
+    <div class="part-header">
+      <div class="part-number">Part IV</div>
+      <h2>Teaching Across Levels & Ages</h2>
+      <p>The principles of good online teaching apply across the age and proficiency spectrum — but their expression varies enormously. What works for a 7-year-old beginner will not work for a C1 adult professional, and vice versa.</p>
+    </div>
+
+    <!-- YOUNG LEARNERS -->
+    <div class="section" id="young">
+      <div class="section-eyebrow">Part IV · Chapter 13</div>
+      <h2 class="section-title">Teaching Young Learners Online</h2>
+      <p class="section-intro">Young learners (approximately ages 4–12) bring enormous energy, imagination, and willingness to engage — but their short attention spans, developing digital literacy, and need for physical movement make online teaching a genuine design challenge that rewards creativity.</p>
+
+      <div class="technique-grid">
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Short, Varied Activities</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">YL Design</span>
+            <p>Plan activities of 5–8 minutes maximum for young learners (shorter for very young learners). Switch between modalities — listening, speaking, drawing, moving, singing — to sustain attention across a session. Aim for 6–8 distinct activities per hour of instruction.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">TPR Adapted for Screens</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">YL Methodology</span>
+            <p>Total Physical Response (TPR) works beautifully online. Instruct students to stand up, point, jump, draw, or act out vocabulary. Physical response anchors language in the body even through a screen, and the kinaesthetic engagement reduces restlessness in young learners.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Story-Based Learning</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">YL Strategy</span>
+            <p>Structure lessons around a story. Use digital picture books (share your screen), puppet characters, or recurring story characters to create narrative continuity. Young learners engage deeply with story and remember language contextualised within it far longer than isolated items.</p>
+            <p><strong>Resources:</strong> Storyline Online, Epic! Books, Oxford Reading Tree Digital</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Songs, Chants & Rhymes</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">YL Strategy</span>
+            <p>Music and rhythm are among the most powerful supports for young language learners. Share audio or video, invite students to sing and move along. Songs make vocabulary sticky, lessons memorable, and the session joyful — which is itself a pedagogical value worth defending.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Involving Parents in Young Learner Online Classes</div>
+        <p>For very young learners (ages 4–7), communicate expectations to parents clearly before the course begins. Brief parents on the week's vocabulary so they can reinforce it at home. A simple weekly parent message via WhatsApp or email — "This week we practised: ..." — dramatically extends learning beyond the screen and builds strong home-school communication.</p>
+      </div>
+    </div>
+
+    <!-- TEENS -->
+    <div class="section" id="teens">
+      <div class="section-eyebrow">Part IV · Chapter 14</div>
+      <h2 class="section-title">Teaching Teenagers Online</h2>
+      <p class="section-intro">Teenagers are often the most challenging online learners — and with the right approach, the most rewarding. The key is designing for their need for relevance, autonomy, peer connection, and the opportunity to express their own identities through the language.</p>
+
+      <div class="technique-grid">
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Make It Genuinely Relevant</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Teen Engagement</span>
+            <p>Connect language tasks to things teenagers actually care about: music, gaming, social media, identity, justice, relationships, and future plans. "Analyse this song's lyrics for persuasive language" produces more engagement than "read this paragraph about shopping trends."</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Social Media Formats</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Teen Strategy</span>
+            <p>Frame writing and speaking tasks in formats teenagers know intimately: write an Instagram caption, record a TikTok-style explainer, create a Twitter thread on a news story, or design a podcast intro. Familiar formats reduce resistance to producing in English.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Maximise Peer Collaboration</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Teen Strategy</span>
+            <p>Teenagers are social learners. Maximise peer interaction in breakout rooms. Use peer feedback structures with clear rubrics. Collaborative creative projects — co-written stories, group podcasts, shared presentations — tap into the social energy that is the primary driver of adolescent learning.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Offer Meaningful Choices</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Teen Autonomy</span>
+            <p>Provide task format choices where possible: "You can write a letter, record a short video, or create a visual presentation for the same task." Meeting the same language objective while honouring different preferences and strengths is one of the most effective teen engagement strategies available.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADULTS -->
+    <div class="section" id="adults">
+      <div class="section-eyebrow">Part IV · Chapter 15</div>
+      <h2 class="section-title">Teaching Adult Learners Online</h2>
+      <p class="section-intro">Adult learners bring decades of life experience, self-directedness, and clear purpose to their English learning. They are often time-poor and highly motivated — a combination that demands both efficiency and deep respect for their existing competence.</p>
+
+      <div class="info-box">
+        <div class="info-box-title">Andragogy: The Core Framework for Adult Learning</div>
+        <p>Malcolm Knowles' principles of adult learning remind us that adults need to know why they are learning something; bring rich self-concept and experience to the classroom; are ready to learn what is directly relevant to their real-life situations; are problem-centred rather than content-centred; and are intrinsically motivated. Design every adult lesson around these truths.</p>
+      </div>
+
+      <div class="two-col">
+        <div class="col-card">
+          <div class="col-card-title">What Adults Need Online</div>
+          <ul>
+            <li>Clear, stated objectives at the start of every session</li>
+            <li>Efficient, purposeful use of their limited time</li>
+            <li>Direct connection between tasks and real-life use</li>
+            <li>Respect for their existing knowledge and experience</li>
+            <li>Flexible asynchronous options within the course</li>
+            <li>Professional and business-relevant content where appropriate</li>
+            <li>Direct, constructive, specific feedback</li>
+          </ul>
+        </div>
+        <div class="col-card">
+          <div class="col-card-title">What to Avoid with Adults</div>
+          <ul>
+            <li>Infantilising tasks or childlike visual design</li>
+            <li>Excessive games without clear language purpose</li>
+            <li>Over-scaffolding what they can already accomplish</li>
+            <li>Vague encouragement instead of genuine feedback</li>
+            <li>Ignoring their specific, stated language goals</li>
+            <li>Rigid synchronous-only schedules with no flexibility</li>
+            <li>One-size-fits-all content that ignores professional diversity</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADVANCED -->
+    <div class="section" id="advanced">
+      <div class="section-eyebrow">Part IV · Chapter 16</div>
+      <h2 class="section-title">Teaching Advanced Learners Online</h2>
+      <p class="section-intro">Advanced learners (C1–C2) often arrive with strong passive competence but limited exposure to high-level productive use. Online teaching at this level is about pushing the edges of fluency, accuracy, and complexity — and creating genuine intellectual challenge.</p>
+
+      <div class="technique-grid">
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Seminar-Style Discussion</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Advanced Strategy</span>
+            <p>Structure live sessions as seminars: assign readings or podcasts in advance, designate student discussion leaders, require evidence-based contributions. Hold students to C1–C2 standards of accuracy, sophistication, and coherence — and name it clearly and specifically when they hit it.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Research & Presentation Projects</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Advanced Strategy</span>
+            <p>Assign independent research projects where learners investigate a topic, synthesise multiple English-language sources, and present findings in an academic format. Focus feedback on precision of expression, appropriate register, and the coherence of argument structure.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Extensive Reading & Listening</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Input</span>
+            <p>Assign authentic long-form reading and listening: novels, longform journalism, documentary series, academic lectures. Advanced learners need massive comprehensible input at genuine English-language level. Online teaching makes curating and distributing this input remarkably easy.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Stylistic Writing Workshops</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Writing</span>
+            <p>Workshop advanced writing: analyse a model text stylistically, identify the techniques the writer uses, then write a piece applying those same techniques. Focus feedback on voice, register, precision, and argument. Share drafts on a collaborative Google Doc for peer and teacher annotation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- ===== PART V ===== -->
+    <div class="part-header">
+      <div class="part-number">Part V</div>
+      <h2>Assessment & Feedback</h2>
+      <p>Assessment drives learning. Feedback shapes improvement. In online contexts, both require intentional adaptation to remain as powerful and meaningful as they are in physical classrooms.</p>
+    </div>
+
+    <!-- FORMATIVE -->
+    <div class="section" id="formative">
+      <div class="section-eyebrow">Part V · Chapter 17</div>
+      <h2 class="section-title">Formative Assessment Online</h2>
+      <p class="section-intro">Formative assessment is assessment for learning — the ongoing gathering of evidence about where learners are, used to adjust teaching in real time. Online, this requires deliberate design because the classroom cues that alert teachers to confusion are harder to read on a screen.</p>
+
+      <div class="technique-grid">
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Exit Tickets</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Formative Tool</span>
+            <p>End every session with a 2–3 question exit ticket via Google Forms or Mentimeter. Ask what they learned, what they are still unsure about, and one question they have. Review responses before the next session and open by addressing what students raised.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Reaction Buttons Check</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Formative Tool</span>
+            <p>Use Zoom's reaction buttons or ask students to physically show thumbs up (understood), thumbs sideways (mostly understood), or thumbs down (confused). Simple, fast, and surprisingly informative — especially when you ask follow-up questions to students who signal uncertainty.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Simultaneous Chat Checks</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Formative Tool</span>
+            <p>Ask a specific comprehension question and have students answer in the chat simultaneously. "Everyone type the answer before you send it — 3, 2, 1, send!" ensures genuine individual checking, avoids the "Any questions?" silence, and gives you whole-class data instantly.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Shared Whiteboard Responses</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Formative Tool</span>
+            <p>Ask students to write answers, diagram ideas, or map concepts on a shared Jamboard or Miro board. You see all responses simultaneously. This surfaces misunderstanding instantly and produces rich data about where the class is — both collectively and individually.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUMMATIVE -->
+    <div class="section" id="summative">
+      <div class="section-eyebrow">Part V · Chapter 18</div>
+      <h2 class="section-title">Summative Assessment Online</h2>
+      <p class="section-intro">Summative assessment evaluates learning at the end of a unit, course, or learning period. Online, assessment design must balance rigour with the reality that students complete assessments in unsupervised environments — which changes how we design for validity.</p>
+
+      <div class="two-col">
+        <div class="col-card">
+          <div class="col-card-title">High-Integrity Assessment Designs</div>
+          <ul>
+            <li><strong>Performance tasks</strong> — demonstrate ability by doing</li>
+            <li><strong>Video presentations</strong> — record and submit speaking work</li>
+            <li><strong>Portfolio submissions</strong> — curated evidence of development</li>
+            <li><strong>Live speaking assessments</strong> — via individual video call</li>
+            <li><strong>Process writing</strong> — drafts submitted alongside final piece</li>
+            <li><strong>Project outputs</strong> — multimedia or written final products</li>
+          </ul>
+        </div>
+        <div class="col-card">
+          <div class="col-card-title">Managing Academic Integrity</div>
+          <ul>
+            <li>Design tasks requiring personalised, unique response</li>
+            <li>Include a reflective element that demands genuine thought</li>
+            <li>Use live components alongside written components</li>
+            <li>Set submissions that draw on in-class work students completed</li>
+            <li>Use oral confirmation of written submissions where needed</li>
+            <li>Build relationships — students cheat less for teachers they trust</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ERROR CORRECTION -->
+    <div class="section" id="error">
+      <div class="section-eyebrow">Part V · Chapter 19</div>
+      <h2 class="section-title">Error Correction Online</h2>
+      <p class="section-intro">Error correction in online teaching requires the same principled decision-making as in physical classrooms — but the channels and timing look different. How you correct, when you correct, and who sees the correction all matter enormously for learner confidence.</p>
+
+      <div class="technique-grid">
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Delayed Board Correction</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Live Session</span>
+            <p>Note errors during speaking tasks and write them on a shared whiteboard after the task ends. Ask students to identify and correct the errors themselves before you intervene. Always anonymise errors — never connect a mistake to a specific student publicly during a session.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Private Chat Correction</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Live Session</span>
+            <p>For sensitive errors, use private chat to correct a student discreetly. This is especially effective in adult and professional contexts where public correction can cause real embarrassment. Type: "Just to note — it's 'I have been working here' not 'I am working here since three years.'"</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Google Docs Annotation</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Written Feedback</span>
+            <p>Use Google Docs' comment and suggestion features for written error correction. Rather than simply correcting, ask questions in comments: "Is this the right tense here? What time frame are you describing?" Prompting self-correction before providing the answer produces deeper learning.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Error Pattern Lessons</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Teaching from Data</span>
+            <p>Collect recurring errors across multiple students and turn them into a focused mini-lesson. Open the next session with: "I noticed many of us are using X this way — let's look at it together." This normalises error, makes correction a shared event, and feels collaborative rather than corrective.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEEDBACK -->
+    <div class="section" id="feedback">
+      <div class="section-eyebrow">Part V · Chapter 20</div>
+      <h2 class="section-title">Feedback Strategies</h2>
+      <p class="section-intro">Feedback is one of the most powerful influences on learning. In online contexts, it must work harder to compensate for the absence of spontaneous in-class encouragement and the physical presence of a teacher who clearly cares.</p>
+
+      <div class="subsection">
+        <h3 class="subsection-title">The Feedback Quality Ladder</h3>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Evaluative Feedback (Weakest)</h4>
+              <p>"Good job!" or "This needs work." Tells the student nothing actionable about what is working or what to change. Avoid this as your primary feedback form — it is noise, not signal.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Descriptive Feedback</h4>
+              <p>"Your argument in paragraph two is well-supported by evidence." Describes what is observed but still does not guide next steps — better than evaluative, but not yet sufficient.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Suggestive Feedback</h4>
+              <p>"Consider adding a counter-argument in paragraph three to strengthen your overall position." Provides clear direction for improvement — significantly more useful and actionable than descriptive alone.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h4>Dialogic Feedback (Strongest)</h4>
+              <p>Feedback delivered as a conversation — via Loom video, audio note, or a brief live meeting — that invites the student to respond and participate in their own improvement process. This is the gold standard of online feedback, and the most memorable for learners.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- ===== PART VI ===== -->
+    <div class="part-header">
+      <div class="part-number">Part VI</div>
+      <h2>Differentiation & Inclusion</h2>
+      <p>Every online class contains a range of learners — in readiness, background, learning style, and need. Effective online teachers design for the range, not the middle. Differentiation is not an extra; it is the work.</p>
+    </div>
+
+    <!-- DIFFERENTIATION -->
+    <div class="section" id="differentiation">
+      <div class="section-eyebrow">Part VI · Chapter 21</div>
+      <h2 class="section-title">Meeting Diverse Needs Online</h2>
+      <p class="section-intro">Universal Design for Learning (UDL) provides a practical framework for differentiation in online teaching. It asks teachers to provide multiple means of representation, engagement, and expression — so all learners can access content and demonstrate learning.</p>
+
+      <table class="handbook-table">
+        <thead>
+          <tr><th>UDL Principle</th><th>What It Means</th><th>Online Application</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Multiple Means of Representation</strong></td>
+            <td>Present information in more than one format</td>
+            <td>Use video + audio + text for key content; provide transcripts; use visual organisers alongside written instructions</td>
+          </tr>
+          <tr>
+            <td><strong>Multiple Means of Engagement</strong></td>
+            <td>Provide different ways to connect with learning</td>
+            <td>Offer task choices; vary group sizes; allow self-paced work; connect to real-world learner interests and goals</td>
+          </tr>
+          <tr>
+            <td><strong>Multiple Means of Expression</strong></td>
+            <td>Allow students to demonstrate learning in different ways</td>
+            <td>Accept video, audio, written, or visual responses; offer project-based alternatives to traditional assessment</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SCAFFOLDING -->
+    <div class="section" id="scaffolding">
+      <div class="section-eyebrow">Part VI · Chapter 22</div>
+      <h2 class="section-title">Scaffolding Online</h2>
+      <p class="section-intro">Scaffolding provides temporary support that enables learners to achieve more than they could independently. Online, scaffolds can be built directly into digital materials — available on demand, rather than delivered improvisationally in the moment.</p>
+
+      <div class="technique-grid">
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Language Frames</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Scaffold Type</span>
+            <p>Provide sentence starters and frames for speaking and writing tasks: "In my opinion, ... because ..."; "This text suggests that ..."; "I disagree with ... because ..." Share these in the chat or on a visible slide during tasks so students can reference them without interrupting their flow.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Tiered Tasks</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Scaffold Type</span>
+            <p>Design the same task at three levels: supported (vocabulary bank and sentence frames), standard (guiding questions only), and extended (open-ended with additional challenge). Assign levels sensitively or allow student choice with a transparent rationale about purpose.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Visual Organisers</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Scaffold Type</span>
+            <p>Graphic organisers, mind maps, and structured templates reduce cognitive load by externalising the thinking structure. Distribute via Google Slides or Jamboard before the task begins. Canva has excellent, customisable templates for every age group and task type.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Vocabulary Banks</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Scaffold Type</span>
+            <p>Provide a pinned or shared vocabulary resource for each lesson or unit — a Google Doc, Quizlet set, or LMS glossary. Include pronunciation guides, examples in context, and translation where appropriate for lower levels. Make it searchable and permanently accessible.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- ===== PART VII ===== -->
+    <div class="part-header">
+      <div class="part-number">Part VII</div>
+      <h2>Virtual Classroom Management</h2>
+      <p>Management in a virtual classroom is not about control — it is about creating conditions in which learning can happen. That means clear structures, predictable routines, and proactive management of participation and community culture.</p>
+    </div>
+
+    <!-- NORMS -->
+    <div class="section" id="norms">
+      <div class="section-eyebrow">Part VII · Chapter 23</div>
+      <h2 class="section-title">Virtual Norms & Classroom Culture</h2>
+      <p class="section-intro">The culture of your virtual classroom is established in the first two sessions and reinforced every session thereafter. Invest time at the start of a course in co-creating norms — students who help write the rules are far more likely to honour them.</p>
+
+      <div class="callout">
+        <div class="callout-label">Co-Creating Classroom Norms</div>
+        <p>In your first session, ask students: "What makes an online lesson work well for you?" Collect responses on a shared Padlet or Jamboard. Group ideas into categories (participation, technology, respect, punctuality) and formalise them as a shared class agreement. Return to this agreement when norms are tested — and they will be.</p>
+      </div>
+
+      <div class="two-col">
+        <div class="col-card">
+          <div class="col-card-title">Common Virtual Classroom Norms</div>
+          <ul>
+            <li>Join on time with your displayed name correct</li>
+            <li>Mute your microphone when not speaking</li>
+            <li>Use the chat respectfully and on-topic</li>
+            <li>Signal via reaction buttons if you have a tech problem</li>
+            <li>Keep camera on during discussions where possible</li>
+            <li>Be fully present — no parallel tasks during live sessions</li>
+            <li>English as the communication language during class time</li>
+          </ul>
+        </div>
+        <div class="col-card">
+          <div class="col-card-title">Camera Policy Considerations</div>
+          <ul>
+            <li>Cameras off should never be punished — there are often valid reasons</li>
+            <li>Instead, create conditions where students want to turn cameras on</li>
+            <li>Breakout rooms have higher camera-on rates than main sessions</li>
+            <li>Acknowledge camera-on students naturally and warmly</li>
+            <li>Respect privacy concerns, home environments, and bandwidth</li>
+            <li>For formal assessments, camera-on is a justifiable requirement</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARTICIPATION -->
+    <div class="section" id="participation">
+      <div class="section-eyebrow">Part VII · Chapter 24</div>
+      <h2 class="section-title">Managing Participation Online</h2>
+      <p class="section-intro">In a physical classroom, silent students are visible. Online, they can disappear entirely. Proactive participation management ensures no learner remains invisible — and that the most vocal students do not dominate at the expense of quieter ones.</p>
+
+      <div class="technique-grid">
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Randomised Calling</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Participation Tool</span>
+            <p>Use Wheel of Names or ClassDojo to randomly select students to respond. Make this a positive, low-stakes ritual from the start of the course so students expect to be called and prepare accordingly. Always pair randomised calling with adequate thinking time before speaking.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Simultaneous Chat Responses</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Participation Tool</span>
+            <p>Have everyone type their answer and hold it before sending. "3, 2, 1 — send!" Every student commits simultaneously. You get whole-class data instantly, and no student can wait to copy a more vocal peer's response — one of the most powerful simple techniques in online teaching.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Partner Accountability Pairs</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Participation Structure</span>
+            <p>Assign stable "online partners" at the start of the course. Partners are responsible for each other's understanding and progress. "Check with your partner" becomes a consistent routine. When a student is absent, their partner notices — and that noticing is itself a powerful motivation.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">The Private Check-In</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Wellbeing & Presence</span>
+            <p>Send quieter students a brief private chat message during or after sessions: "How are you finding the material this week?" This opens a channel beyond the live session and signals that you notice their presence as an individual — not just as a participant count.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TECH FAIL -->
+    <div class="section" id="techfail">
+      <div class="section-eyebrow">Part VII · Chapter 25</div>
+      <h2 class="section-title">Handling Technical Difficulties</h2>
+      <p class="section-intro">Technology will fail. Internet will drop. Platforms will crash. Microphones will refuse to cooperate at the worst possible moment. The mark of a skilled online teacher is not that technology never fails — it is how gracefully they handle it when it does.</p>
+
+      <div class="info-box">
+        <div class="info-box-title">The Tech Failure Protocol</div>
+        <p>Establish a clear protocol at the start of every course: "If you lose connection, rejoin via the same link. If I lose connection, I will rejoin within three minutes. If neither of us can reconnect, check your email or our WhatsApp group for instructions on how we will continue." Students who know what to do during a tech failure experience far less anxiety when it happens.</p>
+      </div>
+
+      <div class="technique-grid">
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Backup Communication Channel</div></div>
+          <div class="technique-card-body">
+            <p>Always maintain a secondary channel: a WhatsApp group, email list, or LMS announcement space. If the main platform goes down, students know exactly where to check. Send the day's task or a holding activity immediately upon experiencing a technical failure.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Autonomous Task Ready</div></div>
+          <div class="technique-card-body">
+            <p>Keep a shared Google Doc or LMS page with an independent task always prepared and accessible. If you lose connection mid-lesson, students continue working independently. When you return, debrief what they completed. A tech failure becomes a self-directed learning moment.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Stay Calm & Narrate</div></div>
+          <div class="technique-card-body">
+            <p>Narrate technical issues as they happen: "My screen share has frozen — I'm restarting it, give me 30 seconds." Students mirror teacher energy. If you are calm and solution-focused, they will be too. If you panic, the session derails. Model tech resilience explicitly and visibly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- ===== PART VIII ===== -->
+    <div class="part-header">
+      <div class="part-number">Part VIII</div>
+      <h2>Teacher Wellbeing & Professional Growth</h2>
+      <p>Online teachers face particular risks of burnout, isolation, and the specific exhaustion that comes from spending long hours teaching through a screen. Wellbeing is not a luxury — it is a professional responsibility and a precondition for effective teaching.</p>
+    </div>
+
+    <!-- BURNOUT -->
+    <div class="section" id="burnout">
+      <div class="section-eyebrow">Part VIII · Chapter 26</div>
+      <h2 class="section-title">Avoiding Screen Fatigue & Burnout</h2>
+      <p class="section-intro">Zoom fatigue is documented and neurologically grounded. Research identifies four primary causes: sustained close-up eye contact, the effort of self-monitoring on camera, reduced physical mobility, and the cognitive overhead of processing social cues without a body. Online teachers experience all four, simultaneously, for extended periods, repeatedly.</p>
+
+      <div class="technique-grid">
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Schedule Camera-Off Blocks</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Wellbeing Practice</span>
+            <p>During asynchronous student work or student-led breakout tasks, turn your own camera off. Intentionally step away from the screen for 2–3 minutes during independent work. You do not need to be visible on camera for every single moment of an online lesson.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Protect Gap Time Between Sessions</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Wellbeing Practice</span>
+            <p>Protect at least 15–20 minutes between consecutive online sessions. Use this time away from your screen — make tea, move your body, look out a window. The lack of physical transition between lessons is one of the underacknowledged cumulative costs of teaching online full-time.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Batch Your Lesson Planning</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Sustainability</span>
+            <p>Plan and prepare materials in batches, not lesson by lesson on the day before. Dedicate one focused block per week to planning the following week in full. This reduces the cognitive overhead of constant context-switching between teaching mode and preparation mode.</p>
+          </div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-card-header"><div class="technique-card-title">Recognise Burnout Early</div></div>
+          <div class="technique-card-body">
+            <span class="technique-tag">Self-Awareness</span>
+            <p>Watch for these signs: dreading sessions you once enjoyed, declining lesson quality, resentment of students, persistent fatigue that sleep does not resolve, cynicism about the profession. These are signals to slow down, seek support, and adjust — not to push harder through them.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUSTAINABILITY -->
+    <div class="section" id="sustainability">
+      <div class="section-eyebrow">Part VIII · Chapter 27</div>
+      <h2 class="section-title">Sustainable Online Teaching Practice</h2>
+      <p class="section-intro">Sustainability means building systems and habits that allow you to teach well over the long term — not just brilliantly in the short term. Brilliance that burns out is not effective teaching; it is a temporary performance.</p>
+
+      <div class="subsection">
+        <h3 class="subsection-title">Build Your Digital Resource Library</h3>
+        <div class="subsection-text">
+          <p>Invest time in building a digital resource library: a folder structure in Google Drive or Notion where you store lesson materials, templates, activity ideas, and video links — organised by level, skill, age group, and theme. The upfront investment pays compound returns over months and years of online teaching.</p>
+          <p>Template your most used document types: feedback sheets, session plans, unit maps, student reports. A well-designed template saves significant time and ensures quality consistency across your work.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">The Five-Minute Reflection Habit</div>
+        <p>After each session, spend five minutes noting: one thing that worked well, one thing to adjust next time, and one student who needs closer attention in the following session. Brief, consistent reflection over time produces more professional growth than any formal training programme — and is far more efficient than lengthy post-lesson analysis.</p>
+      </div>
+    </div>
+
+    <!-- CPD -->
+    <div class="section" id="cpd">
+      <div class="section-eyebrow">Part VIII · Chapter 28</div>
+      <h2 class="section-title">Continuous Professional Development</h2>
+      <p class="section-intro">The field of online English language teaching is evolving rapidly. Teachers who commit to ongoing professional learning remain effective, relevant, and energised by a field that is genuinely exciting and expanding in scope and influence.</p>
+
+      <div class="two-col">
+        <div class="col-card">
+          <div class="col-card-title">Online Teacher Communities</div>
+          <ul>
+            <li><strong>IATEFL Online</strong> — global ELT professional community</li>
+            <li><strong>TESOL International</strong> — leading professional association</li>
+            <li><strong>iTDi</strong> — independent teacher development initiative</li>
+            <li><strong>ELT Chat</strong> — real-time teacher Twitter discussions</li>
+            <li><strong>Cambridge English Teacher</strong> — professional resources and CPD</li>
+            <li><strong>British Council Teaching English</strong> — articles, webinars, forums</li>
+          </ul>
+        </div>
+        <div class="col-card">
+          <div class="col-card-title">Professional Development Habits</div>
+          <ul>
+            <li>Attend one webinar or online conference session per month</li>
+            <li>Read one ELT article or chapter per week</li>
+            <li>Maintain a teaching journal or short reflection log</li>
+            <li>Observe a peer's online lesson at least once per term</li>
+            <li>Try one new tool or activity format per month</li>
+            <li>Conduct an action research cycle at least once per year</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <div class="info-box-title">Building Your Personal Learning Network (PLN)</div>
+        <p>A Personal Learning Network is your curated ecosystem of teachers, researchers, and educators who expand your thinking and challenge your practice. Build yours deliberately: follow ELT thought leaders on LinkedIn and X/Twitter, join teacher Facebook groups, participate actively in webinar Q&As, and be generous in sharing your own insights and resources publicly. What you contribute to a PLN is what makes it valuable in return.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- ===== RESOURCES ===== -->
+    <div class="section" id="resources">
+      <div class="section-eyebrow">Closing</div>
+      <h2 class="section-title">Resources & Further Reading</h2>
+      <p class="section-intro">The following represent a curated professional foundation for continued learning in online English language teaching, instructional design, and educational technology.</p>
+
+      <div class="two-col">
+        <div class="col-card">
+          <div class="col-card-title">Essential Reading</div>
+          <ul>
+            <li>Harmer, J. — <em>The Practice of English Language Teaching</em></li>
+            <li>Scrivener, J. — <em>Learning Teaching</em></li>
+            <li>Willis, J. — <em>A Framework for Task-Based Learning</em></li>
+            <li>Knowles, M. — <em>The Adult Learner</em></li>
+            <li>Wiggins & McTighe — <em>Understanding by Design</em></li>
+            <li>Salmon, G. — <em>E-tivities: The Key to Active Online Learning</em></li>
+            <li>Burns, A. — <em>Doing Action Research in English Language Teaching</em></li>
+          </ul>
+        </div>
+        <div class="col-card">
+          <div class="col-card-title">Online Resources</div>
+          <ul>
+            <li>British Council TeachingEnglish (teachingenglish.org.uk)</li>
+            <li>Cambridge English Teacher (cambridgeenglish.org)</li>
+            <li>Edutopia — evidence-based teaching strategies (edutopia.org)</li>
+            <li>The CEFR Framework (coe.int/lang-cefr)</li>
+            <li>TESOL Blog and Journal (tesol.org)</li>
+            <li>IATEFL Publications (iatefl.org)</li>
+            <li>Larry Ferlazzo's Websites of the Day (larryferlazzo.edublogs.org)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pullquote">
+        <p>Every online session is a chance to prove that learning across a screen can be as human, as meaningful, and as transformative as learning in the same room. Go make that case — one lesson at a time.</p>
+        <cite>— Rayene Medabis, M.Ed., TESOL</cite>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="handbook-footer">
+      <div class="footer-title">The Online English Teacher's Handbook</div>
+      <div class="footer-meta">
+        Authored and designed by Rayene Medabis, M.Ed., TESOL-Certified &nbsp;·&nbsp; Teacher Trainer & Curriculum Designer &nbsp;·&nbsp; Follow Me Academy, Muscat, Oman<br>
+        All methodologies, frameworks, and instructional guidance in this handbook are the professional intellectual work of the author.<br>
+        © 2025 Rayene Medabis. All rights reserved.
+      </div>
+    </div>
+
+  </div><!-- end content-wrapper -->
+</main>
+
+<script>
+  // Scroll progress bar
+  const progressBar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    if (docH > 0) progressBar.style.transform = `scaleX(${window.scrollY / docH})`;
+  });
+
+  // Scroll spy
+  const navLinks = document.querySelectorAll('.nav-link');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${id}`) {
+            link.classList.add('active');
+            link.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+          }
+        });
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
+
+  document.querySelectorAll('.section[id]').forEach(s => observer.observe(s));
+
+  // Mobile sidebar
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+  }
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 920) document.getElementById('sidebar').classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>

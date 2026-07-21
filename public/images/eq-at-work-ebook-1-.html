@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emotional Intelligence at Work — Rayene Medabis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --forest:    #1E3A2F;
+  --fmid:      #2D5A45;
+  --flt:       #4A8B64;
+  --leaf:      #5FAD7F;
+  --burgundy:  #7D2340;
+  --gold:      #C49A3C;
+  --goldlt:    #D4B56A;
+  --page:      #F8F6F0;
+  --pagealt:   #F1EDE4;
+  --text:      #1A1A1A;
+  --textmid:   #4A4A4A;
+  --textlt:    #7A7A7A;
+  --border:    #DDD8CE;
+  --sbbg:      #142318;
+  --sbtext:    #C0D0BB;
+  --sbw:       268px;
+  --mintbg:    #EAF4EE;
+  --mintbrd:   #7ABEA0;
+  --blushbg:   #FBF0F2;
+  --blushbrd:  #C4899A;
+  --creambg:   #FBF5E6;
+  --creambrd:  #C49A3C;
+  --ffd: 'Playfair Display', Georgia, serif;
+  --ffb: 'Lora', Georgia, serif;
+  --ffu: 'DM Sans', system-ui, sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--page);color:var(--text);font-family:var(--ffb);line-height:1.82;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+/* PROGRESS */
+#pgbar{position:fixed;top:0;left:var(--sbw);right:0;height:3px;background:rgba(0,0,0,.08);z-index:1000;}
+#pgfill{height:100%;width:0%;background:linear-gradient(90deg,var(--flt),var(--gold));transition:width .1s linear;}
+/* SIDEBAR */
+#sb{position:fixed;top:0;left:0;width:var(--sbw);height:100vh;background:var(--sbbg);overflow-y:auto;z-index:200;display:flex;flex-direction:column;transition:transform .3s ease;scrollbar-width:thin;scrollbar-color:var(--fmid) transparent;}
+#sb::-webkit-scrollbar{width:3px;}#sb::-webkit-scrollbar-thumb{background:var(--fmid);}
+.sbhd{padding:28px 22px 20px;border-bottom:1px solid rgba(255,255,255,.07);}
+.sbttl{font-family:var(--ffd);font-size:13.5px;font-weight:600;color:#fff;line-height:1.4;margin-bottom:5px;}
+.sbauth{font-family:var(--ffu);font-size:10px;color:var(--sbtext);opacity:.6;letter-spacing:.1em;text-transform:uppercase;}
+.sbtoc{padding:14px 0 22px;flex:1;}
+.sblbl{display:block;font-family:var(--ffu);font-size:9.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--sbtext);opacity:.38;padding:14px 22px 5px;}
+.sblk{display:block;padding:7px 22px;font-family:var(--ffu);font-size:12px;color:var(--sbtext);line-height:1.4;border-left:2px solid transparent;transition:all .18s;opacity:.78;}
+.sblk:hover{color:#fff;border-left-color:var(--leaf);background:rgba(95,173,127,.1);opacity:1;padding-left:26px;}
+.sblk.active{color:#fff;border-left-color:var(--gold);background:rgba(196,154,60,.1);opacity:1;font-weight:500;}
+.sblk .cn{font-size:9.5px;opacity:.5;margin-right:3px;}
+.sbft{padding:15px 22px;border-top:1px solid rgba(255,255,255,.06);}
+.sbft p{font-family:var(--ffu);font-size:10px;color:var(--sbtext);opacity:.36;line-height:1.6;}
+/* HAMBURGER */
+#hbg{display:none;position:fixed;top:14px;left:14px;z-index:300;background:var(--forest);border:none;border-radius:8px;width:42px;height:42px;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px;box-shadow:0 2px 14px rgba(0,0,0,.35);}
+#hbg span{display:block;width:18px;height:1.8px;background:#fff;border-radius:1px;}
+#ovl{display:none;position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:199;}
+/* MAIN */
+#main{margin-left:var(--sbw);min-height:100vh;}
+/* COVER */
+#cover{min-height:100vh;background:var(--forest);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:60px 48px;}
+.cvrip{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+.cvrip svg{position:absolute;width:min(160vw,160vh);height:min(160vw,160vh);}
+.rp{fill:none;stroke-width:1;animation:rp 8s ease-in-out infinite;}
+.rp:nth-child(1){stroke:rgba(255,255,255,.08);animation-delay:0s;}
+.rp:nth-child(2){stroke:rgba(255,255,255,.065);animation-delay:1.3s;}
+.rp:nth-child(3){stroke:rgba(255,255,255,.05);animation-delay:2.6s;}
+.rp:nth-child(4){stroke:rgba(255,255,255,.035);animation-delay:3.9s;}
+.rp:nth-child(5){stroke:rgba(255,255,255,.022);animation-delay:5.2s;}
+.rp:nth-child(6){stroke:rgba(255,255,255,.012);animation-delay:6.5s;}
+@keyframes rp{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+.cvin{position:relative;z-index:1;max-width:580px;text-align:center;}
+.cvser{font-family:var(--ffu);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--goldlt);opacity:.85;margin-bottom:26px;display:flex;align-items:center;justify-content:center;gap:14px;}
+.cvser::before,.cvser::after{content:'';width:28px;height:1px;background:var(--goldlt);opacity:.45;}
+.cvttl{font-family:var(--ffd);font-size:clamp(38px,6vw,64px);font-weight:700;color:#fff;line-height:1.08;margin-bottom:18px;letter-spacing:-.025em;}
+.cvttl em{font-style:italic;color:var(--goldlt);}
+.cvsub{font-family:var(--ffb);font-style:italic;font-size:clamp(14px,2vw,17px);color:rgba(192,208,187,.82);line-height:1.65;max-width:440px;margin:0 auto 44px;}
+.cvrule{width:52px;height:2px;background:var(--gold);margin:0 auto 28px;}
+.cvname{font-family:var(--ffu);font-size:13px;font-weight:500;letter-spacing:.1em;color:#fff;text-transform:uppercase;}
+.cvnsub{font-family:var(--ffu);font-size:10px;color:var(--sbtext);opacity:.55;margin-top:6px;}
+.cvhint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;font-family:var(--ffu);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.26);animation:flt 2.2s ease-in-out infinite;}
+.cvarr{width:16px;height:16px;border-right:1.5px solid rgba(255,255,255,.26);border-bottom:1.5px solid rgba(255,255,255,.26);transform:rotate(45deg);margin-top:-2px;}
+@keyframes flt{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(7px);}}
+/* BOOK SECTION */
+.bs{max-width:740px;margin:0 auto;padding:80px 48px 96px;}
+/* TOC PAGE */
+#tocp{background:var(--pagealt);border-bottom:1px solid var(--border);}
+.tpttl{font-family:var(--ffd);font-size:34px;font-weight:700;color:var(--forest);margin-bottom:8px;}
+.tpsub{font-family:var(--ffu);font-size:13px;color:var(--textlt);margin-bottom:42px;padding-bottom:20px;border-bottom:2px solid var(--border);}
+.tr{display:flex;align-items:baseline;gap:16px;padding:13px 0;border-bottom:1px solid var(--border);}
+.tr:hover .trt{color:var(--flt);}
+.trn{font-family:var(--ffu);font-size:11px;color:var(--textlt);min-width:80px;}
+.trt{font-family:var(--ffd);font-size:16px;font-weight:600;color:var(--forest);flex:1;line-height:1.3;transition:color .18s;}
+.trst{font-family:var(--ffu);font-size:11px;font-weight:400;color:var(--textlt);display:block;margin-top:2px;}
+.trtm{font-family:var(--ffu);font-size:10px;color:var(--textlt);opacity:.55;white-space:nowrap;}
+/* LABELS */
+.slbl{font-family:var(--ffu);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--flt);font-weight:500;margin-bottom:14px;}
+.smtt{font-family:var(--ffd);font-size:clamp(26px,4vw,40px);font-weight:700;color:var(--forest);line-height:1.12;margin-bottom:14px;letter-spacing:-.022em;}
+.smst{font-family:var(--ffb);font-size:16.5px;font-style:italic;color:var(--textmid);margin-bottom:38px;padding-bottom:28px;border-bottom:2px solid var(--border);line-height:1.65;}
+/* CHAPTER OPENER */
+.chop{position:relative;overflow:hidden;padding:80px 48px 56px;border-bottom:1px solid var(--border);}
+.chop::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--fmid);}
+.chbgn{position:absolute;top:-10px;right:-10px;font-family:var(--ffd);font-size:260px;font-weight:700;color:var(--forest);opacity:.042;line-height:1;pointer-events:none;user-select:none;letter-spacing:-.05em;}
+.chmeta{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.chtag{font-family:var(--ffu);font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:var(--fmid);padding:5px 12px;border-radius:2px;}
+.chrt{font-family:var(--ffu);font-size:11px;color:var(--textlt);}
+.chttl{font-family:var(--ffd);font-size:clamp(24px,4vw,44px);font-weight:700;color:var(--forest);line-height:1.1;margin-bottom:28px;letter-spacing:-.025em;position:relative;z-index:1;}
+.chq{margin:0;padding-left:20px;border-left:3px solid var(--burgundy);max-width:520px;position:relative;z-index:1;}
+.chq p{font-family:var(--ffb);font-style:italic;font-size:15px;color:var(--textmid);line-height:1.7;margin-bottom:8px;}
+.chq cite{font-family:var(--ffu);font-size:11px;color:var(--textlt);font-style:normal;letter-spacing:.03em;}
+/* CHAPTER BODY */
+.chbd{max-width:740px;margin:0 auto;padding:60px 48px 80px;}
+h2.st{font-family:var(--ffd);font-size:21px;font-weight:600;color:var(--forest);margin:46px 0 13px;padding-bottom:9px;border-bottom:1.5px solid var(--border);}
+h2.st:first-child{margin-top:0;}
+h3.ss{font-family:var(--ffd);font-size:17px;font-weight:600;font-style:italic;color:var(--fmid);margin:28px 0 9px;}
+.chbd p{font-family:var(--ffb);font-size:16.5px;line-height:1.88;color:var(--text);margin-bottom:20px;}
+.chbd strong{font-weight:600;color:var(--forest);}
+.chbd em{font-style:italic;}
+/* PULL QUOTE */
+.pq{font-family:var(--ffd);font-style:italic;font-size:clamp(18px,2.4vw,22px);color:var(--burgundy);border-top:2px solid var(--burgundy);border-bottom:2px solid var(--burgundy);padding:22px 0;margin:38px 0;line-height:1.5;}
+/* CALLOUTS */
+.box{border-radius:3px;padding:20px 24px;margin:28px 0;border-left:4px solid;}
+.boxlbl{font-family:var(--ffu);font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;margin-bottom:9px;display:flex;align-items:center;gap:8px;}
+.boxlbl::before{content:'';width:14px;height:1.5px;background:currentColor;opacity:.45;}
+.box p{font-family:var(--ffb);font-size:14.5px;line-height:1.75;margin-bottom:8px;}
+.box p:last-child{margin-bottom:0;}
+.bres{background:var(--mintbg);border-color:var(--mintbrd);}
+.bres .boxlbl{color:#2D7A5A;}
+.bref{background:var(--blushbg);border-color:var(--blushbrd);}
+.bref .boxlbl{color:var(--burgundy);}
+.bact{background:var(--creambg);border-color:var(--creambrd);}
+.bact .boxlbl{color:#8A6A1E;}
+/* DEFINITION LIST */
+.dl{margin:20px 0;}
+.di{padding:14px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:155px 1fr;gap:18px;}
+.di:last-child{border-bottom:none;}
+.dt{font-family:var(--ffu);font-size:11px;font-weight:600;color:var(--forest);text-transform:uppercase;letter-spacing:.04em;padding-top:2px;}
+.dd{font-family:var(--ffb);font-size:15.5px;line-height:1.72;color:var(--text);margin:0;}
+/* FEATURE LIST */
+.fl{margin:20px 0;list-style:none;}
+.fi{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border);}
+.fi:last-child{border-bottom:none;}
+.fn{font-family:var(--ffd);font-size:25px;font-weight:700;color:var(--forest);opacity:.14;line-height:1;min-width:32px;padding-top:2px;}
+.fc h4{font-family:var(--ffu);font-size:12.5px;font-weight:600;color:var(--forest);margin-bottom:5px;text-transform:uppercase;letter-spacing:.04em;}
+.fc p{font-family:var(--ffb);font-size:15px;line-height:1.7;color:var(--textmid);margin:0;}
+/* TAKEAWAYS */
+.tw{background:var(--forest);padding:26px 30px;margin-top:42px;border-radius:3px;}
+.tw h3{font-family:var(--ffu);font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--goldlt);margin-bottom:13px;}
+.tw ul{list-style:none;}
+.tw li{font-family:var(--ffb);font-size:14.5px;line-height:1.65;color:rgba(255,255,255,.86);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.08);display:flex;gap:12px;}
+.tw li:last-child{border-bottom:none;}
+.tw li::before{content:'—';color:var(--goldlt);flex-shrink:0;}
+/* JOHARI WINDOW */
+.johari{display:grid;grid-template-columns:36px 1fr 1fr;grid-template-rows:auto 1fr 1fr;border:1.5px solid var(--border);margin:20px 0 26px;}
+.jcn{background:var(--sbbg);}
+.jch{background:var(--forest);color:#fff;padding:10px 14px;font-family:var(--ffu);font-size:10.5px;font-weight:500;letter-spacing:.07em;text-align:center;text-transform:uppercase;border-left:1px solid rgba(255,255,255,.1);}
+.jrh{background:var(--forest);color:#fff;writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);padding:14px 8px;font-family:var(--ffu);font-size:10.5px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;border-top:1px solid rgba(255,255,255,.1);}
+.jc{padding:17px;border:1px solid var(--border);}
+.jc h4{font-family:var(--ffu);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--fmid);margin-bottom:6px;}
+.jc p{font-family:var(--ffb);font-size:13px;line-height:1.6;color:var(--textmid);margin:0;}
+.jopen{background:var(--mintbg);}.jblind{background:var(--blushbg);}.jhid{background:var(--creambg);}.junkn{background:var(--pagealt);}
+/* ASSESSMENT */
+.ac{margin-bottom:32px;}
+.ac h4{font-family:var(--ffd);font-size:17px;font-weight:600;color:var(--forest);margin-bottom:11px;border-bottom:1.5px solid var(--border);padding-bottom:7px;}
+.ar{display:flex;align-items:center;gap:13px;padding:8px 0;border-bottom:1px dotted var(--border);font-family:var(--ffb);font-size:14px;color:var(--textmid);line-height:1.5;}
+.ar:last-child{border-bottom:none;}
+.rat{display:flex;gap:5px;flex-shrink:0;}
+.rd{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--border);cursor:pointer;transition:all .15s;}
+.rd:hover{border-color:var(--flt);}
+.rd.on{background:var(--flt);border-color:var(--flt);}
+/* REFS */
+.rfl{list-style:none;}
+.rfl li{font-family:var(--ffb);font-size:14px;line-height:1.72;color:var(--textmid);padding:9px 0;border-bottom:1px dotted var(--border);}
+.rfl li:last-child{border-bottom:none;}
+/* ABOUT */
+#about{background:var(--forest);}
+#about .bs{display:flex;gap:36px;align-items:flex-start;}
+.auav{width:84px;height:84px;border-radius:50%;background:var(--fmid);border:2px solid var(--gold);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--ffd);font-size:27px;font-weight:700;color:var(--goldlt);}
+.auin h2{font-family:var(--ffd);font-size:23px;font-weight:700;color:#fff;margin-bottom:4px;}
+.aurole{font-family:var(--ffu);font-size:10px;font-weight:500;color:var(--goldlt);letter-spacing:.12em;text-transform:uppercase;margin-bottom:15px;}
+.auin p{font-family:var(--ffb);font-size:15px;line-height:1.78;color:rgba(255,255,255,.76);margin-bottom:12px;}
+/* CONCLUSION */
+#conclusion .chop{background:var(--forest);}
+#conclusion .chop::before{background:var(--gold);}
+#conclusion .chbgn{color:rgba(255,255,255,.04);}
+#conclusion .chttl{color:#fff;}
+#conclusion .chq{border-color:var(--gold);}
+#conclusion .chq p{color:rgba(255,255,255,.78);}
+#conclusion .chq cite{color:rgba(255,255,255,.45);}
+#conclusion .chtag{background:var(--fmid);}
+#conclusion .chrt{color:rgba(255,255,255,.38);}
+/* FOOTER */
+.ebft{background:var(--sbbg);padding:26px 48px;text-align:center;}
+.ebft p{font-family:var(--ffu);font-size:11px;color:var(--sbtext);opacity:.36;}
+/* RESPONSIVE */
+@media(max-width:940px){
+  #main{margin-left:0;}
+  #sb{transform:translateX(calc(-1 * var(--sbw)));}
+  #sb.open{transform:translateX(0);}
+  #ovl.open{display:block;}
+  #hbg{display:flex;}
+  #pgbar{left:0;}
+  .bs,.chbd{padding-left:26px;padding-right:26px;}
+  .chop{padding:80px 26px 48px;}
+  #about .bs{flex-direction:column;}
+  .di{grid-template-columns:1fr;gap:3px;}
+}
+@media(max-width:600px){
+  .cvttl{font-size:32px;}.chbgn{font-size:160px;}.trtm{display:none;}
+  .johari{grid-template-columns:1fr;}.jcn,.jch,.jrh{display:none;}
+}
+@media print{
+  #sb,#hbg,#pgbar,#ovl,.cvhint{display:none !important;}
+  #main{margin-left:0 !important;}
+  .chop{break-before:page;}
+}
+</style>
+</head>
+<body>
+<div id="pgbar"><div id="pgfill"></div></div>
+<div id="ovl"></div>
+<button id="hbg" aria-label="Open navigation"><span></span><span></span><span></span></button>
+
+<nav id="sb" aria-label="Table of contents">
+  <div class="sbhd">
+    <div class="sbttl">Emotional Intelligence at Work</div>
+    <div class="sbauth">Rayene Medabis</div>
+  </div>
+  <div class="sbtoc">
+    <span class="sblbl">Front Matter</span>
+    <a href="#cover" class="sblk">Cover</a>
+    <a href="#tocp" class="sblk">Table of Contents</a>
+    <a href="#intro" class="sblk">Introduction</a>
+    <span class="sblbl" style="margin-top:6px;">Chapters</span>
+    <a href="#ch1" class="sblk"><span class="cn">01 — </span>What Is Emotional Intelligence?</a>
+    <a href="#ch2" class="sblk"><span class="cn">02 — </span>Self-Awareness</a>
+    <a href="#ch3" class="sblk"><span class="cn">03 — </span>Self-Regulation</a>
+    <a href="#ch4" class="sblk"><span class="cn">04 — </span>Motivation &amp; Resilience</a>
+    <a href="#ch5" class="sblk"><span class="cn">05 — </span>Empathy</a>
+    <a href="#ch6" class="sblk"><span class="cn">06 — </span>Social Skills</a>
+    <a href="#ch7" class="sblk"><span class="cn">07 — </span>Difficult Conversations</a>
+    <a href="#ch8" class="sblk"><span class="cn">08 — </span>Building EQ Culture</a>
+    <a href="#ch9" class="sblk"><span class="cn">09 — </span>The EQ Toolkit</a>
+    <span class="sblbl" style="margin-top:6px;">Back Matter</span>
+    <a href="#conclusion" class="sblk">Conclusion</a>
+    <a href="#refs" class="sblk">References</a>
+    <a href="#about" class="sblk">About the Author</a>
+  </div>
+  <div class="sbft"><p>© 2025 Rayene Medabis<br>All rights reserved.</p></div>
+</nav>
+
+<main id="main">
+
+<!-- ═══ COVER ═══ -->
+<section id="cover">
+  <div class="cvrip">
+    <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle class="rp" cx="400" cy="400" r="70"/>
+      <circle class="rp" cx="400" cy="400" r="150"/>
+      <circle class="rp" cx="400" cy="400" r="240"/>
+      <circle class="rp" cx="400" cy="400" r="335"/>
+      <circle class="rp" cx="400" cy="400" r="440"/>
+      <circle class="rp" cx="400" cy="400" r="560"/>
+    </svg>
+  </div>
+  <div class="cvin">
+    <div class="cvser">Educational Leadership Series</div>
+    <h1 class="cvttl">Emotional<br><em>Intelligence</em><br>at Work</h1>
+    <p class="cvsub">Building Self-Awareness and Social Skills for Leadership in Educational Institutions</p>
+    <div class="cvrule"></div>
+    <div class="cvname">Rayene Medabis</div>
+    <div class="cvnsub">Educator &nbsp;·&nbsp; Leadership Practitioner &nbsp;·&nbsp; Researcher</div>
+  </div>
+  <div class="cvhint">Begin Reading<div class="cvarr"></div></div>
+</section>
+
+<!-- ═══ TABLE OF CONTENTS ═══ -->
+<section id="tocp">
+  <div class="bs">
+    <div class="slbl">Navigation</div>
+    <h2 class="tpttl">Table of Contents</h2>
+    <p class="tpsub">A complete guide to emotional intelligence in educational leadership</p>
+    <a href="#intro" class="tr"><span class="trn">Introduction</span><span class="trt">The Emotional Landscape of Educational Leadership<span class="trst">Why emotional intelligence matters now more than ever in education</span></span><span class="trtm">8 min</span></a>
+    <a href="#ch1" class="tr"><span class="trn">Chapter 01</span><span class="trt">What Is Emotional Intelligence?<span class="trst">Foundations, models, and the neuroscience behind EQ</span></span><span class="trtm">12 min</span></a>
+    <a href="#ch2" class="tr"><span class="trn">Chapter 02</span><span class="trt">Self-Awareness<span class="trst">Knowing your inner world, triggers, and blind spots</span></span><span class="trtm">14 min</span></a>
+    <a href="#ch3" class="tr"><span class="trn">Chapter 03</span><span class="trt">Self-Regulation<span class="trst">The pause that transforms reactivity into deliberate, values-aligned response</span></span><span class="trtm">12 min</span></a>
+    <a href="#ch4" class="tr"><span class="trn">Chapter 04</span><span class="trt">Intrinsic Motivation &amp; Resilience<span class="trst">Leading from purpose, meaning, and resilient commitment</span></span><span class="trtm">10 min</span></a>
+    <a href="#ch5" class="tr"><span class="trn">Chapter 05</span><span class="trt">Empathy<span class="trst">The bridge between leaders and the communities they serve</span></span><span class="trtm">13 min</span></a>
+    <a href="#ch6" class="tr"><span class="trn">Chapter 06</span><span class="trt">Social Skills<span class="trst">The architecture of influence, trust, and authentic communication</span></span><span class="trtm">13 min</span></a>
+    <a href="#ch7" class="tr"><span class="trn">Chapter 07</span><span class="trt">Difficult Conversations<span class="trst">Navigating tension, feedback, and conflict with grace</span></span><span class="trtm">12 min</span></a>
+    <a href="#ch8" class="tr"><span class="trn">Chapter 08</span><span class="trt">Building an Emotionally Intelligent Institution<span class="trst">From individual EQ to organizational culture and psychological safety</span></span><span class="trtm">13 min</span></a>
+    <a href="#ch9" class="tr"><span class="trn">Chapter 09</span><span class="trt">The EQ Toolkit<span class="trst">Daily practices, self-assessment, and reflective exercises</span></span><span class="trtm">15 min</span></a>
+    <a href="#conclusion" class="tr"><span class="trn">Conclusion</span><span class="trt">The Lifelong Journey<span class="trst">Emotional leadership as an ongoing, evolving practice</span></span><span class="trtm">5 min</span></a>
+    <a href="#refs" class="tr"><span class="trn">Back Matter</span><span class="trt">References &amp; Further Reading<span class="trst">Core works cited and recommended bibliography</span></span><span class="trtm"></span></a>
+  </div>
+</section>
+
+<!-- ═══ INTRODUCTION ═══ -->
+<section id="intro">
+  <div class="chop">
+    <div class="chbgn" style="font-size:190px;right:10px;top:20px;opacity:.03;">Intro</div>
+    <div class="chmeta"><span class="chtag">Introduction</span><span class="chrt">8 min read</span></div>
+    <h2 class="chttl">The Emotional Landscape of Educational Leadership</h2>
+    <blockquote class="chq">
+      <p>"Leadership is not about being in charge. It is about taking care of those in your charge."</p>
+      <cite>— Simon Sinek</cite>
+    </blockquote>
+  </div>
+  <div class="chbd">
+    <p>Imagine walking into a faculty meeting where tension hangs in the air. A policy change has unsettled the staff. Some wear their worry openly; others have retreated behind a wall of professional distance. How you navigate the next sixty minutes will shape not just the outcome of that meeting, but the emotional culture of your institution for months to come.</p>
+    <p>This is the world of educational leadership — a world where intellectual rigor meets human complexity at every turn. Principals, department chairs, deans, and academic directors carry the weight of institutional vision while serving the very human needs of students, faculty, parents, and communities. In this world, technical expertise and administrative competence are necessary but insufficient. What separates good leaders from transformative ones is often a less visible quality: <strong>emotional intelligence</strong>.</p>
+    <p>Emotional intelligence — the capacity to recognize, understand, manage, and influence emotions in ourselves and in others — has emerged over three decades as one of the most consequential domains of leadership research. For educational leaders in particular, it is not an abstract theoretical construct. It is the daily work of reading the emotional weather of a building before the first bell rings. It is the art of delivering difficult feedback to a colleague you deeply respect. It is the discipline of remaining calm when a parent is frightened and angry, and genuinely curious when a student is withdrawn and unreachable.</p>
+    <div class="pq">"Emotional intelligence is not a fixed trait. It is a set of learnable skills that grow through honest self-reflection, deliberate practice, and the courage to look inward."</div>
+    <p>This book is organized around Daniel Goleman's widely used five-component model — self-awareness, self-regulation, motivation, empathy, and social skills — adapted specifically for the contexts and challenges of educational institutions. Beyond these core competencies, it explores how to navigate the difficult conversations inseparable from leadership, how to build psychologically safe institutional cultures, and how to sustain EQ development across an entire career.</p>
+    <p>Emotional intelligence is not developed by reading about it. It is developed through practice — consistent, intentional, reflective practice over time, in the real conditions of actual leadership work. The frameworks in this book are valuable only to the extent that they find their way into your daily behavior. May they challenge, sustain, and expand your capacity to serve the communities whose lives you have the extraordinary privilege of shaping.</p>
+  </div>
+</section>
+
+<!-- ═══ CHAPTER 1 ═══ -->
+<section id="ch1">
+  <div class="chop" style="background:var(--pagealt);">
+    <div class="chbgn">01</div>
+    <div class="chmeta"><span class="chtag">Chapter 01</span><span class="chrt">12 min read</span></div>
+    <h2 class="chttl">What Is Emotional Intelligence?</h2>
+    <blockquote class="chq">
+      <p>"Anyone can become angry — that is easy. But to be angry with the right person, to the right degree, at the right time, for the right purpose, and in the right way — this is not easy."</p>
+      <cite>— Aristotle, Nicomachean Ethics</cite>
+    </blockquote>
+  </div>
+  <div class="chbd">
+    <h2 class="st">A Brief History of the Concept</h2>
+    <p>The term <em>emotional intelligence</em> has a specific origin in academic psychology. Psychologists Peter Salovey and John D. Mayer introduced it formally in a 1990 paper, defining it as the ability to monitor one's own and others' feelings and emotions, to discriminate among them, and to use this information to guide one's thinking and actions. For several years the concept remained within academic research, generating modest but growing interest.</p>
+    <p>That changed dramatically in 1995, when psychologist and science journalist Daniel Goleman published <em>Emotional Intelligence: Why It Can Matter More Than IQ.</em> The book became a global phenomenon, translating psychological research into insights that resonated with educators, business leaders, and parents alike. Goleman argued that the emotional capacities he described — grouped under the abbreviation EQ — were more predictive of life and leadership success than traditional cognitive intelligence.</p>
+    <p>Since then, the field has expanded significantly. Brené Brown's work on vulnerability and courage, Amy Edmondson's research on psychological safety, and Antonio Damasio's neuroscientific demonstration that emotional processing is inseparable from rational decision-making have all deepened our understanding of how emotions shape effective leadership in institutions of every kind.</p>
+    <h2 class="st">The Four-Branch Model</h2>
+    <p>Salovey and Mayer's foundational model describes EQ as a hierarchy of four interconnected abilities, each dependent on the one before it:</p>
+    <ul class="fl">
+      <li class="fi"><span class="fn">1</span><div class="fc"><h4>Perceiving Emotions</h4><p>Accurately identifying emotions in facial expressions, voices, images, and other stimuli. This is the foundation of all other emotional abilities — you cannot manage what you cannot first perceive.</p></div></li>
+      <li class="fi"><span class="fn">2</span><div class="fc"><h4>Using Emotions to Facilitate Thought</h4><p>Harnessing emotional states to enhance problem-solving and creativity. Different emotional conditions support different cognitive tasks; skilled leaders know how to create the right emotional environment for the work at hand.</p></div></li>
+      <li class="fi"><span class="fn">3</span><div class="fc"><h4>Understanding Emotions</h4><p>Comprehending how emotions evolve, combine, and transition over time — recognizing, for instance, that frustration often underlies aggression, or that anxiety can mask a deeper fear of inadequacy.</p></div></li>
+      <li class="fi"><span class="fn">4</span><div class="fc"><h4>Managing Emotions</h4><p>Regulating one's own emotions and influencing the emotional states of others in ways that serve goals and relationships — the most complex and developmentally advanced branch of the model.</p></div></li>
+    </ul>
+    <h2 class="st">Goleman's Five Components</h2>
+    <p>Goleman adapted the academic model for a leadership context, proposing five components that have become the most widely used framework in organizational and educational leadership development:</p>
+    <div class="dl">
+      <div class="di"><span class="dt">Self-Awareness</span><p class="dd">Knowing your own emotions, strengths, weaknesses, values, and drives — and understanding their impact on others. The foundation on which all other EQ competencies rest.</p></div>
+      <div class="di"><span class="dt">Self-Regulation</span><p class="dd">Managing your emotional responses, impulses, and disruptive feelings in ways that serve your values and goals rather than undermining them.</p></div>
+      <div class="di"><span class="dt">Motivation</span><p class="dd">The drive to achieve for the sake of achievement and meaning itself, rather than for external rewards alone — the inner compass that sustains energy through difficulty.</p></div>
+      <div class="di"><span class="dt">Empathy</span><p class="dd">Understanding and appropriately considering the emotional makeup of other people — colleagues, students, parents, and the broader community you serve.</p></div>
+      <div class="di"><span class="dt">Social Skills</span><p class="dd">The ability to manage relationships, build networks, find common ground, and build rapport — the outward expression of all internal EQ development.</p></div>
+    </div>
+    <h2 class="st">EQ and IQ — A Complementary Relationship</h2>
+    <p>A common misconception is that emotional and cognitive intelligence exist in opposition — that prioritizing EQ means devaluing intellectual rigor. Research consistently shows the opposite: they are deeply complementary capacities that reinforce each other. Antonio Damasio's neurological research provides a compelling biological argument. His work with patients who suffered damage to the prefrontal cortex showed that while their cognitive abilities remained intact, they became incapable of making sound decisions. Rational thinking, it turns out, depends on emotional input. Leaders who suppress or ignore their emotions are not being more rational — they are depriving themselves of vital information.</p>
+    <div class="box bres"><div class="boxlbl">Research Insight</div><p>Studies of school principals across multiple countries have found that those with higher emotional intelligence scores demonstrate significantly more transformational leadership behaviors, including inspirational motivation and individualized consideration of faculty needs. Higher EQ was also associated with stronger staff satisfaction and lower turnover rates (Leithwood &amp; Jantzi, 2006; adapted).</p></div>
+    <div class="box bref"><div class="boxlbl">Reflection</div><p>Think of a leader who had a significant positive impact on you. What emotional qualities did they embody? Now think of a leader whose style caused harm or dysfunction. What emotional capacities were absent? What does this comparison reveal about the true nature of effective leadership?</p></div>
+    <div class="tw"><h3>Key Takeaways — Chapter 1</h3><ul>
+      <li>EQ describes the ability to perceive, understand, manage, and use emotions intelligently — in oneself and in others.</li>
+      <li>Goleman's five-component model (self-awareness, self-regulation, motivation, empathy, social skills) is the most widely used leadership EQ framework.</li>
+      <li>EQ and IQ are complementary, not competitive; emotional processing is neurologically integral to rational decision-making.</li>
+      <li>For educational leaders, emotional intelligence is not a "soft" supplement — it is a core professional competency that predicts leadership effectiveness.</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ═══ CHAPTER 2 ═══ -->
+<section id="ch2">
+  <div class="chop">
+    <div class="chbgn">02</div>
+    <div class="chmeta"><span class="chtag">Chapter 02</span><span class="chrt">14 min read</span></div>
+    <h2 class="chttl">Self-Awareness: Knowing Your Inner World</h2>
+    <blockquote class="chq">
+      <p>"To know yourself is the beginning of all wisdom."</p>
+      <cite>— Aristotle</cite>
+    </blockquote>
+  </div>
+  <div class="chbd">
+    <h2 class="st">What Self-Awareness Really Means</h2>
+    <p>Self-awareness is the foundational EQ competency — the one on which all others rest. But it is widely misunderstood. It is not about being self-absorbed or introspective to the point of paralysis. It is about having an accurate, honest, real-time understanding of your own emotional states, beliefs, motivations, and the effect you have on the people around you.</p>
+    <p>Psychologist Tasha Eurich distinguishes between two types: <strong>internal self-awareness</strong> — how clearly we see our own values, thoughts, and feelings — and <strong>external self-awareness</strong> — how well we understand how others see us. Her research found that most people believe they are self-aware, but fewer than 15% actually are. More strikingly, people in positions of authority are often <em>less</em> self-aware than their junior counterparts, because they receive less honest, unfiltered feedback. For educational leaders, this finding deserves serious and sustained attention.</p>
+    <h2 class="st">The Johari Window</h2>
+    <p>Developed by psychologists Joseph Luft and Harry Ingham in 1955, the Johari Window maps four "panes" of self-knowledge based on what is known to oneself versus what is known to others:</p>
+    <div class="johari">
+      <div class="jcn"></div>
+      <div class="jch">Known to Others</div>
+      <div class="jch">Not Known to Others</div>
+      <div class="jrh">Known to Self</div>
+      <div class="jc jopen"><h4>Open Arena</h4><p>Known to both you and others. The foundation of authentic, transparent relationships. Expanding this window builds trust and enables genuine connection with colleagues.</p></div>
+      <div class="jc jhid"><h4>Hidden Façade</h4><p>What you know about yourself but do not share — private doubts, genuine fears about your leadership, authentic reactions to difficult situations and people.</p></div>
+      <div class="jrh">Not Known to Self</div>
+      <div class="jc jblind"><h4>Blind Spot</h4><p>What others can see that you cannot — habitual defensive patterns, the unintended effects of your words, your facial expressions under pressure.</p></div>
+      <div class="jc junkn"><h4>Unknown Area</h4><p>Undiscovered capabilities, latent fears, untapped creativity. This territory reveals itself through new challenges and honest exploration.</p></div>
+    </div>
+    <p>A primary goal of self-awareness work is to expand the Open Arena: by actively seeking feedback (shrinking the Blind Spot) and by choosing to share more authentically with trusted colleagues (shrinking the Hidden Façade). Both moves require courage — and both build the relational trust that effective educational leadership depends on.</p>
+    <h2 class="st">Emotional Triggers in Educational Settings</h2>
+    <p>Every leader carries a set of emotional triggers — situations, behaviors, or words that reliably produce strong emotional reactions. In educational environments, common triggers include being undermined in front of colleagues or students, feeling that professional judgment is being questioned, encountering apparent apathy from those whose growth you care about, or navigating bureaucratic obstacles to meaningful change.</p>
+    <p>The trouble with triggers is not that they produce emotional responses — that is human and unavoidable. The trouble arises when we react automatically, without awareness that we have been triggered. Until we can identify our triggers with precision, we cannot make conscious choices about how to respond to them. Naming is the beginning of choice.</p>
+    <div class="box bact"><div class="boxlbl">Try This — Trigger Mapping Exercise</div>
+      <p>Over the next two weeks, keep a brief emotions journal. When you notice a strong emotional reaction during your workday, write: (1) What exactly happened? (2) What story did I immediately tell myself about it? (3) What emotion arose, and where did I feel it in my body? (4) What did I do? (5) What do I wish I had done instead?</p>
+      <p>After two weeks, review your entries for patterns. What situations, people, or dynamics appear repeatedly? These recurring patterns are your primary professional triggers — and naming them is the beginning of conscious choice.</p>
+    </div>
+    <h2 class="st">Values and the Emotional Signal System</h2>
+    <p>Our strongest emotional reactions are often signals that a core value is at stake. When we feel outrage, a value around fairness or integrity has been violated. When we feel fear, a value around safety or respect is threatened. When we feel profound satisfaction, a value around excellence or meaning has been honored. Knowing your core values — not as abstract principles but as live, felt commitments that guide daily decisions — is central to self-aware leadership.</p>
+    <div class="box bref"><div class="boxlbl">Reflection</div><p>What are your five most deeply held professional values? How consistently do your daily actions align with them? When there is a gap between your values and your behavior — and there will be — what emotional signal does that gap produce? This discomfort is itself information, and a call to recalibrate.</p></div>
+    <h2 class="st">Receiving Feedback as a Leadership Practice</h2>
+    <p>Because self-awareness requires external input to remain accurate, the ability to receive feedback openly — without defensiveness, without immediately seeking to explain it away — is both a skill and a discipline. Seeking feedback well means creating regular opportunities for honest upward input; responding with visible curiosity rather than defensiveness; following up to show how feedback shaped your thinking; and genuinely thanking people for difficult observations, because sharing them required courage on their part.</p>
+    <div class="tw"><h3>Key Takeaways — Chapter 2</h3><ul>
+      <li>Self-awareness involves both internal knowledge of your emotional life and external awareness of how others experience you.</li>
+      <li>Fewer than 15% of leaders are truly self-aware — and positional authority often reduces rather than increases this capacity over time.</li>
+      <li>The Johari Window provides a practical map for expanding self-knowledge by seeking feedback and choosing authentic sharing.</li>
+      <li>Strong emotional reactions are signals about core values — learning to read these signals is itself a form of emotional intelligence.</li>
+      <li>Actively seeking honest feedback, and responding with curiosity rather than defensiveness, is one of the highest-leverage practices in a leader's repertoire.</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ═══ CHAPTER 3 ═══ -->
+<section id="ch3">
+  <div class="chop" style="background:var(--pagealt);">
+    <div class="chbgn">03</div>
+    <div class="chmeta"><span class="chtag">Chapter 03</span><span class="chrt">12 min read</span></div>
+    <h2 class="chttl">Self-Regulation: The Pause That Transforms</h2>
+    <blockquote class="chq">
+      <p>"Between stimulus and response there is a space. In that space lies our freedom and our power to choose our response. In our response lies our growth and our freedom."</p>
+      <cite>— Attributed to Viktor Frankl</cite>
+    </blockquote>
+  </div>
+  <div class="chbd">
+    <h2 class="st">The Neuroscience of Emotional Reactivity</h2>
+    <p>To understand self-regulation, it helps to understand what happens neurologically when an emotional trigger fires. The amygdala — an almond-shaped structure deep within the brain's limbic system — is the brain's primary threat-detection center. When it senses a threat, whether physical, social, or emotional, it initiates a rapid physiological cascade: elevated heart rate, heightened adrenaline, and increased blood flow to the extremities. This is the body's ancient fight-flight-freeze system, and it activates <em>before</em> the prefrontal cortex — the seat of rational thinking, perspective-taking, and impulse control — has fully processed the situation.</p>
+    <p>Daniel Goleman coined the term <strong>amygdala hijack</strong> to describe what happens when this threat response overwhelms rational processing. During a hijack, we say things we immediately regret, make decisions we later question, or withdraw in ways that damage important relationships. The behavior is fast, intense, and poorly calibrated to the actual situation.</p>
+    <p>The crucial biological fact: the amygdala hijack lasts approximately six to twenty seconds, at which point the prefrontal cortex can resume its regulatory function — if we give it the space to do so. That space is the pause.</p>
+    <div class="pq">"The pause is not passivity. In leadership, the deliberate pause is one of the most powerful responses available — because it converts reaction into choice."</div>
+    <h2 class="st">Creating the Pause — The STOP Method</h2>
+    <p>The most powerful single self-regulation skill is the <strong>pause</strong>: deliberately inserting a moment of non-reactivity between an emotional trigger and a behavioral response. This sounds deceptively simple. In practice, it requires training and the willingness to tolerate the discomfort of not responding immediately — a discomfort that feels particularly acute in high-stakes institutional settings where leaders are expected to project confidence and decisiveness.</p>
+    <div class="dl">
+      <div class="di"><span class="dt">S — Stop</span><p class="dd">Recognize that you have been triggered. Simply naming the internal state — "I'm feeling flooded right now" — activates the prefrontal cortex and begins the reregulation process. Naming is neurologically powerful.</p></div>
+      <div class="di"><span class="dt">T — Take a breath</span><p class="dd">A slow, controlled exhalation activates the parasympathetic nervous system, directly reducing physiological arousal. Even one deliberate breath meaningfully shifts your internal state and restores access to rational processing.</p></div>
+      <div class="di"><span class="dt">O — Observe</span><p class="dd">Notice your physical sensations, thoughts, and impulses — as a witness, not a judge. What is happening in your body right now? What story is your mind automatically generating? Observation creates distance from the reaction.</p></div>
+      <div class="di"><span class="dt">P — Proceed with intention</span><p class="dd">Make a deliberate, values-aligned choice about how to respond. The response is now chosen, not compelled. This single shift — from compelled to chosen — changes everything about the interaction that follows.</p></div>
+    </div>
+    <h2 class="st">Stress in Educational Leadership</h2>
+    <p>Educational leadership is objectively and persistently stressful. Leaders navigate competing demands from students, parents, faculty, administrators, and governing bodies simultaneously. They manage chronic resource constraints while maintaining ambitious educational aspirations. They absorb and process the emotional distress of everyone around them — often with limited acknowledgment that this absorption itself has a significant cost.</p>
+    <p>Research consistently shows that school principals and educational administrators report rates of burnout comparable to or exceeding those of classroom teachers, despite the additional authority their positions carry. The emotional labor of leadership — the constant work of managing one's own emotional presentation while attuning to the emotional states of others — is among the most underacknowledged forms of professional work in education.</p>
+    <p>Sustainable leadership therefore requires a proactive approach to stress management, not as self-indulgence but as professional responsibility. A dysregulated leader is a less effective leader. The emotional contagion effects of leadership are real and well-documented: a leader's unmanaged stress, anxiety, and irritability spread through an institution's culture with remarkable speed.</p>
+    <h2 class="st">Cognitive Reappraisal — Changing the Story</h2>
+    <p>Among the most research-validated self-regulation techniques is <strong>cognitive reappraisal</strong>: consciously reconsidering the meaning we assign to a situation before responding to it. Our emotional responses are not direct reactions to events; they are reactions to our <em>interpretation</em> of events. Changing the interpretation can substantially change the emotion — and therefore the range of responses available to us.</p>
+    <p>When a faculty member pushes back against a new initiative, a leader who interprets this as "resistance" or "disloyalty" will feel defensive and frustrated. A leader who reappraises it as "this person has concerns I haven't fully heard yet" will feel curious and engaged. The event is identical; the emotional consequence and range of available responses are entirely different. Cognitive reappraisal is not denial or toxic positivity — it is the discipline of holding multiple interpretations simultaneously before committing to one.</p>
+    <div class="box bact"><div class="boxlbl">Try This — The Two-Story Exercise</div>
+      <p>When you notice yourself in a reactive emotional state, try writing two distinct narratives about what is happening. The first story: the account that explains why you are upset — usually centered on another person's failings or bad intentions. The second story: an alternative account that explains the other person's behavior in the most generous, plausible terms available.</p>
+      <p>Notice how differently the two stories feel emotionally. Then ask: which account is more likely to lead to a response you will be proud of? Which one serves the relationship and the institution you are trying to build?</p>
+    </div>
+    <div class="box bres"><div class="boxlbl">Research Insight</div><p>Neuroscientist James Gross at Stanford University has conducted extensive research on emotion regulation strategies, finding that cognitive reappraisal — changing one's interpretation of a potentially emotion-eliciting situation — is more effective than suppression (simply pushing emotions down) and produces better outcomes for psychological wellbeing, relationship quality, and decision-making under pressure (Gross, 2002; adapted).</p></div>
+    <div class="tw"><h3>Key Takeaways — Chapter 3</h3><ul>
+      <li>The amygdala hijack explains why emotional triggers produce rapid, intense responses that bypass rational evaluation — and why the deliberate pause is neurologically powerful.</li>
+      <li>The STOP method (Stop, Take a breath, Observe, Proceed with intention) provides a practical in-the-moment self-regulation framework.</li>
+      <li>Stress management is a professional responsibility for educational leaders — unmanaged stress is emotionally contagious throughout an institution's culture.</li>
+      <li>Cognitive reappraisal — deliberately reconsidering the meaning of a situation before responding — is among the most research-supported self-regulation strategies available.</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ═══ CHAPTER 4 ═══ -->
+<section id="ch4">
+  <div class="chop">
+    <div class="chbgn">04</div>
+    <div class="chmeta"><span class="chtag">Chapter 04</span><span class="chrt">10 min read</span></div>
+    <h2 class="chttl">Intrinsic Motivation &amp; Resilience: Leading from Purpose</h2>
+    <blockquote class="chq">
+      <p>"It is not enough to be busy; so too are the ants. The question is: what are we busy about?"</p>
+      <cite>— Henry David Thoreau</cite>
+    </blockquote>
+  </div>
+  <div class="chbd">
+    <h2 class="st">The Motivational Core of EQ</h2>
+    <p>In Goleman's framework, motivation occupies a pivotal position between the inward-facing competencies — self-awareness and self-regulation — and the outward-facing ones — empathy and social skills. It is both a personal and organizational force: a leader's intrinsic motivation shapes their resilience and direction, and it powerfully influences the motivational climate of the entire institution they lead.</p>
+    <p>Goleman describes this component of EQ as "a passion to work for reasons that go beyond money or status — a propensity to pursue goals with energy and persistence." In educational contexts, this translates into something specific: the conviction that what happens in schools and learning communities matters deeply — that education is not merely a service industry but a profoundly moral endeavor concerned with the development of human potential and the conditions for a flourishing society.</p>
+    <h2 class="st">Autonomy, Mastery, and Purpose</h2>
+    <p>Psychologist Daniel Pink synthesized decades of motivational research in <em>Drive</em> (2009), arguing that for complex, cognitively demanding work — the kind educational leadership requires — three intrinsic motivators are most reliably powerful:</p>
+    <div class="dl">
+      <div class="di"><span class="dt">Autonomy</span><p class="dd">The desire to direct our own professional lives. Leaders and faculty who feel micromanaged lose motivation and creativity; those with genuine decision-making authority over meaningful domains sustain energy and initiative. Respecting autonomy is itself a motivational act.</p></div>
+      <div class="di"><span class="dt">Mastery</span><p class="dd">The drive to continually improve at work that matters. Leaders who are actively growing — developing new approaches, deepening expertise, expanding their emotional repertoire — sustain motivation far more readily than those who feel stagnant or unchallenged in their roles.</p></div>
+      <div class="di"><span class="dt">Purpose</span><p class="dd">The conviction that one's work contributes to something larger than oneself. In educational settings, purpose is often the most potent motivator of all — and one that wise leaders actively help every member of the community reconnect with regularly.</p></div>
+    </div>
+    <h2 class="st">Resilience — Bouncing Forward</h2>
+    <p>In educational institutions, leaders face setbacks regularly: budget decisions that eliminate carefully built programs, political pressures that override sound pedagogical judgment, failed initiatives, difficult personnel situations, community crises. Resilience — the capacity not merely to survive adversity but to continue moving forward with purpose and learning — is not a luxury. It is a survival skill and a professional obligation.</p>
+    <p>Research by Martin Seligman and Angela Duckworth on resilience and "grit" suggests that resilient people do not simply bounce back to their pre-adversity state. They often come back stronger, having integrated the insights available in difficult experience — a process psychologists call <em>post-traumatic growth.</em> For educational leaders, this means treating setbacks not as verdicts on their competence but as data about what needs to change and what they are becoming through the process of navigating difficulty.</p>
+    <h2 class="st">Sustaining Motivation Across a Career</h2>
+    <p>Educational careers are long, and the emotional demands of leadership compound over time. Leaders who sustain high motivation and genuine engagement across decades share several identifiable habits: they regularly reconnect with the original purpose that drew them to education; they invest in ongoing learning that expands rather than merely confirms their existing knowledge; they maintain close professional relationships with peers who can offer honest perspective; and they protect what might be called "renewal time" — unstructured space for reading, reflection, and experiences that restore the inner life that leadership draws so heavily upon.</p>
+    <div class="box bref"><div class="boxlbl">Reflection</div><p>What drew you originally to educational leadership? How present is that original sense of purpose in your daily work right now? If it feels distant — as it sometimes will — what specific changes to your schedule, your priorities, or your relationships might help you reconnect with it? The answer to that question is worth pursuing with urgency.</p></div>
+    <div class="box bres"><div class="boxlbl">Research Insight</div><p>A longitudinal study of educational leaders found that those who explicitly connected their daily work to a clear sense of institutional purpose reported significantly higher levels of professional satisfaction and significantly lower rates of occupational burnout, even when controlling for workload intensity. Purpose is not merely motivating — it is deeply protective against the erosion that makes long leadership careers unsustainable (Day et al., 2011; adapted).</p></div>
+    <div class="tw"><h3>Key Takeaways — Chapter 4</h3><ul>
+      <li>In EQ terms, motivation is not about external incentives but about the inner drive to achieve for reasons connected to meaning and purpose.</li>
+      <li>Pink's three motivational pillars — autonomy, mastery, and purpose — provide a practical framework for understanding and sustaining leadership energy.</li>
+      <li>Resilience is not simply bouncing back, but integrating the lessons of adversity and continuing forward with expanded capacity and clearer values.</li>
+      <li>Leaders who maintain a clear connection to purpose protect themselves against burnout — and inspire the same quality of connection in those they lead.</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ═══ CHAPTER 5 ═══ -->
+<section id="ch5">
+  <div class="chop" style="background:var(--pagealt);">
+    <div class="chbgn">05</div>
+    <div class="chmeta"><span class="chtag">Chapter 05</span><span class="chrt">13 min read</span></div>
+    <h2 class="chttl">Empathy: The Bridge Between Leaders and People</h2>
+    <blockquote class="chq">
+      <p>"I've learned that people will forget what you said, people will forget what you did, but people will never forget how you made them feel."</p>
+      <cite>— Maya Angelou</cite>
+    </blockquote>
+  </div>
+  <div class="chbd">
+    <h2 class="st">Beyond Sympathy — The Nature of True Empathy</h2>
+    <p>Empathy is one of the most discussed and most misunderstood concepts in leadership. It is routinely confused with sympathy — the feeling of pity or compassion for someone's difficulty from a position of emotional distance. Empathy is something genuinely different: the capacity to enter another person's emotional world, to understand their experience from the inside rather than the outside, without losing your own grounding in the process.</p>
+    <p>Researchers distinguish three distinct varieties of empathy, each valuable in different leadership contexts:</p>
+    <div class="dl">
+      <div class="di"><span class="dt">Cognitive Empathy</span><p class="dd">Intellectually understanding another person's perspective — knowing how they think about a situation, what concerns are shaping their response. Essential in planning, negotiation, and conflict resolution. The empathy of a skilled diplomat.</p></div>
+      <div class="di"><span class="dt">Affective Empathy</span><p class="dd">Genuinely feeling something of what another person feels — being moved by their joy, troubled by their distress. What Brené Brown describes as "feeling with people" rather than "feeling for people." Builds deep trust and authentic belonging.</p></div>
+      <div class="di"><span class="dt">Compassionate Empathy</span><p class="dd">The integration of understanding and feeling with a motivation to act — to help where help is genuinely wanted and useful. The root of effective mentoring, coaching, and the kind of institutional care that transforms communities.</p></div>
+    </div>
+    <h2 class="st">Empathy Across the Educational Community</h2>
+    <p>Educational institutions are communities of extraordinary complexity — learners, educators, families, and support staff, each carrying distinct histories, vulnerabilities, and needs. Effective educational leadership requires the capacity to empathize authentically across this full spectrum of human experience, without reducing any group to a category.</p>
+    <p>Empathizing with <strong>students</strong> means holding consistently in mind that academic performance never occurs in a vacuum — that the student who cannot concentrate has a life outside the classroom, that academic struggles are always also emotional struggles, and that the conditions for deep learning are as much emotional as they are intellectual or cognitive.</p>
+    <p>Empathizing with <strong>faculty and staff</strong> means genuinely understanding the particular stresses of educational work: the often-unacknowledged isolation of the classroom, the exhausting emotional labor of managing group dynamics, the painful tension between institutional demands and professional integrity. Teachers who feel genuinely understood by their leadership are more motivated, more creative, and more resilient.</p>
+    <p>Empathizing with <strong>parents and families</strong> means meeting people at the intersection of their deepest love and their deepest anxiety — their children's futures — and bringing a quality of steady, genuine care to that encounter, even when the interaction is difficult.</p>
+    <h2 class="st">The Art of Deep Listening</h2>
+    <p>The most visible and immediate expression of empathy in leadership practice is listening — not the impatient, performative listening of someone waiting for their turn to speak, but the full, unhurried attention that communicates with absolute clarity: <em>You matter. What you are saying matters. I am here with you in this.</em> This quality of presence transforms conversations. It changes what people are willing to say, what they allow themselves to feel, and what becomes possible between two people in a room together.</p>
+    <p>Practical principles for deep listening: maintain eye contact that communicates attention rather than evaluation; resist the impulse to respond immediately — leave genuine space between their words and yours; reflect back what you hear at the level of feeling, not just content ("It sounds like you're feeling unseen in this process"); ask open questions that invite deeper sharing rather than narrowing toward the response you already expect.</p>
+    <div class="box bact"><div class="boxlbl">Try This — The Listening Lab</div>
+      <p>In your next one-on-one conversation with a faculty member, staff colleague, or student, make a conscious commitment: listen at 90%, speak at 10%. Resist the impulse to offer solutions, interpretations, or reassurances. Simply receive what the other person is sharing, fully and without agenda.</p>
+      <p>Afterward, reflect: What did you learn that you would not have heard in a typical conversation? What shifted in the quality of the relationship? What was the experience of that much intentional silence like for you — and what does that tell you?</p>
+    </div>
+    <div class="box bres"><div class="boxlbl">Research Insight</div><p>Research on school leadership consistently finds that teachers' trust in their principal — one of the strongest predictors of school climate and student achievement — is built primarily through behaviors associated with empathetic listening: being genuinely heard, feeling that professional expertise is respected, and knowing that personal wellbeing matters to the institution's leadership (Bryk &amp; Schneider, 2002; Tschannen-Moran &amp; Gareis, 2015; adapted).</p></div>
+    <div class="tw"><h3>Key Takeaways — Chapter 5</h3><ul>
+      <li>Empathy is distinct from sympathy — it involves entering another's emotional world, not observing it from a safe distance.</li>
+      <li>Cognitive, affective, and compassionate empathy each serve different leadership functions and are developed through different practices.</li>
+      <li>Educational leaders must cultivate empathy across a wide spectrum of community members, each with distinct needs and vulnerabilities.</li>
+      <li>Deep listening is the most immediate and powerful expression of empathy in practice — and one of the most transformative leadership tools available.</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ═══ CHAPTER 6 ═══ -->
+<section id="ch6">
+  <div class="chop">
+    <div class="chbgn">06</div>
+    <div class="chmeta"><span class="chtag">Chapter 06</span><span class="chrt">13 min read</span></div>
+    <h2 class="chttl">Social Skills: The Architecture of Influence</h2>
+    <blockquote class="chq">
+      <p>"The art of communication is the language of leadership."</p>
+      <cite>— James Humes</cite>
+    </blockquote>
+  </div>
+  <div class="chbd">
+    <h2 class="st">Social Skills in the EQ Framework</h2>
+    <p>Goleman positions social skills as the outermost ring of the EQ framework — the competencies through which all internal emotional development ultimately expresses itself in the world. They are not about superficial charm or professional networking. They encompass the full range of abilities involved in building, sustaining, and leveraging authentic relationships in service of meaningful goals.</p>
+    <p>For educational leaders, key social skill competencies include <strong>influence</strong> (the ability to move people toward new ideas and commitments through skilled communication and genuine relationship, not coercion); <strong>conflict management</strong> (identifying, acknowledging, and navigating disagreements toward productive resolution); <strong>collaborative leadership</strong> (inspiring and guiding through emotional and intellectual resources, not merely positional authority); and <strong>building bonds</strong> (developing and maintaining meaningful professional relationships that endure through difficulty and institutional change).</p>
+    <h2 class="st">Influence Without Authority</h2>
+    <p>One of the most important realities of educational leadership is that most of the people whose behavior most urgently needs to shift are not technically within a leader's direct control. Faculty, staff, students, parents, and community stakeholders are all, in various ways, beyond the reach of simple hierarchical authority. Coercive authority produces compliance, not commitment — and in educational settings, compliance is almost never enough to achieve the outcomes that genuinely matter.</p>
+    <p>The most effective educational leaders are therefore skilled practitioners of <em>influence</em> — the ability to persuade, inspire, and align without relying primarily on positional power. Research on influence identifies several reliable levers that educational leaders can develop over time:</p>
+    <div class="dl">
+      <div class="di"><span class="dt">Reciprocity</span><p class="dd">People are influenced by those who have genuinely given them something of value — time, recognition, honest support during difficulty, professional resources. Invest consistently and generously before you need to draw on that relational account.</p></div>
+      <div class="di"><span class="dt">Credibility</span><p class="dd">Influence flows from a combination of expertise and trustworthiness. Leaders whose stated values and daily behavior consistently align carry an authority that no title can confer — and that no organizational restructuring can remove.</p></div>
+      <div class="di"><span class="dt">Vision</span><p class="dd">People are moved toward a compelling picture of a better future. Leaders who can articulate a vivid, specific, and emotionally resonant vision of what the institution can become inspire sustained, voluntary commitment rather than reluctant compliance.</p></div>
+      <div class="di"><span class="dt">Connection</span><p class="dd">At its deepest level, influence is relational. People are moved by those who have genuinely understood them. The empathy developed in the previous chapter is the most enduring foundation of real influence in any institution.</p></div>
+    </div>
+    <h2 class="st">Navigating Faculty Relationships</h2>
+    <p>The relationship between educational leaders and their faculty is perhaps the most consequential and most complex social dynamic in any school's ecosystem. Faculty members are highly educated professionals with deep specialized expertise, strong professional identities, and a legitimate expectation of genuine autonomy and respect. They are not employees whose primary function is to implement directives — and treating them as such reliably produces the disengagement and quiet resentment that transform good schools into merely functional ones.</p>
+    <p>Effective educational leaders understand that faculty relationships must be built on: genuine respect for professional expertise and experience — not merely formal acknowledgment of it; transparent communication about institutional direction and the reasoning behind decisions; regular individual investment — mentoring, checking in, authentic personal interest; appropriate delegation of real authority over domains within faculty expertise; and honest, timely, growth-oriented feedback delivered with care and specific attention to the individual.</p>
+    <h2 class="st">Communication as a Leadership Craft</h2>
+    <p>Beyond one-on-one relationships, educational leaders must communicate effectively across whole communities — in faculty meetings, parent forums, student assemblies, board presentations, and public communications. High-EQ communication in institutional settings means: leading with the "why" before the "what" (people commit to purpose before they commit to process); naming the emotional reality in the room before addressing the cognitive agenda ("I know many of you are uncertain about these changes — that's completely understandable, and I want to make space for that"); and consistently closing the loop — acknowledging input received, explaining decisions made, and demonstrating that community voices shaped outcomes.</p>
+    <div class="box bres"><div class="boxlbl">Research Insight</div><p>Research by Bryk and Schneider identified "relational trust" — built on mutual respect, personal regard, demonstrated competence, and behavioral integrity — as the single most important condition for school improvement. Their long-term study of Chicago elementary schools found that schools with high relational trust were dramatically more likely to show gains in student achievement, even after controlling for socioeconomic factors. Trust is not a byproduct of good leadership; it is a foundational infrastructure on which everything else depends (Bryk &amp; Schneider, 2002; adapted).</p></div>
+    <div class="tw"><h3>Key Takeaways — Chapter 6</h3><ul>
+      <li>Social skills are the outward expression of all internal EQ development — the domain where emotional intelligence becomes visible and consequential in the world.</li>
+      <li>Educational leaders must master influence without authority, since most of the people who matter most are beyond the reach of positional power.</li>
+      <li>The key levers of influence — reciprocity, credibility, vision, and genuine connection — are all relational in nature and built through consistent behavior over time.</li>
+      <li>Relational trust with faculty is not a byproduct of good leadership — it is a foundational condition for the educational outcomes that leadership exists to serve.</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ═══ CHAPTER 7 ═══ -->
+<section id="ch7">
+  <div class="chop" style="background:var(--pagealt);">
+    <div class="chbgn">07</div>
+    <div class="chmeta"><span class="chtag">Chapter 07</span><span class="chrt">12 min read</span></div>
+    <h2 class="chttl">Difficult Conversations: Navigating Tension with Grace</h2>
+    <blockquote class="chq">
+      <p>"The most important conversations are the ones we most want to avoid."</p>
+      <cite>— Douglas Stone, Bruce Patton &amp; Sheila Heen</cite>
+    </blockquote>
+  </div>
+  <div class="chbd">
+    <h2 class="st">Why Difficult Conversations Are Central to Leadership</h2>
+    <p>Educational leaders face conversations of genuine difficulty and high stakes with regularity: addressing a veteran teacher's declining performance, delivering an unwelcome institutional decision to a respected department chair, navigating a frightened and angry parent, counseling a student in genuine distress, managing an escalating conflict between two valued colleagues. These conversations are not failures or edge cases — they are intrinsic to the work of leading in any people-intensive environment.</p>
+    <p>The avoidance of necessary difficult conversations is itself a form of leadership failure — one of the quieter, less visible kinds, but no less damaging for that. Unaddressed performance problems compound over time. Unacknowledged tensions between colleagues fester into resentments that reshape the culture of a department or a school. The leader who delays a necessary difficult conversation in the name of kindness or conflict-avoidance typically produces more suffering than they prevent — they simply defer it and allow it to grow in the silence.</p>
+    <h2 class="st">The Three Conversations Framework</h2>
+    <p>Harvard Negotiation Project researchers Douglas Stone, Bruce Patton, and Sheila Heen developed a foundational insight that fundamentally reframes how we understand difficult conversations: every difficult conversation is actually three simultaneous conversations happening at once, each requiring different skills to navigate well.</p>
+    <div class="dl">
+      <div class="di"><span class="dt">The "What Happened?" Conversation</span><p class="dd">About the facts: what each party believes occurred, whose account is correct, who bears responsibility for what. Most people enter difficult conversations convinced that their account is the accurate one. Skilled navigation requires holding both accounts simultaneously and exploring each with genuine curiosity rather than prosecutorial intent.</p></div>
+      <div class="di"><span class="dt">The Feelings Conversation</span><p class="dd">Beneath the surface narrative, most difficult conversations carry a substrate of powerful emotion — hurt, fear, anger, shame — that shapes both parties' experience and behavior. Ignoring these feelings doesn't make them go away; it drives them underground, where they exert influence invisibly and destructively on everything that follows.</p></div>
+      <div class="di"><span class="dt">The Identity Conversation</span><p class="dd">At the deepest level, difficult conversations often threaten something fundamental to how we see ourselves. A critique of a teacher's instructional practice touches their identity as an educator. A negative performance review touches a leader's sense of competence and worth. Managing this identity dimension — in yourself and in the other person — is often the most important and least visible task in any genuinely difficult conversation.</p></div>
+    </div>
+    <h2 class="st">Giving Feedback with Emotional Intelligence</h2>
+    <p>One of the most common and most consequential difficult conversations in educational leadership is performance feedback: telling someone, with clarity and honesty, how their work is falling short of what is needed. Done poorly, feedback causes lasting damage to the relationship, to the recipient's confidence, and to the institutional culture. Done with emotional intelligence, it is one of the most powerful developmental gifts one professional can offer another.</p>
+    <p>A high-EQ feedback conversation: opens with genuine positive intent, making unmistakably clear that the goal is growth, not judgment; is specific and behavioral, describing observable actions rather than character attributions; actively invites the other person's perspective and account of what happened; co-creates a clear path forward rather than issuing directives; and closes with a genuine, specific expression of confidence in the person's capacity to grow from this.</p>
+    <p>The <strong>SBI Model</strong> provides a clean structure for behavioral feedback that minimizes defensiveness while maximizing clarity:</p>
+    <div class="dl">
+      <div class="di"><span class="dt">Situation</span><p class="dd">Provide the specific context: <em>"In yesterday's department meeting..."</em> Specificity prevents the defensive response that vague, generalizing feedback typically provokes, and makes the feedback immediately actionable.</p></div>
+      <div class="di"><span class="dt">Behavior</span><p class="dd">Describe the specific, observable action: <em>"...when you interrupted three different colleagues while they were speaking..."</em> Not an interpretation, not a character judgment — a behavior that can be seen, named, and changed.</p></div>
+      <div class="di"><span class="dt">Impact</span><p class="dd">Share the effect that behavior had: <em>"...I noticed the conversation shut down quickly, and two people stopped contributing for the rest of the meeting."</em> Impact connects behavior to consequences in a way that builds understanding rather than triggering defensiveness.</p></div>
+    </div>
+    <div class="box bref"><div class="boxlbl">Reflection</div><p>Think of a difficult conversation you have been avoiding or delaying. What specifically are you afraid will happen if you have it? Is that fear about the other person's reaction — or about something in your own identity? How has the delay already affected the relationship, the team, or the institution? What would it mean for your leadership to have this conversation this week?</p></div>
+    <div class="tw"><h3>Key Takeaways — Chapter 7</h3><ul>
+      <li>Avoiding necessary difficult conversations is itself a form of leadership failure — one that allows problems to compound and cultures to quietly erode.</li>
+      <li>Every difficult conversation contains three simultaneous conversations: about facts, about feelings, and about identity. Effective navigation addresses all three.</li>
+      <li>High-EQ feedback is specific, behavioral, growth-oriented, and delivered with genuine care for the person's development — not as a verdict but as a gift.</li>
+      <li>The SBI model (Situation, Behavior, Impact) provides a practical structure for feedback that builds understanding rather than triggering defensiveness.</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ═══ CHAPTER 8 ═══ -->
+<section id="ch8">
+  <div class="chop">
+    <div class="chbgn">08</div>
+    <div class="chmeta"><span class="chtag">Chapter 08</span><span class="chrt">13 min read</span></div>
+    <h2 class="chttl">Building an Emotionally Intelligent Institution</h2>
+    <blockquote class="chq">
+      <p>"If you want to go fast, go alone. If you want to go far, go together."</p>
+      <cite>— African Proverb</cite>
+    </blockquote>
+  </div>
+  <div class="chbd">
+    <h2 class="st">From Individual EQ to Institutional Culture</h2>
+    <p>The chapters preceding this one have focused primarily on what individual leaders can develop within themselves. But the ultimate test of a leader's emotional intelligence is whether it translates into the culture of the institution — whether the empathy, self-regulation, and courageous honesty developed through personal work become the shared DNA of the organization, not merely the property of one extraordinary individual.</p>
+    <p>An emotionally intelligent institution is one where people feel genuinely safe to raise concerns, admit mistakes, and offer dissenting views; where feedback flows in all directions — upward, downward, and laterally — without fear of retaliation or marginalization; where conflict is addressed directly and constructively rather than avoided, suppressed, or allowed to fester; where the emotional and mental wellbeing of all community members is recognized as an institutional responsibility; and where leadership development at every level includes emotional intelligence alongside technical competence.</p>
+    <h2 class="st">Psychological Safety — Amy Edmondson's Contribution</h2>
+    <p>Harvard Business School professor Amy Edmondson has conducted the most systematic and influential research on psychological safety in organizational settings. She defines it as "a shared belief that the team is safe for interpersonal risk-taking" — that people can speak up, offer unconventional ideas, ask naïve questions, and admit failures without fear of embarrassment, rejection, or punishment from peers or leaders.</p>
+    <p>Edmondson's research began with a counterintuitive finding: medical teams that reported <em>more</em> errors to supervisors were not worse performers than teams that reported fewer. They were better performers who worked in environments safe enough to report mistakes honestly and openly. In educational institutions, the implication is profound: error-reporting cultures are learning cultures — and they require psychological safety to exist at all.</p>
+    <p>Her framework identifies four progressive stages of psychological safety, each needing to be established before the next becomes reliably possible:</p>
+    <ul class="fl">
+      <li class="fi"><span class="fn">1</span><div class="fc"><h4>Inclusion Safety</h4><p>People feel safe being themselves in this community. They belong here as who they are, not despite who they are. This is the most foundational condition, without which all others are undermined.</p></div></li>
+      <li class="fi"><span class="fn">2</span><div class="fc"><h4>Learner Safety</h4><p>People feel safe asking questions, making mistakes, and learning in public. Vulnerability in the service of learning is welcomed, not penalized or quietly mocked.</p></div></li>
+      <li class="fi"><span class="fn">3</span><div class="fc"><h4>Contributor Safety</h4><p>People feel safe contributing their ideas and perspectives to the institution's work. Their thinking is actively wanted, taken seriously, and treated with genuine respect.</p></div></li>
+      <li class="fi"><span class="fn">4</span><div class="fc"><h4>Challenger Safety</h4><p>People feel safe questioning the status quo, challenging established assumptions, and proposing significant change — without fear that doing so threatens their standing in the community.</p></div></li>
+    </ul>
+    <h2 class="st">What Leaders Can Do to Build Psychological Safety</h2>
+    <p>Leaders cannot mandate psychological safety into existence — it cannot be decreed in a memo or created through a strategic plan. It can only be built through consistent, visible behaviors that demonstrate, over time, that safety is real and not merely claimed.</p>
+    <p><strong>Model vulnerability actively and publicly:</strong> Leaders who acknowledge uncertainty, admit mistakes with genuine equanimity, and share what they are currently learning signal that these behaviors are safe for everyone in the institution. Nothing builds psychological safety faster than a leader who says, in public and without defensiveness: "I was wrong about that — here is what I now understand differently."</p>
+    <p><strong>Reward dissent and critical thinking visibly:</strong> When a faculty member raises an inconvenient truth or challenges a leader's assumption in a meeting, the leader's response in that precise moment — visible to everyone present — teaches the entire community what is truly safe. A response of genuine curiosity and appreciation builds psychological safety; a response of visible defensiveness or subtle marginalization destroys it, sometimes irreparably.</p>
+    <p><strong>Embed wellbeing as a genuine institutional value:</strong> Building mentoring programs, ensuring access to counseling and support resources, protecting collaborative planning time, and monitoring the emotional climate of departments through regular structured check-ins signals that the institution genuinely understands and takes seriously the human dimensions of its work.</p>
+    <p><strong>Normalize not-knowing:</strong> In institutions where leaders are expected to have all the answers, admitting uncertainty feels dangerous. Leaders who regularly frame open questions — "I don't know yet, and I think that's worth exploring together" — model the intellectual humility that learning communities require.</p>
+    <div class="box bres"><div class="boxlbl">Research Insight</div><p>A meta-analysis of organizational research found that psychological safety positively predicted team learning, individual voice behavior, and innovation — and that team leader behavior was the strongest single predictor of whether psychological safety was present or absent. In educational settings, the principal or department chair's visible, daily behaviors account for more variance in staff psychological safety than any structural, policy, or environmental factor (Edmondson &amp; Lei, 2014; adapted).</p></div>
+    <h2 class="st">EQ in Hiring, Onboarding, and Professional Development</h2>
+    <p>An emotionally intelligent institution normalizes EQ as a professional expectation — not a personal bonus — by embedding it in hiring and professional development processes. This means including emotional intelligence competencies explicitly in job descriptions and interview protocols; designing onboarding experiences that introduce new staff to the institution's relational norms and emotional culture; building professional development programs that address self-awareness, feedback skills, and conflict resolution alongside technical content; and recognizing and rewarding leaders who demonstrate EQ in their daily practice, not just those who deliver short-term results.</p>
+    <div class="tw"><h3>Key Takeaways — Chapter 8</h3><ul>
+      <li>The ultimate test of a leader's EQ is whether it translates into the emotional culture of the institution — not just their personal behavior.</li>
+      <li>Psychological safety — the shared belief that interpersonal risk-taking is safe here — is the foundational condition for institutional learning and innovation.</li>
+      <li>The four stages of psychological safety (inclusion, learner, contributor, challenger) build progressively; each requires the previous stage to be established first.</li>
+      <li>Leaders create psychological safety through consistent visible behavior — modeling vulnerability, rewarding dissent, normalizing not-knowing — not through policy declarations.</li>
+      <li>Embedding EQ in hiring, onboarding, and professional development normalizes emotional intelligence as a professional expectation, not a personal bonus.</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ═══ CHAPTER 9 ═══ -->
+<section id="ch9">
+  <div class="chop" style="background:var(--pagealt);">
+    <div class="chbgn">09</div>
+    <div class="chmeta"><span class="chtag">Chapter 09</span><span class="chrt">15 min read</span></div>
+    <h2 class="chttl">The EQ Toolkit: Daily Practices for Growth</h2>
+    <blockquote class="chq">
+      <p>"We are what we repeatedly do. Excellence, then, is not an act, but a habit."</p>
+      <cite>— Aristotle</cite>
+    </blockquote>
+  </div>
+  <div class="chbd">
+    <h2 class="st">The Practice Principle</h2>
+    <p>Emotional intelligence is not developed by reading about it. It is developed through practice — consistent, intentional, reflective practice over time, in the real and often messy conditions of actual leadership work. The frameworks and concepts in this book are valuable only to the extent that they find their way into your daily behavior, your moment-to-moment choices about how to respond rather than react, how to listen rather than perform listening, how to lead from values rather than from habit.</p>
+    <p>There is no shortcut to emotional maturity. But there is a path — and it can be walked with purpose, with self-compassion, and with the support of a community of fellow practitioners who are willing to be honest with you about what they observe.</p>
+    <h2 class="st">EQ Self-Assessment</h2>
+    <p>For each statement below, rate yourself honestly on a scale of 1 (rarely or never) to 5 (consistently and reliably). Circle or mark the dots. The purpose is illumination, not a performance score. Be as honest as you are courageous.</p>
+    <div class="ac">
+      <h4>Self-Awareness</h4>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>I can name the specific emotion I am feeling in real time, not just "stressed" or "fine."</div>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>I know my primary emotional triggers and can predict when they are likely to fire.</div>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>I regularly solicit honest feedback from colleagues and act visibly on what I learn.</div>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>I understand how my mood and energy level affect the people around me.</div>
+    </div>
+    <div class="ac">
+      <h4>Self-Regulation</h4>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>When I feel strong negative emotions, I choose my response rather than react automatically.</div>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>I maintain composure and constructive presence under significant professional pressure.</div>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>I have specific, practiced strategies for managing acute stress in the moment.</div>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>I rarely say or do things in emotional moments that I later deeply regret.</div>
+    </div>
+    <div class="ac">
+      <h4>Motivation</h4>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>My daily work feels connected to a meaningful purpose larger than my role or title.</div>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>I approach professional setbacks as information and learning opportunities.</div>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>I maintain high professional standards even when external pressure or surveillance eases.</div>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>Significant challenges energize me more than they deplete me over the long term.</div>
+    </div>
+    <div class="ac">
+      <h4>Empathy</h4>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>I routinely consider how decisions will affect diverse stakeholders before implementing them.</div>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>When someone is upset, I listen fully and without judgment before offering solutions.</div>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>I notice and can accurately name emotional undercurrents in group settings.</div>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>I adjust my communication style to the emotional needs of my audience in real time.</div>
+    </div>
+    <div class="ac">
+      <h4>Social Skills</h4>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>I build genuine trust with people across different levels and roles in the institution.</div>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>I address conflict directly and constructively rather than avoiding or suppressing it.</div>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>I communicate institutional vision in ways that inspire genuine commitment, not just compliance.</div>
+      <div class="ar"><div class="rat"><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div><div class="rd"></div></div>I consistently both give and actively seek honest feedback in my professional relationships.</div>
+    </div>
+    <h2 class="st">Daily Practice Framework</h2>
+    <p>The following practices require minimal time but, when maintained consistently over weeks and months, produce measurable shifts in emotional awareness, regulation capacity, and the quality of your professional relationships.</p>
+    <div class="box bact"><div class="boxlbl">Morning Practice — 3 to 5 Minutes</div>
+      <p><strong>Before email, before the first meeting,</strong> take three to five minutes for an intention-setting practice: (1) Three slow, deep breaths to arrive fully in the present moment and leave behind whatever you were carrying before entering your professional day. (2) Name whatever emotional state you are carrying into the day — not to judge it, simply to be aware of it. A named emotion is one you can navigate; an unnamed one navigates you. (3) Set an intention: <em>How do I want to show up today?</em> Choose one quality — patience, directness, warmth, curiosity, courage — and commit to embodying it. (4) Anticipate one challenging interaction you are likely to face. How will you bring your intended quality to that specific moment?</p>
+    </div>
+    <div class="box bact"><div class="boxlbl">End-of-Day Reflection — 5 to 10 Minutes</div>
+      <p>At the close of the workday, before transitioning to personal time, spend five to ten minutes in structured reflection — not rumination, but intentional, forward-facing review: What moments today felt most emotionally charged, and what triggered them? Where did I embody my morning intention, and where did I fall short? Who did I genuinely connect with today? Who did I overlook or miss? What did I learn — about myself, about a colleague, about the institution? What would I do differently tomorrow if I had the chance?</p>
+    </div>
+    <h2 class="st">Reflective Journaling Prompts</h2>
+    <p>Use these prompts in rotation — one per week, or when a particularly challenging situation calls for deeper examination and honest processing:</p>
+    <div class="dl">
+      <div class="di"><span class="dt">Prompt 1</span><p class="dd">Describe a moment this week when you felt genuinely proud of how you handled an emotionally charged situation. What did you do, and why does it matter to you?</p></div>
+      <div class="di"><span class="dt">Prompt 2</span><p class="dd">Describe a moment when you wish you had responded differently. Without self-judgment — with only honest curiosity — what was happening inside you that shaped the response you gave?</p></div>
+      <div class="di"><span class="dt">Prompt 3</span><p class="dd">Think of someone at work you find genuinely difficult. What might their experience of working in this institution actually feel like from the inside? What might they most need from your leadership that they are not currently receiving?</p></div>
+      <div class="di"><span class="dt">Prompt 4</span><p class="dd">What fear about yourself as a leader do you most often avoid examining? What might looking directly at that fear — with honest, compassionate curiosity — give you?</p></div>
+      <div class="di"><span class="dt">Prompt 5</span><p class="dd">Imagine a version of yourself five years from now who has developed their emotional intelligence deeply and consistently. What specifically do they do differently in a difficult situation? How do the people around them experience them? What would it genuinely take to become that person?</p></div>
+    </div>
+    <h2 class="st">The Monthly 360° Check-In</h2>
+    <p>Once a month, create a structured opportunity to receive honest feedback from the people closest to your work — a trusted colleague, a supervisee, a supervisor if possible. Use three guiding questions, asked in person and with genuine openness:</p>
+    <div class="dl">
+      <div class="di"><span class="dt">Question 1</span><p class="dd">What do you observe me doing effectively as a leader? Be as specific as you can — I want to understand what is actually working, not just hear general reassurance.</p></div>
+      <div class="di"><span class="dt">Question 2</span><p class="dd">Where do you see the clearest opportunities for me to grow? What specific change would make the biggest difference to you, to the team, or to the institution?</p></div>
+      <div class="di"><span class="dt">Question 3</span><p class="dd">Is there something you have wished you could say to me but haven't been sure it was safe to? I want to hear it — and I mean that. (This is the hardest question to ask, and the most valuable to receive an honest answer to.)</p></div>
+    </div>
+    <div class="tw"><h3>Key Takeaways — Chapter 9</h3><ul>
+      <li>EQ is developed through consistent practice, not through understanding — the frameworks in this book are valuable only as they shape daily behavior.</li>
+      <li>The self-assessment across all five domains reveals your current developmental profile and guides where to focus your intentional practice.</li>
+      <li>Brief, consistent daily practices — morning intention-setting and evening reflection — produce meaningful shifts in emotional awareness and regulation capacity over time.</li>
+      <li>Reflective journaling engages the deep processing that develops self-awareness more reliably than almost any other single practice available to a working leader.</li>
+      <li>The monthly 360° check-in systematizes the honest external feedback that prevents the blind spots that accumulate with positional authority.</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ═══ CONCLUSION ═══ -->
+<section id="conclusion">
+  <div class="chop">
+    <div class="chbgn" style="font-size:220px;opacity:.04;">&#8734;</div>
+    <div class="chmeta"><span class="chtag">Conclusion</span><span class="chrt">5 min read</span></div>
+    <h2 class="chttl">The Lifelong Journey</h2>
+    <blockquote class="chq">
+      <p>"The privilege of a lifetime is to become who you truly are."</p>
+      <cite>— Carl Jung</cite>
+    </blockquote>
+  </div>
+  <div class="chbd">
+    <p>The development of emotional intelligence has no endpoint. There is no credential that marks its completion, no plateau beyond which the work becomes unnecessary, no version of maturity so advanced that the daily practice of self-awareness and self-regulation becomes effortless. Like physical fitness, musical skill, or intellectual depth, emotional maturity requires continued cultivation — and unlike those other domains, it becomes more, not less, consequential as the scope and stakes of leadership grow.</p>
+    <p>The leaders who have the deepest and most lasting positive impact on educational institutions are not necessarily the most technically brilliant, the most administratively efficient, or the most politically skilled — though they may be all of these things. They are, most reliably, the ones who know themselves with honesty and compassion; who manage their responses with wisdom and care; who bring genuine, sustained curiosity to the experience of others; and who create communities where every person feels genuinely seen, authentically valued, and fully capable of contributing their best.</p>
+    <div class="pq">"This kind of leadership cannot be sustained by effort or performance alone. It grows from the inside out — from the daily, often uncomfortable work of turning attention inward with honesty."</div>
+    <p>It grows from the courage to face what we find there without flinching away, and from the sustained commitment to let honest self-knowledge shape how we show up for the students, educators, families, and communities whose lives we have the extraordinary privilege of touching. The field of educational leadership faces real challenges — challenges of resource, policy, equity, and social change that are larger than any individual leader can resolve.</p>
+    <p>But within every educational institution, every day, there are moments in which a single person's emotional intelligence makes the difference between a student feeling seen or invisible, a teacher feeling valued or depleted, a colleague feeling trusted or managed. These moments accumulate. They become the culture. They become the institution. They become the future that those who came before us could not quite reach, but helped to make possible.</p>
+    <p>The work you have begun in these pages is among the most important work of any leader's career. May you continue it with courage, with self-compassion, and with the knowledge that every step of honest inner development ripples outward — through your institutions, through the people in your care, and into futures you will never fully see but always help to shape.</p>
+  </div>
+</section>
+
+<!-- ═══ REFERENCES ═══ -->
+<section id="refs" style="background:var(--pagealt);">
+  <div class="bs">
+    <div class="slbl">Bibliography</div>
+    <h2 class="smtt">References &amp; Further Reading</h2>
+    <p class="smst">Core works cited and recommended resources for continuing study</p>
+    <h2 class="st" style="margin-top:0;">Core Works Cited</h2>
+    <ul class="rfl">
+      <li>Bar-On, R. (1997). <em>Bar-On Emotional Quotient Inventory: Technical Manual.</em> Multi-Health Systems.</li>
+      <li>Brown, B. (2012). <em>Daring Greatly: How the Courage to Be Vulnerable Transforms the Way We Live, Love, Parent, and Lead.</em> Gotham Books.</li>
+      <li>Bryk, A. S., &amp; Schneider, B. (2002). <em>Trust in Schools: A Core Resource for Improvement.</em> Russell Sage Foundation.</li>
+      <li>Damasio, A. (1994). <em>Descartes' Error: Emotion, Reason, and the Human Brain.</em> Putnam.</li>
+      <li>Day, C., Sammons, P., Hopkins, D., et al. (2011). <em>Successful School Leadership: Linking with Learning and Achievement.</em> Open University Press.</li>
+      <li>Duckworth, A. (2016). <em>Grit: The Power of Passion and Perseverance.</em> Scribner.</li>
+      <li>Edmondson, A. C. (1999). Psychological safety and learning behavior in work teams. <em>Administrative Science Quarterly, 44</em>(2), 350–383.</li>
+      <li>Edmondson, A. C. (2018). <em>The Fearless Organization: Creating Psychological Safety in the Workplace for Learning, Innovation, and Growth.</em> Wiley.</li>
+      <li>Edmondson, A. C., &amp; Lei, Z. (2014). Psychological safety: The history, renaissance, and future of an interpersonal construct. <em>Annual Review of Organizational Psychology and Organizational Behavior, 1,</em> 23–43.</li>
+      <li>Eurich, T. (2017). <em>Insight: The Surprising Truth About How Others See Us, How We See Ourselves, and Why the Answers Matter More Than We Think.</em> Currency.</li>
+      <li>Goleman, D. (1995). <em>Emotional Intelligence: Why It Can Matter More Than IQ.</em> Bantam Books.</li>
+      <li>Goleman, D. (1998). <em>Working with Emotional Intelligence.</em> Bantam Books.</li>
+      <li>Goleman, D. (2000). Leadership that gets results. <em>Harvard Business Review, 78</em>(2), 78–90.</li>
+      <li>Gross, J. J. (2002). Emotion regulation: Affective, cognitive, and social consequences. <em>Psychophysiology, 39,</em> 281–291.</li>
+      <li>Leithwood, K., &amp; Jantzi, D. (2006). Transformational school leadership for large-scale reform. <em>School Leadership and Management, 26</em>(3), 249–272.</li>
+      <li>Luft, J., &amp; Ingham, H. (1955). <em>The Johari Window: A Graphic Model of Interpersonal Awareness.</em> Proceedings of the Western Training Laboratory in Group Development.</li>
+      <li>Mayer, J. D., Salovey, P., &amp; Caruso, D. R. (2004). Emotional intelligence: Theory, findings, and implications. <em>Psychological Inquiry, 15</em>(3), 197–215.</li>
+      <li>O'Boyle, E. H., Humphrey, R. H., Pollack, J. M., Hawver, T. H., &amp; Story, P. A. (2011). The relation between emotional intelligence and job performance: A meta-analysis. <em>Journal of Organizational Behavior, 32</em>(5), 788–818.</li>
+      <li>Pink, D. H. (2009). <em>Drive: The Surprising Truth About What Motivates Us.</em> Riverhead Books.</li>
+      <li>Salovey, P., &amp; Mayer, J. D. (1990). Emotional intelligence. <em>Imagination, Cognition and Personality, 9</em>(3), 185–211.</li>
+      <li>Scharmer, C. O. (2009). <em>Theory U: Leading from the Future as It Emerges.</em> Berrett-Koehler.</li>
+      <li>Seligman, M. E. P. (1991). <em>Learned Optimism: How to Change Your Mind and Your Life.</em> Knopf.</li>
+      <li>Stone, D., Patton, B., &amp; Heen, S. (1999). <em>Difficult Conversations: How to Discuss What Matters Most.</em> Viking.</li>
+      <li>Tschannen-Moran, M., &amp; Gareis, C. R. (2015). Faculty trust in the principal. <em>Journal of Educational Administration, 53</em>(1), 89–113.</li>
+    </ul>
+    <h2 class="st">Recommended Further Reading</h2>
+    <ul class="rfl">
+      <li>Bradberry, T., &amp; Greaves, J. (2009). <em>Emotional Intelligence 2.0.</em> TalentSmart.</li>
+      <li>Brown, B. (2018). <em>Dare to Lead: Brave Work, Tough Conversations, Whole Hearts.</em> Random House.</li>
+      <li>Dweck, C. S. (2006). <em>Mindset: The New Psychology of Success.</em> Random House.</li>
+      <li>Fullan, M. (2001). <em>Leading in a Culture of Change.</em> Jossey-Bass.</li>
+      <li>Hargreaves, A., &amp; Fink, D. (2006). <em>Sustainable Leadership.</em> Jossey-Bass.</li>
+      <li>Neff, K. (2011). <em>Self-Compassion: The Proven Power of Being Kind to Yourself.</em> William Morrow.</li>
+      <li>Seligman, M. E. P. (2011). <em>Flourish: A Visionary New Understanding of Happiness and Well-Being.</em> Free Press.</li>
+      <li>Sinek, S. (2009). <em>Start with Why: How Great Leaders Inspire Everyone to Take Action.</em> Portfolio.</li>
+      <li>Zenger, J., &amp; Folkman, J. (2002). <em>The Extraordinary Leader: Turning Good Managers into Great Leaders.</em> McGraw-Hill.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="bs">
+    <div class="auav" aria-hidden="true">RM</div>
+    <div class="auin">
+      <h2>Rayene Medabis</h2>
+      <div class="aurole">Educator &nbsp;·&nbsp; Leadership Practitioner &nbsp;·&nbsp; Researcher</div>
+      <p>Rayene Medabis is an educator, researcher, and leadership practitioner dedicated to the advancement of emotionally intelligent leadership in educational institutions. With a deep and sustained commitment to human-centered leadership development, they believe that the most enduring and meaningful change in education begins not with new policies, technologies, or organizational structures, but with leaders who have done the inner work of self-understanding — and who bring that understanding generously, consistently, and courageously to their communities.</p>
+      <p>This book represents a distillation of research, reflective practice, and professional experience — offered in the spirit of the collaborative, ever-evolving learning that it describes. It is dedicated to every educational leader who has ever stood before a difficult situation and chosen curiosity over defensiveness, connection over distance, and growth over comfort.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="ebft">
+  <p>© 2025 Rayene Medabis &nbsp;·&nbsp; All Rights Reserved &nbsp;·&nbsp; <em>Emotional Intelligence at Work: Building Self-Awareness and Social Skills for Leadership in Educational Institutions</em></p>
+</footer>
+
+</main>
+
+<script>
+// ── READING PROGRESS BAR ──
+const pgfill = document.getElementById('pgfill');
+function updatePg() {
+  const s = window.scrollY;
+  const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  pgfill.style.width = (h > 0 ? (s / h * 100) : 0) + '%';
+}
+
+// ── ACTIVE SECTION HIGHLIGHT ──
+const sbLinks = document.querySelectorAll('.sblk');
+const sections = document.querySelectorAll('section[id]');
+function highlightSection() {
+  const y = window.scrollY + 140;
+  let cur = '';
+  sections.forEach(s => { if (s.offsetTop <= y) cur = s.id; });
+  sbLinks.forEach(l => {
+    l.classList.remove('active');
+    if (l.getAttribute('href') === '#' + cur) l.classList.add('active');
+  });
+}
+
+window.addEventListener('scroll', () => { updatePg(); highlightSection(); }, { passive: true });
+
+// ── MOBILE NAVIGATION ──
+const hbg = document.getElementById('hbg');
+const sb  = document.getElementById('sb');
+const ovl = document.getElementById('ovl');
+function openNav()  { sb.classList.add('open');  ovl.classList.add('open');  document.body.style.overflow = 'hidden'; }
+function closeNav() { sb.classList.remove('open'); ovl.classList.remove('open'); document.body.style.overflow = ''; }
+hbg.addEventListener('click', () => sb.classList.contains('open') ? closeNav() : openNav());
+ovl.addEventListener('click', closeNav);
+sb.querySelectorAll('.sblk').forEach(l => l.addEventListener('click', () => { if (window.innerWidth <= 940) closeNav(); }));
+
+// ── SMOOTH SCROLL ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 16, behavior: 'smooth' });
+    }
+  });
+});
+
+// ── INTERACTIVE RATING DOTS ──
+document.querySelectorAll('.ar').forEach(row => {
+  const dots = row.querySelectorAll('.rd');
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      dots.forEach((d, j) => d.classList.toggle('on', j <= i));
+    });
+  });
+});
+
+// Init
+updatePg();
+highlightSection();
+</script>
+</body>
+</html>
