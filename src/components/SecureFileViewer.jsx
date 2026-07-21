@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import mammoth from "mammoth";
 
 const PROTECTION_SNIPPET = `
 <style>
@@ -41,6 +42,31 @@ const PROTECTION_SNIPPET = `
 </script>
 `;
 
+// Minimal readable shell for converted docx content, since mammoth only
+// returns body-level HTML (no <head>, no styling of its own).
+const DOCX_SHELL = (bodyHtml) => `
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Georgia, 'Times New Roman', serif;
+        color: #222;
+        line-height: 1.65;
+        max-width: 780px;
+        margin: 0 auto;
+        padding: 2.5rem 1.5rem 4rem;
+      }
+      img { max-width: 100%; height: auto; }
+      table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+      table, th, td { border: 1px solid #ddd; }
+      th, td { padding: 0.5rem 0.75rem; text-align: left; }
+      h1, h2, h3, h4 { font-family: inherit; line-height: 1.3; }
+    </style>
+  </head>
+  <body>${bodyHtml}</body>
+</html>
+`;
+
 const IMAGE_EXTENSIONS = ["png", "jpg", "jpeg", "gif", "webp", "svg", "avif"];
 
 function getExtension(src) {
@@ -56,12 +82,15 @@ export default function SecureFileViewer({ src, title, onClose }) {
 
   const ext = getExtension(src);
   const isHtml = ext === "html" || ext === "htm";
+  const isDocx = ext === "docx";
+  const isLegacyDoc = ext === "doc"; // old binary .doc — mammoth can't read this
   const isImage = IMAGE_EXTENSIONS.includes(ext);
   const isPdf = ext === "pdf";
+  const needsInjectedDoc = isHtml || isDocx;
 
   useEffect(() => {
-    // Only HTML files need the fetch-and-inject treatment
-    if (!isHtml) {
+    // Only HTML and docx need the fetch-and-inject treatment
+    if (!needsInjectedDoc) {
       setDoc(null);
       setError(false);
       return;
@@ -79,22 +108,38 @@ export default function SecureFileViewer({ src, title, onClose }) {
       ? `/api/proxy-ebook?url=${encodeURIComponent(src)}`
       : src;
 
-    fetch(fetchUrl)
-      .then((res) => {
-        if (!res.ok) throw new Error("fetch failed");
-        return res.text();
-      })
-      .then((html) => {
-        if (cancelled) return;
-        const injected = /<\/head>/i.test(html)
-          ? html.replace(/<\/head>/i, `${PROTECTION_SNIPPET}</head>`)
-          : PROTECTION_SNIPPET + html;
-        setDoc(injected);
-      })
-      .catch(() => { if (!cancelled) setError(true); });
+    if (isHtml) {
+      fetch(fetchUrl)
+        .then((res) => {
+          if (!res.ok) throw new Error("fetch failed");
+          return res.text();
+        })
+        .then((html) => {
+          if (cancelled) return;
+          const injected = /<\/head>/i.test(html)
+            ? html.replace(/<\/head>/i, `${PROTECTION_SNIPPET}</head>`)
+            : PROTECTION_SNIPPET + html;
+          setDoc(injected);
+        })
+        .catch(() => { if (!cancelled) setError(true); });
+    } else if (isDocx) {
+      fetch(fetchUrl)
+        .then((res) => {
+          if (!res.ok) throw new Error("fetch failed");
+          return res.arrayBuffer();
+        })
+        .then((buffer) => mammoth.convertToHtml({ arrayBuffer: buffer }))
+        .then((result) => {
+          if (cancelled) return;
+          const shell = DOCX_SHELL(result.value);
+          const injected = shell.replace(/<\/head>/i, `${PROTECTION_SNIPPET}</head>`);
+          setDoc(injected);
+        })
+        .catch(() => { if (!cancelled) setError(true); });
+    }
 
     return () => { cancelled = true; };
-  }, [src, isHtml]);
+  }, [src, isHtml, isDocx, needsInjectedDoc]);
 
   useEffect(() => {
     function blockKeys(e) {
@@ -110,7 +155,7 @@ export default function SecureFileViewer({ src, title, onClose }) {
   }, []);
 
   function renderContent() {
-    if (isHtml) {
+    if (needsInjectedDoc) {
       if (error) {
         return (
           <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af" }}>
@@ -170,6 +215,18 @@ export default function SecureFileViewer({ src, title, onClose }) {
           title={title}
           style={{ flex: 1, border: "none", width: "100%" }}
         />
+      );
+    }
+
+    if (isLegacyDoc) {
+      return (
+        <div style={{
+          flex: 1, display: "flex", flexDirection: "column", gap: "0.5rem",
+          alignItems: "center", justifyContent: "center", color: "#9ca3af",
+          fontFamily: "var(--font-mono)", fontSize: "0.8rem", textAlign: "center", padding: "2rem",
+        }}>
+          <span>Legacy .doc files can't be previewed here — please re-save as .docx.</span>
+        </div>
       );
     }
 
