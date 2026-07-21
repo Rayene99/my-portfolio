@@ -1,6 +1,6 @@
 ---
-title: AI & Technology Integration for English Language Teachers — A Six-Week
-  Programme
+title: "AI & Technology Integration for English Language Teachers: A Six-Week
+  Programme"
 image: /images/screenshot-2026-07-21-191827.png
 file: /images/ai_technology_pedagogy_syllabus.pdf
 tags:
