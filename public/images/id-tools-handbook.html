@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instructional Design Tools Handbook — Rayene Medabis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --yellow:     #FFF9C4;
+      --yellow-mid: #FFE566;
+      --pink:       #FFD6E0;
+      --pink-mid:   #FFB3C6;
+      --olive:      #D4E6B5;
+      --olive-mid:  #A8C97A;
+      --cherry:     #C62828;
+      --cherry-hov: #B71C1C;
+      --white:      #FFFFFF;
+      --off-white:  #FAF9F7;
+      --dark:       #1C1C1C;
+      --text:       #2D2D2D;
+      --muted:      #787878;
+      --border:     #E8E4DC;
+      --sidebar-w:  275px;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--off-white);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── PROGRESS BAR ── */
+    #progress-bar {
+      position: fixed; top: 0; left: 0;
+      height: 3px; width: 0%;
+      background: var(--cherry);
+      z-index: 1000;
+      transition: width 0.08s linear;
+    }
+
+    /* ── LAYOUT ── */
+    .layout { display: flex; min-height: 100vh; }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      position: fixed; top: 0; left: 0;
+      height: 100vh; overflow-y: auto;
+      background: var(--white);
+      border-right: 1px solid var(--border);
+      z-index: 200;
+      display: flex; flex-direction: column;
+    }
+
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .sidebar-brand {
+      padding: 22px 22px 18px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .sidebar-brand .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 900;
+      line-height: 1.15; color: var(--dark);
+    }
+    .sidebar-brand .logo em { color: var(--cherry); font-style: italic; }
+    .sidebar-brand .by {
+      margin-top: 5px;
+      font-size: 10.5px; font-weight: 600;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .nav-group { padding: 10px 0 4px; }
+    .nav-label {
+      padding: 0 22px 5px;
+      font-size: 9.5px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 7px 22px;
+      font-size: 12.5px; font-weight: 500;
+      color: var(--text); text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: background 0.12s, color 0.12s, border-color 0.12s;
+      cursor: pointer;
+    }
+    .nav-item:hover { background: var(--yellow); color: var(--cherry); border-left-color: var(--yellow-mid); }
+    .nav-item.active { background: var(--pink); color: var(--cherry); border-left-color: var(--cherry); font-weight: 700; }
+    .nav-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; color: var(--cherry);
+      min-width: 20px; flex-shrink: 0;
+    }
+
+    /* ── MAIN ── */
+    .main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; overflow: hidden;
+      padding: 72px 64px 88px;
+      background: linear-gradient(140deg, var(--yellow) 0%, var(--pink) 55%, var(--olive) 100%);
+    }
+    .hero-orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(60px); opacity: 0.55;
+      pointer-events: none;
+    }
+    .orb1 { width: 480px; height: 480px; background: var(--pink);    top: -160px; right: 80px; }
+    .orb2 { width: 320px; height: 320px; background: var(--olive);   bottom: -100px; right: 40px; }
+    .orb3 { width: 220px; height: 220px; background: var(--yellow);  top: 60px; right: 420px; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--cherry); color: var(--white);
+      font-size: 10.5px; font-weight: 700;
+      letter-spacing: 0.13em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 20px; margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 4.5vw, 60px);
+      font-weight: 900; line-height: 1.08;
+      color: var(--dark); max-width: 640px;
+      margin-bottom: 18px;
+    }
+    .hero h1 .accent { color: var(--cherry); font-style: italic; }
+
+    .hero-desc {
+      font-size: 15.5px; color: #444;
+      max-width: 520px; line-height: 1.75;
+      margin-bottom: 36px;
+    }
+
+    .hero-meta { display: flex; align-items: center; gap: 36px; flex-wrap: wrap; }
+
+    .hero-author { display: flex; align-items: center; gap: 13px; }
+    .author-avatar {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: var(--cherry); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 15px; font-weight: 900; flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(198,40,40,0.30);
+    }
+    .author-name { font-size: 14px; font-weight: 700; color: var(--dark); }
+    .author-role { font-size: 11.5px; color: var(--muted); }
+
+    .hero-stats { display: flex; gap: 28px; }
+    .hero-stat .num {
+      display: block; font-family: 'Space Mono', monospace;
+      font-size: 26px; font-weight: 700; color: var(--cherry); line-height: 1;
+    }
+    .hero-stat .lbl {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: var(--muted); margin-top: 3px;
+    }
+
+    /* ── HOW-TO-USE BANNER ── */
+    .htu-banner {
+      background: var(--cherry); color: var(--white);
+      padding: 18px 64px; display: flex; align-items: center; gap: 36px;
+    }
+    .htu-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 13.5px; font-weight: 700;
+      min-width: 110px; line-height: 1.4;
+    }
+    .htu-steps { display: flex; gap: 28px; flex-wrap: wrap; }
+    .htu-step { display: flex; align-items: flex-start; gap: 9px; font-size: 12px; line-height: 1.55; max-width: 180px; }
+    .htu-n {
+      min-width: 20px; height: 20px; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.45);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* ── CHAPTERS ── */
+    .chapter {
+      padding: 64px;
+      border-bottom: 1px solid var(--border);
+    }
+    .ch-white  { background: var(--white); }
+    .ch-yellow { background: var(--yellow); }
+    .ch-pink   { background: var(--pink); }
+    .ch-olive  { background: var(--olive); }
+    .ch-cherry { background: var(--cherry); }
+
+    .chapter-header {
+      display: flex; align-items: flex-start; gap: 18px;
+      margin-bottom: 40px;
+    }
+    .ch-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 80px; font-weight: 900;
+      line-height: 0.82; color: transparent;
+      -webkit-text-stroke: 2px var(--cherry);
+      opacity: 0.22; min-width: 88px;
+      user-select: none;
+    }
+    .ch-meta .eyebrow {
+      font-size: 10.5px; font-weight: 700;
+      letter-spacing: 0.13em; text-transform: uppercase;
+      color: var(--cherry); margin-bottom: 7px;
+    }
+    .ch-meta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px; font-weight: 700;
+      color: var(--dark); line-height: 1.2;
+    }
+    .ch-meta .ch-desc {
+      font-size: 14px; color: var(--muted);
+      margin-top: 7px; max-width: 580px; line-height: 1.65;
+    }
+
+    .ch-cherry .ch-num   { -webkit-text-stroke-color: rgba(255,255,255,0.35); }
+    .ch-cherry .eyebrow  { color: rgba(255,255,255,0.7); }
+    .ch-cherry h2        { color: var(--white); }
+    .ch-cherry .ch-desc  { color: rgba(255,255,255,0.75); }
+
+    /* ── STEP CARDS ── */
+    .steps { display: flex; flex-direction: column; position: relative; }
+    .steps::before {
+      content: ''; position: absolute;
+      left: 23px; top: 0; bottom: 0; width: 2px;
+      background: var(--border); z-index: 0;
+    }
+    .step {
+      display: flex; gap: 22px; align-items: flex-start;
+      padding: 20px 0; position: relative; z-index: 1;
+    }
+    .step-dot {
+      min-width: 48px; height: 48px; border-radius: 50%;
+      background: var(--cherry); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 12.5px; font-weight: 700;
+      box-shadow: 0 3px 12px rgba(198,40,40,0.28);
+      position: relative; z-index: 2; flex-shrink: 0;
+    }
+    .step-body { flex: 1; padding-top: 7px; }
+    .step-body h4 { font-size: 15.5px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+    .step-body p  { font-size: 13.5px; color: #555; line-height: 1.72; }
+    .step-tag {
+      display: inline-block;
+      background: rgba(198,40,40,0.10); color: var(--cherry);
+      font-size: 9.5px; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 20px; margin-bottom: 6px;
+    }
+    strong { font-weight: 700; color: var(--dark); }
+
+    /* ── CALLOUTS ── */
+    .callout {
+      display: flex; gap: 15px; align-items: flex-start;
+      border-radius: 12px; padding: 18px 22px; margin: 22px 0;
+    }
+    .callout-tip     { background: var(--olive); border-left: 4px solid var(--olive-mid); }
+    .callout-warn    { background: var(--pink); border-left: 4px solid var(--pink-mid); }
+    .callout-info    { background: var(--yellow); border-left: 4px solid var(--yellow-mid); }
+    .callout-icon    { font-size: 19px; flex-shrink: 0; margin-top: 1px; }
+    .callout-text strong { display: block; font-size: 13px; font-weight: 700; margin-bottom: 4px; color: var(--dark); }
+    .callout-text p  { font-size: 13px; color: #555; line-height: 1.65; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      display: flex; align-items: center; gap: 14px; margin: 36px 0;
+    }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .divider span {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--cherry); white-space: nowrap;
+    }
+
+    /* ── TOOL CARDS GRID ── */
+    .tool-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+    .tool-card {
+      background: var(--white); border-radius: 16px;
+      padding: 22px; border: 1px solid var(--border);
+      transition: transform 0.18s, box-shadow 0.18s;
+    }
+    .tool-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.08); }
+    .tool-icon {
+      width: 46px; height: 46px; border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 14px;
+    }
+    .tool-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 7px; }
+    .tool-card p  { font-size: 12.5px; color: var(--muted); line-height: 1.65; }
+
+    /* ── TAGS ── */
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .tag {
+      font-size: 10.5px; font-weight: 600;
+      padding: 3px 11px; border-radius: 20px;
+      background: var(--yellow); color: #555;
+    }
+    .tag.pink   { background: var(--pink); }
+    .tag.olive  { background: var(--olive); }
+    .tag.cherry { background: var(--cherry); color: var(--white); }
+
+    /* ── COMPARISON TABLE ── */
+    .table-wrap { overflow-x: auto; margin-top: 24px; border-radius: 12px; border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    thead th {
+      background: var(--dark); color: var(--white);
+      padding: 13px 15px; text-align: left;
+      font-weight: 600; font-size: 11px; letter-spacing: 0.05em;
+    }
+    tbody td { padding: 11px 15px; border-bottom: 1px solid var(--border); color: var(--text); }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:nth-child(even) td { background: var(--off-white); }
+    .yes    { color: #37A72F; font-weight: 700; }
+    .no     { color: var(--cherry); font-weight: 700; }
+    .part   { color: #D97706; font-weight: 700; }
+
+    /* ── CONCEPT CARDS ── */
+    .concept-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 18px; }
+    .concept-card {
+      background: var(--white); border-radius: 14px;
+      padding: 22px; border: 1px solid var(--border);
+    }
+    .concept-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 34px; font-weight: 900; color: var(--cherry);
+      line-height: 1; margin-bottom: 8px;
+    }
+    .concept-card h4 { font-size: 14.5px; font-weight: 700; margin-bottom: 7px; }
+    .concept-card p  { font-size: 13px; color: #555; line-height: 1.65; }
+
+    /* ── ACCORDION ── */
+    .accordion { display: flex; flex-direction: column; gap: 8px; margin: 22px 0; }
+    .acc-item {
+      background: var(--white); border-radius: 11px;
+      border: 1px solid var(--border); overflow: hidden;
+    }
+    .acc-header {
+      padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; user-select: none;
+      font-size: 13.5px; font-weight: 600; color: var(--dark);
+      transition: background 0.14s;
+    }
+    .acc-header:hover { background: var(--yellow); }
+    .acc-arrow { font-size: 11px; color: var(--cherry); transition: transform 0.22s; flex-shrink: 0; }
+    .acc-item.open .acc-arrow { transform: rotate(180deg); }
+    .acc-body {
+      overflow: hidden; max-height: 0;
+      transition: max-height 0.32s ease, padding 0.22s;
+      padding: 0 20px; font-size: 13.5px; color: #555;
+    }
+    .acc-item.open .acc-body { max-height: 1200px; padding: 4px 20px 20px; }
+
+    /* inner steps (inside accordion — no connector line) */
+    .inner-steps { display: flex; flex-direction: column; gap: 14px; margin-top: 12px; }
+    .inner-step { display: flex; gap: 14px; align-items: flex-start; }
+    .inner-dot {
+      min-width: 30px; height: 30px; border-radius: 50%;
+      background: var(--cherry); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .inner-body h4 { font-size: 13.5px; font-weight: 700; margin-bottom: 4px; color: var(--dark); }
+    .inner-body p  { font-size: 12.5px; color: #555; line-height: 1.65; }
+
+    /* ── SUB-SECTION HEADER ── */
+    .sub-hdr {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--white); border-radius: 12px;
+      padding: 15px 20px; border: 1px solid var(--border);
+      margin-bottom: 22px;
+    }
+    .sub-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .sub-hdr h3 { font-size: 16px; font-weight: 700; color: var(--dark); }
+    .sub-hdr p  { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* ── SHORTCUT GRID ── */
+    .shortcut-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 7px; margin-top: 12px;
+    }
+    .shortcut-row {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--off-white); padding: 9px 12px;
+      border-radius: 8px; font-size: 12px;
+    }
+    kbd {
+      font-family: 'Space Mono', monospace; font-size: 10px;
+      background: var(--white); border: 1px solid var(--border);
+      padding: 2px 8px; border-radius: 5px; color: var(--cherry);
+    }
+
+    /* ── PLATFORM CARDS ── */
+    .platform-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 22px; }
+    .platform-card {
+      background: var(--white); border-radius: 14px;
+      padding: 22px; border: 1px solid var(--border);
+    }
+    .platform-emoji { font-size: 28px; margin-bottom: 10px; display: block; }
+    .platform-card h4 { font-size: 14.5px; font-weight: 700; margin-bottom: 7px; }
+    .platform-card p  { font-size: 12.5px; color: var(--muted); line-height: 1.65; }
+
+    /* ── RESOURCES GRID ── */
+    .res-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 22px; }
+    .res-card {
+      background: var(--white); border-radius: 12px;
+      padding: 20px; border: 1px solid var(--border);
+    }
+    .res-type {
+      font-size: 9.5px; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: var(--cherry); margin-bottom: 6px;
+    }
+    .res-card h4 { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; }
+    .res-card p  { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+    /* ── INFO BOX ── */
+    .info-box {
+      background: var(--white); border-radius: 12px;
+      padding: 22px 24px; border: 1px solid var(--border);
+      margin: 18px 0;
+    }
+    .info-box h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; color: var(--dark); }
+    .info-box p  { font-size: 13.5px; color: #555; line-height: 1.7; }
+
+    /* ── FILE TREE ── */
+    .file-tree {
+      font-family: 'Space Mono', monospace;
+      font-size: 11.5px; color: #555;
+      line-height: 2; background: var(--off-white);
+      border-radius: 10px; padding: 16px 20px;
+      margin-top: 12px; overflow-x: auto;
+    }
+
+    /* ── CHECKLIST ── */
+    .checklist-box {
+      background: rgba(255,255,255,0.11); border-radius: 12px;
+      padding: 22px; border: 1px solid rgba(255,255,255,0.22);
+    }
+    .checklist-box h3 { font-size: 14.5px; font-weight: 700; color: var(--white); margin-bottom: 14px; }
+    .checklist { list-style: none; }
+    .checklist li {
+      display: flex; align-items: flex-start; gap: 11px;
+      padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.12);
+      font-size: 13px;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist input[type="checkbox"] {
+      width: 16px; height: 16px; accent-color: var(--yellow);
+      cursor: pointer; margin-top: 3px; flex-shrink: 0;
+    }
+    .checklist label { cursor: pointer; color: rgba(255,255,255,0.92); line-height: 1.55; }
+    .checklist input:checked + label { text-decoration: line-through; color: rgba(255,255,255,0.38); }
+    .checklist-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 18px; margin-top: 8px;
+    }
+
+    /* ── ADDIE FULL ROW ── */
+    .addie-full {
+      background: var(--cherry); border-radius: 14px;
+      padding: 22px; margin-top: 14px;
+    }
+    .addie-full .concept-letter { color: rgba(255,255,255,0.55); }
+    .addie-full h4 { color: var(--white); font-size: 14.5px; font-weight: 700; margin-bottom: 6px; }
+    .addie-full p  { color: rgba(255,255,255,0.82); font-size: 13px; line-height: 1.65; }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--dark); color: rgba(255,255,255,0.55);
+      padding: 44px 64px; text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 900; color: var(--white);
+      margin-bottom: 7px;
+    }
+    .footer-logo em { color: var(--cherry); }
+    .footer p  { font-size: 13px; margin-bottom: 18px; }
+    .footer-author {
+      display: inline-block;
+      background: var(--cherry); color: var(--white);
+      font-size: 11.5px; font-weight: 700;
+      padding: 5px 18px; border-radius: 20px; margin-bottom: 28px;
+    }
+    .footer-copy { font-size: 11.5px; color: rgba(255,255,255,0.3); margin-top: 12px; }
+
+    /* ── MOBILE ── */
+    .mob-toggle {
+      display: none; position: fixed;
+      top: 14px; left: 14px; z-index: 300;
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--cherry); color: var(--white);
+      border: none; font-size: 18px; cursor: pointer;
+      align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(198,40,40,0.35);
+    }
+
+    @media (max-width: 820px) {
+      .mob-toggle { display: flex; }
+      .sidebar { transform: translateX(-100%); transition: transform 0.27s ease; }
+      .sidebar.open { transform: translateX(0); }
+      .main { margin-left: 0; }
+      .hero, .chapter, .htu-banner, .footer { padding-left: 24px; padding-right: 24px; }
+      .tool-grid, .concept-grid, .platform-grid, .res-grid { grid-template-columns: 1fr; }
+      .shortcut-grid, .checklist-grid { grid-template-columns: 1fr; }
+      .htu-banner { flex-direction: column; align-items: flex-start; }
+      .htu-steps  { flex-direction: column; gap: 12px; }
+      .hero-meta  { flex-direction: column; align-items: flex-start; gap: 18px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- Mobile toggle -->
+<button class="mob-toggle" onclick="toggleSidebar()" aria-label="Toggle navigation">☰</button>
+
+<div class="layout">
+
+  <!-- ═══════════ SIDEBAR ═══════════ -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo"><em>ID</em> Tools<br>Handbook</div>
+      <div class="by">by Rayene Medabis</div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Introduction</div>
+      <a class="nav-item" href="#welcome"><span class="nav-num">00</span>Welcome</a>
+      <a class="nav-item" href="#overview"><span class="nav-num">—</span>Tools at a Glance</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Foundations</div>
+      <a class="nav-item" href="#ch1"><span class="nav-num">01</span>ID Fundamentals</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Authoring Tools</div>
+      <a class="nav-item" href="#ch2"><span class="nav-num">02</span>Articulate 360</a>
+      <a class="nav-item" href="#ch5"><span class="nav-num">05</span>Adobe Captivate</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Design Tools</div>
+      <a class="nav-item" href="#ch3"><span class="nav-num">03</span>Figma</a>
+      <a class="nav-item" href="#ch4"><span class="nav-num">04</span>Canva</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Collaboration</div>
+      <a class="nav-item" href="#ch6"><span class="nav-num">06</span>Google Workspace</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Deployment</div>
+      <a class="nav-item" href="#ch7"><span class="nav-num">07</span>LMS Platforms</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Best Practices</div>
+      <a class="nav-item" href="#ch8"><span class="nav-num">08</span>Accessibility</a>
+      <a class="nav-item" href="#ch9"><span class="nav-num">09</span>Resources</a>
+      <a class="nav-item" href="#checklist"><span class="nav-num">✓</span>Final Checklist</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════ MAIN ═══════════ -->
+  <main class="main">
+
+    <!-- ── HERO ── -->
+    <section id="welcome" class="hero">
+      <div class="hero-orb orb1"></div>
+      <div class="hero-orb orb2"></div>
+      <div class="hero-orb orb3"></div>
+
+      <div class="hero-badge">📚 Step-by-Step Handbook</div>
+
+      <h1>The Instructional<br>Designer's <span class="accent">Tool Guide</span></h1>
+
+      <p class="hero-desc">A hands-on, beginner-friendly handbook walking you through the most powerful tools in instructional design — from wireframing your first idea in Figma to publishing a polished course on your LMS.</p>
+
+      <div class="hero-meta">
+        <div class="hero-author">
+          <div class="author-avatar">RM</div>
+          <div>
+            <div class="author-name">Rayene Medabis</div>
+            <div class="author-role">Instructional Designer</div>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><span class="num">7</span><span class="lbl">Tools</span></div>
+          <div class="hero-stat"><span class="num">9</span><span class="lbl">Chapters</span></div>
+          <div class="hero-stat"><span class="num">60+</span><span class="lbl">Steps</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HOW TO USE ── -->
+    <div class="htu-banner">
+      <div class="htu-title">How to use<br>this handbook</div>
+      <div class="htu-steps">
+        <div class="htu-step"><div class="htu-n">1</div><span>Read Chapter 01 first — ID theory before any tool</span></div>
+        <div class="htu-step"><div class="htu-n">2</div><span>Follow chapters in order, or jump to your tool</span></div>
+        <div class="htu-step"><div class="htu-n">3</div><span>Open the tool alongside this handbook and follow each step</span></div>
+        <div class="htu-step"><div class="htu-n">4</div><span>Run the Final Checklist before every launch</span></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         CH 00 — TOOLS OVERVIEW
+    ══════════════════════════════════ -->
+    <section id="overview" class="chapter ch-white">
+      <div class="chapter-header">
+        <div class="ch-num">00</div>
+        <div class="ch-meta">
+          <div class="eyebrow">At a Glance</div>
+          <h2>Tools We Cover</h2>
+          <p class="ch-desc">Seven essential tools that cover the full instructional design workflow — from content planning all the way to learner delivery.</p>
+        </div>
+      </div>
+
+      <div class="tool-grid">
+        <div class="tool-card">
+          <div class="tool-icon" style="background:var(--pink)">📝</div>
+          <h3>Articulate 360</h3>
+          <p>The industry standard for e-learning authoring. Includes Storyline for custom interactives and Rise for rapid mobile-ready development.</p>
+          <div class="tags"><span class="tag cherry">Industry Standard</span><span class="tag">Authoring</span></div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon" style="background:var(--olive)">🎨</div>
+          <h3>Figma</h3>
+          <p>A collaborative design tool used to wireframe, storyboard, and prototype your learning experiences before building in an authoring tool.</p>
+          <div class="tags"><span class="tag olive">Design</span><span class="tag">Wireframing</span></div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon" style="background:var(--yellow)">🖼️</div>
+          <h3>Canva</h3>
+          <p>Quick, template-driven tool for creating visuals: infographics, job aids, worksheets, presentations, and branded learning materials.</p>
+          <div class="tags"><span class="tag">Visuals</span><span class="tag pink">Templates</span></div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon" style="background:var(--pink)">🎬</div>
+          <h3>Adobe Captivate</h3>
+          <p>Powerful for software simulations, responsive design, and immersive VR/360° experiences. Best when you need to record a software walk-through.</p>
+          <div class="tags"><span class="tag">Simulations</span><span class="tag pink">Responsive</span></div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon" style="background:var(--olive)">📊</div>
+          <h3>Google Workspace</h3>
+          <p>Docs, Slides, and Forms for content development, stakeholder collaboration, needs analysis surveys, and project file organization.</p>
+          <div class="tags"><span class="tag">Free</span><span class="tag olive">Collaboration</span></div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon" style="background:var(--yellow)">🏫</div>
+          <h3>LMS Platforms</h3>
+          <p>Learning Management Systems like Moodle, Canvas, and TalentLMS are where your learners access, complete, and are tracked in courses.</p>
+          <div class="tags"><span class="tag">Deployment</span><span class="tag">SCORM</span></div>
+        </div>
+      </div>
+
+      <div class="divider"><span>Tool Comparison</span></div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Tool</th>
+              <th>Cost</th>
+              <th>Learning Curve</th>
+              <th>Interactives</th>
+              <th>SCORM Export</th>
+              <th>Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Articulate Storyline</strong></td>
+              <td>$1,299/yr</td>
+              <td>Medium</td>
+              <td><span class="yes">●●●</span></td>
+              <td><span class="yes">✓</span></td>
+              <td>Custom e-learning</td>
+            </tr>
+            <tr>
+              <td><strong>Articulate Rise</strong></td>
+              <td>Included in 360</td>
+              <td>Low</td>
+              <td><span class="part">●●</span></td>
+              <td><span class="yes">✓</span></td>
+              <td>Fast, responsive courses</td>
+            </tr>
+            <tr>
+              <td><strong>Figma</strong></td>
+              <td>Free / $12+/mo</td>
+              <td>Medium</td>
+              <td><span class="part">●●</span></td>
+              <td><span class="no">✗</span></td>
+              <td>Wireframing & design</td>
+            </tr>
+            <tr>
+              <td><strong>Canva</strong></td>
+              <td>Free / $15/mo</td>
+              <td>Very Low</td>
+              <td><span class="part">●</span></td>
+              <td><span class="no">✗</span></td>
+              <td>Visual learning materials</td>
+            </tr>
+            <tr>
+              <td><strong>Adobe Captivate</strong></td>
+              <td>$33/mo</td>
+              <td>High</td>
+              <td><span class="yes">●●●</span></td>
+              <td><span class="yes">✓</span></td>
+              <td>Software simulations</td>
+            </tr>
+            <tr>
+              <td><strong>Google Workspace</strong></td>
+              <td>Free / $6+/mo</td>
+              <td>Very Low</td>
+              <td><span class="part">●</span></td>
+              <td><span class="no">✗</span></td>
+              <td>Content dev & collaboration</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         CH 01 — ID FOUNDATIONS
+    ══════════════════════════════════ -->
+    <section id="ch1" class="chapter ch-yellow">
+      <div class="chapter-header">
+        <div class="ch-num">01</div>
+        <div class="ch-meta">
+          <div class="eyebrow">Before You Open Any Tool</div>
+          <h2>Instructional Design Fundamentals</h2>
+          <p class="ch-desc">Understanding the theory and process behind effective ID is what separates well-designed learning from a decorated slide deck.</p>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <h3>💡 What is Instructional Design?</h3>
+        <p>Instructional design (ID) is the systematic process of creating educational and training experiences so that knowledge and skills are acquired more efficiently and effectively. IDs draw on learning theory, cognitive psychology, and communication design to build materials that actually change behavior — not just deliver information.</p>
+      </div>
+
+      <div class="divider"><span>The ADDIE Model</span></div>
+
+      <p style="font-size:13.5px;color:#555;margin-bottom:16px">ADDIE is the most widely used ID framework. Every tool in this handbook fits into one of these five phases.</p>
+
+      <div class="concept-grid">
+        <div class="concept-card">
+          <div class="concept-letter">A</div>
+          <h4>Analyze</h4>
+          <p>Identify the learning gap, audience characteristics, existing knowledge, constraints, and goals. Ask: Who are the learners? What do they need to be able to do that they can't do now? What's causing the gap?</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-letter">D</div>
+          <h4>Design</h4>
+          <p>Write learning objectives, map the content structure, plan assessments, and decide on the instructional strategy. Create your storyboard here — in Google Docs and Figma before touching an authoring tool.</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-letter">D</div>
+          <h4>Develop</h4>
+          <p>Build the actual course using Articulate Storyline, Rise, or Captivate. Develop slides, add interactions, record narration, create assessments, and produce all supporting materials in Canva or Figma.</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-letter">I</div>
+          <h4>Implement</h4>
+          <p>Deploy the course through your LMS (Moodle, Canvas, etc.). Set up enrollments, configure SCORM tracking, communicate with learners, and ensure technical support is ready for the launch.</p>
+        </div>
+      </div>
+
+      <div class="addie-full">
+        <div class="concept-letter">E</div>
+        <h4>Evaluate</h4>
+        <p>Measure effectiveness using Kirkpatrick's Four Levels: Reaction (did learners enjoy it?), Learning (did they gain knowledge?), Behavior (did they apply it?), and Results (did it solve the business problem?). Use LMS reports and Google Forms surveys to collect data.</p>
+      </div>
+
+      <div class="divider"><span>Writing Strong Learning Objectives</span></div>
+
+      <div class="callout callout-tip">
+        <div class="callout-icon">✅</div>
+        <div class="callout-text">
+          <strong>Use Bloom's Taxonomy verbs</strong>
+          <p>Good objectives use measurable action verbs from Bloom's Taxonomy: <strong>Remember</strong> (recall, list), <strong>Understand</strong> (explain, describe), <strong>Apply</strong> (use, execute), <strong>Analyze</strong> (compare, differentiate), <strong>Evaluate</strong> (judge, justify), <strong>Create</strong> (design, develop). Instead of "learners will understand safety procedures," write: "Learners will be able to identify and apply the three-step safety protocol when operating equipment."</p>
+        </div>
+      </div>
+
+      <div class="divider"><span>Storyboarding Before You Build</span></div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-dot">1</div>
+          <div class="step-body">
+            <div class="step-tag">Plan</div>
+            <h4>Create your course outline</h4>
+            <p>List all modules, lessons, and topic points in a simple hierarchy. A typical e-learning course has 3–5 modules, each with 2–5 lessons. Use a Google Doc with Heading 1 for modules, Heading 2 for lessons, and bullet points for slide-level content.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">2</div>
+          <div class="step-body">
+            <div class="step-tag">Plan</div>
+            <h4>Choose your storyboard format</h4>
+            <p>For most projects, use a two-column storyboard (Visual Description | Audio/Text Script). For courses with branching scenarios, add a third column for logic/triggers. For complex multi-path experiences, use a flowchart storyboard in Figma showing decision branches.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">3</div>
+          <div class="step-body">
+            <div class="step-tag">Plan</div>
+            <h4>Write all content before designing</h4>
+            <p>Draft the full script and on-screen text in your storyboard before opening any design tool. Content drives design. Share the storyboard with your SME (Subject Matter Expert) for review using Google Docs' Comment feature — resolve all feedback before proceeding to development.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">4</div>
+          <div class="step-body">
+            <div class="step-tag">Plan</div>
+            <h4>Plan your assessments from the start</h4>
+            <p>Write your quiz questions alongside the content — never as an afterthought. Map each question back to a specific learning objective. Plan for varied types: multiple choice, drag-and-drop, scenario-based decision-making, and reflection prompts. Great assessments measure actual performance, not just recall.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-warn">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-text">
+          <strong>Never skip the Analyze phase</strong>
+          <p>The biggest mistake novice IDs make is jumping straight into tool use without properly understanding the problem. A course nobody needed is a course nobody completes. Spend time interviewing stakeholders and sampling real learners first.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         CH 02 — ARTICULATE 360
+    ══════════════════════════════════ -->
+    <section id="ch2" class="chapter ch-pink">
+      <div class="chapter-header">
+        <div class="ch-num">02</div>
+        <div class="ch-meta">
+          <div class="eyebrow">Authoring Tool</div>
+          <h2>Articulate 360</h2>
+          <p class="ch-desc">The gold standard in e-learning authoring. Storyline 360 for powerful custom courses; Rise 360 for rapid, responsive content.</p>
+        </div>
+      </div>
+
+      <!-- STORYLINE -->
+      <div class="sub-hdr">
+        <div class="sub-icon" style="background:var(--pink)">📖</div>
+        <div>
+          <h3>Articulate Storyline 360</h3>
+          <p>PowerPoint-like interface for building fully custom, interactive e-learning with timelines, triggers, layers, and states.</p>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-dot">1</div>
+          <div class="step-body">
+            <div class="step-tag">Setup</div>
+            <h4>Download and install Articulate 360</h4>
+            <p>Go to <strong>articulate.com</strong> → start a 60-day free trial or sign in with a licensed account. Download the <strong>Articulate 360 desktop app</strong>, which is the launcher for all Articulate tools. From there, install Storyline 360.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">2</div>
+          <div class="step-body">
+            <div class="step-tag">Setup</div>
+            <h4>Create a new project</h4>
+            <p>Open Storyline 360 → click <strong>New Project</strong> → under Story Size, choose <strong>16:9 Widescreen (1280×720px)</strong> — the most common and LMS-friendly format. Give it a name and save immediately to a local drive (not a network or cloud drive, as Storyline can behave unpredictably with synced folders).</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">3</div>
+          <div class="step-body">
+            <div class="step-tag">Interface</div>
+            <h4>Learn the four key panels</h4>
+            <p><strong>Slide Panel</strong> (left): all your slides, organized into Scenes. <strong>Stage</strong> (center): your visual canvas. <strong>Timeline</strong> (bottom): controls when each object appears, disappears, and animates. <strong>Triggers Panel</strong> (right): the brain of your course — every interaction is a trigger. Spend 20 minutes clicking around before building anything.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">4</div>
+          <div class="step-body">
+            <div class="step-tag">Build</div>
+            <h4>Organize slides into Scenes</h4>
+            <p>In the Slide Panel, right-click → <strong>New Scene</strong> to create a container for each module (e.g., Scene 1 = Introduction, Scene 2 = Module 1). Then right-click inside a scene to <strong>Add New Slide</strong>. This keeps large courses manageable. You can import PowerPoint slides via <strong>Insert → Import → PowerPoint</strong>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">5</div>
+          <div class="step-body">
+            <div class="step-tag">Build</div>
+            <h4>Add content to slides</h4>
+            <p>Use the <strong>Insert tab</strong> to add text boxes, shapes, images, video, audio, and characters. From the <strong>Content Library 360</strong>, access thousands of built-in illustrated characters, backgrounds, and icons. Position objects by clicking and dragging. Hold <strong>Shift</strong> while dragging to constrain movement to horizontal or vertical.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">6</div>
+          <div class="step-body">
+            <div class="step-tag">Interactivity</div>
+            <h4>Add triggers and states</h4>
+            <p>Triggers are the heart of Storyline interactivity. In the Triggers panel → <strong>Create New Trigger</strong>. The three parts of every trigger are: <strong>Action</strong> (what happens), <strong>Object</strong> (what it happens to), and <strong>When/Condition</strong> (what sets it off). Common example: "Jump to Slide 1.2 when the user clicks Button 1." States allow you to change how any object looks — Normal, Hover, Selected, Visited, Disabled.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">7</div>
+          <div class="step-body">
+            <div class="step-tag">Interactivity</div>
+            <h4>Use layers for pop-ups and feedback</h4>
+            <p>Layers sit on top of your base slide and are shown or hidden by triggers. Perfect for feedback panels, modal windows, and tab interactions. Add via <strong>Insert → New Layer</strong>. Each layer has its own independent timeline and can have its own objects. A common pattern: base slide has buttons; each button shows a different layer with detail content.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">8</div>
+          <div class="step-body">
+            <div class="step-tag">Assess</div>
+            <h4>Build your quiz</h4>
+            <p>Go to <strong>Insert → New Slide → Graded Question</strong>. Choose from Multiple Choice, True/False, Matching, Drag & Drop, Sequence, Short Answer, and more. After adding questions, insert a <strong>Result Slide</strong> (Insert → New Slide → Result Slide). In the Result Slide properties, set your passing score and configure what happens on pass or fail (e.g., "Continue to next section" vs. "Jump to Review Module").</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">9</div>
+          <div class="step-body">
+            <div class="step-tag">Publish</div>
+            <h4>Preview and publish your course</h4>
+            <p>Press <strong>F12</strong> to preview the full project in Storyline's built-in player. For a browser preview, click <strong>Preview → Preview Project</strong>. To publish: <strong>Home → Publish</strong>. For LMS delivery, choose <strong>LMS</strong> and select <strong>SCORM 1.2</strong> (most universally supported). Click Publish → you'll get a ZIP file. Upload that ZIP as-is to your LMS.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-tip">
+        <div class="callout-icon">⌨️</div>
+        <div class="callout-text">
+          <strong>Essential Storyline Keyboard Shortcuts</strong>
+          <div class="shortcut-grid">
+            <div class="shortcut-row"><span>Preview project</span><kbd>F12</kbd></div>
+            <div class="shortcut-row"><span>Duplicate slide</span><kbd>Ctrl+D</kbd></div>
+            <div class="shortcut-row"><span>Group objects</span><kbd>Ctrl+G</kbd></div>
+            <div class="shortcut-row"><span>New layer</span><kbd>Ctrl+Shift+N</kbd></div>
+            <div class="shortcut-row"><span>Undo</span><kbd>Ctrl+Z</kbd></div>
+            <div class="shortcut-row"><span>Publish</span><kbd>Ctrl+Shift+P</kbd></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"><span>Articulate Rise 360</span></div>
+
+      <!-- RISE -->
+      <div class="sub-hdr">
+        <div class="sub-icon" style="background:var(--pink)">⚡</div>
+        <div>
+          <h3>Articulate Rise 360</h3>
+          <p>Browser-based rapid authoring for beautiful, responsive courses — no software install needed.</p>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-dot">1</div>
+          <div class="step-body">
+            <div class="step-tag">Setup</div>
+            <h4>Access Rise — no download required</h4>
+            <p>Rise is entirely browser-based. Log into <strong>articulate.com → My Articulate</strong> → click <strong>Rise 360</strong>. Create a new course by clicking <strong>+ New Course</strong>. Enter a title and description to help your team identify it.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">2</div>
+          <div class="step-body">
+            <div class="step-tag">Build</div>
+            <h4>Structure your course with Sections and Lessons</h4>
+            <p>Rise organizes content into <strong>Sections</strong> (modules) and <strong>Lessons</strong> (individual pages). Add a Section for each main topic, then nest Lessons inside. Drag and drop to reorder. You can also add a <strong>Quiz</strong> lesson type for graded assessment.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">3</div>
+          <div class="step-body">
+            <div class="step-tag">Build</div>
+            <h4>Build lessons with content blocks</h4>
+            <p>Inside each lesson, click the <strong>+</strong> icon to add blocks. Rise offers over 40 block types: Text, Image, Video, Button, Quote, Process, Accordion, Tabs, Sorting Activity, Flashcards, Timeline, Scenario, and more. Each block is already mobile-responsive and beautifully styled — just add your content.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">4</div>
+          <div class="step-body">
+            <div class="step-tag">Design</div>
+            <h4>Customize your brand theme</h4>
+            <p>Click <strong>Theme</strong> in the top toolbar. Set your brand <strong>accent color</strong>, fonts, and cover style. Upload your logo. Rise's themes are elegant by default — small color tweaks go a long way. For more control, use <strong>Custom Fonts</strong> to upload your brand typefaces.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">5</div>
+          <div class="step-body">
+            <div class="step-tag">Assess</div>
+            <h4>Add quizzes and knowledge checks</h4>
+            <p>To embed a quick check inside a lesson, add a <strong>Knowledge Check block</strong>. For a formal graded quiz, add a separate <strong>Quiz lesson</strong> — this tracks completion differently. Set question types, feedback, and the passing score in the Quiz settings panel.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">6</div>
+          <div class="step-body">
+            <div class="step-tag">Publish</div>
+            <h4>Preview and publish</h4>
+            <p>Click <strong>Preview</strong> at the top to see your course in a simulated browser, tablet, and mobile view simultaneously. When ready, click <strong>Publish → LMS</strong> and download your SCORM 1.2 ZIP. Alternatively, <strong>Publish for Web</strong> generates an instant shareable link — perfect for stakeholder reviews without LMS setup.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         CH 03 — FIGMA
+    ══════════════════════════════════ -->
+    <section id="ch3" class="chapter ch-olive">
+      <div class="chapter-header">
+        <div class="ch-num">03</div>
+        <div class="ch-meta">
+          <div class="eyebrow">Design Tool</div>
+          <h2>Figma for Instructional Designers</h2>
+          <p class="ch-desc">Figma is where you design and prototype before building. Used for wireframing, storyboarding, visual asset creation, and stakeholder previews.</p>
+        </div>
+      </div>
+
+      <div class="callout callout-info">
+        <div class="callout-icon">ℹ️</div>
+        <div class="callout-text">
+          <strong>Why Figma before your authoring tool?</strong>
+          <p>Designing your slide layouts and interactions in Figma first lets you get fast stakeholder feedback before spending hours building in Storyline. A 30-minute Figma prototype can prevent 10 hours of rework. You also export background images and assets directly from Figma into your authoring tool.</p>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-dot">1</div>
+          <div class="step-body">
+            <div class="step-tag">Setup</div>
+            <h4>Create a free Figma account</h4>
+            <p>Go to <strong>figma.com</strong> → sign up for free. The Starter plan (free) allows 3 Figma files with unlimited collaborators — plenty to start with. Download the optional desktop app for better performance, or use it entirely in your browser.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">2</div>
+          <div class="step-body">
+            <div class="step-tag">Interface</div>
+            <h4>Learn the Figma workspace</h4>
+            <p><strong>Left panel</strong>: Layers (object hierarchy) and Pages (like tabs in a file). <strong>Canvas</strong>: infinite work area — scroll to navigate, Ctrl+scroll to zoom. <strong>Right panel</strong>: Design properties (size, color, effects) and Prototype tab (interactions). <strong>Toolbar</strong>: Move <kbd>V</kbd>, Frame <kbd>F</kbd>, Rectangle <kbd>R</kbd>, Text <kbd>T</kbd>, Pen <kbd>P</kbd>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">3</div>
+          <div class="step-body">
+            <div class="step-tag">Build</div>
+            <h4>Create frames sized for e-learning</h4>
+            <p>Press <strong>F</strong> → in the right panel under Frame presets, choose <strong>1280 × 720</strong> (Storyline's standard canvas) or type custom dimensions. Double-click the frame name to rename it (e.g., "Slide 01 – Title"). Create one frame per slide in your storyboard — you'll end up with a full visual storyboard in one Figma file.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">4</div>
+          <div class="step-body">
+            <div class="step-tag">Build</div>
+            <h4>Design slide layouts with grids</h4>
+            <p>Select a frame → right panel → <strong>Layout Grid → +</strong> → choose <strong>Grid: 8px</strong> for alignment snapping. Design backgrounds with rectangles, headings with text boxes, and icons from Figma's built-in <strong>Resources panel</strong> (press the grid icon or use the plugin <strong>Iconify</strong> for thousands of free icons).</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">5</div>
+          <div class="step-body">
+            <div class="step-tag">Build</div>
+            <h4>Build reusable components</h4>
+            <p>Select any element → right-click → <strong>Create Component</strong> (Ctrl+Alt+K). Common components to create: navigation bar, slide header, info button, character frame, and next/back buttons. Instances of components (drag from the Assets panel) inherit changes from the master — update once, update everywhere.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">6</div>
+          <div class="step-body">
+            <div class="step-tag">Design</div>
+            <h4>Create color and text styles</h4>
+            <p>Select a filled shape → right panel → Fill → click the 4-dot icon → <strong>+Create Style</strong>. Name it by category: "Brand/Primary", "Brand/Background", "State/Hover". Do the same for typography. Styles ensure visual consistency across all slides and make global rebrand changes trivial.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">7</div>
+          <div class="step-body">
+            <div class="step-tag">Prototype</div>
+            <h4>Create a clickable prototype</h4>
+            <p>Switch to <strong>Prototype mode</strong> (top-right tab, or <kbd>Shift+E</kbd>). Click any element → drag the blue node to a target frame to create a link. Set the trigger (On Click) and transition (Dissolve, Slide In Left). Press <strong>▶ Present</strong> to launch the interactive prototype. Share the link with stakeholders — they click through and leave comments without needing a Figma account.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">8</div>
+          <div class="step-body">
+            <div class="step-tag">Export</div>
+            <h4>Export assets for your authoring tool</h4>
+            <p>Select any frame or element → right panel → <strong>Export → +</strong>. Choose format: <strong>PNG</strong> (background images, illustrations), <strong>SVG</strong> (icons, shapes that need to scale), or <strong>PDF</strong> (full slides). To bulk export all frames, select all → Export. These assets drop directly into Storyline's media library or Captivate's Library.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">9</div>
+          <div class="step-body">
+            <div class="step-tag">Collaborate</div>
+            <h4>Share for review and feedback</h4>
+            <p>Click <strong>Share</strong> (top-right) → set to <strong>"can view"</strong> for SMEs and stakeholders. They open the link, switch to Comment mode (keyboard shortcut <kbd>C</kbd>), and click anywhere on the designs to leave feedback. You see all comments in the right panel and can resolve them as you work — far faster than email rounds.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-tip">
+        <div class="callout-icon">⌨️</div>
+        <div class="callout-text">
+          <strong>Essential Figma Shortcuts for IDs</strong>
+          <div class="shortcut-grid">
+            <div class="shortcut-row"><span>Frame tool</span><kbd>F</kbd></div>
+            <div class="shortcut-row"><span>Text tool</span><kbd>T</kbd></div>
+            <div class="shortcut-row"><span>Auto Layout</span><kbd>Shift+A</kbd></div>
+            <div class="shortcut-row"><span>Create Component</span><kbd>Ctrl+Alt+K</kbd></div>
+            <div class="shortcut-row"><span>Prototype mode</span><kbd>Shift+E</kbd></div>
+            <div class="shortcut-row"><span>Zoom to fit</span><kbd>Shift+1</kbd></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         CH 04 — CANVA
+    ══════════════════════════════════ -->
+    <section id="ch4" class="chapter ch-yellow">
+      <div class="chapter-header">
+        <div class="ch-num">04</div>
+        <div class="ch-meta">
+          <div class="eyebrow">Visual Design Tool</div>
+          <h2>Canva for Educational Materials</h2>
+          <p class="ch-desc">Create polished supporting materials — infographics, job aids, worksheets, and more — with drag-and-drop simplicity. No design background required.</p>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-dot">1</div>
+          <div class="step-body">
+            <div class="step-tag">Setup</div>
+            <h4>Create your Canva account</h4>
+            <p>Go to <strong>canva.com</strong> and sign up for free. If you're working in an educational institution, apply for <strong>Canva for Education</strong> — it gives you free Pro access with the full asset library. The free plan works well for most ID needs; Pro adds Brand Kit, background removal, and premium templates.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">2</div>
+          <div class="step-body">
+            <div class="step-tag">Setup</div>
+            <h4>Set up your Brand Kit</h4>
+            <p>Go to <strong>Brand Hub</strong> in the left sidebar → upload your organization's <strong>logo</strong>, add your <strong>brand colors</strong> (paste hex codes), and choose your <strong>brand fonts</strong>. With Pro, apply the Brand Kit to any design in one click. Even on the free plan, saving a manual color palette saves significant time.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">3</div>
+          <div class="step-body">
+            <div class="step-tag">Build</div>
+            <h4>Choose the right canvas size</h4>
+            <p>Click <strong>Create a design</strong> → search for your format. Key ID formats: <strong>Presentation (16:9)</strong> for slide decks, <strong>Infographic (800×2000)</strong> for visual summaries, <strong>A4 Document</strong> for worksheets and handouts, <strong>Whiteboard</strong> for collaborative planning. You can also type custom dimensions for LMS banners or email headers.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">4</div>
+          <div class="step-body">
+            <div class="step-tag">Build</div>
+            <h4>Design infographics for learning</h4>
+            <p>Infographics make excellent module summaries and concept explainers. Start from an infographic template → clear out the placeholder text → add your own. Use the <strong>Elements panel</strong> for charts, icons, lines, and shapes. Stick to 3–5 key points per infographic. Maintain one clear reading flow from top to bottom.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">5</div>
+          <div class="step-body">
+            <div class="step-tag">Build</div>
+            <h4>Create job aids and quick reference cards</h4>
+            <p>Job aids are among the highest-ROI deliverables in ID — learners reference them on the job long after the course ends. Use a structured layout: numbered steps or a clear table. Keep it to one page (A4 portrait or landscape). Use icons from the Elements panel to replace long text blocks with visual cues. Aim for print-and-post readability.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">6</div>
+          <div class="step-body">
+            <div class="step-tag">Export</div>
+            <h4>Download and share your materials</h4>
+            <p>Click <strong>Share → Download</strong>. For print handouts: <strong>PDF Print</strong> (CMYK, highest quality). For digital distribution: <strong>PDF Standard</strong> or <strong>PNG</strong>. To present live, use <strong>Share → Present</strong> directly from Canva. For team access, click <strong>Share → Invite People</strong> and give editing access to collaborators on your team.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-text">
+          <strong>What to make in Canva as an ID</strong>
+          <p>LMS module banners and cover images, participant workbooks, certificate templates, facilitator guides, onboarding welcome cards, pre/post-test instruction sheets, social media posts announcing your course launch, and visual learning objectives slide decks.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         CH 05 — ADOBE CAPTIVATE
+    ══════════════════════════════════ -->
+    <section id="ch5" class="chapter ch-pink">
+      <div class="chapter-header">
+        <div class="ch-num">05</div>
+        <div class="ch-meta">
+          <div class="eyebrow">Authoring Tool</div>
+          <h2>Adobe Captivate</h2>
+          <p class="ch-desc">Captivate shines for software simulations, responsive fluid box design, and VR/360° learning environments. Steeper curve, but uniquely powerful for the right projects.</p>
+        </div>
+      </div>
+
+      <div class="callout callout-info">
+        <div class="callout-icon">ℹ️</div>
+        <div class="callout-text">
+          <strong>Choose Captivate when you need to:</strong>
+          <p>Record on-screen software simulations (e.g., training people on a new CRM), build truly responsive content that reflows automatically across device sizes using Fluid Boxes, or create immersive VR/360° learning environments. For standard slide-based e-learning, Articulate Storyline is usually faster.</p>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-dot">1</div>
+          <div class="step-body">
+            <div class="step-tag">Setup</div>
+            <h4>Install Adobe Captivate</h4>
+            <p>Go to <strong>adobe.com/products/captivate</strong>. Download a 30-day free trial or purchase a subscription ($33/mo). Install and launch. On the Start screen, click <strong>New Project</strong>. Captivate uses your local drive for project files — save early and often.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">2</div>
+          <div class="step-body">
+            <div class="step-tag">Setup</div>
+            <h4>Choose your project type</h4>
+            <p>Captivate offers: <strong>Blank Project</strong> (manual slide-based), <strong>Software Simulation</strong> (records your screen with click detection), <strong>Responsive Project</strong> (fluid box layout for multi-device), <strong>Video Demo</strong> (screen recording as MP4), or <strong>VR Project</strong> (360° environment). For your first project, start with a <strong>Blank Project</strong> at 1280×720.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">3</div>
+          <div class="step-body">
+            <div class="step-tag">Build</div>
+            <h4>Record a software simulation</h4>
+            <p>Go to <strong>File → Record New Software Simulation</strong>. Open the software you want to demonstrate, define your capture area (snap to the application window), choose <strong>Demo mode</strong> (auto-generated callouts) or <strong>Training mode</strong> (click boxes where learners must click). Click Record, perform the steps, then stop. Captivate generates a slide for each action automatically.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">4</div>
+          <div class="step-body">
+            <div class="step-tag">Build</div>
+            <h4>Add interactive elements</h4>
+            <p>Use the <strong>Interactions panel</strong> (right sidebar) to insert Buttons, Click Boxes (invisible hotspots), Text Entry Boxes, and Rollovers. Objects are controlled by the <strong>Timeline</strong> at the bottom — drag object bars to control when they appear. Add <strong>Success Caption</strong> and <strong>Failure Caption</strong> feedback to any interactive element via its Properties panel.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">5</div>
+          <div class="step-body">
+            <div class="step-tag">Assess</div>
+            <h4>Build a quiz</h4>
+            <p>Go to <strong>Quiz → Question Slide</strong>. Captivate supports Multiple Choice, Fill in the Blank, True/False, Matching, Sequence, Short Answer, Hotspot, and Likert Scale. In the <strong>Quiz Properties panel</strong> (right side), set pass/fail scores, number of attempts, and post-quiz branching. Captivate can send quiz results to your LMS via SCORM.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">6</div>
+          <div class="step-body">
+            <div class="step-tag">Publish</div>
+            <h4>Publish for your LMS</h4>
+            <p>Go to <strong>File → Publish for Devices</strong> → select <strong>LMS</strong>. Choose <strong>SCORM 1.2</strong> for maximum compatibility, or SCORM 2004 if your LMS specifically requires it. Configure completion criteria (slide viewed, quiz score, etc.), then click <strong>Publish</strong>. Upload the generated ZIP to your LMS — the same process as Storyline.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         CH 06 — GOOGLE WORKSPACE
+    ══════════════════════════════════ -->
+    <section id="ch6" class="chapter ch-olive">
+      <div class="chapter-header">
+        <div class="ch-num">06</div>
+        <div class="ch-meta">
+          <div class="eyebrow">Collaboration & Content Development</div>
+          <h2>Google Workspace for ID</h2>
+          <p class="ch-desc">Docs, Slides, Forms, and Drive are the backbone of your ID workflow — free, cloud-based, and built for the kind of collaboration that ID demands.</p>
+        </div>
+      </div>
+
+      <div class="accordion">
+
+        <!-- DOCS -->
+        <div class="acc-item open">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            <span>📄 Google Docs — Storyboarding & SME Collaboration</span>
+            <span class="acc-arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <div class="inner-steps">
+              <div class="inner-step">
+                <div class="inner-dot">1</div>
+                <div class="inner-body">
+                  <h4>Set up your storyboard template</h4>
+                  <p>Use a two-column table: Column 1 = Visual Description, Column 2 = Audio/On-Screen Text. Use <strong>Heading 1</strong> for module names, <strong>Heading 2</strong> for lesson names, and <strong>Heading 3</strong> for individual slide titles. This auto-generates a clickable Table of Contents (Insert → Table of Contents).</p>
+                </div>
+              </div>
+              <div class="inner-step">
+                <div class="inner-dot">2</div>
+                <div class="inner-body">
+                  <h4>Collaborate with SMEs using Comments and Suggestions</h4>
+                  <p>Share with your SME as <strong>"Commenter."</strong> They highlight text + press <strong>Ctrl+Alt+M</strong> to leave inline comments. Switch to <strong>Suggesting mode</strong> (pencil icon → "Suggesting") so you can see exactly what they changed before accepting. Resolve comments as you address them — this creates a clean revision trail.</p>
+                </div>
+              </div>
+              <div class="inner-step">
+                <div class="inner-dot">3</div>
+                <div class="inner-body">
+                  <h4>Use Version History to track drafts</h4>
+                  <p>Go to <strong>File → Version History → See Version History</strong>. Name important versions (e.g., "SME Review v1," "Approved Final"). You can restore any previous version at any time — no more emailing files named "storyboard_FINAL_v3_ACTUALFINAL."</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDES -->
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            <span>📊 Google Slides — Rapid Presentation Development</span>
+            <span class="acc-arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <div class="inner-steps">
+              <div class="inner-step">
+                <div class="inner-dot">1</div>
+                <div class="inner-body">
+                  <h4>Design with a custom theme/master</h4>
+                  <p>Go to <strong>Slide → Edit Theme</strong> to set brand fonts, colors, and layouts that apply across all slides. This is your slide master — any change here ripples through the entire deck. Far more reliable than manually applying formatting to each slide.</p>
+                </div>
+              </div>
+              <div class="inner-step">
+                <div class="inner-dot">2</div>
+                <div class="inner-body">
+                  <h4>Import into Storyline as a starting point</h4>
+                  <p>Download your presentation as <strong>PPTX</strong> (File → Download → Microsoft PowerPoint). Then in Storyline: <strong>Insert → Import → PowerPoint</strong>. Storyline brings in all slides while preserving fonts, images, and layouts. This workflow lets you draft content quickly in Slides and polish the interactivity in Storyline.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORMS -->
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            <span>📋 Google Forms — Needs Analysis & Evaluations</span>
+            <span class="acc-arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <div class="inner-steps">
+              <div class="inner-step">
+                <div class="inner-dot">1</div>
+                <div class="inner-body">
+                  <h4>Build a needs analysis survey</h4>
+                  <p>Go to <strong>forms.google.com → Blank form</strong>. Add questions: multiple choice for closed questions, short answer for open-ended, and Linear Scale (1–5) for rating satisfaction. Sections let you create different question paths based on responses (Settings → Sections). Share the link or embed it in your LMS.</p>
+                </div>
+              </div>
+              <div class="inner-step">
+                <div class="inner-dot">2</div>
+                <div class="inner-body">
+                  <h4>Use Quiz Mode for graded assessments</h4>
+                  <p>Go to <strong>Settings → Make this a quiz</strong>. Set point values for each question and add answer feedback. Google Forms auto-grades multiple choice and checkbox questions. Connect to a Google Sheet (Responses → Spreadsheet icon) to analyze all results in one place — filter by score, date, or respondent.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DRIVE -->
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            <span>🗂️ Google Drive — Project Organization</span>
+            <span class="acc-arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <p style="margin-bottom:10px;font-size:13px">Organize every ID project the same way — build a folder template in Drive and copy it for each new project:</p>
+            <div class="file-tree">
+📁 [Project Name]/<br>
+├── 📁 01_Analysis/<br>
+│&nbsp;&nbsp;&nbsp;├── Needs Analysis Survey Results<br>
+│&nbsp;&nbsp;&nbsp;├── Audience Profile<br>
+│&nbsp;&nbsp;&nbsp;└── SME Contacts & Interview Notes<br>
+├── 📁 02_Design/<br>
+│&nbsp;&nbsp;&nbsp;├── Learning Objectives<br>
+│&nbsp;&nbsp;&nbsp;├── Course Outline<br>
+│&nbsp;&nbsp;&nbsp;└── Storyboard (v1, v2, Approved)<br>
+├── 📁 03_Development/<br>
+│&nbsp;&nbsp;&nbsp;├── 📁 Assets/ (images, audio, video, icons)<br>
+│&nbsp;&nbsp;&nbsp;└── 📁 Source Files/ (Storyline .story / Captivate .cptx)<br>
+├── 📁 04_Review/<br>
+│&nbsp;&nbsp;&nbsp;└── SME Feedback Log<br>
+└── 📁 05_Published/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;└── SCORM Package (ZIP)
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         CH 07 — LMS
+    ══════════════════════════════════ -->
+    <section id="ch7" class="chapter ch-pink">
+      <div class="chapter-header">
+        <div class="ch-num">07</div>
+        <div class="ch-meta">
+          <div class="eyebrow">Deployment</div>
+          <h2>LMS Platforms</h2>
+          <p class="ch-desc">A Learning Management System is where your learners access, complete, and are tracked through your courses. Understanding LMS basics is non-negotiable for modern IDs.</p>
+        </div>
+      </div>
+
+      <div class="platform-grid">
+        <div class="platform-card">
+          <span class="platform-emoji">🏫</span>
+          <h4>Moodle</h4>
+          <p>Free and open-source. Highly customizable but requires technical admin know-how. Widely used in higher education and non-profits globally.</p>
+          <div class="tags" style="margin-top:10px"><span class="tag">Free</span><span class="tag olive">Open Source</span></div>
+        </div>
+        <div class="platform-card">
+          <span class="platform-emoji">🖥️</span>
+          <h4>Canvas (Instructure)</h4>
+          <p>Clean, modern UI. Popular in K–12 and universities. Offers "Canvas Free for Teachers" for individuals. Mobile app is best-in-class.</p>
+          <div class="tags" style="margin-top:10px"><span class="tag">User-Friendly</span><span class="tag pink">Higher Ed</span></div>
+        </div>
+        <div class="platform-card">
+          <span class="platform-emoji">⚡</span>
+          <h4>TalentLMS</h4>
+          <p>Cloud-based, quick to set up, and built for corporate training. Free plan for up to 5 users — ideal for small teams testing a deployment.</p>
+          <div class="tags" style="margin-top:10px"><span class="tag">Corporate</span><span class="tag">Free Tier</span></div>
+        </div>
+        <div class="platform-card">
+          <span class="platform-emoji">🏢</span>
+          <h4>Blackboard / Anthology</h4>
+          <p>Enterprise-grade with robust reporting and extensive integrations. Common in large institutions and organizations with complex compliance needs.</p>
+          <div class="tags" style="margin-top:10px"><span class="tag cherry">Enterprise</span></div>
+        </div>
+      </div>
+
+      <div class="divider"><span>Uploading SCORM to Your LMS — Step by Step</span></div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-dot">1</div>
+          <div class="step-body">
+            <div class="step-tag">Know This</div>
+            <h4>Understand SCORM basics</h4>
+            <p><strong>SCORM</strong> (Shareable Content Object Reference Model) is the packaging standard that lets any LMS "understand" an e-learning course — tracking completion, scores, and time. The two common versions are <strong>SCORM 1.2</strong> (widest compatibility — use this as your default) and <strong>SCORM 2004</strong> (more data tracking, but fewer LMS support it fully). When in doubt, SCORM 1.2 is safe.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">2</div>
+          <div class="step-body">
+            <div class="step-tag">Publish</div>
+            <h4>Export the SCORM package from your authoring tool</h4>
+            <p>In <strong>Storyline</strong>: Home → Publish → LMS → SCORM 1.2 → Publish. In <strong>Rise</strong>: Publish → LMS → SCORM 1.2 → Download. In <strong>Captivate</strong>: File → Publish for Devices → LMS → SCORM 1.2 → Publish. In all cases, you receive a <strong>ZIP file</strong>. Do not unzip it — your LMS needs the ZIP package as-is.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">3</div>
+          <div class="step-body">
+            <div class="step-tag">Upload</div>
+            <h4>Upload to your LMS</h4>
+            <p>In <strong>Moodle</strong>: Go to your course → Turn Editing On → Add an Activity → <strong>SCORM Package</strong> → drag in your ZIP. In <strong>Canvas</strong>: Modules → + → External Tool → upload, or use Files → upload ZIP and create a content page. In <strong>TalentLMS</strong>: Courses → Add Course → Content → Add Unit → SCORM. Each LMS has its own interface — the ZIP is always the same.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">4</div>
+          <div class="step-body">
+            <div class="step-tag">Configure</div>
+            <h4>Set completion tracking rules</h4>
+            <p>In your LMS's SCORM settings, specify how the system marks a course "complete." Options: <strong>Passed/Failed</strong> (based on a quiz score), <strong>Completed</strong> (based on slide progress), or simply <strong>Viewed</strong> (the learner launched it). Always test with a dummy learner account before releasing to your full audience.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">5</div>
+          <div class="step-body">
+            <div class="step-tag">Launch</div>
+            <h4>Enroll learners and monitor progress</h4>
+            <p>Enroll learners individually, by cohort, or via self-enrollment links. After launch, use the LMS <strong>Reports section</strong> (usually under Administration or Analytics) to see: completion rates, average quiz scores, time spent, and individual learner progress. Export as CSV and analyze in Google Sheets or Excel to share with stakeholders.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         CH 08 — ACCESSIBILITY
+    ══════════════════════════════════ -->
+    <section id="ch8" class="chapter ch-yellow">
+      <div class="chapter-header">
+        <div class="ch-num">08</div>
+        <div class="ch-meta">
+          <div class="eyebrow">Best Practices</div>
+          <h2>Accessibility in Instructional Design</h2>
+          <p class="ch-desc">Accessible design ensures every learner — regardless of disability — can fully engage with your content. Building accessibly from the start is faster and cheaper than retrofitting.</p>
+        </div>
+      </div>
+
+      <div class="callout callout-warn">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-text">
+          <strong>It's often a legal requirement, not just best practice</strong>
+          <p>In the US, Section 508 and the ADA require digital learning to be accessible in federal agencies and organizations receiving federal funding. In the EU, the European Accessibility Act applies broadly. The international standard is <strong>WCAG 2.1 Level AA</strong>. Designing to AA keeps you compliant and inclusive.</p>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-dot">1</div>
+          <div class="step-body">
+            <div class="step-tag">Visual</div>
+            <h4>Check your color contrast</h4>
+            <p>Text must achieve at least a <strong>4.5:1 contrast ratio</strong> against its background (3:1 for large text over 18pt). Never use color as the only way to convey information — if you show correct answers in green, also add a checkmark icon or the word "Correct." Use <strong>WebAIM Contrast Checker</strong> (webaim.org/resources/contrastchecker) to verify every text/background pair in your course.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">2</div>
+          <div class="step-body">
+            <div class="step-tag">Visual</div>
+            <h4>Write alt text for all images</h4>
+            <p>In <strong>Storyline</strong>: right-click any image → Accessibility → Alt Text field. Write a description of what the image shows and why it matters in context. For decorative images (pure design elements): check "This object is decorative and can be ignored by screen readers." For complex charts or diagrams, provide a full text description below the image.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">3</div>
+          <div class="step-body">
+            <div class="step-tag">Audio / Video</div>
+            <h4>Add closed captions to all audio and video</h4>
+            <p>In Storyline: select your audio object → <strong>Insert → Closed Captions</strong> to auto-generate and then manually edit for accuracy. For video, start with auto-captions from YouTube, correct errors, then export the .srt file. Always provide a text transcript as an alternative — it also helps SEO and learners who prefer reading. Captions benefit all learners, not only those who are deaf or hard of hearing.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">4</div>
+          <div class="step-body">
+            <div class="step-tag">Navigation</div>
+            <h4>Enable full keyboard navigation</h4>
+            <p>Every interactive element must be reachable and activatable using only a keyboard: <kbd>Tab</kbd> to move between elements, <kbd>Enter</kbd> or <kbd>Space</kbd> to activate. In Storyline: <strong>Home → Tab Order</strong> — set this for every slide, listing all elements in the correct reading sequence. Test by closing your mouse completely and navigating your entire course with keyboard alone.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">5</div>
+          <div class="step-body">
+            <div class="step-tag">Content</div>
+            <h4>Write accessible, plain-language content</h4>
+            <p>Use active voice and plain language. Avoid jargon, or define it when unavoidable. Structure all content with a logical heading hierarchy: H1 (course title) → H2 (module) → H3 (lesson) → H4 (slide topic). Never describe content by its position alone ("see the chart on the right") — screen readers can't see position. Instead, describe what the content conveys: "The bar chart shows sales grew 40% in Q3."</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot">6</div>
+          <div class="step-body">
+            <div class="step-tag">Test</div>
+            <h4>Test with a real screen reader</h4>
+            <p>Download <strong>NVDA</strong> (free for Windows at nvaccess.org) or use <strong>VoiceOver</strong> (built into Mac: <kbd>Cmd+F5</kbd>, and iOS). Navigate your published course with the screen reader active and listen to how every element is announced. Fix elements that are skipped, mislabeled, or announced confusingly. Also run the published HTML through <strong>WAVE</strong> (wave.webaim.org) for an automated accessibility report.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         CH 09 — RESOURCES
+    ══════════════════════════════════ -->
+    <section id="ch9" class="chapter ch-olive">
+      <div class="chapter-header">
+        <div class="ch-num">09</div>
+        <div class="ch-meta">
+          <div class="eyebrow">Keep Growing</div>
+          <h2>Resources &amp; Communities</h2>
+          <p class="ch-desc">The best instructional designers are always learning. Here are the communities, books, podcasts, and tools that will deepen your practice.</p>
+        </div>
+      </div>
+
+      <div class="res-grid">
+        <div class="res-card">
+          <div class="res-type">📖 Free Community</div>
+          <h4>Articulate Community (community.articulate.com)</h4>
+          <p>Thousands of tutorials, downloadable examples, and peer support. The weekly E-Learning Challenges are the single best way to build a portfolio quickly.</p>
+        </div>
+        <div class="res-card">
+          <div class="res-type">📚 Essential Book</div>
+          <h4>"Map It" — Cathy Moore</h4>
+          <p>The definitive guide to action-mapping. Teaches you to design training that actually changes behavior on the job — not just fills an hour. Read this in your first month.</p>
+        </div>
+        <div class="res-card">
+          <div class="res-type">📚 Essential Book</div>
+          <h4>"The Accidental Instructional Designer" — Cammy Bean</h4>
+          <p>Written for people who find themselves doing ID without a formal background. Practical, encouraging, and honest about what the job actually looks like day-to-day.</p>
+        </div>
+        <div class="res-card">
+          <div class="res-type">🎙️ Podcast</div>
+          <h4>The eLearning Coach Podcast</h4>
+          <p>Hosted by Connie Malamed. Covers design principles, learner psychology, tool reviews, and career advice for IDs at every stage. Subscribe on any podcast app.</p>
+        </div>
+        <div class="res-card">
+          <div class="res-type">🌐 Professional Association</div>
+          <h4>ATD — Association for Talent Development</h4>
+          <p>The largest L&D professional association. Offers research reports, the CPTD certification, local chapter networking, and TechKnowledge — the major annual ID conference.</p>
+        </div>
+        <div class="res-card">
+          <div class="res-type">🔧 Free Tool</div>
+          <h4>H5P (h5p.org)</h4>
+          <p>Free, open-source interactive content creator. Build quizzes, video annotations, branching scenarios, and interactive presentations that embed directly into Moodle and Canvas — no SCORM needed.</p>
+        </div>
+        <div class="res-card">
+          <div class="res-type">🎨 Free Assets</div>
+          <h4>Unsplash / Pexels / Pixabay</h4>
+          <p>Free, high-quality, license-free stock photography. Always choose images showing diverse, authentic people who reflect your actual learner audience — stock photography bias is real.</p>
+        </div>
+        <div class="res-card">
+          <div class="res-type">🎓 Free Templates</div>
+          <h4>eLearning Brothers Free Library</h4>
+          <p>Free Storyline and Rise templates, asset packs, and character sets. A head start on every project. Their paid library is also one of the best investments for professional IDs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         FINAL CHECKLIST
+    ══════════════════════════════════ -->
+    <section id="checklist" class="chapter ch-cherry">
+      <div class="chapter-header">
+        <div class="ch-num">✓</div>
+        <div class="ch-meta">
+          <div class="eyebrow">Before Every Launch</div>
+          <h2>Final Project Checklist</h2>
+          <p class="ch-desc">Run through every item before publishing. Tick each box as you confirm it — your learners will thank you.</p>
+        </div>
+      </div>
+
+      <div class="checklist-grid">
+
+        <div class="checklist-box">
+          <h3>📋 Content &amp; Design</h3>
+          <ul class="checklist">
+            <li><input type="checkbox" id="c1"><label for="c1">Learning objectives are clear, measurable, and aligned to the business goal</label></li>
+            <li><input type="checkbox" id="c2"><label for="c2">All content reviewed and approved by the SME</label></li>
+            <li><input type="checkbox" id="c3"><label for="c3">Spelling and grammar checked throughout</label></li>
+            <li><input type="checkbox" id="c4"><label for="c4">All images high resolution and properly licensed</label></li>
+            <li><input type="checkbox" id="c5"><label for="c5">Fonts, colors, and visual style consistent across all slides</label></li>
+            <li><input type="checkbox" id="c6"><label for="c6">Brand guidelines followed throughout</label></li>
+          </ul>
+        </div>
+
+        <div class="checklist-box">
+          <h3>⚙️ Technical</h3>
+          <ul class="checklist">
+            <li><input type="checkbox" id="c7"><label for="c7">Course previewed and fully tested in the authoring tool</label></li>
+            <li><input type="checkbox" id="c8"><label for="c8">All triggers, interactions, and branching work correctly</label></li>
+            <li><input type="checkbox" id="c9"><label for="c9">Quiz scoring, pass/fail logic, and result slide confirmed</label></li>
+            <li><input type="checkbox" id="c10"><label for="c10">SCORM package tested in LMS staging with a dummy account</label></li>
+            <li><input type="checkbox" id="c11"><label for="c11">Completion data tracked and reported correctly to LMS</label></li>
+            <li><input type="checkbox" id="c12"><label for="c12">Course tested on all target devices (desktop, tablet, mobile)</label></li>
+          </ul>
+        </div>
+
+        <div class="checklist-box">
+          <h3>♿ Accessibility</h3>
+          <ul class="checklist">
+            <li><input type="checkbox" id="c13"><label for="c13">All images have descriptive alt text (empty alt for decorative)</label></li>
+            <li><input type="checkbox" id="c14"><label for="c14">All text passes WCAG 2.1 AA contrast ratio (4.5:1 minimum)</label></li>
+            <li><input type="checkbox" id="c15"><label for="c15">Closed captions provided for all audio and video</label></li>
+            <li><input type="checkbox" id="c16"><label for="c16">Tab order set correctly on all interactive slides</label></li>
+            <li><input type="checkbox" id="c17"><label for="c17">Full course navigable by keyboard alone</label></li>
+            <li><input type="checkbox" id="c18"><label for="c18">Screen reader test completed (NVDA or VoiceOver)</label></li>
+          </ul>
+        </div>
+
+        <div class="checklist-box">
+          <h3>🚀 Launch</h3>
+          <ul class="checklist">
+            <li><input type="checkbox" id="c19"><label for="c19">Learner enrollment and access confirmed in LMS</label></li>
+            <li><input type="checkbox" id="c20"><label for="c20">Course start/end dates and availability settings configured</label></li>
+            <li><input type="checkbox" id="c21"><label for="c21">Learner communication (launch email, instructions) prepared</label></li>
+            <li><input type="checkbox" id="c22"><label for="c22">Post-training evaluation survey (Level 1) ready to distribute</label></li>
+            <li><input type="checkbox" id="c23"><label for="c23">All project files backed up in organized shared Drive folder</label></li>
+            <li><input type="checkbox" id="c24"><label for="c24">Stakeholders notified and briefed on launch date and metrics</label></li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer class="footer">
+      <div class="footer-logo"><em>ID</em> Tools Handbook</div>
+      <p>A step-by-step guide to instructional design tools for novice designers</p>
+      <div class="footer-author">Rayene Medabis</div>
+      <p class="footer-copy">© 2025 Rayene Medabis. All rights reserved. This handbook is the original work of the author.</p>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  // ── Progress bar ──
+  window.addEventListener('scroll', () => {
+    const max = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('progress-bar').style.width = (window.scrollY / max * 100) + '%';
+  });
+
+  // ── Active nav on scroll ──
+  const sections = [...document.querySelectorAll('section[id], div.htu-banner')];
+  const navLinks = [...document.querySelectorAll('.nav-item[href]')];
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+
+  // ── Accordion ──
+  function toggleAcc(header) { header.parentElement.classList.toggle('open'); }
+
+  // ── Mobile sidebar ──
+  function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+
+  // Close sidebar on nav click (mobile)
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      if (window.innerWidth <= 820) document.getElementById('sidebar').classList.remove('open');
+    });
+  });
+</script>
+
+</body>
+</html>
