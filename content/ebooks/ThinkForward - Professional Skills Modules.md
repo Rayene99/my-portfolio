@@ -1,5 +1,6 @@
 ---
 title: "ThinkForward: Professional Skills Modules"
+author: Rayene Medabis
 cover: /images/sss.png
 html_file: /images/thinkforward-modules.html
 tags:
