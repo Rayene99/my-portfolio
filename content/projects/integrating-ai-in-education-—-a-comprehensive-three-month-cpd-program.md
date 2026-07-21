@@ -1,5 +1,5 @@
 ---
-title: Integrating AI in Education — A Comprehensive Three-Month CPD Program
+title: "Integrating AI in Education: A Comprehensive Three-Month CPD Program"
 image: /images/screenshot-2026-07-21-191120.png
 file: /images/ai_in_education_cpd_program_rayene_medabis.pdf
 tags:
