@@ -1,9 +1,9 @@
 ---
-company: "Follow Me Academy"
-role: "Curriculum & Instructional Designer"
-location: "Algiers, Algeria"
-start_date: "2024-01-01"
-end_date: "2026-04-01"
+company: Follow Me Academy
+role: Curriculum & Instructional Designer
+start_date: 2024-01-01
+end_date: 2026-07-21
+location: Algiers, Algeria
 ---
 - Designed and implemented specialized syllabi for adult and young learners, fully aligned with global frameworks.
 - Standardized learning objectives academy-wide, achieving measurable consistency across all cohorts and proficiency levels.
