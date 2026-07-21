@@ -1,5 +1,6 @@
 ---
 title: "Logged In & Lost: The Online Teacher's Survival Guide"
+author: Rayene Medabis
 cover: /images/xx.png
 html_file: /images/online-teacher-guide-1-.html
 tags:
