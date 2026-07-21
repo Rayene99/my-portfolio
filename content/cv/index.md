@@ -41,6 +41,24 @@ experience:
       - Designed summative and formative assessments focused on measurable communicative actions and real-world task performance.
 
       - Optimized educational workflows by implementing standardized templates and documentation processes for curriculum development teams.
+  - role: Curriculum & Instructional Designer
+    company: Follow Me Academy
+    dates: 01/2024 – Present
+    description: >-
+      - Designed and implemented specialized syllabi for adult and young
+      learners, ensuring full alignment with global frameworks.
+
+      - Standardized learning objectives academy-wide, achieving measurable consistency in instructional quality across all cohorts and proficiency levels.
+
+      - Oversaw all educational content development, maintaining strict alignment with international curriculum benchmarks and quality assurance protocols.
+
+      - Developed comprehensive scope-and-sequence documents, unit plans, and assessment blueprints to guide instruction across all programme levels.
+
+      - Collaborated with academic leadership to identify performance gaps and design targeted remediation strategies for underperforming learner groups.
+
+      - Reviewed and revised existing course materials to incorporate current best practices in ELT pedagogy and learner-centred design principles.
+
+      - Created blended and hybrid learning materials optimized for both synchronous and asynchronous delivery across digital platforms.
   - role: Teacher Trainer
     company: Follow Me Academy
     dates: 05/2024 – 04/2026
@@ -58,24 +76,6 @@ experience:
       - Designed and facilitated peer learning communities among teaching staff to promote collaborative professional growth and knowledge sharing.
 
       - Evaluated teacher performance against established competency frameworks and co-created individualized development plans to address growth areas.
-  - role: Curriculum & Instructional Designer
-    company: Follow Me Academy
-    dates: 01/2024 – 04/2026
-    description: >-
-      - Designed and implemented specialized syllabi for adult and young
-      learners, ensuring full alignment with global frameworks.
-
-      - Standardized learning objectives academy-wide, achieving measurable consistency in instructional quality across all cohorts and proficiency levels.
-
-      - Oversaw all educational content development, maintaining strict alignment with international curriculum benchmarks and quality assurance protocols.
-
-      - Developed comprehensive scope-and-sequence documents, unit plans, and assessment blueprints to guide instruction across all programme levels.
-
-      - Collaborated with academic leadership to identify performance gaps and design targeted remediation strategies for underperforming learner groups.
-
-      - Reviewed and revised existing course materials to incorporate current best practices in ELT pedagogy and learner-centred design principles.
-
-      - Created blended and hybrid learning materials optimized for both synchronous and asynchronous delivery across digital platforms.
   - role: English Language Teacher
     company: Follow Me Academy
     dates: 07/2022 – 04/2026
