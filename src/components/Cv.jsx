@@ -218,7 +218,7 @@ export default function Cv() {
     : [];
 
   return (
-    <div className="min-h-screen bg-[#fafafa]">
+    <div className="min-h-screen bg-[#fafafa] overflow-x-hidden">
 
       {/* Page header */}
       <div style={{ background: "linear-gradient(160deg, #5D4480 0%, #8B6BAE 40%, #B8709C 70%, #D4849A 100%)" }}>
@@ -242,7 +242,7 @@ export default function Cv() {
       </div>
 
       {/* Two-column layout */}
-      <div className="max-w-[1100px] mx-auto px-8 pb-24 grid grid-cols-[200px_1fr] gap-0 items-start">
+      <div className="max-w-[1100px] mx-auto px-8 pb-24 grid grid-cols-[200px_1fr] gap-0 items-start min-w-0">
 
         {/* LEFT: sticky nav */}
         <aside className="sticky top-20 pr-8 border-r border-[rgba(93,68,128,0.18)] self-start">
@@ -270,7 +270,7 @@ export default function Cv() {
         </aside>
 
         {/* RIGHT: content */}
-        <main className="pl-12 pt-2">
+        <main className="pl-12 pt-2 min-w-0">
 
           {/* Summary */}
           <section id="cv-summary">
