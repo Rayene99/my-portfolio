@@ -1,5 +1,5 @@
 ---
-title: The reason micromanagement is just... bad!
+title: The Reason Micromanagement Is Just... Bad!
 cover: /images/1.jpg
 excerpt: "When I worked on a project to create a new curriculum for the advanced
   CEFR levels, I handed my team a plan and said: \"pick whatever lesson you want
