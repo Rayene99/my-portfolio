@@ -21,6 +21,16 @@ const testimonials = [
     role: "Head of Quality Department",
     body: "I highly recommend Mrs. Rayene Medabis, who has consistently distinguished herself through creative instructional design and meticulous organization. She excels at developing high-quality, visually engaging materials with clear learning objectives, and her commitment to academic integrity shows in her precise, rubric-based assessments. Her proactive communication and collaborative spirit model true professional excellence.",
   },
+  {
+    author: "Benslama Borhan",
+    role: "Head of Students Affairs",
+    body: "I am writing to strongly and unreservedly recommend Mrs. Rayene Medabis, whose performance as an educator, examiner, and designer has consistently exceeded the expectations of our entire community. As Head of Client Experience, I have observed her exceptional communication skills, which foster trust, transparency, and confidence among students and parents alike. Her ability to make complex material accessible and her genuine investment in student progress have led to overwhelmingly positive feedback, directly supporting our institution's reputation and learner retention. Mrs. Medabis consistently demonstrates unwavering professionalism, reliability, and a collaborative spirit, making her an invaluable asset who elevates every environment she works in.",
+  },
+  {
+    author: "Ramzi Zouaghi",
+    role: "Curriculum Designer",
+    body: "I wholeheartedly recommend Mrs. Rayene Medabis, with whom I have collaborated closely for four years as a Teacher Trainer and curriculum designer at Follow Me Academy School. She possesses a rare combination of analytical precision and interpersonal sensitivity, which makes her exceptionally skilled at evaluating trainees and delivering feedback that redirects, challenges, and elevates their practice. In our work on curriculum design, she consistently produced thoroughly researched and impeccably organized materials that prioritize authentic, communicative language learning over rigid instruction. As a colleague, she is a generous and natural collaborator who fosters productive dialogue and maintains the highest degree of professional integrity, reliably meeting every commitment. I recommend her without reservation for any role in teacher training, curriculum development, or instructional leadership, as she is an educator of the highest order whose presence elevates the entire team.",
+  },
 ];
 
 const W   = { color: "rgba(255,255,255,1)"    };
