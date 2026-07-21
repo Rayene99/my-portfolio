@@ -1,5 +1,6 @@
 ---
 title: IELTS Band 8+ Master Guide
+author: Rayene Medabis
 cover: /images/123.png
 html_file: /images/ielts-band8-guide.html
 tags:
