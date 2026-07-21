@@ -1,0 +1,3441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Online Teacher's Activity Encyclopedia | Rayene Medabis</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pink: #F4B8C8;
+  --pink-light: #FDE8EE;
+  --pink-dark: #D4849A;
+  --olive: #7C8C4A;
+  --olive-light: #C8D4A0;
+  --olive-dark: #566230;
+  --purple: #8B6BAE;
+  --purple-light: #D4C3E8;
+  --purple-dark: #5D4480;
+  --cream: #FDFAF6;
+  --white: #FFFFFF;
+  --dark: #2C2C2C;
+  --mid: #5A5A5A;
+  --light: #9A9A9A;
+  --border: #EDE8E0;
+  --shadow: 0 4px 24px rgba(139,107,174,0.08);
+  --shadow-lg: 0 12px 48px rgba(139,107,174,0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+/* ============ SIDEBAR ============ */
+.sidebar {
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: 280px;
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  z-index: 100;
+  padding: 0 0 40px 0;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+  padding: 24px 20px;
+  background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple) 100%);
+  color: white;
+}
+
+.sidebar-header .logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+}
+
+.sidebar-header .tagline {
+  font-size: 11px;
+  opacity: 0.65;
+  margin-top: 4px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sidebar-search {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-search input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  background: var(--cream);
+  color: var(--dark);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.sidebar-search input:focus { border-color: var(--purple); }
+
+.sidebar-nav { padding: 12px 0; }
+
+.nav-section-title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--light);
+  padding: 12px 20px 6px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 20px;
+  font-size: 13px;
+  color: var(--mid);
+  cursor: pointer;
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+  font-weight: 400;
+}
+
+.nav-item:hover {
+  background: var(--pink-light);
+  color: var(--purple-dark);
+  border-left-color: var(--pink);
+}
+
+.nav-item.active {
+  background: var(--purple-light);
+  color: var(--purple-dark);
+  border-left-color: var(--purple);
+  font-weight: 500;
+}
+
+.nav-item .num {
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+  color: var(--light);
+  min-width: 22px;
+}
+
+.nav-item.active .num { color: var(--purple); }
+
+/* ============ MAIN CONTENT ============ */
+.main {
+  margin-left: 280px;
+  min-height: 100vh;
+}
+
+/* ============ COVER PAGE ============ */
+.cover {
+  min-height: 100vh;
+  background: linear-gradient(160deg, var(--purple-dark) 0%, var(--purple) 40%, #B8709C 70%, var(--pink-dark) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(ellipse at 30% 40%, rgba(244,184,200,0.15) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 60%, rgba(124,140,74,0.1) 0%, transparent 50%);
+  animation: float 8s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(3deg); }
+}
+
+.cover-badge {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: white;
+  padding: 6px 20px;
+  border-radius: 100px;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.cover h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 300;
+  color: white;
+  line-height: 1.15;
+  position: relative;
+  max-width: 700px;
+}
+
+.cover h1 em {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--pink-light);
+}
+
+.cover-subtitle {
+  font-size: 16px;
+  color: rgba(255,255,255,0.75);
+  margin-top: 20px;
+  max-width: 520px;
+  line-height: 1.6;
+  position: relative;
+}
+
+.cover-divider {
+  width: 60px;
+  height: 2px;
+  background: var(--pink);
+  margin: 36px auto;
+  position: relative;
+}
+
+.cover-author {
+  position: relative;
+  color: white;
+}
+
+.cover-author .name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.cover-author .credentials {
+  font-size: 13px;
+  opacity: 0.65;
+  margin-top: 6px;
+  letter-spacing: 0.08em;
+}
+
+.cover-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 48px;
+  position: relative;
+}
+
+.stat {
+  text-align: center;
+  color: white;
+}
+
+.stat .number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--pink-light);
+  display: block;
+}
+
+.stat .label {
+  font-size: 11px;
+  opacity: 0.65;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.5);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+.scroll-hint::after {
+  content: '↓';
+  font-size: 18px;
+}
+
+/* ============ TOC ============ */
+.toc-page {
+  padding: 80px 60px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 50px;
+}
+
+.page-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--purple);
+  margin-bottom: 12px;
+}
+
+.page-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 300;
+  color: var(--dark);
+  line-height: 1.2;
+}
+
+.page-title strong { font-weight: 700; color: var(--purple-dark); }
+
+.toc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.toc-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s;
+  box-shadow: var(--shadow);
+}
+
+.toc-item:hover {
+  border-color: var(--purple-light);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.toc-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--light);
+  min-width: 30px;
+}
+
+.toc-content { flex: 1; }
+
+.toc-chapter {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.toc-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark);
+  line-height: 1.3;
+}
+
+.toc-icon {
+  font-size: 20px;
+  opacity: 0.7;
+}
+
+.toc-item[data-cat="foundations"] { border-top: 3px solid var(--olive); }
+.toc-item[data-cat="foundations"] .toc-chapter { color: var(--olive); }
+.toc-item[data-cat="skills"] { border-top: 3px solid var(--pink-dark); }
+.toc-item[data-cat="skills"] .toc-chapter { color: var(--pink-dark); }
+.toc-item[data-cat="practice"] { border-top: 3px solid var(--purple); }
+.toc-item[data-cat="practice"] .toc-chapter { color: var(--purple); }
+.toc-item[data-cat="tech"] { border-top: 3px solid var(--olive-dark); }
+.toc-item[data-cat="tech"] .toc-chapter { color: var(--olive-dark); }
+
+/* ============ CHAPTER PAGES ============ */
+.chapter {
+  padding: 80px 60px;
+  max-width: 900px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--border);
+}
+
+.chapter-header {
+  margin-bottom: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.chapter-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.chapter-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.chapter-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3.5vw, 46px);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--dark);
+  margin-bottom: 16px;
+}
+
+.chapter-intro {
+  font-size: 17px;
+  color: var(--mid);
+  line-height: 1.75;
+  max-width: 680px;
+}
+
+/* Color coding by chapter type */
+.chapter[data-type="foundations"] .chapter-number { color: var(--olive-light); }
+.chapter[data-type="foundations"] .chapter-label { color: var(--olive); }
+.chapter[data-type="skills"] .chapter-number { color: var(--pink-light); }
+.chapter[data-type="skills"] .chapter-label { color: var(--pink-dark); }
+.chapter[data-type="practice"] .chapter-number { color: var(--purple-light); }
+.chapter[data-type="practice"] .chapter-label { color: var(--purple); }
+.chapter[data-type="tech"] .chapter-number { color: var(--olive-light); }
+.chapter[data-type="tech"] .chapter-label { color: var(--olive-dark); }
+
+/* ============ CONTENT COMPONENTS ============ */
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--dark);
+  margin: 40px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-title::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 28px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.chapter[data-type="foundations"] .section-title::before { background: var(--olive); }
+.chapter[data-type="skills"] .section-title::before { background: var(--pink-dark); }
+.chapter[data-type="practice"] .section-title::before { background: var(--purple); }
+.chapter[data-type="tech"] .section-title::before { background: var(--olive-dark); }
+
+p { margin-bottom: 16px; color: var(--mid); }
+p:last-child { margin-bottom: 0; }
+strong { color: var(--dark); font-weight: 600; }
+
+/* ============ CALLOUT BOXES ============ */
+.callout {
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 24px 0;
+  border-left: 4px solid;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.callout-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+
+.callout-content { flex: 1; }
+.callout-title { font-weight: 600; font-size: 14px; margin-bottom: 6px; color: var(--dark); }
+.callout-text { font-size: 14px; color: var(--mid); line-height: 1.6; }
+.callout-text:last-child { margin-bottom: 0; }
+
+.callout.tip { background: var(--pink-light); border-color: var(--pink-dark); }
+.callout.warning { background: #FFF8E8; border-color: #D4A020; }
+.callout.avoid { background: #FDEAEA; border-color: #C04040; }
+.callout.idea { background: var(--purple-light); border-color: var(--purple); }
+.callout.key { background: #E8F4E8; border-color: var(--olive); }
+
+/* ============ ACTIVITY CARDS ============ */
+.activity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+  margin: 24px 0;
+}
+
+.activity-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.3s;
+}
+
+.activity-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+
+.card-header {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.card-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.badge {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 100px;
+  text-transform: uppercase;
+}
+
+.badge.level-beg { background: #E8F4E8; color: var(--olive-dark); }
+.badge.level-int { background: var(--purple-light); color: var(--purple-dark); }
+.badge.level-adv { background: var(--pink-light); color: var(--pink-dark); }
+.badge.age-kids { background: #FFF0D8; color: #A06020; }
+.badge.age-teen { background: #E8E8F8; color: #404080; }
+.badge.age-adult { background: var(--olive-light); color: var(--olive-dark); }
+.badge.time { background: #F0F0F0; color: var(--mid); }
+
+.card-body {
+  padding: 0 20px 20px;
+  border-top: 1px solid var(--border);
+}
+
+.card-toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 14px 0;
+  text-align: left;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: var(--purple);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s;
+}
+
+.card-toggle:hover { color: var(--purple-dark); }
+
+.card-toggle .arrow {
+  margin-left: auto;
+  transition: transform 0.3s;
+  font-size: 16px;
+}
+
+.card-toggle.open .arrow { transform: rotate(180deg); }
+
+.card-details {
+  display: none;
+  font-size: 14px;
+  color: var(--mid);
+  line-height: 1.65;
+}
+
+.card-details.visible { display: block; animation: fadeIn 0.3s ease; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+.card-details h4 {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--light);
+  margin: 14px 0 8px;
+}
+
+.card-details ol, .card-details ul {
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+.card-details li { margin-bottom: 5px; }
+
+.card-emoji { font-size: 28px; }
+
+/* ============ COLLAPSIBLE SECTIONS ============ */
+.collapsible {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin: 16px 0;
+  overflow: hidden;
+  background: white;
+}
+
+.collapsible-header {
+  padding: 18px 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 500;
+  color: var(--dark);
+  transition: background 0.2s;
+  user-select: none;
+}
+
+.collapsible-header:hover { background: var(--cream); }
+
+.collapsible-icon {
+  font-size: 18px;
+  transition: transform 0.3s;
+  color: var(--purple);
+}
+
+.collapsible-header.open .collapsible-icon { transform: rotate(180deg); }
+
+.collapsible-body {
+  display: none;
+  padding: 0 24px 24px;
+  border-top: 1px solid var(--border);
+  animation: fadeIn 0.3s ease;
+}
+
+.collapsible-body.visible { display: block; }
+
+/* ============ CHECKLIST ============ */
+.checklist {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 24px 0;
+  box-shadow: var(--shadow);
+}
+
+.checklist-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.checklist-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checklist-download {
+  font-size: 12px;
+  color: var(--purple);
+  cursor: pointer;
+  font-weight: 500;
+  border: 1px solid var(--purple-light);
+  padding: 5px 12px;
+  border-radius: 100px;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.checklist-download:hover { background: var(--purple-light); }
+
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.checklist-item:last-child { border-bottom: none; }
+
+.checklist-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  cursor: pointer;
+  accent-color: var(--olive);
+  margin-top: 2px;
+}
+
+.checklist-item label {
+  font-size: 14px;
+  color: var(--mid);
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.checklist-item.checked label {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+/* ============ LEVEL/AGE TABS ============ */
+.tab-container { margin: 24px 0; }
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--light);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover { color: var(--purple); }
+.tab-btn.active { color: var(--purple-dark); border-bottom-color: var(--purple); font-weight: 600; }
+
+.tab-panel {
+  display: none;
+  padding: 24px;
+  background: white;
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+}
+
+.tab-panel.active { display: block; animation: fadeIn 0.3s ease; }
+
+/* ============ INFO BOXES ============ */
+.info-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.info-box {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.info-box .icon { font-size: 28px; margin-bottom: 10px; }
+.info-box .info-title { font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 8px; }
+.info-box .info-text { font-size: 13px; color: var(--mid); line-height: 1.5; }
+
+/* ============ QUICK TIPS ============ */
+.tips-list {
+  list-style: none;
+  margin: 16px 0;
+}
+
+.tips-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 15px;
+  color: var(--mid);
+}
+
+.tips-list li:last-child { border-bottom: none; }
+
+.tips-list li::before {
+  content: '→';
+  color: var(--pink-dark);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ============ AVOID LIST ============ */
+.avoid-list {
+  list-style: none;
+  margin: 16px 0;
+}
+
+.avoid-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #FDEAEA;
+  font-size: 15px;
+  color: var(--mid);
+}
+
+.avoid-list li:last-child { border-bottom: none; }
+
+.avoid-list li::before {
+  content: '✗';
+  color: #C04040;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ============ ACTIVITY FINDER ============ */
+.finder {
+  background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple) 100%);
+  border-radius: 20px;
+  padding: 40px;
+  margin: 40px 0;
+  color: white;
+}
+
+.finder-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.finder-subtitle { font-size: 14px; opacity: 0.75; margin-bottom: 28px; }
+
+.finder-controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.finder-select {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.finder-select option { background: var(--purple-dark); color: white; }
+.finder-select:focus { background: rgba(255,255,255,0.25); }
+
+.finder-btn {
+  background: white;
+  color: var(--purple-dark);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.finder-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
+.finder-results {
+  margin-top: 24px;
+  display: none;
+}
+
+.finder-results.visible { display: block; animation: fadeIn 0.4s ease; }
+
+.finder-results-title {
+  font-size: 13px;
+  opacity: 0.75;
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+}
+
+.finder-result-card {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.finder-result-card:hover { background: rgba(255,255,255,0.2); }
+
+.result-title { font-weight: 600; margin-bottom: 4px; }
+.result-meta { font-size: 12px; opacity: 0.7; }
+
+/* ============ PROGRESS BAR ============ */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 280px;
+  right: 0;
+  height: 3px;
+  background: var(--border);
+  z-index: 200;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pink-dark), var(--purple), var(--olive));
+  width: 0%;
+  transition: width 0.1s;
+}
+
+/* ============ REFLECTION PROMPTS ============ */
+.reflection {
+  background: linear-gradient(135deg, var(--olive-light) 0%, #E8F0D0 100%);
+  border-radius: 16px;
+  padding: 28px;
+  margin: 28px 0;
+  border: 1px solid var(--olive-light);
+}
+
+.reflection-title {
+  font-weight: 600;
+  color: var(--olive-dark);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reflection-question {
+  font-size: 15px;
+  color: var(--dark);
+  margin-bottom: 12px;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.reflection-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--olive-light);
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  background: rgba(255,255,255,0.8);
+  resize: vertical;
+  min-height: 80px;
+  outline: none;
+  margin-top: 8px;
+  color: var(--dark);
+}
+
+/* ============ INDEX ============ */
+.index-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.index-entry {
+  font-size: 14px;
+  color: var(--mid);
+  padding: 6px 0;
+  border-bottom: 1px dotted var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.index-entry a {
+  color: var(--purple);
+  text-decoration: none;
+  font-size: 12px;
+  font-family: 'DM Mono', monospace;
+}
+
+.index-letter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--pink);
+  margin: 20px 0 8px;
+  grid-column: 1 / -1;
+}
+
+/* ============ BLOOM TABLE ============ */
+.bloom-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 14px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.bloom-table th {
+  background: var(--purple);
+  color: white;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.bloom-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--mid);
+  vertical-align: top;
+  background: white;
+}
+
+.bloom-table tr:hover td { background: var(--cream); }
+
+.bloom-level {
+  font-weight: 600;
+  color: var(--dark);
+}
+
+/* ============ MOBILE TOGGLE ============ */
+.mobile-toggle {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 200;
+  background: var(--purple);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* ============ PLATFORM CARDS ============ */
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.platform-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+
+.platform-name {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.platform-tag {
+  font-size: 10px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-weight: 600;
+  background: var(--pink-light);
+  color: var(--pink-dark);
+}
+
+.tool-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--mid);
+}
+
+.tool-item:last-child { border-bottom: none; }
+
+.tool-item .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--olive);
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .mobile-toggle { display: block; }
+  .reading-progress { left: 0; }
+  .finder-controls { grid-template-columns: 1fr 1fr; }
+  .toc-grid { grid-template-columns: 1fr; }
+  .info-row { grid-template-columns: 1fr; }
+  .index-grid { grid-template-columns: 1fr 1fr; }
+  .chapter { padding: 60px 28px; }
+  .toc-page { padding: 60px 28px; }
+  .cover { padding: 80px 24px 60px; }
+  .cover-stats { flex-wrap: wrap; gap: 24px; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Reading Progress -->
+<div class="reading-progress"><div class="progress-fill" id="progressFill"></div></div>
+
+<!-- Mobile Toggle -->
+<button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+
+<!-- ============ SIDEBAR ============ -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">The Online Teacher's<br>Activity Encyclopedia</div>
+    <div class="tagline">By Rayene Medabis</div>
+  </div>
+  <div class="sidebar-search">
+    <input type="text" id="navSearch" placeholder="Search chapters..." oninput="filterNav(this.value)">
+  </div>
+  <div class="sidebar-nav" id="navList">
+    <div class="nav-section-title">Getting Started</div>
+    <a href="#cover" class="nav-item active"><span class="num">—</span> Cover & Intro</a>
+    <a href="#toc" class="nav-item"><span class="num">—</span> Table of Contents</a>
+
+    <div class="nav-section-title">Foundations</div>
+    <a href="#ch1" class="nav-item"><span class="num">01</span> How the Brain Learns Language</a>
+    <a href="#ch2" class="nav-item"><span class="num">02</span> The Affective Filter & Anxiety</a>
+    <a href="#ch3" class="nav-item"><span class="num">03</span> Content vs. Context</a>
+    <a href="#ch4" class="nav-item"><span class="num">04</span> Bloom's Taxonomy in Practice</a>
+    <a href="#ch5" class="nav-item"><span class="num">05</span> Beyond Learning Styles</a>
+
+    <div class="nav-section-title">Core Skills</div>
+    <a href="#ch6" class="nav-item"><span class="num">06</span> Speaking Activities</a>
+    <a href="#ch7" class="nav-item"><span class="num">07</span> Listening Activities</a>
+    <a href="#ch8" class="nav-item"><span class="num">08</span> Reading Activities</a>
+    <a href="#ch9" class="nav-item"><span class="num">09</span> Writing Activities</a>
+
+    <div class="nav-section-title">Practical Teaching</div>
+    <a href="#ch10" class="nav-item"><span class="num">10</span> Engagement Tactics Online</a>
+    <a href="#ch11" class="nav-item"><span class="num">11</span> Differentiation Strategies</a>
+    <a href="#ch12" class="nav-item"><span class="num">12</span> Motivation & Discipline</a>
+    <a href="#ch13" class="nav-item"><span class="num">13</span> Assessment & Feedback</a>
+    <a href="#ch14" class="nav-item"><span class="num">14</span> Async vs. Synchronous</a>
+    <a href="#ch15" class="nav-item"><span class="num">15</span> Managing Screen Fatigue</a>
+    <a href="#ch16" class="nav-item"><span class="num">16</span> Cultural Considerations</a>
+
+    <div class="nav-section-title">Technology</div>
+    <a href="#ch17" class="nav-item"><span class="num">17</span> Platform-Specific Guidance</a>
+    <a href="#ch18" class="nav-item"><span class="num">18</span> AI for Lesson Planning</a>
+    <a href="#ch19" class="nav-item"><span class="num">19</span> EdTech Tools for Engagement</a>
+
+    <div class="nav-section-title">Survival Kit</div>
+    <a href="#ch20" class="nav-item"><span class="num">20</span> Troubleshooting Disasters</a>
+    <a href="#index" class="nav-item"><span class="num">—</span> Index</a>
+  </div>
+</nav>
+
+<!-- ============ MAIN ============ -->
+<main class="main">
+
+<!-- COVER -->
+<section id="cover" class="cover">
+  <div class="cover-badge">Complete Resource Guide · 20 Chapters</div>
+  <h1>The Online Teacher's<br><em>Activity Encyclopedia</em></h1>
+  <p class="cover-subtitle">A practical, no-nonsense catalog for online teachers who want ideas, not lectures. For every skill, every age, every level — when creativity runs dry, this is where you come.</p>
+  <div class="cover-divider"></div>
+  <div class="cover-author">
+    <div class="name">Rayene Medabis</div>
+    <div class="credentials">M.Ed. · TESOL-Certified · Teacher Trainer & Curriculum Designer</div>
+  </div>
+  <div class="cover-stats">
+    <div class="stat"><span class="number">20</span><span class="label">Chapters</span></div>
+    <div class="stat"><span class="number">100+</span><span class="label">Activities</span></div>
+    <div class="stat"><span class="number">All</span><span class="label">Levels & Ages</span></div>
+    <div class="stat"><span class="number">Online</span><span class="label">Focused</span></div>
+  </div>
+  <div class="scroll-hint">Begin Reading</div>
+</section>
+
+<!-- ACTIVITY FINDER -->
+<section style="padding: 60px 60px 0; max-width: 900px; margin: 0 auto;">
+  <div class="finder">
+    <div class="finder-title">🔍 Find an Activity</div>
+    <div class="finder-subtitle">Lost for ideas? Pick your filters and get instant suggestions.</div>
+    <div class="finder-controls">
+      <select class="finder-select" id="findSkill">
+        <option value="">Any Skill</option>
+        <option value="speaking">Speaking</option>
+        <option value="listening">Listening</option>
+        <option value="reading">Reading</option>
+        <option value="writing">Writing</option>
+        <option value="mixed">Mixed Skills</option>
+      </select>
+      <select class="finder-select" id="findLevel">
+        <option value="">Any Level</option>
+        <option value="beginner">Beginner (A1–A2)</option>
+        <option value="intermediate">Intermediate (B1–B2)</option>
+        <option value="advanced">Advanced (C1–C2)</option>
+      </select>
+      <select class="finder-select" id="findAge">
+        <option value="">Any Age</option>
+        <option value="kids">Young Learners (4–11)</option>
+        <option value="teens">Teens (12–17)</option>
+        <option value="adults">Adults (18+)</option>
+      </select>
+      <button class="finder-btn" onclick="findActivities()">Find Activities →</button>
+    </div>
+    <div class="finder-results" id="finderResults">
+      <div class="finder-results-title" id="finderResultsTitle"></div>
+      <div id="finderResultsList"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TABLE OF CONTENTS -->
+<section id="toc" class="toc-page">
+  <div class="page-header">
+    <div class="page-tag">Navigation</div>
+    <h2 class="page-title">Table of <strong>Contents</strong></h2>
+  </div>
+  <div class="toc-grid">
+    <a href="#ch1" class="toc-item" data-cat="foundations"><span class="toc-num">01</span><div class="toc-content"><div class="toc-chapter">Foundations</div><div class="toc-title">How the Brain Learns Language</div></div><span class="toc-icon">🧠</span></a>
+    <a href="#ch2" class="toc-item" data-cat="foundations"><span class="toc-num">02</span><div class="toc-content"><div class="toc-chapter">Foundations</div><div class="toc-title">The Affective Filter & Anxiety</div></div><span class="toc-icon">💛</span></a>
+    <a href="#ch3" class="toc-item" data-cat="foundations"><span class="toc-num">03</span><div class="toc-content"><div class="toc-chapter">Foundations</div><div class="toc-title">Content vs. Context in Online Teaching</div></div><span class="toc-icon">🧩</span></a>
+    <a href="#ch4" class="toc-item" data-cat="foundations"><span class="toc-num">04</span><div class="toc-content"><div class="toc-chapter">Foundations</div><div class="toc-title">Bloom's Taxonomy in Practice</div></div><span class="toc-icon">🌸</span></a>
+    <a href="#ch5" class="toc-item" data-cat="foundations"><span class="toc-num">05</span><div class="toc-content"><div class="toc-chapter">Foundations</div><div class="toc-title">Beyond Learning Styles</div></div><span class="toc-icon">🔬</span></a>
+    <a href="#ch6" class="toc-item" data-cat="skills"><span class="toc-num">06</span><div class="toc-content"><div class="toc-chapter">Core Skills</div><div class="toc-title">Speaking Activities</div></div><span class="toc-icon">🗣️</span></a>
+    <a href="#ch7" class="toc-item" data-cat="skills"><span class="toc-num">07</span><div class="toc-content"><div class="toc-chapter">Core Skills</div><div class="toc-title">Listening Activities</div></div><span class="toc-icon">👂</span></a>
+    <a href="#ch8" class="toc-item" data-cat="skills"><span class="toc-num">08</span><div class="toc-content"><div class="toc-chapter">Core Skills</div><div class="toc-title">Reading Activities</div></div><span class="toc-icon">📖</span></a>
+    <a href="#ch9" class="toc-item" data-cat="skills"><span class="toc-num">09</span><div class="toc-content"><div class="toc-chapter">Core Skills</div><div class="toc-title">Writing Activities</div></div><span class="toc-icon">✍️</span></a>
+    <a href="#ch10" class="toc-item" data-cat="practice"><span class="toc-num">10</span><div class="toc-content"><div class="toc-chapter">Practical Teaching</div><div class="toc-title">Engagement Tactics for Online Teaching</div></div><span class="toc-icon">⚡</span></a>
+    <a href="#ch11" class="toc-item" data-cat="practice"><span class="toc-num">11</span><div class="toc-content"><div class="toc-chapter">Practical Teaching</div><div class="toc-title">Differentiation Strategies</div></div><span class="toc-icon">🎯</span></a>
+    <a href="#ch12" class="toc-item" data-cat="practice"><span class="toc-num">12</span><div class="toc-content"><div class="toc-chapter">Practical Teaching</div><div class="toc-title">Motivation & Discipline Online</div></div><span class="toc-icon">🔥</span></a>
+    <a href="#ch13" class="toc-item" data-cat="practice"><span class="toc-num">13</span><div class="toc-content"><div class="toc-chapter">Practical Teaching</div><div class="toc-title">Assessment & Feedback</div></div><span class="toc-icon">📊</span></a>
+    <a href="#ch14" class="toc-item" data-cat="practice"><span class="toc-num">14</span><div class="toc-content"><div class="toc-chapter">Practical Teaching</div><div class="toc-title">Async vs. Synchronous Activities</div></div><span class="toc-icon">⏱️</span></a>
+    <a href="#ch15" class="toc-item" data-cat="practice"><span class="toc-num">15</span><div class="toc-content"><div class="toc-chapter">Practical Teaching</div><div class="toc-title">Managing Screen Fatigue</div></div><span class="toc-icon">😮‍💨</span></a>
+    <a href="#ch16" class="toc-item" data-cat="practice"><span class="toc-num">16</span><div class="toc-content"><div class="toc-chapter">Practical Teaching</div><div class="toc-title">Cultural Considerations</div></div><span class="toc-icon">🌍</span></a>
+    <a href="#ch17" class="toc-item" data-cat="tech"><span class="toc-num">17</span><div class="toc-content"><div class="toc-chapter">Technology</div><div class="toc-title">Platform-Specific Guidance</div></div><span class="toc-icon">💻</span></a>
+    <a href="#ch18" class="toc-item" data-cat="tech"><span class="toc-num">18</span><div class="toc-content"><div class="toc-chapter">Technology</div><div class="toc-title">AI for Lesson Planning & Design</div></div><span class="toc-icon">🤖</span></a>
+    <a href="#ch19" class="toc-item" data-cat="tech"><span class="toc-num">19</span><div class="toc-content"><div class="toc-chapter">Technology</div><div class="toc-title">EdTech Tools for Engagement</div></div><span class="toc-icon">🛠️</span></a>
+    <a href="#ch20" class="toc-item" data-cat="practice"><span class="toc-num">20</span><div class="toc-content"><div class="toc-chapter">Survival Kit</div><div class="toc-title">Troubleshooting Teaching Disasters</div></div><span class="toc-icon">🚨</span></a>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 1 -->
+<!-- ============================= -->
+<section id="ch1" class="chapter" data-type="foundations">
+  <div class="chapter-header">
+    <div class="chapter-number">01</div>
+    <div class="chapter-label">Foundations · Neuroscience & Linguistics</div>
+    <h2 class="chapter-title">How the Brain Learns Language</h2>
+    <p class="chapter-intro">Before you can teach effectively, you need to understand what's actually happening inside your students' heads when they encounter new language. This chapter gives you enough neuroscience and linguistics to make genuinely informed decisions in your online classroom — without burying you in theory.</p>
+  </div>
+
+  <div class="section-title">Why This Matters</div>
+  <p>There's a fundamental difference between <strong>teaching language</strong> and <strong>transmitting it</strong>. Transmitting means presenting vocabulary, grammar rules, and structures and hoping something sticks. Teaching means understanding how the brain processes, stores, and retrieves language — and designing your lessons around that process. The two look similar from the outside. Inside the student's head, they're completely different experiences.</p>
+  <p>When you understand the mechanics of language acquisition, your activity choices stop being random. You stop doing things because "it's in the textbook" and start doing things because you know they work neurologically.</p>
+
+  <div class="section-title">How Memory Actually Works</div>
+  <p>Language learning is fundamentally a memory task. Your students have two key memory systems you need to know about.</p>
+  <div class="info-row">
+    <div class="info-box">
+      <div class="icon">⚡</div>
+      <div class="info-title">Working Memory</div>
+      <div class="info-text">Short-term processing space. Limited capacity — roughly 4–7 chunks at once. Where new language is held temporarily before it moves anywhere useful.</div>
+    </div>
+    <div class="info-box">
+      <div class="icon">🗄️</div>
+      <div class="info-title">Long-Term Memory</div>
+      <div class="info-text">Where language becomes automatic. This is your goal. Getting language here requires repetition, emotion, context, and meaningful use — not drilling alone.</div>
+    </div>
+    <div class="info-box">
+      <div class="icon">🔗</div>
+      <div class="info-title">The Bridge</div>
+      <div class="info-text">Sleep, spaced repetition, and retrieval practice are what move language from working to long-term memory. One exposure is almost always not enough.</div>
+    </div>
+  </div>
+
+  <div class="callout tip">
+    <div class="callout-icon">💡</div>
+    <div class="callout-content">
+      <div class="callout-title">The Practical Takeaway</div>
+      <div class="callout-text">Every time a student retrieves language from memory rather than looking it up, they strengthen the neural pathway for that language. Design activities that force retrieval — not just recognition.</div>
+    </div>
+  </div>
+
+  <div class="section-title">Input and Output: They're Not the Same</div>
+  <p>Your students need two things that serve completely different neurological functions: <strong>comprehensible input</strong> (language slightly above their current level that they can mostly understand) and <strong>pushed output</strong> (producing language that stretches their capability). Input alone builds receptive knowledge. Output pushes students to notice gaps in their own language and actively find solutions. Both are non-negotiable. Many online classes are heavy on input and light on meaningful output — that's why students can understand fine but freeze when they speak.</p>
+
+  <div class="section-title">Attention is the Gateway</div>
+  <p>Here's something every online teacher needs tattooed somewhere: <strong>no attention = no learning</strong>. The brain does not passively absorb language that exists in the environment. It needs to consciously notice it. In an online classroom, competing for attention is your constant challenge — notifications, distractions, the simple fact that looking engaged on a screen is much easier than actually being engaged. Your activities need to force active noticing.</p>
+
+  <div class="callout warning">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-content">
+      <div class="callout-title">Online Attention Reality Check</div>
+      <div class="callout-text">Average focused attention for online learning without interaction: 8–12 minutes. Average focused attention when the student is actively participating: significantly longer. Build interaction into every 10-minute block. This isn't optional.</div>
+    </div>
+  </div>
+
+  <div class="section-title">Why Kids and Adults Learn Differently</div>
+  <p>This matters enormously for how you scaffold activities online. Children and adults aren't just different in age — their brains are doing fundamentally different things with new language.</p>
+  <div class="tab-container">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab(this, 'brain-kids')">Young Learners (4–11)</button>
+      <button class="tab-btn" onclick="switchTab(this, 'brain-teens')">Teens (12–17)</button>
+      <button class="tab-btn" onclick="switchTab(this, 'brain-adults')">Adults (18+)</button>
+    </div>
+    <div id="brain-kids" class="tab-panel active">
+      <p><strong>Implicit acquisition dominates.</strong> Young learners absorb language through play, repetition, and patterns — the same way they learned their first language. They don't need rules explained. They need massive, varied exposure in meaningful contexts. Their brains are highly plastic and efficient at pattern recognition. On screen, this means games, songs, stories, movement, and high visual stimulation. Abstract explanations are not just unhelpful — they actively interfere. Keep scaffolding concrete and tactile even online.</p>
+    </div>
+    <div id="brain-teens" class="tab-panel">
+      <p><strong>Transition period.</strong> Teens can handle explicit learning but benefit enormously from implicit approaches too. Their working memory is fully developed, but emotional engagement is their biggest motivator. Peer interaction, real-world relevance, and feeling competent matter deeply. Online, they respond to challenges, collaborative tasks, and content that feels sophisticated — not childish. Avoid anything patronizing. Give them agency and they'll engage. Force them and they'll disappear into their phones.</p>
+    </div>
+    <div id="brain-adults" class="tab-panel">
+      <p><strong>Explicit processing is dominant.</strong> Adults typically learn more efficiently when rules are visible, but they bring the gift of vast real-world knowledge to build on. They connect new language to existing frameworks, which is a huge advantage. The challenge: adults have much stronger inhibitions, more fear of making mistakes, and decades of noticing they sound "wrong." Online, this means psychological safety is everything. Structure activities so mistakes are private or low-stakes. Give adults control and context — they need to know <em>why</em> they're doing something.</p>
+    </div>
+  </div>
+
+  <div class="section-title">The Difference Between Teaching and Just Using the Language</div>
+  <p>This is the thing that separates good language teachers from people who happen to speak English well. <strong>Using language fluently does not mean you can teach it.</strong> A native speaker can have a conversation in English all day — that doesn't mean they understand why their students say "I am agree" instead of "I agree," or why they can't hold on to the word "embarrassed" even after encountering it fifteen times.</p>
+  <p>Teaching requires you to understand interlanguage (the evolving system students create as they learn), common error patterns, why certain structures are harder for certain L1 speakers, and how to sequence language so it builds on itself. When you understand these things, your feedback is precise and your activities are purposeful. When you don't, you're essentially hoping for the best.</p>
+
+  <div class="reflection">
+    <div class="reflection-title">✏️ Teacher Reflection</div>
+    <div class="reflection-question">Think about your last three lessons. What percentage of the time were students actively producing language (output) versus receiving it (input)? Was the balance right for your group's level?</div>
+    <textarea class="reflection-textarea" placeholder="Your notes here..."></textarea>
+    <div class="reflection-question" style="margin-top: 12px;">What's one thing about how your students learn that you didn't know before reading this chapter?</div>
+    <textarea class="reflection-textarea" placeholder="Your notes here..."></textarea>
+  </div>
+
+  <div class="section-title">Practical Principles to Take Into Every Lesson</div>
+  <ul class="tips-list">
+    <li>Introduce new language in context before isolating it for practice. The brain needs the whole picture before it can process the parts.</li>
+    <li>Repeat, vary, revisit. Don't present vocabulary once and move on. Return to it in different contexts, activities, and formats.</li>
+    <li>Make it meaningful. Language tied to real feeling, real tasks, and real consequences sticks better than language used in exercises for its own sake.</li>
+    <li>Keep cognitive load manageable. Don't introduce too many new items at once. Three to five new items per lesson, reinforced thoroughly, beats twelve items skimmed over.</li>
+    <li>Use the body even online. Gestures, facial expressions, physical movement (even standing up) activate different neural pathways and improve retention.</li>
+    <li>Mix modalities. Visual, auditory, and kinesthetic exposure to the same language — not because of "learning styles" (more on that in Chapter 5) — but because multimodal encoding creates stronger, more retrievable memory traces.</li>
+  </ul>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 2 -->
+<!-- ============================= -->
+<section id="ch2" class="chapter" data-type="foundations">
+  <div class="chapter-header">
+    <div class="chapter-number">02</div>
+    <div class="chapter-label">Foundations · Psychology & Wellbeing</div>
+    <h2 class="chapter-title">The Affective Filter, Anxiety & Language Freeze</h2>
+    <p class="chapter-intro">You can have the best activity in the world and the most willing student in the universe, and it can still go completely nowhere because of one thing: anxiety. This chapter is about what happens emotionally when someone tries to learn — or speak — a language, and what you can actually do about it in an online classroom.</p>
+  </div>
+
+  <div class="section-title">The Affective Filter: What It Is</div>
+  <p>The affective filter is a metaphor for the emotional barrier that rises when learners feel anxious, unmotivated, or self-conscious. When the filter is high, language cannot be processed effectively — input goes in but doesn't stick. The student hears you, understands you, but retains almost nothing. When the filter is low, the brain is open and receptive. Learning actually happens. Your job as an online teacher is to keep that filter as low as possible, as consistently as possible.</p>
+
+  <div class="callout key">
+    <div class="callout-icon">🔑</div>
+    <div class="callout-content">
+      <div class="callout-title">Remember This</div>
+      <div class="callout-text">A student who feels safe makes mistakes freely. A student who feels judged stops trying. Safety is not "being nice." Safety is a pedagogical tool — and online, you have to work harder to create it than in a physical classroom.</div>
+    </div>
+  </div>
+
+  <div class="section-title">Anxiety in the Online Classroom: What Makes It Worse</div>
+  <p>Online teaching amplifies certain anxiety triggers that don't exist — or exist less — in face-to-face settings. Knowing them means you can design around them.</p>
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+      📷 Being Seen on Camera <span class="collapsible-icon">▼</span>
+    </div>
+    <div class="collapsible-body">
+      <p>For many students — especially teens and adults — being on camera is already stressful. Seeing their own face while trying to produce language in real time is a unique kind of pressure that has no equivalent in a physical classroom. For anxious learners, this alone can raise the filter significantly. <strong>Don't force cameras on.</strong> If camera policy isn't your decision, at minimum allow students to turn their camera off during production tasks where anxiety is highest.</p>
+    </div>
+  </div>
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+      🔇 Unmuting to Speak <span class="collapsible-icon">▼</span>
+    </div>
+    <div class="collapsible-body">
+      <p>There's a specific moment of anxiety that precedes unmuting and speaking in front of a group. The student doesn't know if their microphone will work, doesn't know if there's background noise, doesn't know if they'll be heard or cut off. This technical anxiety sits on top of linguistic anxiety. Reduce it by having a consistent unmuting protocol and by signaling clearly when you're about to call on someone — don't cold-call without warning.</p>
+    </div>
+  </div>
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+      👁️ Silence Feeling More Obvious <span class="collapsible-icon">▼</span>
+    </div>
+    <div class="collapsible-body">
+      <p>In a physical classroom, silence is distributed. On a video call, silence is pointed. Everyone can see exactly who isn't speaking. This intensifies performance anxiety enormously. If a student freezes, it's immediately visible and feels more humiliating than it would in a room with twenty other students also doing their own tasks.</p>
+    </div>
+  </div>
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+      🌍 Being in Their Own Space <span class="collapsible-icon">▼</span>
+    </div>
+    <div class="collapsible-body">
+      <p>Home should feel safe, but for many students — especially young learners — the blending of school and home creates its own discomfort. Siblings, parents, background noise, and the feeling that their private space is being exposed can all contribute to anxiety. Be sensitive to this and never draw attention to a student's home environment.</p>
+    </div>
+  </div>
+
+  <div class="section-title">Language Freeze: Why It Happens</div>
+  <p>Language freeze is that moment when a student — who <em>definitely</em> knows the vocabulary, who can write the sentences perfectly, who understood the grammar explanation completely — opens their mouth and produces nothing. Or something entirely wrong. It looks like a knowledge gap. It isn't. It's a retrieval failure caused by anxiety.</p>
+  <p>Here's what's happening neurologically: stress releases cortisol, which temporarily impairs the prefrontal cortex — the part of the brain responsible for working memory and language production. Under pressure, the very system the student needs to produce language is literally compromised. This is why drilling in a relaxed setting does not guarantee performance under pressure. The two states are neurologically different.</p>
+
+  <div class="callout avoid">
+    <div class="callout-icon">🚫</div>
+    <div class="callout-content">
+      <div class="callout-title">Stop Doing This</div>
+      <div class="callout-text">Waiting in silence while a frozen student struggles, staring at them through the camera, repeating the question louder. All of this increases cortisol. Redirect, offer a lifeline, or move on and return to them when pressure drops. A student who unfreezes later is infinitely more valuable than one who shuts down for the rest of the lesson.</div>
+    </div>
+  </div>
+
+  <div class="section-title">Anxiety Affects Teachers Too</div>
+  <p>Online teaching is its own specific kind of stressful. Technical failures, non-responsive classes, students with cameras off, the constant effort of performing warmth and energy through a screen — it adds up. Teacher anxiety leaks into the classroom. When you're stressed, your pacing becomes erratic, your instructions unclear, your tolerance for silence low. Your own filter goes up, and students feel it.</p>
+  <ul class="tips-list">
+    <li>Build buffer time into your lesson plan. Feeling rushed is one of the biggest teacher anxiety triggers.</li>
+    <li>Have a go-to emergency activity you could run in your sleep — so technical problems don't spiral you into panic.</li>
+    <li>Normalise your own mistakes out loud. When you mispronounce something or share your screen the wrong way, say "oops" and laugh. You're modeling what you want from your students.</li>
+    <li>Give yourself transition time between classes. Back-to-back online teaching is cognitively exhausting in a way that face-to-face teaching often isn't.</li>
+  </ul>
+
+  <div class="section-title">Practical Strategies to Lower the Affective Filter</div>
+  <div class="checklist">
+    <div class="checklist-header">
+      <div class="checklist-title">✅ Pre-Lesson Filter Check</div>
+      <button class="checklist-download" onclick="downloadChecklist('filter')">⬇ Download</button>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Begin every class with a low-stakes warm-up where there are no wrong answers</label></div>
+    <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Use a class greeting ritual (consistent, predictable, safe)</label></div>
+    <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Allow students to type answers in chat before speaking — reduces performance pressure</label></div>
+    <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Avoid cold-calling. Use visible random name pickers if you must call on students — at least it's "fair"</label></div>
+    <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Use breakout rooms so students speak in pairs before speaking to the group</label></div>
+    <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Praise effort and risk-taking, not just accuracy</label></div>
+    <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Never correct a student mid-sentence during fluency activities</label></div>
+    <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Create a classroom phrase students can use if they're lost: "Can I have a moment?" or "Can we come back to me?"</label></div>
+  </div>
+
+  <div class="section-title">What to Expect: Signs of High Anxiety in Online Students</div>
+  <ul class="tips-list">
+    <li><strong>Camera off with no explanation</strong> — often anxiety, not laziness</li>
+    <li><strong>Consistently typing rather than speaking</strong> even when speaking is the task</li>
+    <li><strong>Very minimal answers</strong> — "yes," "no," "I don't know" — when the student clearly has more capacity</li>
+    <li><strong>Disappearing into breakout rooms without engaging</strong> — social anxiety</li>
+    <li><strong>Asking the teacher to repeat questions frequently</strong> — not a listening problem, often a freeze response that buys time</li>
+    <li><strong>Laughing nervously or deflecting</strong> before speaking — a coping mechanism</li>
+  </ul>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 3 -->
+<!-- ============================= -->
+<section id="ch3" class="chapter" data-type="foundations">
+  <div class="chapter-header">
+    <div class="chapter-number">03</div>
+    <div class="chapter-label">Foundations · Pedagogy</div>
+    <h2 class="chapter-title">Content vs. Context: Why Good Activities Flop</h2>
+    <p class="chapter-intro">You've planned a great activity. The instructions are clear, the topic is interesting, the level is right. And then — nothing. Students don't engage, the conversation dies, the task feels hollow. Nine times out of ten, the content isn't the problem. The context is.</p>
+  </div>
+
+  <div class="section-title">Understanding the Difference</div>
+  <p><strong>Content</strong> is <em>what</em> you teach — the vocabulary, the grammar structure, the topic, the text, the activity type. <strong>Context</strong> is everything around it — <em>why</em> students are doing this, <em>how</em> it connects to them, <em>where</em> it sits in the lesson sequence, and what the emotional and relational environment feels like. A perfectly designed task with the wrong context will flop. A simple task with the right context can be extraordinary.</p>
+
+  <div class="info-row">
+    <div class="info-box">
+      <div class="icon">📝</div>
+      <div class="info-title">Content</div>
+      <div class="info-text">Topic, language point, task type, materials, text, skill focus, level of difficulty</div>
+    </div>
+    <div class="info-box">
+      <div class="icon">🌍</div>
+      <div class="info-title">Context</div>
+      <div class="info-text">Relevance, purpose, timing, sequence, relationship, emotional climate, student readiness</div>
+    </div>
+    <div class="info-box">
+      <div class="icon">⚡</div>
+      <div class="info-title">The Gap</div>
+      <div class="info-text">Most lesson failures happen in the gap between these two. Content is planned. Context is often ignored.</div>
+    </div>
+  </div>
+
+  <div class="section-title">Why Context Is Harder to Get Right Online</div>
+  <p>In a physical classroom, context is partially built by the environment itself — the physical space, the social warmth of bodies in a room, the peer pressure (positive) of watching others engage, the natural rhythm of movement and transition. Online, you have to manufacture all of that intentionally. The screen flattens context. A topic that would feel natural and energising in person can feel random and awkward online without careful framing.</p>
+
+  <div class="callout tip">
+    <div class="callout-icon">💡</div>
+    <div class="callout-content">
+      <div class="callout-title">The Magic Question</div>
+      <div class="callout-text">Before every activity, ask yourself: <em>"Why would my students care about doing this right now?"</em> If you can't answer that clearly, the context isn't ready. Frame the task before you launch it — never just drop it without setup.</div>
+    </div>
+  </div>
+
+  <div class="section-title">The Four Context Failures That Kill Activities</div>
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapsible(this)">1. Wrong Timing <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body"><p>An activity that's perfectly appropriate at one point in a lesson can feel impossible at another. A creative debate works brilliantly after a warm-up that's established vocabulary and sparked opinions — but opened cold at the start of a lesson, it produces silence. Sequence your activities so each one builds context for the next. Never drop students into the deep end without building up to it.</p></div>
+  </div>
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapsible(this)">2. No Genuine Purpose <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body"><p>Students smell "this is just an exercise" from miles away, especially older teens and adults. If the only reason to do the task is "because it's in the lesson plan," engagement will be minimal. Create a genuine reason to communicate — a real question that has a real answer, a decision that needs to be made, a product that will be shared or used.</p></div>
+  </div>
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapsible(this)">3. Topic-Student Mismatch <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body"><p>Textbook topics are generic because they're written for nobody in particular. "Describe your hometown" is fine. "Describe what's happening in your country right now in a way that helps your classmates understand your reality" is engaging — because it's personal, real, and there's actual information exchange happening. Know your students well enough to adapt topics to their lives.</p></div>
+  </div>
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapsible(this)">4. Relationship Not Established <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body"><p>Group activities fail when students don't know or trust each other. In online teaching, you can go weeks with students who are technically in the same class but have never actually talked to each other. You cannot skip the relationship-building phase. Pair students who've never worked together and give them tasks that require genuine sharing before you expect collaborative production.</p></div>
+  </div>
+
+  <div class="section-title">How to Set Context Effectively Online</div>
+  <ul class="tips-list">
+    <li><strong>Frame before you launch.</strong> Always tell students what they're doing, why they're doing it, and what they'll do with the result. Two sentences of framing can transform engagement.</li>
+    <li><strong>Use real-world scenarios.</strong> Instead of "talk about food," use "you're planning a dinner for a friend who just had surgery and can't eat certain things." Specificity creates context.</li>
+    <li><strong>Connect to recent class experiences.</strong> "Remember what we talked about last week?" creates continuity and reminds students they're part of an ongoing story, not a random series of exercises.</li>
+    <li><strong>Show, don't just tell.</strong> Use a visual, a short video clip, a funny image, or a surprising fact to set the emotional tone of a topic before asking students to engage with it.</li>
+    <li><strong>Personalise the stakes.</strong> "Imagine this is happening to you" or "Would you do this in your own life?" makes abstract content concrete and relevant.</li>
+    <li><strong>End with something real.</strong> Ask students to share their outcome — post it, say it, vote on it. A result that goes nowhere kills context. A result that someone responds to creates authentic communication.</li>
+  </ul>
+
+  <div class="reflection">
+    <div class="reflection-title">✏️ Teacher Reflection</div>
+    <div class="reflection-question">Think of an activity that recently flopped in your online class. Was the issue content or context? What specifically was missing?</div>
+    <textarea class="reflection-textarea" placeholder="Your notes here..."></textarea>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 4 -->
+<!-- ============================= -->
+<section id="ch4" class="chapter" data-type="foundations">
+  <div class="chapter-header">
+    <div class="chapter-number">04</div>
+    <div class="chapter-label">Foundations · Curriculum Design</div>
+    <h2 class="chapter-title">Bloom's Taxonomy in Practice</h2>
+    <p class="chapter-intro">Bloom's Taxonomy is one of those things that sounds like theory but is actually one of the most practical tools you have as a curriculum designer. This chapter cuts through the academic language and shows you exactly how to use it — for writing learning outcomes, designing activity sequences, and (bonus) for getting better results from AI tools.</p>
+  </div>
+
+  <div class="section-title">The Six Levels — Made Practical</div>
+  <p>Bloom's Taxonomy organises thinking into six levels, from the most basic to the most complex. In language teaching, your activities should ideally move students up through these levels within a single lesson — starting with remembering and understanding, and pushing toward application, analysis, and creation.</p>
+
+  <table class="bloom-table">
+    <tr><th>Level</th><th>What it looks like in a language class</th><th>Sample verbs</th></tr>
+    <tr><td><span class="bloom-level">1. Remember</span></td><td>Recall vocabulary, reproduce a grammar rule, identify a verb form</td><td>list, name, recall, match, define</td></tr>
+    <tr><td><span class="bloom-level">2. Understand</span></td><td>Explain the meaning of a text, describe a character, summarise a listening passage</td><td>describe, explain, summarise, classify</td></tr>
+    <tr><td><span class="bloom-level">3. Apply</span></td><td>Use new vocabulary in original sentences, fill in a dialogue, complete a task using a grammar point</td><td>use, solve, demonstrate, apply, produce</td></tr>
+    <tr><td><span class="bloom-level">4. Analyse</span></td><td>Compare two viewpoints in a text, identify the author's purpose, break down an argument</td><td>compare, contrast, distinguish, examine</td></tr>
+    <tr><td><span class="bloom-level">5. Evaluate</span></td><td>Judge which argument is stronger, assess a piece of writing, debate a topic with justification</td><td>justify, defend, argue, critique, assess</td></tr>
+    <tr><td><span class="bloom-level">6. Create</span></td><td>Write an original story, design a presentation, build a dialogue from scratch, produce a podcast</td><td>design, compose, build, construct, produce</td></tr>
+  </table>
+
+  <div class="callout tip">
+    <div class="callout-icon">💡</div>
+    <div class="callout-content">
+      <div class="callout-title">The Common Mistake</div>
+      <div class="callout-text">Most online language classes live almost entirely at levels 1–3. Teachers present language (remember), check comprehension (understand), then drill (apply) — and call it done. Students who never reach levels 4–6 never develop genuine communicative competence. Push higher, even with beginners — simplify the language, not the thinking.</div>
+    </div>
+  </div>
+
+  <div class="section-title">Writing Learning Outcomes with Bloom's</div>
+  <p>A learning outcome is not "students will learn about modal verbs." A learning outcome is a measurable statement of what students will be able to <em>do</em> by the end of the lesson. Bloom's gives you the verbs.</p>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapsible(this)">📝 Outcome Formula + Examples <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body">
+      <p><strong>Formula:</strong> By the end of this lesson, students will be able to [Bloom's verb] + [what] + [context/condition]</p>
+      <br>
+      <p>❌ Weak: "Students will learn modal verbs."</p>
+      <p>✅ Strong (Apply): "Students will be able to use 'should,' 'must,' and 'might' to give advice in a real-life problem scenario."</p>
+      <br>
+      <p>❌ Weak: "Students will read about climate change."</p>
+      <p>✅ Strong (Evaluate): "Students will be able to evaluate the strength of two opposing arguments about climate action and defend their position."</p>
+      <br>
+      <p>❌ Weak: "Students will practice speaking."</p>
+      <p>✅ Strong (Create): "Students will design and deliver a 2-minute pitch for an imaginary product, using persuasive language from the lesson."</p>
+    </div>
+  </div>
+
+  <div class="section-title">Using Bloom's to Prompt AI Tools</div>
+  <p>This is where Bloom's becomes genuinely powerful in 2024 and beyond. When you use AI tools like ChatGPT or Claude to generate activities, vague prompts give vague results. Bloom's gives you the precise language to get exactly what you need.</p>
+
+  <div class="callout idea">
+    <div class="callout-icon">🤖</div>
+    <div class="callout-content">
+      <div class="callout-title">Bloom's-Powered AI Prompts</div>
+      <div class="callout-text">
+        Instead of: <em>"Give me a speaking activity about food for B1 students."</em><br><br>
+        Try: <em>"Create a speaking activity for B1 adult learners where students must EVALUATE three different diets based on provided nutritional criteria and JUSTIFY their recommendation to a partner. Include scaffolding language."</em><br><br>
+        The Bloom's level (evaluate, justify) tells the AI exactly what cognitive demand you want. You'll get dramatically better output.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Sequencing Activities Through the Levels</div>
+  <p>A well-designed lesson builds from lower to higher levels naturally. Here's a sample sequence for a B1 lesson on expressing opinions:</p>
+  <ul class="tips-list">
+    <li><strong>Remember:</strong> Students match opinion phrases to their functions (agreement, disagreement, hedging)</li>
+    <li><strong>Understand:</strong> Students listen to a short conversation and identify which phrases the speakers use</li>
+    <li><strong>Apply:</strong> Students use the phrases to respond to a series of prompts in the chat</li>
+    <li><strong>Analyse:</strong> Students compare their responses with a partner and identify differences in meaning</li>
+    <li><strong>Evaluate:</strong> Students debate a simple topic using only the phrases from the lesson</li>
+    <li><strong>Create:</strong> Students write a short persuasive post on a topic of their choice and peer-review it</li>
+  </ul>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 5 -->
+<!-- ============================= -->
+<section id="ch5" class="chapter" data-type="foundations">
+  <div class="chapter-header">
+    <div class="chapter-number">05</div>
+    <div class="chapter-label">Foundations · Cognitive Science</div>
+    <h2 class="chapter-title">Beyond Learning Styles: How the Brain Actually Learns</h2>
+    <p class="chapter-intro">Let's address the elephant in the room: learning styles — the idea that some people are "visual learners," others are "auditory learners," others are "kinesthetic." It's everywhere. It's popular. It also has no solid scientific support. Here's what actually works — and how to use it.</p>
+  </div>
+
+  <div class="section-title">The Problem with Learning Styles</div>
+  <p>The learning styles myth isn't harmless. When teachers design entire lessons around a student's supposed "style," they often deprive that student of the variety that actually drives better learning. The research consistently shows that when you test whether people actually learn better in their preferred "style," the effect disappears. What does work is using multiple modes together — not because of style, but because of how memory encoding works.</p>
+
+  <div class="callout warning">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-content">
+      <div class="callout-title">What This Means in Practice</div>
+      <div class="callout-text">Don't build lessons around individual student "styles." Instead, build all lessons to be inherently multimodal. Everybody benefits. Nobody is labelled as a "visual person" who then misses out on listening. Variety isn't accommodation — it's just good pedagogy.</div>
+    </div>
+  </div>
+
+  <div class="section-title">What Actually Works: Evidence-Based Strategies</div>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapsible(this)">🧠 Retrieval Practice — The Most Powerful Tool You're Probably Underusing <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body">
+      <p>Retrieval practice means deliberately pulling information out of memory — not just re-reading or re-presenting it. Every time a student has to actively recall something, the memory trace gets stronger. Tests, quizzes, gap-fills from memory, and "write down everything you remember from last lesson" activities are all retrieval practice. They feel harder for students, which is exactly the point. Difficulty at the right level = learning.</p>
+      <p><strong>Online applications:</strong> Mini quizzes at the start of every class, memory challenges ("close your notes and list 5 words from last week"), Kahoot reviews, partner recall activities ("tell your partner everything you remember about the modal verbs we studied").</p>
+    </div>
+  </div>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapsible(this)">🔄 Spaced Repetition — Why Cramming Doesn't Work <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body">
+      <p>Spaced repetition means distributing practice over time rather than concentrating it. Revisiting vocabulary on day 1, day 3, day 7, and day 14 produces dramatically better long-term retention than seeing it 20 times in one lesson. This is why "review last week's vocabulary" should be a non-negotiable part of every lesson — not optional, not only if there's time.</p>
+      <p><strong>Online applications:</strong> Start every lesson with a 5-minute flashcard review, use Quizlet for automated spaced repetition, build recycling into your lesson sequences deliberately.</p>
+    </div>
+  </div>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapsible(this)">🖼️ Dual Coding — Words + Images Together <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body">
+      <p>Dual coding is the practice of combining verbal and visual information. When you hear or read something AND see a related image simultaneously, the brain creates two memory traces instead of one — making retrieval far more reliable. This is why visual vocabulary presentation, annotated images, and concept mapping are genuinely effective, not just engaging.</p>
+      <p><strong>Online applications:</strong> Slides with relevant images (not decoration — genuinely connected images), asking students to draw what they hear during listening activities, using Google Slides or Padlet for visual vocabulary mapping, having students create illustrated flashcards.</p>
+    </div>
+  </div>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapsible(this)">🎯 Interleaving — Mixing It Up on Purpose <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body">
+      <p>Interleaving is the counterintuitive practice of mixing different tasks or language points within a session rather than blocking them (practicing one thing repeatedly before moving to another). It feels harder and produces more errors during practice — but results in better transfer and long-term retention. Don't just drill one verb tense for 30 minutes. Mix tenses, vocabulary, and task types within a session.</p>
+    </div>
+  </div>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapsible(this)">🎭 Multimodal Instruction — The Right Reason to Use Multiple Modes <span class="collapsible-icon">▼</span></div>
+    <div class="collapsible-body">
+      <p>The reason to use visual, auditory, and kinesthetic approaches in the same lesson isn't because of learning styles — it's because multiple encoding pathways create stronger, more flexible memory. When a student hears a word, sees it, uses it in a sentence, and acts it out, they have four ways to retrieve it later. One way to encode = one fragile path. Four ways = a robust network.</p>
+      <p><strong>Online applications:</strong> Combine audio (listening), visual (slides, images), linguistic (reading/writing), and physical (gestures, movement) within the same vocabulary or grammar lesson. Online doesn't mean sitting still and looking at text.</p>
+    </div>
+  </div>
+
+  <div class="callout key">
+    <div class="callout-icon">🔑</div>
+    <div class="callout-content">
+      <div class="callout-title">The Bottom Line</div>
+      <div class="callout-text">Forget styles. Focus on: retrieval (pull it out of memory), spacing (revisit over time), dual coding (words + images), and interleaving (mix it up). These four strategies work for every student, at every level, across every language skill.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 6 -->
+<!-- ============================= -->
+<section id="ch6" class="chapter" data-type="skills">
+  <div class="chapter-header">
+    <div class="chapter-number">06</div>
+    <div class="chapter-label">Core Skills · Deep Dive</div>
+    <h2 class="chapter-title">Speaking Activities</h2>
+    <p class="chapter-intro">Speaking is the hardest skill to teach online and the most important to get right. The screen adds friction, anxiety goes up, and silence is more awkward than in any physical classroom. Here is your complete activity bank — from warm-ups to full production tasks — with adaptations for every level and age.</p>
+  </div>
+
+  <div class="section-title">Why Speaking Online Is Different</div>
+  <p>In a physical classroom, conversations overlap, students whisper to each other, and the teacher can monitor multiple pairs simultaneously with ease. Online, everyone goes through the same channel. One person speaks at a time or chaos erupts. Breakout rooms are your best friend — but they require careful setup. The activities below are designed with the specific constraints and opportunities of online speaking in mind.</p>
+
+  <div class="callout avoid">
+    <div class="callout-icon">🚫</div>
+    <div class="callout-content">
+      <div class="callout-title">The Biggest Speaking Mistake Online</div>
+      <div class="callout-text">Asking students to "discuss" a topic in the main room with six or more people. Most students wait for someone else to go first. One or two dominant students fill the space. The rest disengage. Pairs and small groups in breakout rooms first — always. Main room = sharing outcomes, not primary discussion space.</div>
+    </div>
+  </div>
+
+  <div class="section-title">Activity Bank: Speaking</div>
+  <div class="activity-grid">
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Hot Seat</div>
+          <div class="card-badges">
+            <span class="badge level-beg">Beginner+</span>
+            <span class="badge age-kids">Kids</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge time">10–15 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">🔥</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>One student is "in the hot seat" — they can only see their face on screen (no slides).</li>
+            <li>The teacher puts a word or topic on the screen — the student can't see it.</li>
+            <li>Other students give clues, definitions, or mime to help the hot-seat student guess.</li>
+            <li>Rotate every 2–3 minutes.</li>
+          </ol>
+          <h4>Online Adaptation</h4>
+          <p>Use screen sharing with the word on a slide. Ask the hot-seat student to look away from their screen until everyone else has read it. Or use a tool like Gartic Phone to show words only to specific students.</p>
+          <h4>Tips</h4>
+          <p>For beginners, use single vocabulary words. For higher levels, use abstract concepts, idioms, or situations. Keep a running score to add energy.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Speed Dating Debate</div>
+          <div class="card-badges">
+            <span class="badge level-int">Intermediate+</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge age-adult">Adults</span>
+            <span class="badge time">20–30 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">💬</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>Assign each student a position (for/against) on a topic.</li>
+            <li>Put them in breakout rooms in pairs — 3 minutes to argue their position.</li>
+            <li>Rotate partners. Students keep the same position throughout.</li>
+            <li>After 3–4 rounds, bring everyone back and take a class vote.</li>
+          </ol>
+          <h4>Online Adaptation</h4>
+          <p>Name breakout rooms clearly (Room A, B, C...) and rotate manually. Use a visible timer shared on screen. Have a "cheat sheet" of useful argument phrases pinned to the chat.</p>
+          <h4>Adaptations by Level</h4>
+          <p><strong>Intermediate:</strong> Provide a list of arguments they can use. <strong>Advanced:</strong> No preparation — argue from scratch. Students must find their own examples.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Picture Storytelling</div>
+          <div class="card-badges">
+            <span class="badge level-beg">All Levels</span>
+            <span class="badge age-kids">Kids</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge age-adult">Adults</span>
+            <span class="badge time">15–20 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">🖼️</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>Show a series of 4–6 images on screen (or send them to students).</li>
+            <li>Students must create and tell a story connecting all the images.</li>
+            <li>In pairs or small groups, they narrate their story — the other person listens and asks questions.</li>
+            <li>Compare stories: how different are they?</li>
+          </ol>
+          <h4>Adaptations by Level</h4>
+          <p><strong>Beginners:</strong> Simple, concrete images with vocabulary scaffolding provided. Students narrate using present simple. <strong>Advanced:</strong> Abstract or ambiguous images. Students must use narrative tenses and include backstory, motivation, and resolution.</p>
+          <h4>For Kids</h4>
+          <p>Use animated characters or cartoon images. Allow students to draw their own version and show it to the camera before narrating.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Would You Rather?</div>
+          <div class="card-badges">
+            <span class="badge level-beg">Beginner+</span>
+            <span class="badge age-kids">Kids</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge time">10–15 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">🤔</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>Present two options on screen: "Would you rather always speak in rhymes OR only be able to whisper?"</li>
+            <li>Students write their answer in chat (reduces anxiety — they commit before hearing others).</li>
+            <li>Reveal answers and ask students to explain their reasoning.</li>
+            <li>Encourage follow-up questions between students.</li>
+          </ol>
+          <h4>Tips</h4>
+          <p>For beginners, keep scenarios simple and visual. For teens, make them ridiculous — the more absurd, the more they talk. Link the scenarios to your lesson topic whenever possible to make it content-relevant.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Collaborative Story Circle</div>
+          <div class="card-badges">
+            <span class="badge level-int">Intermediate+</span>
+            <span class="badge age-kids">Kids</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge time">15–25 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">⭕</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>Teacher starts a story with one or two sentences.</li>
+            <li>Each student adds one sentence to continue it, speaking one at a time.</li>
+            <li>The story must make sense — each student has to listen carefully to what came before.</li>
+            <li>Add constraints: "the next sentence must include a question" or "the next speaker must introduce a problem."</li>
+          </ol>
+          <h4>Online Adaptation</h4>
+          <p>Use the Participants list as the rotation order so it's predictable. Type the running story in the chat so students can follow along. For larger classes, use groups of 5–6 in breakout rooms.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Two Truths and a Lie</div>
+          <div class="card-badges">
+            <span class="badge level-beg">Beginner+</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge age-adult">Adults</span>
+            <span class="badge time">10–15 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">🕵️</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>Each student prepares 3 statements about themselves — two true, one false.</li>
+            <li>They share in pairs or small groups. Partners ask questions to investigate.</li>
+            <li>Guess which is the lie — and explain why.</li>
+          </ol>
+          <h4>Linguistic Value</h4>
+          <p>This naturally generates question formation, past tense narration, and hedging language ("I think it might be..." / "I'm not sure but..."). Explicitly highlight this language afterward.</p>
+          <h4>Adaptation for Adults</h4>
+          <p>Use professional statements: "Two of these are true about my career path." Excellent for business English classes.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Mini Presentations (1 Slide, 1 Minute)</div>
+          <div class="card-badges">
+            <span class="badge level-int">Intermediate+</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge age-adult">Adults</span>
+            <span class="badge time">20–30 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">📊</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>Students prepare one slide and a one-minute spoken presentation on a topic of their choice (or assigned topic).</li>
+            <li>They share their screen and present to the class.</li>
+            <li>Listeners must ask at least one follow-up question.</li>
+          </ol>
+          <h4>Why One Slide?</h4>
+          <p>The constraint forces focus. Students can't hide behind bullet points — they have to actually talk. The single visual provides scaffolding without replacing the speaking.</p>
+          <h4>Feedback Structure</h4>
+          <p>Give two pieces of specific praise and one development point. Not "good job." Say "your transition between the problem and solution was very smooth" — that's useful feedback.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Back-to-Back Describe and Draw</div>
+          <div class="card-badges">
+            <span class="badge level-beg">Beginner+</span>
+            <span class="badge age-kids">Kids</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge time">15–20 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">✏️</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>One student sees an image; the other turns away from their screen.</li>
+            <li>Student A describes the image. Student B draws what they hear.</li>
+            <li>Compare the original image and the drawing. Laugh at the differences.</li>
+            <li>Swap roles.</li>
+          </ol>
+          <h4>Linguistic Focus</h4>
+          <p>Generates prepositions of place, spatial descriptions, question asking ("Is it in the top left corner?"), and clarification language ("Can you say that again? / Do you mean...?").</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Tips for Speaking Activities Online</div>
+  <ul class="tips-list">
+    <li>Always send students to breakout rooms for initial practice. Return to main room for sharing and feedback only.</li>
+    <li>Give students thinking/preparation time before they speak — 1 minute of quiet planning dramatically improves output quality.</li>
+    <li>Use the chat as a low-anxiety entry point before asking for verbal responses.</li>
+    <li>Don't interrupt for errors during fluency activities. Take notes and address patterns at the end.</li>
+    <li>Vary pair partners regularly. Students who always work together stop pushing each other.</li>
+    <li>For young learners, give role cards or puppets they can "speak through" — the character speaks, not them. Reduces inhibition significantly.</li>
+  </ul>
+
+  <div class="section-title">What to Avoid in Speaking Activities</div>
+  <ul class="avoid-list">
+    <li>Reading from a script and calling it "speaking practice"</li>
+    <li>Asking the whole group to discuss something simultaneously without structure</li>
+    <li>Giving feedback after every single utterance — kills fluency</li>
+    <li>Letting one student monopolise air time</li>
+    <li>Using topics that are culturally sensitive or emotionally loaded without careful framing</li>
+    <li>Ignoring the preparation phase — launching into production without input or model</li>
+  </ul>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 7 -->
+<!-- ============================= -->
+<section id="ch7" class="chapter" data-type="skills">
+  <div class="chapter-header">
+    <div class="chapter-number">07</div>
+    <div class="chapter-label">Core Skills · Deep Dive</div>
+    <h2 class="chapter-title">Listening Activities</h2>
+    <p class="chapter-intro">Listening online should be easier — students have headphones, better audio quality, the ability to control volume. In practice, it's harder, because passive listening through a screen is cognitively exhausting and attention drops fast. Here's how to make listening active, purposeful, and engaging.</p>
+  </div>
+
+  <div class="section-title">The Three Phases of a Listening Activity</div>
+  <p>Every listening activity should have three distinct phases. Skip any of them and the activity loses most of its value.</p>
+  <div class="info-row">
+    <div class="info-box"><div class="icon">🎯</div><div class="info-title">Pre-Listening</div><div class="info-text">Activate prior knowledge. Set the purpose. Give students a reason to listen. Preview key vocabulary if needed. Never just press play.</div></div>
+    <div class="info-box"><div class="icon">👂</div><div class="info-title">While-Listening</div><div class="info-text">Give a focused task — not "listen and understand everything." Specific, achievable goals: identify the main idea, note three facts, track a character's opinion.</div></div>
+    <div class="info-box"><div class="icon">💬</div><div class="info-title">Post-Listening</div><div class="info-text">Check, discuss, extend. Move beyond comprehension questions into opinion, analysis, connection to personal experience. This is where language gets used, not just received.</div></div>
+  </div>
+
+  <div class="section-title">Activity Bank: Listening</div>
+  <div class="activity-grid">
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Dictogloss</div>
+          <div class="card-badges">
+            <span class="badge level-int">Intermediate+</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge age-adult">Adults</span>
+            <span class="badge time">20–30 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">📝</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>Teacher reads a short text at normal speed — students listen only.</li>
+            <li>Second read: students jot down keywords.</li>
+            <li>In pairs, students reconstruct the text from memory using their notes.</li>
+            <li>Compare their version to the original. What did they miss? What grammar did they change?</li>
+          </ol>
+          <h4>Why It Works</h4>
+          <p>Forces active processing. Students must understand well enough to reconstruct — not just passively hear. The reconstruction phase generates natural noticing of grammar gaps.</p>
+          <h4>Online Tip</h4>
+          <p>Use Google Docs in a shared link for pair reconstruction — they can type simultaneously and see each other's contributions in real time.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Running Commentary</div>
+          <div class="card-badges">
+            <span class="badge level-int">Intermediate+</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge age-adult">Adults</span>
+            <span class="badge time">15–20 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">🎙️</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>Play a short video clip (15–30 seconds) with the sound off.</li>
+            <li>A student provides live commentary — describing what they see as it happens.</li>
+            <li>Others add reactions, corrections, or additions in the chat.</li>
+            <li>Then watch with sound — how different was the commentary from reality?</li>
+          </ol>
+          <h4>Linguistic Value</h4>
+          <p>Present continuous narration, prediction language, descriptive vocabulary. The mismatch between prediction and reality creates authentic interest in the listening content.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Listen and Respond (Live Chat)</div>
+          <div class="card-badges">
+            <span class="badge level-beg">Beginner+</span>
+            <span class="badge age-kids">Kids</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge time">15–25 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">💬</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>Play a listening text in short segments — pause after each segment.</li>
+            <li>Students immediately type their reaction, answer, or summary in the chat.</li>
+            <li>Teacher reads selected responses and extends the discussion before the next segment.</li>
+          </ol>
+          <h4>Why This Works Online</h4>
+          <p>The chat makes thinking visible for everyone. Shy students can participate without speaking. You get immediate comprehension data. It turns passive listening into an active, social experience.</p>
+          <h4>For Beginners</h4>
+          <p>Pre-teach the chat prompts: "I think...", "I didn't understand...", "The person said..." — so students can respond even with limited language.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Spot the Difference (Audio)</div>
+          <div class="card-badges">
+            <span class="badge level-beg">All Levels</span>
+            <span class="badge age-kids">Kids</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge time">10–15 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">🔍</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>Give students a written text with deliberate errors or differences.</li>
+            <li>Read the correct version aloud (or play audio).</li>
+            <li>Students circle or note differences as they listen.</li>
+            <li>Compare findings.</li>
+          </ol>
+          <h4>Adaptations</h4>
+          <p><strong>Kids:</strong> Use simple stories with 3–4 obvious changes. <strong>Advanced:</strong> Use longer texts with subtle changes in meaning (not just words).</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Tips and What to Avoid</div>
+  <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-content"><div class="callout-title">Top Tips</div><div class="callout-text">Always give students a task before pressing play — never listen for "general understanding." Use subtitles selectively: they can be scaffolding (on first listen) and removed for challenge (second listen). Let students listen twice as a default — once is rarely enough for language learning, as opposed to comprehension testing.</div></div></div>
+  <ul class="avoid-list">
+    <li>Playing an entire audio clip without pausing — attention drops within 2–3 minutes</li>
+    <li>Asking comprehension questions that are just memory tests — push for analysis and opinion</li>
+    <li>Using only textbook audio — real speech, accents, and rhythm are critical for genuine listening development</li>
+    <li>Forgetting to check for technical issues before the lesson — a student who can't hear the audio gets nothing from the activity</li>
+  </ul>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 8 -->
+<!-- ============================= -->
+<section id="ch8" class="chapter" data-type="skills">
+  <div class="chapter-header">
+    <div class="chapter-number">08</div>
+    <div class="chapter-label">Core Skills · Deep Dive</div>
+    <h2 class="chapter-title">Reading Activities</h2>
+    <p class="chapter-intro">Reading online presents a real challenge: screens already cause fatigue, and adding dense text on top of that is a recipe for disengagement. The solution isn't shorter texts — it's smarter activities around those texts. This chapter gives you a full toolkit for making reading purposeful, interactive, and genuinely engaging in an online classroom.</p>
+  </div>
+
+  <div class="section-title">Reading Skills to Develop Online</div>
+  <div class="info-row">
+    <div class="info-box"><div class="icon">🔎</div><div class="info-title">Skimming</div><div class="info-text">Reading quickly for gist. What is this text generally about? Develop it with strict time limits.</div></div>
+    <div class="info-box"><div class="icon">📌</div><div class="info-title">Scanning</div><div class="info-text">Searching for specific information. Develop it with targeted questions answered before detailed reading.</div></div>
+    <div class="info-box"><div class="icon">🧐</div><div class="info-title">Intensive Reading</div><div class="info-text">Detailed comprehension, inference, and critical analysis. Needs explicit teaching and scaffolding.</div></div>
+  </div>
+
+  <div class="section-title">Activity Bank: Reading</div>
+  <div class="activity-grid">
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Jigsaw Reading</div>
+          <div class="card-badges">
+            <span class="badge level-int">Intermediate+</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge age-adult">Adults</span>
+            <span class="badge time">25–35 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">🧩</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>Divide a text into 3–4 sections. Give each student (or group) one section only.</li>
+            <li>Students read their section, understand it, and prepare to explain it without reading aloud.</li>
+            <li>Regroup so each new group has one expert from each section.</li>
+            <li>Students teach each other their sections to reconstruct the whole text.</li>
+          </ol>
+          <h4>Online Adaptation</h4>
+          <p>Use breakout rooms for expert groups first. Then manually rearrange rooms so each contains one "expert" from each section. Share text sections as links or in the chat rather than scrolling on screen.</p>
+          <h4>Why It Works</h4>
+          <p>Every student becomes essential. Nobody can opt out because they have unique information. Oral summarising forces genuine comprehension beyond surface recall.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Predict from Headlines</div>
+          <div class="card-badges">
+            <span class="badge level-beg">All Levels</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge age-adult">Adults</span>
+            <span class="badge time">15–20 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">📰</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>Share only the headline of an article. Students predict: What is this about? What will it say? Who is involved?</li>
+            <li>Students share predictions in chat or pairs.</li>
+            <li>Reveal the full article. Students read quickly (set a time limit) to check their predictions.</li>
+            <li>Discuss: what surprised you? What confirmed your prediction?</li>
+          </ol>
+          <h4>Why Headlines Work</h4>
+          <p>Prediction creates a purpose for reading and activates prior knowledge. The anticipation gap (wanting to know if you were right) drives genuine engagement with the text.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Annotated Reading</div>
+          <div class="card-badges">
+            <span class="badge level-int">Intermediate+</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge age-adult">Adults</span>
+            <span class="badge time">20–25 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">📝</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>Share a text as a Google Doc (students can comment/annotate).</li>
+            <li>Give annotation tasks: highlight 2 opinions, mark 1 thing you agree with and 1 you disagree with, identify the writer's tone.</li>
+            <li>Students read individually and annotate.</li>
+            <li>In pairs, compare annotations and discuss differences.</li>
+          </ol>
+          <h4>Adaptation for Lower Levels</h4>
+          <p>Use simpler annotation tasks: underline all verbs, highlight words you don't know, circle numbers or dates. Keep it specific and achievable.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Reader Response Circle</div>
+          <div class="card-badges">
+            <span class="badge level-int">Intermediate+</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge age-adult">Adults</span>
+            <span class="badge time">25–30 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">⭕</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>Assign roles before reading: Summariser, Questioner, Connector (links to real life), Word Hunter (interesting language).</li>
+            <li>Students read the text individually.</li>
+            <li>In groups, each student fulfils their role — adding structure to the discussion.</li>
+            <li>Rotate roles for the next text.</li>
+          </ol>
+          <h4>Online Advantage</h4>
+          <p>Roles give every student a defined contribution, eliminating the "I'll wait for someone else to answer" problem common in online group discussions.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Tips and What to Avoid</div>
+  <ul class="tips-list">
+    <li>Always give a specific task to complete while reading — never "read and understand"</li>
+    <li>Use a mix of text types: articles, emails, social media posts, menus, infographics, short stories</li>
+    <li>Set strict time limits for skimming and scanning tasks — otherwise students default to intensive reading everything</li>
+    <li>Let students read silently. Reading aloud around the class is not reading practice — it's pronunciation and performance anxiety</li>
+  </ul>
+  <ul class="avoid-list">
+    <li>Using texts that are culturally irrelevant or emotionally neutral — relevance drives reading</li>
+    <li>Going straight to comprehension questions — always allow for personal response first</li>
+    <li>Choosing texts that are too long to read within the lesson — shorter with deeper tasks is better than longer with surface-level questions</li>
+  </ul>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 9 -->
+<!-- ============================= -->
+<section id="ch9" class="chapter" data-type="skills">
+  <div class="chapter-header">
+    <div class="chapter-number">09</div>
+    <div class="chapter-label">Core Skills · Deep Dive</div>
+    <h2 class="chapter-title">Writing Activities</h2>
+    <p class="chapter-intro">Writing is often reduced to homework in online classes — "we'll do the writing offline." This is a missed opportunity. Online platforms give you collaborative writing tools that are actually better than anything you'd do with pen and paper in a classroom. Here's how to make writing a live, engaged, visible activity.</p>
+  </div>
+
+  <div class="section-title">Types of Writing in Language Classes</div>
+  <div class="info-row">
+    <div class="info-box"><div class="icon">⚡</div><div class="info-title">Controlled Writing</div><div class="info-text">Fill gaps, reorder sentences, transform structures. Useful for form practice but not an end goal.</div></div>
+    <div class="info-box"><div class="icon">🎯</div><div class="info-title">Guided Writing</div><div class="info-text">Students write with scaffolding — frames, prompts, model texts. Ideal for developing accuracy.</div></div>
+    <div class="info-box"><div class="icon">✨</div><div class="info-title">Free Writing</div><div class="info-text">Students write freely on a topic. Develops fluency and voice. Accuracy feedback comes after, not during.</div></div>
+  </div>
+
+  <div class="section-title">Activity Bank: Writing</div>
+  <div class="activity-grid">
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Collaborative Google Doc Story</div>
+          <div class="card-badges">
+            <span class="badge level-beg">All Levels</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge age-adult">Adults</span>
+            <span class="badge time">20–30 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">📄</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>Share a Google Doc link where everyone can edit simultaneously.</li>
+            <li>Each student gets a colour or a section.</li>
+            <li>Teacher provides the opening sentence. Students add one sentence each in turns.</li>
+            <li>Everyone can see the story growing in real time — creating genuine social engagement.</li>
+          </ol>
+          <h4>Variations</h4>
+          <p>Choose Your Own Adventure: each student writes a decision point — "If the character goes left, go to paragraph A. If right, paragraph B." Students build a branching narrative.</p>
+          <h4>Linguistic Focus</h4>
+          <p>Narrative tenses, connectors, story structure. Because it's collaborative and visible, students naturally edit and build on each other's language.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Speed Writing</div>
+          <div class="card-badges">
+            <span class="badge level-beg">Beginner+</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge age-adult">Adults</span>
+            <span class="badge time">10–15 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">⏱️</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>Give a prompt. Set a timer for 3–5 minutes.</li>
+            <li>Students write without stopping — no editing, no deleting, no pausing.</li>
+            <li>Share two or three sentences from what they wrote in the chat.</li>
+            <li>Discuss: what did you notice about how you wrote? What language did you use?</li>
+          </ol>
+          <h4>Purpose</h4>
+          <p>Breaks perfectionism. Forces production. Excellent for students who over-edit to the point of paralysis. Tell students explicitly: fluency before accuracy. Correction comes later.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Peer Review Gallery</div>
+          <div class="card-badges">
+            <span class="badge level-int">Intermediate+</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge age-adult">Adults</span>
+            <span class="badge time">25–35 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">🖼️</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>Students write a short text (paragraph to half page).</li>
+            <li>Post all texts on a shared Padlet or Google Jamboard.</li>
+            <li>Students "walk" through the gallery, reading others' work and leaving sticky note comments.</li>
+            <li>Comments must follow a structure: one strength + one question (not one weakness).</li>
+          </ol>
+          <h4>Why Questions Not Weaknesses?</h4>
+          <p>Questions are less threatening and more generative. "What did you mean by X?" is more useful than "This is unclear." It also teaches writers to consider their reader's perspective.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="activity-card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Letter Writing Exchange</div>
+          <div class="card-badges">
+            <span class="badge level-beg">Beginner+</span>
+            <span class="badge age-kids">Kids</span>
+            <span class="badge age-teen">Teens</span>
+            <span class="badge time">20–30 min</span>
+          </div>
+        </div>
+        <div class="card-emoji">💌</div>
+      </div>
+      <div class="card-body">
+        <button class="card-toggle" onclick="toggleCard(this)">How to run it <span class="arrow">▼</span></button>
+        <div class="card-details">
+          <h4>Instructions</h4>
+          <ol>
+            <li>Pair students. Each writes a letter or email to their partner — a character, a person from history, or themselves in 10 years.</li>
+            <li>Send letters via the chat or a shared doc.</li>
+            <li>Partners write a reply in character.</li>
+          </ol>
+          <h4>Adaptations by Level</h4>
+          <p><strong>Beginners:</strong> Provide a template with blanks to fill in. <strong>Advanced:</strong> Write as a historical figure responding to a modern situation — complex perspective-taking and conditional language.</p>
+          <h4>For Kids</h4>
+          <p>Write to a favourite character, animal, or food. Keep it playful. Young learners love the idea that someone (or something) will write back to them.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Tips and What to Avoid</div>
+  <ul class="tips-list">
+    <li>Provide a model text before asking students to write — never assume they know the genre conventions</li>
+    <li>Separate fluency and accuracy tasks — don't correct grammar during speed writing</li>
+    <li>Make writing social: sharing, responding, building — not just producing and submitting to the teacher</li>
+    <li>For young learners, keep writing tasks short and frame them as messages or notes to real "recipients"</li>
+  </ul>
+  <ul class="avoid-list">
+    <li>Assigning writing as homework without in-class scaffolding — students have no model and often no support</li>
+    <li>Only ever writing essays or formal texts — include everyday genres: texts, captions, reviews, posts</li>
+    <li>Red-pen correcting every error — identify patterns, not individual mistakes</li>
+  </ul>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 10 -->
+<!-- ============================= -->
+<section id="ch10" class="chapter" data-type="practice">
+  <div class="chapter-header">
+    <div class="chapter-number">10</div>
+    <div class="chapter-label">Practical Teaching</div>
+    <h2 class="chapter-title">Engagement Tactics for Online Teaching</h2>
+    <p class="chapter-intro">Engagement online isn't a personality trait — it's a design choice. Students don't disengage because they're lazy. They disengage because the environment hasn't given them a reason to stay present. Here's how to build that reason into every moment of your lesson.</p>
+  </div>
+
+  <div class="section-title">The Engagement Equation</div>
+  <p>Online engagement comes from three overlapping factors: <strong>relevance</strong> (this matters to me), <strong>interaction</strong> (I'm doing something, not watching), and <strong>novelty</strong> (I didn't know this was coming). Most online lessons score well on none of these. Your job is to engineer all three, deliberately, every lesson.</p>
+
+  <div class="section-title">Engagement Tactics by Category</div>
+
+  <div class="collapsible"><div class="collapsible-header" onclick="toggleCollapsible(this)">⚡ High-Energy Warm-Ups (First 5 Minutes) <span class="collapsible-icon">▼</span></div>
+  <div class="collapsible-body">
+    <ul class="tips-list">
+      <li><strong>One Word Check-In:</strong> Each student types one word describing their mood in the chat. No explanation needed. It's inclusive, fast, and tells you everything.</li>
+      <li><strong>This or That Poll:</strong> Launch a quick poll — cats or dogs? Coffee or tea? Immediately creates conversation and personality.</li>
+      <li><strong>GIF Reaction:</strong> Ask students to find and paste a GIF in the chat that represents their week. Visual, fun, and surprisingly revealing.</li>
+      <li><strong>Spot on the Screen:</strong> Show an image with multiple elements and ask "Which one are you today?" Creates buy-in and language production simultaneously.</li>
+    </ul>
+  </div></div>
+
+  <div class="collapsible"><div class="collapsible-header" onclick="toggleCollapsible(this)">🎮 Gamification Elements <span class="collapsible-icon">▼</span></div>
+  <div class="collapsible-body">
+    <p>Gamification doesn't mean turning everything into a game. It means borrowing game mechanics that drive engagement: points, progress, challenge, choice, and surprise.</p>
+    <ul class="tips-list">
+      <li><strong>Class Points:</strong> Award points for participation, correct answers, and creative contributions. Display the total. Even adults respond to this.</li>
+      <li><strong>Challenge Levels:</strong> Offer activity options labelled Bronze, Silver, Gold — students choose their difficulty. Gives agency and reduces anxiety.</li>
+      <li><strong>Mystery Envelopes:</strong> "Open your virtual envelope" (send a Google Doc link) — students don't know the task until they click. Novelty drives opening speed.</li>
+      <li><strong>Time Pressure:</strong> A visible countdown timer transforms the energy of almost any activity. Use one liberally.</li>
+    </ul>
+  </div></div>
+
+  <div class="collapsible"><div class="collapsible-header" onclick="toggleCollapsible(this)">🎭 Novelty and Surprise <span class="collapsible-icon">▼</span></div>
+  <div class="collapsible-body">
+    <ul class="tips-list">
+      <li>Start a lesson from the middle of a story and work backwards — "how did we get here?"</li>
+      <li>Bring a "mystery object" to screen — hold something up. Students guess what it is and what it has to do with today's lesson.</li>
+      <li>Change your virtual background mid-lesson as a signal — "we're moving to the next activity"</li>
+      <li>Introduce a "guest" (a fictional character, a made-up expert) and have students interview them (you in character)</li>
+      <li>Use a spinning wheel for random student selection — randomness is inherently engaging</li>
+    </ul>
+  </div></div>
+
+  <div class="collapsible"><div class="collapsible-header" onclick="toggleCollapsible(this)">🔄 Movement and Breaks <span class="collapsible-icon">▼</span></div>
+  <div class="collapsible-body">
+    <p>Movement online isn't impossible — it just has to be intentional.</p>
+    <ul class="tips-list">
+      <li><strong>Stand Up / Sit Down:</strong> "Stand up if you agree. Sit if you disagree." Physical response to language content.</li>
+      <li><strong>Show Your Hands:</strong> "Show me with your fingers how many reasons you can think of." Physical and visible.</li>
+      <li><strong>Go and Find:</strong> "In 30 seconds, find something in your room that is red." Brings students back to camera and creates instant content for a conversation.</li>
+      <li><strong>Brain Break:</strong> 60 seconds of nothing — stretch, breathe, look away from the screen. Non-negotiable in classes longer than 45 minutes.</li>
+    </ul>
+  </div></div>
+
+  <div class="section-title">Engagement by Age Group</div>
+  <div class="tab-container">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab(this, 'eng-kids')">Young Learners</button>
+      <button class="tab-btn" onclick="switchTab(this, 'eng-teens')">Teens</button>
+      <button class="tab-btn" onclick="switchTab(this, 'eng-adults')">Adults</button>
+    </div>
+    <div id="eng-kids" class="tab-panel active">
+      <p><strong>What works:</strong> Puppets and characters, singing, games with immediate feedback, screen sharing activities where they draw or click, sticker rewards visible on screen, stories with physical responses (clap when you hear X, stand up when Y happens).</p>
+      <p><strong>What kills it:</strong> Sitting still for more than 8–10 minutes, tasks with no visual element, long verbal explanations, unclear transitions between activities.</p>
+    </div>
+    <div id="eng-teens" class="tab-panel">
+      <p><strong>What works:</strong> Real content (news, memes, social media language), peer collaboration, debate and challenge, creative freedom (let them design the outcome), humour, anything that makes them look competent rather than confused.</p>
+      <p><strong>What kills it:</strong> Childish topics, patronising framing, lack of choice, being put on the spot without warning, anything that feels like "school" in the traditional sense.</p>
+    </div>
+    <div id="eng-adults" class="tab-panel">
+      <p><strong>What works:</strong> Clear purpose ("you'll use this in your job/life"), respecting their existing knowledge, choice in topics and tasks, practical outcomes (they produce something useful), being treated as equal thinkers.</p>
+      <p><strong>What kills it:</strong> Being talked down to, wasting time on activities with no apparent purpose, lack of structure, excessive warmth that feels performative rather than genuine.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 11 -->
+<!-- ============================= -->
+<section id="ch11" class="chapter" data-type="practice">
+  <div class="chapter-header">
+    <div class="chapter-number">11</div>
+    <div class="chapter-label">Practical Teaching</div>
+    <h2 class="chapter-title">Differentiation Strategies</h2>
+    <p class="chapter-intro">In an online class, you can't physically move to different groups, hand out different worksheets, or whisper a quieter instruction to one student. Everything has to be planned ahead and built into the activity structure. This chapter shows you how — for mixed levels, mixed ages, and the very different bridges kids and adults need to cross into new language.</p>
+  </div>
+
+  <div class="section-title">What Differentiation Actually Means</div>
+  <p>Differentiation doesn't mean doing a different lesson for every student. It means building options, scaffolds, and stretch into the same activity so that every student can access and be challenged by it. The goal is that everyone is working on the same task with the same language — just with different levels of support or complexity.</p>
+
+  <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-content"><div class="callout-title">The Three Ways to Differentiate</div><div class="callout-text"><strong>By task:</strong> Different tasks for different levels (more complex, less scaffolding). <strong>By support:</strong> Same task, different levels of help (word banks, sentence starters, visual aids). <strong>By outcome:</strong> Same task, accept different levels of production quality — beginner produces three sentences, advanced produces a paragraph.</div></div></div>
+
+  <div class="section-title">Kids vs Adults: Why They Need Different Bridges</div>
+  <p>This is one of the most important things to understand about mixed-age or multi-group teaching. Children and adults don't just process language differently — they need completely different scaffolding approaches, different types of context, and different emotional support structures to access new language.</p>
+
+  <div class="tab-container">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab(this, 'diff-kids')">Scaffolding Kids</button>
+      <button class="tab-btn" onclick="switchTab(this, 'diff-adults')">Scaffolding Adults</button>
+      <button class="tab-btn" onclick="switchTab(this, 'diff-mixed')">Mixed Level Classes</button>
+    </div>
+    <div id="diff-kids" class="tab-panel active">
+      <p><strong>Young learners need bridges that are:</strong></p>
+      <ul class="tips-list">
+        <li><strong>Concrete and physical.</strong> Abstract concepts need physical anchors — even online, this means images, gestures, objects, and colour. "Adjectives are describing words" means nothing to a 7-year-old. "An adjective tells you what the dog looks like — big dog, fluffy dog, angry dog" — with images — makes complete sense.</li>
+        <li><strong>Sequential and predictable.</strong> Children need routine. The same opening ritual, the same transition signal, the same closing activity. Unpredictability is stressful, not exciting, for young learners.</li>
+        <li><strong>Repetitive without being boring.</strong> Children learn through repetition. The same story three times with different actions. The same song with different words. Repetition is not laziness — it is the mechanism.</li>
+        <li><strong>Embedded in play.</strong> Learning doesn't feel separate from playing for children. Design your scaffolding inside game structures, stories, and pretend scenarios. The language happens incidentally — and sticks better because of it.</li>
+      </ul>
+    </div>
+    <div id="diff-adults" class="tab-panel">
+      <p><strong>Adults need bridges that are:</strong></p>
+      <ul class="tips-list">
+        <li><strong>Explicitly purposeful.</strong> Adults need to know why before they engage with how. Before introducing a grammar point, give adults the communicative situation where they'll need it. "You'll need this when you're in a meeting and disagree with your boss without being rude."</li>
+        <li><strong>Connected to existing knowledge.</strong> Adults have decades of experience, professional knowledge, and cultural reference points. Use them. Analogies to their field, their L1, their life experience. Adults learn new language faster when they can pin it to something they already know.</li>
+        <li><strong>Emotionally safe.</strong> Adults have much more invested in their image of competence than children do. A mistake in front of peers feels catastrophically different at 35 than at 8. Design every scaffolding layer to preserve dignity — private attempts before public sharing, written before spoken, pairs before groups.</li>
+        <li><strong>Giving agency.</strong> Adults do not like being told exactly what to do at every step. Give them the scaffold, then step back. Offer guidance when asked, not before.</li>
+      </ul>
+    </div>
+    <div id="diff-mixed" class="tab-panel">
+      <p>Mixed-level classes are the norm, not the exception. Here's how to handle them without leaving anyone behind or bored:</p>
+      <ul class="tips-list">
+        <li><strong>Bronze/Silver/Gold tasks:</strong> The same topic, three versions. Students self-select. Post all three in the chat simultaneously — no public sorting.</li>
+        <li><strong>Pair stronger with weaker — carefully.</strong> Pair matching only works when the stronger student is not just "answering for" the weaker one. Give the weaker student the first response role every time.</li>
+        <li><strong>Whole-class tasks with differentiated contributions:</strong> "Everyone writes one sentence. Beginners write a simple one. Advanced students write a complex one with a subordinate clause." Same activity, different language demands.</li>
+        <li><strong>Role-based groups:</strong> In a group activity, give different roles (Recorder, Reporter, Time-keeper, Creative Lead). Roles allow students to contribute at different linguistic levels without it being visible.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">Scaffolding Online: Practical Tools</div>
+  <ul class="tips-list">
+    <li><strong>Word banks in the chat:</strong> Type key vocabulary students can copy-paste into their responses</li>
+    <li><strong>Sentence starters on slides:</strong> Visible throughout the task — remove them for the second run-through</li>
+    <li><strong>Model texts:</strong> Show what a finished product looks like before students create their own</li>
+    <li><strong>Shared slides students can edit:</strong> Template with blanks lowers the activation energy to start</li>
+    <li><strong>Visual glossaries:</strong> Vocabulary + image on a shared slide — students can reference during tasks</li>
+    <li><strong>Private chat to the teacher:</strong> Lower-level students can send answers privately first before sharing publicly</li>
+  </ul>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 12 -->
+<!-- ============================= -->
+<section id="ch12" class="chapter" data-type="practice">
+  <div class="chapter-header">
+    <div class="chapter-number">12</div>
+    <div class="chapter-label">Practical Teaching</div>
+    <h2 class="chapter-title">Motivation & Discipline in Online Classes</h2>
+    <p class="chapter-intro">Unmotivated students and behavioural challenges feel worse online because you have fewer tools to address them. You can't walk over to a distracted student, make eye contact, or lower your voice in that way that physically shifts the energy in a room. But you're not powerless — you just need a different toolkit.</p>
+  </div>
+
+  <div class="section-title">Why Motivation Drops Online</div>
+  <p>Before you address motivation, understand why it drops. Online classes are not demotivating by nature — they're demotivating by design when the design is bad. Students disengage when they feel invisible, when the pace is wrong, when the content is irrelevant, when they're never called on but also never allowed to opt out, or when they've learned they can be physically present (camera on) and mentally elsewhere without consequence.</p>
+
+  <div class="section-title">Motivation Strategies by Age</div>
+
+  <div class="collapsible"><div class="collapsible-header" onclick="toggleCollapsible(this)">🧒 Young Learners: Motivation That Works <span class="collapsible-icon">▼</span></div>
+  <div class="collapsible-body">
+    <ul class="tips-list">
+      <li><strong>Visual reward systems.</strong> Digital sticker charts, house points displayed on screen, a "level up" system. Young learners are deeply motivated by visible progress and immediate rewards.</li>
+      <li><strong>Character and story.</strong> Give the class a collective mission. "We're on a quest to find the magic words." Motivation becomes intrinsic when it's embedded in narrative.</li>
+      <li><strong>Praise specifically.</strong> Not "good job" — "I loved how you used the word 'enormous' instead of 'big' — that was a brilliant choice." Specific praise feels real; generic praise feels like white noise.</li>
+      <li><strong>Give jobs.</strong> Children love being the "Word Detective," the "Chat Helper," the "Timer Watcher." Responsibility drives engagement.</li>
+    </ul>
+  </div></div>
+
+  <div class="collapsible"><div class="collapsible-header" onclick="toggleCollapsible(this)">🧑 Teens: The Hardest Group to Motivate Online <span class="collapsible-icon">▼</span></div>
+  <div class="collapsible-body">
+    <ul class="tips-list">
+      <li><strong>Give them control.</strong> Choice in topics, roles, and formats signals respect. Teens who feel infantilised disengage. Teens who feel like co-designers engage.</li>
+      <li><strong>Make the stakes real.</strong> "You'll share this in class" is more motivating than "this is practice." Authentic audiences — even just classmates — raise the quality of output.</li>
+      <li><strong>Connect to identity.</strong> Language learning for teens needs to connect to who they are and want to be — not to passing a test. When they can see themselves using this language in their real life, motivation follows.</li>
+      <li><strong>Don't embarrass them.</strong> A single moment of public humiliation in an online class can cause a teen to mentally leave that class permanently. The digital environment feels more exposing, not less.</li>
+    </ul>
+  </div></div>
+
+  <div class="collapsible"><div class="collapsible-header" onclick="toggleCollapsible(this)">🧑‍💼 Adults: Motivation Is Often About Respect <span class="collapsible-icon">▼</span></div>
+  <div class="collapsible-body">
+    <ul class="tips-list">
+      <li><strong>Treat them as partners, not students.</strong> Adults who feel like they're being taught at rather than with disengage. Ask for their expertise and experience. Build it into the lesson.</li>
+      <li><strong>Make the relevance explicit and immediate.</strong> "By the end of today you'll be able to do X in your actual life" is a motivating opener. "Today we're covering unit 7" is not.</li>
+      <li><strong>Acknowledge their constraints.</strong> Adults learning online are often juggling jobs, families, and fatigue. A teacher who shows they understand that — and designs accordingly — earns massive goodwill and reciprocal effort.</li>
+      <li><strong>Progress tracking.</strong> Show adults how far they've come. A "you used to say X, now you say Y" moment is more motivating than any grade.</li>
+    </ul>
+  </div></div>
+
+  <div class="section-title">Discipline Online: What Actually Helps</div>
+  <div class="callout warning"><div class="callout-icon">⚠️</div><div class="callout-content"><div class="callout-title">The Reality of Online Discipline</div><div class="callout-text">Many online "discipline problems" are actually engagement problems. A student who is genuinely absorbed in a task doesn't need managing. Before reaching for a discipline strategy, ask: is this an engagement failure or a behaviour failure? The answer changes your response entirely.</div></div></div>
+
+  <ul class="tips-list">
+    <li><strong>Set expectations clearly at the start of a course, not mid-crisis.</strong> What is acceptable? What is not? Where do students communicate if they need to leave? What happens if cameras are required and they don't work? Address all of this upfront.</li>
+    <li><strong>Use private chat for issues, not public corrections.</strong> Calling a student out publicly online is more shaming than in a physical classroom. A private message ("I notice you haven't contributed today — everything okay?") is less threatening and often more effective.</li>
+    <li><strong>Design out the problem.</strong> If students are always distracted during one type of activity, the activity is the problem. Change the design before addressing the behaviour.</li>
+    <li><strong>The redirect technique.</strong> When a student is off-task, give them a specific role in the current activity. "Actually, Youssef, I'd love your take on this — what do you think?" Redirect without drawing attention to the distraction.</li>
+    <li><strong>For young learners: use a signal.</strong> A clap pattern, a countdown, a specific phrase. Train the signal from day one so it's automatic. You'll need it regularly.</li>
+  </ul>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 13 -->
+<!-- ============================= -->
+<section id="ch13" class="chapter" data-type="practice">
+  <div class="chapter-header">
+    <div class="chapter-number">13</div>
+    <div class="chapter-label">Practical Teaching</div>
+    <h2 class="chapter-title">Assessment & Feedback</h2>
+    <p class="chapter-intro">Assessment tells you where your students are. Feedback tells your students how to get better. Most teachers conflate the two, or do only one of them well. This chapter separates them cleanly and gives you practical approaches to both — specific to the online classroom.</p>
+  </div>
+
+  <div class="section-title">Types of Assessment You Should Be Using</div>
+  <div class="info-row">
+    <div class="info-box"><div class="icon">🔍</div><div class="info-title">Diagnostic</div><div class="info-text">Before teaching: what do students already know? Where are the gaps? Essential for planning. Use at the start of a course or a new unit.</div></div>
+    <div class="info-box"><div class="icon">📊</div><div class="info-title">Formative</div><div class="info-text">During teaching: ongoing check-ins. Exit tickets, quick polls, chat responses, mini-tasks. The most underused and most valuable type.</div></div>
+    <div class="info-box"><div class="icon">📋</div><div class="info-title">Summative</div><div class="info-text">After teaching: did they get it? Tests, projects, presentations. Important but overemphasised. One summative assessment doesn't replace dozens of formative ones.</div></div>
+  </div>
+
+  <div class="section-title">Online Formative Assessment Tools</div>
+  <ul class="tips-list">
+    <li><strong>Exit tickets in the chat:</strong> End every lesson with "type one thing you learned today and one thing you're still not sure about"</li>
+    <li><strong>Polls and reactions:</strong> "Give me a thumbs up if this makes sense, thumbs down if not" — immediate, anonymous, honest</li>
+    <li><strong>Whiteboard activities:</strong> Students write or draw responses visible to the teacher in real time</li>
+    <li><strong>Breakout room monitoring:</strong> Drop into rooms unannounced. Listen before announcing yourself. You'll hear what's actually happening.</li>
+    <li><strong>Written production in the chat:</strong> Ask students to produce sentences, answers, or summaries in the chat. Visible, immediate, assessable.</li>
+  </ul>
+
+  <div class="section-title">How to Give Feedback That Actually Helps</div>
+  <p>Feedback is the most powerful tool in teaching — and the most misused. Most teachers either correct everything (demoralising, counterproductive) or nothing (students have no idea how to improve). The goal is <strong>selective, specific, and actionable</strong> feedback that pushes development without crushing confidence.</p>
+
+  <div class="collapsible"><div class="collapsible-header" onclick="toggleCollapsible(this)">Error Correction: When and How <span class="collapsible-icon">▼</span></div>
+  <div class="collapsible-body">
+    <p><strong>During fluency activities:</strong> Do not correct errors in the moment. Note patterns. Address after the activity is done. Interrupting mid-sentence to correct kills fluency and raises anxiety.</p>
+    <p><strong>During accuracy activities:</strong> Correct actively, but use techniques that give the student a chance to self-correct first:</p>
+    <ul class="tips-list">
+      <li><strong>Recast:</strong> Repeat what they said correctly, without comment. They hear the right version in context.</li>
+      <li><strong>Elicitation:</strong> "Can you try that again?" or "Almost — what's the verb form?"</li>
+      <li><strong>Clarification request:</strong> "Sorry, I didn't quite catch that — can you say it again?" Forces re-attempt without explicit correction.</li>
+      <li><strong>Metalinguistic clue:</strong> "Check your tense" — points to the problem without giving the solution</li>
+    </ul>
+  </div></div>
+
+  <div class="collapsible"><div class="collapsible-header" onclick="toggleCollapsible(this)">Written Feedback: What Makes It Useful <span class="collapsible-icon">▼</span></div>
+  <div class="collapsible-body">
+    <p>Good written feedback is specific, forward-looking, and limited. Here's the structure that works:</p>
+    <ul class="tips-list">
+      <li><strong>Strength first:</strong> Identify specifically what worked. Not "good vocabulary" — "your use of 'consequently' to link cause and effect was exactly right here"</li>
+      <li><strong>One or two development points maximum:</strong> Students can act on one or two things. Twenty red marks produce shame, not improvement.</li>
+      <li><strong>Show the correction, not just the error:</strong> Don't just underline the mistake. Show what it should be and briefly explain why.</li>
+      <li><strong>Ask a question:</strong> End feedback with a question that extends their thinking: "What would change if you rewrote this for a different audience?"</li>
+    </ul>
+  </div></div>
+
+  <div class="callout avoid"><div class="callout-icon">🚫</div><div class="callout-content"><div class="callout-title">Feedback Mistakes to Stop Making</div><div class="callout-text">Saying "well done" with no specificity. Correcting every single error. Giving feedback that evaluates rather than guides ("this is not logical"). Feedback that arrives after the student has moved on to something else entirely — timing matters. Feedback that is longer than the original work.</div></div></div>
+
+  <div class="section-title">Self-Assessment and Peer Assessment</div>
+  <p>These are criminally underused. Both develop metacognition — the ability to think about one's own learning — which is one of the strongest predictors of long-term language development.</p>
+  <ul class="tips-list">
+    <li><strong>Can-Do statements:</strong> Give students a list of functions and ask them to rate themselves: "I can give directions confidently / with some hesitation / not yet." Use this data for your planning.</li>
+    <li><strong>Peer feedback with a frame:</strong> Never just "give feedback to your partner." Give a specific structure: one thing that was clear, one suggestion for improvement, one question.</li>
+    <li><strong>Learning journals:</strong> Students keep a running note of what they learned each lesson. Revisit regularly. The act of writing what you learned cements it — retrieval practice embedded in self-assessment.</li>
+  </ul>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 14 -->
+<!-- ============================= -->
+<section id="ch14" class="chapter" data-type="practice">
+  <div class="chapter-header">
+    <div class="chapter-number">14</div>
+    <div class="chapter-label">Practical Teaching</div>
+    <h2 class="chapter-title">Asynchronous vs. Synchronous Activities</h2>
+    <p class="chapter-intro">Online teaching exists in two modes — live (synchronous) and time-delayed (asynchronous) — and most teachers use only one of them. Using both strategically gives you far more flexibility and, frankly, more learning time than any single lesson can provide.</p>
+  </div>
+
+  <div class="section-title">What's the Difference?</div>
+  <div class="info-row">
+    <div class="info-box"><div class="icon">🔴</div><div class="info-title">Synchronous</div><div class="info-text">Real-time, everyone together. Video lessons, live chat activities, games, discussions. High interaction, high energy, requires presence.</div></div>
+    <div class="info-box"><div class="icon">🟢</div><div class="info-title">Asynchronous</div><div class="info-text">Done in own time. Recorded videos, discussion forums, audio submissions, Padlet contributions. Flexible, reflective, lower anxiety.</div></div>
+    <div class="info-box"><div class="icon">⚡</div><div class="info-title">Hybrid Use</div><div class="info-text">The best online teaching uses both. Async for preparation and reflection. Sync for practice and production. Each supports the other.</div></div>
+  </div>
+
+  <div class="section-title">Activities Suited for Each Mode</div>
+
+  <div class="tab-container">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab(this, 'sync-act')">Best for Synchronous</button>
+      <button class="tab-btn" onclick="switchTab(this, 'async-act')">Best for Asynchronous</button>
+    </div>
+    <div id="sync-act" class="tab-panel active">
+      <ul class="tips-list">
+        <li>Speaking activities, debates, pair conversations</li>
+        <li>Live games (Kahoot, Quizlet Live, Gimkit)</li>
+        <li>Real-time collaborative writing on shared docs</li>
+        <li>Role plays and simulations</li>
+        <li>Listening activities requiring immediate response</li>
+        <li>Q&A and error correction sessions</li>
+        <li>Peer feedback discussions</li>
+      </ul>
+    </div>
+    <div id="async-act" class="tab-panel">
+      <ul class="tips-list">
+        <li>Recorded reading or listening followed by a written response (Padlet, Google Form)</li>
+        <li>Voice recording activities (students record themselves speaking on Flipgrid or WhatsApp)</li>
+        <li>Research tasks with a sharing component in the next live session</li>
+        <li>Reflective journaling and vocabulary review (Quizlet self-study)</li>
+        <li>Watching assigned video content and answering specific questions</li>
+        <li>Draft writing for peer or teacher review before the next session</li>
+        <li>Discussion boards where students respond to a prompt and reply to two classmates</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-content"><div class="callout-title">The Flipped Classroom Approach</div><div class="callout-text">Give students new input asynchronously (a short recorded video, a reading task) and use your synchronous time exclusively for practice, production, and feedback. This flips the traditional model: instead of teaching in class and practising at home, you teach at home and practise in class — where the teacher is actually present to support.</div></div></div>
+
+  <div class="section-title">What to Avoid in Async Activities</div>
+  <ul class="avoid-list">
+    <li>Activities that have no clear deadline — students delay indefinitely without one</li>
+    <li>Async tasks that are never acknowledged in the live session — students need to know someone saw their work</li>
+    <li>Overloading students with async work between live sessions — respect the time cost</li>
+    <li>Complex instructions that aren't supported by a demonstration — students can't ask questions outside the live class</li>
+  </ul>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 15 -->
+<!-- ============================= -->
+<section id="ch15" class="chapter" data-type="practice">
+  <div class="chapter-header">
+    <div class="chapter-number">15</div>
+    <div class="chapter-label">Practical Teaching</div>
+    <h2 class="chapter-title">Managing Screen Fatigue</h2>
+    <p class="chapter-intro">Screen fatigue is real, it affects your students, and it affects you. It's not a personality weakness or a motivation problem — it's a physiological response to sustained video call engagement. Here's what you need to know and, more importantly, what you can do about it.</p>
+  </div>
+
+  <div class="section-title">What's Actually Happening</div>
+  <p>Video calls are more cognitively demanding than in-person interaction because they require constant, active processing: maintaining eye contact with a camera rather than a person, monitoring your own video tile, parsing audio that's slightly degraded compared to in-person speech, and losing all the peripheral social cues (body language, movement, spatial positioning) that the brain uses to process conversation effortlessly. The brain works harder. It tires faster.</p>
+
+  <div class="section-title">Signs Your Students Are Fatigued</div>
+  <ul class="tips-list">
+    <li>Longer response latency (taking longer and longer to answer)</li>
+    <li>Briefer and briefer contributions to discussion</li>
+    <li>Camera going off without explanation</li>
+    <li>Typing errors increasing (fine motor and cognitive coordination both suffering)</li>
+    <li>Visually vacant expressions even when camera is on</li>
+    <li>Reduced creativity and risk-taking in language output</li>
+  </ul>
+
+  <div class="section-title">Prevention Strategies</div>
+  <ul class="tips-list">
+    <li><strong>Change activity type every 10–12 minutes.</strong> Variety of cognitive demand prevents fatigue better than breaks alone.</li>
+    <li><strong>Build in screen-off moments.</strong> "Close your eyes and visualise..." or audio-only activities give the visual system a genuine rest.</li>
+    <li><strong>Use the chat more, video less.</strong> Some activities can run entirely through chat — no camera needed. Students can step back from the screen.</li>
+    <li><strong>Physical micro-breaks.</strong> 60–90 seconds of stretching, looking at something far away, or moving around. Non-negotiable in classes over 45 minutes.</li>
+    <li><strong>Tile view management.</strong> Remind students they can turn off "self-view" — seeing their own face constantly is unusually cognitively draining.</li>
+    <li><strong>End 5 minutes early.</strong> The last five minutes of a 60-minute online lesson rarely produce useful learning. End with energy still in the tank, not after it's all gone.</li>
+  </ul>
+
+  <div class="callout key"><div class="callout-icon">🔑</div><div class="callout-content"><div class="callout-title">For Your Own Fatigue</div><div class="callout-text">Teacher screen fatigue is just as real. Build in transition time between online classes. Don't eat lunch at your teaching desk. Move away from the screen between sessions. Your energy and presence in class is directly linked to your recovery between classes. This is professional maintenance, not indulgence.</div></div></div>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 16 -->
+<!-- ============================= -->
+<section id="ch16" class="chapter" data-type="practice">
+  <div class="chapter-header">
+    <div class="chapter-number">16</div>
+    <div class="chapter-label">Practical Teaching</div>
+    <h2 class="chapter-title">Cultural Considerations in Online Teaching</h2>
+    <p class="chapter-intro">Online teaching often means teaching across cultural contexts simultaneously — students from different countries, different attitudes to authority and error, different communication norms. Getting this wrong creates invisible barriers. Getting it right creates extraordinary richness.</p>
+  </div>
+
+  <div class="section-title">Why Culture Matters More Online</div>
+  <p>In a physical classroom, you can read cultural discomfort in body language and adjust on the fly. Online, you lose many of those cues. Cultural mismatches — in what constitutes polite participation, appropriate topics, acceptable silence, or the relationship between student and teacher — can quietly undermine an entire course without either party understanding why.</p>
+
+  <div class="section-title">Key Cultural Dimensions to Know</div>
+
+  <div class="collapsible"><div class="collapsible-header" onclick="toggleCollapsible(this)">🤫 Attitudes to Silence and Error <span class="collapsible-icon">▼</span></div>
+  <div class="collapsible-body">
+    <p>In many cultural contexts, silence is not a sign of not knowing — it's a sign of respect, careful consideration, or appropriate deference. In others, it signals confusion or disengagement. Similarly, attitudes to making errors in public vary enormously: for some students, being corrected in front of peers is deeply shameful; for others, it's entirely normal. Know your students' backgrounds well enough to calibrate your error correction and cold-calling approaches accordingly.</p>
+  </div></div>
+
+  <div class="collapsible"><div class="collapsible-header" onclick="toggleCollapsible(this)">🎓 Teacher Authority and Hierarchy <span class="collapsible-icon">▼</span></div>
+  <div class="collapsible-body">
+    <p>In high power-distance cultures (where teacher authority is strong and unquestioned), students may be deeply uncomfortable with activities that ask them to evaluate the teacher's ideas, debate topics that feel opinion-based, or direct the flow of the lesson. This isn't defiance — it's cultural norm. Transition these students gradually toward greater participation rather than forcing them into it. Meanwhile, in low power-distance contexts, students may expect to challenge, question, and debate — which can surprise teachers expecting compliance.</p>
+  </div></div>
+
+  <div class="collapsible"><div class="collapsible-header" onclick="toggleCollapsible(this)">📌 Sensitive Topics by Region <span class="collapsible-icon">▼</span></div>
+  <div class="collapsible-body">
+    <p>Topics that are completely neutral in one cultural context can be sensitive, inappropriate, or even dangerous in another. Family structure, religion, gender roles, politics, and economic status all carry very different loads depending on where your students are. A blanket rule: never assume a topic is universal. When in doubt, pilot it with a student you know well before introducing it to a group. If a student visibly withdraws from a topic, redirect immediately and follow up privately.</p>
+  </div></div>
+
+  <div class="section-title">Practical Cultural Sensitivity Strategies</div>
+  <ul class="tips-list">
+    <li>Learn something specific and real about each student's cultural background — not stereotypes, specifics</li>
+    <li>Build sharing of cultural perspectives into activities ("how would this situation play out differently in your country?")</li>
+    <li>Never laugh at or dismiss cultural references you don't understand</li>
+    <li>Offer content examples from different cultural contexts — not only Western, English-language-dominant sources</li>
+    <li>When activities involve personal sharing, allow students to decline and substitute a fictional character's perspective</li>
+    <li>Check in with students privately about whether they were comfortable with a topic — especially after anything potentially sensitive</li>
+  </ul>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 17 -->
+<!-- ============================= -->
+<section id="ch17" class="chapter" data-type="tech">
+  <div class="chapter-header">
+    <div class="chapter-number">17</div>
+    <div class="chapter-label">Technology</div>
+    <h2 class="chapter-title">Platform-Specific Guidance</h2>
+    <p class="chapter-intro">Not all online teaching platforms work the same way — and knowing the specific features, limitations, and tricks of the platform you're using can be the difference between a smooth lesson and a frustrating technical mess. Here's what you need to know for the most common platforms.</p>
+  </div>
+
+  <div class="section-title">Platform Guides</div>
+  <div class="platform-grid">
+
+    <div class="platform-card">
+      <div class="platform-name">💻 Zoom <span class="platform-tag">Most Common</span></div>
+      <div class="tool-item"><div class="dot"></div>Use Breakout Rooms for paired and small group work — pre-assign or randomise</div>
+      <div class="tool-item"><div class="dot"></div>Enable Whiteboard for collaborative brainstorming and visual activities</div>
+      <div class="tool-item"><div class="dot"></div>Use Reactions (hand raise, thumbs up) for quick, low-anxiety responses</div>
+      <div class="tool-item"><div class="dot"></div>Polling feature: launch mid-lesson for instant comprehension checks</div>
+      <div class="tool-item"><div class="dot"></div>Record with consent: students can review explanations asynchronously</div>
+      <div class="tool-item"><div class="dot"></div>Breakout room broadcast: send a message to all rooms simultaneously without entering each</div>
+    </div>
+
+    <div class="platform-card">
+      <div class="platform-name">📹 Google Meet <span class="platform-tag">School-Friendly</span></div>
+      <div class="tool-item"><div class="dot"></div>Breakout rooms available — less feature-rich than Zoom but functional</div>
+      <div class="tool-item"><div class="dot"></div>Jamboard integration: excellent for collaborative visual tasks</div>
+      <div class="tool-item"><div class="dot"></div>Google Docs/Slides sharing: seamless with student Google accounts</div>
+      <div class="tool-item"><div class="dot"></div>Polling via Google Forms in a separate tab — embed the link in chat</div>
+      <div class="tool-item"><div class="dot"></div>Caption feature: great for listening activities with mixed-level students</div>
+    </div>
+
+    <div class="platform-card">
+      <div class="platform-name">📱 Microsoft Teams <span class="platform-tag">Corporate/School</span></div>
+      <div class="tool-item"><div class="dot"></div>Channels as class spaces: organise by topic, week, or group</div>
+      <div class="tool-item"><div class="dot"></div>Together Mode: reduces "Hollywood Squares" fatigue for longer sessions</div>
+      <div class="tool-item"><div class="dot"></div>Whiteboard with Microsoft Whiteboard integration</div>
+      <div class="tool-item"><div class="dot"></div>Forms for quick quizzes embedded directly in class channels</div>
+      <div class="tool-item"><div class="dot"></div>Assignments and grade book built in — useful for tracking</div>
+    </div>
+
+    <div class="platform-card">
+      <div class="platform-name">🖥️ ClassDojo <span class="platform-tag">Young Learners</span></div>
+      <div class="tool-item"><div class="dot"></div>Monster avatars: young learners are deeply invested in their classroom character</div>
+      <div class="tool-item"><div class="dot"></div>Points system: immediate, visible reward — excellent motivator for kids</div>
+      <div class="tool-item"><div class="dot"></div>Portfolio feature: students collect and share their work</div>
+      <div class="tool-item"><div class="dot"></div>Parent communication: keeps families informed and involved</div>
+      <div class="tool-item"><div class="dot"></div>Stories: teacher broadcasts updates and lesson content</div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Platform-Agnostic Tips That Work Everywhere</div>
+  <ul class="tips-list">
+    <li>Always test your audio and screen share before students join — every time, not just new setups</li>
+    <li>Have a backup communication channel (WhatsApp group, email) for when the platform fails</li>
+    <li>Keep slides clean and high-contrast — they'll be viewed on everything from a 27-inch monitor to a phone screen</li>
+    <li>Use your platform's waiting room or equivalent — never let students into a session you haven't prepared yet</li>
+    <li>Learn the keyboard shortcuts for your platform: mute/unmute, start/stop video, screen share. Speed matters when managing a class.</li>
+  </ul>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 18 -->
+<!-- ============================= -->
+<section id="ch18" class="chapter" data-type="tech">
+  <div class="chapter-header">
+    <div class="chapter-number">18</div>
+    <div class="chapter-label">Technology · AI in Education</div>
+    <h2 class="chapter-title">AI for Lesson Planning & Activity Design</h2>
+    <p class="chapter-intro">AI tools like ChatGPT, Claude, and Gemini are not here to replace your teaching expertise — they're here to amplify it. This chapter shows you how to use them in the way that actually helps: generating starting points, saving planning time, differentiating materials, and creating activity variations at speed. The key word in all of this is <em>starting point.</em></p>
+  </div>
+
+  <div class="section-title">What AI Is Actually Good at for Teachers</div>
+  <div class="info-row">
+    <div class="info-box"><div class="icon">⚡</div><div class="info-title">First Drafts</div><div class="info-text">Generate a reading text, a dialogue, a set of discussion questions, or a task description in seconds. Edit to match your voice and context.</div></div>
+    <div class="info-box"><div class="icon">🎯</div><div class="info-title">Differentiation</div><div class="info-text">Take one activity and ask AI to give you a beginner version, an intermediate version, and an advanced version. Saves enormous planning time.</div></div>
+    <div class="info-box"><div class="icon">🔄</div><div class="info-title">Variations</div><div class="info-text">Ask for ten different warm-up activities on the same topic. You'll use two of them — but you'll find them in 60 seconds instead of 20 minutes.</div></div>
+  </div>
+
+  <div class="section-title">How to Write Prompts That Get Good Results</div>
+  <p>The quality of AI output is directly proportional to the quality of your prompt. Vague in = vague out. Here's the structure that works consistently:</p>
+
+  <div class="callout idea"><div class="callout-icon">🤖</div><div class="callout-content"><div class="callout-title">The Prompt Formula for Teachers</div><div class="callout-text">
+    <strong>Role + Context + Task + Constraints + Output Format</strong><br><br>
+    Example: <em>"You are an EFL curriculum designer. I need a reading comprehension activity for B1 adult learners studying business English. The topic is negotiation. Create a 200-word reading text followed by 5 comprehension questions (2 factual, 2 inference, 1 opinion). Include a vocabulary focus section with 4 key terms from the text. Format it clearly with headers."</em><br><br>
+    That prompt will give you something usable. "Write a reading activity for business English" will give you something generic.
+  </div></div></div>
+
+  <div class="section-title">Using Bloom's Levels in AI Prompts</div>
+  <p>As covered in Chapter 4, specifying the Bloom's level in your prompt transforms the output:</p>
+  <ul class="tips-list">
+    <li><em>"Create an activity where students must EVALUATE two different solutions to the problem and JUSTIFY their choice."</em></li>
+    <li><em>"Design a task where students ANALYSE the structure of a persuasive text and IDENTIFY the rhetorical techniques used."</em></li>
+    <li><em>"Give me a CREATE-level activity where B2 students DESIGN a short campaign in English for a cause they care about."</em></li>
+  </ul>
+
+  <div class="section-title">What AI Cannot Do — Important Limits</div>
+  <ul class="avoid-list">
+    <li>Know your students. AI generates for a generic profile. You adapt for real people with real needs and histories.</li>
+    <li>Replace your pedagogical judgment. AI can generate activities that look plausible but are pedagogically weak — you need to evaluate what it gives you.</li>
+    <li>Guarantee accuracy. Always fact-check AI-generated content, especially dates, statistics, and scientific claims.</li>
+    <li>Match your voice without prompting. If your teaching style is direct and sarcastic (good), tell the AI. Otherwise it defaults to bland and formal.</li>
+    <li>Understand emotional context. AI doesn't know your student who had a bad week or your group that's been struggling with this particular concept for three lessons.</li>
+  </ul>
+
+  <div class="section-title">AI Tools to Know</div>
+  <div class="platform-grid">
+    <div class="platform-card">
+      <div class="platform-name">🤖 ChatGPT (OpenAI)</div>
+      <div class="tool-item"><div class="dot"></div>Best for: generating varied texts, dialogues, and activities quickly</div>
+      <div class="tool-item"><div class="dot"></div>GPT-4o: handles image input — describe a worksheet and get it recreated</div>
+      <div class="tool-item"><div class="dot"></div>Custom GPTs: build a "lesson planning assistant" with your own instructions saved</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-name">🧠 Claude (Anthropic)</div>
+      <div class="tool-item"><div class="dot"></div>Best for: longer texts, nuanced instructions, curriculum documents</div>
+      <div class="tool-item"><div class="dot"></div>Handles very long context — can analyse an entire curriculum unit and suggest improvements</div>
+      <div class="tool-item"><div class="dot"></div>Particularly good at following complex constraints in prompts</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-name">✨ Gemini (Google)</div>
+      <div class="tool-item"><div class="dot"></div>Best for: integration with Google Docs, Slides, and Classroom</div>
+      <div class="tool-item"><div class="dot"></div>Can work directly within Google Workspace — generate content in Docs without switching apps</div>
+      <div class="tool-item"><div class="dot"></div>Good for differentiated materials that need to live in Google Drive</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 19 -->
+<!-- ============================= -->
+<section id="ch19" class="chapter" data-type="tech">
+  <div class="chapter-header">
+    <div class="chapter-number">19</div>
+    <div class="chapter-label">Technology · EdTech</div>
+    <h2 class="chapter-title">EdTech Tools for Engagement</h2>
+    <p class="chapter-intro">This chapter is your curated catalog of tools that actually work in online language classrooms. Not every tool that exists — the ones that are genuinely useful, easy to use, and have direct pedagogical value. Use what fits. Ignore the rest.</p>
+  </div>
+
+  <div class="section-title">Vocabulary & Language Practice</div>
+  <div class="platform-grid">
+    <div class="platform-card">
+      <div class="platform-name">📚 Quizlet</div>
+      <div class="tool-item"><div class="dot"></div>Flashcard sets with spaced repetition built in</div>
+      <div class="tool-item"><div class="dot"></div>Quizlet Live: competitive team vocabulary game — excellent for review</div>
+      <div class="tool-item"><div class="dot"></div>Audio pronunciation in multiple languages</div>
+      <div class="tool-item"><div class="dot"></div>Students can create their own sets — high-value learning activity</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-name">🎮 Kahoot!</div>
+      <div class="tool-item"><div class="dot"></div>Best for quick, energetic whole-class review</div>
+      <div class="tool-item"><div class="dot"></div>Open-ended questions allow short written responses</div>
+      <div class="tool-item"><div class="dot"></div>Use "Team Mode" for collaborative rather than competitive play</div>
+      <div class="tool-item"><div class="dot"></div>AI question generator: paste your lesson content and get a quiz</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-name">🎯 Gimkit</div>
+      <div class="tool-item"><div class="dot"></div>More gamified than Kahoot — students earn in-game currency</div>
+      <div class="tool-item"><div class="dot"></div>Can run for longer periods — better for vocabulary drilling</div>
+      <div class="tool-item"><div class="dot"></div>Various game modes keep it fresh</div>
+    </div>
+  </div>
+
+  <div class="section-title">Collaboration & Visual Thinking</div>
+  <div class="platform-grid">
+    <div class="platform-card">
+      <div class="platform-name">📌 Padlet</div>
+      <div class="tool-item"><div class="dot"></div>Digital bulletin board — students post text, images, links, audio</div>
+      <div class="tool-item"><div class="dot"></div>Map view for geography-based language activities</div>
+      <div class="tool-item"><div class="dot"></div>Timeline view for narrative and history tasks</div>
+      <div class="tool-item"><div class="dot"></div>Students can comment and react to each other's posts — social reading</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-name">🎨 Google Jamboard / FigJam</div>
+      <div class="tool-item"><div class="dot"></div>Collaborative whiteboard — sticky notes, drawing, image posting</div>
+      <div class="tool-item"><div class="dot"></div>Excellent for brainstorming, mind-mapping, and visual vocabulary</div>
+      <div class="tool-item"><div class="dot"></div>All students can contribute simultaneously — high engagement</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-name">🃏 Mentimeter</div>
+      <div class="tool-item"><div class="dot"></div>Live polls, word clouds, Q&A — excellent for formative assessment</div>
+      <div class="tool-item"><div class="dot"></div>Word cloud of students' responses: immediate and visual</div>
+      <div class="tool-item"><div class="dot"></div>Anonymous input: reduces anxiety for sensitive topics</div>
+    </div>
+  </div>
+
+  <div class="section-title">Speaking & Audio Tools</div>
+  <div class="platform-grid">
+    <div class="platform-card">
+      <div class="platform-name">🎬 Flipgrid / Flip</div>
+      <div class="tool-item"><div class="dot"></div>Students record short video responses to prompts</div>
+      <div class="tool-item"><div class="dot"></div>Excellent for async speaking practice</div>
+      <div class="tool-item"><div class="dot"></div>Peers can view and respond to each other's videos</div>
+      <div class="tool-item"><div class="dot"></div>Reduces camera anxiety — students can re-record before submitting</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-name">🎙️ Speeko / Elsa Speak</div>
+      <div class="tool-item"><div class="dot"></div>AI-powered pronunciation feedback</div>
+      <div class="tool-item"><div class="dot"></div>Students can practice between sessions and bring results to class</div>
+      <div class="tool-item"><div class="dot"></div>Particularly useful for students with pronunciation goals</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-name">✏️ Wordwall</div>
+      <div class="tool-item"><div class="dot"></div>Create interactive games from any content — match, sort, quiz, fill</div>
+      <div class="tool-item"><div class="dot"></div>Excellent visual design — students actually want to use it</div>
+      <div class="tool-item"><div class="dot"></div>One set of content, multiple game formats with one click</div>
+    </div>
+  </div>
+
+  <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-content"><div class="callout-title">The Rule of Three</div><div class="callout-text">Don't try to use more than three EdTech tools in a single course. Too many platforms = cognitive overload for students who have to relearn login procedures every lesson. Pick your three tools, learn them deeply, and use them consistently. Your students will thank you.</div></div></div>
+
+  <div class="section-title">AI-Powered Tools for Students</div>
+  <ul class="tips-list">
+    <li><strong>Grammarly:</strong> Real-time grammar and style feedback on writing — excellent for writing revision tasks</li>
+    <li><strong>DeepL Write:</strong> Helps students rephrase and improve their writing with AI suggestions</li>
+    <li><strong>Duolingo (as a supplement):</strong> Good for spaced vocabulary repetition outside class — not a replacement for structured teaching</li>
+    <li><strong>ChatGPT as a conversation partner:</strong> Advanced students can practice conversation with AI between sessions — give specific prompts and scenarios</li>
+    <li><strong>Speechify / NaturalReader:</strong> Text-to-speech tools that help students with listening to their own written work and noticing gaps</li>
+  </ul>
+</section>
+
+<!-- ============================= -->
+<!-- CHAPTER 20 -->
+<!-- ============================= -->
+<section id="ch20" class="chapter" data-type="practice">
+  <div class="chapter-header">
+    <div class="chapter-number">20</div>
+    <div class="chapter-label">Survival Kit</div>
+    <h2 class="chapter-title">Troubleshooting Common Online Teaching Disasters</h2>
+    <p class="chapter-intro">Things will go wrong. Technology fails. Students disappear. Activities flop. The difference between a good online teacher and a great one isn't whether problems happen — it's how fast they pivot when they do. This chapter is your emergency handbook.</p>
+  </div>
+
+  <div class="section-title">Technical Disasters</div>
+
+  <div class="collapsible"><div class="collapsible-header" onclick="toggleCollapsible(this)">🔇 Your Audio Stops Working Mid-Lesson <span class="collapsible-icon">▼</span></div>
+  <div class="collapsible-body">
+    <p><strong>Immediate response:</strong> Type in the chat immediately: "Technical issue — please read from the chat." Switch to chat-only mode. If your audio fails completely, send a message, leave, and rejoin the session. Don't waste lesson time troubleshooting while students wait in silence.</p>
+    <p><strong>Prevention:</strong> Always test audio 5 minutes before a session. Have a backup microphone (even your phone earphones) ready. Know your platform's audio troubleshooting sequence by heart.</p>
+  </div></div>
+
+  <div class="collapsible"><div class="collapsible-header" onclick="toggleCollapsible(this)">📺 Screen Share Freezes or Fails <span class="collapsible-icon">▼</span></div>
+  <div class="collapsible-body">
+    <p><strong>Immediate response:</strong> Send the slide link directly in the chat. Students can open it themselves. Continue the lesson verbally while they navigate to the slide. If you use Google Slides, share the link in advance as standard practice — this is your backup every single time.</p>
+    <p><strong>Prevention:</strong> Never rely only on screen sharing for lesson materials. Always have a shareable link ready.</p>
+  </div></div>
+
+  <div class="collapsible"><div class="collapsible-header" onclick="toggleCollapsible(this)">👻 Students Keep Dropping Out <span class="collapsible-icon">▼</span></div>
+  <div class="collapsible-body">
+    <p><strong>Immediate response:</strong> Don't stop the lesson for every drop-out. Note who left in the chat ("Welcome back when you reconnect") and continue. If the majority drops simultaneously, it's likely a server issue — wait 2 minutes, send a reconnect link in the group channel, and proceed when numbers recover.</p>
+    <p><strong>Prevention:</strong> Have a backup communication channel (WhatsApp, Telegram, email) to send reconnect links. Share this at the start of every course.</p>
+  </div></div>
+
+  <div class="collapsible"><div class="collapsible-header" onclick="toggleCollapsible(this)">😶 Complete Silence — Nobody Responds <span class="collapsible-icon">▼</span></div>
+  <div class="collapsible-body">
+    <p><strong>This is the most common online teaching disaster, and it's usually a design failure, not a student failure.</strong></p>
+    <p><strong>Immediate response:</strong> Switch to chat. "Type your answer in the chat." If chat is also dead, lower the barrier: "Give me a thumbs up if you understood the question." If nothing — say "Let me try a different approach" and rephrase or simplify the task completely. Do not escalate silence with more silence or increasing visible frustration.</p>
+    <p><strong>Prevention:</strong> Never launch a speaking activity without a chat warm-up first. The chat lowers inhibition and makes the transition to speaking feel less abrupt.</p>
+  </div></div>
+
+  <div class="section-title">Lesson Disasters</div>
+
+  <div class="collapsible"><div class="collapsible-header" onclick="toggleCollapsible(this)">💀 An Activity Dies Completely <span class="collapsible-icon">▼</span></div>
+  <div class="collapsible-body">
+    <p><strong>Immediate response:</strong> Name it briefly and move on. "Okay, that didn't land — let's try this instead." Students respect teachers who adapt rather than flogging a dead activity out of pride. Have two emergency backup activities at the bottom of every lesson plan — something you could run in your sleep that takes 5–10 minutes and always works with your group.</p>
+    <p><strong>Examples of emergency backups:</strong> Two Truths and a Lie (any level). Vocabulary taboo on the board (any level). "Ask me anything" (teacher in hot seat). Show something from your desk/room — describe and discuss.</p>
+  </div></div>
+
+  <div class="collapsible"><div class="collapsible-header" onclick="toggleCollapsible(this)">⏱️ You Run Out of Material with 20 Minutes Left <span class="collapsible-icon">▼</span></div>
+  <div class="collapsible-body">
+    <p><strong>Never visible panic. Pivot to extended practice.</strong></p>
+    <ul class="tips-list">
+      <li>Return to the lesson's language point and run a different activity type on the same content</li>
+      <li>Ask students to create their own examples, questions, or mini-tasks using the lesson language</li>
+      <li>Run a quick review quiz on vocabulary from the last three lessons</li>
+      <li>Ask: "What's one question you still have from today's lesson?" — turns students into teachers</li>
+    </ul>
+  </div></div>
+
+  <div class="collapsible"><div class="collapsible-header" onclick="toggleCollapsible(this)">😤 A Student Is Openly Rude or Difficult <span class="collapsible-icon">▼</span></div>
+  <div class="collapsible-body">
+    <p><strong>Online, you have tools physical classrooms don't.</strong></p>
+    <p>Private message the student immediately — do not address it publicly unless safety is involved. Remove from breakout rooms or mute if necessary. Document the incident. If it continues, escalate to whoever manages student conduct at your institution. Your calmness and consistency is your most powerful tool — react emotionally and you lose control of the dynamic.</p>
+    <p><strong>For young learners:</strong> Bring a parent/guardian into the equation immediately. Online classes where parental oversight is unclear need explicit agreements about behaviour from the start of the course.</p>
+  </div></div>
+
+  <div class="section-title">Emergency Activity Bank</div>
+  <p>Keep this list bookmarked. These are zero-preparation activities that work at any level with any age group when everything else fails:</p>
+
+  <div class="checklist">
+    <div class="checklist-header">
+      <div class="checklist-title">🚨 Emergency Activity Backup List</div>
+      <button class="checklist-download" onclick="downloadChecklist('emergency')">⬇ Download</button>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Word Association Chain — any vocabulary</label></div>
+    <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Two Truths and a Lie — no preparation needed</label></div>
+    <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Hot Seat with words from today's lesson</label></div>
+    <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"><label>20 Questions — any topic</label></div>
+    <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Describe Your Screen Background — spontaneous speaking</label></div>
+    <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Speed Vocabulary Challenge — how many words can you list in a category in 60 seconds?</label></div>
+    <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Collaborative sentence building — teacher starts, students add</label></div>
+    <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Would You Rather? — any level, any topic</label></div>
+  </div>
+
+  <div class="callout key"><div class="callout-icon">🔑</div><div class="callout-content"><div class="callout-title">The Most Important Thing</div><div class="callout-text">Students don't remember when everything went perfectly. They remember how you handled it when it didn't. Stay calm, stay flexible, and trust that you have enough experience to navigate any situation. Confidence in a crisis is a teaching skill — and it can be developed exactly like any other.</div></div></div>
+</section>
+
+<!-- ============================= -->
+<!-- INDEX -->
+<!-- ============================= -->
+<section id="index" style="padding: 80px 60px; max-width: 900px; margin: 0 auto;">
+  <div class="page-header">
+    <div class="page-tag">Reference</div>
+    <h2 class="page-title">Index of <strong>Key Topics</strong></h2>
+  </div>
+
+  <div class="index-grid">
+    <div class="index-letter">A</div>
+    <div class="index-entry">Affective Filter <a href="#ch2">Ch. 2</a></div>
+    <div class="index-entry">AI Tools <a href="#ch18">Ch. 18</a></div>
+    <div class="index-entry">Anxiety (students) <a href="#ch2">Ch. 2</a></div>
+    <div class="index-entry">Anxiety (teachers) <a href="#ch2">Ch. 2</a></div>
+    <div class="index-entry">Assessment <a href="#ch13">Ch. 13</a></div>
+    <div class="index-entry">Asynchronous <a href="#ch14">Ch. 14</a></div>
+    <div class="index-letter">B</div>
+    <div class="index-entry">Bloom's Taxonomy <a href="#ch4">Ch. 4</a></div>
+    <div class="index-entry">Brain Learning <a href="#ch1">Ch. 1</a></div>
+    <div class="index-entry">Breakout Rooms <a href="#ch6">Ch. 6</a></div>
+    <div class="index-letter">C</div>
+    <div class="index-entry">Classroom Management <a href="#ch12">Ch. 12</a></div>
+    <div class="index-entry">Context (vs Content) <a href="#ch3">Ch. 3</a></div>
+    <div class="index-entry">Cultural Sensitivity <a href="#ch16">Ch. 16</a></div>
+    <div class="index-letter">D</div>
+    <div class="index-entry">Differentiation <a href="#ch11">Ch. 11</a></div>
+    <div class="index-entry">Discipline <a href="#ch12">Ch. 12</a></div>
+    <div class="index-entry">Dual Coding <a href="#ch5">Ch. 5</a></div>
+    <div class="index-letter">E</div>
+    <div class="index-entry">EdTech Tools <a href="#ch19">Ch. 19</a></div>
+    <div class="index-entry">Engagement <a href="#ch10">Ch. 10</a></div>
+    <div class="index-entry">Error Correction <a href="#ch13">Ch. 13</a></div>
+    <div class="index-letter">F</div>
+    <div class="index-entry">Feedback <a href="#ch13">Ch. 13</a></div>
+    <div class="index-entry">Flipgrid <a href="#ch19">Ch. 19</a></div>
+    <div class="index-entry">Formative Assessment <a href="#ch13">Ch. 13</a></div>
+    <div class="index-letter">G</div>
+    <div class="index-entry">Gamification <a href="#ch10">Ch. 10</a></div>
+    <div class="index-entry">Google Meet <a href="#ch17">Ch. 17</a></div>
+    <div class="index-letter">I</div>
+    <div class="index-entry">Interleaving <a href="#ch5">Ch. 5</a></div>
+    <div class="index-letter">K</div>
+    <div class="index-entry">Kahoot <a href="#ch19">Ch. 19</a></div>
+    <div class="index-entry">Kids vs Adults <a href="#ch11">Ch. 11</a></div>
+    <div class="index-letter">L</div>
+    <div class="index-entry">Language Freeze <a href="#ch2">Ch. 2</a></div>
+    <div class="index-entry">Learning Outcomes <a href="#ch4">Ch. 4</a></div>
+    <div class="index-entry">Learning Styles <a href="#ch5">Ch. 5</a></div>
+    <div class="index-entry">Listening Activities <a href="#ch7">Ch. 7</a></div>
+    <div class="index-letter">M</div>
+    <div class="index-entry">Memory <a href="#ch1">Ch. 1</a></div>
+    <div class="index-entry">Motivation <a href="#ch12">Ch. 12</a></div>
+    <div class="index-entry">Multimodal <a href="#ch5">Ch. 5</a></div>
+    <div class="index-letter">P</div>
+    <div class="index-entry">Padlet <a href="#ch19">Ch. 19</a></div>
+    <div class="index-entry">Peer Assessment <a href="#ch13">Ch. 13</a></div>
+    <div class="index-entry">Platform Guidance <a href="#ch17">Ch. 17</a></div>
+    <div class="index-entry">Prompting AI <a href="#ch18">Ch. 18</a></div>
+    <div class="index-letter">Q</div>
+    <div class="index-entry">Quizlet <a href="#ch19">Ch. 19</a></div>
+    <div class="index-letter">R</div>
+    <div class="index-entry">Reading Activities <a href="#ch8">Ch. 8</a></div>
+    <div class="index-entry">Retrieval Practice <a href="#ch5">Ch. 5</a></div>
+    <div class="index-letter">S</div>
+    <div class="index-entry">Scaffolding <a href="#ch11">Ch. 11</a></div>
+    <div class="index-entry">Screen Fatigue <a href="#ch15">Ch. 15</a></div>
+    <div class="index-entry">Spaced Repetition <a href="#ch5">Ch. 5</a></div>
+    <div class="index-entry">Speaking Activities <a href="#ch6">Ch. 6</a></div>
+    <div class="index-entry">Synchronous <a href="#ch14">Ch. 14</a></div>
+    <div class="index-letter">T</div>
+    <div class="index-entry">Teens (motivation) <a href="#ch12">Ch. 12</a></div>
+    <div class="index-entry">Troubleshooting <a href="#ch20">Ch. 20</a></div>
+    <div class="index-letter">W</div>
+    <div class="index-entry">Wordwall <a href="#ch19">Ch. 19</a></div>
+    <div class="index-entry">Writing Activities <a href="#ch9">Ch. 9</a></div>
+    <div class="index-letter">Z</div>
+    <div class="index-entry">Zoom <a href="#ch17">Ch. 17</a></div>
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); text-align: center;">
+    <div style="font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--dark); margin-bottom: 8px;">Rayene Medabis</div>
+    <div style="font-size: 13px; color: var(--light); margin-bottom: 4px;">M.Ed. · TESOL-Certified · Teacher Trainer & Curriculum Designer</div>
+    <div style="font-size: 12px; color: var(--light); margin-top: 16px;">The Online Teacher's Activity Encyclopedia · All rights reserved.</div>
+    <div style="font-size: 11px; color: var(--border); margin-top: 8px;">This resource may not be reproduced or redistributed without permission.</div>
+  </div>
+</section>
+
+</main>
+
+<script>
+// ============ ACTIVITY FINDER DATABASE ============
+const activities = [
+  { name: "Hot Seat", skill: "speaking", level: "beginner", age: "kids", chapter: "#ch6" },
+  { name: "Speed Dating Debate", skill: "speaking", level: "intermediate", age: "teens", chapter: "#ch6" },
+  { name: "Picture Storytelling", skill: "speaking", level: "beginner", age: "kids", chapter: "#ch6" },
+  { name: "Would You Rather?", skill: "speaking", level: "beginner", age: "kids", chapter: "#ch6" },
+  { name: "Collaborative Story Circle", skill: "speaking", level: "intermediate", age: "teens", chapter: "#ch6" },
+  { name: "Two Truths and a Lie", skill: "speaking", level: "beginner", age: "teens", chapter: "#ch6" },
+  { name: "Mini Presentations", skill: "speaking", level: "intermediate", age: "teens", chapter: "#ch6" },
+  { name: "Back-to-Back Describe and Draw", skill: "speaking", level: "beginner", age: "kids", chapter: "#ch6" },
+  { name: "Dictogloss", skill: "listening", level: "intermediate", age: "adults", chapter: "#ch7" },
+  { name: "Running Commentary", skill: "listening", level: "intermediate", age: "teens", chapter: "#ch7" },
+  { name: "Listen and Respond (Live Chat)", skill: "listening", level: "beginner", age: "kids", chapter: "#ch7" },
+  { name: "Spot the Difference (Audio)", skill: "listening", level: "beginner", age: "kids", chapter: "#ch7" },
+  { name: "Jigsaw Reading", skill: "reading", level: "intermediate", age: "adults", chapter: "#ch8" },
+  { name: "Predict from Headlines", skill: "reading", level: "beginner", age: "teens", chapter: "#ch8" },
+  { name: "Annotated Reading", skill: "reading", level: "intermediate", age: "adults", chapter: "#ch8" },
+  { name: "Reader Response Circle", skill: "reading", level: "intermediate", age: "teens", chapter: "#ch8" },
+  { name: "Collaborative Google Doc Story", skill: "writing", level: "beginner", age: "teens", chapter: "#ch9" },
+  { name: "Speed Writing", skill: "writing", level: "beginner", age: "teens", chapter: "#ch9" },
+  { name: "Peer Review Gallery", skill: "writing", level: "intermediate", age: "adults", chapter: "#ch9" },
+  { name: "Letter Writing Exchange", skill: "writing", level: "beginner", age: "kids", chapter: "#ch9" },
+];
+
+function findActivities() {
+  const skill = document.getElementById('findSkill').value;
+  const level = document.getElementById('findLevel').value;
+  const age = document.getElementById('findAge').value;
+
+  let levelMap = { 'beginner': 'beginner', 'intermediate': 'intermediate', 'advanced': 'intermediate' };
+  let ageMap = { 'kids': 'kids', 'teens': 'teens', 'adults': 'adults' };
+
+  let filtered = activities.filter(a => {
+    let matchSkill = !skill || a.skill === skill || (skill === 'mixed');
+    let matchLevel = !level || a.level === levelMap[level] || a.level === 'beginner';
+    let matchAge = !age || a.age === ageMap[age] || a.age === 'kids';
+    return matchSkill && matchLevel && matchAge;
+  });
+
+  // Remove duplicates and shuffle
+  let unique = [...new Map(filtered.map(a => [a.name, a])).values()];
+  unique = unique.sort(() => Math.random() - 0.5).slice(0, 5);
+
+  const resultsDiv = document.getElementById('finderResults');
+  const titleDiv = document.getElementById('finderResultsTitle');
+  const listDiv = document.getElementById('finderResultsList');
+
+  if (unique.length === 0) {
+    titleDiv.textContent = "No exact matches — try broadening your filters.";
+    listDiv.innerHTML = '';
+  } else {
+    titleDiv.textContent = `${unique.length} activit${unique.length === 1 ? 'y' : 'ies'} found for your selection:`;
+    listDiv.innerHTML = unique.map(a => `
+      <div class="finder-result-card" onclick="window.location.href='${a.chapter}'">
+        <div class="result-title">${a.name}</div>
+        <div class="result-meta">${a.skill.charAt(0).toUpperCase() + a.skill.slice(1)} · ${a.level} · ${a.age} → Go to Chapter</div>
+      </div>
+    `).join('');
+  }
+
+  resultsDiv.classList.add('visible');
+}
+
+// ============ COLLAPSIBLE ============
+function toggleCollapsible(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('visible');
+}
+
+// ============ ACTIVITY CARDS ============
+function toggleCard(btn) {
+  btn.classList.toggle('open');
+  const details = btn.nextElementSibling;
+  details.classList.toggle('visible');
+}
+
+// ============ TABS ============
+function switchTab(btn, panelId) {
+  const container = btn.closest('.tab-container');
+  container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  container.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+
+// ============ CHECKLIST ============
+function toggleCheck(item) {
+  item.classList.toggle('checked');
+  item.querySelector('input').checked = !item.querySelector('input').checked;
+}
+
+function downloadChecklist(type) {
+  const content = type === 'filter' ?
+    'Pre-Lesson Affective Filter Checklist\nBy Rayene Medabis\n\n[ ] Begin with a low-stakes warm-up\n[ ] Use a class greeting ritual\n[ ] Allow chat responses before speaking\n[ ] Avoid cold-calling\n[ ] Use breakout rooms first\n[ ] Praise effort and risk-taking\n[ ] Never correct mid-sentence during fluency tasks\n[ ] Provide a classroom safety phrase' :
+    'Emergency Activity Backup List\nBy Rayene Medabis\n\n[ ] Word Association Chain\n[ ] Two Truths and a Lie\n[ ] Hot Seat with lesson vocabulary\n[ ] 20 Questions\n[ ] Describe Your Screen Background\n[ ] Speed Vocabulary Challenge\n[ ] Collaborative sentence building\n[ ] Would You Rather?';
+
+  const blob = new Blob([content], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `checklist_${type}.txt`;
+  a.click();
+}
+
+// ============ PROGRESS BAR ============
+window.addEventListener('scroll', () => {
+  const main = document.querySelector('.main');
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / docHeight) * 100;
+  document.getElementById('progressFill').style.width = progress + '%';
+
+  // Active nav item
+  const sections = document.querySelectorAll('[id]');
+  let current = '';
+  sections.forEach(section => {
+    if (window.scrollY >= section.offsetTop - 200) {
+      current = section.id;
+    }
+  });
+
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.classList.remove('active');
+    if (item.getAttribute('href') === '#' + current) {
+      item.classList.add('active');
+    }
+  });
+});
+
+// ============ SIDEBAR MOBILE ============
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+// ============ NAV SEARCH ============
+function filterNav(query) {
+  const items = document.querySelectorAll('.nav-item');
+  items.forEach(item => {
+    const text = item.textContent.toLowerCase();
+    item.style.display = text.includes(query.toLowerCase()) || query === '' ? 'flex' : 'none';
+  });
+}
+
+// Close sidebar on nav click (mobile)
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', () => {
+    if (window.innerWidth < 900) {
+      document.getElementById('sidebar').classList.remove('open');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
