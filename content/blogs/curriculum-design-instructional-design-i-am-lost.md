@@ -1,5 +1,5 @@
 ---
-title: Curriculum design? Instructional design? I AM LOST!
+title: Curriculum Design? Instructional Design? I AM LOST!
 cover: /images/c.jpg
 excerpt: "People often use \"curriculum design\" and \"instructional design\"
   interchangeably; but they're not the same thing. "
