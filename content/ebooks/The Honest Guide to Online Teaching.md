@@ -1,5 +1,6 @@
 ---
 title: The Honest Guide to Online Teaching
+author: Rayene Medabis
 cover: /images/rr.png
 html_file: /images/the-honest-guide-to-online-teaching-1-.html
 tags:
