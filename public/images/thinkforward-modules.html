@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ThinkForward — Professional Skills Modules | Rayene Medabis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #E9E4DC;
+  --surface: #F4F0EA;
+  --card: #FDFCFB;
+  --text: #1C2B3A;
+  --text2: #56687A;
+  --text3: #8A96A4;
+  --border: #D6CEBF;
+  --borderL: #E8E2D8;
+  --font-d: 'Playfair Display', Georgia, serif;
+  --font-b: 'Inter', system-ui, sans-serif;
+  --font-m: 'JetBrains Mono', monospace;
+  --r: 10px; --rl: 18px;
+  --sh: 0 2px 10px rgba(28,43,58,.08);
+  --shm: 0 6px 24px rgba(28,43,58,.13);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+button{cursor:pointer;font-family:var(--font-b);border:none;background:none}
+button:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+a{text-decoration:none;color:inherit}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:100;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;
+  background:rgba(233,228,220,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-brand{display:flex;align-items:center;gap:.55rem;font-family:var(--font-d);font-size:1.1rem;font-weight:700;letter-spacing:-.02em;cursor:pointer}
+.nav-logo{width:30px;height:30px;flex-shrink:0}
+.nav-author{font-size:.78rem;color:var(--text3);font-style:italic}
+.nav-back{display:none;align-items:center;gap:.4rem;font-size:.82rem;font-weight:500;color:var(--text2);
+  padding:.35rem .8rem;border-radius:6px;transition:background .15s,color .15s}
+.nav-back:hover{background:var(--borderL);color:var(--text)}
+.nav-back.show{display:flex}
+
+/* ── HERO ── */
+.hero{max-width:860px;margin:0 auto;padding:3.5rem 2rem 2.5rem;text-align:center}
+.hero-eyebrow{font-family:var(--font-m);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:1.1rem}
+.hero-title{font-family:var(--font-d);font-size:clamp(2rem,5vw,3.2rem);font-weight:700;line-height:1.12;letter-spacing:-.03em;margin-bottom:1.1rem}
+.hero-title em{font-style:italic;color:#2463A7}
+.hero-sub{font-size:1rem;color:var(--text2);max-width:500px;margin:0 auto 2rem;line-height:1.72}
+.hero-stats{display:flex;align-items:center;justify-content:center;gap:1.8rem;flex-wrap:wrap}
+.hstat .n{font-family:var(--font-d);font-size:1.55rem;font-weight:700;display:block}
+.hstat .l{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text3)}
+.hdiv{width:1px;height:36px;background:var(--border)}
+
+/* ── CATALOG ── */
+.cat-section{max-width:1080px;margin:0 auto;padding:1rem 2rem 4rem}
+.sec-head{display:flex;align-items:baseline;gap:.8rem;margin-bottom:1.8rem}
+.sec-head h2{font-family:var(--font-d);font-size:1.25rem;font-weight:600}
+.sec-head span{font-family:var(--font-m);font-size:.7rem;color:var(--text3)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.4rem}
+
+/* ── MODULE CARD ── */
+.mcard{background:var(--card);border-radius:var(--rl);border:1px solid var(--borderL);overflow:hidden;
+  cursor:pointer;transition:transform .2s,box-shadow .2s}
+.mcard:hover{transform:translateY(-4px);box-shadow:var(--shm)}
+.mcard-stripe{height:7px}
+.mcard-body{padding:1.4rem}
+.mcard-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.9rem}
+.micon{width:42px;height:42px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.bdg{font-family:var(--font-m);font-size:.67rem;font-weight:500;padding:.18rem .55rem;border-radius:20px;background:var(--borderL);color:var(--text2)}
+.mnum{font-family:var(--font-m);font-size:.65rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3rem}
+.mcard-title{font-family:var(--font-d);font-size:1.13rem;font-weight:700;line-height:1.25;margin-bottom:.5rem}
+.mcard-desc{font-size:.855rem;color:var(--text2);line-height:1.62;margin-bottom:1.1rem}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.2rem}
+.stag{font-size:.68rem;font-weight:500;padding:.18rem .5rem;border-radius:4px}
+.mcard-foot{display:flex;align-items:center;gap:.8rem}
+.pbar-wrap{flex:1;height:3px;background:var(--borderL);border-radius:2px;overflow:hidden}
+.pbar-fill{height:100%;border-radius:2px;transition:width .4s}
+.plabel{font-family:var(--font-m);font-size:.67rem;color:var(--text3);white-space:nowrap}
+.btn-enter{font-size:.78rem;font-weight:600;padding:.45rem 1rem;border-radius:6px;color:#fff;transition:opacity .2s;flex-shrink:0}
+.btn-enter:hover{opacity:.85}
+
+/* ── MODULE LAYOUT ── */
+.mod-layout{display:grid;grid-template-columns:270px 1fr;min-height:calc(100vh - 58px)}
+.sidebar{background:var(--card);border-right:1px solid var(--border);padding:1.6rem 0;
+  position:sticky;top:58px;height:calc(100vh - 58px);overflow-y:auto;display:flex;flex-direction:column}
+.sb-head{padding:0 1.4rem 1.4rem;border-bottom:1px solid var(--borderL);margin-bottom:.8rem}
+.sb-tag{font-family:var(--font-m);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.4rem}
+.sb-title{font-family:var(--font-d);font-size:1rem;font-weight:700;line-height:1.3}
+.sb-nav{flex:1;padding:0 .6rem}
+.sb-item{display:flex;align-items:center;gap:.7rem;width:100%;text-align:left;padding:.55rem .8rem;
+  border-radius:7px;transition:background .15s;margin-bottom:.1rem;color:var(--text2);font-size:.82rem}
+.sb-item:hover{background:var(--surface);color:var(--text)}
+.sb-item.active{background:var(--surface);color:var(--text);font-weight:500}
+.sb-dot{width:7px;height:7px;border-radius:50%;background:var(--border);flex-shrink:0;transition:background .2s}
+.sb-dot.done{background:#2B7A4B}
+.sb-dot.cur{border:2px solid;background:transparent}
+.sb-foot{padding:1.2rem 1.4rem;border-top:1px solid var(--borderL);margin-top:auto}
+.sb-plabel{font-size:.72rem;color:var(--text3);margin-bottom:.4rem}
+
+/* ── LESSON CONTENT ── */
+.lesson-wrap{padding:2.8rem 3rem;max-width:700px}
+.l-eyebrow{font-family:var(--font-m);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
+.l-title{font-family:var(--font-d);font-size:clamp(1.55rem,3vw,2.1rem);font-weight:700;
+  line-height:1.14;letter-spacing:-.025em;margin-bottom:.7rem}
+.l-meta{display:flex;align-items:center;gap:.8rem;font-size:.78rem;color:var(--text3);margin-bottom:2.2rem;
+  padding-bottom:1.5rem;border-bottom:1px solid var(--borderL)}
+.l-body{font-size:.965rem;line-height:1.78;color:var(--text)}
+.l-body h3{font-family:var(--font-d);font-size:1.15rem;font-weight:600;letter-spacing:-.015em;
+  margin:2.2rem 0 .85rem}
+.l-body h4{font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;
+  color:var(--text3);margin:1.8rem 0 .65rem}
+.l-body p{margin-bottom:1.1rem}
+.l-body ul,.l-body ol{padding-left:1.35rem;margin-bottom:1.1rem}
+.l-body li{margin-bottom:.38rem}
+.l-body strong{font-weight:600}
+.l-body em{font-style:italic}
+
+/* ── CALLOUTS ── */
+.callout{border-radius:var(--r);padding:1.1rem 1.3rem;margin:1.4rem 0;border-left:3px solid}
+.callout-ttl{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.45rem}
+.callout-txt{font-size:.875rem;line-height:1.65}
+.co-insight{background:#EBF3FC;border-color:#2463A7;color:#1a3a5a}
+.co-practice{background:#EBF6F0;border-color:#2B7A4B;color:#1a3a28}
+.co-warning{background:#FBF0E8;border-color:#B85C1A;color:#3a2010}
+.co-tip{background:#F2EBFC;border-color:#6B3FA0;color:#2a1540}
+
+/* ── FRAMEWORK CARD ── */
+.fw-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.4rem;margin:1.4rem 0}
+.fw-title{font-family:var(--font-d);font-size:.98rem;font-weight:600;margin-bottom:1rem}
+.fw-steps{display:flex;flex-direction:column;gap:.6rem}
+.fw-step{display:flex;align-items:flex-start;gap:.7rem}
+.fw-ltr{font-family:var(--font-m);font-size:.7rem;font-weight:600;min-width:26px;height:26px;
+  display:flex;align-items:center;justify-content:center;border-radius:5px;flex-shrink:0;margin-top:.15rem}
+.fw-txt{font-size:.875rem;line-height:1.55}
+.fw-txt strong{display:block;font-weight:600;margin-bottom:.1rem}
+
+/* ── EXERCISE ── */
+.ex-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:1.6rem;margin:2rem 0}
+.ex-hd{display:flex;align-items:center;gap:.6rem;margin-bottom:.9rem}
+.ex-icon{font-size:1.1rem}
+.ex-title{font-family:var(--font-d);font-size:.98rem;font-weight:600}
+.ex-prompt{font-size:.86rem;color:var(--text2);line-height:1.65;margin-bottom:.9rem}
+textarea{width:100%;min-height:110px;border:1px solid var(--border);border-radius:7px;
+  background:var(--card);font-family:var(--font-b);font-size:.855rem;padding:.7rem;
+  color:var(--text);resize:vertical;line-height:1.6;transition:border-color .2s}
+textarea:focus{outline:none;border-color:#2463A7}
+
+/* ── LESSON NAV ── */
+.l-nav{display:flex;align-items:center;justify-content:space-between;margin-top:2.8rem;
+  padding-top:1.8rem;border-top:1px solid var(--borderL)}
+.btn-prev{display:flex;align-items:center;gap:.4rem;padding:.6rem 1.2rem;border-radius:6px;
+  font-size:.84rem;font-weight:500;border:1px solid var(--border);color:var(--text2);transition:all .2s}
+.btn-prev:hover{border-color:var(--text3);color:var(--text)}
+.btn-next{display:flex;align-items:center;gap:.4rem;padding:.6rem 1.3rem;border-radius:6px;
+  font-size:.84rem;font-weight:600;color:#fff;transition:opacity .2s}
+.btn-next:hover{opacity:.85}
+
+/* ── QUIZ ── */
+.quiz-wrap{padding:2.8rem 3rem;max-width:700px}
+.qcard{background:var(--card);border:1px solid var(--borderL);border-radius:var(--r);padding:1.4rem;margin-bottom:1.3rem}
+.q-num{font-family:var(--font-m);font-size:.67rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem}
+.q-txt{font-size:.965rem;font-weight:500;line-height:1.5;margin-bottom:1.1rem}
+.q-opts{display:flex;flex-direction:column;gap:.45rem}
+.qopt{display:flex;align-items:flex-start;gap:.7rem;padding:.65rem .9rem;border:1px solid var(--border);
+  border-radius:6px;text-align:left;font-size:.875rem;line-height:1.5;color:var(--text);transition:all .15s}
+.qopt:hover:not(:disabled){background:var(--surface);border-color:var(--text3)}
+.qopt.sel{border-color:var(--accent,#2463A7)}
+.qopt.correct{background:#EBF6F0;border-color:#2B7A4B;color:#1a3a28}
+.qopt.wrong{background:#FBF0E8;border-color:#B85C1A;color:#3a2010}
+.q-letter{font-family:var(--font-m);font-size:.67rem;font-weight:600;min-width:21px;height:21px;
+  border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.q-fb{font-size:.81rem;margin-top:.7rem;padding:.55rem .8rem;border-radius:6px;display:none;line-height:1.5}
+.q-fb.show{display:block}
+.q-fb.correct{background:#EBF6F0;color:#1a3a28}
+.q-fb.wrong{background:#FBF0E8;color:#3a2010}
+.btn-submit{font-size:.875rem;font-weight:600;padding:.65rem 1.8rem;border-radius:7px;
+  color:#fff;transition:opacity .2s;margin-top:1.5rem}
+.btn-submit:hover{opacity:.85}
+.result-box{margin-top:2rem;border-radius:var(--rl);padding:1.8rem;text-align:center}
+.result-score{font-family:var(--font-d);font-size:2.4rem;font-weight:700;margin-bottom:.2rem}
+.result-lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text3)}
+.result-sub{font-size:.875rem;color:var(--text2);margin-top:.6rem;margin-bottom:1.5rem}
+.result-btns{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap}
+.rbtn{font-size:.84rem;font-weight:600;padding:.58rem 1.3rem;border-radius:7px;transition:opacity .2s}
+.rbtn:hover{opacity:.85}
+
+/* ── FOOTER ── */
+.site-footer{text-align:center;padding:2rem;font-size:.78rem;color:var(--text3);border-top:1px solid var(--border)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:760px){
+  .mod-layout{grid-template-columns:1fr}
+  .sidebar{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border)}
+  .lesson-wrap,.quiz-wrap{padding:1.5rem 1.2rem}
+  .hero{padding:2rem 1.2rem 1.5rem}
+  .cat-section{padding:1rem 1.2rem 3rem}
+  .nav{padding:0 1.2rem}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav class="nav">
+  <div class="nav-brand" onclick="showCatalog()">
+    <svg class="nav-logo" viewBox="0 0 30 30" fill="none">
+      <circle cx="15" cy="15" r="13" stroke="#1C2B3A" stroke-width="1.5"/>
+      <circle cx="9.5" cy="12" r="2.2" fill="#1C2B3A"/>
+      <circle cx="20.5" cy="12" r="2.2" fill="#1C2B3A"/>
+      <circle cx="15" cy="20" r="2.2" fill="#1C2B3A"/>
+      <line x1="11.5" y1="12" x2="18.5" y2="12" stroke="#1C2B3A" stroke-width="1"/>
+      <line x1="10.5" y1="13.8" x2="14.3" y2="18.5" stroke="#1C2B3A" stroke-width="1"/>
+      <line x1="19.5" y1="13.8" x2="15.7" y2="18.5" stroke="#1C2B3A" stroke-width="1"/>
+    </svg>
+    ThinkForward
+  </div>
+  <span class="nav-author">by Rayene Medabis</span>
+  <button class="nav-back" id="navBack" onclick="showCatalog()">← All Modules</button>
+</nav>
+
+<!-- ── CATALOG ── -->
+<div id="viewCatalog">
+  <section class="hero">
+    <p class="hero-eyebrow">Non-Credit Professional Development Series</p>
+    <h1 class="hero-title">Build the skills that<br><em>change everything</em></h1>
+    <p class="hero-sub">Six self-paced modules for adult learners ready to think more clearly, communicate more effectively, and make better decisions — starting today.</p>
+    <div class="hero-stats">
+      <div class="hstat"><span class="n">6</span><span class="l">Modules</span></div>
+      <div class="hdiv"></div>
+      <div class="hstat"><span class="n">24</span><span class="l">Lessons</span></div>
+      <div class="hdiv"></div>
+      <div class="hstat"><span class="n">~6 hrs</span><span class="l">Total time</span></div>
+      <div class="hdiv"></div>
+      <div class="hstat"><span class="n">Self-paced</span><span class="l">Format</span></div>
+    </div>
+  </section>
+  <section class="cat-section">
+    <div class="sec-head">
+      <h2>Modules</h2><span>6 available</span>
+    </div>
+    <div class="grid" id="catalogGrid"></div>
+  </section>
+  <footer class="site-footer">
+    <p>ThinkForward Non-Credit Learning Series &mdash; Created by <strong>Rayene Medabis</strong></p>
+    <p style="margin-top:.3rem">Self-directed learning for working adults. No prerequisites required.</p>
+  </footer>
+</div>
+
+<!-- ── MODULE VIEW ── -->
+<div id="viewModule" style="display:none">
+  <div class="mod-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main id="contentArea"></main>
+  </div>
+</div>
+
+<script>
+// =========================================================
+// MODULE DATA
+// =========================================================
+const MODS = [
+{
+  id:1, title:"Critical Thinking Foundations", num:"Module 01",
+  icon:"🔍", color:"#2463A7", light:"#EBF3FC", dur:"60 min",
+  desc:"Learn to question assumptions, evaluate evidence, and reason through complex situations with clarity and purpose.",
+  skills:["Analysis","Reasoning","Logic"],
+  lessons:[
+  {
+    title:"What Is Critical Thinking?", type:"lesson", dur:"15 min",
+    content:`
+    <p class="l-eyebrow" style="color:#2463A7">Module 01 — Lesson 1</p>
+    <h1 class="l-title">What Is Critical Thinking?</h1>
+    <div class="l-meta"><span>🕐 15 minutes</span><span>·</span><span>Reading + Reflection</span></div>
+    <div class="l-body">
+      <p>Critical thinking is not simply "thinking hard." It is a disciplined process of actively and skillfully analyzing, evaluating, and synthesizing information to reach a well-reasoned conclusion. The key word is <em>disciplined</em> — critical thinking is purposeful, self-directed, and measured against intellectual standards.</p>
+      <div class="callout co-insight"><p class="callout-ttl">💡 Core Distinction</p><p class="callout-txt">The difference between ordinary thinking and critical thinking is <strong>intentionality</strong>. Critical thinkers constantly ask: Am I being clear? Is my evidence accurate? Am I being fair to other perspectives?</p></div>
+      <h3>The Paul–Elder Framework</h3>
+      <p>Philosophers Richard Paul and Linda Elder developed the most widely used critical thinking framework in education. It has two layers:</p>
+      <ul>
+        <li><strong>Elements of Thought:</strong> Every act of reasoning has a purpose, a question at issue, information, interpretation, concepts, assumptions, implications, and a point of view.</li>
+        <li><strong>Intellectual Standards:</strong> We evaluate thinking by asking if it is clear, accurate, precise, relevant, deep, broad, logical, significant, and fair.</li>
+      </ul>
+      <h3>Four Core Habits of Critical Thinkers</h3>
+      <p>Research by psychologist Peter Facione identifies four dispositional habits that distinguish strong critical thinkers. Importantly, these are practiced behaviors — not fixed personality traits:</p>
+      <ul>
+        <li><strong>Inquisitiveness:</strong> Genuine curiosity about a wide range of topics and a desire to be well-informed</li>
+        <li><strong>Open-mindedness:</strong> Real willingness to consider views that challenge your own — not just performing tolerance</li>
+        <li><strong>Systematicity:</strong> Staying organized and focused even when tackling messy, complex problems</li>
+        <li><strong>Analytical attitude:</strong> Constantly asking "what's the evidence for this?" before accepting a claim</li>
+      </ul>
+      <h3>Why Critical Thinking Matters Now</h3>
+      <p>We live in a high-volume information environment. The ability to evaluate what is true, what is relevant, and what is misleading is one of the most protective skills you can develop — for your career, your relationships, and your civic life.</p>
+      <div class="callout co-practice"><p class="callout-ttl">✏️ Reflection</p><p class="callout-txt">Think of a recent decision or belief. What assumptions did you bring to it? What information did you rely on, and what might you have been missing?</p></div>
+    </div>`
+  },
+  {
+    title:"Assumptions & Cognitive Bias", type:"lesson", dur:"20 min",
+    content:`
+    <p class="l-eyebrow" style="color:#2463A7">Module 01 — Lesson 2</p>
+    <h1 class="l-title">Assumptions & Cognitive Bias</h1>
+    <div class="l-meta"><span>🕐 20 minutes</span><span>·</span><span>Reading + Exercise</span></div>
+    <div class="l-body">
+      <p>Every thought rests on assumptions — things we accept as true without examining them. Cognitive biases are systematic errors in thinking that affect judgments in predictable ways. Understanding both is essential for reasoning well under pressure.</p>
+      <h3>Five High-Impact Biases</h3>
+      <div class="fw-card"><p class="fw-title">Common Cognitive Biases</p><div class="fw-steps">
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF3FC;color:#2463A7">01</div><div class="fw-txt"><strong>Confirmation Bias</strong>Seeking, interpreting, and remembering information that confirms what we already believe — while ignoring contradictory evidence.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF3FC;color:#2463A7">02</div><div class="fw-txt"><strong>Availability Heuristic</strong>Judging likelihood based on how easily examples come to mind. Vivid or recent events feel more probable than they are.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF3FC;color:#2463A7">03</div><div class="fw-txt"><strong>Anchoring Bias</strong>Over-relying on the first piece of information received. A salary discussion anchored at $50K produces very different outcomes than one starting at $80K.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF3FC;color:#2463A7">04</div><div class="fw-txt"><strong>Dunning-Kruger Effect</strong>People with limited knowledge in a domain overestimate their competence. Genuine expertise tends to reveal how much more there is to know.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF3FC;color:#2463A7">05</div><div class="fw-txt"><strong>Sunk Cost Fallacy</strong>Continuing to invest in something because of past investment, even when it no longer makes sense on its own merits going forward.</div></div>
+      </div></div>
+      <h3>How to Surface Hidden Assumptions</h3>
+      <ol>
+        <li><strong>State your claim clearly.</strong> Write it in one sentence.</li>
+        <li><strong>Ask: What am I taking for granted?</strong> List everything assumed without proof.</li>
+        <li><strong>Ask: What would change my mind?</strong> If nothing could, that is a warning sign.</li>
+        <li><strong>Actively seek opposing evidence.</strong> Search specifically for reasons you might be wrong.</li>
+      </ol>
+      <div class="callout co-warning"><p class="callout-ttl">⚠️ Key Caution</p><p class="callout-txt">The most dangerous assumptions are the ones we are most confident about. High confidence is not the same as high accuracy — and biases are strongest precisely where we feel most certain.</p></div>
+      <div class="ex-box"><div class="ex-hd"><span class="ex-icon">✏️</span><span class="ex-title">Exercise: Bias Hunt</span></div><p class="ex-prompt">Think of a strong opinion you currently hold. Describe it, then identify: (1) two assumptions it rests on, and (2) one piece of evidence that genuinely challenges it.</p><textarea placeholder="My opinion: ...\nAssumption 1: ...\nAssumption 2: ...\nChallenge: ..."></textarea></div>
+    </div>`
+  },
+  {
+    title:"Evaluating Evidence", type:"lesson", dur:"20 min",
+    content:`
+    <p class="l-eyebrow" style="color:#2463A7">Module 01 — Lesson 3</p>
+    <h1 class="l-title">Evaluating Evidence</h1>
+    <div class="l-meta"><span>🕐 20 minutes</span><span>·</span><span>Reading + Exercise</span></div>
+    <div class="l-body">
+      <p>A critical thinker doesn't just ask "Is there evidence?" — they ask "How strong is this evidence, and where did it come from?" Not all evidence carries equal weight, and knowing how to evaluate sources is one of the most practical skills in this course.</p>
+      <h3>The SIFT Method</h3>
+      <div class="fw-card"><p class="fw-title">SIFT — Information Verification</p><div class="fw-steps">
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF3FC;color:#2463A7">S</div><div class="fw-txt"><strong>Stop</strong>Before reacting, sharing, or acting on information — pause. Your initial emotional response may not reflect the full picture.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF3FC;color:#2463A7">I</div><div class="fw-txt"><strong>Investigate the source</strong>Who created this? What are their credentials, potential biases, or motivations? Is this their area of expertise?</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF3FC;color:#2463A7">F</div><div class="fw-txt"><strong>Find better coverage</strong>Can multiple independent sources confirm it? Consensus across credible outlets increases confidence.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF3FC;color:#2463A7">T</div><div class="fw-txt"><strong>Trace claims to origin</strong>Follow a claim back to its primary source. What did the original study actually say? Reporting often distorts original findings significantly.</div></div>
+      </div></div>
+      <h3>Evidence Hierarchy</h3>
+      <ol>
+        <li><strong>Systematic reviews and meta-analyses</strong> — synthesize results across many studies</li>
+        <li><strong>Randomized controlled trials</strong> — controlled experiments with random assignment</li>
+        <li><strong>Observational studies</strong> — data gathered without manipulation</li>
+        <li><strong>Expert opinion</strong> — informed judgment from domain specialists</li>
+        <li><strong>Anecdotal evidence</strong> — individual stories and personal experience</li>
+      </ol>
+      <div class="callout co-insight"><p class="callout-ttl">💡 Correlation ≠ Causation</p><p class="callout-txt">Just because two things happen together doesn't mean one causes the other. Countries with more internet access also have more Nobel Prize winners — but internet access doesn't cause Nobel Prizes. Identifying the real causal chain is always worth the effort.</p></div>
+      <h3>Common Logical Fallacies to Recognize</h3>
+      <ul>
+        <li><strong>Ad hominem:</strong> Attacking the person rather than their argument</li>
+        <li><strong>False dichotomy:</strong> Presenting two options as if they are the only ones possible</li>
+        <li><strong>Slippery slope:</strong> Claiming one event will inevitably lead to extreme consequences without showing the mechanism</li>
+        <li><strong>Straw man:</strong> Misrepresenting someone's argument to make it easier to dismiss</li>
+      </ul>
+      <div class="ex-box"><div class="ex-hd"><span class="ex-icon">✏️</span><span class="ex-title">Exercise: SIFT in Action</span></div><p class="ex-prompt">Find a headline or claim you've recently seen — news, social media, or conversation. Apply the four SIFT steps to it. What did you discover about the source and the original claim?</p><textarea placeholder="Claim: ...\nS - I stopped and noticed my reaction...\nI - The source is...\nF - Other coverage says...\nT - The original source is..."></textarea></div>
+    </div>`
+  },
+  {
+    title:"Knowledge Check", type:"quiz", dur:"5 min",
+    questions:[
+      {text:"Which of the following best defines critical thinking?",opts:["Thinking very hard about a problem","A disciplined process of analyzing, evaluating, and synthesizing information to reach well-reasoned conclusions","Disagreeing with popular opinions to challenge groupthink","Gathering as much information as possible before deciding"],correct:1,exp:"Critical thinking is defined by its disciplined, intentional nature — examining information using standards like clarity, accuracy, and fairness rather than simply accumulating data or being contrarian."},
+      {text:"You keep funding a failing project because your team has already invested six months in it. This illustrates:",opts:["Confirmation bias","The availability heuristic","The sunk cost fallacy","Anchoring bias"],correct:2,exp:"The sunk cost fallacy occurs when past investment drives continued commitment, regardless of future costs and benefits. Good decisions evaluate future prospects on their own terms."},
+      {text:"In the SIFT method, 'T' stands for:",opts:["Think critically before acting","Test the claim with an experiment","Trace claims to their original source","Trust only peer-reviewed sources"],correct:2,exp:"T = Trace to origin. Following a claim back to its primary source often reveals distortion, exaggeration, or misrepresentation in how it was reported downstream."},
+      {text:"Which level of evidence is generally considered most reliable?",opts:["Expert opinion from a recognized authority","A compelling personal anecdote","A single randomized controlled trial","Systematic reviews and meta-analyses"],correct:3,exp:"Systematic reviews and meta-analyses synthesize results across many studies, making them more robust than any single study, expert opinion, or anecdote."},
+      {text:"'We can't trust climate research because those scientists receive government grants.' This is an example of:",opts:["A valid concern about research funding bias","The ad hominem fallacy","A straw man argument","Sound source evaluation"],correct:1,exp:"This is an ad hominem — attacking the credibility of researchers rather than engaging with the evidence they've produced. Funding sources should prompt scrutiny, but they don't automatically invalidate findings."}
+    ]
+  }]
+},
+
+{
+  id:2, title:"Decision-Making Under Pressure", num:"Module 02",
+  icon:"⚖️", color:"#B85C1A", light:"#FBF0E8", dur:"65 min",
+  desc:"Develop practical frameworks for making sound decisions when stakes are high, time is limited, and information is incomplete.",
+  skills:["Frameworks","Risk Analysis","Judgment"],
+  lessons:[
+  {
+    title:"Understanding Decision Types", type:"lesson", dur:"15 min",
+    content:`
+    <p class="l-eyebrow" style="color:#B85C1A">Module 02 — Lesson 1</p>
+    <h1 class="l-title">Understanding Decision Types</h1>
+    <div class="l-meta"><span>🕐 15 minutes</span><span>·</span><span>Reading + Reflection</span></div>
+    <div class="l-body">
+      <p>Not all decisions deserve the same time and energy. The first step in good decision-making is recognizing what kind of decision you are actually facing — because misclassifying them is itself one of the most common mistakes.</p>
+      <h3>Reversible vs. Irreversible Decisions</h3>
+      <p>Amazon founder Jeff Bezos famously framed decisions as either "one-way doors" or "two-way doors":</p>
+      <ul>
+        <li><strong>One-way doors (irreversible):</strong> High-stakes, hard-to-undo choices. Leaving a career, major financial commitments, health decisions. These deserve deliberate analysis.</li>
+        <li><strong>Two-way doors (reversible):</strong> Choices that can be adjusted or undone. Testing a new workflow, trying a different approach. Here, speed matters more than perfection.</li>
+      </ul>
+      <div class="callout co-insight"><p class="callout-ttl">💡 The Most Common Mistake</p><p class="callout-txt">Most people spend too much time on reversible decisions (where speed is optimal) and too little time on irreversible ones (where deliberation pays dividends). Misclassifying these is a major, correctable error.</p></div>
+      <h3>When to Trust Intuition vs. Analysis</h3>
+      <ul>
+        <li><strong>Favor intuition when:</strong> You have genuine domain expertise, the situation is highly familiar, and time is genuinely limited. Expert intuition is pattern recognition — not guessing.</li>
+        <li><strong>Favor analysis when:</strong> The decision is novel, stakes are high, multiple stakeholders are affected, or your emotional state is likely to bias your judgment.</li>
+      </ul>
+      <div class="fw-card"><p class="fw-title">Four Decision Zones</p><div class="fw-steps">
+        <div class="fw-step"><div class="fw-ltr" style="background:#FBF0E8;color:#B85C1A">A</div><div class="fw-txt"><strong>Simple and clear:</strong>Routine decisions with established procedures. Use checklists, delegate, and move fast.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#FBF0E8;color:#B85C1A">B</div><div class="fw-txt"><strong>Complicated but knowable:</strong>Expert analysis can identify the best answer. Bring in expertise and reason systematically.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#FBF0E8;color:#B85C1A">C</div><div class="fw-txt"><strong>Complex (many variables):</strong>No single right answer; cause and effect are unclear. Run small experiments; adapt based on results.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#FBF0E8;color:#B85C1A">D</div><div class="fw-txt"><strong>Chaotic:</strong>Crisis mode. Act first to stabilize, then sense and analyze. Deliberation comes after the immediate situation is contained.</div></div>
+      </div></div>
+    </div>`
+  },
+  {
+    title:"Decision Frameworks", type:"lesson", dur:"25 min",
+    content:`
+    <p class="l-eyebrow" style="color:#B85C1A">Module 02 — Lesson 2</p>
+    <h1 class="l-title">Decision Frameworks</h1>
+    <div class="l-meta"><span>🕐 25 minutes</span><span>·</span><span>Reading + Exercise</span></div>
+    <div class="l-body">
+      <p>Frameworks give structure to messy decisions. They don't eliminate uncertainty, but they ensure you are not missing critical factors — especially under pressure, when shortcuts feel most tempting.</p>
+      <h3>The DECIDE Model</h3>
+      <div class="fw-card"><p class="fw-title">DECIDE — A Six-Step Process</p><div class="fw-steps">
+        <div class="fw-step"><div class="fw-ltr" style="background:#FBF0E8;color:#B85C1A">D</div><div class="fw-txt"><strong>Define the problem.</strong>What exactly needs to be decided? Misdefining the problem leads to solving the wrong thing with great skill.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#FBF0E8;color:#B85C1A">E</div><div class="fw-txt"><strong>Establish criteria.</strong>What does a good outcome look like? What are your non-negotiables versus nice-to-haves?</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#FBF0E8;color:#B85C1A">C</div><div class="fw-txt"><strong>Consider alternatives.</strong>Generate at least 3–4 genuine options. Resist stopping at the first viable solution.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#FBF0E8;color:#B85C1A">I</div><div class="fw-txt"><strong>Identify the best alternative.</strong>Evaluate each option against your criteria systematically. Use a weighted matrix for complex cases.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#FBF0E8;color:#B85C1A">D</div><div class="fw-txt"><strong>Develop and implement a plan.</strong>Assign responsibilities, set a timeline, and define what "done" looks like before you begin.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#FBF0E8;color:#B85C1A">E</div><div class="fw-txt"><strong>Evaluate and monitor.</strong>How will you know the decision worked? Schedule a review checkpoint in advance.</div></div>
+      </div></div>
+      <h3>The 10/10/10 Rule</h3>
+      <p>Developed by Suzy Welch, this technique escapes short-term emotional bias by shifting your time horizon:</p>
+      <ul>
+        <li><strong>In 10 minutes,</strong> how will you feel about this choice?</li>
+        <li><strong>In 10 months,</strong> will it still matter? Will you have regrets?</li>
+        <li><strong>In 10 years,</strong> will this decision have been significant?</li>
+      </ul>
+      <p>The 10-year question is often the most clarifying. Decisions that feel enormous today are frequently irrelevant in a decade — and vice versa.</p>
+      <h3>The Pre-Mortem</h3>
+      <p>Psychologist Gary Klein's antidote to overconfidence: rather than hoping for success, you <em>assume</em> failure and ask why.</p>
+      <ol>
+        <li>Imagine it is one year from now. Your decision has failed completely.</li>
+        <li>Write down every reason it could have gone wrong.</li>
+        <li>Use that list to strengthen your plan before you commit.</li>
+      </ol>
+      <div class="callout co-tip"><p class="callout-ttl">🔮 Why Pre-Mortems Work</p><p class="callout-txt">By <em>assuming</em> failure, the pre-mortem bypasses social pressure to be positive. People freely surface concerns they would normally suppress to avoid seeming pessimistic.</p></div>
+      <div class="ex-box"><div class="ex-hd"><span class="ex-icon">✏️</span><span class="ex-title">Exercise: Apply DECIDE</span></div><p class="ex-prompt">Identify a real decision you're currently facing. Walk through all six DECIDE steps, writing a brief response for each one.</p><textarea placeholder="D: Define the problem...\nE: Establish criteria...\nC: Consider alternatives...\nI: Identify best option...\nD: Develop a plan...\nE: How I'll evaluate..."></textarea></div>
+    </div>`
+  },
+  {
+    title:"Avoiding Decision Traps", type:"lesson", dur:"20 min",
+    content:`
+    <p class="l-eyebrow" style="color:#B85C1A">Module 02 — Lesson 3</p>
+    <h1 class="l-title">Avoiding Decision Traps</h1>
+    <div class="l-meta"><span>🕐 20 minutes</span><span>·</span><span>Reading + Reflection</span></div>
+    <div class="l-body">
+      <p>Even with good frameworks, predictable patterns derail decisions. Recognizing them in real time is one of the most valuable skills you can develop — because these traps tend to strike hardest on the decisions that matter most.</p>
+      <h3>Analysis Paralysis</h3>
+      <p>More information feels safer, but beyond a threshold, additional data does not improve decision quality — it only delays action. You've likely crossed the threshold when: you keep researching without feeling more certain; new information is confirming what you already know; the cost of delay now exceeds the cost of a suboptimal choice.</p>
+      <p><strong>Antidote:</strong> Set a decision deadline before you start gathering information. Commit to "good enough" on reversible decisions.</p>
+      <h3>Groupthink</h3>
+      <p>When teams prioritize harmony over critical evaluation, decisions emerge that everyone privately doubts but no one challenges. The warning signs: rapid consensus on complex decisions; no one plays devil's advocate; dissenting views are dismissed rather than engaged.</p>
+      <ul>
+        <li>Assign a formal devil's advocate before important decisions</li>
+        <li>Have individuals write their views independently before group discussion</li>
+        <li>Leaders should share their opinion last, not first</li>
+      </ul>
+      <h3>Loss Aversion</h3>
+      <p>Research by Kahneman and Tversky demonstrates that losses feel roughly twice as painful as equivalent gains feel good. This leads to systematically overcautious choices and reluctance to cut losses that should be cut.</p>
+      <div class="callout co-warning"><p class="callout-ttl">⚠️ Test For This</p><p class="callout-txt">When you feel strong resistance to an option primarily because of what you might lose, ask: "If I didn't already have this, would I choose it over the alternative?" If not, loss aversion may be distorting your judgment rather than informing it.</p></div>
+      <h3>Outcome Bias</h3>
+      <p>We judge past decisions by their outcomes rather than by the quality of the process. A good decision that led to a bad outcome (due to bad luck) is still a good decision. A bad decision that worked out is still a bad decision — and a poor basis for future confidence. Focus on <em>process quality</em> when learning from experience, not just results.</p>
+      <div class="ex-box"><div class="ex-hd"><span class="ex-icon">✏️</span><span class="ex-title">Exercise: Trap Diagnosis</span></div><p class="ex-prompt">Reflect on a poor decision you made in the past. Looking back: which trap or traps played a role? What would a better decision process have looked like?</p><textarea placeholder="The decision: ...\nTrap I fell into: ...\nWhat a better process would have looked like: ..."></textarea></div>
+    </div>`
+  },
+  {
+    title:"Knowledge Check", type:"quiz", dur:"5 min",
+    questions:[
+      {text:"A 'one-way door' decision is one that:",opts:["Must be made alone, without team input","Is high-stakes and very difficult to reverse","Should always be made quickly","Opens a new business opportunity"],correct:1,exp:"One-way door decisions are irreversible or very hard to undo. They deserve more careful deliberation than reversible two-way door decisions, where speed often matters more than perfection."},
+      {text:"In the DECIDE framework, the final 'E' step refers to:",opts:["Eliminating the worst option","Ensuring full team agreement","Evaluating and monitoring whether the decision worked","Establishing new success criteria"],correct:2,exp:"The final E = Evaluate and monitor. Good decisions include a pre-set plan for measuring whether the choice achieved its intended outcome — defined before implementation begins."},
+      {text:"A team planning a major launch asks everyone to imagine it has completely failed and explain why. This is called:",opts:["Devil's advocacy","Loss aversion analysis","A post-mortem review","Pre-mortem analysis"],correct:3,exp:"A pre-mortem assumes failure before it happens, prompting the team to surface hidden concerns that might otherwise be suppressed under social pressure to stay optimistic."},
+      {text:"The best antidote to groupthink is:",opts:["Ensuring the team leader sets direction early","Limiting discussion to the top two options","Having individuals record views privately before group discussion","Including only those who agree on the core problem"],correct:2,exp:"Individual pre-discussion recording prevents the first dominant voice from anchoring the group. It allows diverse, honest perspectives to surface before social dynamics take over."},
+      {text:"Loss aversion describes the tendency to:",opts:["Avoid all high-stakes decisions","Feel losses more intensely than equivalent gains","Overestimate the probability of negative outcomes","Prefer certain outcomes over probabilistic ones regardless of expected value"],correct:1,exp:"Kahneman and Tversky found that the pain of losing something is roughly twice as powerful as the pleasure of gaining something equivalent — leading to systematically overcautious choices."}
+    ]
+  }]
+},
+
+{
+  id:3, title:"Active Listening Mastery", num:"Module 03",
+  icon:"👂", color:"#2B7A4B", light:"#EBF6F0", dur:"55 min",
+  desc:"Discover why most people are poor listeners and develop the habits that transform conversations and deepen understanding.",
+  skills:["Presence","Empathy","Communication"],
+  lessons:[
+  {
+    title:"The Listening Gap", type:"lesson", dur:"15 min",
+    content:`
+    <p class="l-eyebrow" style="color:#2B7A4B">Module 03 — Lesson 1</p>
+    <h1 class="l-title">The Listening Gap</h1>
+    <div class="l-meta"><span>🕐 15 minutes</span><span>·</span><span>Reading + Reflection</span></div>
+    <div class="l-body">
+      <p>We hear at 125–250 words per minute, but our minds can process up to 1,000–3,000 words per minute. That gap — the difference between how fast someone speaks and how fast we think — is where listening breaks down. The surplus mental capacity tends to wander: toward our response, our judgments, our own concerns.</p>
+      <div class="callout co-insight"><p class="callout-ttl">📊 Research Finding</p><p class="callout-txt">Studies consistently show we retain only <strong>25–50%</strong> of what we hear immediately after a conversation — and far less hours later. We are not nearly as good at listening as we believe we are.</p></div>
+      <h3>Five Levels of Listening</h3>
+      <div class="fw-card"><p class="fw-title">The Listening Spectrum</p><div class="fw-steps">
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF6F0;color:#2B7A4B">1</div><div class="fw-txt"><strong>Ignoring:</strong>Making no real effort to hear — physically present, mentally absent.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF6F0;color:#2B7A4B">2</div><div class="fw-txt"><strong>Pretending:</strong>Appearing to listen while thinking about something else. "Uh-huh, yeah, totally."</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF6F0;color:#2B7A4B">3</div><div class="fw-txt"><strong>Selective:</strong>Only hearing parts — what affects us, what we agree with, what we want to respond to.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF6F0;color:#2B7A4B">4</div><div class="fw-txt"><strong>Attentive:</strong>Focused and engaged with the words — but interpreting through our own frame and experience.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF6F0;color:#2B7A4B">5</div><div class="fw-txt"><strong>Empathic:</strong>Seeking to understand the speaker's complete message — words, emotion, and what's left unsaid. This is the goal.</div></div>
+      </div></div>
+      <h3>Why Listening Is Harder Than It Looks</h3>
+      <ul>
+        <li><strong>Planning your response</strong> while they're still speaking — you stop listening the moment you start composing</li>
+        <li><strong>Emotional reactivity</strong> — a trigger word activates your defenses before the point is finished</li>
+        <li><strong>Assumptions</strong> — you think you already know what they're going to say</li>
+        <li><strong>Status and ego</strong> — a feeling that you shouldn't have to listen carefully to this person</li>
+        <li><strong>Device distraction</strong> — the phone on the table reduces listening quality even when untouched</li>
+      </ul>
+      <div class="callout co-practice"><p class="callout-ttl">✏️ Self-Assessment</p><p class="callout-txt">In your last important conversation, what level were you actually listening at? What was competing for your attention? This honest awareness is the first and most important step.</p></div>
+    </div>`
+  },
+  {
+    title:"Techniques for Deep Listening", type:"lesson", dur:"20 min",
+    content:`
+    <p class="l-eyebrow" style="color:#2B7A4B">Module 03 — Lesson 2</p>
+    <h1 class="l-title">Techniques for Deep Listening</h1>
+    <div class="l-meta"><span>🕐 20 minutes</span><span>·</span><span>Reading + Exercise</span></div>
+    <div class="l-body">
+      <p>Active listening is not a passive skill — it is a set of deliberate practices. The techniques below transform both how you listen and how others feel when talking with you.</p>
+      <h3>The LADDER Technique</h3>
+      <div class="fw-card"><p class="fw-title">LADDER — Active Listening in Practice</p><div class="fw-steps">
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF6F0;color:#2B7A4B">L</div><div class="fw-txt"><strong>Look at the person.</strong>Natural eye contact signals engagement. Set the phone face-down. Turn toward them.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF6F0;color:#2B7A4B">A</div><div class="fw-txt"><strong>Ask questions.</strong>Genuine curiosity — "Tell me more about that" — signals real interest and deepens the conversation naturally.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF6F0;color:#2B7A4B">D</div><div class="fw-txt"><strong>Don't interrupt.</strong>Resist finishing their sentence or redirecting. Let them arrive at their point in their own time and their own words.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF6F0;color:#2B7A4B">D</div><div class="fw-txt"><strong>Don't change the subject.</strong>Follow their thread, not yours. Topic-jumping signals that you were waiting to speak, not listening.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF6F0;color:#2B7A4B">E</div><div class="fw-txt"><strong>Emotions — acknowledge them.</strong>"It sounds like that was genuinely frustrating." Naming the emotion alone transforms conversation quality.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EBF6F0;color:#2B7A4B">R</div><div class="fw-txt"><strong>Respond with reflection.</strong>Before adding your view, reflect back what you heard. This confirms understanding and signals respect.</div></div>
+      </div></div>
+      <h3>Reflective Listening Responses</h3>
+      <ul>
+        <li><strong>Paraphrase:</strong> "So what you're saying is..." — restate the meaning in your own words</li>
+        <li><strong>Summarize:</strong> "Let me make sure I understand the main points..." — capture the whole message</li>
+        <li><strong>Clarify:</strong> "When you say 'overwhelmed,' what does that look like for you?" — go deeper</li>
+        <li><strong>Validate:</strong> "That makes complete sense given what you've described." — acknowledge without necessarily agreeing</li>
+      </ul>
+      <div class="callout co-warning"><p class="callout-ttl">⚠️ The Word 'But'</p><p class="callout-txt">Avoid "I hear you, <em>but</em>..." — the 'but' erases everything before it in the listener's mind. Use "I hear you, <em>and</em>..." to hold both perspectives without dismissing theirs.</p></div>
+      <div class="ex-box"><div class="ex-hd"><span class="ex-icon">✏️</span><span class="ex-title">Exercise: Reflective Response</span></div><p class="ex-prompt">Read this colleague's statement: "I've been trying to get the team to follow the process we agreed on, but everyone does their own thing and I end up fixing it at the last minute. I'm exhausted." Write a reflective listening response that paraphrases, acknowledges the emotion, and asks an open question.</p><textarea placeholder="Your response: ..."></textarea></div>
+    </div>`
+  },
+  {
+    title:"Listening in High-Stakes Situations", type:"lesson", dur:"20 min",
+    content:`
+    <p class="l-eyebrow" style="color:#2B7A4B">Module 03 — Lesson 3</p>
+    <h1 class="l-title">Listening in High-Stakes Situations</h1>
+    <div class="l-meta"><span>🕐 20 minutes</span><span>·</span><span>Reading + Reflection</span></div>
+    <div class="l-body">
+      <p>Listening is hardest — and most important — when emotions are running high. Whether it's a performance review, a conflict with a colleague, or a team under pressure, the quality of your listening determines the quality of the outcome.</p>
+      <h3>When Emotions Are Elevated</h3>
+      <p>Emotional arousal narrows thinking and triggers defensiveness in both speaker and listener. A step-by-step approach for these moments:</p>
+      <ol>
+        <li><strong>Pause before responding.</strong> Even two seconds of intentional silence signals that you are listening rather than reacting.</li>
+        <li><strong>Acknowledge the emotion first.</strong> Before problem-solving, confirm you heard how they feel. "It sounds like you're genuinely worried about this."</li>
+        <li><strong>Ask before advising.</strong> "Would it be most helpful to think through options, or do you need to talk it through first?" This one question transforms how people receive you.</li>
+        <li><strong>Separate the person from the position.</strong> You can disagree with what someone says while still fully hearing them.</li>
+      </ol>
+      <div class="callout co-insight"><p class="callout-ttl">💡 The Most Powerful Question</p><p class="callout-txt">"<strong>Are you looking for advice, or do you need to be heard right now?</strong>" Asking this — genuinely — changes conversations completely. Most people need to feel heard before they are ready to receive any advice.</p></div>
+      <h3>Listening Across Differences</h3>
+      <p>Listening norms vary across cultures and individuals. Effective listeners adapt rather than assume everyone communicates the same way:</p>
+      <ul>
+        <li>In some cultures, silence signals respect; in others it signals disinterest</li>
+        <li>Eye contact norms vary significantly — sustained eye contact can be respectful or aggressive depending on context</li>
+        <li>Some people need to talk through ideas to understand them; others think before they speak</li>
+        <li>A calm tone doesn't mean someone isn't deeply distressed</li>
+      </ul>
+      <h3>Listening to Understand, Not to Win</h3>
+      <p>In many conversations — especially in conflict — we listen to find ammunition for our own argument rather than to understand. Try this: in your next disagreement, make it your goal to understand the other person's position so well that you could argue it better than they did. Notice what this changes about what they say — and what you say back.</p>
+    </div>`
+  },
+  {
+    title:"Knowledge Check", type:"quiz", dur:"5 min",
+    questions:[
+      {text:"The 'listening gap' refers to:",opts:["The difference between what we hear and what we later remember","The gap between speaking speed and thinking speed that causes mental drift","A deliberate pause used to signal active listening","Information lost when messages are misunderstood"],correct:1,exp:"We speak at 125-250 wpm but process at up to 3,000 wpm. That mental surplus tends to wander — filling with distraction, judgment, and response-planning rather than genuine attention."},
+      {text:"Which of the following is a reflective listening response?",opts:["'I understand. That happened to me too once.'","'You shouldn't feel that way — it wasn't that bad.'","'So what you're saying is the timeline feels too tight and it's affecting your confidence?'","'Here's what I think you should do...'"],correct:2,exp:"Reflective listening means paraphrasing the speaker's words and acknowledging the underlying emotion. Redirecting to your own experience, dismissing feelings, or jumping to solutions are not reflective responses."},
+      {text:"In the LADDER technique, 'E' stands for:",opts:["Eye contact — maintain it throughout","Emotions — acknowledge the speaker's feelings","Eliminate distractions before the conversation","Explain your own point of view clearly"],correct:1,exp:"E = Emotions. Acknowledging the emotional content of a message ('That sounds really frustrating') is one of the most powerful and underused listening behaviors — and one of the simplest to practice."},
+      {text:"Why should you avoid 'but' after a validation statement?",opts:["It sounds too casual","It contradicts active listening grammar","It signals disagreement and erases the validation that came before it","It tends to extend the conversation unnecessarily"],correct:2,exp:"'I hear you, but...' effectively dismisses everything before the 'but' in the listener's mind. Replacing it with 'and' allows you to hold both perspectives without negating the speaker's experience."},
+      {text:"You're in a tense conversation with a frustrated colleague. What should you do first?",opts:["Offer your solution immediately so tension doesn't escalate","Acknowledge the emotion before problem-solving","Defend your position clearly so they understand where you stand","Summarize all the points you disagree with"],correct:1,exp:"When emotions are elevated, people need to feel heard before they are ready to engage with solutions or counterarguments. Acknowledging the emotion first reduces defensiveness and opens genuine dialogue."}
+    ]
+  }]
+},
+
+{
+  id:4, title:"Creative Problem-Solving", num:"Module 04",
+  icon:"🧩", color:"#6B3FA0", light:"#F2EBFC", dur:"70 min",
+  desc:"Move beyond obvious answers by learning to define problems precisely, think divergently, and evaluate solutions systematically.",
+  skills:["Creativity","Root Cause","Design Thinking"],
+  lessons:[
+  {
+    title:"Defining the Real Problem", type:"lesson", dur:"20 min",
+    content:`
+    <p class="l-eyebrow" style="color:#6B3FA0">Module 04 — Lesson 1</p>
+    <h1 class="l-title">Defining the Real Problem</h1>
+    <div class="l-meta"><span>🕐 20 minutes</span><span>·</span><span>Reading + Exercise</span></div>
+    <div class="l-body">
+      <p>The most common cause of failed problem-solving is solving the wrong problem with great skill. Before reaching for a solution, invest in understanding exactly what you are trying to solve — this step pays back tenfold.</p>
+      <div class="callout co-insight"><p class="callout-ttl">💡 Classic Misdiagnosis</p><p class="callout-txt">When tenants complained that elevators were too slow, engineers proposed expensive upgrades. A psychologist reframed it: the problem wasn't slow elevators — it was bored waiting. Adding mirrors to the lobby nearly eliminated complaints at almost no cost. Same situation, different problem definition, vastly different solutions.</p></div>
+      <h3>The 5 Whys Technique</h3>
+      <p>Developed at Toyota, the 5 Whys method drills down to the root cause by asking "why?" repeatedly until you reach the underlying driver rather than a surface symptom.</p>
+      <div class="fw-card"><p class="fw-title">5 Whys — Example</p><div class="fw-steps">
+        <div class="fw-step"><div class="fw-ltr" style="background:#F2EBFC;color:#6B3FA0">1</div><div class="fw-txt"><strong>Problem:</strong> The team missed the project deadline. Why? — The final report wasn't submitted in time.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#F2EBFC;color:#6B3FA0">2</div><div class="fw-txt">Why wasn't it submitted? — Two team members didn't complete their sections.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#F2EBFC;color:#6B3FA0">3</div><div class="fw-txt">Why didn't they complete them? — They said they didn't know the deadline.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#F2EBFC;color:#6B3FA0">4</div><div class="fw-txt">Why didn't they know? — The project plan was never shared with them.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#F2EBFC;color:#6B3FA0">5</div><div class="fw-txt"><strong>Root cause:</strong> There is no standard process for onboarding new members to a project. Fix this, and the deadline problem doesn't recur.</div></div>
+      </div></div>
+      <h3>Problem Reframing</h3>
+      <p>How you define a problem constrains the solutions you can imagine. Reframing opens new possibilities by changing the level, angle, or direction of the question:</p>
+      <ul>
+        <li>"How do we increase parking?" → "How do we reduce the need for parking?"</li>
+        <li>"How do we get people to read this report?" → "How do we effectively share this information?"</li>
+        <li>"How do we fix this broken process?" → "What is this process actually trying to accomplish?"</li>
+      </ul>
+      <div class="ex-box"><div class="ex-hd"><span class="ex-icon">✏️</span><span class="ex-title">Exercise: 5 Whys + Reframe</span></div><p class="ex-prompt">Choose a real problem you're currently facing. Apply 5 Whys to find the root cause, then write two different reframings of the problem statement.</p><textarea placeholder="Problem: ...\nWhy 1: ...\nWhy 2: ...\nWhy 3: ...\nWhy 4: ...\nRoot Cause: ...\nReframe A: ...\nReframe B: ..."></textarea></div>
+    </div>`
+  },
+  {
+    title:"Generating Creative Solutions", type:"lesson", dur:"25 min",
+    content:`
+    <p class="l-eyebrow" style="color:#6B3FA0">Module 04 — Lesson 2</p>
+    <h1 class="l-title">Generating Creative Solutions</h1>
+    <div class="l-meta"><span>🕐 25 minutes</span><span>·</span><span>Reading + Exercise</span></div>
+    <div class="l-body">
+      <p>Once you've defined the real problem, the goal is to generate as many possible solutions as you can <em>before</em> evaluating any of them. This separation of divergent thinking (ideation) from convergent thinking (evaluation) is the core mechanism of creative problem-solving.</p>
+      <h3>The SCAMPER Method</h3>
+      <div class="fw-card"><p class="fw-title">SCAMPER — Seven Creative Angles</p><div class="fw-steps">
+        <div class="fw-step"><div class="fw-ltr" style="background:#F2EBFC;color:#6B3FA0">S</div><div class="fw-txt"><strong>Substitute</strong>What can be substituted? A material, a person, a process, a location?</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#F2EBFC;color:#6B3FA0">C</div><div class="fw-txt"><strong>Combine</strong>What can be merged? Two features, two audiences, two existing processes?</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#F2EBFC;color:#6B3FA0">A</div><div class="fw-txt"><strong>Adapt</strong>What has worked in another field that could apply here? What can be borrowed and modified?</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#F2EBFC;color:#6B3FA0">M</div><div class="fw-txt"><strong>Modify / Magnify</strong>What can be changed, exaggerated, or minimized? What if it were 10× larger — or 10× smaller?</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#F2EBFC;color:#6B3FA0">P</div><div class="fw-txt"><strong>Put to other uses</strong>Can this be used differently? Can the byproduct become the main product?</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#F2EBFC;color:#6B3FA0">E</div><div class="fw-txt"><strong>Eliminate</strong>What can be removed? What is unnecessary? What if you took away the core feature?</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#F2EBFC;color:#6B3FA0">R</div><div class="fw-txt"><strong>Reverse / Rearrange</strong>What if it worked backwards? What if the user became the provider? What if the sequence were inverted?</div></div>
+      </div></div>
+      <h3>Design Thinking: Start with Empathy</h3>
+      <p>Design thinking, developed at IDEO and Stanford's d.school, places the user's experience at the center of solution development:</p>
+      <ol>
+        <li><strong>Empathize:</strong> Observe and interview users; understand their needs, frustrations, and workarounds</li>
+        <li><strong>Define:</strong> Synthesize findings into a clear problem statement: "User needs [goal] because [insight]"</li>
+        <li><strong>Ideate:</strong> Generate as many ideas as possible — aim for 20+ before evaluating any</li>
+        <li><strong>Prototype:</strong> Build quick, cheap versions of the most promising ideas</li>
+        <li><strong>Test:</strong> Gather feedback from real users and iterate</li>
+      </ol>
+      <div class="callout co-tip"><p class="callout-ttl">🧠 Brainstorming Rules</p><p class="callout-txt"><strong>(1)</strong> Defer judgment — no criticism during ideation. <strong>(2)</strong> Build on ideas — "yes, and..." not "yes, but..." <strong>(3)</strong> Go for quantity — the best ideas often arrive after the obvious ones are exhausted. <strong>(4)</strong> Welcome wild ideas — they stretch thinking and can always be refined.</p></div>
+      <div class="ex-box"><div class="ex-hd"><span class="ex-icon">✏️</span><span class="ex-title">Exercise: SCAMPER It</span></div><p class="ex-prompt">Take a problem you've been approaching the same way for a while. Apply at least 4 SCAMPER prompts to it. Write down the ideas that emerge — even impractical ones. The goal is quantity and range, not polish.</p><textarea placeholder="Problem: ...\nS: ...\nC: ...\nA: ...\nM: ...\nP: ...\nE: ...\nR: ..."></textarea></div>
+    </div>`
+  },
+  {
+    title:"Evaluating & Implementing Solutions", type:"lesson", dur:"20 min",
+    content:`
+    <p class="l-eyebrow" style="color:#6B3FA0">Module 04 — Lesson 3</p>
+    <h1 class="l-title">Evaluating & Implementing Solutions</h1>
+    <div class="l-meta"><span>🕐 20 minutes</span><span>·</span><span>Reading + Reflection</span></div>
+    <div class="l-body">
+      <p>After generating many possible solutions, the challenge is selecting the right one — and then actually implementing it. A solution without an implementation plan is just a good intention.</p>
+      <h3>The Three-Lens Filter</h3>
+      <p>The best solutions sit at the intersection of three dimensions. Evaluate each candidate against all three:</p>
+      <ul>
+        <li><strong>Desirability:</strong> Do people actually want or need this? Does it solve a real and felt pain point?</li>
+        <li><strong>Feasibility:</strong> Can we actually build or execute this with available resources, skills, and time?</li>
+        <li><strong>Viability:</strong> Is it sustainable? Does it make organizational, financial, or strategic sense to maintain?</li>
+      </ul>
+      <p>Solutions that score well on only one or two dimensions rarely succeed long-term.</p>
+      <h3>Force Field Analysis</h3>
+      <p>Kurt Lewin's Force Field Analysis helps evaluate a proposed solution by mapping the forces for and against it — so you can strengthen what's working and weaken what's blocking.</p>
+      <ol>
+        <li>Write your proposed solution in the center</li>
+        <li>List all <strong>driving forces</strong> pushing toward it (with strength scores 1–5)</li>
+        <li>List all <strong>restraining forces</strong> pushing against it (with strength scores 1–5)</li>
+        <li>Develop specific strategies to strengthen the strongest drivers and weaken the key restrainers</li>
+      </ol>
+      <h3>From Decision to Action</h3>
+      <div class="fw-card"><p class="fw-title">Five Implementation Questions</p><div class="fw-steps">
+        <div class="fw-step"><div class="fw-ltr" style="background:#F2EBFC;color:#6B3FA0">1</div><div class="fw-txt"><strong>What, exactly, will be done?</strong>Specify the concrete action — not just the goal.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#F2EBFC;color:#6B3FA0">2</div><div class="fw-txt"><strong>By whom?</strong>Assign clear individual ownership. Shared ownership is no ownership.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#F2EBFC;color:#6B3FA0">3</div><div class="fw-txt"><strong>By when?</strong>A deadline without a date is a wish, not a commitment.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#F2EBFC;color:#6B3FA0">4</div><div class="fw-txt"><strong>What resources are needed?</strong>Identify what it takes — time, tools, budget, people — before beginning.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#F2EBFC;color:#6B3FA0">5</div><div class="fw-txt"><strong>How will we know it worked?</strong>Define what success looks like in measurable, observable terms.</div></div>
+      </div></div>
+    </div>`
+  },
+  {
+    title:"Knowledge Check", type:"quiz", dur:"5 min",
+    questions:[
+      {text:"The primary purpose of the 5 Whys technique is to:",opts:["Generate five alternative solutions","Identify the root cause by asking 'why' repeatedly","Evaluate five options before deciding","Check whether a solution addresses all stakeholders"],correct:1,exp:"The 5 Whys drills past surface symptoms to underlying root causes. Solving the root cause creates lasting change; solving symptoms creates recurring problems that return in different forms."},
+      {text:"In Design Thinking, which step comes first?",opts:["Define a problem statement","Prototype potential solutions","Empathize with the people you're designing for","Test your most promising idea"],correct:2,exp:"Empathize comes first. Design thinking starts with deep understanding of the user's experience, needs, and frustrations — before any problem statement or solution is formed. Skipping this leads to technically correct solutions that miss the real problem."},
+      {text:"In SCAMPER, 'R' prompts you to ask:",opts:["What resources are required?","What can be replaced to improve efficiency?","What if we reversed or rearranged the components?","How can we reduce complexity?"],correct:2,exp:"R = Reverse/Rearrange. This prompt challenges you to flip your assumptions — what if it worked backwards, the sequence was inverted, or the user became the provider?"},
+      {text:"The Three-Lens Filter evaluates solutions across:",opts:["Speed, quality, and cost","Desirability, feasibility, and viability","Innovation, simplicity, and scalability","User value, technical difficulty, and market size"],correct:1,exp:"The best solutions balance what people want (desirability), what you can actually build with available resources (feasibility), and what makes long-term sense to sustain (viability). Missing any one dimension tends to lead to failure."},
+      {text:"'Shared ownership is no ownership' refers to which aspect of implementation?",opts:["Assigning clear individual accountability for each action","Distributing resources equitably","Building team consensus before starting","Making sure everyone understands the goals"],correct:0,exp:"When everyone is responsible, no one is. Effective implementation plans assign a single accountable owner to each action item — one specific person who is responsible for its completion."}
+    ]
+  }]
+},
+
+{
+  id:5, title:"Emotional Intelligence", num:"Module 05",
+  icon:"🧠", color:"#1A7A87", light:"#EAF5F7", dur:"65 min",
+  desc:"Understand and manage your own emotions — and understand others' — to lead, collaborate, and communicate at your full capacity.",
+  skills:["Self-Awareness","Empathy","Regulation"],
+  lessons:[
+  {
+    title:"The Five Components of EQ", type:"lesson", dur:"20 min",
+    content:`
+    <p class="l-eyebrow" style="color:#1A7A87">Module 05 — Lesson 1</p>
+    <h1 class="l-title">The Five Components of EQ</h1>
+    <div class="l-meta"><span>🕐 20 minutes</span><span>·</span><span>Reading + Self-Assessment</span></div>
+    <div class="l-body">
+      <p>Emotional intelligence (EQ) is the ability to recognize, understand, manage, and effectively use emotions — your own and others'. Daniel Goleman's research found that EQ predicts professional success more reliably than IQ in most fields, particularly in roles involving people, collaboration, and leadership.</p>
+      <div class="callout co-insight"><p class="callout-ttl">📊 Research Context</p><p class="callout-txt">An analysis of 181 leadership competency models found that two-thirds of the abilities distinguishing star performers from average performers were EQ competencies — not technical skills or cognitive intelligence.</p></div>
+      <h3>Goleman's Five Components</h3>
+      <div class="fw-card"><p class="fw-title">The Five EQ Competencies</p><div class="fw-steps">
+        <div class="fw-step"><div class="fw-ltr" style="background:#EAF5F7;color:#1A7A87">1</div><div class="fw-txt"><strong>Self-Awareness</strong>Knowing what you feel, why you feel it, and how your emotions affect your behavior and the people around you. The foundation of all other EQ competencies.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EAF5F7;color:#1A7A87">2</div><div class="fw-txt"><strong>Self-Regulation</strong>Managing disruptive emotions and impulses. Staying composed under pressure, thinking before reacting, and maintaining integrity across different emotional states.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EAF5F7;color:#1A7A87">3</div><div class="fw-txt"><strong>Motivation</strong>A drive toward achievement that comes from within — beyond external rewards. Optimism, persistence, and commitment to meaningful goals even when progress is slow or difficult.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EAF5F7;color:#1A7A87">4</div><div class="fw-txt"><strong>Empathy</strong>Understanding others' emotional states and perspectives. Reading a room, sensing unspoken dynamics, and responding to people as complete human beings rather than roles or functions.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EAF5F7;color:#1A7A87">5</div><div class="fw-txt"><strong>Social Skills</strong>Managing relationships effectively — influencing without coercion, communicating clearly, leading, collaborating, and navigating conflict. These integrate all four previous competencies.</div></div>
+      </div></div>
+      <h3>The Amygdala Hijack</h3>
+      <p>Neuroscientist Joseph LeDoux identified what Goleman called the "amygdala hijack" — when the brain's emotional threat-detection center overrides rational thinking. You cannot think your way out of a hijack while it's happening. You must first lower your physiological arousal through breathing, pausing, or briefly removing yourself from the situation.</p>
+      <div class="ex-box"><div class="ex-hd"><span class="ex-icon">✏️</span><span class="ex-title">Self-Assessment: Your EQ Profile</span></div><p class="ex-prompt">Rate yourself honestly on each of the five EQ competencies (1 = major development area, 5 = genuine strength). Then identify which one, if strengthened, would have the biggest positive impact on your work or relationships — and explain why.</p><textarea placeholder="Self-Awareness: [1-5] ...\nSelf-Regulation: [1-5] ...\nMotivation: [1-5] ...\nEmpathy: [1-5] ...\nSocial Skills: [1-5] ...\n\nHighest-impact development area: ..."></textarea></div>
+    </div>`
+  },
+  {
+    title:"Self-Awareness & Self-Regulation", type:"lesson", dur:"20 min",
+    content:`
+    <p class="l-eyebrow" style="color:#1A7A87">Module 05 — Lesson 2</p>
+    <h1 class="l-title">Self-Awareness & Self-Regulation</h1>
+    <div class="l-meta"><span>🕐 20 minutes</span><span>·</span><span>Reading + Exercise</span></div>
+    <div class="l-body">
+      <p>Self-awareness is not self-criticism. It is the ability to observe yourself with clarity and without judgment — noticing your emotional patterns, triggers, and tendencies so you can use that information to make better choices.</p>
+      <h3>Building Emotional Vocabulary</h3>
+      <p>Neuroscientist Lisa Feldman Barrett's research shows that people with more granular emotional vocabulary — who can distinguish "anxious" from "apprehensive" from "overwhelmed" — experience emotions less intensely and recover faster. The act of naming what you feel is itself a regulating act.</p>
+      <ul>
+        <li><strong>Positive states:</strong> content, enthusiastic, grateful, inspired, proud, relieved, energized, curious</li>
+        <li><strong>Difficult states:</strong> anxious, frustrated, disappointed, resentful, overwhelmed, uncertain, embarrassed, lonely</li>
+        <li><strong>Neutral states:</strong> reflective, cautious, focused, detached, ambivalent</li>
+      </ul>
+      <h3>The STOP Technique</h3>
+      <div class="fw-card"><p class="fw-title">STOP — In-the-Moment Regulation</p><div class="fw-steps">
+        <div class="fw-step"><div class="fw-ltr" style="background:#EAF5F7;color:#1A7A87">S</div><div class="fw-txt"><strong>Stop.</strong>Pause before reacting. Even 2–3 seconds changes the quality of what follows.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EAF5F7;color:#1A7A87">T</div><div class="fw-txt"><strong>Take a breath.</strong>A slow exhale activates the parasympathetic nervous system, reducing physiological arousal and restoring access to rational thinking.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EAF5F7;color:#1A7A87">O</div><div class="fw-txt"><strong>Observe.</strong>Notice your thoughts, body sensations, and emotional state without judgment. "I'm noticing I feel defensive right now."</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#EAF5F7;color:#1A7A87">P</div><div class="fw-txt"><strong>Proceed.</strong>Choose your response consciously — from your values and goals — rather than from your initial impulse.</div></div>
+      </div></div>
+      <div class="callout co-warning"><p class="callout-ttl">⚠️ Regulation ≠ Suppression</p><p class="callout-txt">Self-regulation is not the same as suppressing emotions. Emotional suppression is associated with worse health outcomes and less effective relationships. The goal is to <em>acknowledge</em> what you feel and <em>choose</em> how you express and act on it.</p></div>
+      <h3>Identifying Emotional Triggers</h3>
+      <p>Triggers are situations, words, or behaviors that reliably activate strong emotional responses. Understanding yours gives you agency:</p>
+      <ol>
+        <li>Recall a recent time you overreacted. What happened immediately before?</li>
+        <li>What belief or value was threatened? (E.g., "My competence was questioned.")</li>
+        <li>What is the most useful response the next time this trigger appears?</li>
+      </ol>
+    </div>`
+  },
+  {
+    title:"Empathy in Practice", type:"lesson", dur:"20 min",
+    content:`
+    <p class="l-eyebrow" style="color:#1A7A87">Module 05 — Lesson 3</p>
+    <h1 class="l-title">Empathy in Practice</h1>
+    <div class="l-meta"><span>🕐 20 minutes</span><span>·</span><span>Reading + Exercise</span></div>
+    <div class="l-body">
+      <p>Empathy is not a soft skill. It is the cognitive and emotional ability to understand another person's experience — and one of the strongest predictors of effective leadership, team performance, and meaningful relationships.</p>
+      <h3>Three Types of Empathy</h3>
+      <ul>
+        <li><strong>Cognitive empathy:</strong> Understanding how someone thinks — their perspective, frame of reference, and reasoning. Most useful in negotiation, teaching, and conflict resolution.</li>
+        <li><strong>Emotional empathy:</strong> Resonating with what someone else feels — genuinely feeling it with them. Most useful for deepening connection and demonstrating care.</li>
+        <li><strong>Compassionate empathy:</strong> Understanding + feeling + taking action to help. The most complete and transformative form.</li>
+      </ul>
+      <div class="callout co-insight"><p class="callout-ttl">💡 Empathy vs. Sympathy</p><p class="callout-txt">Sympathy stays within your own perspective — "At least it wasn't worse," "I know exactly how you feel." Empathy requires setting your own experience aside to genuinely enter the other person's world. Sympathy often minimizes without intending to; empathy validates without requiring you to agree.</p></div>
+      <h3>Four Practical Empathy Behaviors</h3>
+      <ul>
+        <li><strong>Ask before advising:</strong> "Would it be more helpful to think through options together, or do you just need to be heard?" This question alone transforms how people receive you.</li>
+        <li><strong>Validate without agreeing:</strong> "I can completely see why you'd feel that way" means you understand the experience — not that you share the conclusion.</li>
+        <li><strong>Avoid the silver lining rush:</strong> "At least..." and "but the good news is..." arrive too quickly. People need to feel heard in their difficulty before they are ready to look for the positive.</li>
+        <li><strong>Specific perspective-taking:</strong> Don't just vaguely "imagine what they're going through." Specifically imagine their history, constraints, fears, and relationships — concretely.</li>
+      </ul>
+      <div class="ex-box"><div class="ex-hd"><span class="ex-icon">✏️</span><span class="ex-title">Exercise: Perspective-Taking</span></div><p class="ex-prompt">Think of someone in your life or work with whom you currently have tension or misunderstanding. Write a description of the situation from their perspective — not to excuse their behavior, but to genuinely understand it. What pressures, fears, or needs might be driving how they're showing up?</p><textarea placeholder="From their perspective: ..."></textarea></div>
+    </div>`
+  },
+  {
+    title:"Knowledge Check", type:"quiz", dur:"5 min",
+    questions:[
+      {text:"Which EQ component is described as 'the foundation of all other EQ skills'?",opts:["Empathy","Social Skills","Self-Awareness","Motivation"],correct:2,exp:"Self-awareness is foundational because you cannot manage, express, or channel an emotion you haven't first recognized and named. All other EQ competencies depend on this baseline clarity about your own inner state."},
+      {text:"An 'amygdala hijack' is:",opts:["A mindfulness technique for reducing reactivity","The process by which the emotional brain overrides rational thinking in response to perceived threat","The way the brain stores emotionally significant memories","A cognitive bias causing us to overreact to criticism"],correct:1,exp:"An amygdala hijack occurs when the brain's threat-detection center triggers an intense emotional response before the rational prefrontal cortex can intervene. The key insight: you can't think your way out of it mid-hijack; you must first reduce arousal physiologically."},
+      {text:"A more granular emotional vocabulary is associated with:",opts:["More intense emotional experiences","Lower empathy toward others","Less intense emotions and faster recovery","A tendency toward emotional over-analysis"],correct:2,exp:"Lisa Feldman Barrett's research shows that 'emotion granularity' — distinguishing fine differences between emotional states — is linked to lower emotional intensity and faster recovery. Labeling reduces the experience of being overwhelmed by undifferentiated feeling."},
+      {text:"In the STOP technique, 'O' stands for:",opts:["Open your mind to other perspectives","Observe your thoughts, body sensations, and emotional state","Organize your response before speaking","Offer understanding before asserting your view"],correct:1,exp:"O = Observe. After stopping and breathing, observing means noticing — without judgment — what is happening internally: thoughts, physical sensations, and the emotional state itself. This observational gap is where choice becomes possible."},
+      {text:"Compassionate empathy combines:",opts:["Cognitive empathy and professional detachment","Understanding another's thoughts and validating their logic","Understanding, emotional resonance, and motivated action to help","Emotional resonance and reframing the situation positively"],correct:2,exp:"Compassionate empathy is the most complete form — it involves cognitive understanding of the person's perspective, genuine emotional resonance with their experience, and the motivation to take action that helps."}
+    ]
+  }]
+},
+
+{
+  id:6, title:"Communication & Collaboration", num:"Module 06",
+  icon:"💬", color:"#A03060", light:"#F9EAEF", dur:"70 min",
+  desc:"Communicate assertively, give and receive feedback skillfully, and navigate difficult conversations with confidence and care.",
+  skills:["Assertiveness","Feedback","Conflict"],
+  lessons:[
+  {
+    title:"Assertive Communication", type:"lesson", dur:"20 min",
+    content:`
+    <p class="l-eyebrow" style="color:#A03060">Module 06 — Lesson 1</p>
+    <h1 class="l-title">Assertive Communication</h1>
+    <div class="l-meta"><span>🕐 20 minutes</span><span>·</span><span>Reading + Exercise</span></div>
+    <div class="l-body">
+      <p>Assertiveness is the ability to express your needs, opinions, and boundaries clearly and respectfully — without violating the rights or dignity of others. It sits between two extremes that are equally problematic in different ways.</p>
+      <div class="fw-card"><p class="fw-title">The Four Communication Styles</p><div class="fw-steps">
+        <div class="fw-step"><div class="fw-ltr" style="background:#F9EAEF;color:#A03060">P</div><div class="fw-txt"><strong>Passive</strong>Prioritizes others' needs at the expense of your own. Avoids conflict. Often leads to resentment, reduced influence, and eventual burnout.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#F9EAEF;color:#A03060">AG</div><div class="fw-txt"><strong>Aggressive</strong>Prioritizes own needs at the expense of others. Uses force, intimidation, or hostility. Damages trust and relationships over time — even when goals are temporarily achieved.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#F9EAEF;color:#A03060">PA</div><div class="fw-txt"><strong>Passive-Aggressive</strong>Indirect expression of hostility — sarcasm, deliberate slowness, the backhanded compliment. Creates confusion and erodes trust silently and persistently.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#F9EAEF;color:#A03060">A</div><div class="fw-txt"><strong>Assertive ← Goal</strong>Honest, direct, and respectful. Balances your needs and others'. Builds genuine influence and lasting relationships. This is the style to develop.</div></div>
+      </div></div>
+      <h3>The Assertive Message Formula</h3>
+      <p><em>"When [specific, observable behavior], I feel [genuine emotion], because [concrete impact]. I would like [clear, specific request]."</em></p>
+      <p><strong>Example:</strong> "When our one-on-ones are rescheduled more than twice in a row, I feel disconnected and unsure about my priorities, because I rely on them for direction. I'd like to find a time that works consistently for both of us."</p>
+      <div class="callout co-insight"><p class="callout-ttl">💡 Critical Detail</p><p class="callout-txt">The behavior described must be <strong>specific and observable</strong> — something a camera could record. "When you are dismissive" is a judgment. "When you continue typing while I'm speaking" is a behavior. Only observable behaviors can be changed.</p></div>
+      <div class="ex-box"><div class="ex-hd"><span class="ex-icon">✏️</span><span class="ex-title">Exercise: Write an Assertive Message</span></div><p class="ex-prompt">Identify a situation where you've been passive, aggressive, or passive-aggressive. Write an assertive version using the formula: "When [observable behavior], I feel [emotion], because [impact]. I would like [specific request]."</p><textarea placeholder="Situation: ...\n\nAssertive message:\n'When..., I feel..., because...\nI would like...'"></textarea></div>
+    </div>`
+  },
+  {
+    title:"Giving & Receiving Feedback", type:"lesson", dur:"25 min",
+    content:`
+    <p class="l-eyebrow" style="color:#A03060">Module 06 — Lesson 2</p>
+    <h1 class="l-title">Giving & Receiving Feedback</h1>
+    <div class="l-meta"><span>🕐 25 minutes</span><span>·</span><span>Reading + Exercise</span></div>
+    <div class="l-body">
+      <p>Feedback is the information people need to grow — but most feedback is delivered in ways that trigger defensiveness rather than reflection. Mastering both sides of the feedback exchange transforms how you develop and how you help others develop.</p>
+      <h3>The SBI Model</h3>
+      <div class="fw-card"><p class="fw-title">SBI — Situation, Behavior, Impact</p><div class="fw-steps">
+        <div class="fw-step"><div class="fw-ltr" style="background:#F9EAEF;color:#A03060">S</div><div class="fw-txt"><strong>Situation</strong>Describe the specific time and place. "In Thursday's team meeting..." This grounds feedback in a concrete event rather than a character pattern, making it easier to hear and act on.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#F9EAEF;color:#A03060">B</div><div class="fw-txt"><strong>Behavior</strong>Describe the observable action — what was specifically said or done. "When you interrupted the presentation three times..." Not "when you were dismissive" — that's a judgment, not a behavior.</div></div>
+        <div class="fw-step"><div class="fw-ltr" style="background:#F9EAEF;color:#A03060">I</div><div class="fw-txt"><strong>Impact</strong>Describe the effect on you, others, or the work — without attributing intent. "I noticed she stopped contributing for the rest of the session, and we lost her perspective on the design." Impact without assumed motive keeps the door open.</div></div>
+      </div></div>
+      <h3>Receiving Feedback Well</h3>
+      <p>Receiving feedback is harder than giving it. When we hear criticism, the amygdala activates and defensiveness rises automatically. Four steps for staying genuinely open:</p>
+      <ol>
+        <li><strong>Listen without defending.</strong> The goal is to understand what was observed — not to explain yourself yet.</li>
+        <li><strong>Ask clarifying questions.</strong> "Can you give me a specific example?" or "What would more helpful look like?" shows you're genuinely engaged.</li>
+        <li><strong>Thank the giver.</strong> Offering feedback takes courage. Acknowledge it even when it stings — especially when it stings.</li>
+        <li><strong>Reflect before responding.</strong> Give yourself time before deciding what to do with it. You don't have to accept every piece of feedback as accurate truth.</li>
+      </ol>
+      <div class="callout co-tip"><p class="callout-ttl">🌱 Growth Mindset Reframe</p><p class="callout-txt">Carol Dweck's research shows people with a growth mindset hear feedback as information for improvement, while those with a fixed mindset hear it as a verdict on their worth. Asking yourself "What can I learn from this?" — even when it feels unfair — shifts the neural framing immediately.</p></div>
+    </div>`
+  },
+  {
+    title:"Navigating Difficult Conversations", type:"lesson", dur:"20 min",
+    content:`
+    <p class="l-eyebrow" style="color:#A03060">Module 06 — Lesson 3</p>
+    <h1 class="l-title">Navigating Difficult Conversations</h1>
+    <div class="l-meta"><span>🕐 20 minutes</span><span>·</span><span>Reading + Exercise</span></div>
+    <div class="l-body">
+      <p>Every meaningful relationship — personal and professional — eventually requires a conversation that feels risky or uncomfortable. Research consistently shows that avoiding these conversations causes far more damage than having them imperfectly.</p>
+      <h3>Three Conversations Inside Every Hard Conversation</h3>
+      <p>Authors Stone, Patton, and Heen identified that every difficult conversation is actually three simultaneous conversations:</p>
+      <ol>
+        <li><strong>The "what happened" conversation:</strong> Both sides have a different story, and each is partially right and partially blind. The shift: from "I'm right, you're wrong" to "we see this differently — let's understand both versions."</li>
+        <li><strong>The feelings conversation:</strong> Emotions are always present, even when unspoken. Pretending they're not there makes the conversation harder. Naming them creates safety.</li>
+        <li><strong>The identity conversation:</strong> What does this say about who I am as a person? When identity feels threatened, people become rigid and defensive. Recognizing this — in yourself and others — helps de-escalate quickly.</li>
+      </ol>
+      <h3>The "And Stance"</h3>
+      <p>The most useful single shift in difficult conversations: replace "I'm right <em>and</em> you're wrong" with "I see it this way <em>and</em> you see it differently." This doesn't mean giving up your position — it means creating space for both realities to be true at once, which is the precondition for real dialogue.</p>
+      <div class="callout co-practice"><p class="callout-ttl">✏️ Before Any Difficult Conversation</p><p class="callout-txt"><strong>(1)</strong> What am I assuming about their intentions that I can't actually know? <strong>(2)</strong> What is my contribution to this situation? <strong>(3)</strong> What do I actually want to accomplish — and is having this conversation the way to get there?</p></div>
+      <h3>De-escalation in the Moment</h3>
+      <ul>
+        <li><strong>Lower your voice</strong> when they raise theirs — don't match the energy</li>
+        <li><strong>Use "I" statements</strong> over "you" statements: "I felt left out" vs. "You excluded me"</li>
+        <li><strong>Name the dynamic:</strong> "I notice this conversation is getting tense — can we slow down?"</li>
+        <li><strong>Take a timed break:</strong> "I want to keep working through this, but I need 15 minutes. Can we continue then?"</li>
+        <li><strong>Find the common goal:</strong> What do you both want that neither of you can get without working through this together?</li>
+      </ul>
+      <div class="ex-box"><div class="ex-hd"><span class="ex-icon">✏️</span><span class="ex-title">Exercise: Prepare a Conversation</span></div><p class="ex-prompt">Think of a conversation you've been avoiding. Prepare for it: (1) What is YOUR story? (2) What might their story be? (3) What feelings are involved on both sides? (4) What is your identity concern? (5) What do you actually want to accomplish?</p><textarea placeholder="My story: ...\nTheir story: ...\nFeelings on both sides: ...\nMy identity concern: ...\nWhat I want to accomplish: ..."></textarea></div>
+    </div>`
+  },
+  {
+    title:"Knowledge Check", type:"quiz", dur:"5 min",
+    questions:[
+      {text:"Which of the following correctly describes a behavior in the Assertive Message Formula?",opts:["'When you are dismissive of my ideas...'","'When you don't care about the team's input...'","'When you continue typing during my presentation...'","'When you always make people feel undervalued...'"],correct:2,exp:"A behavior must be specific and observable — something a camera could record. Continuing to type during a presentation is observable. 'Being dismissive' is a judgment, and 'not caring' is an assumed internal state, not a behavior."},
+      {text:"In the SBI feedback model, 'B' stands for:",opts:["Balance — ensuring positive and negative feedback are equal","Behavior — the specific, observable action being addressed","Background — the context that led to the situation","Boundaries — the limits being crossed"],correct:1,exp:"B = Behavior: describing specifically what was done or said, without interpreting intent or labeling character. This keeps feedback factual and reduces the defensiveness that character-based feedback reliably triggers."},
+      {text:"According to Stone, Patton and Heen, which of the following is NOT one of the three conversations inside a difficult conversation?",opts:["The feelings conversation","The 'what happened' conversation","The authority conversation","The identity conversation"],correct:2,exp:"The three conversations are: (1) 'what happened' — the competing stories about facts and intentions, (2) feelings — the emotions present, and (3) identity — what this means about who we are. There is no 'authority conversation' in this framework."},
+      {text:"The 'And Stance' in difficult conversations means:",opts:["Adding positive framing to negative feedback","Replacing 'I'm right and you're wrong' with 'I see it this way AND you see it differently'","Agreeing to disagree and accepting both positions as equally valid","Restating both sides before responding"],correct:1,exp:"The 'And Stance' holds both perspectives simultaneously without dismissing either. It doesn't mean abandoning your view — it means creating space for both realities to coexist, which is the precondition for genuine dialogue and resolution."},
+      {text:"When receiving difficult feedback, the most important first step is to:",opts:["Explain why the behavior occurred","Evaluate whether the feedback is accurate before engaging","Thank the person immediately","Listen without defending — to fully understand what was observed and felt"],correct:3,exp:"Defending immediately prevents you from actually understanding the feedback. Listening fully — before evaluating, responding, or explaining — is the first step toward receiving feedback in a way that might lead to real growth."}
+    ]
+  }]
+}
+];
+
+// =========================================================
+// STATE
+// =========================================================
+let S = {
+  mod: null,
+  li: 0,
+  prog: loadProg(),
+  qa: {},
+  submitted: false
+};
+
+function loadProg(){
+  try{ return JSON.parse(localStorage.getItem('tf_prog')||'{}'); }
+  catch(e){ return {}; }
+}
+function saveProg(){
+  try{ localStorage.setItem('tf_prog', JSON.stringify(S.prog)); }
+  catch(e){}
+}
+function modPct(id){
+  const m = MODS.find(x=>x.id===id);
+  const done = (S.prog[id]||[]).length;
+  return m ? Math.round(done/m.lessons.length*100) : 0;
+}
+
+// =========================================================
+// CATALOG
+// =========================================================
+function renderCatalog(){
+  const g = document.getElementById('catalogGrid');
+  g.innerHTML = MODS.map(m=>{
+    const pct = modPct(m.id);
+    const done = (S.prog[m.id]||[]).length;
+    const lbl = pct===0?'Start →':pct===100?'Review →':'Continue →';
+    return `<div class="mcard" onclick="openMod(${m.id})">
+      <div class="mcard-stripe" style="background:${m.color}"></div>
+      <div class="mcard-body">
+        <div class="mcard-top">
+          <div class="micon" style="background:${m.light};color:${m.color}">${m.icon}</div>
+          <span class="bdg">${m.dur}</span>
+        </div>
+        <p class="mnum" style="color:${m.color}">${m.num}</p>
+        <h3 class="mcard-title">${m.title}</h3>
+        <p class="mcard-desc">${m.desc}</p>
+        <div class="skill-tags">${m.skills.map(s=>`<span class="stag" style="background:${m.light};color:${m.color}">${s}</span>`).join('')}</div>
+        <div class="mcard-foot">
+          <div class="pbar-wrap"><div class="pbar-fill" style="width:${pct}%;background:${m.color}"></div></div>
+          <span class="plabel">${done}/${m.lessons.length}</span>
+          <button class="btn-enter" style="background:${m.color}" onclick="openMod(${m.id});event.stopPropagation()">${lbl}</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// =========================================================
+// MODULE VIEW
+// =========================================================
+function openMod(id){
+  S.mod = MODS.find(m=>m.id===id);
+  const done = S.prog[id]||[];
+  let start = 0;
+  for(let i=0;i<S.mod.lessons.length;i++){
+    if(!done.includes(i)){start=i;break;}
+    if(i===S.mod.lessons.length-1){start=0;}
+  }
+  S.li = start; S.qa = {}; S.submitted = false;
+  document.getElementById('viewCatalog').style.display='none';
+  document.getElementById('viewModule').style.display='block';
+  document.getElementById('navBack').classList.add('show');
+  renderSidebar(); renderLesson(S.li);
+  window.scrollTo(0,0);
+}
+
+function showCatalog(){
+  document.getElementById('viewCatalog').style.display='block';
+  document.getElementById('viewModule').style.display='none';
+  document.getElementById('navBack').classList.remove('show');
+  S.mod=null; renderCatalog();
+}
+
+function renderSidebar(){
+  const m = S.mod;
+  const done = S.prog[m.id]||[];
+  document.getElementById('sidebar').innerHTML = `
+    <div class="sb-head">
+      <p class="sb-tag" style="color:${m.color}">${m.num}</p>
+      <h2 class="sb-title">${m.title}</h2>
+    </div>
+    <nav class="sb-nav">
+      ${m.lessons.map((l,i)=>{
+        const isDone = done.includes(i);
+        const isCur = i===S.li;
+        return `<button class="sb-item${isDone?' completed':''}${isCur?' active':''}" onclick="navLesson(${i})" ${isCur?`style="color:${m.color}"`:''}">
+          <div class="sb-dot${isDone?' done':isCur?' cur':''}" ${isCur?`style="border-color:${m.color}"`:''}></div>
+          <div>
+            <div style="font-size:.82rem;font-weight:${isCur?600:400}">${l.title}</div>
+            <div style="font-size:.7rem;color:var(--text3);margin-top:1px">${l.type==='quiz'?'📝 Quiz':'📖 Lesson'} · ${l.dur}</div>
+          </div>
+        </button>`;
+      }).join('')}
+    </nav>
+    <div class="sb-foot">
+      <p class="sb-plabel">Module Progress</p>
+      <div class="pbar-wrap"><div class="pbar-fill" style="width:${modPct(m.id)}%;background:${m.color}"></div></div>
+      <p style="font-size:.7rem;color:var(--text3);margin-top:.3rem">${done.length}/${m.lessons.length} completed</p>
+    </div>`;
+}
+
+function navLesson(i){
+  S.li=i; S.qa={}; S.submitted=false;
+  renderSidebar(); renderLesson(i);
+  window.scrollTo(0,0);
+}
+
+function renderLesson(i){
+  const m = S.mod;
+  const l = m.lessons[i];
+  if(l.type==='quiz'){renderQuiz(l,i);return;}
+  const prev = i>0?i-1:null;
+  const next = i<m.lessons.length-1?i+1:null;
+  const prevLbl = prev!==null?m.lessons[prev].title:'';
+  const nextLbl = next!==null?m.lessons[next].title:'Knowledge Check';
+  document.getElementById('contentArea').innerHTML = `<div class="lesson-wrap">
+    ${l.content}
+    <div class="l-nav">
+      ${prev!==null?`<button class="btn-prev" onclick="navLesson(${prev})">← ${prevLbl}</button>`:'<div></div>'}
+      <button class="btn-next" onclick="markDone(${i},${next})" style="background:${m.color}">${nextLbl} →</button>
+    </div>
+  </div>`;
+}
+
+function markDone(ci, ni){
+  const m = S.mod;
+  if(!S.prog[m.id]) S.prog[m.id]=[];
+  if(!S.prog[m.id].includes(ci)){ S.prog[m.id].push(ci); saveProg(); }
+  if(ni!==null) navLesson(ni);
+}
+
+function renderQuiz(l,li){
+  const m = S.mod;
+  const prev = li>0?li-1:null;
+  document.getElementById('contentArea').innerHTML = `<div class="quiz-wrap">
+    <p class="l-eyebrow" style="color:${m.color}">${m.num} — Knowledge Check</p>
+    <h1 class="l-title">${l.title}</h1>
+    <div class="l-meta"><span>🕐 ${l.dur}</span><span>·</span><span>${l.questions.length} questions</span></div>
+    <div id="quizQs">
+      ${l.questions.map((q,qi)=>`<div class="qcard" id="qc${qi}">
+        <p class="q-num">Question ${qi+1} of ${l.questions.length}</p>
+        <p class="q-txt">${q.text}</p>
+        <div class="q-opts">
+          ${q.opts.map((o,oi)=>`<button class="qopt" id="qo${qi}x${oi}" onclick="pick(${qi},${oi})"
+            style="--accent:${m.color}">
+            <span class="q-letter">${String.fromCharCode(65+oi)}</span>${o}</button>`).join('')}
+        </div>
+        <div class="q-fb" id="qf${qi}"></div>
+      </div>`).join('')}
+    </div>
+    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+      ${prev!==null?`<button class="btn-prev" onclick="navLesson(${prev})">← ${m.lessons[prev].title}</button>`:''}
+      <button class="btn-submit" id="btnSub" onclick="submitQuiz(${li})" style="background:${m.color};opacity:.45;cursor:not-allowed">Submit Quiz</button>
+    </div>
+    <div id="quizResult"></div>
+  </div>`;
+}
+
+function pick(qi,oi){
+  if(S.submitted)return;
+  const m=S.mod; const l=m.lessons[S.li];
+  l.questions[qi].opts.forEach((_,x)=>{
+    const b=document.getElementById(`qo${qi}x${x}`);
+    b.classList.remove('sel'); b.style.borderColor='';
+  });
+  S.qa[qi]=oi;
+  const sel=document.getElementById(`qo${qi}x${oi}`);
+  sel.classList.add('sel'); sel.style.borderColor=m.color;
+  const sub=document.getElementById('btnSub');
+  if(sub&&Object.keys(S.qa).length>=l.questions.length){
+    sub.style.opacity='1'; sub.style.cursor='pointer';
+  }
+}
+
+function submitQuiz(li){
+  const m=S.mod; const l=m.lessons[li];
+  if(Object.keys(S.qa).length<l.questions.length){alert('Please answer all questions first.');return;}
+  S.submitted=true;
+  let score=0;
+  l.questions.forEach((q,qi)=>{
+    const ua=S.qa[qi]; const ok=ua===q.correct;
+    if(ok)score++;
+    q.opts.forEach((_,oi)=>{
+      const b=document.getElementById(`qo${qi}x${oi}`);
+      b.disabled=true; b.style.cursor='default';
+      if(oi===q.correct) b.classList.add('correct');
+      else if(oi===ua&&!ok) b.classList.add('wrong');
+    });
+    const fb=document.getElementById(`qf${qi}`);
+    fb.innerHTML=`${ok?'✅':'❌'} ${q.exp}`;
+    fb.className=`q-fb show ${ok?'correct':'wrong'}`;
+  });
+  if(!S.prog[m.id]) S.prog[m.id]=[];
+  if(!S.prog[m.id].includes(li)){ S.prog[m.id].push(li); saveProg(); }
+  const pct=Math.round(score/l.questions.length*100);
+  const mi=MODS.indexOf(m);
+  const nextMod=mi<MODS.length-1?MODS[mi+1]:null;
+  document.getElementById('btnSub').style.display='none';
+  document.getElementById('quizResult').innerHTML=`
+    <div class="result-box" style="background:${m.light};border:1px solid ${m.color}30">
+      <div class="result-score" style="color:${m.color}">${score}/${l.questions.length}</div>
+      <div class="result-lbl">${pct>=80?'🎉 Excellent work!':pct>=60?'👍 Good effort!':'📚 Consider reviewing before moving on'}</div>
+      <p class="result-sub">${pct}% correct — ${score} right, ${l.questions.length-score} to revisit</p>
+      <div class="result-btns">
+        <button class="rbtn" onclick="showCatalog()" style="background:var(--text);color:#fff">← All Modules</button>
+        ${nextMod?`<button class="rbtn" onclick="openMod(${nextMod.id})" style="background:${m.color};color:#fff">Next: ${nextMod.title} →</button>`:''}
+      </div>
+    </div>`;
+  renderSidebar();
+}
+
+// =========================================================
+// INIT
+// =========================================================
+renderCatalog();
+</script>
+</body>
+</html>
