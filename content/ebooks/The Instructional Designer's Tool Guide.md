@@ -1,5 +1,6 @@
 ---
 title: The Instructional Designer's Tool Guide
+author: Rayene Medabis
 cover: /images/tt.png
 html_file: /images/id-tools-handbook.html
 tags:
