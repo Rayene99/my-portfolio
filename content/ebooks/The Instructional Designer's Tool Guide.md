@@ -46,8 +46,8 @@ takeaways:
     triggers, states, layers, and quizzes
   - How to structure and publish a course in Articulate Rise 360 using
     sections, lessons, content blocks, and knowledge checks
-  - How to use Figma for e-learning: frames, grids, reusable components,
-    styles, clickable prototypes, and exporting assets
+  - "How to use Figma for e-learning: frames, grids, reusable components,
+    styles, clickable prototypes, and exporting assets"
   - How to design infographics, job aids, and quick reference cards in Canva
     using a Brand Kit
   - How to build software simulations, interactions, and quizzes in Adobe
