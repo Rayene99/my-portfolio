@@ -16,4 +16,4 @@ As teacher trainers, our job is to develop teachers before managing them. And yo
 
 Giving people a choice isn't a luxury. **It's the baseline**. 
 
-**If your teachers are disengaged, ask yourself: \*Have you tried listening to them before bossing?\***
+**If your teachers are disengaged, ask yourself: "Have you tried listening to them before bossing?"**
