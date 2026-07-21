@@ -1,5 +1,6 @@
 ---
 title: My English Adventure
+author: Rayene Medabis
 cover: /images/aa.png
 html_file: /images/english_adventure_workbook.html
 tags:
