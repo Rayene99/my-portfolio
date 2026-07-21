@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CourseAccess — Department Accessibility Pilot Program</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & TOKENS ───────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1B2D5B; --navy-h:#24388A;
+  --amber:#E8A020; --amber-bg:#FBF0DC;
+  --slate:#F3F6FB; --white:#FFFFFF;
+  --ink:#1E2535; --mid:#5B6478; --border:#E0E6F0;
+  --teal:#1D9E8F; --teal-bg:#D4F0EC;
+  --coral:#E0614A; --coral-bg:#FCE8E4;
+  --green:#059669;
+  --r:10px; --shadow:0 2px 12px rgba(27,45,91,.07); --shadow-lg:0 8px 32px rgba(27,45,91,.15);
+}
+body{font-family:'Source Sans 3',system-ui,sans-serif;background:var(--slate);color:var(--ink);line-height:1.5}
+
+/* ── APP SHELL ───────────────────────────────────────────── */
+.app{display:flex;height:100vh;overflow:hidden}
+
+/* ── SIDEBAR ─────────────────────────────────────────────── */
+.sidebar{width:242px;flex-shrink:0;background:var(--navy);display:flex;flex-direction:column;height:100vh;overflow-y:auto}
+.sb-brand{padding:24px 20px 18px;border-bottom:1px solid rgba(255,255,255,.09)}
+.brand-name{font-family:'Playfair Display',Georgia,serif;font-size:21px;font-weight:700;color:#fff;letter-spacing:-.3px}
+.brand-name em{color:var(--amber);font-style:normal}
+.brand-tag{font-size:11px;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.09em;margin-top:4px}
+.sb-nav{flex:1;padding:10px 10px}
+.nav-sec{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.13em;color:rgba(255,255,255,.28);padding:14px 10px 6px}
+.nav-btn{display:flex;align-items:center;gap:9px;width:100%;padding:9px 11px;border-radius:7px;border:none;background:transparent;color:rgba(255,255,255,.62);font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;text-align:left;transition:background .13s,color .13s;margin-bottom:2px}
+.nav-btn:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav-btn.active{background:rgba(232,160,32,.17);color:var(--amber)}
+.nav-btn .ni{font-size:15px;width:19px;text-align:center}
+.sb-foot{padding:14px 12px;border-top:1px solid rgba(255,255,255,.08)}
+.pilot-pill{background:rgba(232,160,32,.14);border:1px solid rgba(232,160,32,.32);border-radius:8px;padding:10px 12px}
+.pilot-pill-h{font-size:11px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.07em}
+.pilot-pill-s{font-size:12px;color:rgba(255,255,255,.48);margin-top:3px}
+
+/* ── MAIN ────────────────────────────────────────────────── */
+.main{flex:1;display:flex;flex-direction:column;min-width:0;height:100vh;overflow:hidden}
+.topbar{background:var(--white);border-bottom:1px solid var(--border);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;z-index:10}
+.topbar-title{font-size:17px;font-weight:700;color:var(--ink)}
+.topbar-right{display:flex;gap:8px}
+.scroller{flex:1;overflow-y:auto;padding:26px 28px 52px}
+
+/* ── BUTTONS ─────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 15px;border-radius:7px;border:none;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all .14s}
+.btn-primary{background:var(--navy);color:#fff}.btn-primary:hover{background:var(--navy-h)}
+.btn-ghost{background:var(--slate);color:var(--ink);border:1px solid var(--border)}.btn-ghost:hover{background:var(--border)}
+.btn-amber{background:var(--amber);color:var(--navy)}.btn-amber:hover{filter:brightness(.92)}
+.btn-sm{padding:5px 11px;font-size:12px}
+
+/* ── VIEWS ───────────────────────────────────────────────── */
+.view{display:none}.view.active{display:block}
+.eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--amber);margin-bottom:6px}
+.pg-head{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.pg-sub{font-size:15px;color:var(--mid);margin-bottom:22px}
+
+/* ── DASHBOARD ───────────────────────────────────────────── */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.stat-card{background:var(--white);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow);padding:18px 20px}
+.stat-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--mid);margin-bottom:6px}
+.stat-val{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;color:var(--navy);line-height:1}
+.stat-det{font-size:12px;color:var(--mid);margin-top:5px}
+.dash-lower{display:grid;grid-template-columns:1fr 262px;gap:18px}
+.panel{background:var(--white);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow);padding:22px 24px}
+.panel-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+
+/* Score ring */
+.ring-panel{background:var(--white);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow);padding:22px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.ring-wrap{position:relative;width:132px;height:132px;margin-bottom:12px}
+.ring-svg{width:132px;height:132px;transform:rotate(-90deg)}
+.ring-track{fill:none;stroke:var(--border);stroke-width:11}
+.ring-arc{fill:none;stroke-width:11;stroke-linecap:round;transition:stroke-dashoffset .9s cubic-bezier(.25,1,.5,1),stroke .5s}
+.ring-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.ring-num{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--ink);display:block;line-height:1}
+.ring-unit{font-size:12px;color:var(--mid)}
+.ring-caption{font-size:13px;color:var(--mid);margin-bottom:14px;max-width:200px}
+.ring-legend{display:flex;flex-direction:column;gap:5px;width:100%}
+.rl-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mid)}
+.dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+
+/* Course rows */
+.course-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:opacity .12s}
+.course-row:last-child{border-bottom:none}
+.course-row:hover{opacity:.75}
+.cr-info{flex:1}
+.cr-name{font-size:14px;font-weight:700;color:var(--ink)}
+.cr-code{font-size:12px;color:var(--mid)}
+.cr-right{display:flex;align-items:center;gap:10px}
+.mini-bar{width:70px;height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.mini-fill{height:100%;border-radius:3px;transition:width .4s}
+.badge{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+.b-ok{background:var(--teal-bg);color:var(--teal)}
+.b-prog{background:var(--amber-bg);color:#8a5c00}
+.b-new{background:var(--slate);color:var(--mid);border:1px solid var(--border)}
+.b-issue{background:var(--coral-bg);color:var(--coral)}
+
+/* ── AUDIT ───────────────────────────────────────────────── */
+.audit-toolbar{background:var(--white);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow);padding:16px 20px;margin-bottom:18px;display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end}
+.fld-wrap{display:flex;flex-direction:column;gap:4px}
+.fld-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mid)}
+.fld,.fsel{font-family:inherit;font-size:14px;padding:7px 11px;border:1px solid var(--border);border-radius:7px;color:var(--ink);background:var(--slate);outline:none;transition:border-color .14s;min-width:160px}
+.fld:focus,.fsel:focus{border-color:var(--navy);background:var(--white)}
+.score-bar{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:13px 20px;margin-bottom:16px;display:flex;align-items:center;gap:16px;box-shadow:var(--shadow)}
+.sb-lbl{font-size:13px;font-weight:700;color:var(--mid);white-space:nowrap}
+.sb-track{flex:1;height:10px;background:var(--border);border-radius:5px;overflow:hidden}
+.sb-fill{height:100%;border-radius:5px;transition:width .5s,background .5s}
+.sb-pct{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);min-width:52px;text-align:right}
+
+/* Category accordion */
+.cat-card{background:var(--white);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;margin-bottom:12px}
+.cat-hd{padding:15px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;transition:background .12s}
+.cat-hd:hover{background:var(--slate)}
+.cat-hd-l{display:flex;align-items:center;gap:10px}
+.cat-icon{font-size:20px}
+.cat-title{font-size:15px;font-weight:700;color:var(--ink)}
+.cat-prog{font-size:12px;color:var(--mid);margin-top:2px}
+.cat-chev{font-size:18px;color:var(--mid);transition:transform .2s}
+.cat-card.open .cat-chev{transform:rotate(180deg)}
+.cat-body{display:none;border-top:1px solid var(--border)}
+.cat-card.open .cat-body{display:block}
+
+/* Checklist items */
+.item-row{display:grid;grid-template-columns:1fr 155px 1fr;gap:12px;padding:14px 20px;border-bottom:1px solid var(--border);align-items:start}
+.item-row:last-child{border-bottom:none}
+.item-txt{font-size:14px;color:var(--ink);line-height:1.5}
+.item-tip{font-size:12px;color:var(--mid);margin-top:3px;font-style:italic}
+.status-sel{font-family:inherit;font-size:12px;font-weight:700;padding:6px 9px;border-radius:6px;border:1px solid var(--border);cursor:pointer;outline:none;background:var(--white);width:100%;transition:border-color .14s,background .14s,color .14s}
+.status-sel:focus{border-color:var(--navy)}
+.s-ok{border-color:var(--teal)!important;color:var(--teal)!important;background:var(--teal-bg)!important}
+.s-no{border-color:var(--coral)!important;color:var(--coral)!important;background:var(--coral-bg)!important}
+.s-ip{border-color:var(--amber)!important;color:#8a5c00!important;background:var(--amber-bg)!important}
+.notes-ta{font-family:inherit;font-size:13px;padding:6px 10px;border:1px solid var(--border);border-radius:7px;color:var(--ink);background:var(--slate);resize:vertical;outline:none;width:100%;min-height:34px;line-height:1.4}
+.notes-ta:focus{border-color:var(--navy);background:var(--white)}
+
+/* ── TEMPLATES ───────────────────────────────────────────── */
+.tmpl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tmpl-card{background:var(--white);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;transition:box-shadow .15s,transform .15s}
+.tmpl-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.tmpl-icon{font-size:30px;margin-bottom:10px}
+.tmpl-name{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.tmpl-desc{font-size:13px;color:var(--mid);line-height:1.5;flex:1;margin-bottom:14px}
+.tmpl-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px}
+.tmpl-tag{font-size:11px;font-weight:600;padding:2px 7px;border-radius:4px;background:var(--slate);color:var(--mid);border:1px solid var(--border)}
+.tmpl-actions{display:flex;gap:8px}
+
+/* ── GUIDELINES ──────────────────────────────────────────── */
+.guide-wrap{display:grid;grid-template-columns:190px 1fr;gap:22px}
+.guide-nav-panel{background:var(--white);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow);padding:14px;position:sticky;top:0;height:fit-content}
+.gnav-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--mid);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.gnav-btn{display:block;width:100%;border:none;background:none;text-align:left;padding:7px 9px;font-family:inherit;font-size:13px;font-weight:600;color:var(--mid);cursor:pointer;border-radius:6px;transition:all .13s;margin-bottom:2px}
+.gnav-btn:hover,.gnav-btn.active{background:var(--amber-bg);color:var(--navy)}
+.guide-sections{display:flex;flex-direction:column;gap:0}
+.gsec{display:none;background:var(--white);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow);padding:26px 30px}
+.gsec.active{display:block}
+.gsec-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.gsec-rule{width:48px;height:3px;background:var(--amber);border-radius:2px;margin-bottom:18px}
+.gbody{font-size:14px;line-height:1.72;color:var(--ink)}
+.gbody p{margin-bottom:14px}
+.gbody h3{font-size:15px;font-weight:700;margin:18px 0 8px;color:var(--navy)}
+.rule-box{background:var(--slate);border-left:3px solid var(--navy);padding:12px 16px;border-radius:0 7px 7px 0;margin:12px 0;font-size:13px}
+.rule-box strong{color:var(--navy);display:block;margin-bottom:3px;font-size:14px}
+.eg-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.eg-box{padding:11px 14px;border-radius:7px;font-size:13px;line-height:1.5}
+.eg-good{background:var(--teal-bg);border:1px solid rgba(29,158,143,.25)}
+.eg-bad{background:var(--coral-bg);border:1px solid rgba(224,97,74,.25)}
+.eg-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
+.eg-good .eg-lbl{color:var(--teal)}.eg-bad .eg-lbl{color:var(--coral)}
+
+/* ── REPORTS ─────────────────────────────────────────────── */
+.report-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
+.rtable-wrap{background:var(--white);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px}
+.rtable-title{font-size:15px;font-weight:700;color:var(--ink);padding:15px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+table.rt{width:100%;border-collapse:collapse;font-size:14px}
+table.rt th{padding:10px 14px;background:var(--slate);text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mid);border-bottom:1px solid var(--border)}
+table.rt td{padding:12px 14px;border-bottom:1px solid var(--border);color:var(--ink);vertical-align:middle}
+table.rt tr:last-child td{border-bottom:none}
+table.rt tr:hover td{background:#fafbfd}
+.sc-pill{display:inline-flex;align-items:center;font-size:13px;font-weight:700;padding:3px 10px;border-radius:20px}
+
+/* ── MODAL ───────────────────────────────────────────────── */
+.overlay{display:none;position:fixed;inset:0;background:rgba(27,45,91,.52);z-index:100;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
+.overlay.open{display:flex}
+.modal{background:var(--white);border-radius:14px;width:580px;max-width:95vw;max-height:86vh;display:flex;flex-direction:column;box-shadow:var(--shadow-lg)}
+.modal-hd{padding:22px 28px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.modal-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy)}
+.modal-x{background:none;border:none;font-size:20px;cursor:pointer;color:var(--mid);padding:2px 6px;border-radius:5px;transition:background .12s}
+.modal-x:hover{background:var(--slate)}
+.modal-body{padding:20px 28px;overflow-y:auto;flex:1}
+.modal-ft{padding:14px 28px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end}
+.tmpl-pre{font-family:'Courier New',monospace;font-size:12.5px;line-height:1.7;color:var(--ink);background:var(--slate);padding:18px;border-radius:8px;border:1px solid var(--border);white-space:pre-wrap;max-height:400px;overflow-y:auto}
+.form-grp{margin-bottom:16px}
+.form-lbl{display:block;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.form-inp{font-family:inherit;font-size:14px;width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:7px;outline:none;color:var(--ink);transition:border-color .14s}
+.form-inp:focus{border-color:var(--navy)}
+
+/* ── TOAST ───────────────────────────────────────────────── */
+.toast{position:fixed;bottom:22px;right:22px;background:var(--ink);color:#fff;padding:11px 18px;border-radius:8px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:7px;transform:translateY(70px);opacity:0;transition:all .28s cubic-bezier(.4,0,.2,1);z-index:200;box-shadow:0 6px 20px rgba(0,0,0,.3);pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* ── EMPTY STATES ────────────────────────────────────────── */
+.empty{text-align:center;padding:48px 20px;color:var(--mid)}
+.empty-icon{font-size:40px;display:block;margin-bottom:10px}
+.empty-title{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.empty-sub{font-size:14px}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media(max-width:1100px){.stats-row,.dash-lower{grid-template-columns:repeat(2,1fr)}.tmpl-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:860px){.sidebar{width:56px}.brand-name,.brand-tag,.nav-btn span:not(.ni),.pilot-pill{display:none}.guide-wrap{grid-template-columns:1fr}.item-row{grid-template-columns:1fr}}
+@media print{.sidebar,.topbar,.toast,.overlay{display:none!important}.scroller{padding:0}.app{display:block;height:auto}.main{height:auto}.scroller{overflow:visible}}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- ══════════════ SIDEBAR ══════════════ -->
+<aside class="sidebar">
+  <div class="sb-brand">
+    <div class="brand-name">Course<em>Access</em></div>
+    <div class="brand-tag">Accessibility Pilot</div>
+  </div>
+  <nav class="sb-nav">
+    <div class="nav-sec">Program</div>
+    <button class="nav-btn active" id="nav-dashboard" onclick="nav('dashboard')"><span class="ni">🏠</span><span>Dashboard</span></button>
+    <button class="nav-btn" id="nav-audit" onclick="nav('audit')"><span class="ni">✅</span><span>Course Audit</span></button>
+    <div class="nav-sec">Resources</div>
+    <button class="nav-btn" id="nav-templates" onclick="nav('templates')"><span class="ni">📄</span><span>Templates</span></button>
+    <button class="nav-btn" id="nav-guidelines" onclick="nav('guidelines')"><span class="ni">📚</span><span>Guidelines</span></button>
+    <div class="nav-sec">Reporting</div>
+    <button class="nav-btn" id="nav-reports" onclick="nav('reports')"><span class="ni">📊</span><span>Reports</span></button>
+  </nav>
+  <div class="sb-foot">
+    <div class="pilot-pill">
+      <div class="pilot-pill-h">Pilot Program</div>
+      <div class="pilot-pill-s" id="sb-sub">0 courses enrolled</div>
+    </div>
+  </div>
+</aside>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-title" id="topbar-title">Dashboard</div>
+    <div class="topbar-right" id="topbar-right">
+      <button class="btn btn-primary" onclick="openAddCourse()">+ Add Course</button>
+    </div>
+  </div>
+
+  <div class="scroller">
+
+    <!-- ── DASHBOARD ── -->
+    <div class="view active" id="view-dashboard">
+      <div class="eyebrow">Department Overview</div>
+      <h1 class="pg-head">Accessibility Audit Dashboard</h1>
+      <p class="pg-sub">Track your department's progress toward fully accessible course materials across all six audit categories.</p>
+
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-lbl">Courses Enrolled</div><div class="stat-val" id="s-total">0</div><div class="stat-det">in the pilot program</div></div>
+        <div class="stat-card"><div class="stat-lbl">Fully Audited</div><div class="stat-val" id="s-audited">0</div><div class="stat-det">all items reviewed</div></div>
+        <div class="stat-card"><div class="stat-lbl">Issues Flagged</div><div class="stat-val" id="s-issues">0</div><div class="stat-det">non-compliant items</div></div>
+        <div class="stat-card"><div class="stat-lbl">Dept. Score</div><div class="stat-val" id="s-score">—</div><div class="stat-det">overall accessibility</div></div>
+      </div>
+
+      <div class="dash-lower">
+        <div class="panel">
+          <div class="panel-title"><span>Your Courses</span><button class="btn btn-ghost btn-sm" onclick="nav('audit')">Open Audit →</button></div>
+          <div id="dash-courses"><div class="empty"><span class="empty-icon">📋</span><div class="empty-title">No courses yet</div><div class="empty-sub">Click "+ Add Course" to begin the pilot program.</div></div></div>
+        </div>
+
+        <div class="ring-panel">
+          <div class="ring-wrap">
+            <svg class="ring-svg" viewBox="0 0 132 132">
+              <circle class="ring-track" cx="66" cy="66" r="54"/>
+              <circle class="ring-arc" id="ring-arc" cx="66" cy="66" r="54" stroke-dasharray="339.29" stroke-dashoffset="339.29" stroke="var(--teal)"/>
+            </svg>
+            <div class="ring-center"><span class="ring-num" id="ring-val">—</span><span class="ring-unit">dept. avg</span></div>
+          </div>
+          <p class="ring-caption" id="ring-cap">Add courses to see your department accessibility score.</p>
+          <div class="ring-legend">
+            <div class="rl-row"><div class="dot" style="background:var(--teal)"></div>80–100% · Compliant</div>
+            <div class="rl-row"><div class="dot" style="background:var(--amber)"></div>50–79% · In progress</div>
+            <div class="rl-row"><div class="dot" style="background:var(--coral)"></div>0–49% · Needs work</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── AUDIT ── -->
+    <div class="view" id="view-audit">
+      <div class="eyebrow">Step-by-Step Audit</div>
+      <h1 class="pg-head">Course Audit Checklist</h1>
+      <p class="pg-sub">Select a course and work through each category. Your progress saves automatically as you make changes.</p>
+
+      <div class="audit-toolbar">
+        <div class="fld-wrap"><label class="fld-lbl">Course</label><select class="fsel" id="audit-sel" onchange="selectCourse(this.value)"><option value="">— Choose a course —</option></select></div>
+        <div class="fld-wrap"><label class="fld-lbl">Faculty Name</label><input class="fld" id="audit-faculty" type="text" placeholder="Your name" oninput="saveFacultyField()"></div>
+        <div class="fld-wrap"><label class="fld-lbl">Audit Date</label><input class="fld" id="audit-date" type="date" oninput="saveDateField()"></div>
+        <button class="btn btn-amber" style="margin-top:auto" onclick="saveProgress()">💾 Save Progress</button>
+        <button class="btn btn-primary" style="margin-top:auto" onclick="openAddCourse()">+ Add Course</button>
+      </div>
+
+      <div id="audit-score-bar" style="display:none" class="score-bar">
+        <div class="sb-lbl">Accessibility Score</div>
+        <div class="sb-track"><div class="sb-fill" id="sb-fill" style="width:0%;background:var(--coral)"></div></div>
+        <div class="sb-pct" id="sb-pct">0%</div>
+      </div>
+
+      <div id="audit-cats"><div class="empty"><span class="empty-icon">✅</span><div class="empty-title">Select a course to begin</div><div class="empty-sub">Choose a course from the dropdown above, or add a new one first.</div></div></div>
+    </div>
+
+    <!-- ── TEMPLATES ── -->
+    <div class="view" id="view-templates">
+      <div class="eyebrow">Resource Library</div>
+      <h1 class="pg-head">Accessible Templates</h1>
+      <p class="pg-sub">Copy and adapt these ready-to-use templates. All fields in [brackets] should be replaced with your own content.</p>
+      <div class="tmpl-grid" id="tmpl-grid"></div>
+    </div>
+
+    <!-- ── GUIDELINES ── -->
+    <div class="view" id="view-guidelines">
+      <div class="eyebrow">Standards Reference</div>
+      <h1 class="pg-head">Accessibility Guidelines</h1>
+      <p class="pg-sub">A practical reference based on WCAG 2.1 and Universal Design for Learning (UDL) principles.</p>
+
+      <div class="guide-wrap">
+        <div class="guide-nav-panel">
+          <div class="gnav-title">Topics</div>
+          <button class="gnav-btn active" onclick="showGuide('wcag',this)">WCAG Overview</button>
+          <button class="gnav-btn" onclick="showGuide('docs',this)">Document Accessibility</button>
+          <button class="gnav-btn" onclick="showGuide('media',this)">Multimedia</button>
+          <button class="gnav-btn" onclick="showGuide('contrast',this)">Color &amp; Contrast</button>
+          <button class="gnav-btn" onclick="showGuide('language',this)">Plain Language</button>
+          <button class="gnav-btn" onclick="showGuide('udl',this)">UDL Framework</button>
+        </div>
+
+        <div class="guide-sections">
+
+          <div class="gsec active" id="guide-wcag">
+            <div class="gsec-title">WCAG 2.1 Overview</div><div class="gsec-rule"></div>
+            <div class="gbody">
+              <p>The Web Content Accessibility Guidelines (WCAG) 2.1 are the international standard for digital accessibility, published by the W3C. They apply to any digital content — websites, PDFs, videos, LMS pages, and course materials.</p>
+              <h3>The Four Principles (POUR)</h3>
+              <div class="rule-box"><strong>Perceivable</strong>Information must be presentable to users in ways they can perceive — including text alternatives for non-text content, captions for video, and content that can be presented in multiple ways.</div>
+              <div class="rule-box"><strong>Operable</strong>Users must be able to operate all functionality via keyboard alone, and content must not cause seizures or require precise timing.</div>
+              <div class="rule-box"><strong>Understandable</strong>Text must be readable and predictable, and users must be helped to avoid and correct mistakes.</div>
+              <div class="rule-box"><strong>Robust</strong>Content must be interpreted reliably by a wide variety of user agents, including assistive technologies like screen readers and braille displays.</div>
+              <h3>Conformance Levels</h3>
+              <p>WCAG defines three levels: <strong>Level A</strong> (minimum), <strong>Level AA</strong> (the institutional and legal standard), and <strong>Level AAA</strong> (highest). This audit targets <strong>Level AA</strong> conformance — the standard required by most accessibility laws and university policies.</p>
+              <h3>Why It Matters</h3>
+              <p>Students with disabilities include those who are blind or have low vision, are d/Deaf or hard of hearing, have motor disabilities, or have cognitive differences. Accessible materials also benefit all students: captions help in noisy environments, clear headings help everyone navigate long documents, and plain language benefits non-native English speakers.</p>
+            </div>
+          </div>
+
+          <div class="gsec" id="guide-docs">
+            <div class="gsec-title">Document Accessibility</div><div class="gsec-rule"></div>
+            <div class="gbody">
+              <p>Most course materials are shared as PDFs, Word documents, or slides. Each format has specific requirements that must be met before distribution.</p>
+              <h3>Heading Structure</h3>
+              <p>Use built-in heading styles (Heading 1, Heading 2, etc.) rather than manually bolding or enlarging text. Screen readers use heading structure to let users jump between sections without reading every word.</p>
+              <div class="eg-grid">
+                <div class="eg-box eg-good"><div class="eg-lbl">✓ Correct</div>Apply "Heading 2" from the Styles panel in Word or Google Docs for all section titles</div>
+                <div class="eg-box eg-bad"><div class="eg-lbl">✗ Avoid</div>Select text → Bold → Increase font size to 16pt. This looks like a heading but provides no structure.</div>
+              </div>
+              <h3>Alternative Text</h3>
+              <p>Every meaningful image needs descriptive alt text that conveys what the image communicates, not just what it depicts. Decorative images should be marked decorative so screen readers skip them.</p>
+              <div class="eg-grid">
+                <div class="eg-box eg-good"><div class="eg-lbl">✓ Good alt text</div>"Bar chart showing graduation rates by income quintile 2015–2023, with the top quintile consistently 20+ points above the bottom."</div>
+                <div class="eg-box eg-bad"><div class="eg-lbl">✗ Poor alt text</div>"Chart image" or "Figure 3" — provides no information about what the chart shows.</div>
+              </div>
+              <h3>PDF Accessibility</h3>
+              <p>PDFs must be "tagged" — a structured representation that screen readers can interpret. Tagged PDFs are created when you export from Word with the accessibility option enabled. Scanned PDFs are image files and are completely inaccessible until run through OCR software.</p>
+              <p><strong>Quick test:</strong> If you can highlight text by clicking and dragging in your PDF viewer, it is text-based. If clicking selects nothing, it is a scanned image and is inaccessible to screen readers.</p>
+            </div>
+          </div>
+
+          <div class="gsec" id="guide-media">
+            <div class="gsec-title">Multimedia Accessibility</div><div class="gsec-rule"></div>
+            <div class="gbody">
+              <p>All video, audio, and interactive content used in your course must be accessible to students who cannot hear the audio or see the visual content.</p>
+              <h3>Closed Captions</h3>
+              <p>Closed captions are a synchronized text representation of all spoken audio in a video, including speaker identification and relevant sound effects. Auto-generated captions from YouTube, Panopto, or Zoom are a starting point only — they typically reach 80–90% accuracy, which is insufficient. You must review and correct captions before sharing them with students.</p>
+              <div class="rule-box"><strong>Caption quality standards</strong>Captions must be verbatim (or close to it), synchronized within 2 seconds, identify speakers when multiple people are speaking, and include relevant non-speech information such as [laughter] or [music playing].</div>
+              <h3>Transcripts</h3>
+              <p>Audio-only content (podcasts, recorded lectures) requires a complete text transcript. Transcripts benefit d/Deaf students, those with auditory processing differences, students who prefer to read, and anyone searching for specific content in a long recording.</p>
+              <h3>Audio Descriptions</h3>
+              <p>When visual information is essential to understanding your video — a diagram appearing on screen, text being written on a whiteboard — an audio description must narrate what is happening visually. The simplest approach: narrate your own actions as you record. "I'm drawing a flowchart now, starting with the input node at the top..."</p>
+            </div>
+          </div>
+
+          <div class="gsec" id="guide-contrast">
+            <div class="gsec-title">Color &amp; Contrast</div><div class="gsec-rule"></div>
+            <div class="gbody">
+              <p>Approximately 8% of men and 0.5% of women have some form of color vision deficiency. Many more have low vision or view content in challenging lighting conditions. Sufficient contrast and redundant coding are essential.</p>
+              <h3>Contrast Ratios — WCAG Level AA</h3>
+              <div class="rule-box"><strong>Normal text (under 18pt, or 14pt bold)</strong>Minimum contrast ratio of 4.5:1 between text color and background color.</div>
+              <div class="rule-box"><strong>Large text (18pt+, or 14pt+ bold)</strong>Minimum contrast ratio of 3:1 against the background color.</div>
+              <div class="rule-box"><strong>UI components and graphics</strong>Minimum contrast ratio of 3:1 against adjacent colors for icons, charts, and interface elements.</div>
+              <p><strong>Free tool:</strong> WebAIM's Contrast Checker at webaim.org/resources/contrastchecker/ — enter hex color codes to get an instant pass/fail result.</p>
+              <h3>Color Is Not the Only Means</h3>
+              <p>WCAG 1.4.1 requires that color not be used as the only visual means of conveying information. This applies to charts, graphs, diagrams, and any color-coded content in your materials.</p>
+              <div class="eg-grid">
+                <div class="eg-box eg-good"><div class="eg-lbl">✓ Accessible</div>In a line chart, use distinct colors AND different line patterns (solid, dashed, dotted) AND a text legend with labels for each series.</div>
+                <div class="eg-box eg-bad"><div class="eg-lbl">✗ Inaccessible</div>Using only color to distinguish chart lines, or marking correct/incorrect answers with only green/red text.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gsec" id="guide-language">
+            <div class="gsec-title">Plain Language Guide</div><div class="gsec-rule"></div>
+            <div class="gbody">
+              <p>Plain language is writing that is clear, direct, and easy for your audience to understand the first time they read it. It benefits all students, especially those with cognitive disabilities, learning differences, and students for whom English is a second language.</p>
+              <h3>Core Principles</h3>
+              <div class="rule-box"><strong>Use active voice</strong>Active voice is clearer and more direct. Write "Submit your assignment by Friday" not "Assignments should be submitted by Friday."</div>
+              <div class="rule-box"><strong>Keep sentences short</strong>Aim for sentences under 25 words. One idea per sentence. Use bullet points for lists of three or more items rather than long compound sentences.</div>
+              <div class="rule-box"><strong>Define jargon and acronyms</strong>Spell out all acronyms on first use: "Learning Management System (LMS)." Define technical terms when they first appear, especially for introductory courses.</div>
+              <div class="rule-box"><strong>Use everyday words</strong>"Use" instead of "utilize." "Start" instead of "initiate." "Show" instead of "demonstrate." Unless the technical term is itself a learning objective for your course.</div>
+              <h3>Readability Tools</h3>
+              <p>Microsoft Word has a built-in Flesch-Kincaid readability score (enable it in File → Options → Proofing → Show readability statistics). The Hemingway Editor at hemingwayapp.com highlights complex sentences, passive voice, and hard-to-read passages in real time — for free.</p>
+              <div class="eg-grid">
+                <div class="eg-box eg-good"><div class="eg-lbl">✓ Plain</div>"Submit your essay as a PDF by 11:59 PM on Friday. Late work loses 10% per day."</div>
+                <div class="eg-box eg-bad"><div class="eg-lbl">✗ Dense</div>"All written assignments are to be submitted in PDF format no later than 11:59 PM on the designated due date, with subsequent late submission penalties of 10% per diem."</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gsec" id="guide-udl">
+            <div class="gsec-title">Universal Design for Learning</div><div class="gsec-rule"></div>
+            <div class="gbody">
+              <p>Universal Design for Learning (UDL) is a framework developed by CAST that guides the design of flexible learning experiences. Rather than retrofitting accommodations for individual students after the fact, UDL proactively builds flexibility into course design from the start.</p>
+              <h3>The Three UDL Principles</h3>
+              <div class="rule-box"><strong>Multiple Means of Representation</strong>Present information in more than one format. Pair lecture with slides and a reading. Use examples, diagrams, and real-world illustrations alongside abstract concepts. Provide both charts and underlying data tables.</div>
+              <div class="rule-box"><strong>Multiple Means of Action &amp; Expression</strong>Allow students to demonstrate what they know in different ways. Offer alternatives to traditional written exams — presentations, portfolios, creative projects, or demonstrations — when your learning objectives permit.</div>
+              <div class="rule-box"><strong>Multiple Means of Engagement</strong>Offer choices in how students engage with material. Foster collaboration alongside independent work. Develop self-assessment and reflection. Minimize unnecessary barriers to participation — not as lowered expectations, but as flexible pathways to the same rigorous outcomes.</div>
+              <h3>Practical Applications</h3>
+              <p><strong>Representation:</strong> Post lecture slides before class. Offer written and video instructions for assignments. Include both graphs and data tables. Pre-teach key vocabulary.</p>
+              <p><strong>Expression:</strong> Allow students to choose between a written essay, a recorded presentation, or an annotated portfolio to demonstrate the same learning outcome.</p>
+              <p><strong>Engagement:</strong> Vary assessment types across a semester. Allow some choice in discussion topics. Give students the "why" behind course requirements.</p>
+              <p>UDL does not mean eliminating standards. It means intentional design that anticipates learner variability and builds in options, so fewer students require individual accommodations.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ── REPORTS ── -->
+    <div class="view" id="view-reports">
+      <div class="eyebrow">Summary &amp; Export</div>
+      <h1 class="pg-head">Department Reports</h1>
+      <p class="pg-sub">A summary of all course audits in the pilot program. Share with department leadership to demonstrate progress and identify systemic gaps.</p>
+      <div class="report-stats" id="rpt-stats"></div>
+      <div class="rtable-wrap">
+        <div class="rtable-title"><span>Course Audit Summary</span><button class="btn btn-ghost btn-sm" onclick="window.print()">🖨 Print Report</button></div>
+        <div id="rpt-courses"></div>
+      </div>
+      <div class="rtable-wrap">
+        <div class="rtable-title">Category Breakdown by Course</div>
+        <div id="rpt-cats"></div>
+      </div>
+    </div>
+
+  </div><!-- /scroller -->
+</div><!-- /main -->
+</div><!-- /app -->
+
+<!-- ══ MODAL: ADD COURSE ══ -->
+<div class="overlay" id="modal-add">
+  <div class="modal">
+    <div class="modal-hd"><div class="modal-title">Add a Course</div><button class="modal-x" onclick="closeModal('modal-add')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grp"><label class="form-lbl">Course Name *</label><input class="form-inp" id="nc-name" type="text" placeholder="e.g., Introduction to Educational Psychology"></div>
+      <div class="form-grp"><label class="form-lbl">Course Code *</label><input class="form-inp" id="nc-code" type="text" placeholder="e.g., EDUC 201"></div>
+      <div class="form-grp"><label class="form-lbl">Section</label><input class="form-inp" id="nc-sec" type="text" placeholder="e.g., Section 003 or Online"></div>
+      <div class="form-grp"><label class="form-lbl">Semester</label><input class="form-inp" id="nc-sem" type="text" placeholder="e.g., Fall 2026" value="Fall 2026"></div>
+      <div class="form-grp"><label class="form-lbl">Faculty Name</label><input class="form-inp" id="nc-fac" type="text" placeholder="Instructor name"></div>
+    </div>
+    <div class="modal-ft"><button class="btn btn-ghost" onclick="closeModal('modal-add')">Cancel</button><button class="btn btn-primary" onclick="addCourse()">Add Course</button></div>
+  </div>
+</div>
+
+<!-- ══ MODAL: TEMPLATE PREVIEW ══ -->
+<div class="overlay" id="modal-tmpl">
+  <div class="modal">
+    <div class="modal-hd"><div class="modal-title" id="tmpl-modal-title">Template</div><button class="modal-x" onclick="closeModal('modal-tmpl')">✕</button></div>
+    <div class="modal-body">
+      <p style="font-size:13px;color:var(--mid);margin-bottom:12px">Replace all text in [brackets] with your own information before distributing.</p>
+      <div class="tmpl-pre" id="tmpl-preview"></div>
+    </div>
+    <div class="modal-ft"><button class="btn btn-ghost" onclick="closeModal('modal-tmpl')">Close</button><button class="btn btn-amber" onclick="copyActiveTmpl()">📋 Copy Template</button></div>
+  </div>
+</div>
+
+<!-- ══ TOAST ══ -->
+<div class="toast" id="toast">✓ <span id="toast-msg">Saved</span></div>
+
+<script>
+/* ════════════════════════════════════════════
+   DATA — AUDIT CATEGORIES
+   ════════════════════════════════════════════ */
+const CATS = [
+  { id:'syllabus', icon:'📋', title:'Syllabus & Course Structure', items:[
+    {id:'s1',text:'Syllabus uses hierarchical headings (H1, H2, H3) — not just bold formatting',tip:'Apply built-in Heading styles in Word/Google Docs; bold text looks like a heading but is invisible to screen readers'},
+    {id:'s2',text:'Course learning objectives are clearly stated and measurable',tip:'Use action verbs: analyze, evaluate, create, apply — not "understand" or "learn about"'},
+    {id:'s3',text:'An accessibility/accommodation statement is included in the syllabus',tip:'Should direct students to the Office of Disability Services with phone, email, and website'},
+    {id:'s4',text:'Accommodation request procedures are clearly explained',tip:'Specify who students contact, required documentation, and deadlines for submitting letters'},
+    {id:'s5',text:'Instructor contact information and response time are specified',tip:'Include email, office hours location, and typical response window (e.g., within 48 business hours)'},
+    {id:'s6',text:'Grading criteria and point breakdown are clearly defined',tip:'A table or numbered list is clearest — avoid vague language like "quality of participation"'},
+  ]},
+  { id:'documents', icon:'📄', title:'Documents & Reading Materials', items:[
+    {id:'d1',text:'All PDFs are text-based and searchable — not scanned images',tip:'Quick test: if you can highlight text by clicking and dragging, it is accessible; if not, it is a scanned image'},
+    {id:'d2',text:'All meaningful images have descriptive alternative text (alt text)',tip:'Describe what the image communicates, not just what it looks like. Mark purely decorative images with empty alt=""'},
+    {id:'d3',text:'Color is not used as the only means of conveying information',tip:'Add text labels, patterns, or shapes alongside any color coding in charts, graphs, or diagrams'},
+    {id:'d4',text:'Text meets minimum color contrast (4.5:1 for body text, 3:1 for large)',tip:'Use the free WebAIM Contrast Checker at webaim.org/resources/contrastchecker/ to verify'},
+    {id:'d5',text:'Documents use built-in heading styles (not manually sized/bolded text)',tip:'In Word: Home → Styles panel. Apply Heading 1, Heading 2, etc. for section structure'},
+    {id:'d6',text:'Data tables have proper header rows and are not used for layout',tip:'In Word: Table → Table Properties → Row → "Repeat as header row at top of each page"'},
+    {id:'d7',text:'Hyperlinks use descriptive text — not "click here" or bare URLs',tip:'"View the course schedule" is better than "click here." Avoid pasting raw URLs in the middle of sentences'},
+    {id:'d8',text:'Body text is minimum 12pt (print) or 16px (web) with adequate line spacing',tip:'Generous spacing improves readability for all students, especially those with dyslexia or low vision'},
+  ]},
+  { id:'multimedia', icon:'🎬', title:'Multimedia & Video Content', items:[
+    {id:'m1',text:'All instructional videos have accurate, reviewed closed captions',tip:'Auto-generated captions are a starting point only — review and correct before sharing. Target 98%+ accuracy'},
+    {id:'m2',text:'Audio descriptions are available for essential visual-only content',tip:'Narrate what you write or draw as you go: "I am now drawing a flowchart beginning with the input node..."'},
+    {id:'m3',text:'Full transcripts are available for all audio/podcast content',tip:'Transcripts help d/Deaf students, those with auditory processing differences, and students who prefer to read'},
+    {id:'m4',text:'Videos are hosted on an accessible platform (Kaltura, Panopto, YouTube)',tip:'Verify the media player can be fully operated by keyboard alone; Flash-based players are inaccessible'},
+    {id:'m5',text:'No content flashes more than 3 times per second',tip:'Fast-flashing content can trigger photosensitive seizures (WCAG 2.3.1). Applies to animations and slide transitions'},
+    {id:'m6',text:'Recorded meetings and office hours have live captions enabled',tip:'Zoom: Settings → Accessibility → Auto-generated captions. Teams: More → Language and speech → Live captions'},
+  ]},
+  { id:'assessments', icon:'📝', title:'Assessments & Assignments', items:[
+    {id:'a1',text:'Assignment instructions are in an accessible format — not PDF-only',tip:'Post instructions in the LMS as HTML text or an accessible Word file; scanned PDFs are not accessible'},
+    {id:'a2',text:'Multiple ways to demonstrate learning are offered where appropriate',tip:'UDL principle: allow alternative submission formats (essay vs. presentation vs. project) when objectives permit'},
+    {id:'a3',text:'Accessible rubrics are provided for all major assignments',tip:'Rubric tables must have proper header cells; avoid using only color to indicate performance levels'},
+    {id:'a4',text:'Exam accommodation procedures are clearly communicated to students',tip:'Specify the deadline for submitting letters and explain how extended time or alternate locations are arranged'},
+    {id:'a5',text:'All deadlines include a specific time and timezone',tip:'State "11:59 PM Eastern Time" not just "midnight" — online students may be in different time zones'},
+    {id:'a6',text:'A clear process exists for requesting accessible alternative formats',tip:'Document how students can request large print, audio descriptions, or extended time and your response process'},
+  ]},
+  { id:'lms', icon:'💻', title:'Learning Management System', items:[
+    {id:'l1',text:'Course modules are organized in a consistent, logical structure',tip:'Use a predictable pattern every week: Overview → Materials → Discussion → Assignment'},
+    {id:'l2',text:'Announcements and LMS text use accessible formatting (headings, lists)',tip:'Avoid pasting text from Word with hidden formatting. Use the LMS rich text editor\'s own heading and list tools'},
+    {id:'l3',text:'All files uploaded to the LMS have been checked for accessibility',tip:'Run the built-in accessibility checker in Canvas (Settings → Validate Links), Blackboard (Ally), or Brightspace'},
+    {id:'l4',text:'External links that open new tabs include a "(opens in new tab)" notice',tip:'Unexpected new tabs can disorient screen reader users. Add "(opens in new tab)" to the visible link text'},
+    {id:'l5',text:'Course pages are free of unnecessary visual clutter and cognitive overload',tip:'Fewer, well-organized modules are better than many small ones. Remove or archive outdated materials each term'},
+    {id:'l6',text:'Course has been tested with the LMS accessibility checker or a screen reader',tip:'Canvas: click Accessibility Checker icon in rich text editor. Blackboard: Anthology Ally sidebar. Test early.'},
+  ]},
+  { id:'communication', icon:'💬', title:'Communication & Inclusion', items:[
+    {id:'c1',text:'Course materials use plain language appropriate to the course level',tip:'Use Microsoft Word\'s Flesch-Kincaid score (File → Options → Proofing → Show readability statistics)'},
+    {id:'c2',text:'Virtual office hours and recorded meetings have live captioning enabled',tip:'Zoom: enable auto-captions in account Settings. Teams: More → Language and speech → Turn on live captions'},
+    {id:'c3',text:'Materials use inclusive language — preferred names, gender-neutral options',tip:'Avoid assuming student names from rosters. Invite students to share pronouns on the first day'},
+    {id:'c4',text:'Group work accessibility considerations are documented and communicated',tip:'Consider flexible communication modes (async text vs. audio call), group size, and time zone differences'},
+    {id:'c5',text:'Materials avoid ableist, gendered, or culturally biased language',tip:'Review for idioms, examples, and metaphors that may exclude or stereotype. E.g., "walk through" vs. "go through"'},
+    {id:'c6',text:'Mental health and campus support resources are linked in course materials',tip:'Include campus counseling services, the 988 Lifeline, and basic needs support (food, housing) if applicable'},
+  ]},
+];
+
+/* ════════════════════════════════════════════
+   DATA — TEMPLATES
+   ════════════════════════════════════════════ */
+const TEMPLATES = [
+  {
+    id:'syllabus', icon:'📋', name:'Accessible Syllabus',
+    desc:'A complete syllabus with proper heading structure, accessibility statement, accommodation procedures, and wellness resources.',
+    tags:['Syllabus','Word','PDF'],
+    content:`[DEPARTMENT] [COURSE NUMBER]: [COURSE TITLE]
+[SEMESTER] [YEAR] | [DAYS & TIMES] | [LOCATION OR MODALITY]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+INSTRUCTOR INFORMATION
+Instructor: [Your Full Name]
+Pronouns: [Optional — e.g., she/her, they/them]
+Email: [email@institution.edu]
+Response time: I typically respond within 2 business days.
+Office: [Room] or Virtual (link posted in LMS)
+Office Hours: [Day/Time] — drop in welcome, or email to schedule
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+COURSE DESCRIPTION
+[2–3 sentences describing the course purpose and scope. Write in plain language. Avoid jargon.]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+COURSE OBJECTIVES
+By the end of this course, students will be able to:
+• [Action verb + specific, measurable outcome — e.g., Analyze primary sources to construct an evidence-based argument]
+• [Action verb + specific, measurable outcome]
+• [Action verb + specific, measurable outcome]
+
+Use action verbs: analyze, evaluate, apply, design, create, compare, explain.
+Avoid: understand, learn about, appreciate, be aware of.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+REQUIRED MATERIALS
+• [Author (Year). Title (Edition). Publisher. ISBN.]
+• [Supplementary readings: available on course site at no cost]
+• Technology: [List any required software, platforms, or accounts]
+
+If the cost of required materials presents a financial barrier, please contact me. I will work with you to find alternatives.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+GRADING
+Assignment                              Weight    Due Date
+────────────────────────────────────────────────────────
+[Assignment 1 — descriptive name]         XX%     [Date + Timezone]
+[Assignment 2 — descriptive name]         XX%     [Date + Timezone]
+[Midterm Exam]                            XX%     [Date + Timezone]
+[Final Project / Exam]                    XX%     [Date + Timezone]
+Participation / Engagement                XX%     Ongoing
+────────────────────────────────────────────────────────
+Total                                    100%
+
+Grading Scale:
+A: 93–100 | A-: 90–92 | B+: 87–89 | B: 83–86 | B-: 80–82
+C+: 77–79 | C: 73–76  | C-: 70–72 | D: 60–69  | F: Below 60
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ACCESSIBILITY & ACCOMMODATIONS
+I am committed to making this course accessible to all students. If you have a disability and require academic accommodations, please contact [Office of Disability Services] at [phone / email / URL] to begin the accommodation process and receive a formal letter.
+
+Please submit your accommodation letter to me within the first two weeks of the semester, or as soon as it becomes available. Once I receive your letter, I will follow up to confirm how each accommodation will work in this course.
+
+If you experience any barrier to your learning — whether or not you have a formal diagnosis or documentation — I encourage you to reach out to me directly. You do not need to disclose your specific disability to ask for support.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+LATE WORK POLICY
+[State your policy clearly and specifically. Example: Assignments submitted after the deadline will be penalized 10% per calendar day, up to a maximum of 50%. After five days, assignments receive a zero. Extensions may be granted with advance notice and a documented reason — please contact me before the deadline.]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ACADEMIC INTEGRITY
+All work submitted must be your own. Cite all sources using [APA 7th / MLA / Chicago]. Collaboration is [describe what is and is not permitted].
+
+AI Tool Policy: [State your policy clearly — what tools are permitted, for what purposes, and how use must be disclosed.]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WELLNESS & SUPPORT
+Your health comes first. If you are struggling, please reach out:
+• Campus Counseling: [Name, phone, hours, website]
+• Crisis Support: 988 Suicide and Crisis Lifeline — call or text 988 (free, 24/7)
+• Basic Needs: [Food bank / emergency housing / financial aid contacts if applicable]
+
+You are always welcome to come talk to me if you are having difficulty.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+COURSE SCHEDULE
+This schedule is subject to change. Updates will be posted in the LMS.
+
+Week  | Date    | Topic                              | Due
+──────┼─────────┼────────────────────────────────────┼────────────────
+1     | [Date]  | Introduction & Course Overview     | Read Syllabus
+2     | [Date]  | [Topic]                            | [Reading/Task]
+3     | [Date]  | [Topic]                            | [Reading/Task]
+...   | ...     | ...                                | ...`
+  },
+  {
+    id:'statement', icon:'♿', name:'Accessibility Statement',
+    desc:'A standalone statement for use in syllabi, LMS pages, or any course document. Easy to copy into existing materials.',
+    tags:['Statement','LMS','Quick'],
+    content:`ACCESSIBILITY & ACCOMMODATION STATEMENT
+
+[Department / College Name] is committed to creating an inclusive learning environment for all students. If you have a disability and require accommodations, please contact the Office of Disability Services to request an accommodation letter:
+
+  Office of Disability Services
+  Address: [Building, Room Number]
+  Phone:   [XXX-XXX-XXXX]
+  Email:   [disability@institution.edu]
+  Website: [URL]
+  Hours:   Monday–Friday, [X AM–X PM]
+
+Once you have received your accommodation letter, please submit it to me as soon as possible — ideally within the first two weeks of the semester. After I receive your letter, we will meet to discuss how to implement your accommodations in this course.
+
+You do not need to disclose the specific nature of your disability to receive support. If you experience any barrier to your participation in this course, please reach out to me directly.
+
+Instructor: [Your Name]
+Email: [your.email@institution.edu]
+Office Hours: [Day/Time/Location]`
+  },
+  {
+    id:'rubric', icon:'📊', name:'Assignment Rubric',
+    desc:'An accessible rubric template using text-based performance descriptions and no color-only indicators. Works with screen readers.',
+    tags:['Assessment','Rubric','Word'],
+    content:`ASSIGNMENT RUBRIC
+Course:     [Course Number and Name]
+Assignment: [Assignment Name]
+Points:     [Total Points]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CRITERION 1: [Name — e.g., Thesis and Argument]   ([XX] pts)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Excellent (XX–XX pts)
+[Describe excellent performance concretely. What does the student do? What is present and how well is it executed?]
+
+Proficient (XX–XX pts)
+[Describe proficient work. What is present but limited? What one or two things would push this to Excellent?]
+
+Developing (XX–XX pts)
+[Describe work that shows effort but has significant gaps. What key elements are missing or poorly executed?]
+
+Beginning (XX–XX pts)
+[Describe work that has not yet met the basic requirements. What was attempted but not achieved?]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CRITERION 2: [Name — e.g., Use of Evidence]   ([XX] pts)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Excellent (XX–XX pts)   [Description]
+Proficient (XX–XX pts)  [Description]
+Developing (XX–XX pts)  [Description]
+Beginning (XX–XX pts)   [Description]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CRITERION 3: [Name — e.g., Organization & Clarity]   ([XX] pts)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Excellent (XX–XX pts)   [Description]
+Proficient (XX–XX pts)  [Description]
+Developing (XX–XX pts)  [Description]
+Beginning (XX–XX pts)   [Description]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CRITERION 4: [Name — e.g., Citations & Sources]   ([XX] pts)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Excellent (XX–XX pts)   [Description]
+Proficient (XX–XX pts)  [Description]
+Developing (XX–XX pts)  [Description]
+Beginning (XX–XX pts)   [Description]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SCORE SUMMARY
+Criterion 1: ___ / XX
+Criterion 2: ___ / XX
+Criterion 3: ___ / XX
+Criterion 4: ___ / XX
+Total:       ___ / [Total]
+
+INSTRUCTOR FEEDBACK:
+[Written comments here]`
+  },
+  {
+    id:'assignment', icon:'📝', name:'Assignment Brief',
+    desc:'Clear, accessible assignment instructions with explicit requirements, step-by-step submission directions, and contact guidance.',
+    tags:['Assignment','Instructions','LMS'],
+    content:`ASSIGNMENT BRIEF
+Course:      [Course Number and Name]
+Assignment:  [Assignment Name]
+Due:         [Full date + time + timezone — e.g., Friday, October 3, 2026 at 11:59 PM Eastern Time]
+Points:      [XX] | Weight: [XX%] of final grade
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+OVERVIEW
+[1–2 sentences describing the assignment and why it matters. Connect it to a course objective.]
+
+This assignment addresses Course Objective(s): [List relevant objectives]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WHAT TO DO
+[Use numbered steps for sequential tasks, or bullet points for independent requirements]
+
+1. [First task — use an active verb: "Read / Analyze / Write / Record..."]
+2. [Second task]
+3. [Third task]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+REQUIREMENTS
+• Length: [Specific range — e.g., 800–1,000 words, not counting references]
+• Format: [Font, size, spacing — e.g., 12pt Times New Roman, double-spaced, 1-inch margins]
+• Sources: [Minimum number and acceptable types]
+• Citation style: [APA 7th / MLA / Chicago]
+• File format: [PDF / .docx]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+HOW YOU WILL BE EVALUATED
+This assignment is graded using the [Assignment Name] Rubric (attached below / posted in LMS).
+
+Key criteria:
+• [Criterion 1 and what it means]
+• [Criterion 2 and what it means]
+• [Criterion 3 and what it means]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+HOW TO SUBMIT
+1. Log in to [LMS Name] at [URL]
+2. Go to [Course Name] → [Module] → [Assignment Name]
+3. Click "Submit Assignment"
+4. Upload your file as [PDF / .docx]
+5. Click "Submit" to confirm
+
+You will receive a confirmation email. If you do not receive one within 10 minutes, contact me before the deadline.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+QUESTIONS
+1. Review this brief and the rubric
+2. Post to the class discussion board so everyone can see the answer
+3. Email me at [email] for private questions
+
+Need an extension or accommodation? Contact me before the due date.`
+  },
+  {
+    id:'caption', icon:'🎬', name:'Caption Request Form',
+    desc:'Submit this form to Media Services to request professional captioning for course videos, with all required information.',
+    tags:['Multimedia','Captions','Form'],
+    content:`VIDEO CAPTIONING REQUEST FORM
+Department: [Department Name]
+Submit to:  [Media Services email or portal URL]
+Standard turnaround: [X] business days | Rush: [X] business days
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+REQUESTOR INFORMATION
+Name:             ___________________________________
+Course:           ___________________________________
+Email:            ___________________________________
+Date of request:  ___________________________________
+Needed by:        ___________________________________
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VIDEO INFORMATION
+Video title:      ___________________________________
+Video URL / file: ___________________________________
+Running time:     ___________________________________
+Language:         [ ] English   [ ] Other: __________
+
+Content type (check one):
+[ ] Recorded lecture          [ ] Tutorial / demonstration
+[ ] Guest speaker             [ ] Documentary / external content
+[ ] Interview / conversation  [ ] Other: _____________
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SPECIAL NOTES
+Technical terms, proper names, or acronyms the captioner should know:
+[List specialized vocabulary so captions are accurate]
+
+Speakers (if multiple):
+[List all speakers by name for accurate speaker identification]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+REQUEST TYPE
+[ ] New captions needed (no existing captions)
+[ ] Existing auto-captions need professional review and correction
+[ ] Translation needed — target language: ____________
+
+Priority:
+[ ] Standard (within [X] business days)
+[ ] Rush — reason: _________________________________
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DELIVERY
+Preferred format:   [ ] SRT   [ ] VTT   [ ] Embedded in video
+Return captions to: ___________________________________
+
+Signature: _____________________ Date: _______________`
+  },
+  {
+    id:'accom-email', icon:'📧', name:'Accommodation Response',
+    desc:'A professional email template for responding to student accommodation letters within 2 business days of receipt.',
+    tags:['Email','Communication','Accommodations'],
+    content:`EMAIL TEMPLATE — ACCOMMODATION LETTER RESPONSE
+
+Subject: Re: Accommodation Letter — [Course Name/Number]
+
+Dear [Student's preferred name],
+
+Thank you for sharing your accommodation letter from the Office of Disability Services. I have reviewed it carefully and am glad to support your participation in [Course Name].
+
+Based on your accommodation letter, I will provide the following:
+
+• [Accommodation 1 — describe specifically how you will implement it in this course]
+• [Accommodation 2 — describe specifically how you will implement it]
+• [Accommodation 3, if applicable]
+
+For any accommodation that requires advance scheduling — such as extended exam time or an alternative testing location — please contact me at least [X] business days before the relevant assessment so we can make the necessary arrangements.
+
+If you have any questions about how a specific accommodation will work in this course, please reach out so we can discuss it before it becomes an issue. My goal is to make this course fully accessible to you.
+
+I look forward to having you in class.
+
+Best,
+[Your Name]
+[Title]
+[Course Name/Number]
+[Email] | [Office Hours and Location]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NOTES FOR USE:
+— Send this email within 2 business days of receiving the letter
+— Keep a record of all letters received and your responses
+— Contact the Office of Disability Services if you are unsure how to implement any accommodation
+— Never ask students to justify or explain their disability beyond what is in the letter
+— Accommodation letters typically need to be renewed each academic year`
+  },
+];
+
+/* ════════════════════════════════════════════
+   STATE
+   ════════════════════════════════════════════ */
+const CIRC = 2 * Math.PI * 54; // ≈ 339.29 — ring circumference for r=54
+
+let S = {
+  courses: [],
+  audit: {}, // {courseId: {catId: {itemId: {status, notes}}}}
+  selected: null,
+};
+
+/* ════════════════════════════════════════════
+   PERSISTENCE
+   ════════════════════════════════════════════ */
+function load() {
+  try {
+    const raw = localStorage.getItem('ca_v3');
+    if (raw) { const p = JSON.parse(raw); S.courses = p.courses||[]; S.audit = p.audit||{}; }
+  } catch(e) {}
+}
+
+function persist() {
+  try { localStorage.setItem('ca_v3', JSON.stringify({courses:S.courses,audit:S.audit})); } catch(e) {}
+}
+
+function saveProgress() { persist(); toast('Progress saved'); }
+
+/* ════════════════════════════════════════════
+   SCORE HELPERS
+   ════════════════════════════════════════════ */
+function scoreColor(n) { return n >= 80 ? 'var(--teal)' : n >= 50 ? 'var(--amber)' : 'var(--coral)'; }
+
+function getStatus(cid,catid,iid) { return S.audit[cid]?.[catid]?.[iid]?.status || 'not-reviewed'; }
+function getNotes(cid,catid,iid)  { return S.audit[cid]?.[catid]?.[iid]?.notes || ''; }
+
+function setField(cid,catid,iid,field,val) {
+  if (!S.audit[cid]) S.audit[cid]={};
+  if (!S.audit[cid][catid]) S.audit[cid][catid]={};
+  if (!S.audit[cid][catid][iid]) S.audit[cid][catid][iid]={};
+  S.audit[cid][catid][iid][field]=val;
+  persist();
+}
+
+function calcScore(cid) {
+  let total=0, ok=0;
+  CATS.forEach(c=>c.items.forEach(i=>{ total++; if(getStatus(cid,c.id,i.id)==='compliant') ok++; }));
+  return total>0 ? Math.round((ok/total)*100) : 0;
+}
+
+function catProgress(cid,catid) {
+  const cat=CATS.find(c=>c.id===catid);
+  let done=0;
+  cat.items.forEach(i=>{ if(getStatus(cid,catid,i.id)!=='not-reviewed') done++; });
+  return {done, total:cat.items.length};
+}
+
+function totalItems() { return CATS.reduce((a,c)=>a+c.items.length,0); }
+
+function isAudited(cid) {
+  return CATS.every(c=>c.items.every(i=>getStatus(cid,c.id,i.id)!=='not-reviewed'));
+}
+
+function issueCount(cid) {
+  let n=0;
+  CATS.forEach(c=>c.items.forEach(i=>{ if(getStatus(cid,c.id,i.id)==='non-compliant') n++; }));
+  return n;
+}
+
+function deptAvg() {
+  if (!S.courses.length) return null;
+  return Math.round(S.courses.reduce((a,c)=>a+calcScore(c.id),0)/S.courses.length);
+}
+
+function getBadge(cid) {
+  const hasData = S.audit[cid] && Object.keys(S.audit[cid]).length>0;
+  if (!hasData) return {cls:'b-new', lbl:'Not started'};
+  if (issueCount(cid)>0) return {cls:'b-issue', lbl:'Issues found'};
+  const s=calcScore(cid);
+  if (s>=80 && isAudited(cid)) return {cls:'b-ok', lbl:'Compliant'};
+  return {cls:'b-prog', lbl:s+'% done'};
+}
+
+/* ════════════════════════════════════════════
+   NAVIGATION
+   ════════════════════════════════════════════ */
+function nav(id) {
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('view-'+id).classList.add('active');
+  document.getElementById('nav-'+id).classList.add('active');
+
+  const titles = {dashboard:'Dashboard',audit:'Course Audit',templates:'Templates',guidelines:'Guidelines',reports:'Reports'};
+  const rights = {
+    dashboard:`<button class="btn btn-primary" onclick="openAddCourse()">+ Add Course</button>`,
+    audit:`<button class="btn btn-ghost" onclick="saveProgress()">💾 Save Progress</button><button class="btn btn-primary" onclick="openAddCourse()">+ Add Course</button>`,
+    templates:``,
+    guidelines:``,
+    reports:`<button class="btn btn-ghost btn-sm" onclick="window.print()">🖨 Print Report</button>`,
+  };
+
+  document.getElementById('topbar-title').textContent = titles[id];
+  document.getElementById('topbar-right').innerHTML = rights[id]||'';
+
+  if (id==='dashboard') renderDash();
+  if (id==='audit')     renderAudit();
+  if (id==='templates') renderTemplates();
+  if (id==='reports')   renderReports();
+}
+
+/* ════════════════════════════════════════════
+   RENDER: DASHBOARD
+   ════════════════════════════════════════════ */
+function renderDash() {
+  const total = S.courses.length;
+  const audited = S.courses.filter(c=>isAudited(c.id)).length;
+  const issues = S.courses.reduce((a,c)=>a+issueCount(c.id),0);
+  const avg = deptAvg();
+
+  document.getElementById('s-total').textContent   = total;
+  document.getElementById('s-audited').textContent = audited;
+  document.getElementById('s-issues').textContent  = issues;
+  document.getElementById('s-score').textContent   = avg!==null ? avg+'%' : '—';
+  document.getElementById('sb-sub').textContent    = `${total} course${total!==1?'s':''} enrolled`;
+
+  // Ring
+  const arc = document.getElementById('ring-arc');
+  const val = document.getElementById('ring-val');
+  const cap = document.getElementById('ring-cap');
+  if (avg!==null) {
+    arc.style.strokeDashoffset = CIRC - (avg/100)*CIRC;
+    arc.style.stroke = scoreColor(avg);
+    val.textContent = avg+'%';
+    cap.textContent = avg>=80 ? 'Great progress — keep going!' : avg>=50 ? 'Making progress. Keep auditing.' : 'Needs attention. Start auditing today.';
+  } else {
+    arc.style.strokeDashoffset = CIRC;
+    arc.style.stroke = 'var(--border)';
+    val.textContent = '—';
+    cap.textContent = 'Add courses to see your department accessibility score.';
+  }
+
+  // Course list
+  const el = document.getElementById('dash-courses');
+  if (!total) {
+    el.innerHTML = `<div class="empty"><span class="empty-icon">📋</span><div class="empty-title">No courses yet</div><div class="empty-sub">Click "+ Add Course" to begin the pilot program.</div></div>`;
+    return;
+  }
+  el.innerHTML = S.courses.map(c=>{
+    const sc=calcScore(c.id), b=getBadge(c.id);
+    return `<div class="course-row" onclick="goAudit('${c.id}')">
+      <div class="cr-info"><div class="cr-name">${c.name}</div><div class="cr-code">${c.code}${c.sec?' · '+c.sec:''}${c.sem?' · '+c.sem:''}</div></div>
+      <div class="cr-right">
+        <div class="mini-bar"><div class="mini-fill" style="width:${sc}%;background:${scoreColor(sc)}"></div></div>
+        <span class="badge ${b.cls}">${b.lbl}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function goAudit(cid) { S.selected=cid; nav('audit'); }
+
+/* ════════════════════════════════════════════
+   RENDER: AUDIT
+   ════════════════════════════════════════════ */
+function renderAudit() {
+  const sel = document.getElementById('audit-sel');
+  const prev = S.selected || sel.value;
+  sel.innerHTML = '<option value="">— Choose a course —</option>' +
+    S.courses.map(c=>`<option value="${c.id}">${c.code} — ${c.name}</option>`).join('');
+  if (prev) sel.value = prev;
+
+  if (sel.value) {
+    S.selected = sel.value;
+    showAuditCourse(sel.value);
+  } else {
+    document.getElementById('audit-score-bar').style.display='none';
+    document.getElementById('audit-cats').innerHTML=`<div class="empty"><span class="empty-icon">✅</span><div class="empty-title">Select a course to begin</div><div class="empty-sub">Choose from the dropdown above, or add a new course first.</div></div>`;
+  }
+}
+
+function selectCourse(cid) {
+  S.selected = cid||null;
+  if (cid) showAuditCourse(cid);
+  else {
+    document.getElementById('audit-score-bar').style.display='none';
+    document.getElementById('audit-cats').innerHTML=`<div class="empty"><span class="empty-icon">✅</span><div class="empty-title">Select a course to begin</div><div class="empty-sub">Choose a course from the dropdown above.</div></div>`;
+  }
+}
+
+function showAuditCourse(cid) {
+  const course = S.courses.find(c=>c.id===cid);
+  if (!course) return;
+
+  // Pre-fill toolbar fields
+  document.getElementById('audit-faculty').value = course.auditor||course.fac||'';
+  document.getElementById('audit-date').value = course.auditDate || new Date().toISOString().slice(0,10);
+
+  // Score bar
+  const sc = calcScore(cid);
+  document.getElementById('audit-score-bar').style.display='flex';
+  const fill = document.getElementById('sb-fill');
+  fill.style.width=sc+'%'; fill.style.background=scoreColor(sc);
+  document.getElementById('sb-pct').textContent=sc+'%';
+
+  // Render categories
+  document.getElementById('audit-cats').innerHTML = CATS.map((cat,i)=>{
+    const pr = catProgress(cid,cat.id);
+    const rows = cat.items.map(item=>{
+      const st = getStatus(cid,cat.id,item.id);
+      const no = getNotes(cid,cat.id,item.id);
+      const sc_cls = st==='compliant'?'s-ok':st==='non-compliant'?'s-no':st==='in-progress'?'s-ip':'';
+      return `<div class="item-row">
+        <div><div class="item-txt">${item.text}</div><div class="item-tip">💡 ${item.tip}</div></div>
+        <select class="status-sel ${sc_cls}"
+          data-cid="${cid}" data-cat="${cat.id}" data-iid="${item.id}"
+          onchange="updateStatus(this)">
+          <option value="not-reviewed"${st==='not-reviewed'?' selected':''}>Not Reviewed</option>
+          <option value="in-progress"${st==='in-progress'?' selected':''}>In Progress</option>
+          <option value="compliant"${st==='compliant'?' selected':''}>✓ Compliant</option>
+          <option value="non-compliant"${st==='non-compliant'?' selected':''}>✗ Non-Compliant</option>
+        </select>
+        <textarea class="notes-ta"
+          data-cid="${cid}" data-cat="${cat.id}" data-iid="${item.id}"
+          placeholder="Notes (optional)..."
+          onblur="updateNotes(this)">${no}</textarea>
+      </div>`;
+    }).join('');
+    return `<div class="cat-card${i===0?' open':''}" id="cc-${cat.id}">
+      <div class="cat-hd" onclick="toggleCat('${cat.id}')">
+        <div class="cat-hd-l"><span class="cat-icon">${cat.icon}</span>
+          <div><div class="cat-title">${cat.title}</div><div class="cat-prog" id="cp-${cat.id}">${pr.done}/${pr.total} items reviewed</div></div>
+        </div>
+        <span class="cat-chev">▾</span>
+      </div>
+      <div class="cat-body">${rows}</div>
+    </div>`;
+  }).join('');
+}
+
+function toggleCat(id) { document.getElementById('cc-'+id).classList.toggle('open'); }
+
+function updateStatus(sel) {
+  const {cid,cat,iid} = sel.dataset;
+  const v = sel.value;
+  sel.className = 'status-sel' + (v==='compliant'?' s-ok':v==='non-compliant'?' s-no':v==='in-progress'?' s-ip':'');
+  setField(cid,cat,iid,'status',v);
+  refreshScoreBar(cid);
+  refreshCatProg(cid,cat);
+}
+
+function updateNotes(ta) {
+  const {cid,cat,iid} = ta.dataset;
+  setField(cid,cat,iid,'notes',ta.value);
+}
+
+function refreshScoreBar(cid) {
+  const sc=calcScore(cid);
+  const fill=document.getElementById('sb-fill');
+  if(fill){fill.style.width=sc+'%';fill.style.background=scoreColor(sc);}
+  const pct=document.getElementById('sb-pct');
+  if(pct) pct.textContent=sc+'%';
+}
+
+function refreshCatProg(cid,catid) {
+  const pr=catProgress(cid,catid);
+  const el=document.getElementById('cp-'+catid);
+  if(el) el.textContent=`${pr.done}/${pr.total} items reviewed`;
+}
+
+function saveFacultyField() {
+  if (!S.selected) return;
+  const c=S.courses.find(x=>x.id===S.selected);
+  if (c) { c.auditor=document.getElementById('audit-faculty').value; persist(); }
+}
+
+function saveDateField() {
+  if (!S.selected) return;
+  const c=S.courses.find(x=>x.id===S.selected);
+  if (c) { c.auditDate=document.getElementById('audit-date').value; persist(); }
+}
+
+/* ════════════════════════════════════════════
+   RENDER: TEMPLATES
+   ════════════════════════════════════════════ */
+function renderTemplates() {
+  document.getElementById('tmpl-grid').innerHTML = TEMPLATES.map(t=>`
+    <div class="tmpl-card">
+      <div class="tmpl-icon">${t.icon}</div>
+      <div class="tmpl-name">${t.name}</div>
+      <div class="tmpl-desc">${t.desc}</div>
+      <div class="tmpl-tags">${t.tags.map(g=>`<span class="tmpl-tag">${g}</span>`).join('')}</div>
+      <div class="tmpl-actions">
+        <button class="btn btn-ghost" onclick="previewTmpl('${t.id}')">Preview</button>
+        <button class="btn btn-amber" onclick="copyTmpl('${t.id}')">📋 Copy</button>
+      </div>
+    </div>`).join('');
+}
+
+let _activeTmpl = null;
+function previewTmpl(id) {
+  const t=TEMPLATES.find(x=>x.id===id); if(!t) return;
+  _activeTmpl=id;
+  document.getElementById('tmpl-modal-title').textContent=t.name;
+  document.getElementById('tmpl-preview').textContent=t.content;
+  openModal('modal-tmpl');
+}
+
+function copyActiveTmpl() { if(_activeTmpl) copyTmpl(_activeTmpl); }
+
+function copyTmpl(id) {
+  const t=TEMPLATES.find(x=>x.id===id); if(!t) return;
+  navigator.clipboard.writeText(t.content)
+    .then(()=>toast('Template copied!'))
+    .catch(()=>{ const ta=document.createElement('textarea');ta.value=t.content;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);toast('Template copied!'); });
+}
+
+/* ════════════════════════════════════════════
+   RENDER: REPORTS
+   ════════════════════════════════════════════ */
+function renderReports() {
+  const total=S.courses.length, avg=deptAvg();
+  const allIssues=S.courses.reduce((a,c)=>a+issueCount(c.id),0);
+
+  document.getElementById('rpt-stats').innerHTML=`
+    <div class="stat-card"><div class="stat-lbl">Total Courses</div><div class="stat-val">${total}</div><div class="stat-det">in pilot program</div></div>
+    <div class="stat-card"><div class="stat-lbl">Dept. Score</div><div class="stat-val" style="color:${avg!==null?scoreColor(avg):'var(--ink)'}">${avg!==null?avg+'%':'—'}</div><div class="stat-det">accessibility average</div></div>
+    <div class="stat-card"><div class="stat-lbl">Issues Flagged</div><div class="stat-val" style="color:${allIssues>0?'var(--coral)':'var(--green)'}">${allIssues}</div><div class="stat-det">non-compliant items</div></div>`;
+
+  if (!total) {
+    const empty=`<div class="empty"><span class="empty-icon">📊</span><div class="empty-title">No courses yet</div><div class="empty-sub">Add courses in the Dashboard to generate a report.</div></div>`;
+    document.getElementById('rpt-courses').innerHTML=empty;
+    document.getElementById('rpt-cats').innerHTML='';
+    return;
+  }
+
+  const ti=totalItems();
+  document.getElementById('rpt-courses').innerHTML=`<table class="rt">
+    <thead><tr><th>Course</th><th>Code</th><th>Faculty</th><th>Score</th><th>Reviewed</th><th>Issues</th><th>Status</th></tr></thead>
+    <tbody>${S.courses.map(c=>{
+      const sc=calcScore(c.id), b=getBadge(c.id);
+      let rev=0;
+      CATS.forEach(cat=>cat.items.forEach(i=>{ if(getStatus(c.id,cat.id,i.id)!=='not-reviewed') rev++; }));
+      return `<tr>
+        <td>${c.name}</td><td>${c.code}</td>
+        <td>${c.auditor||c.fac||'—'}</td>
+        <td><span class="sc-pill" style="background:${scoreColor(sc)}22;color:${scoreColor(sc)}">${sc}%</span></td>
+        <td>${rev}/${ti}</td>
+        <td style="color:${issueCount(c.id)>0?'var(--coral)':'var(--green)'};font-weight:700">${issueCount(c.id)}</td>
+        <td><span class="badge ${b.cls}">${b.lbl}</span></td>
+      </tr>`;
+    }).join('')}</tbody></table>`;
+
+  document.getElementById('rpt-cats').innerHTML=`<table class="rt">
+    <thead><tr><th>Category</th>${S.courses.map(c=>`<th>${c.code}</th>`).join('')}<th>Avg</th></tr></thead>
+    <tbody>${CATS.map(cat=>{
+      const scores=S.courses.map(c=>{
+        let ok=0; cat.items.forEach(i=>{ if(getStatus(c.id,cat.id,i.id)==='compliant') ok++; });
+        return Math.round((ok/cat.items.length)*100);
+      });
+      const avg=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length):0;
+      return `<tr>
+        <td><strong>${cat.icon} ${cat.title}</strong></td>
+        ${scores.map(s=>`<td><span style="color:${scoreColor(s)};font-weight:700">${s}%</span></td>`).join('')}
+        <td><span class="sc-pill" style="background:${scoreColor(avg)}22;color:${scoreColor(avg)}">${avg}%</span></td>
+      </tr>`;
+    }).join('')}</tbody></table>`;
+}
+
+/* ════════════════════════════════════════════
+   COURSES
+   ════════════════════════════════════════════ */
+function openAddCourse() {
+  ['nc-name','nc-code','nc-sec','nc-fac'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('nc-sem').value='Fall 2026';
+  openModal('modal-add');
+  setTimeout(()=>document.getElementById('nc-name').focus(),80);
+}
+
+function addCourse() {
+  const name=document.getElementById('nc-name').value.trim();
+  const code=document.getElementById('nc-code').value.trim();
+  if (!name||!code) { toast('Please enter a course name and code.'); return; }
+  const id='c_'+Date.now();
+  S.courses.push({ id, name, code,
+    sec: document.getElementById('nc-sec').value.trim(),
+    sem: document.getElementById('nc-sem').value.trim(),
+    fac: document.getElementById('nc-fac').value.trim(),
+    added: new Date().toISOString()
+  });
+  persist();
+  closeModal('modal-add');
+  toast('Course added ✓');
+  renderDash();
+}
+
+/* ════════════════════════════════════════════
+   MODALS
+   ════════════════════════════════════════════ */
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{ if(e.target===o) o.classList.remove('open'); }));
+document.getElementById('nc-fac').addEventListener('keydown',e=>{ if(e.key==='Enter') addCourse(); });
+
+/* ════════════════════════════════════════════
+   GUIDELINES
+   ════════════════════════════════════════════ */
+function showGuide(id,btn) {
+  document.querySelectorAll('.gsec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.gnav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('guide-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ════════════════════════════════════════════
+   TOAST
+   ════════════════════════════════════════════ */
+let _toastTimer;
+function toast(msg) {
+  document.getElementById('toast-msg').textContent=msg;
+  const el=document.getElementById('toast');
+  el.classList.add('show');
+  clearTimeout(_toastTimer);
+  _toastTimer=setTimeout(()=>el.classList.remove('show'),2800);
+}
+
+/* ════════════════════════════════════════════
+   INIT
+   ════════════════════════════════════════════ */
+load();
+nav('dashboard');
+renderTemplates();
+
+</script>
+</body>
+</html>
