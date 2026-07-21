@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Classroom to Instructional Designer — Your Step-by-Step Exit Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#A9D9EE;
+    --blue-ink:#1D5C74;
+    --red:#D7263D;
+    --red-deep:#93172A;
+    --pink:#F7C9DC;
+    --pink-deep:#C4577C;
+    --yellow:#FFD23F;
+    --yellow-deep:#8C6900;
+    --paper:#FFF8F1;
+    --paper-alt:#FFEFE1;
+    --ink:#241F2B;
+    --ink-soft:#5B5563;
+    --line: rgba(36,31,43,0.16);
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'Lora', serif;
+    --font-mono:'IBM Plex Mono', monospace;
+    --rail-w: 92px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:var(--font-display);
+    font-weight:700;
+    line-height:1.1;
+    margin:0 0 .5em;
+    letter-spacing:-0.01em;
+  }
+  p{margin:0 0 1.1em;}
+  a{color:var(--red);}
+  ::selection{background:var(--yellow); color:var(--ink);}
+
+  .skip-link{
+    position:absolute; left:-999px; top:0; background:var(--ink); color:#fff;
+    padding:10px 16px; z-index:200; font-family:var(--font-mono); font-size:13px;
+  }
+  .skip-link:focus{left:8px; top:8px;}
+
+  :focus-visible{outline:3px solid var(--blue-ink); outline-offset:2px;}
+
+  /* ---------- Rail navigation ---------- */
+  .rail{
+    position:fixed; left:0; top:0; bottom:0; width:var(--rail-w);
+    background:var(--ink); z-index:100;
+    display:flex; flex-direction:column;
+    overflow-y:auto; overflow-x:hidden;
+  }
+  .rail__progress{
+    padding:16px 10px 12px; text-align:center; border-bottom:1px solid rgba(255,255,255,0.14);
+  }
+  .rail__progress-track{
+    width:100%; height:5px; border-radius:3px; background:rgba(255,255,255,0.16); overflow:hidden; margin-bottom:8px;
+  }
+  .rail__progress-fill{
+    height:100%; width:0%; background:var(--yellow); transition:width .4s ease;
+  }
+  .rail__progress-label{
+    font-family:var(--font-mono); font-size:9.5px; letter-spacing:.05em; color:rgba(255,255,255,0.65); text-transform:uppercase;
+  }
+  .rail__tabs{display:flex; flex-direction:column; flex:1;}
+  .rail__tab{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;
+    padding:14px 4px; color:rgba(255,255,255,0.5); text-decoration:none;
+    border-left:3px solid transparent;
+    font-family:var(--font-mono); font-size:9.5px; letter-spacing:.05em; text-transform:uppercase;
+    text-align:center; transition:color .15s ease, border-color .15s ease, background .15s ease;
+    --accent: var(--yellow);
+  }
+  .rail__tab:hover, .rail__tab.active{
+    color:#fff; border-left-color:var(--accent); background:rgba(255,255,255,0.05);
+  }
+  .rail__tab-num{
+    font-family:var(--font-display); font-size:15px; font-weight:700; color:var(--accent);
+  }
+  .rail__foot{
+    padding:12px 8px 18px; font-family:var(--font-mono); font-size:8.5px; color:rgba(255,255,255,0.35);
+    text-align:center; letter-spacing:.04em; line-height:1.5;
+  }
+
+  @media (max-width: 780px){
+    :root{--rail-w:0px;}
+    .rail{
+      top:auto; bottom:0; left:0; right:0; width:100%; height:64px;
+      flex-direction:row; overflow-x:auto; overflow-y:hidden; align-items:stretch;
+    }
+    .rail__progress{display:none;}
+    .rail__tabs{flex-direction:row;}
+    .rail__tab{flex:0 0 auto; padding:8px 14px; border-left:none; border-top:3px solid transparent; min-width:64px;}
+    .rail__tab:hover, .rail__tab.active{border-left-color:transparent; border-top-color:var(--accent);}
+    .rail__foot{display:none;}
+    body{padding-bottom:64px;}
+  }
+
+  /* ---------- Layout ---------- */
+  .page{margin-left:var(--rail-w);}
+  @media (max-width:780px){ .page{margin-left:0;} }
+
+  section{padding:96px 24px; position:relative;}
+  @media (max-width:780px){ section{padding:64px 20px;} }
+  .section-inner{max-width:760px; margin:0 auto;}
+  .section-inner--wide{max-width:920px;}
+
+  section.alt{background:var(--paper-alt);}
+
+  /* Content is visible by default no matter what JS does. .reveal only ever
+     ADDS a brief entrance transition via .is-visible; it never hides anything
+     on its own, so a slow/blocked script can't leave content invisible. */
+  .reveal.is-visible{animation:fadeUp .5s ease both;}
+  @keyframes fadeUp{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
+  @media (prefers-reduced-motion: reduce){
+    .reveal.is-visible{animation:none;}
+  }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--font-mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--ink-soft); margin-bottom:16px;
+  }
+  .eyebrow::before{content:''; width:22px; height:2px; background:currentColor; display:inline-block;}
+
+  .h2{font-size:clamp(28px,4vw,40px); margin-bottom:.4em;}
+  .lede{font-family:var(--font-body); font-style:italic; font-size:20px; color:var(--ink-soft); max-width:56ch;}
+
+  /* ---------- Perforated tear divider ---------- */
+  .tear{
+    display:flex; align-items:center; gap:10px;
+    max-width:760px; margin:0 auto; padding:0 24px;
+    font-family:var(--font-mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-soft); opacity:.55;
+  }
+  .tear::before, .tear::after{content:''; flex:1; border-top:2px dashed var(--ink); opacity:.4;}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--font-mono); font-size:13px; letter-spacing:.04em; text-transform:uppercase;
+    padding:13px 22px; border-radius:8px; border:2px solid var(--ink); background:var(--ink); color:var(--paper);
+    cursor:pointer; text-decoration:none; transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px); box-shadow:0 6px 0 rgba(36,31,43,0.18);}
+  .btn--outline{background:transparent; color:var(--ink);}
+  .btn--red{background:var(--red); border-color:var(--red); color:#fff;}
+  .btn-row{display:flex; gap:12px; flex-wrap:wrap;}
+
+  /* ---------- Cards ---------- */
+  .card{
+    background:#fff; border:2px solid var(--ink); border-radius:14px; padding:22px 24px;
+    box-shadow:5px 5px 0 var(--line);
+  }
+  .card-grid{display:grid; gap:18px; margin:28px 0;}
+  .card-grid--2{grid-template-columns:repeat(2,1fr);}
+  .card-grid--3{grid-template-columns:repeat(3,1fr);}
+  @media (max-width:700px){ .card-grid--2, .card-grid--3{grid-template-columns:1fr;} }
+
+  .card h4{font-size:18px; margin-bottom:8px;}
+  .card .tag{
+    display:inline-block; font-family:var(--font-mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
+    padding:3px 9px; border-radius:20px; margin-bottom:10px; color:var(--ink);
+  }
+
+  /* ---------- Tables ---------- */
+  .table-wrap{overflow-x:auto; margin:28px 0; border:2px solid var(--ink); border-radius:14px;}
+  table{border-collapse:collapse; width:100%; min-width:560px; background:#fff;}
+  th,td{text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); vertical-align:top; font-size:15.5px;}
+  th{
+    font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    background:var(--ink); color:var(--paper);
+  }
+  tr:last-child td{border-bottom:none;}
+  tr:nth-child(even) td{background:var(--paper-alt);}
+
+  /* ---------- Worksheet / Reflect / Tip blocks ---------- */
+  .worksheet{
+    border:2px dashed var(--ink); border-radius:14px; padding:22px 24px; margin:26px 0; background:#fff;
+  }
+  .worksheet__label{
+    font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--red); font-weight:600; margin-bottom:10px; display:flex; align-items:center; gap:8px;
+  }
+  .worksheet__label::before{content:'✎'; font-size:14px;}
+  .field-label{display:block; font-family:var(--font-mono); font-size:12.5px; color:var(--ink-soft); margin:14px 0 6px;}
+  .field-label:first-of-type{margin-top:0;}
+  textarea, input[type=text]{
+    width:100%; font-family:var(--font-body); font-size:15.5px; color:var(--ink);
+    border:none; border-bottom:2px solid var(--line); background:transparent; padding:8px 2px;
+    resize:vertical; font-style:italic;
+  }
+  textarea:focus, input[type=text]:focus{border-bottom-color:var(--red); outline:none;}
+  textarea::placeholder, input[type=text]::placeholder{color:#B9B2C2; font-style:italic;}
+
+  .reflect{
+    background:var(--yellow); border-radius:2px 14px 14px 14px; padding:22px 24px; margin:30px 6px;
+    box-shadow:6px 8px 0 rgba(36,31,43,0.12); transform:rotate(-1deg);
+    position:relative;
+  }
+  .reflect:nth-of-type(even){transform:rotate(1deg);}
+  .reflect__label{
+    font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; font-weight:600; margin-bottom:10px;
+  }
+  .reflect textarea{border-bottom-color:rgba(36,31,43,0.35); background:rgba(255,255,255,0.35); border-radius:6px; padding:10px;}
+  .reflect textarea:focus{border-bottom-color:var(--ink);}
+
+  .tip{
+    border-left:5px solid var(--blue-ink); background:var(--blue); border-radius:0 12px 12px 0;
+    padding:16px 20px; margin:24px 0; font-size:15.5px;
+  }
+  .tip strong{font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; display:block; margin-bottom:6px;}
+
+  /* ---------- Checklist ---------- */
+  .checklist{list-style:none; padding:0; margin:20px 0;}
+  .checklist li{
+    display:flex; align-items:flex-start; gap:12px; padding:11px 0; border-bottom:1px solid var(--line);
+    font-size:16px;
+  }
+  .checklist li:last-child{border-bottom:none;}
+  .checklist input[type=checkbox]{
+    appearance:none; width:22px; height:22px; min-width:22px; border:2px solid var(--ink); border-radius:6px;
+    margin-top:2px; cursor:pointer; position:relative; background:#fff;
+  }
+  .checklist input[type=checkbox]:checked{background:var(--red); border-color:var(--red);}
+  .checklist input[type=checkbox]:checked::after{
+    content:''; position:absolute; left:6px; top:2px; width:6px; height:11px;
+    border:solid #fff; border-width:0 2px 2px 0; transform:rotate(40deg);
+  }
+  .checklist label{cursor:pointer;}
+
+  /* ---------- Hall pass (hero signature) ---------- */
+  .hallpass{
+    display:inline-flex; flex-direction:column; gap:6px; background:#fff; border:2px solid var(--ink);
+    border-radius:10px; padding:18px 22px 16px; transform:rotate(-3deg); box-shadow:7px 9px 0 var(--red);
+    position:relative; margin-top:8px;
+  }
+  .hallpass::before{
+    content:''; position:absolute; top:-9px; left:50%; transform:translateX(-50%);
+    width:18px; height:18px; border-radius:50%; background:var(--paper); border:2px solid var(--ink);
+  }
+  .hallpass__eyebrow{font-family:var(--font-mono); font-size:11px; letter-spacing:.12em; color:var(--red); font-weight:600;}
+  .hallpass__row{font-family:var(--font-mono); font-size:13px; color:var(--ink-soft);}
+  .hallpass__row b{color:var(--ink);}
+
+  /* ---------- Utility ---------- */
+  .kicker-list{margin:22px 0; padding-left:0; list-style:none;}
+  .kicker-list li{padding-left:30px; position:relative; margin-bottom:12px; font-size:16.5px;}
+  .kicker-list li::before{content:'—'; position:absolute; left:0; color:var(--red); font-weight:700;}
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:32px;}
+  @media (max-width:700px){.two-col{grid-template-columns:1fr;}}
+  .center{text-align:center;}
+  .mt0{margin-top:0;}
+
+  @media print{
+    .rail, .skip-link, .btn-row{display:none !important;}
+    .page{margin-left:0 !important;}
+    body{background:#fff;}
+    * {-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    section{padding:28px 6px; page-break-inside:avoid;}
+    section.alt{page-break-before:always;}
+    .reveal{opacity:1 !important; transform:none !important;}
+    .card, .worksheet, .reflect{box-shadow:none !important;}
+    textarea{border:1px solid var(--line); min-height:2.4em;}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#top">Skip to workbook content</a>
+
+<nav class="rail" aria-label="Workbook sections">
+  <div class="rail__progress">
+    <div class="rail__progress-track"><div class="rail__progress-fill" id="progressFill"></div></div>
+    <div class="rail__progress-label" id="progressLabel">0% complete</div>
+  </div>
+  <div class="rail__tabs">
+    <a class="rail__tab" href="#top" style="--accent:var(--yellow)"><span class="rail__tab-num">·</span>Start</a>
+    <a class="rail__tab" href="#part1" style="--accent:var(--blue)"><span class="rail__tab-num">1</span>Map</a>
+    <a class="rail__tab" href="#part2" style="--accent:var(--yellow)"><span class="rail__tab-num">2</span>Translate</a>
+    <a class="rail__tab" href="#part3" style="--accent:var(--pink)"><span class="rail__tab-num">3</span>Portfolio</a>
+    <a class="rail__tab" href="#part4" style="--accent:var(--red)"><span class="rail__tab-num">4</span>Resume</a>
+    <a class="rail__tab" href="#part5" style="--accent:var(--blue)"><span class="rail__tab-num">5</span>Apply</a>
+    <a class="rail__tab" href="#bonus" style="--accent:var(--yellow)"><span class="rail__tab-num">+</span>Bonus</a>
+    <a class="rail__tab" href="#exit" style="--accent:var(--red)"><span class="rail__tab-num">✓</span>Exit Pass</a>
+  </div>
+  <div class="rail__foot">© Rayene<br>Medabis</div>
+</nav>
+
+<main class="page">
+
+<section id="top" style="padding-top:64px;">
+  <div class="section-inner">
+    <div class="eyebrow">A workbook for teachers who are ready</div>
+    <h1 style="font-size:clamp(34px,6vw,58px); max-width:14ch;">From Classroom to Instructional&nbsp;Designer</h1>
+    <p class="lede" style="margin-top:14px;">Your step-by-step exit plan — for translating everything you already know how to do into a career that uses it differently.</p>
+
+    <div class="hallpass">
+      <div class="hallpass__eyebrow">ADMIT ONE — NO EXPERIENCE REQUIRED</div>
+      <div class="hallpass__row">FROM: <b>The Classroom</b></div>
+      <div class="hallpass__row">TO: <b>Instructional Design</b></div>
+      <div class="hallpass__row">VALID: <b>Starting today</b></div>
+    </div>
+
+    <p style="margin-top:40px; max-width:60ch;">Let's get one thing straight before you turn another page: you are not starting from zero. You are not "just a teacher trying to break into a real career." You have spent years doing needs analysis, learner-centered design, stakeholder management, and iterative content development — you just called it "lesson planning" and "parent emails." This workbook exists to translate what you already know into language the hiring world recognizes, and then to help you build the proof.</p>
+    <p style="max-width:60ch;">This isn't a pep talk. It's a plan. Grab something to write with — every part of this workbook expects you to actually do something in it, not just nod along.</p>
+
+    <div class="tip" style="margin-top:36px; max-width:60ch;">
+      <strong>How to use this workbook</strong>
+      Work through Parts 1–5 in order the first time — each one builds on the last. After that, jump around using the tabs on the left (or the bar at the bottom, if you're on your phone). Your answers stay on the page as you type. When you're ready, use the <em>Download My Answers</em> button near the end to save everything as a text file — nothing here is stored anywhere but your own device.
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="who">
+  <div class="section-inner">
+    <div class="eyebrow" style="color:var(--red-deep);">Before we start</div>
+    <h2 class="h2">This workbook is for you if…</h2>
+    <ul class="checklist">
+      <li><input type="checkbox" class="progress-check" id="w1"><label for="w1">You've mentally drafted your resignation letter during a staff meeting. More than once.</label></li>
+      <li><input type="checkbox" class="progress-check" id="w2"><label for="w2">You've said "I just need a change" so many times your friends have stopped asking follow-up questions.</label></li>
+      <li><input type="checkbox" class="progress-check" id="w3"><label for="w3">You've heard the term "instructional design" and thought, <em>that sounds like me, but I have no idea if I'm "qualified."</em></label></li>
+      <li><input type="checkbox" class="progress-check" id="w4"><label for="w4">You want to keep using the parts of teaching you're actually good at — and lose the parts that are burning you out.</label></li>
+      <li><input type="checkbox" class="progress-check" id="w5"><label for="w5">You're done dreaming about it. You want to start building it.</label></li>
+    </ul>
+    <p style="margin-top:8px; color:var(--ink-soft);">Checked two or more? Good. Keep going — the rail on the left tracks your progress through the whole workbook, not just this page.</p>
+  </div>
+</section>
+
+<section id="part1">
+  <div class="section-inner">
+    <div class="eyebrow">Part 1 of 5</div>
+    <h2 class="h2">Map the Field</h2>
+    <p class="lede">"Instructional design" isn't one job. It's a whole neighborhood of jobs — and you need to know which house you're knocking on before you can dress for the interview.</p>
+
+    <p>Here's the short version: teaching is about delivering learning live, one room at a time, usually to people who didn't choose to be there. Instructional design is about <em>architecting</em> learning — building the course, module, or resource once, so it can teach well without you standing next to it. Same underlying skill (helping people learn something they didn't know before). Different delivery mechanism, different audience, and — this part matters — usually a very different paycheck and schedule.</p>
+
+    <p>You don't need to pick a lane forever. You do need to pick one to aim at first, because it changes what your portfolio, resume, and applications should emphasize.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Role</th><th>What you'd actually do</th><th>Where you'd work</th><th>Your closest teaching skill</th><th>Good fit if…</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Instructional Designer</strong><br>(Corporate L&amp;D)</td>
+            <td>Build onboarding, compliance, or skills training for employees</td>
+            <td>Corporations, agencies, consulting firms</td>
+            <td>Curriculum &amp; lesson planning</td>
+            <td>You like solving business problems, not just delivering content</td>
+          </tr>
+          <tr>
+            <td><strong>eLearning Developer</strong></td>
+            <td>Build interactive online modules in an authoring tool</td>
+            <td>Corporate L&amp;D teams, agencies</td>
+            <td>Tech-forward materials, edtech integration</td>
+            <td>You enjoy "building," not just designing on paper</td>
+          </tr>
+          <tr>
+            <td><strong>Curriculum Designer</strong><br>(K-12 / Higher Ed / EdTech)</td>
+            <td>Design scope &amp; sequence, units, and assessments</td>
+            <td>Schools, districts, edtech companies, publishers</td>
+            <td>Curriculum mapping, unit planning</td>
+            <td>You want off the floor, but not out of education entirely</td>
+          </tr>
+          <tr>
+            <td><strong>Learning Experience Designer</strong><br>(LXD)</td>
+            <td>Design the learner's journey, engagement, and motivation — sits closer to UX</td>
+            <td>Tech companies, edtech, larger L&amp;D teams</td>
+            <td>Engagement strategy, differentiation</td>
+            <td>You're drawn to the creative and human-centered side</td>
+          </tr>
+          <tr>
+            <td><strong>L&amp;D Specialist / Consultant</strong></td>
+            <td>Needs analysis, program design, sometimes delivery</td>
+            <td>Corporations, consulting firms</td>
+            <td>PD delivery, training facilitation</td>
+            <td>You still want some time facilitating live, not just building</td>
+          </tr>
+          <tr>
+            <td><strong>Instructional Technologist</strong><br>/ LMS Administrator</td>
+            <td>Manage the systems and tools that deliver training</td>
+            <td>Schools, corporate L&amp;D, higher ed</td>
+            <td>You're the one everyone asks for edtech help</td>
+            <td>You love systems, tools, and troubleshooting</td>
+          </tr>
+          <tr>
+            <td><strong>Performance Consultant</strong></td>
+            <td>Diagnose <em>why</em> performance is falling short before recommending training (sometimes the answer isn't training at all)</td>
+            <td>Consulting firms, corporate strategy/HR teams</td>
+            <td>Data-driven instruction, root-cause thinking</td>
+            <td>You like asking "will this actually fix it?" before you build anything</td>
+          </tr>
+          <tr>
+            <td><strong>Freelance / Contract ID</strong></td>
+            <td>All of the above, across multiple clients, on your own terms</td>
+            <td>Self-employed</td>
+            <td>Everything above, plus running your own classroom like a small business</td>
+            <td>You want autonomy and don't mind the hustle of finding clients</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip">
+      <strong>Where the field is heading</strong>
+      AI hasn't replaced instructional designers — but it has raised the bar. Employers increasingly expect comfort with AI-assisted workflows (drafting scripts, generating quiz variations, building branching scenarios faster), and portfolios that show you can direct those tools well tend to stand out. The core skill hiring managers still care about most is the same one you already have: knowing what actually helps someone learn.
+    </div>
+
+    <div class="reflect">
+      <div class="reflect__label">Reflect</div>
+      <p style="margin-bottom:14px;">Look back at the table. Circle — or just notice — two or three roles that make your stomach do a little flip. The good kind. Why these? What is it about the day-to-day that's pulling you?</p>
+      <textarea rows="4" placeholder="The roles that caught my attention were… because…" data-field="Part 1 — Career paths that caught my attention, and why"></textarea>
+    </div>
+  </div>
+</section>
+
+<div class="tear">tear along the dotted line</div>
+
+<section class="alt" id="part2">
+  <div class="section-inner">
+    <div class="eyebrow" style="color:var(--yellow-deep);">Part 2 of 5</div>
+    <h2 class="h2">Translate Your Experience</h2>
+    <p class="lede">You are already doing roughly 80% of this job. Nobody ever handed you the dictionary for it. Here it is.</p>
+
+    <p>Hiring managers outside education don't know what "differentiated instruction" means, and they will not Google it. They also don't know that it's a harder, more sophisticated skill than most corporate "audience segmentation" work. Your job in this section isn't to learn new skills — it's to relabel the ones you have so a stranger reading your resume for eight seconds understands their value immediately.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>What you say as a teacher</th><th>What it means in instructional design</th></tr></thead>
+        <tbody>
+          <tr><td>Lesson planning</td><td>Instructional design / storyboarding</td></tr>
+          <tr><td>Differentiated instruction</td><td>Learner-centered design; adaptive content design</td></tr>
+          <tr><td>Scaffolding</td><td>Chunking content; progressive disclosure</td></tr>
+          <tr><td>Formative assessment (quizzes, exit tickets)</td><td>Embedded assessment; knowledge checks</td></tr>
+          <tr><td>Summative assessment (exams, projects)</td><td>Evaluation design; performance assessment</td></tr>
+          <tr><td>Classroom management</td><td>Facilitation strategy; behavior-change design</td></tr>
+          <tr><td>IEP / 504 accommodations</td><td>Accessibility design; UDL (Universal Design for Learning) implementation</td></tr>
+          <tr><td>Curriculum mapping</td><td>Learning path design; curriculum architecture</td></tr>
+          <tr><td>Parent-teacher conferences</td><td>Stakeholder communication &amp; reporting</td></tr>
+          <tr><td>Grading rubrics</td><td>Assessment criteria; rubric design</td></tr>
+          <tr><td>Delivering PD to colleagues</td><td>Training facilitation; train-the-trainer</td></tr>
+          <tr><td>Writing lesson objectives</td><td>Writing learning objectives (often using an ABCD framework: Audience, Behavior, Condition, Degree)</td></tr>
+          <tr><td>Using classroom tech / Google Classroom</td><td>LMS implementation and administration</td></tr>
+          <tr><td>Student engagement strategies</td><td>Learner engagement / motivation design</td></tr>
+          <tr><td>Peer observation &amp; mentoring</td><td>Instructional coaching; performance consulting</td></tr>
+          <tr><td>Reading assessment data to adjust instruction</td><td>Needs analysis; data-informed design</td></tr>
+          <tr><td>Teaching a mixed-ability classroom</td><td>Designing for a diverse learner population</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="worksheet">
+      <div class="worksheet__label">Worksheet — Translate Your Own Experience</div>
+      <p style="margin-top:0; color:var(--ink-soft);">The table above is a starting dictionary, not the whole language. Fill in three things you personally do that aren't listed above.</p>
+      <span class="field-label">1. What I actually did as a teacher</span>
+      <textarea rows="2" placeholder="e.g., Built a shared resource bank for my grade-level team" data-field="Part 2 — Translation worksheet, item 1: what I did"></textarea>
+      <span class="field-label">→ How I'd describe it in ID language</span>
+      <textarea rows="2" placeholder="e.g., Developed and maintained a shared content repository for a five-person instructional team" data-field="Part 2 — Translation worksheet, item 1: ID language"></textarea>
+
+      <span class="field-label" style="margin-top:24px;">2. What I actually did as a teacher</span>
+      <textarea rows="2" data-field="Part 2 — Translation worksheet, item 2: what I did"></textarea>
+      <span class="field-label">→ How I'd describe it in ID language</span>
+      <textarea rows="2" data-field="Part 2 — Translation worksheet, item 2: ID language"></textarea>
+
+      <span class="field-label" style="margin-top:24px;">3. What I actually did as a teacher</span>
+      <textarea rows="2" data-field="Part 2 — Translation worksheet, item 3: what I did"></textarea>
+      <span class="field-label">→ How I'd describe it in ID language</span>
+      <textarea rows="2" data-field="Part 2 — Translation worksheet, item 3: ID language"></textarea>
+    </div>
+
+    <h3 style="margin-top:48px; font-size:22px;">Two frameworks worth knowing before your first interview</h3>
+    <div class="card-grid card-grid--2">
+      <div class="card">
+        <span class="tag" style="background:var(--blue);">Framework</span>
+        <h4>ADDIE</h4>
+        <p style="margin-bottom:0; font-size:15px;"><strong>A</strong>nalyze the problem and audience → <strong>D</strong>esign the objectives and structure → <strong>D</strong>evelop the actual materials → <strong>I</strong>mplement with real learners → <strong>E</strong>valuate what worked. It's the classic, linear ID process — and if you've ever planned, taught, and reflected on a unit, you've already run this cycle.</p>
+      </div>
+      <div class="card">
+        <span class="tag" style="background:var(--pink);">Framework</span>
+        <h4>SAM</h4>
+        <p style="margin-bottom:0; font-size:15px;">The Successive Approximation Model — a faster, more iterative alternative to ADDIE. Build a rough draft fast, get feedback, revise, repeat. Many corporate teams favor it because it ships usable training sooner. Mentioning both in an interview signals you've done your homework.</p>
+      </div>
+    </div>
+
+    <div class="reflect">
+      <div class="reflect__label">Reflect</div>
+      <p style="margin-bottom:14px;">What's the one thing you do as a teacher that feels so normal to you, you'd almost be embarrassed to call it a "skill" — but that most people outside a classroom couldn't do in a hundred years? That's not a humble-brag question. That's your differentiator.</p>
+      <textarea rows="4" placeholder="The thing I do without thinking twice that's actually rare is…" data-field="Part 2 — My hidden differentiator"></textarea>
+    </div>
+  </div>
+</section>
+
+<div class="tear">tear along the dotted line</div>
+
+<section id="part3">
+  <div class="section-inner">
+    <div class="eyebrow" style="color:var(--pink-deep);">Part 3 of 5</div>
+    <h2 class="h2">Build Your Portfolio</h2>
+    <p class="lede">In this field, your portfolio doesn't support your resume. It <em>is</em> your resume. Hiring managers want to see how you think, not read a list of adjectives about it.</p>
+
+    <p>Here's the good news: you don't need "real" ID experience to build one. You need three to five honest, well-documented projects that show your process — not fifteen rushed ones that show your desperation. Quality and range beat quantity every time.</p>
+
+    <h3 style="font-size:22px;">A strong portfolio project shows four things</h3>
+    <ul class="kicker-list">
+      <li><strong>The problem</strong> — who needed to learn what, and why it mattered</li>
+      <li><strong>Your process</strong> — how you analyzed it and made design decisions (this is what separates a designer from someone who just made a pretty slide deck)</li>
+      <li><strong>The solution</strong> — what you actually built</li>
+      <li><strong>The (intended) impact</strong> — how you'd measure whether it worked, even if this one's hypothetical for now</li>
+    </ul>
+
+    <h3 style="font-size:22px; margin-top:40px;">Six projects you can start this month with what you already have</h3>
+    <div class="card-grid card-grid--2">
+      <div class="card">
+        <span class="tag" style="background:var(--blue);">Project idea</span>
+        <h4>Redesign a favorite lesson as an eLearning storyboard</h4>
+        <p style="font-size:15px; margin-bottom:0;">Take a unit you know cold and rebuild it as a self-paced module: screens, narration script, and interactions.</p>
+      </div>
+      <div class="card">
+        <span class="tag" style="background:var(--pink);">Project idea</span>
+        <h4>Turn a worksheet into an interactive mini-module</h4>
+        <p style="font-size:15px; margin-bottom:0;">Rebuild a favorite activity in Canva, H5P, or Articulate Rise so it's clickable, not printable.</p>
+      </div>
+      <div class="card">
+        <span class="tag" style="background:var(--yellow);">Project idea</span>
+        <h4>Formalize a new-teacher onboarding module</h4>
+        <p style="font-size:15px; margin-bottom:0;">If you've ever informally trained a new colleague, you already have the raw material for a real onboarding project.</p>
+      </div>
+      <div class="card">
+        <span class="tag" style="background:var(--red); color:#fff;">Project idea</span>
+        <h4>Convert a curriculum unit into a full ID document</h4>
+        <p style="font-size:15px; margin-bottom:0;">Needs analysis, learning objectives, assessment plan, and a sample storyboard — this is the piece that proves you understand the whole process, not just the pretty parts.</p>
+      </div>
+      <div class="card">
+        <span class="tag" style="background:var(--blue);">Project idea</span>
+        <h4>Script a microlearning video from a 5-minute reteach</h4>
+        <p style="font-size:15px; margin-bottom:0;">Take a concept you've re-explained a dozen times and turn it into a tight 3–5 minute video script and storyboard.</p>
+      </div>
+      <div class="card">
+        <span class="tag" style="background:var(--pink);">Project idea</span>
+        <h4>Design one AI-enabled learning experience</h4>
+        <p style="font-size:15px; margin-bottom:0;">A simple branching scenario or a custom AI tutor persona shows employers you're comfortable directing today's tools, not just aware of them.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:22px; margin-top:44px;">Tools worth learning (you don't need all of them)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Category</th><th>Tools</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Industry standard</strong></td><td>Articulate 360 (Storyline + Rise)</td><td>What most job postings name-check; offers a free trial, worth storyboarding first so your trial month counts</td></tr>
+          <tr><td><strong>Free / low-cost alternatives</strong></td><td>Canva, H5P, ActivePresenter, iSpring</td><td>Genuinely capable, and a smart choice while you're job hunting on a teacher's budget</td></tr>
+          <tr><td><strong>Video &amp; animation</strong></td><td>Vyond, Camtasia, Powtoon</td><td>For microlearning and explainer-style projects</td></tr>
+          <tr><td><strong>Still very relevant</strong></td><td>PowerPoint</td><td>Yes, really — a huge amount of real storyboarding still happens here first</td></tr>
+          <tr><td><strong>For LXD-leaning roles</strong></td><td>Figma</td><td>If you're drawn to the UX side of the field, this is worth learning early</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:22px; margin-top:44px;">Where to host it</h3>
+    <p>A simple, working portfolio beats a beautiful, unfinished one. In rough order of speed to launch:</p>
+    <ul class="kicker-list">
+      <li><strong>Notion</strong> — free, fast, and increasingly common in this exact field</li>
+      <li><strong>Google Sites</strong> — free, simple, no design skills required</li>
+      <li><strong>Wix / Squarespace / Carrd</strong> — low-cost, more polish, more control</li>
+      <li><strong>LinkedIn Featured section</strong> — not a replacement, but a solid minimum-viable version while you build the real thing</li>
+    </ul>
+
+    <div class="worksheet">
+      <div class="worksheet__label">Worksheet — Portfolio Project Planner</div>
+      <p style="margin-top:0; color:var(--ink-soft);">Plan your first two projects. Be specific — vague plans are how "someday" projects stay unbuilt.</p>
+      <span class="field-label">Project 1 — title &amp; the problem it solves</span>
+      <textarea rows="2" data-field="Part 3 — Portfolio project 1: title and problem"></textarea>
+      <span class="field-label">Tools I'll use / Target completion date</span>
+      <textarea rows="1" data-field="Part 3 — Portfolio project 1: tools and deadline"></textarea>
+
+      <span class="field-label" style="margin-top:22px;">Project 2 — title &amp; the problem it solves</span>
+      <textarea rows="2" data-field="Part 3 — Portfolio project 2: title and problem"></textarea>
+      <span class="field-label">Tools I'll use / Target completion date</span>
+      <textarea rows="1" data-field="Part 3 — Portfolio project 2: tools and deadline"></textarea>
+    </div>
+
+    <div class="worksheet">
+      <div class="worksheet__label">Template — Case Study Write-Up</div>
+      <p style="margin-top:0; color:var(--ink-soft);">Use this structure for every project page in your portfolio.</p>
+      <span class="field-label">The Challenge — who's the audience, what did they need to learn?</span>
+      <textarea rows="2" data-field="Part 3 — Case study template: the challenge"></textarea>
+      <span class="field-label">My Process — how did you analyze it and decide on an approach?</span>
+      <textarea rows="2" data-field="Part 3 — Case study template: my process"></textarea>
+      <span class="field-label">The Solution — what did you actually build?</span>
+      <textarea rows="2" data-field="Part 3 — Case study template: the solution"></textarea>
+      <span class="field-label">The Impact — how would you (or did you) measure success?</span>
+      <textarea rows="2" data-field="Part 3 — Case study template: the impact"></textarea>
+    </div>
+  </div>
+</section>
+
+<div class="tear">tear along the dotted line</div>
+
+<section class="alt" id="part4">
+  <div class="section-inner">
+    <div class="eyebrow" style="color:var(--red-deep);">Part 4 of 5</div>
+    <h2 class="h2">Write a Resume That Stands Out</h2>
+    <p class="lede">A teaching resume says "responsible for." An ID resume says "designed," "built," "reduced," "increased." Same person. Different dialect.</p>
+
+    <h3 style="font-size:22px;">Structure it like this</h3>
+    <ol style="padding-left:20px; font-size:16.5px;">
+      <li style="margin-bottom:10px;"><strong>Headline / summary</strong> — two to three lines pitching your transferable value. Not "former teacher seeking a new challenge."</li>
+      <li style="margin-bottom:10px;"><strong>Core skills</strong> — a keyword-rich line: instructional design methods (ADDIE, SAM), tools, and one or two soft skills that actually matter (stakeholder communication, needs analysis).</li>
+      <li style="margin-bottom:10px;"><strong>Portfolio link</strong> — near the top, not buried at the bottom. For a career changer, this is doing more work than any bullet point.</li>
+      <li style="margin-bottom:10px;"><strong>Experience</strong> — translated using Part 2's dictionary, with metrics wherever you honestly have them.</li>
+      <li><strong>Education &amp; certifications</strong> — your degree still counts. List it plainly; don't apologize for it not saying "instructional design."</li>
+    </ol>
+
+    <h3 style="font-size:22px; margin-top:40px;">Before → After</h3>
+    <p>These are templates, not scripts — swap in your own numbers wherever you see brackets.</p>
+
+    <div class="card-grid" style="grid-template-columns:1fr; gap:14px;">
+      <div class="card">
+        <p style="margin-bottom:6px; color:var(--ink-soft); font-size:14.5px;"><strong>Before:</strong> Planned and delivered daily lessons for 30 students across mixed ability levels.</p>
+        <p style="margin-bottom:0; font-size:15.5px;"><strong>After:</strong> Designed and facilitated differentiated instruction for a segmented learner group of 30, adapting content delivery to meet [X] distinct proficiency levels.</p>
+      </div>
+      <div class="card">
+        <p style="margin-bottom:6px; color:var(--ink-soft); font-size:14.5px;"><strong>Before:</strong> Created assessments to track student progress.</p>
+        <p style="margin-bottom:0; font-size:15.5px;"><strong>After:</strong> Designed formative and summative assessment tools aligned to learning objectives, using performance data to iteratively revise instructional content.</p>
+      </div>
+      <div class="card">
+        <p style="margin-bottom:6px; color:var(--ink-soft); font-size:14.5px;"><strong>Before:</strong> Trained new teachers during onboarding.</p>
+        <p style="margin-bottom:0; font-size:15.5px;"><strong>After:</strong> Developed and facilitated onboarding training for [X] new hires, including a reference guide and walkthrough videos, cutting new-hire ramp-up time by [X]%.</p>
+      </div>
+      <div class="card">
+        <p style="margin-bottom:6px; color:var(--ink-soft); font-size:14.5px;"><strong>Before:</strong> Managed classroom behavior and built a positive learning environment.</p>
+        <p style="margin-bottom:0; font-size:15.5px;"><strong>After:</strong> Applied engagement-design and behavior-change strategies to build a learning environment with measurably higher participation and fewer disruptions.</p>
+      </div>
+      <div class="card">
+        <p style="margin-bottom:6px; color:var(--ink-soft); font-size:14.5px;"><strong>Before:</strong> Used Google Classroom and other tech tools daily.</p>
+        <p style="margin-bottom:0; font-size:15.5px;"><strong>After:</strong> Administered and optimized LMS workflows (Google Classroom) for [X]+ users, including content organization, progress tracking, and troubleshooting.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:22px; margin-top:44px;">What one page could look like</h3>
+    <div class="card" style="font-family:var(--font-body);">
+      <div style="border-bottom:2px solid var(--ink); padding-bottom:12px; margin-bottom:14px;">
+        <p style="font-family:var(--font-display); font-weight:700; font-size:20px; margin:0;">Sam Whitfield</p>
+        <p style="margin:4px 0 0; color:var(--ink-soft); font-size:14px;">Instructional Designer (in transition from K–8 classroom teaching) · portfolio.samwhitfield.com · sam@email.com</p>
+      </div>
+      <p style="font-style:italic; margin-bottom:14px; font-size:15px;">Learning designer with 7 years translating complex content into instruction that sticks, now building for adult and corporate audiences. Skilled in needs analysis, storyboarding, and accessible content design.</p>
+      <p style="font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:6px;">Core skills</p>
+      <p style="font-size:14.5px; margin-bottom:14px;">ADDIE &amp; SAM · Storyboarding · Articulate Rise · Canva · Needs Analysis · UDL / Accessibility Design · Stakeholder Communication</p>
+      <p style="font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:6px;">Experience</p>
+      <p style="font-size:14.5px; margin-bottom:2px;"><strong>Lead Teacher, Grades 4–5</strong> — Riverside School (2019–2026)</p>
+      <p style="font-size:14.5px; margin-bottom:0;">Designed differentiated instruction for 90+ students across three sections; built and facilitated onboarding training for 6 new hires; administered LMS workflows for the grade-level team.</p>
+    </div>
+
+    <div class="tip">
+      <strong>One ATS note</strong>
+      This workbook is meant to look like this. Your actual submitted resume shouldn't — applicant tracking systems choke on tables, graphics, and columns. Keep the file you upload clean and text-based, and mirror keywords from the job posting itself.
+    </div>
+
+    <div class="worksheet">
+      <div class="worksheet__label">Worksheet — Bullet Point Translator</div>
+      <span class="field-label">Before (paste one of your current resume bullets)</span>
+      <textarea rows="2" data-field="Part 4 — Bullet translator 1: before"></textarea>
+      <span class="field-label">After (rewrite it in ID language)</span>
+      <textarea rows="2" data-field="Part 4 — Bullet translator 1: after"></textarea>
+
+      <span class="field-label" style="margin-top:22px;">Before</span>
+      <textarea rows="2" data-field="Part 4 — Bullet translator 2: before"></textarea>
+      <span class="field-label">After</span>
+      <textarea rows="2" data-field="Part 4 — Bullet translator 2: after"></textarea>
+
+      <span class="field-label" style="margin-top:22px;">Before</span>
+      <textarea rows="2" data-field="Part 4 — Bullet translator 3: before"></textarea>
+      <span class="field-label">After</span>
+      <textarea rows="2" data-field="Part 4 — Bullet translator 3: after"></textarea>
+    </div>
+  </div>
+</section>
+
+<div class="tear">tear along the dotted line</div>
+
+<section id="part5">
+  <div class="section-inner">
+    <div class="eyebrow" style="color:var(--blue-ink);">Part 5 of 5</div>
+    <h2 class="h2">Apply &amp; Interview With Confidence</h2>
+    <p class="lede">Quality beats quantity. Twenty tailored applications will outperform two hundred copy-pasted ones — and they'll cost you less of your sanity.</p>
+
+    <h3 style="font-size:22px;">Where to actually look</h3>
+    <div class="card-grid card-grid--2">
+      <div class="card"><span class="tag" style="background:var(--blue);">General</span><h4>LinkedIn Jobs, Indeed, Glassdoor</h4><p style="font-size:15px; margin-bottom:0;">Biggest volume; use filters aggressively so you're not wading through unrelated roles.</p></div>
+      <div class="card"><span class="tag" style="background:var(--pink);">Niche &amp; L&amp;D-specific</span><h4>ATD Job Bank, eLearning Industry, Instructional Design Central, Teamed</h4><p style="font-size:15px; margin-bottom:0;">Smaller volume, higher relevance — these are worth checking weekly.</p></div>
+      <div class="card"><span class="tag" style="background:var(--yellow);">Academic-leaning</span><h4>HigherEdJobs, EdTech.com</h4><p style="font-size:15px; margin-bottom:0;">Good if you want to stay closer to K–12 or higher-ed curriculum work.</p></div>
+      <div class="card"><span class="tag" style="background:var(--red); color:#fff;">The one that actually works best</span><h4>Referrals &amp; direct outreach</h4><p style="font-size:15px; margin-bottom:0;">Roles are often filled before they're widely posted. A warm introduction skips the queue entirely — more on this in the Bonus section.</p></div>
+    </div>
+
+    <h3 style="font-size:22px; margin-top:44px;">Common interview questions — and how to think about them</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>They ask</th><th>Your angle as a former teacher</th></tr></thead>
+        <tbody>
+          <tr><td>"Walk me through your design process."</td><td>Structure your answer around ADDIE or SAM, even if you never called it that while you were doing it.</td></tr>
+          <tr><td>"Tell me about designing for a difficult or resistant audience."</td><td>Classroom management stories translate directly — reframe the audience as "learners with low initial buy-in."</td></tr>
+          <tr><td>"How do you handle feedback from stakeholders or subject matter experts?"</td><td>Parent communication, admin feedback, and peer coaching are all stakeholder management. Say so.</td></tr>
+          <tr><td>"Walk us through a project in your portfolio."</td><td>Rehearse the Challenge → Process → Solution → Impact structure for each piece until it's second nature.</td></tr>
+          <tr><td>"How do you measure whether training worked?"</td><td>Connect directly to your formative/summative assessment experience.</td></tr>
+          <tr><td>"What tools have you used?"</td><td>Be honest. Emphasize that you're a fast, self-directed learner — and point to a portfolio piece as proof.</td></tr>
+          <tr><td>"Why are you leaving teaching?"</td><td>Frame it as moving <em>toward</em> something, not fleeing something. Talk about what draws you to ID, not what exhausted you about the classroom.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip">
+      <strong>The design challenge</strong>
+      Many ID interviews include a take-home exercise — "storyboard a 10-minute module on X." Use ADDIE as visible scaffolding in your response so your thinking is easy to follow. Don't overbuild for a timed exercise; a clear, well-reasoned partial solution beats a rushed, polished one. If you're allowed to ask clarifying questions first, ask them — it's exactly the instinct a real ID needs.
+    </div>
+
+    <div class="reflect">
+      <div class="reflect__label">Reflect</div>
+      <p style="margin-bottom:14px;">If someone asked you right now, "why are you leaving teaching for this?" — what's your honest, forward-facing answer? Write the version you'd actually say out loud in an interview.</p>
+      <textarea rows="4" placeholder="I'm moving toward instructional design because…" data-field="Part 5 — My honest answer to 'why are you leaving teaching?'"></textarea>
+    </div>
+  </div>
+</section>
+
+<div class="tear">tear along the dotted line</div>
+
+<section class="alt" id="bonus" style="padding-bottom:48px;">
+  <div class="section-inner center">
+    <div class="eyebrow" style="justify-content:center; color:var(--yellow-deep);">Bonus material</div>
+    <h2 class="h2">Everything Else That Helps</h2>
+    <p class="lede" style="margin:0 auto;">LinkedIn prompts, a 30-day plan, the mindset stuff nobody puts in the job-search guide, and a glossary so you're never caught nodding along to an acronym you don't know.</p>
+  </div>
+</section>
+
+<section id="linkedin" style="padding-top:24px;">
+  <div class="section-inner">
+    <div class="eyebrow" style="color:var(--yellow-deep);">Bonus — LinkedIn</div>
+    <h2 class="h2" style="font-size:30px;">Optimize Your LinkedIn</h2>
+    <p>Recruiters search LinkedIn before they read your resume. Treat your profile like your first portfolio piece.</p>
+
+    <h3 style="font-size:19px;">Headline formulas</h3>
+    <div class="card-grid" style="grid-template-columns:1fr;">
+      <div class="card"><p style="margin:0; font-family:var(--font-mono); font-size:14.5px;">Teacher turned Instructional Designer | Building learner-centered training for [industry you want]</p></div>
+      <div class="card"><p style="margin:0; font-family:var(--font-mono); font-size:14.5px;">Instructional Designer in training | 7 years turning classrooms into learning experiences that work</p></div>
+      <div class="card"><p style="margin:0; font-family:var(--font-mono); font-size:14.5px;">[Your subject] Teacher → Instructional Designer | I help teams build training people actually finish</p></div>
+    </div>
+
+    <h3 style="font-size:19px; margin-top:32px;">About section — fill-in-the-blank template</h3>
+    <div class="worksheet">
+      <span class="field-label">Hook — one relatable line</span>
+      <textarea rows="2" placeholder="e.g., I've written more lesson plans than I can count — and every one of them was an instructional design document I just never called by that name." data-field="Bonus — LinkedIn About: hook"></textarea>
+      <span class="field-label">Bridge — what you did, translated</span>
+      <textarea rows="2" data-field="Bonus — LinkedIn About: bridge"></textarea>
+      <span class="field-label">Turn — why instructional design, specifically</span>
+      <textarea rows="2" data-field="Bonus — LinkedIn About: turn"></textarea>
+      <span class="field-label">Proof — a project, skill, or credential</span>
+      <textarea rows="2" data-field="Bonus — LinkedIn About: proof"></textarea>
+      <span class="field-label">Call to action — what you're looking for + your portfolio link</span>
+      <textarea rows="2" data-field="Bonus — LinkedIn About: call to action"></textarea>
+    </div>
+
+    <h3 style="font-size:19px; margin-top:32px;">Five post prompts to demonstrate ID thinking while you search</h3>
+    <ul class="kicker-list">
+      <li>Break down a lesson you taught using the ADDIE model, step by step.</li>
+      <li>Share one classroom skill you didn't realize was a "real" ID skill until you translated it — and how you found the language for it.</li>
+      <li>Post a mini case study of a portfolio project: the problem, your process, what you built.</li>
+      <li>React to an L&amp;D trend or article with your teacher's-eye perspective — you'll notice things career IDs miss.</li>
+      <li>Document the transition publicly: "Day 12 of learning Articulate Storyline — here's what surprised me."</li>
+    </ul>
+  </div>
+</section>
+
+<section class="alt" id="plan">
+  <div class="section-inner">
+    <div class="eyebrow" style="color:var(--red-deep);">Bonus — Action Plan</div>
+    <h2 class="h2" style="font-size:30px;">Your 30-Day Action Plan</h2>
+    <p>You don't need a year. You need four focused weeks and a little consistency. Check items off as you go — your progress bar on the left is tracking this too.</p>
+
+    <div class="card" style="margin-bottom:18px; border-color:var(--blue-ink);">
+      <h4 style="color:var(--blue-ink);">Week 1 — Foundation</h4>
+      <ul class="checklist">
+        <li><input type="checkbox" class="progress-check" id="wk1a"><label for="wk1a">Complete Parts 1 &amp; 2 of this workbook</label></li>
+        <li><input type="checkbox" class="progress-check" id="wk1b"><label for="wk1b">Choose your top two target career paths</label></li>
+        <li><input type="checkbox" class="progress-check" id="wk1c"><label for="wk1c">Update your LinkedIn headline</label></li>
+      </ul>
+    </div>
+
+    <div class="card" style="margin-bottom:18px; border-color:var(--yellow-deep);">
+      <h4 style="color:var(--yellow-deep);">Week 2 — Build</h4>
+      <ul class="checklist">
+        <li><input type="checkbox" class="progress-check" id="wk2a"><label for="wk2a">Pick your first two portfolio projects</label></li>
+        <li><input type="checkbox" class="progress-check" id="wk2b"><label for="wk2b">Start building project 1</label></li>
+        <li><input type="checkbox" class="progress-check" id="wk2c"><label for="wk2c">Learn the basics of one new tool</label></li>
+      </ul>
+    </div>
+
+    <div class="card" style="margin-bottom:18px; border-color:var(--pink-deep);">
+      <h4 style="color:var(--pink-deep);">Week 3 — Package</h4>
+      <ul class="checklist">
+        <li><input type="checkbox" class="progress-check" id="wk3a"><label for="wk3a">Finish portfolio project 1</label></li>
+        <li><input type="checkbox" class="progress-check" id="wk3b"><label for="wk3b">Rewrite your resume using Part 4</label></li>
+        <li><input type="checkbox" class="progress-check" id="wk3c"><label for="wk3c">Set up your portfolio host page</label></li>
+      </ul>
+    </div>
+
+    <div class="card" style="border-color:var(--red);">
+      <h4 style="color:var(--red);">Week 4 — Launch</h4>
+      <ul class="checklist">
+        <li><input type="checkbox" class="progress-check" id="wk4a"><label for="wk4a">Finish portfolio project 2, if time allows</label></li>
+        <li><input type="checkbox" class="progress-check" id="wk4b"><label for="wk4b">Start applying — aim for quality over volume each week</label></li>
+        <li><input type="checkbox" class="progress-check" id="wk4c"><label for="wk4c">Send three networking or informational-interview requests</label></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="mindset">
+  <div class="section-inner">
+    <div class="eyebrow" style="color:var(--pink-deep);">Bonus — Mindset</div>
+    <h2 class="h2" style="font-size:30px;">The Fears Nobody Puts in the Job Guide</h2>
+
+    <div class="two-col" style="margin-top:24px;">
+      <div>
+        <h4>"I don't have an ID degree."</h4>
+        <p style="font-size:15.5px;">Most postings list "or equivalent experience" for a reason — employers increasingly weigh a strong portfolio and tool proficiency over a specific degree title. Your master's still counts. Your portfolio is the "equivalent experience."</p>
+      </div>
+      <div>
+        <h4>"I'm too experienced in teaching to start over."</h4>
+        <p style="font-size:15.5px;">You're not starting over. You're transferring. Nobody transferring a decade of expertise into a new label is starting at zero — Part 2 of this workbook is proof.</p>
+      </div>
+      <div>
+        <h4>"I can't afford to just quit."</h4>
+        <p style="font-size:15.5px;">You don't have to. Most successful transitions happen while still employed — building the portfolio on evenings and weekends, applying once it's ready. There's no prize for leaping without a landing spot.</p>
+      </div>
+      <div>
+        <h4>"What if I'm not creative enough?"</h4>
+        <p style="font-size:15.5px;">You planned 180 days of instruction a year on a budget of index cards and hope. You are creative enough. This field rewards clear thinking more than it rewards flair.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tear">tear along the dotted line</div>
+
+<section class="alt" id="glossary">
+  <div class="section-inner">
+    <div class="eyebrow" style="color:var(--blue-ink);">Bonus — Glossary</div>
+    <h2 class="h2" style="font-size:30px;">The ID Glossary</h2>
+    <p>Twenty terms that'll come up in interviews and job postings, so you're never quietly Googling under the table.</p>
+
+    <div class="card-grid card-grid--2" style="margin-top:8px;">
+      <div class="card"><h4 style="font-size:16px;">ADDIE</h4><p style="font-size:14.5px; margin:0;">Analyze, Design, Develop, Implement, Evaluate — the classic ID process model.</p></div>
+      <div class="card"><h4 style="font-size:16px;">SAM</h4><p style="font-size:14.5px; margin:0;">Successive Approximation Model — a faster, iterative alternative to ADDIE.</p></div>
+      <div class="card"><h4 style="font-size:16px;">LMS</h4><p style="font-size:14.5px; margin:0;">Learning Management System — the platform that hosts and tracks training (e.g., Google Classroom, Moodle, Cornerstone).</p></div>
+      <div class="card"><h4 style="font-size:16px;">LXP</h4><p style="font-size:14.5px; margin:0;">Learning Experience Platform — a more learner-driven, Netflix-style cousin of the LMS.</p></div>
+      <div class="card"><h4 style="font-size:16px;">SCORM</h4><p style="font-size:14.5px; margin:0;">A technical standard that lets eLearning content "talk" to an LMS and report completion/scores.</p></div>
+      <div class="card"><h4 style="font-size:16px;">xAPI (Tin Can)</h4><p style="font-size:14.5px; margin:0;">A newer standard for tracking learning experiences beyond just an LMS — including real-world and informal learning.</p></div>
+      <div class="card"><h4 style="font-size:16px;">UDL</h4><p style="font-size:14.5px; margin:0;">Universal Design for Learning — designing accessibly from the start, not retrofitting later.</p></div>
+      <div class="card"><h4 style="font-size:16px;">Bloom's Taxonomy</h4><p style="font-size:14.5px; margin:0;">A hierarchy of cognitive skill levels (remember → understand → apply → analyze → evaluate → create), used to write learning objectives.</p></div>
+      <div class="card"><h4 style="font-size:16px;">ILT / VILT</h4><p style="font-size:14.5px; margin:0;">Instructor-Led Training / Virtual ILT — live facilitation, in person or online.</p></div>
+      <div class="card"><h4 style="font-size:16px;">Microlearning</h4><p style="font-size:14.5px; margin:0;">Short, focused learning content — usually under five minutes, built around one objective.</p></div>
+      <div class="card"><h4 style="font-size:16px;">Rapid authoring</h4><p style="font-size:14.5px; margin:0;">Building eLearning quickly using tools like Rise or Storyline, rather than custom code.</p></div>
+      <div class="card"><h4 style="font-size:16px;">Storyboard</h4><p style="font-size:14.5px; margin:0;">A screen-by-screen plan of a module's content, visuals, and interactions before it's built.</p></div>
+      <div class="card"><h4 style="font-size:16px;">Needs analysis</h4><p style="font-size:14.5px; margin:0;">Figuring out whether training is actually the right solution, and what it needs to cover if so.</p></div>
+      <div class="card"><h4 style="font-size:16px;">Gap analysis</h4><p style="font-size:14.5px; margin:0;">Comparing current performance to desired performance to define what training must close.</p></div>
+      <div class="card"><h4 style="font-size:16px;">KSA</h4><p style="font-size:14.5px; margin:0;">Knowledge, Skills, and Abilities — the building blocks a learning objective is meant to build.</p></div>
+      <div class="card"><h4 style="font-size:16px;">Stakeholder</h4><p style="font-size:14.5px; margin:0;">Anyone with a say in the training — your manager, an SME, a client. Think: admin, parent, or department head.</p></div>
+      <div class="card"><h4 style="font-size:16px;">SME</h4><p style="font-size:14.5px; margin:0;">Subject Matter Expert — the person who knows the content; your job is to know how people learn it.</p></div>
+      <div class="card"><h4 style="font-size:16px;">Learning objective</h4><p style="font-size:14.5px; margin:0;">A specific, measurable statement of what a learner will be able to do afterward.</p></div>
+      <div class="card"><h4 style="font-size:16px;">Kirkpatrick Model</h4><p style="font-size:14.5px; margin:0;">Four levels of evaluating training: Reaction, Learning, Behavior, Results.</p></div>
+      <div class="card"><h4 style="font-size:16px;">Job aid</h4><p style="font-size:14.5px; margin:0;">A quick-reference tool (checklist, one-pager) that supports performance in the moment, instead of a full course.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="exit">
+  <div class="section-inner center">
+    <div class="eyebrow" style="justify-content:center; color:var(--red-deep);">The last page</div>
+    <h2 class="h2">Your Exit Pass</h2>
+    <p class="lede" style="margin:0 auto 8px;">Fill this out like you mean it. Then go do the first thing on it.</p>
+  </div>
+
+  <div class="section-inner" style="max-width:820px;">
+    <div class="card" style="box-shadow:8px 10px 0 var(--red); border-width:2px; padding:0; overflow:hidden; text-align:left;">
+      <div style="display:grid; grid-template-columns:120px 1fr;" id="passGrid">
+        <div style="background:var(--ink); color:var(--paper); padding:20px 14px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; border-right:2px dashed rgba(255,255,255,0.4);">
+          <span style="font-family:var(--font-mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; text-align:center; opacity:.7;">Keep<br>this<br>stub</span>
+          <span style="font-family:var(--font-display); font-size:26px; font-weight:700; color:var(--yellow);">✓</span>
+        </div>
+        <div style="padding:26px 28px;">
+          <div style="font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--red); font-weight:600; margin-bottom:16px;">Admit One — Exit Plan Certificate</div>
+
+          <span class="field-label" style="margin-top:0;">My name</span>
+          <input type="text" placeholder="Type your name" data-field="Exit Pass — Name">
+
+          <span class="field-label">The career path I'm aiming at first</span>
+          <input type="text" placeholder="e.g., Instructional Designer, Corporate L&D" data-field="Exit Pass — Target career path">
+
+          <span class="field-label">My top 3 actions this month</span>
+          <textarea rows="3" placeholder="1. …&#10;2. …&#10;3. …" data-field="Exit Pass — Top 3 actions this month"></textarea>
+
+          <span class="field-label">Who will know if I don't follow through (my accountability partner)</span>
+          <input type="text" placeholder="Name of a person, not a vague 'myself'" data-field="Exit Pass — Accountability partner">
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:18px;">
+            <div>
+              <span class="field-label" style="margin-top:0;">Signature</span>
+              <input type="text" placeholder="Sign here" data-field="Exit Pass — Signature" style="font-family:var(--font-display); font-size:19px;">
+            </div>
+            <div>
+              <span class="field-label" style="margin-top:0;">Date</span>
+              <input type="text" placeholder="DD / MM / YYYY" data-field="Exit Pass — Date">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row center" style="justify-content:center; margin-top:32px;">
+      <button class="btn btn--red" onclick="downloadAnswers()">Download My Answers</button>
+      <button class="btn btn--outline" onclick="window.print()">Print This Workbook</button>
+    </div>
+
+    <p class="center" style="margin-top:40px; color:var(--ink-soft); font-size:15px; max-width:56ch; margin-left:auto; margin-right:auto;">You didn't need permission to leave the classroom. But if it helps to have something that looks official — there it is. Now go build the thing that gets you out the door on your own terms.</p>
+
+    <div style="text-align:center; margin-top:56px; padding-top:24px; border-top:2px solid var(--line); font-family:var(--font-mono); font-size:11.5px; letter-spacing:.05em; color:var(--ink-soft);">
+      From Classroom to Instructional Designer: Your Step-by-Step Exit Plan<br>
+      © Rayene Medabis. All rights reserved.
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+
+  // Active tab + reveal-on-scroll
+  var sections = document.querySelectorAll('main > section[id]');
+  var railLinks = document.querySelectorAll('.rail__tab');
+  if('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          var id = entry.target.getAttribute('id');
+          railLinks.forEach(function(l){
+            l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, {rootMargin:'-35% 0px -50% 0px', threshold:0});
+    sections.forEach(function(s){
+      s.classList.add('reveal');
+      obs.observe(s);
+    });
+  } else {
+    sections.forEach(function(s){ s.classList.add('is-visible'); });
+  }
+
+  // Progress tracking
+  function updateProgress(){
+    var fields = document.querySelectorAll('[data-field]');
+    var checks = document.querySelectorAll('.progress-check');
+    var total = fields.length + checks.length;
+    var done = 0;
+    fields.forEach(function(f){ if(f.value && f.value.trim().length > 0) done++; });
+    checks.forEach(function(c){ if(c.checked) done++; });
+    var pct = total ? Math.round((done/total)*100) : 0;
+    var fill = document.getElementById('progressFill');
+    var label = document.getElementById('progressLabel');
+    if(fill) fill.style.width = pct + '%';
+    if(label) label.textContent = pct + '% complete';
+  }
+  document.querySelectorAll('[data-field]').forEach(function(f){
+    f.addEventListener('input', updateProgress);
+  });
+  document.querySelectorAll('.progress-check').forEach(function(c){
+    c.addEventListener('change', updateProgress);
+  });
+  updateProgress();
+
+  // Download answers as a text file
+  window.downloadAnswers = function(){
+    var fields = document.querySelectorAll('[data-field]');
+    var out = 'MY CLASSROOM-TO-ID EXIT PLAN — MY ANSWERS\n';
+    out += new Date().toLocaleDateString() + '\n';
+    out += '================================================\n\n';
+    fields.forEach(function(f){
+      var label = f.getAttribute('data-field');
+      var val = (f.value && f.value.trim()) ? f.value.trim() : '(not answered yet)';
+      out += label + '\n' + val + '\n\n------------------------------------------------\n\n';
+    });
+    var blob = new Blob([out], {type:'text/plain'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'my-exit-plan-answers.txt';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+});
+</script>
+</body>
+</html>
