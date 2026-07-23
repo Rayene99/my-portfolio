@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<!-- saved from url=(0105)file:///C:/Users/rayen/OneDrive/Documents/My%20Portfolio/Training%20Materials/english-learning-guide.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Master English — The Complete Learning System</title>
+<link href="./Master English — The Complete Learning System_files/css2" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --paper: #f5f0e8;
+    --cream: #ede8db;
+    --accent: #c8400f;
+    --gold: #c49a2c;
+    --muted: #7a7065;
+    --rule: #d4cfc4;
+    --highlight: #f0e6c8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* ── MASTHEAD ──────────────────────────────── */
+  .masthead {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .masthead-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 80px 32px 60px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .masthead-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .masthead h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 9vw, 96px);
+    font-weight: 900;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+  }
+
+  .masthead h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .masthead-sub {
+    font-size: 17px;
+    color: #b0a898;
+    max-width: 520px;
+    line-height: 1.65;
+    margin-bottom: 40px;
+  }
+
+  .masthead-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #2a2a2a;
+    border-top: 1px solid #2a2a2a;
+    margin-top: 60px;
+  }
+
+  .masthead-stat {
+    background: var(--ink);
+    padding: 20px 24px;
+  }
+
+  .masthead-stat .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .masthead-stat .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: #6a6460;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* BIG background text */
+  .masthead-bg-text {
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    transform: translateY(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 300px;
+    font-weight: 900;
+    color: #1a1a1a;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    z-index: 1;
+  }
+
+  /* ── NAV ──────────────────────────────────── */
+  .toc-bar {
+    background: var(--accent);
+    padding: 0 32px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    overflow-x: auto;
+  }
+
+  .toc-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .toc-inner a {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    padding: 13px 16px;
+    white-space: nowrap;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+    border-right: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .toc-inner a:first-child { border-left: 1px solid rgba(255,255,255,0.15); }
+  .toc-inner a:hover { opacity: 1; }
+
+  /* ── LAYOUT ───────────────────────────────── */
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ── SECTION DIVIDERS ─────────────────────── */
+  .section-break {
+    padding: 80px 0 0;
+  }
+
+  .section-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  /* ── INTRO PULL QUOTE ─────────────────────── */
+  .intro-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 60px;
+    padding: 48px;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .intro-block .pull-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-style: italic;
+    line-height: 1.35;
+    color: var(--gold);
+    border-left: 3px solid var(--accent);
+    padding-left: 24px;
+    display: flex;
+    align-items: center;
+  }
+
+  .intro-block .intro-text {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #b0a898;
+  }
+
+  .intro-block .intro-text strong {
+    color: var(--paper);
+    font-weight: 500;
+  }
+
+  /* ── TECHNIQUE CARDS ──────────────────────── */
+  .technique-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--rule);
+    margin-bottom: 2px;
+  }
+
+  .technique-card {
+    background: var(--paper);
+    padding: 36px;
+    position: relative;
+    transition: background 0.2s;
+  }
+
+  .technique-card:hover {
+    background: var(--highlight);
+  }
+
+  .tc-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: var(--rule);
+    line-height: 1;
+    position: absolute;
+    top: 20px;
+    right: 24px;
+  }
+
+  .tc-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .tc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    max-width: 260px;
+  }
+
+  .tc-body {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #4a4540;
+    margin-bottom: 20px;
+  }
+
+  .tc-how {
+    background: var(--cream);
+    padding: 16px 20px;
+    border-left: 3px solid var(--gold);
+    margin-top: 16px;
+  }
+
+  .tc-how-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .tc-how p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #3a3530;
+  }
+
+  .tc-steps {
+    list-style: none;
+    padding: 0;
+    margin-top: 12px;
+  }
+
+  .tc-steps li {
+    font-size: 13px;
+    line-height: 1.65;
+    color: #3a3530;
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 6px;
+  }
+
+  .tc-steps li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 11px;
+  }
+
+  /* ── FULL-WIDTH CARD ──────────────────────── */
+  .full-card {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 48px;
+    margin-bottom: 2px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .full-card-left .fc-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 120px;
+    font-weight: 900;
+    color: #1e1e1e;
+    line-height: 1;
+    margin-bottom: -16px;
+  }
+
+  .full-card-left .tc-tag { color: var(--gold); }
+
+  .full-card-left .tc-title {
+    font-size: 32px;
+    color: var(--paper);
+    max-width: none;
+  }
+
+  .full-card-right .tc-body { color: #8a8480; }
+
+  .full-card-how {
+    background: #1a1a1a;
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    margin-top: 16px;
+  }
+
+  .full-card-how .tc-how-label { color: var(--accent); }
+  .full-card-how p, .full-card-how li { color: #9a9490; }
+  .full-card-how li::before { color: var(--gold) !important; }
+
+  /* ── SCHEDULE TABLE ───────────────────────── */
+  .schedule-wrap {
+    margin: 48px 0;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead th {
+    background: var(--ink);
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 14px 16px;
+    text-align: left;
+  }
+
+  tbody tr:nth-child(even) { background: var(--cream); }
+  tbody tr:hover { background: var(--highlight); }
+
+  tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  tbody td:first-child {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    white-space: nowrap;
+    font-weight: 500;
+  }
+
+  /* ── PILLARS ROW ──────────────────────────── */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: var(--rule);
+    margin: 48px 0;
+  }
+
+  .pillar {
+    background: var(--paper);
+    padding: 28px 24px;
+    text-align: center;
+  }
+
+  .pillar-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .pillar-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .pillar-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── WARNING / TIP BOXES ──────────────────── */
+  .callout {
+    padding: 24px 28px;
+    margin: 32px 0;
+    border-left: 4px solid var(--accent);
+    background: var(--cream);
+  }
+
+  .callout.tip { border-color: var(--gold); }
+  .callout.warning { border-color: #c8400f; }
+
+  .callout-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .callout.tip .callout-label { color: var(--gold); }
+
+  .callout p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #3a3530;
+  }
+
+  /* ── MILESTONE TIMELINE ───────────────────── */
+  .timeline {
+    position: relative;
+    padding-left: 36px;
+    margin: 48px 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--rule);
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 32px;
+  }
+
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--paper);
+    outline: 2px solid var(--accent);
+  }
+
+  .tl-phase {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .tl-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .tl-body {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ── TOOLS GRID ───────────────────────────── */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .tool-card {
+    border: 1px solid var(--rule);
+    padding: 20px;
+    background: var(--paper);
+  }
+
+  .tool-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .tool-use {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .tool-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    background: var(--highlight);
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  /* ── FOOTER ───────────────────────────────── */
+  .footer {
+    background: var(--ink);
+    color: #6a6460;
+    text-align: center;
+    padding: 40px 32px;
+    margin-top: 80px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+
+  .footer span { color: var(--gold); }
+
+  /* ── RESPONSIVE ───────────────────────────── */
+  @media (max-width: 680px) {
+    .technique-grid,
+    .intro-block,
+    .full-card,
+    .pillars,
+    .tools-grid { grid-template-columns: 1fr; }
+    .masthead-grid { grid-template-columns: 1fr 1fr; }
+    .tc-number { display: none; }
+    .masthead-bg-text { display: none; }
+    .full-card-left .fc-num { font-size: 72px; }
+  }
+
+  /* ── PRINT / SPACING ──────────────────────── */
+  .spacer-sm { height: 24px; }
+  .spacer { height: 48px; }
+  .rule { border: none; border-top: 1px solid var(--rule); margin: 48px 0; }
+</style>
+</head>
+<body>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║             MASTHEAD                     ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-label">The Complete Practical Guide · English Language Acquisition</div>
+    <h1>Master<br><em>English</em><br>For Real.</h1>
+    <p class="masthead-sub">A science-backed, no-filler system covering every proven technique — from retrieval practice and spaced repetition to immersion, output forcing, and dual coding. Built for serious learners.</p>
+  </div>
+  <div class="masthead-grid">
+    <div class="masthead-stat">
+      <div class="num">10+</div>
+      <div class="label">Core Techniques</div>
+    </div>
+    <div class="masthead-stat">
+      <div class="num">4</div>
+      <div class="label">Skill Areas</div>
+    </div>
+    <div class="masthead-stat">
+      <div class="num">∞</div>
+      <div class="label">Compound Growth</div>
+    </div>
+  </div>
+  <div class="masthead-bg-text">E</div>
+</header>
+
+<!-- ── STICKY NAV ── -->
+<nav class="toc-bar">
+  <div class="toc-inner">
+    <a href="file:///C:/Users/rayen/OneDrive/Documents/My%20Portfolio/Training%20Materials/english-learning-guide.html#foundations">Foundations</a>
+    <a href="file:///C:/Users/rayen/OneDrive/Documents/My%20Portfolio/Training%20Materials/english-learning-guide.html#memory">Memory</a>
+    <a href="file:///C:/Users/rayen/OneDrive/Documents/My%20Portfolio/Training%20Materials/english-learning-guide.html#input">Input</a>
+    <a href="file:///C:/Users/rayen/OneDrive/Documents/My%20Portfolio/Training%20Materials/english-learning-guide.html#output">Output</a>
+    <a href="file:///C:/Users/rayen/OneDrive/Documents/My%20Portfolio/Training%20Materials/english-learning-guide.html#drilling">Drilling</a>
+    <a href="file:///C:/Users/rayen/OneDrive/Documents/My%20Portfolio/Training%20Materials/english-learning-guide.html#immersion">Immersion</a>
+    <a href="file:///C:/Users/rayen/OneDrive/Documents/My%20Portfolio/Training%20Materials/english-learning-guide.html#schedule">Schedule</a>
+    <a href="file:///C:/Users/rayen/OneDrive/Documents/My%20Portfolio/Training%20Materials/english-learning-guide.html#tools">Tools</a>
+    <a href="file:///C:/Users/rayen/OneDrive/Documents/My%20Portfolio/Training%20Materials/english-learning-guide.html#roadmap">Roadmap</a>
+  </div>
+</nav>
+
+<main class="page">
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║          FOUNDATIONS                     ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div id="foundations" class="section-break">
+  <div class="section-number">Section 01 — The Mindset Layer</div>
+  <h2 class="section-title">Before You<br>Learn Anything, <em>Understand This</em></h2>
+</div>
+
+<div class="intro-block">
+  <div class="pull-quote">"Languages are not memorised — they are acquired through meaningful, repeated exposure and use."</div>
+  <div class="intro-text">
+    Most learners fail not because they lacked intelligence, but because they used the <strong>wrong methods</strong>. Passive re-reading, translating word-by-word, and memorising lists without context are all low-ROI activities that feel productive but produce little retention.<br><br>
+    This guide is built on <strong>cognitive science</strong>: how memory actually works, how the brain forms language habits, and how to structure your time so that every hour compounds. You will not find generic advice here — only specific, actionable techniques with clear instructions on how to apply them.
+  </div>
+</div>
+
+<div class="pillars">
+  <div class="pillar">
+    <div class="pillar-icon">👂</div>
+    <div class="pillar-name">Listening</div>
+    <div class="pillar-desc">Comprehensible input builds your internal grammar model before you can articulate rules.</div>
+  </div>
+  <div class="pillar">
+    <div class="pillar-icon">📖</div>
+    <div class="pillar-name">Reading</div>
+    <div class="pillar-desc">Extensive reading accelerates vocabulary, grammar intuition, and cultural knowledge simultaneously.</div>
+  </div>
+  <div class="pillar">
+    <div class="pillar-icon">🗣️</div>
+    <div class="pillar-name">Speaking</div>
+    <div class="pillar-desc">Output forces your brain to retrieve and deploy language — the highest-difficulty practice mode.</div>
+  </div>
+  <div class="pillar">
+    <div class="pillar-icon">✍️</div>
+    <div class="pillar-name">Writing</div>
+    <div class="pillar-desc">Writing slows production down, exposing gaps and forcing precision unavailable in fast speech.</div>
+  </div>
+</div>
+
+<div class="callout warning">
+  <div class="callout-label">⚠ The #1 Mistake</div>
+  <p><strong>Passive consumption without active retrieval.</strong> Watching Netflix in English with English subtitles feels immersive — but if you never pause to reproduce what you heard, almost none of it sticks long-term. Every technique below forces active, effortful processing, which is the only kind your brain actually encodes.</p>
+</div>
+
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║         MEMORY TECHNIQUES               ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div id="memory" class="section-break">
+  <div class="section-number">Section 02 — Memory Science</div>
+  <h2 class="section-title">How to Make<br><em>Vocabulary Stick</em><br>Forever</h2>
+</div>
+
+<div class="technique-grid">
+
+  <!-- Card 1: Spaced Repetition -->
+  <div class="technique-card">
+    <div class="tc-number">01</div>
+    <div class="tc-tag">🧠 Memory System</div>
+    <div class="tc-title">Spaced Repetition (SRS)</div>
+    <div class="tc-body">SRS is the single most powerful vocabulary tool in existence. It uses an algorithm to show you a word just before you would forget it — widening the interval every time you recall it correctly. This exploits the <em>spacing effect</em>, a well-replicated cognitive phenomenon.</div>
+    <div class="tc-how">
+      <div class="tc-how-label">How to apply it</div>
+      <ul class="tc-steps">
+        <li>Use Anki (free, open-source) or a similar app daily</li>
+        <li>Create cards from real sentences you've encountered, not dictionaries</li>
+        <li>Review every day — even 10 minutes is enough to maintain thousands of cards</li>
+        <li>Never skip a review day; the algorithm relies on daily input</li>
+        <li>Keep your new-cards-per-day limit realistic (10–20 for beginners)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Card 2: Retrieval Practice -->
+  <div class="technique-card">
+    <div class="tc-number">02</div>
+    <div class="tc-tag">💡 Active Recall</div>
+    <div class="tc-title">Retrieval Practice &amp; Active Recall</div>
+    <div class="tc-body">The act of <em>trying to remember</em> something — even if you fail — strengthens the memory trace far more than re-reading or re-listening. This is called the Testing Effect, confirmed across hundreds of studies. Struggle = encoding.</div>
+    <div class="tc-how">
+      <div class="tc-how-label">How to apply it</div>
+      <ul class="tc-steps">
+        <li>Cover your notes; try to write everything you remember</li>
+        <li>After listening to a podcast, pause and summarise aloud in English</li>
+        <li>Use the blank-page method: write everything you know about a topic from scratch</li>
+        <li>Answer flash card questions before flipping — guessing counts</li>
+        <li>Quiz yourself on new words 10 minutes after learning them</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Card 3: Elaborative Encoding -->
+  <div class="technique-card">
+    <div class="tc-number">03</div>
+    <div class="tc-tag">🔗 Deep Processing</div>
+    <div class="tc-title">Elaborative Encoding</div>
+    <div class="tc-body">The brain retains information better when it's connected to things you already know. Instead of memorising "melancholy = sadness," encode it with an image, story, sound, emotion, or personal memory. The stranger and more vivid the connection, the more memorable.</div>
+    <div class="tc-how">
+      <div class="tc-how-label">How to apply it</div>
+      <ul class="tc-steps">
+        <li>For each new word, ask: "When have I felt this? Who do I associate this with?"</li>
+        <li>Invent an absurd story connecting the word to its meaning</li>
+        <li>Use etymology — knowing that "melancholy" comes from Greek "black bile" makes it unforgettable</li>
+        <li>Write a personal sentence using the word in a context real to your life</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Card 4: Dual Coding -->
+  <div class="technique-card">
+    <div class="tc-number">04</div>
+    <div class="tc-tag">🖼️ Visual + Verbal</div>
+    <div class="tc-title">Dual Coding</div>
+    <div class="tc-body">Dual coding theory (Paivio, 1971) shows that combining verbal and visual information creates two separate but linked memory traces. When one fades, the other can trigger retrieval. Words paired with images are recalled up to 65% better than words alone.</div>
+    <div class="tc-how">
+      <div class="tc-how-label">How to apply it</div>
+      <ul class="tc-steps">
+        <li>Add images to every Anki card (not the translation — the actual concept)</li>
+        <li>Draw rough diagrams when learning grammar rules (arrow for direction of action, circles for word groups)</li>
+        <li>Map vocabulary around a sketch of a scene (e.g., draw a kitchen, label everything)</li>
+        <li>Use physical flashcards with your own drawings for high-priority words</li>
+        <li>Watch content where you can SEE what's being described</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- Full-width: Interleaving -->
+<div class="full-card">
+  <div class="full-card-left">
+    <div class="fc-num">05</div>
+    <div class="tc-tag">🔀 Study Structure</div>
+    <div class="tc-title">Interleaved Practice</div>
+  </div>
+  <div class="full-card-right">
+    <div class="tc-body">Most learners block their practice: "Monday = present tense, Tuesday = past tense." Research consistently shows that <strong>mixing topics within a single session</strong> (interleaving) produces significantly better long-term retention than blocked practice — even though it feels harder and less productive in the moment. The difficulty IS the learning.</div>
+    <div class="full-card-how tc-how">
+      <div class="tc-how-label">How to apply it</div>
+      <ul class="tc-steps">
+        <li>In a 45-minute grammar session, cycle through 3 different tenses rather than drilling one</li>
+        <li>Mix old vocabulary reviews with new vocabulary learning in every session</li>
+        <li>Alternate between grammar exercises, writing practice, and listening in one study block</li>
+        <li>When drilling, shuffle your flashcard deck rather than going in order</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║              INPUT METHODS              ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div id="input" class="section-break">
+  <div class="section-number">Section 03 — Input Methods</div>
+  <h2 class="section-title">The Art of<br><em>Comprehensible Input</em></h2>
+</div>
+
+<div class="callout tip">
+  <div class="callout-label">💡 Krashen's Input Hypothesis</div>
+  <p>Linguist Stephen Krashen proposed that we acquire language when we understand input that is slightly above our current level — labelled <strong>i+1</strong>. Content that is too easy produces no growth; content that is incomprehensible produces frustration. The sweet spot: understand ~70–80% without help.</p>
+</div>
+
+<div class="technique-grid">
+
+  <div class="technique-card">
+    <div class="tc-number">06</div>
+    <div class="tc-tag">🎧 Listening</div>
+    <div class="tc-title">Active Listening with Transcripts</div>
+    <div class="tc-body">Passive listening (background music, TV) does very little for acquisition. Active listening — pausing, re-listening, note-taking, and checking transcripts — transforms audio into a rich language resource.</div>
+    <div class="tc-how">
+      <div class="tc-how-label">The 3-Pass Method</div>
+      <ul class="tc-steps">
+        <li><strong>Pass 1:</strong> Listen without any text. Write down what you understood.</li>
+        <li><strong>Pass 2:</strong> Listen again with the transcript. Identify unknown words.</li>
+        <li><strong>Pass 3:</strong> Listen again without text. Notice the improvement.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="technique-card">
+    <div class="tc-number">07</div>
+    <div class="tc-tag">📚 Reading</div>
+    <div class="tc-title">Extensive Reading</div>
+    <div class="tc-body">Reading large volumes of slightly-below-your-level material for meaning (not analysis) builds vocabulary and grammar intuition faster than any textbook. Volume trumps difficulty at this stage — read more, annotate less.</div>
+    <div class="tc-how">
+      <div class="tc-how-label">How to apply it</div>
+      <ul class="tc-steps">
+        <li>Choose graded readers at your exact level (A1–C2 books exist)</li>
+        <li>Read articles from BBC Learning English, The Guardian Simple News</li>
+        <li>Look up only words that block comprehension — ignore the rest</li>
+        <li>Aim for 20+ minutes of daily reading, uninterrupted</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- Full-width: Shadowing -->
+<div class="full-card">
+  <div class="full-card-left">
+    <div class="fc-num">08</div>
+    <div class="tc-tag">🎙️ Pronunciation</div>
+    <div class="tc-title">Shadowing</div>
+  </div>
+  <div class="full-card-right">
+    <div class="tc-body">Shadowing — repeating audio <em>at the same time as the speaker</em>, attempting to mimic their exact rhythm, stress, and intonation — is the most effective pronunciation technique available. It was developed by interpreter trainer Alexander Arguelles and trains your mouth and ear simultaneously. Unlike listening, shadowing forces motor production, ingraining native prosody into muscle memory.</div>
+    <div class="full-card-how tc-how">
+      <div class="tc-how-label">The Shadowing Protocol</div>
+      <ul class="tc-steps">
+        <li>Choose audio at a natural pace by a native speaker (podcast, audiobook, movie dialogue)</li>
+        <li>Play audio; repeat every word out loud simultaneously — even if you don't understand</li>
+        <li>Walk while doing this (physical movement increases retention)</li>
+        <li>Start at 0.8× speed; increase to full speed over days</li>
+        <li>Record yourself — then compare to the original. The gap reveals exactly what to fix.</li>
+        <li>5–10 minutes of proper shadowing per day &gt; 60 minutes of passive listening</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║            OUTPUT & DRILLING            ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div id="output" class="section-break">
+  <div class="section-number">Section 04 — Output Methods</div>
+  <h2 class="section-title">Forcing Output:<br><em>Where Fluency</em><br>Is Actually Built</h2>
+</div>
+
+<div class="technique-grid">
+
+  <div class="technique-card">
+    <div class="tc-number">09</div>
+    <div class="tc-tag">✍️ Writing</div>
+    <div class="tc-title">Journal Writing + AI Correction</div>
+    <div class="tc-body">Daily free writing — without stopping to check grammar — followed by correction review is one of the highest-leverage output activities. The act of writing forces lexical retrieval. The correction loop closes the feedback cycle.</div>
+    <div class="tc-how">
+      <div class="tc-how-label">The Daily Write</div>
+      <ul class="tc-steps">
+        <li>Write for 10 minutes daily on any topic — no stopping, no dictionary</li>
+        <li>Submit to a language exchange partner or AI for corrections</li>
+        <li>Re-write the corrected version by hand once</li>
+        <li>Extract recurring errors into a personal "error log" and review weekly</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="technique-card">
+    <div class="tc-number">10</div>
+    <div class="tc-tag">🗣️ Speaking</div>
+    <div class="tc-title">Deliberate Speaking Practice</div>
+    <div class="tc-body">Random conversation is enjoyable but inefficient for focused improvement. Deliberate speaking — targeting specific weaknesses during practice — produces faster gains. Focus on one feature per session (e.g., conditionals, contractions, phrasal verbs).</div>
+    <div class="tc-how">
+      <div class="tc-how-label">How to apply it</div>
+      <ul class="tc-steps">
+        <li>Use italki or Preply for structured 1-on-1 lessons with a tutor</li>
+        <li>Give yourself a topic and speak for 2 minutes without stopping (record yourself)</li>
+        <li>Listen back — mark every hesitation, wrong word, or grammar mistake</li>
+        <li>Repeat the same topic the next day; notice the improvement</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div id="drilling" class="section-break">
+  <div class="section-number">Section 05 — Drilling</div>
+  <h2 class="section-title">The Right Way<br>to <em>Drill</em></h2>
+</div>
+
+<div class="callout warning">
+  <div class="callout-label">⚠ Drilling Done Wrong</div>
+  <p>Mindless repetition — writing a word 50 times, repeating a phrase parrot-fashion — without meaning or variation is largely useless. The brain habituates to meaningless repetition. <strong>Effective drilling is varied, contextualised, and effortful.</strong></p>
+</div>
+
+<div class="technique-grid">
+
+  <div class="technique-card">
+    <div class="tc-number">11</div>
+    <div class="tc-tag">⚙️ Grammar</div>
+    <div class="tc-title">Substitution &amp; Transformation Drills</div>
+    <div class="tc-body">Substitution drills take a sentence and require you to change one element (tense, subject, object) rapidly. Transformation drills require restructuring (active → passive, statement → question). Both build grammatical automaticity — the ability to produce correct forms without conscious thinking.</div>
+    <div class="tc-how">
+      <div class="tc-how-label">Example drill sequence</div>
+      <ul class="tc-steps">
+        <li>Base: "She <em>is eating</em> lunch." → Transform to past: "She <em>ate</em> lunch."</li>
+        <li>Base: "I made the cake." → Transform to passive: "The cake <em>was made</em> by me."</li>
+        <li>Work through 10–15 transformations per session, increasing speed each time</li>
+        <li>Use audio drills (many free on YouTube) for listening + response practice</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="technique-card">
+    <div class="tc-number">12</div>
+    <div class="tc-tag">📝 Vocabulary</div>
+    <div class="tc-title">Sentence Mining</div>
+    <div class="tc-body">Instead of learning vocabulary from wordlists, sentence mining extracts whole sentences from content you're actually consuming — then adds them to your SRS deck. Context is everything: the word "run" means something completely different in "run a business" vs. "run for the bus."</div>
+    <div class="tc-how">
+      <div class="tc-how-label">How to apply it</div>
+      <ul class="tc-steps">
+        <li>When you encounter an unknown word in reading or listening, copy the full sentence</li>
+        <li>Create an Anki card: front = sentence with word blanked out, back = full sentence</li>
+        <li>Include audio pronunciation on the card if possible</li>
+        <li>Mine 5–10 sentences per day from real content you enjoyed</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="technique-card">
+    <div class="tc-number">13</div>
+    <div class="tc-tag">🔄 Fluency</div>
+    <div class="tc-title">4/3/2 Technique</div>
+    <div class="tc-body">A powerful fluency-building drill: speak on the same topic for 4 minutes, then again for 3, then again for 2. Each round forces faster delivery of the same content, training your brain to access language at higher speed. By round 3, most learners speak noticeably more fluidly.</div>
+    <div class="tc-how">
+      <div class="tc-how-label">How to run a 4/3/2 session</div>
+      <ul class="tc-steps">
+        <li>Pick any topic: "Describe your morning routine" or "Talk about a film you saw"</li>
+        <li>Set a timer for 4 minutes. Speak continuously. Record.</li>
+        <li>Reset. Speak the same content in 3 minutes.</li>
+        <li>Reset. Speak the same content in 2 minutes.</li>
+        <li>Listen back to round 1 vs. round 3 — the fluency gain is audible and motivating.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="technique-card">
+    <div class="tc-number">14</div>
+    <div class="tc-tag">🔊 Pronunciation</div>
+    <div class="tc-title">Minimal Pair Drilling</div>
+    <div class="tc-body">Minimal pairs are words that differ by only one sound: <em>ship/sheep, bad/bed, live/leave</em>. Training your ear to distinguish and your mouth to produce these pairs directly fixes accent errors that general conversation practice never addresses.</div>
+    <div class="tc-how">
+      <div class="tc-how-label">How to apply it</div>
+      <ul class="tc-steps">
+        <li>Identify the sounds you confuse most (e.g., /ɪ/ vs /iː/ for many learners)</li>
+        <li>Find minimal pair lists for those sounds online (many free resources exist)</li>
+        <li>Listen → repeat → record → compare, 10 pairs per session</li>
+        <li>Use a free tool like Forvo to hear native speaker audio for each word</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║           IMMERSION                     ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div id="immersion" class="section-break">
+  <div class="section-number">Section 06 — Immersion</div>
+  <h2 class="section-title">Building an<br><em>English Environment</em><br>at Home</h2>
+</div>
+
+<div class="intro-block">
+  <div class="pull-quote">"You don't need to live in an English-speaking country. You need to live in English."</div>
+  <div class="intro-text">
+    The advantage of living abroad is not geography — it's <strong>total daily exposure</strong> and the social pressure to communicate. You can manufacture nearly all of that at home with deliberate environmental design.<br><br>
+    True immersion is not binge-watching Netflix passively. It is the systematic replacement of your native language habits with English ones, one domain at a time.
+  </div>
+</div>
+
+<div class="technique-grid">
+
+  <div class="technique-card">
+    <div class="tc-number">15</div>
+    <div class="tc-tag">📱 Digital Life</div>
+    <div class="tc-title">Environment Design</div>
+    <div class="tc-body">Your phone, computer, and all apps are in English. Your default search engine queries are in English. Your calendar events are named in English. These micro-exposures add up to hours of passive input per week and continuously force retrieval in real contexts.</div>
+    <div class="tc-how">
+      <div class="tc-how-label">Switch list</div>
+      <ul class="tc-steps">
+        <li>Phone language → English</li>
+        <li>All social media feeds → follow only English accounts</li>
+        <li>YouTube default → only English content in your recommended</li>
+        <li>Browser news tab → English news source</li>
+        <li>Think aloud in English when alone — narrate your actions</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="technique-card">
+    <div class="tc-number">16</div>
+    <div class="tc-tag">🎭 Authentic Content</div>
+    <div class="tc-title">Active Media Consumption</div>
+    <div class="tc-body">Watching a series or YouTube channel you are genuinely interested in produces deeper processing than "learning content" you find boring. Interest → attention → retention. The key is adding active engagement to the viewing habit.</div>
+    <div class="tc-how">
+      <div class="tc-how-label">The Active Viewing Protocol</div>
+      <ul class="tc-steps">
+        <li>Watch with English subtitles (not your native language)</li>
+        <li>Pause whenever you hear an interesting phrase — repeat it aloud 3 times</li>
+        <li>After each episode, write 3 sentences summarising what happened</li>
+        <li>Re-watch favourite scenes without subtitles as a listening challenge</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="full-card">
+  <div class="full-card-left">
+    <div class="fc-num">17</div>
+    <div class="tc-tag">👥 Community</div>
+    <div class="tc-title">Language Exchange &amp; Real Conversation</div>
+  </div>
+  <div class="full-card-right">
+    <div class="tc-body">No technique replaces the unpredictability and social stakes of real conversation. The anxiety you feel before speaking with a native or fluent speaker is neurologically almost identical to the "desirable difficulty" that produces memory consolidation. Lean into it.<br><br>Language exchange (you teach your language, they teach theirs) is free and mutually beneficial. Online communities have removed the geographic barrier entirely.</div>
+    <div class="full-card-how tc-how">
+      <div class="tc-how-label">Where to find conversation partners</div>
+      <ul class="tc-steps">
+        <li><strong>Tandem / HelloTalk</strong> — free language exchange apps</li>
+        <li><strong>italki Community</strong> — find partners by interest</li>
+        <li><strong>Reddit communities</strong> — r/language_exchange, r/EnglishLearning</li>
+        <li><strong>Discord servers</strong> — "Language Exchange" Discord has 100k+ members</li>
+        <li>Set a weekly target: at least 2 conversations per week, 20 minutes each</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║         WEEKLY SCHEDULE                 ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div id="schedule" class="section-break">
+  <div class="section-number">Section 07 — Weekly System</div>
+  <h2 class="section-title">A Practical<br><em>Weekly Schedule</em><br>(60 min/day)</h2>
+</div>
+
+<div class="schedule-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Day</th>
+      <th>Focus</th>
+      <th>Activities</th>
+      <th>Duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Monday</td>
+      <td>Vocabulary + Reading</td>
+      <td>Anki review (10 min) · New sentence mining from a graded reader (20 min) · Extensive reading (30 min)</td>
+      <td>60 min</td>
+    </tr>
+    <tr>
+      <td>Tuesday</td>
+      <td>Grammar + Writing</td>
+      <td>Grammar transformation drills (20 min) · Free journal writing (15 min) · Review corrections from previous entry (10 min) · Anki review (15 min)</td>
+      <td>60 min</td>
+    </tr>
+    <tr>
+      <td>Wednesday</td>
+      <td>Listening + Shadowing</td>
+      <td>Active 3-pass listening (20 min) · Shadowing practice (15 min) · Anki review (10 min) · Vocabulary from listening (15 min)</td>
+      <td>60 min</td>
+    </tr>
+    <tr>
+      <td>Thursday</td>
+      <td>Speaking + Pronunciation</td>
+      <td>4/3/2 fluency drill (15 min) · Minimal pair drilling (10 min) · Language exchange conversation (30 min) · Anki review (5 min)</td>
+      <td>60 min</td>
+    </tr>
+    <tr>
+      <td>Friday</td>
+      <td>Mixed / Interleaved</td>
+      <td>Anki review (10 min) · Mixed grammar/vocab exercises (20 min) · Active video viewing (30 min)</td>
+      <td>60 min</td>
+    </tr>
+    <tr>
+      <td>Saturday</td>
+      <td>Deep Immersion</td>
+      <td>Extended English content (film, podcast, book) for 60+ min · Light Anki · No structured study — just engagement</td>
+      <td>60+ min</td>
+    </tr>
+    <tr>
+      <td>Sunday</td>
+      <td>Review + Reset</td>
+      <td>Weekly retrieval: write everything you can recall from the week (15 min) · Anki maintenance (15 min) · Plan next week's sentence mining topics (10 min)</td>
+      <td>40 min</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout tip">
+  <div class="callout-label">💡 Consistency over Intensity</div>
+  <p>60 minutes daily for 12 months outperforms 8-hour weekend marathon sessions by a wide margin. The brain consolidates language during sleep — meaning shorter, daily practice sessions literally give you more overnight consolidation cycles than cramming does. Daily streaks are not just motivational — they are neurologically superior.</p>
+</div>
+
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║             TOOLS                       ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div id="tools" class="section-break">
+  <div class="section-number">Section 08 — Recommended Tools</div>
+  <h2 class="section-title">The Essential<br><em>Toolkit</em></h2>
+</div>
+
+<div class="tools-grid">
+  <div class="tool-card">
+    <div class="tool-tag">SRS / Flashcards</div>
+    <div class="tool-name">Anki</div>
+    <div class="tool-use">Free, open-source. The gold standard for spaced repetition. Sync across all devices. Thousands of community decks available.</div>
+  </div>
+  <div class="tool-card">
+    <div class="tool-tag">Speaking</div>
+    <div class="tool-name">italki</div>
+    <div class="tool-use">Book professional tutors or community teachers. One of the most cost-effective structured speaking practice options.</div>
+  </div>
+  <div class="tool-card">
+    <div class="tool-tag">Listening</div>
+    <div class="tool-name">Spotify / Podcasts</div>
+    <div class="tool-use">6 Minute English (BBC), All Ears English, and The English We Speak are designed for learners at multiple levels.</div>
+  </div>
+  <div class="tool-card">
+    <div class="tool-tag">Reading</div>
+    <div class="tool-name">ReadLang</div>
+    <div class="tool-use">Click any word on a web page to get an instant translation + auto-add to flashcard deck. Turns any website into a study resource.</div>
+  </div>
+  <div class="tool-card">
+    <div class="tool-tag">Writing Feedback</div>
+    <div class="tool-name">LangCorrect / iTalki</div>
+    <div class="tool-use">Submit written journal entries and receive corrections from native speakers. Free community corrections on LangCorrect.</div>
+  </div>
+  <div class="tool-card">
+    <div class="tool-tag">Pronunciation</div>
+    <div class="tool-name">Forvo</div>
+    <div class="tool-use">World's largest pronunciation database. Hear any word spoken by multiple native speakers from different regions.</div>
+  </div>
+  <div class="tool-card">
+    <div class="tool-tag">Grammar Reference</div>
+    <div class="tool-name">English Grammar in Use</div>
+    <div class="tool-use">By Raymond Murphy. The most widely used self-study grammar book. Each unit is one page of explanation + one page of exercises.</div>
+  </div>
+  <div class="tool-card">
+    <div class="tool-tag">Vocabulary</div>
+    <div class="tool-name">Vocabulary.com</div>
+    <div class="tool-use">Adaptive vocabulary learning with adaptive quiz system, example sentences in context, and etymological explanations.</div>
+  </div>
+  <div class="tool-card">
+    <div class="tool-tag">Immersion</div>
+    <div class="tool-name">Language Reactor</div>
+    <div class="tool-use">Chrome extension for Netflix and YouTube. Shows dual subtitles, instant word lookup, and auto-creates flashcards from what you watch.</div>
+  </div>
+</div>
+
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║             ROADMAP                     ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div id="roadmap" class="section-break">
+  <div class="section-number">Section 09 — The Roadmap</div>
+  <h2 class="section-title">Your Path from<br><em>Beginner to Fluent</em></h2>
+</div>
+
+<div class="timeline">
+  <div class="tl-item">
+    <div class="tl-phase">Phase 1 · Months 1–3</div>
+    <div class="tl-title">Foundation Building</div>
+    <div class="tl-body">Focus on the top 1,000 most frequent English words via SRS. Learn basic sentence patterns through substitution drills. Start a daily journal with 3–5 sentences. Listen to beginner podcasts. Build the daily habit above all else — consistency matters more than technique at this stage.</div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-phase">Phase 2 · Months 4–6</div>
+    <div class="tl-title">Systematic Expansion</div>
+    <div class="tl-body">Introduce sentence mining from real content. Begin shadowing practice 5 min/day. Start speaking with a language exchange partner. Reach the 2,000-word milestone. Switch your phone to English. Grammar study should become regular and interleaved.</div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-phase">Phase 3 · Months 7–12</div>
+    <div class="tl-title">Fluency Acceleration</div>
+    <div class="tl-body">Native-speed content becomes your primary input. Use 4/3/2 drills regularly. Aim for 3,000–5,000 vocabulary words known. Increase speaking sessions to 3× per week. Start reading novels or long-form articles. The learning feels faster now because everything connects.</div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-phase">Phase 4 · Year 2+</div>
+    <div class="tl-title">Advanced Fluency</div>
+    <div class="tl-body">Maintenance SRS becomes minimal. Input becomes pleasure, not study. Focus shifts to vocabulary depth (collocations, idioms, register). Consider a writing or debate challenge. The ceiling of English is effectively unlimited — and now genuinely enjoyable to explore.</div>
+  </div>
+</div>
+
+<div class="callout tip">
+  <div class="callout-label">💡 The Most Important Principle</div>
+  <p><strong>Don't optimise too early.</strong> In the first 3 months, picking one good method and being consistent is infinitely more valuable than researching the perfect system. The brain needs volume and repetition. Start, persist, and refine as you go. The techniques above are the destination — daily practice is the vehicle.</p>
+</div>
+
+<div class="spacer"></div>
+
+</main>
+
+<footer class="footer">
+  <span>Master English</span> · A Complete Practical Guide to Language Acquisition<br>
+  Built on cognitive science: spacing effect, testing effect, dual coding, and input hypothesis.
+</footer>
+
+
+
+</body></html>
