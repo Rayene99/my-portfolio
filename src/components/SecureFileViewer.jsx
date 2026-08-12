@@ -68,6 +68,7 @@ const DOCX_SHELL = (bodyHtml) => `
 `;
 
 const IMAGE_EXTENSIONS = ["png", "jpg", "jpeg", "gif", "webp", "svg", "avif"];
+const VIDEO_EXTENSIONS = ["mp4", "webm", "mov", "ogg", "m4v"];
 
 function getExtension(src) {
   if (!src) return "";
@@ -85,6 +86,7 @@ export default function SecureFileViewer({ src, title, onClose }) {
   const isDocx = ext === "docx";
   const isLegacyDoc = ext === "doc"; // old binary .doc — mammoth can't read this
   const isImage = IMAGE_EXTENSIONS.includes(ext);
+  const isVideo = VIDEO_EXTENSIONS.includes(ext);
   const isPdf = ext === "pdf";
   const needsInjectedDoc = isHtml || isDocx;
 
@@ -197,6 +199,29 @@ export default function SecureFileViewer({ src, title, onClose }) {
               maxWidth: "100%", maxHeight: "100%", objectFit: "contain",
               userSelect: "none", WebkitUserSelect: "none", pointerEvents: "none",
             }}
+          />
+        </div>
+      );
+    }
+
+    if (isVideo) {
+      // Rendered natively via <video>, same rationale as isImage above —
+      // no iframe/proxy needed since the browser streams the src directly
+      // (range requests happen at the network layer, not through fetch/JS).
+      // controlsList="nodownload" hides the download button in Chromium-
+      // based browsers only; like the PDF case below, this is a deterrent,
+      // not real protection — the underlying src URL is still reachable.
+      return (
+        <div style={{
+          flex: 1, display: "flex", alignItems: "center", justifyContent: "center",
+          background: "#000",
+        }}>
+          <video
+            src={src}
+            controls
+            controlsList="nodownload"
+            onContextMenu={(e) => e.preventDefault()}
+            style={{ maxWidth: "100%", maxHeight: "100%" }}
           />
         </div>
       );
