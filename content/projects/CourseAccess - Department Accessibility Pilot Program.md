@@ -1,5 +1,5 @@
 ---
-title: "CourseAccess: Department Accessibility Pilot Program"
+title: "Course Access: Department Accessibility Pilot Program"
 image: /images/uu.png
 file: /images/course-access-audit.html
 tags:

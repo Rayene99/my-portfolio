@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Fairy Tale Treasury — by Rayene Medabis</title>
+<meta name="description" content="30 classic fairy tales retold simply for young readers, by Rayene Medabis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --lavender:#EDE1FB;
+  --blush:#FFE6F2;
+  --ink:#4A3F5C;
+  --ink-soft:#8B7EA8;
+  --paper:#FFFDFB;
+  --gold:#FFD873;
+  --shadow-sm:0 6px 18px rgba(90,70,130,.14);
+  --shadow-md:0 14px 34px rgba(90,70,130,.20);
+  --shadow-lg:0 26px 60px rgba(70,55,110,.32);
+  --r-lg:30px;
+  --r-md:20px;
+  --f-display:'Fredoka',sans-serif;
+  --f-body:'Nunito',sans-serif;
+  --story-c1:#EDE1FB;
+  --story-c2:#B79FD4;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:var(--f-body);
+  color:var(--ink);
+  min-height:100vh;
+  background:
+    radial-gradient(ellipse 900px 500px at 15% -5%, #FFF7E0 0%, transparent 60%),
+    radial-gradient(ellipse 900px 600px at 90% 8%, var(--blush) 0%, transparent 55%),
+    linear-gradient(160deg, var(--lavender) 0%, #EAF3FF 55%, #FFF3EA 100%);
+  background-attachment:fixed;
+  position:relative;
+  overflow-x:hidden;
+}
+.hidden{display:none !important;}
+button{font-family:inherit;}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:8px;}
+
+/* decorative floating layer */
+.floaties{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0;}
+.floaty{position:absolute;width:34px;height:34px;opacity:.6;animation:bob 7s ease-in-out infinite;}
+.floaty svg{width:100%;height:100%;display:block;}
+@media (prefers-reduced-motion:reduce){.floaty{animation:none;}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-22px) rotate(6deg);}}
+
+/* ===== menu / shelf screen ===== */
+#menu-screen{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:52px 20px 90px;}
+.site-header{text-align:center;margin-bottom:8px;}
+.eyebrow{font-family:var(--f-display);font-weight:500;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);}
+.site-title{font-family:var(--f-display);font-weight:600;font-size:clamp(2.1rem,6vw,3.4rem);
+  background:linear-gradient(90deg,#B384CF,#F0729C 45%,#4FA6DE);
+  -webkit-background-clip:text;background-clip:text;color:transparent;margin:4px 0 10px;line-height:1.15;}
+.site-subtitle{font-size:1.1rem;color:var(--ink-soft);}
+.site-author{margin-top:12px;font-size:.95rem;color:var(--ink-soft);}
+.site-author strong{color:var(--ink);}
+
+.shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:26px 20px;margin-top:44px;}
+.book-tile{
+  --tilt:0deg;
+  position:relative;background:linear-gradient(165deg, var(--c1) 0%, var(--paper) 145%);
+  border:none;border-radius:var(--r-md);padding:18px 12px 16px;cursor:pointer;
+  box-shadow:var(--shadow-sm);
+  transform:rotate(var(--tilt));
+  transition:transform .28s cubic-bezier(.34,1.56,.64,1), box-shadow .28s ease;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  isolation:isolate;
+}
+.book-tile::after{
+  content:"";position:absolute;top:0;right:14px;width:15px;height:24px;
+  background:var(--c2);clip-path:polygon(0 0,100% 0,100% 100%,50% 76%,0 100%);
+  box-shadow:0 3px 6px rgba(0,0,0,.10);
+}
+.book-tile:hover,.book-tile:focus-visible{transform:rotate(0deg) translateY(-8px) scale(1.045);box-shadow:var(--shadow-md);z-index:2;}
+.tile-illus{width:92px;height:92px;}
+.tile-title{font-family:var(--f-display);font-weight:600;font-size:.98rem;text-align:center;color:var(--ink);line-height:1.25;}
+.tile-hint{font-size:.7rem;color:var(--ink-soft);}
+
+.footer-credit{text-align:center;margin-top:70px;color:var(--ink-soft);font-size:.9rem;}
+
+/* ===== book / reading screen ===== */
+#book-screen{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:16px;
+  background:
+    radial-gradient(ellipse 900px 500px at 15% -5%, #FFF7E0 0%, transparent 60%),
+    radial-gradient(ellipse 900px 600px at 90% 8%, var(--blush) 0%, transparent 55%),
+    linear-gradient(160deg, var(--lavender) 0%, #EAF3FF 55%, #FFF3EA 100%);
+}
+.book-card{
+  width:100%;max-width:700px;max-height:94vh;background:var(--paper);border-radius:34px;
+  box-shadow:var(--shadow-lg);display:flex;flex-direction:column;overflow:hidden;
+}
+.book-topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;
+  background:linear-gradient(100deg,var(--story-c1),var(--story-c2));}
+.book-story-title{font-family:var(--f-display);font-weight:600;color:var(--ink);font-size:1rem;}
+.close-btn{width:40px;height:40px;border-radius:50%;border:none;background:rgba(255,255,255,.8);
+  font-size:1.05rem;color:var(--ink);cursor:pointer;box-shadow:var(--shadow-sm);flex-shrink:0;}
+.close-btn:hover{background:#fff;}
+
+.page-stage{flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:22px 30px 8px;text-align:center;gap:12px;min-height:280px;}
+.page-stage svg.scene{width:min(200px,42vw);height:auto;flex-shrink:0;}
+.page-eyebrow{font-family:var(--f-display);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);}
+.page-headline{font-family:var(--f-display);font-weight:600;font-size:clamp(1.5rem,4.2vw,2.1rem);color:var(--ink);}
+.page-text{font-size:clamp(1.2rem,3.4vw,1.5rem);line-height:1.7;font-weight:800;color:var(--ink);max-width:32ch;}
+.page-note{font-size:.95rem;color:var(--ink-soft);}
+
+.book-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 20px 20px;}
+.nav-btn{font-family:var(--f-display);font-weight:600;border:none;border-radius:999px;padding:13px 20px;
+  font-size:.98rem;cursor:pointer;color:var(--ink);
+  background:linear-gradient(120deg,var(--story-c2),var(--story-c1));
+  box-shadow:var(--shadow-sm);transition:transform .15s ease;white-space:nowrap;}
+.nav-btn:active{transform:scale(.94);}
+.nav-btn:disabled{opacity:.3;cursor:default;}
+.page-dots{display:flex;gap:5px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:120px;}
+.dot{width:7px;height:7px;border-radius:50%;background:#E4D9F0;transition:all .2s;flex-shrink:0;}
+.dot.active{background:var(--story-c2);width:18px;border-radius:5px;}
+
+/* shared svg tone classes, used by symbol library */
+.scene-bg{fill:var(--story-c1);opacity:.6;}
+.tone-a{fill:var(--story-c2);}
+.tone-b{fill:var(--story-c1);}
+.tone-skin{fill:#FCD9B8;}
+.tone-hair{fill:#8A5A3B;}
+.tone-hairdark{fill:#3D3450;}
+.tone-hairgold{fill:#E8C468;}
+.tone-hairgray{fill:#C9C2D6;}
+.tone-dark{fill:var(--ink);}
+.tone-white{fill:#ffffff;}
+.tone-gray{fill:#B7AFC9;}
+.tone-brown{fill:#B08968;}
+.tone-green{fill:#8FBF8F;}
+.tone-red{fill:#E8748A;}
+.tone-gold{fill:var(--gold);}
+.tone-line{fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+@media (max-width:560px){
+  .shelf{grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:16px 12px;}
+  .tile-illus{width:70px;height:70px;}
+  .tile-title{font-size:.85rem;}
+  .page-stage svg.scene{width:54vw;}
+  .book-card{border-radius:26px;}
+  .nav-btn{padding:12px 16px;font-size:.9rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="floaties" aria-hidden="true">
+  <div class="floaty" style="top:6%;left:4%;animation-delay:.2s;"><svg viewBox="0 0 100 100"><use href="#sym-sparkle" width="100" height="100"/></svg></div>
+  <div class="floaty" style="top:11%;left:89%;width:46px;height:46px;animation-delay:1.4s;"><svg viewBox="0 0 100 100"><use href="#sym-cloud" width="100" height="100"/></svg></div>
+  <div class="floaty" style="top:32%;left:93%;animation-delay:2.6s;"><svg viewBox="0 0 100 100"><use href="#sym-star" width="100" height="100"/></svg></div>
+  <div class="floaty" style="top:72%;left:2%;width:46px;height:46px;animation-delay:.9s;"><svg viewBox="0 0 100 100"><use href="#sym-cloud" width="100" height="100"/></svg></div>
+  <div class="floaty" style="top:88%;left:82%;animation-delay:2s;"><svg viewBox="0 0 100 100"><use href="#sym-star" width="100" height="100"/></svg></div>
+  <div class="floaty" style="top:48%;left:5%;animation-delay:3.2s;"><svg viewBox="0 0 100 100"><use href="#sym-sparkle" width="100" height="100"/></svg></div>
+  <div class="floaty" style="top:4%;left:45%;animation-delay:1.9s;"><svg viewBox="0 0 100 100"><use href="#sym-sparkle" width="100" height="100"/></svg></div>
+</div>
+
+<main id="menu-screen">
+  <div class="site-header">
+    <p class="eyebrow">A Storybook Treasury</p>
+    <h1 class="site-title">My Fairy Tale Treasury</h1>
+    <p class="site-subtitle">30 classic stories, retold simply for young readers</p>
+    <p class="site-author">Written &amp; designed by <strong>Rayene Medabis</strong></p>
+  </div>
+  <div class="shelf" id="shelf"></div>
+  <p class="footer-credit">📖 Tap a book to start reading · A Rayene Medabis original</p>
+</main>
+
+<div id="book-screen" class="hidden" role="dialog" aria-modal="true" tabindex="-1">
+  <div class="book-card">
+    <div class="book-topbar">
+      <span class="book-story-title" id="book-story-title"></span>
+      <button class="close-btn" id="close-book" aria-label="Close book, back to shelf">✕</button>
+    </div>
+    <div class="page-stage" id="page-stage"></div>
+    <div class="book-nav">
+      <button class="nav-btn" id="prev-page">← Back</button>
+      <div class="page-dots" id="page-dots"></div>
+      <button class="nav-btn" id="next-page">Next →</button>
+    </div>
+  </div>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+<!-- decorative -->
+<symbol id="sym-star" viewBox="0 0 100 100"><path class="tone-gold" d="M50 8L61 38L93 40L67 60L76 92L50 73L24 92L33 60L7 40L39 38Z"/></symbol>
+<symbol id="sym-cloud" viewBox="0 0 100 100"><path class="tone-white" d="M25 65Q10 65 10 50Q10 36 25 36Q27 20 45 20Q60 20 64 32Q80 30 86 45Q95 47 95 58Q95 68 84 68L25 68Z"/></symbol>
+<symbol id="sym-sparkle" viewBox="0 0 100 100"><path class="tone-gold" d="M50 5Q54 42 95 50Q54 58 50 95Q46 58 5 50Q46 42 50 5Z"/></symbol>
+<symbol id="sym-moon" viewBox="0 0 100 100"><path class="tone-b" d="M65 10A45 45 0 1 0 65 90A36 36 0 0 1 65 10Z"/><circle class="tone-a" opacity=".5" cx="55" cy="35" r="4"/><circle class="tone-a" opacity=".5" cx="45" cy="55" r="3"/></symbol>
+
+<!-- characters -->
+<symbol id="sym-girl-a" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="96" rx="19" ry="3.5"/><path class="tone-a" d="M33 52Q50 44 67 52L71 90Q50 98 29 90Z"/><circle class="tone-skin" cx="37" cy="72" r="5.5"/><circle class="tone-skin" cx="63" cy="72" r="5.5"/><circle class="tone-skin" cx="50" cy="30" r="15"/><path class="tone-hair" d="M34 22Q50 6 66 22Q68 34 60 38L60 25Q50 15 40 25L40 38Q32 34 34 22Z"/><circle class="tone-dark" cx="44" cy="30" r="1.7"/><circle class="tone-dark" cx="56" cy="30" r="1.7"/><path class="tone-line" d="M45 36Q50 39 55 36"/></symbol>
+<symbol id="sym-girl-hood" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="96" rx="19" ry="3.5"/><path class="tone-a" d="M35 58Q50 52 65 58L68 90Q50 97 32 90Z"/><circle class="tone-skin" cx="37" cy="74" r="5"/><circle class="tone-skin" cx="63" cy="74" r="5"/><circle class="tone-skin" cx="50" cy="34" r="14"/><path class="tone-red" d="M28 40Q50 6 72 40Q74 55 64 60Q68 34 50 24Q32 34 36 60Q26 55 28 40Z"/><circle class="tone-dark" cx="45" cy="35" r="1.6"/><circle class="tone-dark" cx="55" cy="35" r="1.6"/><path class="tone-line" d="M46 41Q50 44 54 41"/></symbol>
+<symbol id="sym-boy-a" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="96" rx="18" ry="3.5"/><path class="tone-a" d="M35 52Q50 45 65 52L66 78L58 78L58 90L42 90L42 78L34 78Z"/><circle class="tone-skin" cx="36" cy="70" r="5.5"/><circle class="tone-skin" cx="64" cy="70" r="5.5"/><circle class="tone-skin" cx="50" cy="29" r="14.5"/><path class="tone-hair" d="M35 22Q50 10 65 22Q65 28 60 29Q58 18 50 17Q42 18 40 29Q35 28 35 22Z"/><circle class="tone-dark" cx="44" cy="29" r="1.7"/><circle class="tone-dark" cx="56" cy="29" r="1.7"/><path class="tone-line" d="M45 35Q50 38 55 35"/></symbol>
+<symbol id="sym-woman-old" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="97" rx="19" ry="3.5"/><path class="tone-a" d="M32 50Q50 42 68 50L73 92Q50 99 27 92Z"/><path class="tone-b" d="M30 55Q50 65 70 55L68 68Q50 76 32 68Z"/><circle class="tone-skin" cx="36" cy="70" r="5"/><circle class="tone-skin" cx="64" cy="70" r="5"/><circle class="tone-skin" cx="50" cy="30" r="14.5"/><path class="tone-hairgray" d="M36 26Q50 12 64 26Q65 32 60 33Q60 22 50 20Q40 22 40 33Q35 32 36 26Z"/><circle class="tone-hairgray" cx="50" cy="15" r="5"/><circle class="tone-dark" cx="45" cy="31" r="1.6"/><circle class="tone-dark" cx="55" cy="31" r="1.6"/><path class="tone-line" d="M45 37Q50 39 55 37"/></symbol>
+<symbol id="sym-granny" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="97" rx="19" ry="3.5"/><path class="tone-a" d="M32 52Q50 45 68 52L72 92Q50 99 28 92Z"/><circle class="tone-skin" cx="37" cy="72" r="5"/><circle class="tone-skin" cx="63" cy="72" r="5"/><circle class="tone-skin" cx="50" cy="31" r="14.5"/><path class="tone-b" d="M34 26Q50 15 66 26Q68 19 64 14Q50 7 36 14Q32 19 34 26Z"/><circle class="tone-line" cx="45" cy="32" r="4"/><circle class="tone-line" cx="55" cy="32" r="4"/><path class="tone-line" d="M49 32L51 32"/><circle class="tone-dark" cx="45" cy="32" r="1.3"/><circle class="tone-dark" cx="55" cy="32" r="1.3"/><path class="tone-line" d="M45 39Q50 42 55 39"/></symbol>
+<symbol id="sym-man-old" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="97" rx="19" ry="3.5"/><path class="tone-a" d="M33 54Q50 47 67 54L70 92L30 92Z"/><circle class="tone-skin" cx="36" cy="72" r="5.3"/><circle class="tone-skin" cx="64" cy="72" r="5.3"/><circle class="tone-skin" cx="50" cy="32" r="14.5"/><path class="tone-hairgray" d="M36 27Q50 15 64 27Q65 24 62 20Q50 12 38 20Q35 24 36 27Z"/><path class="tone-hairgray" d="M38 36Q50 48 62 36Q64 42 58 46Q50 50 42 46Q36 42 38 36Z"/><circle class="tone-dark" cx="45" cy="30" r="1.6"/><circle class="tone-dark" cx="55" cy="30" r="1.6"/></symbol>
+<symbol id="sym-witch" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="97" rx="19" ry="3.5"/><path class="tone-a" d="M30 55Q50 46 70 55L74 92Q50 99 26 92Z"/><circle class="tone-skin" cx="37" cy="73" r="5"/><circle class="tone-skin" cx="63" cy="73" r="5"/><circle class="tone-skin" cx="50" cy="33" r="14"/><path class="tone-hairdark" d="M35 30Q34 46 40 50Q36 34 50 30Q64 34 60 50Q66 46 65 30Z"/><path class="tone-b" d="M32 24Q50 -4 68 24Q60 22 50 22Q40 22 32 24Z"/><rect class="tone-b" x="30" y="21" width="40" height="5" rx="2"/><circle class="tone-dark" cx="45" cy="33" r="1.6"/><circle class="tone-dark" cx="55" cy="33" r="1.6"/><path class="tone-line" d="M44 39Q50 42 56 39"/></symbol>
+<symbol id="sym-fairy" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="97" rx="16" ry="3"/><path class="tone-white" opacity=".85" d="M30 55Q10 45 15 65Q20 80 34 70Z"/><path class="tone-white" opacity=".85" d="M70 55Q90 45 85 65Q80 80 66 70Z"/><path class="tone-a" d="M37 55Q50 49 63 55L66 90Q50 96 34 90Z"/><circle class="tone-skin" cx="40" cy="73" r="4.5"/><circle class="tone-skin" cx="60" cy="73" r="4.5"/><circle class="tone-skin" cx="50" cy="34" r="13"/><path class="tone-hairgold" d="M37 28Q50 16 63 28Q64 36 58 38L58 27Q50 19 42 27L42 38Q36 36 37 28Z"/><circle class="tone-dark" cx="45" cy="34" r="1.4"/><circle class="tone-dark" cx="55" cy="34" r="1.4"/><path class="tone-line" d="M45 40Q50 42 55 40"/><line class="tone-line" x1="64" y1="64" x2="80" y2="46"/><path class="tone-gold" d="M80 41L84 46L80 51L76 46Z"/></symbol>
+<symbol id="sym-prince" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="97" rx="19" ry="3.5"/><path class="tone-b" d="M28 50Q50 58 72 50L75 90L25 90Z"/><path class="tone-a" d="M36 52Q50 46 64 52L67 90L33 90Z"/><circle class="tone-skin" cx="35" cy="68" r="5.3"/><circle class="tone-skin" cx="65" cy="68" r="5.3"/><circle class="tone-skin" cx="50" cy="29" r="14.5"/><path class="tone-hairdark" d="M36 24Q50 12 64 24Q65 30 60 31Q58 20 50 19Q42 20 40 31Q35 30 36 24Z"/><path class="tone-gold" d="M38 17L42 8L47 15L50 6L53 15L58 8L62 17Z"/><circle class="tone-dark" cx="45" cy="29" r="1.6"/><circle class="tone-dark" cx="55" cy="29" r="1.6"/><path class="tone-line" d="M45 35Q50 38 55 35"/></symbol>
+<symbol id="sym-princess" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="97" rx="20" ry="3.5"/><path class="tone-a" d="M30 50Q50 42 70 50L78 92Q50 99 22 92Z"/><circle class="tone-skin" cx="34" cy="70" r="5.3"/><circle class="tone-skin" cx="66" cy="70" r="5.3"/><circle class="tone-skin" cx="50" cy="29" r="14.5"/><path class="tone-hairdark" d="M35 22Q50 8 65 22Q67 38 60 42L59 25Q50 15 41 25L40 42Q33 38 35 22Z"/><path class="tone-gold" d="M40 16L44 8L48 14L50 6L52 14L56 8L60 16Z"/><circle class="tone-dark" cx="45" cy="29" r="1.6"/><circle class="tone-dark" cx="55" cy="29" r="1.6"/><path class="tone-line" d="M45 35Q50 38 55 35"/></symbol>
+<symbol id="sym-king" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="97" rx="20" ry="3.5"/><path class="tone-a" d="M27 52Q50 44 73 52L77 92L23 92Z"/><path class="tone-white" d="M27 52Q50 60 73 52L73 58Q50 66 27 58Z"/><circle class="tone-skin" cx="34" cy="70" r="5.5"/><circle class="tone-skin" cx="66" cy="70" r="5.5"/><circle class="tone-skin" cx="50" cy="30" r="15"/><path class="tone-hairgray" d="M36 34Q34 44 40 47Q37 33 50 32Q63 33 60 47Q66 44 64 34Z"/><path class="tone-gold" d="M32 20L38 8L45 17L50 5L55 17L62 8L68 20Z"/><rect class="tone-gold" x="32" y="19" width="36" height="4" rx="2"/><circle class="tone-dark" cx="45" cy="28" r="1.6"/><circle class="tone-dark" cx="55" cy="28" r="1.6"/></symbol>
+<symbol id="sym-queen" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="97" rx="20" ry="3.5"/><path class="tone-a" d="M29 50Q50 43 71 50L79 92Q50 99 21 92Z"/><circle class="tone-skin" cx="33" cy="70" r="5.3"/><circle class="tone-skin" cx="67" cy="70" r="5.3"/><circle class="tone-skin" cx="50" cy="29" r="14.5"/><path class="tone-hairdark" d="M34 25Q50 34 66 25Q66 40 58 44L58 30Q50 26 42 30L42 44Q34 40 34 25Z"/><path class="tone-gold" d="M34 18L40 9L46 16L50 6L54 16L60 9L66 18Z"/><rect class="tone-gold" x="34" y="17" width="32" height="3.5" rx="1.5"/><circle class="tone-dark" cx="45" cy="29" r="1.6"/><circle class="tone-dark" cx="55" cy="29" r="1.6"/><path class="tone-line" d="M45 35Q50 37 55 35"/></symbol>
+<symbol id="sym-giant" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="97" rx="24" ry="4"/><path class="tone-a" d="M22 46Q50 36 78 46L82 92L18 92Z"/><circle class="tone-skin" cx="24" cy="66" r="7"/><circle class="tone-skin" cx="76" cy="66" r="7"/><circle class="tone-skin" cx="50" cy="26" r="18"/><path class="tone-hairdark" d="M30 20Q50 4 70 20Q72 28 66 30Q64 16 50 15Q36 16 34 30Q28 28 30 20Z"/><circle class="tone-dark" cx="43" cy="26" r="1.8"/><circle class="tone-dark" cx="57" cy="26" r="1.8"/><path class="tone-line" d="M43 33Q50 36 57 33"/></symbol>
+<symbol id="sym-troll" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="97" rx="22" ry="4"/><path class="tone-a" d="M25 55Q50 46 75 55L78 92L22 92Z"/><circle class="tone-skin" cx="27" cy="72" r="6.5"/><circle class="tone-skin" cx="73" cy="72" r="6.5"/><circle class="tone-b" cx="50" cy="34" r="17"/><path class="tone-b" d="M38 20Q34 10 30 18Z"/><path class="tone-b" d="M62 20Q66 10 70 18Z"/><circle class="tone-skin" cx="50" cy="38" r="5"/><circle class="tone-dark" cx="42" cy="30" r="1.7"/><circle class="tone-dark" cx="58" cy="30" r="1.7"/><path class="tone-line" d="M42 44Q50 47 58 44"/></symbol>
+<symbol id="sym-beast" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="97" rx="21" ry="4"/><path class="tone-b" d="M24 50Q50 42 76 50L80 92L20 92Z"/><circle class="tone-brown" cx="26" cy="68" r="6.5"/><circle class="tone-brown" cx="74" cy="68" r="6.5"/><circle class="tone-brown" cx="50" cy="30" r="16"/><path class="tone-brown" d="M30 22Q24 8 34 14Z"/><path class="tone-brown" d="M70 22Q76 8 66 14Z"/><path class="tone-a" d="M22 48Q50 60 78 48L78 54Q50 66 22 54Z"/><circle class="tone-dark" cx="43" cy="29" r="1.8"/><circle class="tone-dark" cx="57" cy="29" r="1.8"/><path class="tone-line" d="M43 36Q50 39 57 36"/></symbol>
+<symbol id="sym-mermaid" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".12" cx="50" cy="97" rx="20" ry="3"/><path class="tone-a" d="M50 55Q30 60 22 80Q35 76 50 90Q65 76 78 80Q70 60 50 55Z"/><path class="tone-a" d="M50 82Q42 92 50 98Q58 92 50 82Z"/><path class="tone-b" d="M38 52Q50 47 62 52L60 62Q50 66 40 62Z"/><circle class="tone-skin" cx="37" cy="60" r="4.5"/><circle class="tone-skin" cx="63" cy="60" r="4.5"/><circle class="tone-skin" cx="50" cy="32" r="13.5"/><path class="tone-hairgold" d="M36 26Q50 12 64 26Q67 45 55 50Q60 30 50 24Q40 30 45 50Q33 45 36 26Z"/><circle class="tone-dark" cx="45" cy="32" r="1.5"/><circle class="tone-dark" cx="55" cy="32" r="1.5"/><path class="tone-line" d="M45 38Q50 40 55 38"/></symbol>
+<symbol id="sym-tin-soldier" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="97" rx="12" ry="3"/><rect class="tone-a" x="38" y="55" width="24" height="38" rx="4"/><rect class="tone-dark" x="40" y="88" width="20" height="7" rx="2"/><rect class="tone-b" x="36" y="55" width="28" height="8" rx="3"/><circle class="tone-skin" cx="50" cy="35" r="13"/><rect class="tone-dark" x="38" y="16" width="24" height="20" rx="4"/><rect class="tone-dark" x="35" y="14" width="30" height="6" rx="2"/><circle class="tone-gold" cx="50" cy="60" r="2.3"/><circle class="tone-gold" cx="50" cy="68" r="2.3"/><circle class="tone-gold" cx="50" cy="76" r="2.3"/><circle class="tone-dark" cx="45" cy="35" r="1.5"/><circle class="tone-dark" cx="55" cy="35" r="1.5"/><path class="tone-line" d="M45 41Q50 43 55 41"/></symbol>
+<symbol id="sym-ballerina" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".12" cx="50" cy="97" rx="8" ry="2.5"/><path class="tone-a" d="M35 58Q50 50 65 58L80 82Q50 74 20 82Z"/><rect class="tone-skin" x="47" y="80" width="6" height="15" rx="2"/><circle class="tone-skin" cx="36" cy="66" r="4.5"/><circle class="tone-skin" cx="64" cy="66" r="4.5"/><circle class="tone-skin" cx="50" cy="34" r="13"/><path class="tone-hairdark" d="M50 18Q62 20 58 32Q50 36 42 32Q38 20 50 18Z"/><circle class="tone-dark" cx="46" cy="34" r="1.4"/><circle class="tone-dark" cx="54" cy="34" r="1.4"/><path class="tone-line" d="M45 40Q50 42 55 40"/></symbol>
+<symbol id="sym-gingerbread-man" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".12" cx="50" cy="96" rx="20" ry="3"/><rect class="tone-brown" x="18" y="46" width="16" height="9" rx="4.5" transform="rotate(-25 26 50)"/><rect class="tone-brown" x="66" y="46" width="16" height="9" rx="4.5" transform="rotate(25 74 50)"/><rect class="tone-brown" x="30" y="78" width="14" height="9" rx="4.5" transform="rotate(20 37 82)"/><rect class="tone-brown" x="56" y="78" width="14" height="9" rx="4.5" transform="rotate(-20 63 82)"/><rect class="tone-brown" x="32" y="42" width="36" height="42" rx="16"/><circle class="tone-brown" cx="50" cy="26" r="18"/><path d="M38 30Q50 34 62 30" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><circle fill="#fff" cx="40" cy="60" r="2.2"/><circle fill="#fff" cx="60" cy="60" r="2.2"/><circle fill="#fff" cx="50" cy="72" r="2.2"/><circle class="tone-dark" cx="44" cy="24" r="1.6"/><circle class="tone-dark" cx="56" cy="24" r="1.6"/><path class="tone-line" d="M45 30Q50 32 55 30"/></symbol>
+<symbol id="sym-elf" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="97" rx="14" ry="3"/><path class="tone-a" d="M36 58Q50 52 64 58L67 90Q50 96 33 90Z"/><circle class="tone-skin" cx="38" cy="75" r="4.5"/><circle class="tone-skin" cx="62" cy="75" r="4.5"/><circle class="tone-skin" cx="50" cy="38" r="12.5"/><path class="tone-skin" d="M37 36L28 30L38 40Z"/><path class="tone-skin" d="M63 36L72 30L62 40Z"/><path class="tone-b" d="M36 32Q50 18 64 32Q66 26 60 20Q50 14 40 20Q34 26 36 32Z"/><circle class="tone-dark" cx="45" cy="38" r="1.4"/><circle class="tone-dark" cx="55" cy="38" r="1.4"/><path class="tone-line" d="M45 43Q50 45 55 43"/></symbol>
+
+<!-- animals -->
+<symbol id="sym-wolf" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="96" rx="22" ry="4"/><path class="tone-a" d="M28 50Q50 40 72 50Q78 70 68 92L32 92Q22 70 28 50Z"/><path class="tone-a" d="M26 28L34 46L20 44Z"/><path class="tone-a" d="M74 28L66 46L80 44Z"/><path class="tone-white" d="M40 58Q50 78 60 58Q66 66 60 76Q50 84 40 76Q34 66 40 58Z"/><ellipse class="tone-dark" cx="50" cy="62" rx="5" ry="4"/><circle class="tone-dark" cx="38" cy="46" r="2"/><circle class="tone-dark" cx="62" cy="46" r="2"/></symbol>
+<symbol id="sym-pig" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="96" rx="22" ry="4"/><ellipse class="tone-a" cx="50" cy="62" rx="30" ry="26"/><path class="tone-a" d="M26 40Q22 28 32 30Q34 36 30 42Z"/><path class="tone-a" d="M74 40Q78 28 68 30Q66 36 70 42Z"/><ellipse class="tone-b" cx="50" cy="64" rx="11" ry="8"/><circle class="tone-dark" cx="45" cy="63" r="1.6"/><circle class="tone-dark" cx="55" cy="63" r="1.6"/><circle class="tone-dark" cx="38" cy="48" r="2"/><circle class="tone-dark" cx="62" cy="48" r="2"/></symbol>
+<symbol id="sym-bear" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="96" rx="24" ry="4"/><ellipse class="tone-a" cx="50" cy="60" rx="30" ry="27"/><circle class="tone-a" cx="25" cy="32" r="9"/><circle class="tone-a" cx="75" cy="32" r="9"/><circle class="tone-b" cx="25" cy="32" r="4.5"/><circle class="tone-b" cx="75" cy="32" r="4.5"/><ellipse class="tone-b" cx="50" cy="66" rx="13" ry="10"/><circle class="tone-dark" cx="50" cy="60" r="3"/><circle class="tone-dark" cx="40" cy="48" r="2.2"/><circle class="tone-dark" cx="60" cy="48" r="2.2"/><path class="tone-line" d="M43 68Q50 72 57 68"/></symbol>
+<symbol id="sym-duck" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".12" cx="50" cy="94" rx="20" ry="3.5"/><ellipse class="tone-a" cx="48" cy="62" rx="26" ry="22"/><circle class="tone-a" cx="68" cy="38" r="15"/><path class="tone-gold" d="M80 38Q92 36 90 42Q92 46 80 44Z"/><circle class="tone-dark" cx="72" cy="34" r="1.8"/><path class="tone-a" d="M20 55Q10 55 14 66Q18 74 26 68Z"/></symbol>
+<symbol id="sym-swan" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".12" cx="50" cy="94" rx="22" ry="3.5"/><ellipse class="tone-a" cx="45" cy="68" rx="28" ry="20"/><path class="tone-a" d="M55 55Q70 50 66 30Q64 18 74 14Q60 14 58 26Q54 40 55 55Z"/><circle class="tone-a" cx="72" cy="16" r="9"/><path class="tone-gold" d="M80 16Q90 15 88 19Q90 22 80 20Z"/><circle class="tone-dark" cx="75" cy="13" r="1.6"/></symbol>
+<symbol id="sym-hare" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="96" rx="20" ry="4"/><ellipse class="tone-a" cx="50" cy="66" rx="24" ry="22"/><path class="tone-a" d="M36 40Q28 8 40 6Q46 8 42 40Z"/><path class="tone-a" d="M64 40Q72 8 60 6Q54 8 58 40Z"/><path class="tone-b" d="M38 38Q34 14 40 12Q44 14 42 38Z"/><path class="tone-b" d="M62 38Q66 14 60 12Q56 14 58 38Z"/><ellipse class="tone-b" cx="50" cy="70" rx="11" ry="9"/><circle class="tone-dark" cx="42" cy="56" r="2.2"/><circle class="tone-dark" cx="58" cy="56" r="2.2"/><circle class="tone-dark" cx="50" cy="64" r="1.8"/></symbol>
+<symbol id="sym-tortoise" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="90" rx="26" ry="5"/><ellipse class="tone-a" cx="50" cy="60" rx="32" ry="24"/><path class="tone-b" d="M50 40L62 50L58 66L42 66L38 50Z"/><path class="tone-b" d="M28 55L38 50L42 66L30 68Z"/><path class="tone-b" d="M72 55L62 50L58 66L70 68Z"/><circle class="tone-a" cx="22" cy="70" r="10"/><circle class="tone-dark" cx="18" cy="68" r="1.8"/><circle class="tone-a" cx="30" cy="86" r="6"/><circle class="tone-a" cx="70" cy="86" r="6"/></symbol>
+<symbol id="sym-cat" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="95" rx="18" ry="3.5"/><ellipse class="tone-a" cx="50" cy="64" rx="22" ry="24"/><path class="tone-a" d="M32 40L24 22L42 34Z"/><path class="tone-a" d="M68 40L76 22L58 34Z"/><path class="tone-b" d="M35 40L30 28L40 35Z"/><path class="tone-b" d="M65 40L70 28L60 35Z"/><path class="tone-line" d="M50 58L44 52M50 58L56 52M50 58L50 65"/><circle class="tone-dark" cx="40" cy="48" r="2"/><circle class="tone-dark" cx="60" cy="48" r="2"/><path class="tone-line" d="M35 60Q28 58 24 62M65 60Q72 58 76 62"/></symbol>
+<symbol id="sym-dog" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="95" rx="20" ry="3.5"/><ellipse class="tone-a" cx="50" cy="62" rx="24" ry="24"/><path class="tone-a" d="M26 42Q16 40 18 58Q24 64 32 54Z"/><path class="tone-a" d="M74 42Q84 40 82 58Q76 64 68 54Z"/><ellipse class="tone-b" cx="50" cy="68" rx="13" ry="10"/><ellipse class="tone-dark" cx="50" cy="62" rx="4" ry="3"/><circle class="tone-dark" cx="40" cy="50" r="2.1"/><circle class="tone-dark" cx="60" cy="50" r="2.1"/><path class="tone-line" d="M43 72Q50 76 57 72"/></symbol>
+<symbol id="sym-donkey" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="95" rx="20" ry="3.5"/><ellipse class="tone-a" cx="50" cy="66" rx="22" ry="22"/><path class="tone-a" d="M33 44Q24 14 38 16Q44 20 40 44Z"/><path class="tone-a" d="M67 44Q76 14 62 16Q56 20 60 44Z"/><path class="tone-b" d="M35 42Q30 20 38 20Q42 22 40 42Z"/><path class="tone-b" d="M65 42Q70 20 62 20Q58 22 60 42Z"/><ellipse class="tone-b" cx="50" cy="72" rx="10" ry="8"/><circle class="tone-dark" cx="42" cy="56" r="2.1"/><circle class="tone-dark" cx="58" cy="56" r="2.1"/></symbol>
+<symbol id="sym-rooster" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".12" cx="50" cy="94" rx="18" ry="3.5"/><ellipse class="tone-a" cx="46" cy="66" rx="22" ry="22"/><circle class="tone-a" cx="64" cy="38" r="14"/><path class="tone-red" d="M58 24Q62 12 66 24Q70 14 72 26Q66 22 62 26Q60 20 58 24Z"/><path class="tone-gold" d="M78 36Q90 34 87 40Q90 44 78 42Z"/><circle class="tone-dark" cx="68" cy="35" r="1.8"/><path class="tone-b" d="M22 60Q10 56 14 68Q10 76 22 72Z"/></symbol>
+<symbol id="sym-hen" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".12" cx="50" cy="94" rx="20" ry="3.5"/><ellipse class="tone-a" cx="46" cy="64" rx="25" ry="23"/><circle class="tone-a" cx="68" cy="42" r="13"/><path class="tone-red" d="M64 30Q68 22 72 30Q70 33 64 30Z"/><path class="tone-gold" d="M80 40Q90 38 87 43Q90 47 80 45Z"/><circle class="tone-dark" cx="72" cy="39" r="1.7"/><path class="tone-b" d="M20 58Q8 56 12 66Q8 74 20 70Z"/></symbol>
+<symbol id="sym-goat" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="96" rx="20" ry="4"/><ellipse class="tone-a" cx="50" cy="64" rx="23" ry="22"/><path class="tone-b" d="M38 34Q34 14 42 16Q46 22 42 36Z"/><path class="tone-b" d="M62 34Q66 14 58 16Q54 22 58 36Z"/><path class="tone-a" d="M46 66Q42 78 48 80Q50 76 46 66Z"/><ellipse class="tone-b" cx="50" cy="68" rx="9" ry="7"/><circle class="tone-dark" cx="42" cy="52" r="2"/><circle class="tone-dark" cx="58" cy="52" r="2"/></symbol>
+<symbol id="sym-frog" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="92" rx="24" ry="5"/><ellipse class="tone-a" cx="50" cy="66" rx="27" ry="20"/><circle class="tone-a" cx="34" cy="42" r="12"/><circle class="tone-a" cx="66" cy="42" r="12"/><circle class="tone-white" cx="34" cy="42" r="7"/><circle class="tone-white" cx="66" cy="42" r="7"/><circle class="tone-dark" cx="34" cy="42" r="3"/><circle class="tone-dark" cx="66" cy="42" r="3"/><path class="tone-line" d="M32 62Q50 72 68 62"/></symbol>
+<symbol id="sym-fish" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".1" cx="50" cy="90" rx="26" ry="4"/><ellipse class="tone-a" cx="44" cy="55" rx="30" ry="20"/><path class="tone-b" d="M74 55L92 40L92 70Z"/><path class="tone-b" d="M36 38Q44 28 52 38Z"/><path class="tone-b" d="M36 72Q44 82 52 72Z"/><circle class="tone-white" cx="30" cy="50" r="6"/><circle class="tone-dark" cx="29" cy="50" r="2.6"/><path class="tone-line" d="M46 55Q54 58 60 55"/></symbol>
+<symbol id="sym-sheep" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="96" rx="22" ry="4"/><rect class="tone-b" x="30" y="76" width="6" height="16" rx="3"/><rect class="tone-b" x="64" y="76" width="6" height="16" rx="3"/><circle class="tone-a" cx="34" cy="52" r="15"/><circle class="tone-a" cx="50" cy="44" r="17"/><circle class="tone-a" cx="66" cy="52" r="15"/><circle class="tone-a" cx="50" cy="66" r="17"/><ellipse class="tone-b" cx="50" cy="68" rx="12" ry="10"/><circle class="tone-dark" cx="43" cy="64" r="2"/><circle class="tone-dark" cx="57" cy="64" r="2"/></symbol>
+<symbol id="sym-fox" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="95" rx="20" ry="3.5"/><path class="tone-a" d="M30 46Q50 36 70 46Q76 66 62 90L38 90Q24 66 30 46Z"/><path class="tone-a" d="M28 26L38 44L22 42Z"/><path class="tone-a" d="M72 26L62 44L78 42Z"/><path class="tone-white" d="M40 56Q50 74 60 56Q64 62 58 72Q50 78 42 72Q36 62 40 56Z"/><ellipse class="tone-dark" cx="50" cy="60" rx="3.5" ry="3"/><circle class="tone-dark" cx="38" cy="46" r="2"/><circle class="tone-dark" cx="62" cy="46" r="2"/></symbol>
+<symbol id="sym-bird" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".1" cx="50" cy="90" rx="14" ry="3"/><ellipse class="tone-a" cx="52" cy="55" rx="22" ry="18"/><path class="tone-b" d="M30 50Q10 46 18 62Q24 68 34 60Z"/><circle class="tone-white" cx="66" cy="46" r="6"/><circle class="tone-dark" cx="68" cy="45" r="1.8"/><path class="tone-gold" d="M76 48Q86 46 82 52Q86 56 76 54Z"/><path class="tone-b" d="M40 68Q52 78 62 68Z"/></symbol>
+
+<!-- scenery -->
+<symbol id="sym-cottage" viewBox="0 0 100 100"><rect class="tone-b" x="22" y="52" width="56" height="40" rx="3"/><path class="tone-a" d="M14 54L50 20L86 54Z"/><rect class="tone-dark" x="42" y="66" width="16" height="26" rx="2"/><rect class="tone-white" x="28" y="60" width="14" height="14" rx="2"/><rect class="tone-white" x="58" y="60" width="14" height="14" rx="2"/><rect class="tone-a" x="46" y="26" width="8" height="14"/></symbol>
+<symbol id="sym-castle" viewBox="0 0 100 100"><rect class="tone-b" x="16" y="50" width="68" height="42" rx="2"/><rect class="tone-a" x="12" y="28" width="18" height="26"/><rect class="tone-a" x="70" y="28" width="18" height="26"/><rect class="tone-a" x="12" y="22" width="5" height="7"/><rect class="tone-a" x="21" y="22" width="5" height="7"/><rect class="tone-a" x="70" y="22" width="5" height="7"/><rect class="tone-a" x="79" y="22" width="5" height="7"/><rect class="tone-a" x="37" y="16" width="26" height="38"/><path class="tone-b" d="M37 16L50 2L63 16Z"/><rect class="tone-dark" x="44" y="70" width="12" height="22" rx="2"/><rect class="tone-white" x="18" y="58" width="10" height="10" rx="1"/><rect class="tone-white" x="72" y="58" width="10" height="10" rx="1"/><rect class="tone-white" x="45" y="30" width="10" height="10" rx="1"/><rect class="tone-gold" x="49" y="0" width="2" height="8"/><path class="tone-gold" d="M51 1L58 4L51 7Z"/></symbol>
+<symbol id="sym-tower" viewBox="0 0 100 100"><path class="tone-b" d="M38 92L38 30Q38 14 50 14Q62 14 62 30L62 92Z"/><path class="tone-a" d="M34 30L50 8L66 30Z"/><rect class="tone-white" x="43" y="38" width="14" height="14" rx="2"/><rect class="tone-gold" x="49" y="0" width="2" height="9"/><path class="tone-gold" d="M51 1L58 4L51 7Z"/><path class="tone-hairgold" opacity=".85" d="M43 52Q40 70 46 92L54 92Q60 70 57 52Z"/></symbol>
+<symbol id="sym-tree-round" viewBox="0 0 100 100"><rect class="tone-brown" x="44" y="66" width="12" height="28" rx="3"/><circle class="tone-green" cx="50" cy="44" r="30"/><circle class="tone-green" cx="30" cy="55" r="18"/><circle class="tone-green" cx="70" cy="55" r="18"/></symbol>
+<symbol id="sym-tree-pine" viewBox="0 0 100 100"><rect class="tone-brown" x="45" y="80" width="10" height="16" rx="2"/><path class="tone-green" d="M50 8L74 46L26 46Z"/><path class="tone-green" d="M50 28L78 66L22 66Z"/><path class="tone-green" d="M50 48L82 88L18 88Z"/></symbol>
+<symbol id="sym-beanstalk" viewBox="0 0 100 100"><path d="M50 98Q30 80 55 65Q75 52 45 38Q22 25 50 2" fill="none" stroke="#8FBF8F" stroke-width="9" stroke-linecap="round"/><ellipse class="tone-green" cx="38" cy="70" rx="12" ry="7" transform="rotate(-30 38 70)"/><ellipse class="tone-green" cx="65" cy="50" rx="12" ry="7" transform="rotate(20 65 50)"/><ellipse class="tone-green" cx="35" cy="30" rx="11" ry="6" transform="rotate(-25 35 30)"/></symbol>
+<symbol id="sym-pumpkin-coach" viewBox="0 0 100 100"><ellipse class="tone-dark" opacity=".15" cx="50" cy="92" rx="30" ry="4"/><ellipse class="tone-a" cx="50" cy="58" rx="34" ry="26"/><path class="tone-b" d="M20 46Q50 58 80 46L80 52Q50 64 20 52Z"/><rect class="tone-b" x="38" y="30" width="24" height="16" rx="6"/><rect class="tone-gold" x="46" y="16" width="8" height="14" rx="3"/><circle class="tone-dark" cx="30" cy="86" r="9"/><circle class="tone-dark" cx="70" cy="86" r="9"/><circle class="tone-gold" cx="30" cy="86" r="3"/><circle class="tone-gold" cx="70" cy="86" r="3"/></symbol>
+<symbol id="sym-glass-slipper" viewBox="0 0 100 100"><path class="tone-b" opacity=".55" d="M15 78Q15 60 35 55Q45 40 60 42Q78 44 82 60Q90 62 88 72Q86 80 74 80L20 80Q14 80 15 78Z"/><path class="tone-white" opacity=".5" d="M40 48Q50 44 58 50L54 58L42 56Z"/><circle class="tone-gold" cx="70" cy="66" r="4"/></symbol>
+<symbol id="sym-spinning-wheel" viewBox="0 0 100 100"><circle cx="48" cy="42" r="28" fill="none" stroke="#B08968" stroke-width="5"/><line x1="48" y1="14" x2="48" y2="70" stroke="#B08968" stroke-width="3"/><line x1="20" y1="42" x2="76" y2="42" stroke="#B08968" stroke-width="3"/><line x1="28" y1="22" x2="68" y2="62" stroke="#B08968" stroke-width="3"/><line x1="68" y1="22" x2="28" y2="62" stroke="#B08968" stroke-width="3"/><circle cx="48" cy="42" r="5" fill="#B08968"/><rect x="42" y="70" width="12" height="26" rx="3" fill="#8A5A3B"/><rect x="30" y="90" width="40" height="8" rx="3" fill="#8A5A3B"/></symbol>
+<symbol id="sym-bed-stack" viewBox="0 0 100 100"><rect class="tone-a" x="15" y="82" width="70" height="12" rx="5"/><rect class="tone-b" x="18" y="70" width="64" height="12" rx="5"/><rect class="tone-a" x="21" y="58" width="58" height="12" rx="5"/><rect class="tone-b" x="24" y="46" width="52" height="12" rx="5"/><rect class="tone-a" x="27" y="34" width="46" height="12" rx="5"/><circle class="tone-gold" cx="50" cy="28" r="4"/></symbol>
+<symbol id="sym-bridge" viewBox="0 0 100 100"><path class="tone-b" d="M6 70Q50 30 94 70L94 82Q50 46 6 82Z"/><rect class="tone-brown" x="10" y="66" width="10" height="20" rx="2"/><rect class="tone-brown" x="80" y="66" width="10" height="20" rx="2"/><path class="tone-green" d="M0 88Q50 96 100 88L100 100L0 100Z"/></symbol>
+<symbol id="sym-house-straw" viewBox="0 0 100 100"><path class="tone-gold" d="M20 90L20 58L50 30L80 58L80 90Z"/><path class="tone-b" d="M20 58L50 30L80 58L74 58L50 38L26 58Z"/><rect class="tone-brown" x="42" y="66" width="16" height="24" rx="2"/><line x1="24" y1="70" x2="76" y2="70" stroke="#E8C468" stroke-width="2"/><line x1="24" y1="78" x2="76" y2="78" stroke="#E8C468" stroke-width="2"/></symbol>
+<symbol id="sym-house-sticks" viewBox="0 0 100 100"><path class="tone-b" d="M20 90L20 58L50 30L80 58L80 90Z"/><path class="tone-a" d="M20 58L50 30L80 58L74 58L50 38L26 58Z"/><rect class="tone-brown" x="42" y="66" width="16" height="24" rx="2"/><line x1="20" y1="66" x2="80" y2="60" stroke="#8A5A3B" stroke-width="2.5"/><line x1="20" y1="78" x2="80" y2="72" stroke="#8A5A3B" stroke-width="2.5"/><line x1="20" y1="90" x2="80" y2="84" stroke="#8A5A3B" stroke-width="2.5"/></symbol>
+<symbol id="sym-house-bricks" viewBox="0 0 100 100"><path class="tone-red" d="M18 90L18 56L50 28L82 56L82 90Z"/><path class="tone-b" d="M18 56L50 28L82 56L76 56L50 34L24 56Z"/><rect class="tone-dark" x="42" y="64" width="16" height="26" rx="2"/><rect class="tone-white" x="24" y="60" width="12" height="10" rx="1"/><rect class="tone-white" x="64" y="60" width="12" height="10" rx="1"/><line x1="18" y1="66" x2="82" y2="66" stroke="#c85a68" stroke-width="1.5"/><line x1="18" y1="76" x2="82" y2="76" stroke="#c85a68" stroke-width="1.5"/></symbol>
+<symbol id="sym-boat" viewBox="0 0 100 100"><path class="tone-brown" d="M10 62L90 62L78 82L22 82Z"/><rect class="tone-a" x="48" y="20" width="3" height="42"/><path class="tone-white" d="M51 22L51 55L80 50Z"/><path d="M18 68Q30 76 42 68Q54 76 66 68Q78 76 90 68" fill="none" stroke="#8EC5EE" stroke-width="2.5" stroke-linecap="round"/></symbol>
+<symbol id="sym-mirror-magic" viewBox="0 0 100 100"><ellipse class="tone-a" cx="50" cy="42" rx="26" ry="32"/><ellipse class="tone-white" cx="50" cy="42" rx="19" ry="25"/><rect class="tone-gold" x="45" y="70" width="10" height="20" rx="3"/><rect class="tone-gold" x="34" y="88" width="32" height="7" rx="3"/><path class="tone-b" opacity=".5" d="M38 24Q46 20 44 32Z"/></symbol>
+<symbol id="sym-apple" viewBox="0 0 100 100"><path class="tone-red" d="M50 34Q30 30 26 52Q22 76 42 84Q50 88 58 84Q78 76 74 52Q70 30 50 34Z"/><path class="tone-green" d="M50 26Q58 18 66 22Q60 26 58 32Z"/><rect class="tone-brown" x="48" y="14" width="4" height="16" rx="2"/></symbol>
+<symbol id="sym-flower" viewBox="0 0 100 100"><rect class="tone-green" x="47" y="60" width="6" height="34" rx="3"/><path class="tone-green" d="M50 70Q34 66 34 78Q42 84 50 76Z"/><circle class="tone-a" cx="50" cy="30" r="13"/><circle class="tone-a" cx="32" cy="42" r="13"/><circle class="tone-a" cx="68" cy="42" r="13"/><circle class="tone-a" cx="38" cy="58" r="13"/><circle class="tone-a" cx="62" cy="58" r="13"/><circle class="tone-gold" cx="50" cy="46" r="10"/></symbol>
+  </defs>
+</svg>
+
+<script>
+const STORIES = [
+{ title:"Cinderella", theme:["#EDE1FB","#B79FD4"], icon:[{s:'glass-slipper',x:100,y:112,w:110,h:100}],
+  pages:[
+    {text:"Cinderella lived with her mean stepmother and two stepsisters. They made her work all day.", actors:[{s:'girl-a',x:100,y:114,w:120,h:120}]},
+    {text:"A fairy godmother appeared! She turned a pumpkin into a coach, and gave Cinderella a beautiful dress.", actors:[{s:'fairy',x:65,y:116,w:95,h:95},{s:'pumpkin-coach',x:145,y:118,w:100,h:100}]},
+    {text:"Cinderella danced with the prince all night. At midnight, she ran home and lost one glass slipper.", actors:[{s:'prince',x:65,y:112,w:100,h:100},{s:'girl-a',x:140,y:112,w:100,h:100}]},
+    {text:"The prince searched the kingdom. The slipper fit Cinderella perfectly, and they lived happily ever after.", actors:[{s:'castle',x:100,y:110,w:130,h:130},{s:'glass-slipper',x:150,y:150,w:55,h:55}]}
+  ], moral:"Kindness always shines through." },
+{ title:"Little Red Riding Hood", theme:["#FFE1EC","#F19CBB"], icon:[{s:'girl-hood',x:100,y:112,w:120,h:120}],
+  pages:[
+    {text:"Little Red Riding Hood took a basket to Grandma's house. She walked through the deep, dark woods.", actors:[{s:'girl-hood',x:75,y:114,w:105,h:105},{s:'tree-pine',x:150,y:100,w:85,h:110}]},
+    {text:"A sneaky wolf ran ahead. He jumped into Grandma's bed and pretended to be her!", actors:[{s:'granny',x:65,y:114,w:95,h:95},{s:'wolf',x:140,y:116,w:100,h:100}]},
+    {text:"\"What big teeth you have!\" said Little Red. \"All the better to eat you with!\" said the wolf.", actors:[{s:'girl-hood',x:70,y:114,w:95,h:95},{s:'wolf',x:140,y:114,w:100,h:100}]},
+    {text:"A brave woodcutter heard her call and chased the wolf away. Grandma and Little Red were safe.", actors:[{s:'man-old',x:100,y:112,w:120,h:120}]}
+  ], moral:"Always listen to good advice." },
+{ title:"The Three Little Pigs", theme:["#DBF6EA","#7FCDA8"], icon:[{s:'pig',x:70,y:116,w:85,h:85},{s:'house-bricks',x:148,y:100,w:95,h:95}],
+  pages:[
+    {text:"Three little pigs built three houses: one of straw, one of sticks, and one of sturdy bricks.", actors:[{s:'house-straw',x:60,y:115,w:80,h:80},{s:'house-bricks',x:145,y:108,w:90,h:90}]},
+    {text:"A big bad wolf huffed and puffed! He blew down the straw house and the stick house.", actors:[{s:'wolf',x:65,y:114,w:100,h:100},{s:'house-sticks',x:145,y:112,w:90,h:90}]},
+    {text:"The two pigs ran to their brother's brick house. The wolf huffed and puffed, but the bricks stood strong.", actors:[{s:'pig',x:65,y:118,w:90,h:90},{s:'house-bricks',x:145,y:108,w:95,h:95}]},
+    {text:"The wolf could not blow the house down. He ran away, and the three little pigs were safe and happy.", actors:[{s:'pig',x:70,y:116,w:90,h:90},{s:'pig',x:130,y:116,w:90,h:90}]}
+  ], moral:"Hard work builds strong things." },
+{ title:"Goldilocks and the Three Bears", theme:["#DCEEFC","#7EB8E8"], icon:[{s:'girl-a',x:68,y:114,w:95,h:95},{s:'bear',x:142,y:110,w:100,h:100}],
+  pages:[
+    {text:"Goldilocks found a little house in the woods. No one was home, so she peeked inside.", actors:[{s:'girl-a',x:70,y:114,w:100,h:100},{s:'cottage',x:145,y:105,w:95,h:95}]},
+    {text:"She tasted three bowls of porridge. Papa's was too hot, Mama's was too cold, and Baby's was just right!", actors:[{s:'girl-a',x:100,y:114,w:115,h:115}]},
+    {text:"She tried three chairs and three beds. Baby Bear's little bed was the comfiest of all.", actors:[{s:'girl-a',x:100,y:118,w:105,h:105}]},
+    {text:"The three bears came home and found her! Goldilocks woke up and ran home very fast.", actors:[{s:'bear',x:65,y:112,w:100,h:100},{s:'bear',x:135,y:120,w:70,h:70}]}
+  ], moral:"It's polite to ask before you visit." },
+{ title:"Jack and the Beanstalk", theme:["#FFF3C9","#F3C94E"], icon:[{s:'beanstalk',x:100,y:100,w:110,h:150}],
+  pages:[
+    {text:"Jack traded his cow for five magic beans. His mother was upset and tossed them out the window.", actors:[{s:'boy-a',x:70,y:114,w:105,h:105},{s:'woman-old',x:145,y:112,w:100,h:100}]},
+    {text:"The next morning, a giant beanstalk grew all the way to the sky! Jack climbed up to look.", actors:[{s:'beanstalk',x:100,y:100,w:120,h:160}]},
+    {text:"At the top, Jack found a giant's castle with a bag of gold and a hen that laid golden eggs.", actors:[{s:'giant',x:70,y:112,w:110,h:110},{s:'castle',x:150,y:104,w:95,h:95}]},
+    {text:"The giant chased Jack down the beanstalk. Jack chopped it down, and he and his mother lived happily.", actors:[{s:'boy-a',x:100,y:114,w:115,h:115}]}
+  ], moral:"Being brave can lead to great things." },
+{ title:"Hansel and Gretel", theme:["#FFE3D1","#F0996A"], icon:[{s:'boy-a',x:72,y:116,w:90,h:90},{s:'girl-a',x:132,y:116,w:90,h:90}],
+  pages:[
+    {text:"Hansel and Gretel got lost in the forest. Deep among the trees, they found a house made of candy!", actors:[{s:'boy-a',x:65,y:116,w:90,h:90},{s:'cottage',x:145,y:105,w:100,h:100}]},
+    {text:"A witch lived in the candy house. She seemed friendly, but she really wanted to eat them up!", actors:[{s:'witch',x:100,y:114,w:115,h:115}]},
+    {text:"The witch locked Hansel in a cage. But clever Gretel tricked the witch and pushed her away.", actors:[{s:'girl-a',x:70,y:114,w:100,h:100},{s:'witch',x:140,y:114,w:95,h:95}]},
+    {text:"Hansel and Gretel ran home with treasure from the witch's house. Their family was overjoyed to see them.", actors:[{s:'boy-a',x:70,y:116,w:95,h:95},{s:'girl-a',x:132,y:116,w:95,h:95}]}
+  ], moral:"Clever thinking gets you out of trouble." },
+{ title:"Snow White", theme:["#E2E1FA","#9B9AE0"], icon:[{s:'girl-a',x:78,y:112,w:105,h:105},{s:'apple',x:150,y:92,w:45,h:45}],
+  pages:[
+    {text:"Snow White's stepmother, the Queen, was very jealous. She asked her magic mirror who was fairest of all.", actors:[{s:'queen',x:75,y:112,w:100,h:100},{s:'mirror-magic',x:150,y:105,w:80,h:80}]},
+    {text:"The mirror said Snow White was fairest. So Snow White ran away and found seven kind little friends.", actors:[{s:'girl-a',x:100,y:114,w:115,h:115}]},
+    {text:"The Queen tricked Snow White with a shiny red apple. Snow White took a bite and fell fast asleep.", actors:[{s:'girl-a',x:70,y:116,w:100,h:100},{s:'apple',x:145,y:98,w:60,h:60}]},
+    {text:"A prince came by and gently woke her. Snow White opened her eyes, and everyone celebrated happily.", actors:[{s:'prince',x:68,y:112,w:100,h:100},{s:'girl-a',x:138,y:112,w:100,h:100}]}
+  ], moral:"A kind heart is the fairest of all." },
+{ title:"Rapunzel", theme:["#FFE1DC","#EF9284"], icon:[{s:'tower',x:100,y:100,w:110,h:150}],
+  pages:[
+    {text:"Rapunzel lived high in a tall tower with no doors or stairs. Her hair was very, very long.", actors:[{s:'tower',x:100,y:100,w:120,h:155}]},
+    {text:"\"Rapunzel, Rapunzel, let down your hair!\" A witch used it like a rope to climb up and down.", actors:[{s:'witch',x:70,y:114,w:95,h:95},{s:'tower',x:150,y:100,w:90,h:120}]},
+    {text:"One day, a prince heard Rapunzel singing sweetly. He climbed up her long hair to meet her.", actors:[{s:'prince',x:100,y:114,w:110,h:110}]},
+    {text:"Rapunzel and the prince escaped the tower together, and lived happily ever after in the kingdom.", actors:[{s:'princess',x:70,y:112,w:100,h:100},{s:'prince',x:138,y:112,w:100,h:100}]}
+  ], moral:"Love finds a way." },
+{ title:"The Ugly Duckling", theme:["#F1E1FB","#BC85E8"], icon:[{s:'swan',x:100,y:114,w:120,h:120}],
+  pages:[
+    {text:"A little duckling looked different from his brothers and sisters. The other animals were not kind to him.", actors:[{s:'duck',x:100,y:116,w:105,h:105}]},
+    {text:"He felt sad and lonely, so he swam far away. He spent a long, cold winter all alone.", actors:[{s:'duck',x:100,y:118,w:95,h:95}]},
+    {text:"In spring, he saw beautiful swans on the lake. Shyly, he swam over to say hello.", actors:[{s:'duck',x:65,y:118,w:80,h:80},{s:'swan',x:140,y:112,w:100,h:100}]},
+    {text:"He looked at his reflection in the water — he was a swan too, the most beautiful one of all!", actors:[{s:'swan',x:100,y:114,w:120,h:120}]}
+  ], moral:"You are more wonderful than you know." },
+{ title:"The Tortoise and the Hare", theme:["#D9F3ED","#78CDBC"], icon:[{s:'tortoise',x:68,y:120,w:75,h:75},{s:'hare',x:140,y:112,w:85,h:85}],
+  pages:[
+    {text:"A speedy hare laughed at a slow tortoise. \"Let's have a race!\" said the tortoise with a smile.", actors:[{s:'hare',x:70,y:112,w:100,h:100},{s:'tortoise',x:145,y:122,w:75,h:75}]},
+    {text:"The race began! The hare zoomed far, far ahead, leaving the tortoise slowly plodding behind.", actors:[{s:'hare',x:100,y:112,w:115,h:115}]},
+    {text:"The hare felt so sure he would win that he stopped to nap under a shady tree.", actors:[{s:'hare',x:70,y:120,w:90,h:90},{s:'tree-round',x:145,y:100,w:95,h:95}]},
+    {text:"Slow and steady, the tortoise kept walking. He passed the sleeping hare and won the race!", actors:[{s:'tortoise',x:100,y:118,w:110,h:110}]}
+  ], moral:"Slow and steady wins the race." },
+{ title:"The Boy Who Cried Wolf", theme:["#FCE1EC","#E88AB0"], icon:[{s:'boy-a',x:75,y:112,w:95,h:95},{s:'wolf',x:140,y:116,w:90,h:90}],
+  pages:[
+    {text:"A shepherd boy watched sheep on a hill. One day, just for fun, he shouted, \"Wolf! Wolf!\"", actors:[{s:'boy-a',x:70,y:112,w:100,h:100},{s:'sheep',x:145,y:118,w:80,h:80}]},
+    {text:"The villagers ran to help, but there was no wolf at all. The boy laughed and laughed.", actors:[{s:'boy-a',x:100,y:114,w:110,h:110}]},
+    {text:"He cried \"Wolf!\" again the very next day. Again, the villagers came running for nothing.", actors:[{s:'boy-a',x:100,y:114,w:105,h:105}]},
+    {text:"Then a real wolf came! The boy cried for help, but this time, no one believed him.", actors:[{s:'boy-a',x:70,y:114,w:95,h:95},{s:'wolf',x:140,y:116,w:100,h:100}]}
+  ], moral:"Telling the truth matters." },
+{ title:"Puss in Boots", theme:["#FFF3B8","#FFC94A"], icon:[{s:'cat',x:100,y:112,w:115,h:115}],
+  pages:[
+    {text:"A poor miller left his clever cat to his youngest son. The cat asked only for boots and a bag.", actors:[{s:'cat',x:100,y:114,w:115,h:115}]},
+    {text:"Puss caught rabbits and brought them to the King, all as gifts from his clever 'master.'", actors:[{s:'cat',x:70,y:114,w:95,h:95},{s:'king',x:140,y:110,w:100,h:100}]},
+    {text:"Puss tricked a scary ogre into turning into a tiny mouse, then gobbled him right up!", actors:[{s:'cat',x:70,y:116,w:95,h:95},{s:'troll',x:140,y:110,w:100,h:100}]},
+    {text:"Puss gave his master the ogre's castle. The King was so impressed, they all lived happily ever after.", actors:[{s:'castle',x:100,y:106,w:120,h:120}]}
+  ], moral:"Clever thinking can solve big problems." },
+{ title:"The Frog Prince", theme:["#EDE1FB","#B79FD4"], icon:[{s:'frog',x:100,y:118,w:100,h:100}],
+  pages:[
+    {text:"A princess dropped her golden ball into a pond. A friendly frog offered to fetch it for her.", actors:[{s:'princess',x:70,y:112,w:100,h:100},{s:'frog',x:145,y:126,w:75,h:75}]},
+    {text:"\"Let me be your friend,\" said the frog. The princess agreed, then quickly ran off with her ball.", actors:[{s:'frog',x:100,y:122,w:90,h:90}]},
+    {text:"The frog followed her all the way to the castle. \"A promise is a promise,\" said the wise King.", actors:[{s:'frog',x:65,y:124,w:75,h:75},{s:'king',x:140,y:110,w:105,h:105}]},
+    {text:"The princess kept her promise, and the frog turned into a handsome prince. They became the best of friends.", actors:[{s:'princess',x:70,y:112,w:100,h:100},{s:'prince',x:138,y:112,w:100,h:100}]}
+  ], moral:"Always keep your promises." },
+{ title:"Sleeping Beauty", theme:["#FFE1EC","#F19CBB"], icon:[{s:'princess',x:78,y:112,w:105,h:105},{s:'spinning-wheel',x:150,y:120,w:60,h:60}],
+  pages:[
+    {text:"A princess was born, and a mean fairy cast a spell: she would prick her finger and fall asleep.", actors:[{s:'witch',x:100,y:114,w:110,h:110}]},
+    {text:"A kind fairy softened the spell. She would sleep for one hundred years instead, not forever.", actors:[{s:'fairy',x:100,y:114,w:105,h:105}]},
+    {text:"On her birthday, the princess touched a spinning wheel and fell asleep. The whole castle slept too.", actors:[{s:'princess',x:68,y:114,w:95,h:95},{s:'spinning-wheel',x:145,y:122,w:70,h:70}]},
+    {text:"One hundred years later, a kind prince arrived and gently woke her. The whole kingdom woke up too!", actors:[{s:'prince',x:70,y:112,w:100,h:100},{s:'princess',x:138,y:112,w:100,h:100}]}
+  ], moral:"Kindness can soften even the worst luck." },
+{ title:"Rumpelstiltskin", theme:["#DBF6EA","#7FCDA8"], icon:[{s:'elf',x:100,y:116,w:100,h:100},{s:'spinning-wheel',x:152,y:132,w:55,h:55}],
+  pages:[
+    {text:"A miller bragged that his daughter could spin straw into gold. The King locked her in a room to try.", actors:[{s:'girl-a',x:70,y:114,w:100,h:100},{s:'king',x:140,y:110,w:100,h:100}]},
+    {text:"A funny little man appeared and spun the gold for her. But he wanted something in return.", actors:[{s:'elf',x:100,y:118,w:100,h:100}]},
+    {text:"He asked for her firstborn child — unless she could guess his strange and tricky name.", actors:[{s:'elf',x:100,y:118,w:95,h:95}]},
+    {text:"She guessed \"Rumpelstiltskin!\" He was so surprised, he stomped off and never came back again.", actors:[{s:'elf',x:100,y:116,w:105,h:105}]}
+  ], moral:"Every name and every riddle can be solved." },
+{ title:"The Little Mermaid", theme:["#DCEEFC","#7EB8E8"], icon:[{s:'mermaid',x:100,y:112,w:115,h:115}],
+  pages:[
+    {text:"A little mermaid loved watching the world above the sea. She dreamed of walking on land someday.", actors:[{s:'mermaid',x:100,y:112,w:120,h:120}]},
+    {text:"She saved a prince from a shipwreck during a storm, and fell in love with him from afar.", actors:[{s:'mermaid',x:70,y:112,w:95,h:95},{s:'boat',x:145,y:112,w:100,h:100}]},
+    {text:"A sea witch gave her legs to walk on land. It was hard work learning to walk on two feet!", actors:[{s:'mermaid',x:100,y:114,w:110,h:110}]},
+    {text:"The mermaid made true friends on land and sea alike, and found joy wherever she went.", actors:[{s:'mermaid',x:70,y:112,w:95,h:95},{s:'prince',x:140,y:112,w:95,h:95}]}
+  ], moral:"Being brave means trying new things." },
+{ title:"Thumbelina", theme:["#FFF3C9","#F3C94E"], icon:[{s:'flower',x:100,y:104,w:105,h:105},{s:'girl-a',x:100,y:128,w:48,h:48}],
+  pages:[
+    {text:"A tiny woman, no bigger than a thumb, was born from a magic flower. They named her Thumbelina.", actors:[{s:'flower',x:100,y:110,w:120,h:120}]},
+    {text:"A big bug, a mole, and a toad all wanted her to stay — but Thumbelina wanted to be free.", actors:[{s:'frog',x:70,y:120,w:80,h:80},{s:'girl-a',x:140,y:126,w:55,h:55}]},
+    {text:"All winter, she cared for a hurt little bird. When spring came, the bird could fly again.", actors:[{s:'bird',x:100,y:114,w:110,h:110}]},
+    {text:"The bird flew Thumbelina to a garden full of tiny flower fairies, where she finally felt at home.", actors:[{s:'fairy',x:100,y:112,w:105,h:105}]}
+  ], moral:"Good friends help each other." },
+{ title:"The Emperor's New Clothes", theme:["#FFE3D1","#F0996A"], icon:[{s:'king',x:100,y:112,w:115,h:115}],
+  pages:[
+    {text:"An Emperor loved fancy clothes. Two tricksters said they could weave the finest cloth in the world.", actors:[{s:'king',x:70,y:112,w:100,h:100},{s:'man-old',x:140,y:112,w:100,h:100}]},
+    {text:"\"Only smart people can see this cloth,\" they said. Really, there was no cloth there at all!", actors:[{s:'man-old',x:100,y:114,w:110,h:110}]},
+    {text:"No one wanted to seem silly, so everyone pretended to see the beautiful clothes, even the Emperor.", actors:[{s:'king',x:100,y:112,w:115,h:115}]},
+    {text:"The Emperor paraded in 'nothing' at all. A little child shouted, \"He isn't wearing anything!\"", actors:[{s:'boy-a',x:70,y:114,w:95,h:95},{s:'king',x:140,y:112,w:100,h:100}]}
+  ], moral:"It's always brave to tell the truth." },
+{ title:"The Gingerbread Man", theme:["#E2E1FA","#9B9AE0"], icon:[{s:'gingerbread-man',x:100,y:112,w:105,h:105}],
+  pages:[
+    {text:"An old woman baked a gingerbread man. The moment she opened the oven, he jumped up and ran away!", actors:[{s:'woman-old',x:70,y:112,w:100,h:100},{s:'gingerbread-man',x:145,y:118,w:80,h:80}]},
+    {text:"\"Run, run, as fast as you can! You can't catch me, I'm the Gingerbread Man!\" he shouted happily.", actors:[{s:'gingerbread-man',x:100,y:114,w:110,h:110}]},
+    {text:"He ran past a cow, a dog, and many surprised people. No one could catch the speedy cookie.", actors:[{s:'gingerbread-man',x:70,y:114,w:90,h:90},{s:'dog',x:140,y:118,w:90,h:90}]},
+    {text:"A clever fox tricked him at a river. After that, he always remembered to watch out for tricky foxes.", actors:[{s:'fox',x:100,y:116,w:110,h:110}]}
+  ], moral:"Stay careful, even when you're having fun." },
+{ title:"The Little Red Hen", theme:["#FFE1DC","#EF9284"], icon:[{s:'hen',x:100,y:116,w:105,h:105}],
+  pages:[
+    {text:"A little red hen found some wheat seeds. \"Who will help me plant them?\" she asked. \"Not I,\" said everyone.", actors:[{s:'hen',x:70,y:116,w:95,h:95},{s:'cat',x:140,y:116,w:90,h:90}]},
+    {text:"She planted, watered, and picked the wheat all by herself. No one else wanted to help at all.", actors:[{s:'hen',x:100,y:116,w:110,h:110}]},
+    {text:"She baked the wheat into warm, tasty bread, all on her own. The smell filled the whole yard.", actors:[{s:'hen',x:100,y:118,w:105,h:105}]},
+    {text:"\"Who will help me eat it?\" Everyone said yes this time — but she shared it with her own little chicks.", actors:[{s:'hen',x:70,y:118,w:90,h:90},{s:'hen',x:135,y:130,w:45,h:45}]}
+  ], moral:"Helping out makes everything better." },
+{ title:"Chicken Little", theme:["#F1E1FB","#BC85E8"], icon:[{s:'hen',x:100,y:116,w:90,h:90},{s:'sparkle',x:152,y:78,w:35,h:35}],
+  pages:[
+    {text:"An acorn fell right on Chicken Little's head. \"The sky is falling!\" she cried, running to tell everyone.", actors:[{s:'hen',x:100,y:116,w:105,h:105}]},
+    {text:"Henny Penny, Ducky Lucky, and Goosey Loosey all believed her, and they ran along too.", actors:[{s:'hen',x:65,y:118,w:75,h:75},{s:'duck',x:140,y:114,w:95,h:95}]},
+    {text:"A sly fox heard them coming and invited them all into his den to be 'safe.'", actors:[{s:'fox',x:100,y:114,w:110,h:110}]},
+    {text:"Luckily, a wise old dog warned them just in time. They all ran home safely, wiser than before.", actors:[{s:'dog',x:100,y:114,w:110,h:110}]}
+  ], moral:"Check the facts before you worry." },
+{ title:"The Town Musicians of Bremen", theme:["#D9F3ED","#78CDBC"], icon:[{s:'donkey',x:100,y:122,w:100,h:100},{s:'rooster',x:100,y:76,w:45,h:45}],
+  pages:[
+    {text:"A donkey, a dog, a cat, and a rooster were too old to work. They set off to become musicians together.", actors:[{s:'donkey',x:70,y:120,w:95,h:95},{s:'dog',x:140,y:116,w:85,h:85}]},
+    {text:"At night, they found a cottage full of robbers. Together, they made the loudest, silliest noise ever!", actors:[{s:'cat',x:70,y:118,w:80,h:80},{s:'rooster',x:140,y:114,w:85,h:85}]},
+    {text:"The robbers were so startled and scared, they ran off into the dark forest and never came back.", actors:[{s:'donkey',x:100,y:120,w:105,h:105}]},
+    {text:"The four friends moved into the cozy cottage together, and lived happily ever after as best friends.", actors:[{s:'cottage',x:100,y:106,w:120,h:120}]}
+  ], moral:"Friends can do amazing things together." },
+{ title:"The Elves and the Shoemaker", theme:["#FCE1EC","#E88AB0"], icon:[{s:'elf',x:75,y:118,w:78,h:78},{s:'man-old',x:135,y:110,w:95,h:95}],
+  pages:[
+    {text:"A poor shoemaker had just enough leather for one pair of shoes. He cut it out and went to bed.", actors:[{s:'man-old',x:100,y:112,w:115,h:115}]},
+    {text:"In the morning, the shoes were finished — perfectly! Tiny elves had snuck in and sewed all night long.", actors:[{s:'elf',x:100,y:118,w:100,h:100}]},
+    {text:"The shoemaker sold the shoes and bought more leather. Every single night, the elves worked their magic again.", actors:[{s:'man-old',x:70,y:112,w:95,h:95},{s:'elf',x:140,y:120,w:75,h:75}]},
+    {text:"To say thank you, the shoemaker sewed the elves tiny new clothes. The happy elves danced away with joy.", actors:[{s:'elf',x:100,y:116,w:105,h:105}]}
+  ], moral:"A little kindness deserves a thank you." },
+{ title:"The Fisherman and His Wife", theme:["#FFF3B8","#FFC94A"], icon:[{s:'fish',x:100,y:116,w:110,h:110}],
+  pages:[
+    {text:"A fisherman caught a magic talking fish. The fish begged to be set free, so the fisherman let him go.", actors:[{s:'man-old',x:70,y:114,w:95,h:95},{s:'fish',x:145,y:118,w:90,h:90}]},
+    {text:"His wife wanted more and more — a nice house, then a castle, then to be queen! The fish granted each wish.", actors:[{s:'woman-old',x:70,y:112,w:100,h:100},{s:'castle',x:145,y:105,w:100,h:100}]},
+    {text:"She wished to control the sun and the moon. That, it turned out, was one wish too many.", actors:[{s:'queen',x:100,y:112,w:110,h:110}]},
+    {text:"The magic fish took everything back. The fisherman and his wife returned to their simple little hut.", actors:[{s:'man-old',x:70,y:114,w:90,h:90},{s:'woman-old',x:132,y:114,w:90,h:90}]}
+  ], moral:"Be happy with what you have." },
+{ title:"The Princess and the Pea", theme:["#EDE1FB","#B79FD4"], icon:[{s:'bed-stack',x:100,y:108,w:120,h:120}],
+  pages:[
+    {text:"A prince wanted to marry a real princess, but how could he ever be sure she was truly royal?", actors:[{s:'prince',x:100,y:112,w:115,h:115}]},
+    {text:"A girl came to the castle in a rainstorm, saying she was a princess. The Queen wanted proof.", actors:[{s:'princess',x:70,y:112,w:95,h:95},{s:'queen',x:140,y:112,w:95,h:95}]},
+    {text:"The Queen hid a tiny pea under twenty soft mattresses, and the girl slept there for the night.", actors:[{s:'bed-stack',x:100,y:106,w:115,h:115}]},
+    {text:"In the morning, she said she barely slept — something hard was in the bed! She truly was a real princess.", actors:[{s:'princess',x:100,y:112,w:115,h:115}]}
+  ], moral:"Being yourself is enough." },
+{ title:"Snow White and Rose Red", theme:["#FFE1EC","#F19CBB"], icon:[{s:'girl-a',x:76,y:114,w:90,h:90},{s:'bear',x:140,y:112,w:95,h:95}],
+  pages:[
+    {text:"Two sisters, Snow White and Rose Red, lived with their mother in a cozy little cottage.", actors:[{s:'girl-a',x:72,y:114,w:90,h:90},{s:'girl-a',x:132,y:114,w:90,h:90}]},
+    {text:"One winter night, a friendly bear knocked on their door, cold and hungry. They let him warm up by the fire.", actors:[{s:'bear',x:100,y:114,w:115,h:115}]},
+    {text:"In summer, they helped a grumpy little dwarf out of trouble again and again, though he was never thankful.", actors:[{s:'elf',x:100,y:118,w:95,h:95}]},
+    {text:"The bear turned out to be a prince under a magic spell, now happily broken. Everyone lived happily ever after.", actors:[{s:'prince',x:70,y:112,w:95,h:95},{s:'girl-a',x:138,y:114,w:95,h:95}]}
+  ], moral:"Kindness to others comes back to you." },
+{ title:"The Three Billy Goats Gruff", theme:["#DBF6EA","#7FCDA8"], icon:[{s:'goat',x:100,y:112,w:100,h:100},{s:'bridge',x:100,y:150,w:130,h:50}],
+  pages:[
+    {text:"Three billy goats wanted to cross a bridge to eat the green grass on the hill. A troll lived underneath.", actors:[{s:'goat',x:70,y:118,w:85,h:85},{s:'bridge',x:100,y:158,w:150,h:55}]},
+    {text:"Little Billy Goat crossed first. \"Who's trip-trapping on my bridge?\" growled the troll from below.", actors:[{s:'goat',x:65,y:118,w:70,h:70},{s:'troll',x:140,y:112,w:100,h:100}]},
+    {text:"Middle Billy Goat crossed next, and said the very same thing. So the troll waited for a bigger goat.", actors:[{s:'goat',x:100,y:114,w:95,h:95}]},
+    {text:"Big Billy Goat Gruff crossed last and bumped the troll right off the bridge! The goats ate grass happily.", actors:[{s:'goat',x:100,y:110,w:120,h:120}]}
+  ], moral:"Teamwork helps everyone get where they're going." },
+{ title:"The Wolf and the Seven Young Kids", theme:["#DCEEFC","#7EB8E8"], icon:[{s:'goat',x:72,y:120,w:72,h:72},{s:'wolf',x:138,y:112,w:95,h:95}],
+  pages:[
+    {text:"A mother goat left her seven little kids at home. \"Don't open the door for the wolf!\" she warned.", actors:[{s:'goat',x:100,y:116,w:110,h:110}]},
+    {text:"The wolf covered his paws in flour to look friendly, and tricked the little kids into opening the door.", actors:[{s:'wolf',x:100,y:114,w:115,h:115}]},
+    {text:"Six little kids hid quickly, but the smallest one hid safely inside the big clock.", actors:[{s:'goat',x:100,y:120,w:75,h:75}]},
+    {text:"Mother goat found the sleepy wolf and rescued all her children. They were safe, happy, and together again.", actors:[{s:'goat',x:70,y:114,w:90,h:90},{s:'goat',x:132,y:120,w:70,h:70}]}
+  ], moral:"Listen to the ones who love you." },
+{ title:"Beauty and the Beast", theme:["#FFF3C9","#F3C94E"], icon:[{s:'beast',x:100,y:112,w:115,h:115}],
+  pages:[
+    {text:"A kind girl named Beauty went to live in a Beast's castle to save her dear father.", actors:[{s:'girl-a',x:70,y:114,w:95,h:95},{s:'castle',x:145,y:105,w:100,h:100}]},
+    {text:"The Beast looked scary, but he was gentle and lonely. Slowly, Beauty and the Beast became true friends.", actors:[{s:'beast',x:100,y:112,w:120,h:120}]},
+    {text:"Beauty missed her family and went to visit them. While away, she realized how much she cared for the Beast.", actors:[{s:'girl-a',x:100,y:114,w:110,h:110}]},
+    {text:"She rushed back just in time. Her love broke the spell, and the Beast turned into a kind prince!", actors:[{s:'girl-a',x:70,y:112,w:95,h:95},{s:'prince',x:138,y:112,w:100,h:100}]}
+  ], moral:"True beauty is on the inside." },
+{ title:"The Steadfast Tin Soldier", theme:["#FFE3D1","#F0996A"], icon:[{s:'tin-soldier',x:76,y:112,w:82,h:82},{s:'ballerina',x:134,y:112,w:82,h:82}],
+  pages:[
+    {text:"A little tin soldier stood on a shelf with the other toys. He had only one leg, but a very brave heart.", actors:[{s:'tin-soldier',x:100,y:114,w:100,h:100}]},
+    {text:"He loved a paper ballerina in a toy castle, and watched her every day, wishing to dance with her.", actors:[{s:'tin-soldier',x:68,y:114,w:85,h:85},{s:'ballerina',x:140,y:114,w:85,h:85}]},
+    {text:"The tin soldier had a big adventure — he fell out a window, sailed in a paper boat, and met a fish!", actors:[{s:'boat',x:100,y:114,w:120,h:120}]},
+    {text:"Amazingly, he made it back home to his shelf, right beside his paper ballerina, exactly where he belonged.", actors:[{s:'tin-soldier',x:70,y:114,w:85,h:85},{s:'ballerina',x:135,y:114,w:85,h:85}]}
+  ], moral:"Stay brave and true, no matter what." }
+];
+
+const TILTS = [-3, 2, -1.5, 3, -2.5, 1.5, -1, 2.5];
+
+function sceneSVG(actors, theme){
+  const list = actors || [];
+  const shapes = list.map(a=>{
+    const w = a.w || 90, h = a.h || 90;
+    const tx = a.x - w/2, ty = a.y - h/2;
+    return '<use href="#sym-' + a.s + '" width="' + w + '" height="' + h + '" transform="translate(' + tx + ',' + ty + ')"/>';
+  }).join('');
+  return '<svg class="scene" viewBox="0 0 200 200" style="--story-c1:' + theme[0] + ';--story-c2:' + theme[1] + '">' +
+    '<path class="scene-bg" d="M100 8C150 4 194 44 192 100C190 156 150 194 100 192C50 194 8 156 8 100C8 44 50 12 100 8Z"/>' +
+    shapes + '</svg>';
+}
+
+function renderShelf(){
+  const shelf = document.getElementById('shelf');
+  shelf.innerHTML = STORIES.map((s,i)=>{
+    return '<button class="book-tile" style="--c1:' + s.theme[0] + ';--c2:' + s.theme[1] + ';--tilt:' + TILTS[i % TILTS.length] + 'deg" data-i="' + i + '">' +
+      '<div class="tile-illus">' + sceneSVG(s.icon, s.theme) + '</div>' +
+      '<div class="tile-title">' + s.title + '</div>' +
+      '<div class="tile-hint">Tap to read</div>' +
+    '</button>';
+  }).join('');
+  shelf.querySelectorAll('.book-tile').forEach(function(btn){
+    btn.addEventListener('click', function(){ openBook(parseInt(btn.dataset.i, 10)); });
+  });
+}
+
+let current = null, page = 0, pages = [];
+
+function buildPages(story){
+  const cover = { kind:'cover', actors: story.icon };
+  const end = { kind:'end', actors: story.icon.concat([
+    {s:'sparkle', x:26, y:20, w:32, h:32},
+    {s:'star', x:174, y:26, w:30, h:30}
+  ])};
+  return [cover].concat(story.pages).concat([end]);
+}
+
+function openBook(i){
+  current = STORIES[i];
+  page = 0;
+  pages = buildPages(current);
+  document.getElementById('book-story-title').textContent = current.title;
+  document.getElementById('menu-screen').classList.add('hidden');
+  const bs = document.getElementById('book-screen');
+  bs.classList.remove('hidden');
+  bs.style.setProperty('--story-c1', current.theme[0]);
+  bs.style.setProperty('--story-c2', current.theme[1]);
+  renderPage();
+  bs.focus();
+}
+
+function closeBook(){
+  document.getElementById('book-screen').classList.add('hidden');
+  document.getElementById('menu-screen').classList.remove('hidden');
+}
+
+function renderPage(){
+  const p = pages[page];
+  const stage = document.getElementById('page-stage');
+  const illus = sceneSVG(p.actors, current.theme);
+  let body = '';
+  if(p.kind === 'cover'){
+    body = illus + '<p class="page-eyebrow">Once Upon A Time</p><h2 class="page-headline">' + current.title + '</h2><p class="page-note">Retold by Rayene Medabis</p>';
+  } else if(p.kind === 'end'){
+    body = illus + '<h2 class="page-headline">The End</h2><p class="page-note">✨ ' + current.moral + ' ✨</p>';
+  } else {
+    body = illus + '<p class="page-text">' + p.text + '</p>';
+  }
+  stage.innerHTML = body;
+  document.getElementById('prev-page').disabled = (page === 0);
+  const nextBtn = document.getElementById('next-page');
+  nextBtn.textContent = (page === pages.length - 1) ? 'Back to Shelf ✓' : 'Next →';
+  document.getElementById('page-dots').innerHTML = pages.map(function(_, idx){
+    return '<span class="dot' + (idx === page ? ' active' : '') + '"></span>';
+  }).join('');
+  stage.scrollTop = 0;
+}
+
+function nextPage(){
+  if(page === pages.length - 1){ closeBook(); return; }
+  page++; renderPage();
+}
+function prevPage(){
+  if(page === 0) return;
+  page--; renderPage();
+}
+
+document.getElementById('next-page').addEventListener('click', nextPage);
+document.getElementById('prev-page').addEventListener('click', prevPage);
+document.getElementById('close-book').addEventListener('click', closeBook);
+document.addEventListener('keydown', function(e){
+  if(document.getElementById('book-screen').classList.contains('hidden')) return;
+  if(e.key === 'ArrowRight') nextPage();
+  if(e.key === 'ArrowLeft') prevPage();
+  if(e.key === 'Escape') closeBook();
+});
+
+renderShelf();
+</script>
+</body>
+</html>

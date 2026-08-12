@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Wonders with Aesop &mdash; Rayene Medabis</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&family=Patrick+Hand&display=swap');
+
+:root{
+  --cream:#FDF6F0;
+  --ink:#5B4B6E;
+  --ink-soft:#8779A0;
+  --rose:#FBD8E0;
+  --lavender:#E6DFF6;
+  --sky:#CFE8F3;
+  --sage:#D9EAD3;
+  --honey:#F7E3B5;
+  --peach:#F5D3C3;
+  --line:#D8CBEA;
+  --paper:#FFFFFF;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:linear-gradient(180deg,#FBF3ED 0%, #F6EEF9 100%);
+  font-family:'Quicksand',sans-serif;
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+
+.sheet{
+  max-width:900px;
+  margin:0 auto 46px auto;
+  background:var(--paper);
+  border-radius:34px;
+  box-shadow:0 18px 50px -20px rgba(91,75,110,0.25);
+  padding:56px 60px 64px;
+  position:relative;
+  overflow:hidden;
+  page-break-after:always;
+}
+.sheet::before{
+  content:'';
+  position:absolute; inset:14px;
+  border:2px dashed rgba(91,75,110,0.14);
+  border-radius:24px;
+  pointer-events:none;
+}
+
+/* ---------- COVER ---------- */
+.cover{
+  text-align:center;
+  padding:80px 50px 70px;
+  background:
+    radial-gradient(circle at 18% 20%, var(--rose) 0%, transparent 40%),
+    radial-gradient(circle at 85% 15%, var(--sky) 0%, transparent 38%),
+    radial-gradient(circle at 80% 85%, var(--sage) 0%, transparent 40%),
+    radial-gradient(circle at 10% 85%, var(--honey) 0%, transparent 38%);
+}
+.cover .eyebrow{
+  font-family:'Quicksand'; font-weight:700; letter-spacing:.3em; text-transform:uppercase;
+  font-size:13px; color:var(--ink-soft); margin-bottom:22px;
+}
+.cover h1{
+  font-family:'Baloo 2'; font-weight:800; font-size:64px; line-height:1.05; margin:0 0 18px;
+  color:var(--ink);
+}
+.cover .sub{
+  font-size:20px; font-weight:600; color:var(--ink-soft); max-width:520px; margin:0 auto 40px;
+}
+.cover-cloud{
+  width:230px; height:230px; margin:0 auto 34px;
+  border-radius:63% 37% 54% 46% / 43% 47% 53% 57%;
+  background:linear-gradient(135deg,var(--lavender),var(--rose));
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 20px 40px -16px rgba(91,75,110,0.35);
+}
+.cover-cloud svg{width:66%; height:66%;}
+.cover .byline{
+  font-family:'Baloo 2'; font-weight:700; font-size:22px; margin-top:10px; color:var(--ink);
+}
+.cover .tag{
+  display:inline-block; margin-top:26px; padding:10px 22px; border-radius:999px;
+  background:var(--paper); font-weight:700; font-size:14px; color:var(--ink-soft);
+  box-shadow:0 6px 16px -8px rgba(91,75,110,0.3);
+}
+.cover .stars{ margin-top:46px; font-size:15px; color:var(--ink-soft); font-weight:600;}
+
+/* ---------- TOC ---------- */
+.toc h2{
+  font-family:'Baloo 2'; font-size:34px; text-align:center; margin:0 0 8px;
+}
+.toc .toc-sub{ text-align:center; color:var(--ink-soft); font-weight:600; margin-bottom:34px;}
+.toc-grid{
+  display:grid; grid-template-columns:1fr 1fr; gap:10px 30px;
+}
+.toc-item{
+  display:flex; align-items:center; gap:14px;
+  padding:10px 14px; border-radius:16px;
+}
+.toc-item .badge{
+  width:34px; height:34px; border-radius:50%; flex:0 0 auto;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Baloo 2'; font-weight:700; font-size:15px; color:var(--ink);
+}
+.toc-item span.t{font-weight:600; font-size:15.5px;}
+.how-to{
+  margin-top:38px; padding:22px 26px; border-radius:20px; background:var(--cream);
+  font-size:14.5px; line-height:1.7;
+}
+.how-to b{font-family:'Baloo 2';}
+
+/* ---------- STORY PAGE ---------- */
+.story-head{ display:flex; align-items:center; gap:22px; margin-bottom:28px;}
+.badge-num{
+  font-family:'Baloo 2'; font-weight:800; font-size:22px; color:var(--ink);
+  width:56px; height:56px; border-radius:50%; flex:0 0 auto;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,0.6);
+}
+.story-head h2{
+  font-family:'Baloo 2'; font-size:30px; margin:0; line-height:1.15; color:var(--ink);
+}
+.story-head .icons{ margin-left:auto; display:flex; gap:8px;}
+.story-head .icons .cloud{
+  width:66px; height:66px; border-radius:63% 37% 54% 46% / 43% 47% 53% 57%;
+  display:flex; align-items:center; justify-content:center;
+}
+.story-head .icons .cloud svg{ width:76%; height:76%;}
+
+.story-panel{
+  border-radius:24px; padding:26px 30px; margin-bottom:26px;
+  font-size:17.5px; line-height:1.85; font-weight:500;
+}
+.story-panel p{margin:0;}
+
+.section-label{
+  font-family:'Baloo 2'; font-weight:700; font-size:14px; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--ink-soft); margin:0 0 12px;
+  display:flex; align-items:center; gap:8px;
+}
+.section-label .dot{width:9px; height:9px; border-radius:50%; background:currentColor; opacity:.5;}
+
+.vocab-row{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:26px;}
+.vocab-bubble{
+  background:var(--paper); border:2px solid var(--line); border-radius:999px;
+  padding:9px 16px; font-size:14.5px; font-weight:600;
+}
+.vocab-bubble b{font-family:'Baloo 2'; color:var(--ink); font-weight:700;}
+.vocab-bubble span{color:var(--ink-soft); font-weight:500;}
+
+.qa{ margin-bottom:8px;}
+.qa ol{margin:0; padding-left:22px;}
+.qa li{ margin-bottom:16px; font-weight:600; font-size:15.5px;}
+.answer-line{
+  display:block; height:0; border-bottom:1.6px dashed var(--line); margin:10px 0 0;
+}
+
+.two-col{ display:grid; grid-template-columns:1fr 1fr; gap:30px; margin-top:30px;}
+
+.trace-box{
+  border-radius:22px; padding:22px 24px; background:var(--cream);
+}
+.trace-word{
+  font-family:'Patrick Hand'; font-size:26px; letter-spacing:.5px;
+  color:transparent; -webkit-text-stroke:1.4px var(--ink-soft);
+  margin-bottom:14px;
+}
+.guide{
+  position:relative; height:44px; margin-bottom:6px;
+}
+.guide::before{
+  content:''; position:absolute; left:0; right:0; top:8px; border-top:1.4px dashed rgba(91,75,110,0.35);
+}
+.guide::after{
+  content:''; position:absolute; left:0; right:0; bottom:8px; border-bottom:2px solid rgba(91,75,110,0.55);
+}
+
+.write-box{
+  border-radius:22px; padding:22px 24px; background:var(--cream);
+}
+.write-box .prompt{ font-weight:700; font-size:15px; margin-bottom:14px;}
+
+.footer-tag{
+  margin-top:28px; text-align:center; font-size:12.5px; color:var(--ink-soft); font-weight:600; letter-spacing:.04em;
+}
+
+@media print{
+  body{background:var(--paper);}
+  .sheet{ box-shadow:none; margin:0; border-radius:0; page-break-after:always;}
+  .sheet::before{ display:none; }
+}
+
+@media (max-width:720px){
+  .sheet{ padding:34px 22px 40px; border-radius:20px;}
+  .cover h1{ font-size:42px;}
+  .toc-grid{ grid-template-columns:1fr;}
+  .two-col{ grid-template-columns:1fr;}
+  .story-head{ flex-wrap:wrap;}
+}
+</style>
+</head>
+<body>
+
+    <section class="sheet cover">
+      <div class="eyebrow">A Grade 1 Reading &amp; Vocabulary Journey</div>
+      <div class="cover-cloud"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="58" r="26" fill="#F4C97A"/>
+      <circle cx="34" cy="48" r="9" fill="#F4C97A"/>
+      <circle cx="66" cy="48" r="9" fill="#F4C97A"/>
+      <circle cx="41" cy="55" r="3" fill="#5B4B6E"/>
+      <circle cx="59" cy="55" r="3" fill="#5B4B6E"/>
+      <circle cx="30" cy="63" r="5" fill="#F7B5C4" opacity="0.7"/>
+      <circle cx="70" cy="63" r="5" fill="#F7B5C4" opacity="0.7"/>
+      <path d="M42 68 Q50 74 58 68" stroke="#5B4B6E" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    </svg></div>
+      <h1>Little Wonders<br>with Aesop</h1>
+      <p class="sub">30 gentle retellings of Aesop's fables, with vocabulary, comprehension and handwriting practice for young readers.</p>
+      <div class="byline">Created by Rayene Medabis</div>
+      <div class="tag">TESOL Teacher Trainer &amp; Curriculum Designer</div>
+      <div class="stars">&#10022; &#10022; &#10022;</div>
+    </section>
+
+    <section class="sheet toc">
+      <h2>Table of Tales</h2>
+      <p class="toc-sub">Thirty stories to read, one gentle lesson at a time.</p>
+      <div class="toc-grid">
+        <div class="toc-item">
+          <div class="badge" style="background:#FBD8E0">1</div>
+          <span class="t">The Tortoise and the Hare</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#E6DFF6">2</div>
+          <span class="t">The Boy Who Cried Wolf</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#CFE8F3">3</div>
+          <span class="t">The Ant and the Grasshopper</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#D9EAD3">4</div>
+          <span class="t">The Lion and the Mouse</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#F7E3B5">5</div>
+          <span class="t">The Fox and the Grapes</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#F5D3C3">6</div>
+          <span class="t">The Fox and the Crow</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#FBD8E0">7</div>
+          <span class="t">The Town Mouse and the Country Mouse</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#E6DFF6">8</div>
+          <span class="t">The North Wind and the Sun</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#CFE8F3">9</div>
+          <span class="t">The Goose That Laid the Golden Eggs</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#D9EAD3">10</div>
+          <span class="t">The Wolf in Sheep's Clothing</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#F7E3B5">11</div>
+          <span class="t">The Crow and the Pitcher</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#F5D3C3">12</div>
+          <span class="t">The Dog and Its Reflection</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#FBD8E0">13</div>
+          <span class="t">The Milkmaid and Her Pail</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#E6DFF6">14</div>
+          <span class="t">The Bundle of Sticks</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#CFE8F3">15</div>
+          <span class="t">Belling the Cat</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#D9EAD3">16</div>
+          <span class="t">The Oak and the Reeds</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#F7E3B5">17</div>
+          <span class="t">The Frog and the Ox</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#F5D3C3">18</div>
+          <span class="t">The Crab and His Mother</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#FBD8E0">19</div>
+          <span class="t">The Fox and the Stork</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#E6DFF6">20</div>
+          <span class="t">The Lion's Share</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#CFE8F3">21</div>
+          <span class="t">The Wolf and the Lamb</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#D9EAD3">22</div>
+          <span class="t">The Donkey Carrying Salt</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#F7E3B5">23</div>
+          <span class="t">The Eagle and the Arrow</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#F5D3C3">24</div>
+          <span class="t">The Peacock and the Crane</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#FBD8E0">25</div>
+          <span class="t">The Miser and His Gold</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#E6DFF6">26</div>
+          <span class="t">The Monkey and the Dolphin</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#CFE8F3">27</div>
+          <span class="t">The Wolf and the Crane</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#D9EAD3">28</div>
+          <span class="t">The Fir Tree and the Bramble</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#F7E3B5">29</div>
+          <span class="t">The Donkey and the Lapdog</span>
+        </div>
+        <div class="toc-item">
+          <div class="badge" style="background:#F5D3C3">30</div>
+          <span class="t">The Farmer and the Stork</span>
+        </div></div>
+      <div class="how-to">
+        <b>How to use this workbook &mdash;</b> Read each tale aloud together, or let your reader try it solo.
+        Explore the new words in the vocabulary bubbles. Talk through the three questions.
+        Then trace the moral sentence and write a short answer of your own on the lines provided.
+        One story a day makes a wonderful thirty-day reading habit!
+      </div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#FBD8E0">1</div>
+        <h2>The Tortoise and the Hare</h2>
+        <div class="icons"><div class="cloud" style="background:#FBD8E0"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="84" rx="46" ry="34" fill="#A8CDA0"/><ellipse cx="70" cy="78" rx="38" ry="24" fill="#E9DFC9" opacity="0.85"/><circle cx="56" cy="72" r="6" fill="#A8CDA0" opacity="0.5"/><circle cx="84" cy="72" r="6" fill="#A8CDA0" opacity="0.5"/><circle cx="70" cy="64" r="6" fill="#A8CDA0" opacity="0.5"/><circle cx="52" cy="84" r="6" fill="#A8CDA0" opacity="0.5"/><circle cx="88" cy="84" r="6" fill="#A8CDA0" opacity="0.5"/><circle cx="18" cy="88" r="10" fill="#A8CDA0"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#A8CDA0"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#A8CDA0"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#A8CDA0"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#A8CDA0"/><circle cx="64" cy="42" r="26" fill="#A8CDA0"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div><div class="cloud" style="background:#FBD8E0"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#F2A48B"/><circle cx="18" cy="88" r="10" fill="#F2A48B"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><circle cx="64" cy="42" r="26" fill="#F2A48B"/><ellipse cx="48" cy="2" rx="7" ry="24" fill="#F2A48B" transform="rotate(-15 48 2)"/><ellipse cx="78" cy="0" rx="7" ry="24" fill="#F2A48B" transform="rotate(12 78 0)"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#FBD8E022; border:2px solid #FBD8E0;">
+        <p>Hare loved to brag about how fast he could run. One day he laughed at slow Tortoise and challenged him to a race. All the animals came to watch. When the race began, Hare zoomed far ahead. He was so far ahead that he stopped to nap under a shady tree. Tortoise did not stop. He walked on, one small step at a time. While Hare was sleeping, Tortoise passed him! Hare woke up and ran as fast as he could, but it was too late. Tortoise crossed the finish line first, and everyone cheered.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>brag</b> &mdash; <span>to talk proudly about yourself</span></div><div class="vocab-bubble"><b>challenge</b> &mdash; <span>to ask someone to compete</span></div><div class="vocab-bubble"><b>zoomed</b> &mdash; <span>moved very fast</span></div><div class="vocab-bubble"><b>steady</b> &mdash; <span>moving in a calm, even way</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>Who won the race?<span class="answer-line"></span></li><li>Why did Hare lose the race?<span class="answer-line"></span></li><li>What do you think Tortoise felt when he won?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Slow and steady wins the race.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about something you finished by not giving up.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 1 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#E6DFF6">2</div>
+        <h2>The Boy Who Cried Wolf</h2>
+        <div class="icons"><div class="cloud" style="background:#E6DFF6"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#B79FCB"/><circle cx="20" cy="82" r="15" fill="#B79FCB"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#B79FCB"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#B79FCB"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#B79FCB"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#B79FCB"/><circle cx="64" cy="42" r="26" fill="#B79FCB"/><path d="M 42 34 L 38 10 L 58 24 Z" fill="#B79FCB"/><path d="M 86 34 L 90 10 L 70 24 Z" fill="#B79FCB"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div><div class="cloud" style="background:#E6DFF6"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#F5EFE3"/><circle cx="20" cy="82" r="15" fill="#F5EFE3"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#F5EFE3"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#F5EFE3"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#F5EFE3"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#F5EFE3"/><circle cx="64" cy="42" r="26" fill="#F5EFE3"/><circle cx="44" cy="20" r="11" fill="#F5EFE3"/><circle cx="82" cy="18" r="11" fill="#F5EFE3"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#E6DFF622; border:2px solid #E6DFF6;">
+        <p>A shepherd boy watched sheep on a hill. He felt bored, so he shouted, 'Wolf! Wolf!' The villagers ran to help, but there was no wolf at all. The boy laughed. He tricked them again the next day. The villagers were angry, but they still came running. Then one day, a real wolf came! The boy shouted for help, but no one believed him this time. No one came. The wolf scared away all the sheep. The boy learned that if you tell lies, people stop trusting you, even when you tell the truth.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>shepherd</b> &mdash; <span>a person who takes care of sheep</span></div><div class="vocab-bubble"><b>villagers</b> &mdash; <span>people who live in a village</span></div><div class="vocab-bubble"><b>tricked</b> &mdash; <span>fooled someone</span></div><div class="vocab-bubble"><b>trust</b> &mdash; <span>to believe someone is honest</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What did the boy shout when there was no wolf?<span class="answer-line"></span></li><li>Why didn't the villagers come the last time?<span class="answer-line"></span></li><li>How can we be more trustworthy than the boy?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Always tell the truth.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write one reason it is important to tell the truth.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 2 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#CFE8F3">3</div>
+        <h2>The Ant and the Grasshopper</h2>
+        <div class="icons"><div class="cloud" style="background:#CFE8F3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><circle cx="48" cy="84" r="13" fill="#F2A48B"/><circle cx="70" cy="84" r="17" fill="#F2A48B"/><circle cx="94" cy="84" r="15" fill="#F2A48B"/><line x1="64" y1="98" x2="55.6" y2="118" stroke="#F2A48B" stroke-width="4" stroke-linecap="round"/><line x1="76" y1="98" x2="84.4" y2="118" stroke="#F2A48B" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="88.3" cy="83.25" r="1.3499999999999999" fill="#5B4B6E"/>
+    <circle cx="99.7" cy="83.25" r="1.3499999999999999" fill="#5B4B6E"/>
+    <circle cx="84.31" cy="86.7" r="2.4" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="103.69" cy="86.7" r="2.4" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 91.6 88.2 Q 94 90.3 96.4 88.2" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <line x1="104" y1="72" x2="114" y2="60" stroke="#F2A48B" stroke-width="3" stroke-linecap="round"/></svg></div><div class="cloud" style="background:#CFE8F3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="64" cy="84" rx="30" ry="15" fill="#A8CDA0"/><path d="M 62 94 Q 76 124 100 114 Q 80 106 72 92 Z" fill="#A8CDA0"/><circle cx="88" cy="78" r="14" fill="#A8CDA0"/>
+    <circle cx="82.68" cy="77.3" r="1.26" fill="#5B4B6E"/>
+    <circle cx="93.32" cy="77.3" r="1.26" fill="#5B4B6E"/>
+    <circle cx="78.956" cy="80.52" r="2.24" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="97.044" cy="80.52" r="2.24" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 85.76 81.92 Q 88 83.88 90.24 81.92" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <line x1="96" y1="68" x2="106" y2="56" stroke="#A8CDA0" stroke-width="3" stroke-linecap="round"/></svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#CFE8F322; border:2px solid #CFE8F3;">
+        <p>All summer, Ant worked hard. She carried food to her nest, bit by bit, to save for winter. Grasshopper sang and played in the sun all day. 'Why work so hard?' he asked. 'Come sing with me!' Ant just kept working. When winter came, snow covered the ground. Grasshopper had no food and was very hungry and cold. He knocked on Ant's door. Kind Ant shared her food with him. Grasshopper thanked her and promised to plan ahead next time.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>harvest</b> &mdash; <span>to gather food or crops</span></div><div class="vocab-bubble"><b>prepare</b> &mdash; <span>to get ready for later</span></div><div class="vocab-bubble"><b>shivered</b> &mdash; <span>shook because of the cold</span></div><div class="vocab-bubble"><b>promised</b> &mdash; <span>said you will do something</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What did Ant do all summer?<span class="answer-line"></span></li><li>What happened to Grasshopper in winter?<span class="answer-line"></span></li><li>What lesson did Grasshopper learn?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">It is wise to plan ahead.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about something you can do today to help your future self.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 3 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#D9EAD3">4</div>
+        <h2>The Lion and the Mouse</h2>
+        <div class="icons"><div class="cloud" style="background:#D9EAD3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#F4C97A"/><circle cx="20" cy="82" r="15" fill="#F4C97A"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#F4C97A"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#F4C97A"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#F4C97A"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#F4C97A"/><circle cx="82.7" cy="36.0" r="9" fill="#F2A48B"/><circle cx="80.2" cy="45.4" r="9" fill="#F2A48B"/><circle cx="73.4" cy="52.2" r="9" fill="#F2A48B"/><circle cx="64.0" cy="54.7" r="9" fill="#F2A48B"/><circle cx="54.7" cy="52.2" r="9" fill="#F2A48B"/><circle cx="47.8" cy="45.4" r="9" fill="#F2A48B"/><circle cx="45.3" cy="36.0" r="9" fill="#F2A48B"/><circle cx="47.8" cy="26.6" r="9" fill="#F2A48B"/><circle cx="54.6" cy="19.8" r="9" fill="#F2A48B"/><circle cx="64.0" cy="17.3" r="9" fill="#F2A48B"/><circle cx="73.4" cy="19.8" r="9" fill="#F2A48B"/><circle cx="80.2" cy="26.6" r="9" fill="#F2A48B"/><circle cx="64" cy="42" r="26" fill="#F4C97A"/><circle cx="44" cy="20" r="11" fill="#F4C97A"/><circle cx="82" cy="18" r="11" fill="#F4C97A"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div><div class="cloud" style="background:#D9EAD3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#D9CDBF"/><path d="M 26 92 Q -4 84 4 60" stroke="#D9CDBF" stroke-width="9" fill="none" stroke-linecap="round"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#D9CDBF"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#D9CDBF"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#D9CDBF"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#D9CDBF"/><circle cx="64" cy="42" r="26" fill="#D9CDBF"/><circle cx="44" cy="20" r="11" fill="#D9CDBF"/><circle cx="82" cy="18" r="11" fill="#D9CDBF"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#D9EAD322; border:2px solid #D9EAD3;">
+        <p>A big lion was sleeping when a tiny mouse ran across his paw. The lion woke up and grabbed the mouse. 'Please let me go,' squeaked the mouse. 'One day I might help you.' The lion laughed, but he let her go anyway. Later, hunters trapped the lion in a net. He roared for help. The little mouse heard him and ran over. She chewed the ropes with her sharp teeth until the lion was free. 'Thank you, little friend,' said the lion. 'You were right after all.'</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>squeaked</b> &mdash; <span>made a small, high sound</span></div><div class="vocab-bubble"><b>trapped</b> &mdash; <span>caught and unable to move</span></div><div class="vocab-bubble"><b>roared</b> &mdash; <span>made a loud, deep sound</span></div><div class="vocab-bubble"><b>grateful</b> &mdash; <span>thankful</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>Why did the lion let the mouse go?<span class="answer-line"></span></li><li>How did the mouse help the lion later?<span class="answer-line"></span></li><li>Why is it good to be kind to others, even small ones?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">A small friend can be a big help.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about a time a friend helped you.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 4 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#F7E3B5">5</div>
+        <h2>The Fox and the Grapes</h2>
+        <div class="icons"><div class="cloud" style="background:#F7E3B5"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#F2A48B"/><path d="M 26 92 Q -4 84 4 60" stroke="#F2A48B" stroke-width="9" fill="none" stroke-linecap="round"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><circle cx="64" cy="42" r="26" fill="#F2A48B"/><path d="M 42 34 L 38 10 L 58 24 Z" fill="#F2A48B"/><path d="M 86 34 L 90 10 L 70 24 Z" fill="#F2A48B"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div><div class="cloud" style="background:#F7E3B5"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><path d="M 64 40 Q 100 36 88 62" fill="none" stroke="#B7D9A8" stroke-width="5"/><ellipse cx="92" cy="40" rx="16" ry="12" fill="#B7D9A8"/><circle cx="56" cy="66" r="12" fill="#C9A8E0"/><circle cx="53" cy="63" r="4" fill="#fff" opacity="0.35"/><circle cx="76" cy="66" r="12" fill="#C9A8E0"/><circle cx="73" cy="63" r="4" fill="#fff" opacity="0.35"/><circle cx="50" cy="84" r="12" fill="#C9A8E0"/><circle cx="47" cy="81" r="4" fill="#fff" opacity="0.35"/><circle cx="70" cy="84" r="12" fill="#C9A8E0"/><circle cx="67" cy="81" r="4" fill="#fff" opacity="0.35"/><circle cx="90" cy="84" r="12" fill="#C9A8E0"/><circle cx="87" cy="81" r="4" fill="#fff" opacity="0.35"/><circle cx="60" cy="102" r="12" fill="#C9A8E0"/><circle cx="57" cy="99" r="4" fill="#fff" opacity="0.35"/><circle cx="80" cy="102" r="12" fill="#C9A8E0"/><circle cx="77" cy="99" r="4" fill="#fff" opacity="0.35"/><circle cx="70" cy="120" r="12" fill="#C9A8E0"/><circle cx="67" cy="117" r="4" fill="#fff" opacity="0.35"/></svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#F7E3B522; border:2px solid #F7E3B5;">
+        <p>One hot day, Fox saw juicy purple grapes hanging high on a vine. 'Those grapes look delicious,' he said. He jumped and jumped, but the grapes were too high to reach. Fox tried again and again, but he could not jump high enough. At last, tired and hungry, Fox gave up. He walked away and said, 'Those grapes were probably sour anyway. I didn't want them.' But really, Fox was just disappointed that he could not reach them.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>juicy</b> &mdash; <span>full of liquid, like a ripe fruit</span></div><div class="vocab-bubble"><b>delicious</b> &mdash; <span>tastes very good</span></div><div class="vocab-bubble"><b>disappointed</b> &mdash; <span>feeling sad because something did not happen</span></div><div class="vocab-bubble"><b>sour</b> &mdash; <span>a sharp, unpleasant taste</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What did Fox want to eat?<span class="answer-line"></span></li><li>Why couldn't Fox get the grapes?<span class="answer-line"></span></li><li>Why did Fox say the grapes were sour?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">It is easy to blame what we cannot have.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about a time something was hard and how it felt.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 5 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#F5D3C3">6</div>
+        <h2>The Fox and the Crow</h2>
+        <div class="icons"><div class="cloud" style="background:#F5D3C3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#F2A48B"/><path d="M 26 92 Q -4 84 4 60" stroke="#F2A48B" stroke-width="9" fill="none" stroke-linecap="round"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><circle cx="64" cy="42" r="26" fill="#F2A48B"/><path d="M 42 34 L 38 10 L 58 24 Z" fill="#F2A48B"/><path d="M 86 34 L 90 10 L 70 24 Z" fill="#F2A48B"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div><div class="cloud" style="background:#F5D3C3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="104" rx="30" ry="24" fill="#B79FCB"/><path d="M 42 98 Q 24 90 30 76 Q 46 86 42 98 Z" fill="#B79FCB"/><circle cx="72" cy="68" r="17" fill="#B79FCB"/><path d="M 86 70 L 100 66 L 86 76 Z" fill="#F7C56B"/>
+    <circle cx="65.54" cy="66.15" r="1.53" fill="#5B4B6E"/>
+    <circle cx="78.46" cy="66.15" r="1.53" fill="#5B4B6E"/>
+    <circle cx="61.018" cy="70.06" r="2.72" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="82.982" cy="70.06" r="2.72" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 69.28 71.76 Q 72 74.14 74.72 71.76" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <rect x="62" y="124" width="5" height="14" fill="#E8A87C"/><rect x="76" y="124" width="5" height="14" fill="#E8A87C"/></svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#F5D3C322; border:2px solid #F5D3C3;">
+        <p>Crow found a big piece of cheese and flew up to a branch to eat it. Fox saw the cheese and wanted it for himself. 'Dear Crow,' said Fox, 'your feathers are so shiny! I bet your voice is just as beautiful. Sing for me!' Crow felt proud and opened her beak to sing. The cheese fell right out of her mouth and landed at Fox's feet. Fox grabbed the cheese and ran off, laughing. Crow learned not to trust every kind word.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>flattery</b> &mdash; <span>nice words said to trick someone</span></div><div class="vocab-bubble"><b>proud</b> &mdash; <span>feeling pleased with yourself</span></div><div class="vocab-bubble"><b>beak</b> &mdash; <span>a bird's mouth</span></div><div class="vocab-bubble"><b>trick</b> &mdash; <span>a clever way to fool someone</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What did Crow have in her mouth?<span class="answer-line"></span></li><li>How did Fox trick Crow?<span class="answer-line"></span></li><li>What should Crow do differently next time?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Do not trust every kind word.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about a smart way to answer a trick.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 6 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#FBD8E0">7</div>
+        <h2>The Town Mouse and the Country Mouse</h2>
+        <div class="icons"><div class="cloud" style="background:#FBD8E0"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#E9DFC9"/><path d="M 26 92 Q -4 84 4 60" stroke="#E9DFC9" stroke-width="9" fill="none" stroke-linecap="round"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#E9DFC9"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#E9DFC9"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#E9DFC9"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#E9DFC9"/><circle cx="64" cy="42" r="26" fill="#E9DFC9"/><circle cx="44" cy="20" r="11" fill="#E9DFC9"/><circle cx="82" cy="18" r="11" fill="#E9DFC9"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div><div class="cloud" style="background:#FBD8E0"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#C9AEE0"/><path d="M 26 92 Q -4 84 4 60" stroke="#C9AEE0" stroke-width="9" fill="none" stroke-linecap="round"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#C9AEE0"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#C9AEE0"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#C9AEE0"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#C9AEE0"/><circle cx="64" cy="42" r="26" fill="#C9AEE0"/><circle cx="44" cy="20" r="11" fill="#C9AEE0"/><circle cx="82" cy="18" r="11" fill="#C9AEE0"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#FBD8E022; border:2px solid #FBD8E0;">
+        <p>Country Mouse lived in a quiet field and ate simple seeds and corn. One day his cousin, Town Mouse, visited from the big city. 'Come see my home!' said Town Mouse. In the city, they found a table full of cakes and cheese. Just as they began to eat, a big dog barked and chased them away! They hid, shaking with fear. 'I would rather eat simple food in peace,' said Country Mouse, 'than eat fancy food in fear.' He packed his bag and went home.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>simple</b> &mdash; <span>plain, not fancy</span></div><div class="vocab-bubble"><b>fancy</b> &mdash; <span>special and decorated</span></div><div class="vocab-bubble"><b>peace</b> &mdash; <span>calm, with no trouble</span></div><div class="vocab-bubble"><b>fear</b> &mdash; <span>a feeling of being scared</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What food did Country Mouse usually eat?<span class="answer-line"></span></li><li>What scared the two mice in the city?<span class="answer-line"></span></li><li>Why did Country Mouse want to go home?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">A simple life can bring peace.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about a place that feels calm and safe to you.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 7 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#E6DFF6">8</div>
+        <h2>The North Wind and the Sun</h2>
+        <div class="icons"><div class="cloud" style="background:#E6DFF6"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><circle cx="70" cy="64" r="26" fill="#F7E3B5"/><line x1="100.0" y1="64.0" x2="112.0" y2="64.0" stroke="#F4C97A" stroke-width="5" stroke-linecap="round"/><line x1="91.2" y1="85.2" x2="99.7" y2="93.7" stroke="#F4C97A" stroke-width="5" stroke-linecap="round"/><line x1="70.0" y1="94.0" x2="70.0" y2="106.0" stroke="#F4C97A" stroke-width="5" stroke-linecap="round"/><line x1="48.8" y1="85.2" x2="40.3" y2="93.7" stroke="#F4C97A" stroke-width="5" stroke-linecap="round"/><line x1="40.0" y1="64.0" x2="28.0" y2="64.0" stroke="#F4C97A" stroke-width="5" stroke-linecap="round"/><line x1="48.8" y1="42.8" x2="40.3" y2="34.3" stroke="#F4C97A" stroke-width="5" stroke-linecap="round"/><line x1="70.0" y1="34.0" x2="70.0" y2="22.0" stroke="#F4C97A" stroke-width="5" stroke-linecap="round"/><line x1="91.2" y1="42.8" x2="99.7" y2="34.3" stroke="#F4C97A" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="60.12" cy="62.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="79.88" cy="62.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="53.204" cy="68.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="86.79599999999999" cy="68.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 65.84 71.28 Q 70 74.92 74.16 71.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <ellipse cx="60" cy="108" rx="34" ry="16" fill="#EAF3FB"/><ellipse cx="88" cy="100" rx="22" ry="14" fill="#EAF3FB"/><path d="M 42 120 q -4 10 -10 14" stroke="#BFD9EA" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M 56 120 q -4 10 -10 14" stroke="#BFD9EA" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M 70 120 q -4 10 -10 14" stroke="#BFD9EA" stroke-width="4" fill="none" stroke-linecap="round"/></svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#E6DFF622; border:2px solid #E6DFF6;">
+        <p>Wind and Sun argued about who was stronger. They saw a traveler walking in a warm coat. 'Let's see who can make him take off his coat,' said Sun. Wind blew hard and cold, but the man just held his coat tighter. Wind blew harder and harder, but nothing worked. Then it was Sun's turn. Sun shone warm and bright. The man grew hot and took off his coat all by himself. Being gentle and warm was stronger than being rough.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>traveler</b> &mdash; <span>a person who is going on a trip</span></div><div class="vocab-bubble"><b>argued</b> &mdash; <span>disagreed with words</span></div><div class="vocab-bubble"><b>gentle</b> &mdash; <span>soft and kind</span></div><div class="vocab-bubble"><b>stronger</b> &mdash; <span>having more power</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What did Wind and Sun argue about?<span class="answer-line"></span></li><li>What happened when Wind blew hard?<span class="answer-line"></span></li><li>How did Sun get the man to take off his coat?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Kindness can be stronger than force.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about a time being kind helped more than being tough.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 8 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#CFE8F3">9</div>
+        <h2>The Goose That Laid the Golden Eggs</h2>
+        <div class="icons"><div class="cloud" style="background:#CFE8F3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="104" rx="30" ry="24" fill="#F4C97A"/><path d="M 42 98 Q 24 90 30 76 Q 46 86 42 98 Z" fill="#F4C97A"/><circle cx="72" cy="68" r="17" fill="#F4C97A"/><path d="M 86 70 L 100 66 L 86 76 Z" fill="#E8899B"/>
+    <circle cx="65.54" cy="66.15" r="1.53" fill="#5B4B6E"/>
+    <circle cx="78.46" cy="66.15" r="1.53" fill="#5B4B6E"/>
+    <circle cx="61.018" cy="70.06" r="2.72" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="82.982" cy="70.06" r="2.72" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 69.28 71.76 Q 72 74.14 74.72 71.76" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <rect x="62" y="124" width="5" height="14" fill="#E8A87C"/><rect x="76" y="124" width="5" height="14" fill="#E8A87C"/></svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#CFE8F322; border:2px solid #CFE8F3;">
+        <p>A farmer had a magic goose. Every morning she laid one shiny golden egg. The farmer sold the eggs and became rich. But he grew greedy. 'If there is gold inside her, I will get it all at once!' he thought. He cut the goose open to find more gold. But there was no gold inside at all, only a goose, like any other. Now the farmer had no goose and no more golden eggs. Being greedy can cost you everything.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>golden</b> &mdash; <span>made of gold, or gold colored</span></div><div class="vocab-bubble"><b>greedy</b> &mdash; <span>wanting more than you need</span></div><div class="vocab-bubble"><b>rich</b> &mdash; <span>having a lot of money</span></div><div class="vocab-bubble"><b>harm</b> &mdash; <span>to hurt something</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What did the goose lay every day?<span class="answer-line"></span></li><li>Why did the farmer cut the goose open?<span class="answer-line"></span></li><li>What did the farmer lose because he was greedy?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Being greedy can cost you everything.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about being happy with what you already have.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 9 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#D9EAD3">10</div>
+        <h2>The Wolf in Sheep's Clothing</h2>
+        <div class="icons"><div class="cloud" style="background:#D9EAD3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#F5EFE3"/><circle cx="20" cy="82" r="15" fill="#F5EFE3"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#F5EFE3"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#F5EFE3"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#F5EFE3"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#F5EFE3"/><circle cx="64" cy="42" r="26" fill="#F5EFE3"/><circle cx="44" cy="20" r="11" fill="#F5EFE3"/><circle cx="82" cy="18" r="11" fill="#F5EFE3"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#D9EAD322; border:2px solid #D9EAD3;">
+        <p>A hungry wolf wanted an easy meal. He found an old sheep's skin and put it on. Now he looked just like one of the fluffy sheep! He walked into the flock, and the shepherd did not notice a thing. That night, the wolf picked a sheep to eat. But he grabbed the wrong one, the shepherd's dog! The dog barked and the shepherd came running. They caught the wolf and chased him away. Looking nice on the outside does not always mean you are good on the inside.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>disguise</b> &mdash; <span>a costume that hides who you are</span></div><div class="vocab-bubble"><b>flock</b> &mdash; <span>a group of sheep</span></div><div class="vocab-bubble"><b>notice</b> &mdash; <span>to see or pay attention to</span></div><div class="vocab-bubble"><b>outside</b> &mdash; <span>the part you can see</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What did the wolf wear to trick the sheep?<span class="answer-line"></span></li><li>Who did the wolf try to grab at night?<span class="answer-line"></span></li><li>What does this story teach us about looks?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Looks can be tricky, so look closer.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about someone who is kind on the inside.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 10 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#F7E3B5">11</div>
+        <h2>The Crow and the Pitcher</h2>
+        <div class="icons"><div class="cloud" style="background:#F7E3B5"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="104" rx="30" ry="24" fill="#B79FCB"/><path d="M 42 98 Q 24 90 30 76 Q 46 86 42 98 Z" fill="#B79FCB"/><circle cx="72" cy="68" r="17" fill="#B79FCB"/><path d="M 86 70 L 100 66 L 86 76 Z" fill="#F7C56B"/>
+    <circle cx="65.54" cy="66.15" r="1.53" fill="#5B4B6E"/>
+    <circle cx="78.46" cy="66.15" r="1.53" fill="#5B4B6E"/>
+    <circle cx="61.018" cy="70.06" r="2.72" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="82.982" cy="70.06" r="2.72" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 69.28 71.76 Q 72 74.14 74.72 71.76" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <rect x="62" y="124" width="5" height="14" fill="#E8A87C"/><rect x="76" y="124" width="5" height="14" fill="#E8A87C"/></svg></div><div class="cloud" style="background:#F7E3B5"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><path d="M 44 54 Q 36 112 70 116 Q 104 112 96 54 Z" fill="#CFE8F3"/><ellipse cx="70" cy="54" rx="26" ry="9" fill="#CFE8F3"/><ellipse cx="70" cy="56" rx="19" ry="6" fill="#7FB7D9"/><path d="M 92 64 Q 112 70 92 88" fill="none" stroke="#CFE8F3" stroke-width="8" stroke-linecap="round"/><circle cx="66" cy="72" r="5" fill="#7FB7D9" opacity="0.8"/><circle cx="76" cy="80" r="5" fill="#7FB7D9" opacity="0.8"/><circle cx="62" cy="88" r="5" fill="#7FB7D9" opacity="0.8"/></svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#F7E3B522; border:2px solid #F7E3B5;">
+        <p>On a hot day, Crow found a tall pitcher with a little water at the bottom. She tried to drink, but her beak could not reach the water. Crow thought and thought. Then she had a clever idea. She picked up small stones, one by one, and dropped them into the pitcher. Plop, plop, plop! Slowly, the water rose higher and higher. At last, Crow could reach the water and drink. Her clever thinking saved the day.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>pitcher</b> &mdash; <span>a container for holding liquid</span></div><div class="vocab-bubble"><b>clever</b> &mdash; <span>smart and quick-thinking</span></div><div class="vocab-bubble"><b>rose</b> &mdash; <span>went up</span></div><div class="vocab-bubble"><b>idea</b> &mdash; <span>a thought or plan</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>Why couldn't Crow drink the water at first?<span class="answer-line"></span></li><li>What clever idea did Crow have?<span class="answer-line"></span></li><li>What happened to the water as she dropped stones in?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">A clever idea can solve a problem.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about a clever idea you had.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 11 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#F5D3C3">12</div>
+        <h2>The Dog and Its Reflection</h2>
+        <div class="icons"><div class="cloud" style="background:#F5D3C3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#F2A48B"/><circle cx="18" cy="88" r="10" fill="#F2A48B"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><circle cx="64" cy="42" r="26" fill="#F2A48B"/><circle cx="44" cy="20" r="11" fill="#F2A48B"/><circle cx="82" cy="18" r="11" fill="#F2A48B"/><ellipse cx="66" cy="52" rx="13" ry="9" fill="#E9DFC9"/><circle cx="66" cy="49" r="2.4" fill="#5B4B6E"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#F5D3C322; border:2px solid #F5D3C3;">
+        <p>A dog found a big juicy bone and carried it home in his mouth. On the way, he crossed a bridge over a stream. He looked down and saw another dog in the water holding an even bigger bone! It was really just his own reflection, but the dog didn't know that. He wanted that bigger bone too, so he barked loudly. His own bone fell, splash, into the water and was gone forever. Now the greedy dog had no bone at all.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>reflection</b> &mdash; <span>an image you see in water or a mirror</span></div><div class="vocab-bubble"><b>stream</b> &mdash; <span>a small river</span></div><div class="vocab-bubble"><b>barked</b> &mdash; <span>made a loud dog sound</span></div><div class="vocab-bubble"><b>forever</b> &mdash; <span>for all time</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What did the dog see in the water?<span class="answer-line"></span></li><li>Why did the dog lose his bone?<span class="answer-line"></span></li><li>What should the dog have done instead?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Be happy with what you have.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about a time you shared instead of wanting more.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 12 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#FBD8E0">13</div>
+        <h2>The Milkmaid and Her Pail</h2>
+        <div class="icons"><div class="cloud" style="background:#FBD8E0"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><path d="M 56 76 L 60 100 L 80 100 L 84 76 Z" fill="#CFE8F3"/><path d="M 56 76 Q 70 66 84 76" stroke="#CFE8F3" stroke-width="4" fill="none"/></svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#FBD8E022; border:2px solid #FBD8E0;">
+        <p>Molly the milkmaid carried a pail of milk on her head to sell at the market. As she walked, she began to dream. 'I will sell this milk and buy some eggs. The eggs will hatch into chickens. I will sell the chickens and buy a fine dress. Everyone will admire me!' She was so excited that she tossed her head high, and the pail of milk tumbled to the ground! All the milk spilled out, and Molly's dreams spilled with it.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>pail</b> &mdash; <span>a bucket</span></div><div class="vocab-bubble"><b>market</b> &mdash; <span>a place to buy and sell things</span></div><div class="vocab-bubble"><b>admire</b> &mdash; <span>to look at with pleasure</span></div><div class="vocab-bubble"><b>tumbled</b> &mdash; <span>fell suddenly</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What was Molly carrying on her head?<span class="answer-line"></span></li><li>What happened when she tossed her head high?<span class="answer-line"></span></li><li>What does “don't count your chickens before they hatch” mean?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Do not count your chickens before they hatch.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about planning carefully for something important.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 13 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#E6DFF6">14</div>
+        <h2>The Bundle of Sticks</h2>
+        <div class="icons"><div class="cloud" style="background:#E6DFF6"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><rect x="36" y="42" width="8" height="76" rx="4" fill="#D9B589"/><rect x="48" y="42" width="8" height="76" rx="4" fill="#D9B589"/><rect x="60" y="42" width="8" height="76" rx="4" fill="#D9B589"/><rect x="72" y="42" width="8" height="76" rx="4" fill="#D9B589"/><rect x="84" y="42" width="8" height="76" rx="4" fill="#D9B589"/><rect x="96" y="42" width="8" height="76" rx="4" fill="#D9B589"/><rect x="32" y="74" width="76" height="12" rx="6" fill="#E8899B"/></svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#E6DFF622; border:2px solid #E6DFF6;">
+        <p>An old man had four sons who often argued. One day he gave each son a single stick and asked them to break it. Snap! Each stick broke easily. Then he tied many sticks into one bundle. 'Now try to break this,' he said. The sons tried and tried, but the bundle would not break. 'Alone, you are weak like one stick,' said the father. 'Together, you are strong like this bundle.' The brothers promised to help each other from then on.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>bundle</b> &mdash; <span>a group of things tied together</span></div><div class="vocab-bubble"><b>argued</b> &mdash; <span>disagreed with each other</span></div><div class="vocab-bubble"><b>alone</b> &mdash; <span>by yourself</span></div><div class="vocab-bubble"><b>together</b> &mdash; <span>with others</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What happened when each son tried to break one stick?<span class="answer-line"></span></li><li>What happened when they tried to break the bundle?<span class="answer-line"></span></li><li>What lesson did the father teach his sons?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Together we are stronger.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about working together with someone.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 14 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#CFE8F3">15</div>
+        <h2>Belling the Cat</h2>
+        <div class="icons"><div class="cloud" style="background:#CFE8F3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#C9AEE0"/><path d="M 26 92 Q -4 84 4 60" stroke="#C9AEE0" stroke-width="9" fill="none" stroke-linecap="round"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#C9AEE0"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#C9AEE0"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#C9AEE0"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#C9AEE0"/><circle cx="64" cy="42" r="26" fill="#C9AEE0"/><path d="M 42 34 L 38 10 L 58 24 Z" fill="#C9AEE0"/><path d="M 86 34 L 90 10 L 70 24 Z" fill="#C9AEE0"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <circle cx="88" cy="42" r="9" fill="#F4D9A0" stroke="#D9A05B" stroke-width="2"/><circle cx="88" cy="49" r="2.5" fill="#D9A05B"/></svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#CFE8F322; border:2px solid #CFE8F3;">
+        <p>A sneaky cat kept catching mice in the house. The mice held a meeting to solve the problem. 'Let's tie a bell around the cat's neck,' said a young mouse. 'Then we will hear her coming and run away!' All the mice cheered, what a wonderful plan! But then an old, wise mouse asked, 'That is a fine idea. But who will go and tie the bell on the cat?' The room went silent. No mouse was brave enough to try.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>sneaky</b> &mdash; <span>quiet and tricky</span></div><div class="vocab-bubble"><b>meeting</b> &mdash; <span>people gathering to talk</span></div><div class="vocab-bubble"><b>silent</b> &mdash; <span>making no sound</span></div><div class="vocab-bubble"><b>brave</b> &mdash; <span>not afraid</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What plan did the young mouse suggest?<span class="answer-line"></span></li><li>What question did the old mouse ask?<span class="answer-line"></span></li><li>Why did no mouse answer?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Some plans are easy to say, hard to do.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about a brave thing you could try.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 15 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#D9EAD3">16</div>
+        <h2>The Oak and the Reeds</h2>
+        <div class="icons"><div class="cloud" style="background:#D9EAD3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><rect x="62" y="80" width="16" height="46" rx="6" fill="#C9A27A"/><circle cx="48" cy="60" r="26" fill="#B7D9A8"/><circle cx="92" cy="60" r="26" fill="#B7D9A8"/><circle cx="70" cy="42" r="30" fill="#B7D9A8"/><circle cx="40" cy="84" r="20" fill="#B7D9A8"/><circle cx="100" cy="84" r="20" fill="#B7D9A8"/></svg></div><div class="cloud" style="background:#D9EAD3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><rect x="62" y="80" width="16" height="46" rx="6" fill="#C9A27A"/><path d="M 56 126 Q 50 80 60 48" stroke="#B7D9A8" stroke-width="5" fill="none" stroke-linecap="round"/><ellipse cx="60" cy="48" rx="4" ry="10" fill="#C9A27A"/><path d="M 68 126 Q 62 80 72 48" stroke="#B7D9A8" stroke-width="5" fill="none" stroke-linecap="round"/><ellipse cx="72" cy="48" rx="4" ry="10" fill="#C9A27A"/><path d="M 80 126 Q 74 80 84 48" stroke="#B7D9A8" stroke-width="5" fill="none" stroke-linecap="round"/><ellipse cx="84" cy="48" rx="4" ry="10" fill="#C9A27A"/><path d="M 90 126 Q 84 80 94 48" stroke="#B7D9A8" stroke-width="5" fill="none" stroke-linecap="round"/><ellipse cx="94" cy="48" rx="4" ry="10" fill="#C9A27A"/></svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#D9EAD322; border:2px solid #D9EAD3;">
+        <p>A tall, strong Oak tree grew next to some thin, bending Reeds by a river. 'How do you stay standing in the wind?' asked Oak. 'You are so thin and weak!' One night, a huge storm came. The wind blew hard. The stiff Oak would not bend at all, crack, it broke and fell down. The Reeds, though thin, bent low with the wind and did not break. When the storm ended, the Reeds stood back up tall again.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>reeds</b> &mdash; <span>thin plants that grow near water</span></div><div class="vocab-bubble"><b>storm</b> &mdash; <span>strong wind and rain</span></div><div class="vocab-bubble"><b>stiff</b> &mdash; <span>not able to bend</span></div><div class="vocab-bubble"><b>flexible</b> &mdash; <span>able to bend easily</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>Who broke in the storm, the Oak or the Reeds?<span class="answer-line"></span></li><li>Why did the Reeds survive the storm?<span class="answer-line"></span></li><li>What does this story teach about being flexible?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Bending is sometimes stronger than breaking.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about a time you had to be flexible.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 16 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#F7E3B5">17</div>
+        <h2>The Frog and the Ox</h2>
+        <div class="icons"><div class="cloud" style="background:#F7E3B5"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="96" rx="34" ry="22" fill="#A8CDA0"/><ellipse cx="46" cy="82" rx="12" ry="14" fill="#A8CDA0"/><ellipse cx="94" cy="82" rx="12" ry="14" fill="#A8CDA0"/>
+    <circle cx="41.44" cy="81.4" r="1.08" fill="#5B4B6E"/>
+    <circle cx="50.56" cy="81.4" r="1.08" fill="#5B4B6E"/>
+    <circle cx="38.248" cy="84.16" r="1.92" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="53.752" cy="84.16" r="1.92" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 44.08 85.36 Q 46 87.04 47.92 85.36" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    
+    <circle cx="89.44" cy="81.4" r="1.08" fill="#5B4B6E"/>
+    <circle cx="98.56" cy="81.4" r="1.08" fill="#5B4B6E"/>
+    <circle cx="86.248" cy="84.16" r="1.92" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="101.752" cy="84.16" r="1.92" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 92.08 85.36 Q 94 87.04 95.92 85.36" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M 40 108 Q 28.0 126 37.0 118" stroke="#A8CDA0" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M 100 108 Q 112.0 126 103.0 118" stroke="#A8CDA0" stroke-width="8" fill="none" stroke-linecap="round"/></svg></div><div class="cloud" style="background:#F7E3B5"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#E9DFC9"/><circle cx="18" cy="88" r="10" fill="#E9DFC9"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#E9DFC9"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#E9DFC9"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#E9DFC9"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#E9DFC9"/><path d="M 40 44 L 48 26 L 56 44 Z" fill="#F4C97A"/><path d="M 84 44 L 92 26 L 100 44 Z" fill="#F4C97A"/><circle cx="64" cy="42" r="26" fill="#E9DFC9"/><circle cx="44" cy="20" r="11" fill="#E9DFC9"/><circle cx="82" cy="18" r="11" fill="#E9DFC9"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#F7E3B522; border:2px solid #F7E3B5;">
+        <p>A little frog saw a huge ox drinking at the pond. 'I can be big too!' she told her babies. She took a deep breath and puffed herself up. 'Am I as big as the ox now?' she asked. 'Not even close,' said her children. She puffed up even more. 'Now?' 'Bigger, Mama, but still not close!' She puffed up one more time, as hard as she could, pop! The frog had puffed up too much.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>huge</b> &mdash; <span>very big</span></div><div class="vocab-bubble"><b>puffed</b> &mdash; <span>filled with air to look bigger</span></div><div class="vocab-bubble"><b>pond</b> &mdash; <span>a small area of water</span></div><div class="vocab-bubble"><b>dangerous</b> &mdash; <span>not safe</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What did the frog see at the pond?<span class="answer-line"></span></li><li>What did the frog try to do?<span class="answer-line"></span></li><li>What happened when she puffed up too much?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Be happy being who you are.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about something special about you, just as you are.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 17 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#F5D3C3">18</div>
+        <h2>The Crab and His Mother</h2>
+        <div class="icons"><div class="cloud" style="background:#F5D3C3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="88" rx="32" ry="20" fill="#F2A48B"/><circle cx="30" cy="78" r="9" fill="#F2A48B"/><circle cx="110" cy="78" r="9" fill="#F2A48B"/>
+    <circle cx="63.92" cy="85.2" r="1.44" fill="#5B4B6E"/>
+    <circle cx="76.08" cy="85.2" r="1.44" fill="#5B4B6E"/>
+    <circle cx="59.664" cy="88.88" r="2.56" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.336" cy="88.88" r="2.56" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 67.44 90.48 Q 70 92.72 72.56 90.48" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <line x1="40" y1="94" x2="23.0" y2="93.5" stroke="#F2A48B" stroke-width="4" stroke-linecap="round"/><line x1="40" y1="94" x2="26.7" y2="99.3" stroke="#F2A48B" stroke-width="4" stroke-linecap="round"/><line x1="40" y1="94" x2="32.5" y2="103.0" stroke="#F2A48B" stroke-width="4" stroke-linecap="round"/><line x1="100" y1="94" x2="117.0" y2="93.5" stroke="#F2A48B" stroke-width="4" stroke-linecap="round"/><line x1="100" y1="94" x2="113.3" y2="99.3" stroke="#F2A48B" stroke-width="4" stroke-linecap="round"/><line x1="100" y1="94" x2="107.5" y2="103.0" stroke="#F2A48B" stroke-width="4" stroke-linecap="round"/></svg></div><div class="cloud" style="background:#F5D3C3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="88" rx="32" ry="20" fill="#F3B6C6"/><circle cx="30" cy="78" r="9" fill="#F3B6C6"/><circle cx="110" cy="78" r="9" fill="#F3B6C6"/>
+    <circle cx="63.92" cy="85.2" r="1.44" fill="#5B4B6E"/>
+    <circle cx="76.08" cy="85.2" r="1.44" fill="#5B4B6E"/>
+    <circle cx="59.664" cy="88.88" r="2.56" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.336" cy="88.88" r="2.56" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 67.44 90.48 Q 70 92.72 72.56 90.48" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <line x1="40" y1="94" x2="23.0" y2="93.5" stroke="#F3B6C6" stroke-width="4" stroke-linecap="round"/><line x1="40" y1="94" x2="26.7" y2="99.3" stroke="#F3B6C6" stroke-width="4" stroke-linecap="round"/><line x1="40" y1="94" x2="32.5" y2="103.0" stroke="#F3B6C6" stroke-width="4" stroke-linecap="round"/><line x1="100" y1="94" x2="117.0" y2="93.5" stroke="#F3B6C6" stroke-width="4" stroke-linecap="round"/><line x1="100" y1="94" x2="113.3" y2="99.3" stroke="#F3B6C6" stroke-width="4" stroke-linecap="round"/><line x1="100" y1="94" x2="107.5" y2="103.0" stroke="#F3B6C6" stroke-width="4" stroke-linecap="round"/></svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#F5D3C322; border:2px solid #F5D3C3;">
+        <p>Mother Crab watched her son walk sideways across the sand. 'Why do you always walk sideways?' she asked. 'Walk straight ahead like the other animals!' 'Show me how, Mother,' said the little crab. Mother Crab tried to walk straight forward. She twisted and wobbled, but her legs only knew how to move sideways, just like his! She laughed and said, 'I suppose I should not tell you to do something I cannot do myself.'</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>sideways</b> &mdash; <span>moving to the side, not forward</span></div><div class="vocab-bubble"><b>wobbled</b> &mdash; <span>moved unsteadily</span></div><div class="vocab-bubble"><b>suppose</b> &mdash; <span>to think or guess</span></div><div class="vocab-bubble"><b>forward</b> &mdash; <span>moving ahead</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>How did the little crab walk?<span class="answer-line"></span></li><li>What happened when Mother Crab tried to walk straight?<span class="answer-line"></span></li><li>What did Mother Crab learn?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Show others what you want them to do.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about a good example someone has shown you.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 18 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#FBD8E0">19</div>
+        <h2>The Fox and the Stork</h2>
+        <div class="icons"><div class="cloud" style="background:#FBD8E0"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#F2A48B"/><path d="M 26 92 Q -4 84 4 60" stroke="#F2A48B" stroke-width="9" fill="none" stroke-linecap="round"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><circle cx="64" cy="42" r="26" fill="#F2A48B"/><path d="M 42 34 L 38 10 L 58 24 Z" fill="#F2A48B"/><path d="M 86 34 L 90 10 L 70 24 Z" fill="#F2A48B"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div><div class="cloud" style="background:#FBD8E0"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><path d="M 68 100 Q 54 70 66 54" stroke="#8FC7DE" stroke-width="20" fill="none" stroke-linecap="round"/><ellipse cx="70" cy="104" rx="30" ry="24" fill="#8FC7DE"/><path d="M 42 98 Q 24 90 30 76 Q 46 86 42 98 Z" fill="#8FC7DE"/><circle cx="72" cy="54" r="17" fill="#8FC7DE"/><path d="M 86 56 L 100 52 L 86 62 Z" fill="#F7C56B"/>
+    <circle cx="65.54" cy="52.15" r="1.53" fill="#5B4B6E"/>
+    <circle cx="78.46" cy="52.15" r="1.53" fill="#5B4B6E"/>
+    <circle cx="61.018" cy="56.06" r="2.72" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="82.982" cy="56.06" r="2.72" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 69.28 57.76 Q 72 60.14 74.72 57.76" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <rect x="62" y="124" width="5" height="14" fill="#E8A87C"/><rect x="76" y="124" width="5" height="14" fill="#E8A87C"/></svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#FBD8E022; border:2px solid #FBD8E0;">
+        <p>Fox invited Stork to dinner and served soup in a flat, shallow dish. Fox could lick it up easily, but Stork's long thin beak could not scoop up a single drop! Stork went home hungry. The next week, Stork invited Fox to dinner. She served food in a tall jar with a narrow neck. Stork's long beak reached right in, but Fox's mouth could not fit at all! Fox understood: he had been unkind, and now he learned how it felt.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>shallow</b> &mdash; <span>not deep</span></div><div class="vocab-bubble"><b>scoop</b> &mdash; <span>to lift up with a curved motion</span></div><div class="vocab-bubble"><b>narrow</b> &mdash; <span>thin, not wide</span></div><div class="vocab-bubble"><b>unkind</b> &mdash; <span>not nice or kind</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>Why couldn't Stork eat the soup at Fox's house?<span class="answer-line"></span></li><li>How did Stork get back at Fox?<span class="answer-line"></span></li><li>What did Fox learn from this?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Treat others the way you want to be treated.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about being fair to a friend.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 19 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#E6DFF6">20</div>
+        <h2>The Lion's Share</h2>
+        <div class="icons"><div class="cloud" style="background:#E6DFF6"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#F4C97A"/><circle cx="20" cy="82" r="15" fill="#F4C97A"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#F4C97A"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#F4C97A"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#F4C97A"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#F4C97A"/><circle cx="82.7" cy="36.0" r="9" fill="#F2A48B"/><circle cx="80.2" cy="45.4" r="9" fill="#F2A48B"/><circle cx="73.4" cy="52.2" r="9" fill="#F2A48B"/><circle cx="64.0" cy="54.7" r="9" fill="#F2A48B"/><circle cx="54.7" cy="52.2" r="9" fill="#F2A48B"/><circle cx="47.8" cy="45.4" r="9" fill="#F2A48B"/><circle cx="45.3" cy="36.0" r="9" fill="#F2A48B"/><circle cx="47.8" cy="26.6" r="9" fill="#F2A48B"/><circle cx="54.6" cy="19.8" r="9" fill="#F2A48B"/><circle cx="64.0" cy="17.3" r="9" fill="#F2A48B"/><circle cx="73.4" cy="19.8" r="9" fill="#F2A48B"/><circle cx="80.2" cy="26.6" r="9" fill="#F2A48B"/><circle cx="64" cy="42" r="26" fill="#F4C97A"/><circle cx="44" cy="20" r="11" fill="#F4C97A"/><circle cx="82" cy="18" r="11" fill="#F4C97A"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div><div class="cloud" style="background:#E6DFF6"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#F2A48B"/><path d="M 26 92 Q -4 84 4 60" stroke="#F2A48B" stroke-width="9" fill="none" stroke-linecap="round"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><circle cx="64" cy="42" r="26" fill="#F2A48B"/><path d="M 42 34 L 38 10 L 58 24 Z" fill="#F2A48B"/><path d="M 86 34 L 90 10 L 70 24 Z" fill="#F2A48B"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#E6DFF622; border:2px solid #E6DFF6;">
+        <p>Lion, Fox, Jackal, and Wolf hunted together and caught a deer. 'Let's share it fairly,' said Fox. Lion stepped forward. 'The first part is mine because I am the king,' he said. 'The second part is mine because I am the strongest. The third part is mine because I worked the hardest. And the fourth part, anyone who touches it will answer to me!' The other animals looked at each other and quietly walked away with nothing.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>fairly</b> &mdash; <span>in a way that is right for everyone</span></div><div class="vocab-bubble"><b>king</b> &mdash; <span>the ruler of a group</span></div><div class="vocab-bubble"><b>strongest</b> &mdash; <span>having the most power</span></div><div class="vocab-bubble"><b>share</b> &mdash; <span>to give part of something to others</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What did the animals catch together?<span class="answer-line"></span></li><li>How did Lion divide the deer?<span class="answer-line"></span></li><li>Was Lion being fair? Why or why not?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Sharing should be fair for everyone.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about a fair way to share something with friends.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 20 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#CFE8F3">21</div>
+        <h2>The Wolf and the Lamb</h2>
+        <div class="icons"><div class="cloud" style="background:#CFE8F3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#B79FCB"/><circle cx="20" cy="82" r="15" fill="#B79FCB"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#B79FCB"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#B79FCB"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#B79FCB"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#B79FCB"/><circle cx="64" cy="42" r="26" fill="#B79FCB"/><path d="M 42 34 L 38 10 L 58 24 Z" fill="#B79FCB"/><path d="M 86 34 L 90 10 L 70 24 Z" fill="#B79FCB"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div><div class="cloud" style="background:#CFE8F3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#F5EFE3"/><circle cx="18" cy="88" r="10" fill="#F5EFE3"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#F5EFE3"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#F5EFE3"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#F5EFE3"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#F5EFE3"/><circle cx="64" cy="42" r="26" fill="#F5EFE3"/><circle cx="44" cy="20" r="11" fill="#F5EFE3"/><circle cx="82" cy="18" r="11" fill="#F5EFE3"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#CFE8F322; border:2px solid #CFE8F3;">
+        <p>A wolf saw a little lamb drinking at a stream and wanted to eat her. He needed an excuse. 'You are making the water dirty!' said Wolf. 'But I am downstream from you,' said Lamb. 'My water cannot reach you.' 'Well, you said mean things about me last year!' said Wolf. 'I wasn't even born last year,' said Lamb gently. Wolf growled, 'It was someone in your family then!' and he ate her anyway.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>excuse</b> &mdash; <span>a reason someone makes up</span></div><div class="vocab-bubble"><b>downstream</b> &mdash; <span>further along in the direction water flows</span></div><div class="vocab-bubble"><b>gently</b> &mdash; <span>in a soft, kind way</span></div><div class="vocab-bubble"><b>unfair</b> &mdash; <span>not right or fair</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What did Wolf accuse Lamb of doing?<span class="answer-line"></span></li><li>How did Lamb answer each accusation?<span class="answer-line"></span></li><li>Was Wolf being fair to Lamb?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">An unfair person always finds an excuse.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about standing up for someone treated unfairly.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 21 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#D9EAD3">22</div>
+        <h2>The Donkey Carrying Salt</h2>
+        <div class="icons"><div class="cloud" style="background:#D9EAD3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#E9DFC9"/><circle cx="18" cy="88" r="10" fill="#E9DFC9"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#E9DFC9"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#E9DFC9"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#E9DFC9"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#E9DFC9"/><circle cx="64" cy="42" r="26" fill="#E9DFC9"/><ellipse cx="48" cy="2" rx="7" ry="24" fill="#E9DFC9" transform="rotate(-15 48 2)"/><ellipse cx="78" cy="0" rx="7" ry="24" fill="#E9DFC9" transform="rotate(12 78 0)"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#D9EAD322; border:2px solid #D9EAD3;">
+        <p>A donkey carried heavy bags of salt across a river every day. One day he slipped and fell into the water. The salt melted away, and his load became much lighter! 'What a clever trick,' thought the donkey. The next day, he carried soft, fluffy cotton instead. He fell into the river on purpose this time. But the cotton soaked up the water and became heavier than before! The donkey learned that the same trick does not always work twice.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>load</b> &mdash; <span>the things a person or animal carries</span></div><div class="vocab-bubble"><b>melted</b> &mdash; <span>turned from solid into liquid</span></div><div class="vocab-bubble"><b>soaked</b> &mdash; <span>took in a lot of water</span></div><div class="vocab-bubble"><b>heavier</b> &mdash; <span>weighing more</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What happened to the salt when the donkey fell in the water?<span class="answer-line"></span></li><li>Why did the donkey fall in the river on purpose the second time?<span class="answer-line"></span></li><li>What went wrong with his plan?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">The same trick does not always work twice.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about a time a plan did not go as you expected.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 22 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#F7E3B5">23</div>
+        <h2>The Eagle and the Arrow</h2>
+        <div class="icons"><div class="cloud" style="background:#F7E3B5"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="104" rx="30" ry="24" fill="#8FC7DE"/><path d="M 42 98 Q 24 90 30 76 Q 46 86 42 98 Z" fill="#8FC7DE"/><circle cx="72" cy="68" r="17" fill="#8FC7DE"/><path d="M 68 52 L 72 38 L 78 53 Z" fill="#8FC7DE"/><path d="M 86 70 L 100 66 L 86 76 Z" fill="#F7C56B"/>
+    <circle cx="65.54" cy="66.15" r="1.53" fill="#5B4B6E"/>
+    <circle cx="78.46" cy="66.15" r="1.53" fill="#5B4B6E"/>
+    <circle cx="61.018" cy="70.06" r="2.72" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="82.982" cy="70.06" r="2.72" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 69.28 71.76 Q 72 74.14 74.72 71.76" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <rect x="62" y="124" width="5" height="14" fill="#E8A87C"/><rect x="76" y="124" width="5" height="14" fill="#E8A87C"/></svg></div><div class="cloud" style="background:#F7E3B5"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><line x1="40" y1="90" x2="90" y2="50" stroke="#B08968" stroke-width="4" stroke-linecap="round"/><path d="M 90 50 L 78 56 L 84 42 Z" fill="#B08968"/></svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#F7E3B522; border:2px solid #F7E3B5;">
+        <p>An eagle soared high above the hills, watching for prey below. A hunter took aim and shot an arrow at the great bird. The arrow struck true, and the eagle began to fall. As she fell, she saw that the arrow had her own feather attached to guide it straight. 'How sad,' she thought, 'to be hurt by a weapon made partly from myself.' Sometimes the tools we give away can be used against us.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>soared</b> &mdash; <span>flew high in the sky</span></div><div class="vocab-bubble"><b>prey</b> &mdash; <span>an animal hunted for food</span></div><div class="vocab-bubble"><b>struck</b> &mdash; <span>hit something</span></div><div class="vocab-bubble"><b>weapon</b> &mdash; <span>a tool used to attack</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What was the eagle doing at the start of the story?<span class="answer-line"></span></li><li>What did the eagle notice on the arrow?<span class="answer-line"></span></li><li>What does this story teach us about being careful?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Be careful what you give away.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about something you should be careful with.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 23 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#F5D3C3">24</div>
+        <h2>The Peacock and the Crane</h2>
+        <div class="icons"><div class="cloud" style="background:#F5D3C3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="104" rx="30" ry="24" fill="#C9AEE0"/><ellipse cx="23.0" cy="133.4" rx="9" ry="16" fill="#CFE8F3" transform="rotate(-40 23.0 133.4)"/><ellipse cx="14.0" cy="125.9" rx="9" ry="16" fill="#E6DFF6" transform="rotate(-20 14.0 125.9)"/><ellipse cx="8.1" cy="115.6" rx="9" ry="16" fill="#FBD8E0" transform="rotate(0 8.1 115.6)"/><ellipse cx="6.0" cy="104.0" rx="9" ry="16" fill="#D9EAD3" transform="rotate(20 6.0 104.0)"/><ellipse cx="8.1" cy="92.4" rx="9" ry="16" fill="#F7E3B5" transform="rotate(40 8.1 92.4)"/><circle cx="72" cy="68" r="17" fill="#C9AEE0"/><path d="M 86 70 L 100 66 L 86 76 Z" fill="#F7C56B"/>
+    <circle cx="65.54" cy="66.15" r="1.53" fill="#5B4B6E"/>
+    <circle cx="78.46" cy="66.15" r="1.53" fill="#5B4B6E"/>
+    <circle cx="61.018" cy="70.06" r="2.72" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="82.982" cy="70.06" r="2.72" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 69.28 71.76 Q 72 74.14 74.72 71.76" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <rect x="62" y="124" width="5" height="14" fill="#E8A87C"/><rect x="76" y="124" width="5" height="14" fill="#E8A87C"/></svg></div><div class="cloud" style="background:#F5D3C3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><path d="M 68 100 Q 54 70 66 54" stroke="#D9D2C4" stroke-width="20" fill="none" stroke-linecap="round"/><ellipse cx="70" cy="104" rx="30" ry="24" fill="#D9D2C4"/><path d="M 42 98 Q 24 90 30 76 Q 46 86 42 98 Z" fill="#D9D2C4"/><circle cx="72" cy="54" r="17" fill="#D9D2C4"/><path d="M 86 56 L 100 52 L 86 62 Z" fill="#F7C56B"/>
+    <circle cx="65.54" cy="52.15" r="1.53" fill="#5B4B6E"/>
+    <circle cx="78.46" cy="52.15" r="1.53" fill="#5B4B6E"/>
+    <circle cx="61.018" cy="56.06" r="2.72" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="82.982" cy="56.06" r="2.72" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 69.28 57.76 Q 72 60.14 74.72 57.76" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <rect x="62" y="124" width="5" height="14" fill="#E8A87C"/><rect x="76" y="124" width="5" height="14" fill="#E8A87C"/></svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#F5D3C322; border:2px solid #F5D3C3;">
+        <p>A peacock spread his bright, colorful tail and strutted proudly past a plain gray crane. 'Look at my beautiful feathers!' he said. 'What do you have?' The crane said nothing. She spread her long wings and flew high into the clouds, over the hills and far away. The peacock, with his heavy, fancy tail, could only walk on the ground and watch her go. Being useful can matter more than looking fancy.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>strutted</b> &mdash; <span>walked proudly</span></div><div class="vocab-bubble"><b>colorful</b> &mdash; <span>having many bright colors</span></div><div class="vocab-bubble"><b>plain</b> &mdash; <span>simple, not fancy</span></div><div class="vocab-bubble"><b>useful</b> &mdash; <span>helpful, able to do a job</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What did the peacock brag about?<span class="answer-line"></span></li><li>What could the crane do that the peacock could not?<span class="answer-line"></span></li><li>What is more important, looking fancy or being useful?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Being useful matters more than looking fancy.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about something useful you can do.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 24 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#FBD8E0">25</div>
+        <h2>The Miser and His Gold</h2>
+        <div class="icons"><div class="cloud" style="background:#FBD8E0"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><path d="M 40 88 Q 36 118 70 120 Q 104 118 100 88 Z" fill="#D9A05B"/><circle cx="54" cy="80" r="11" fill="#F4D9A0" stroke="#D9A05B" stroke-width="2"/><circle cx="54" cy="80" r="4" fill="#D9A05B" opacity="0.5"/><circle cx="70" cy="72" r="11" fill="#F4D9A0" stroke="#D9A05B" stroke-width="2"/><circle cx="70" cy="72" r="4" fill="#D9A05B" opacity="0.5"/><circle cx="86" cy="80" r="11" fill="#F4D9A0" stroke="#D9A05B" stroke-width="2"/><circle cx="86" cy="80" r="4" fill="#D9A05B" opacity="0.5"/><circle cx="62" cy="86" r="11" fill="#F4D9A0" stroke="#D9A05B" stroke-width="2"/><circle cx="62" cy="86" r="4" fill="#D9A05B" opacity="0.5"/><circle cx="80" cy="84" r="11" fill="#F4D9A0" stroke="#D9A05B" stroke-width="2"/><circle cx="80" cy="84" r="4" fill="#D9A05B" opacity="0.5"/></svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#FBD8E022; border:2px solid #FBD8E0;">
+        <p>A miser buried all his gold under a tree so no one could take it. Every day he visited the spot just to look at it. One day a thief saw him and dug up the gold while he was away. The miser came back and found only an empty hole. He cried and cried. A neighbor said, 'You never spent the gold anyway. Just put a rock in the hole and look at that instead, it will do you just as much good.'</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>miser</b> &mdash; <span>a person who saves money and does not spend it</span></div><div class="vocab-bubble"><b>buried</b> &mdash; <span>put underground</span></div><div class="vocab-bubble"><b>thief</b> &mdash; <span>a person who steals</span></div><div class="vocab-bubble"><b>hoards</b> &mdash; <span>keeps a lot of something without using it</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>Where did the miser keep his gold?<span class="answer-line"></span></li><li>What happened while he was away?<span class="answer-line"></span></li><li>What did his neighbor mean about the rock?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Things we never use do us little good.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about something you own that you actually use and enjoy.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 25 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#E6DFF6">26</div>
+        <h2>The Monkey and the Dolphin</h2>
+        <div class="icons"><div class="cloud" style="background:#E6DFF6"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><path d="M 10 114 Q 35 98 60 114 T 110 114 T 160 114" stroke="#CFE8F3" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="42" cy="80" r="20" fill="#E8B87C"/>
+    <circle cx="34.4" cy="79.0" r="1.7999999999999998" fill="#5B4B6E"/>
+    <circle cx="49.6" cy="79.0" r="1.7999999999999998" fill="#5B4B6E"/>
+    <circle cx="29.08" cy="83.6" r="3.2" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="54.92" cy="83.6" r="3.2" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 38.8 85.6 Q 42 88.39999999999999 45.2 85.6" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <circle cx="26" cy="66" r="8" fill="#E8B87C"/><circle cx="58" cy="66" r="8" fill="#E8B87C"/><path d="M 80 94 Q 104 58 128 90 Q 108 80 88 100 Z" fill="#8FC7DE"/><circle cx="92" cy="88" r="3" fill="#5B4B6E"/></svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#E6DFF622; border:2px solid #E6DFF6;">
+        <p>A ship full of sailors sank near an island, but a friendly dolphin carried a monkey safely on his back. 'You must know this island well,' said the dolphin. 'Oh yes,' said the monkey, who had never even been there. 'Everyone there knows my name!' The dolphin, testing him, said, 'That's the city of Port Town ahead.' 'Oh, I know it well!' bragged the monkey. But the dolphin knew there was no such city, only open sea, and swam off to find someone honest to help instead.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>sailors</b> &mdash; <span>people who work on a ship</span></div><div class="vocab-bubble"><b>island</b> &mdash; <span>land surrounded by water</span></div><div class="vocab-bubble"><b>bragged</b> &mdash; <span>talked proudly, often not truthfully</span></div><div class="vocab-bubble"><b>honest</b> &mdash; <span>telling the truth</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>How did the dolphin help the monkey?<span class="answer-line"></span></li><li>How did the dolphin test the monkey?<span class="answer-line"></span></li><li>What happened when the dolphin found out the monkey was lying?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">It is better to be honest than to brag.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about why honesty is important to you.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 26 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#CFE8F3">27</div>
+        <h2>The Wolf and the Crane</h2>
+        <div class="icons"><div class="cloud" style="background:#CFE8F3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#B79FCB"/><path d="M 26 92 Q -4 84 4 60" stroke="#B79FCB" stroke-width="9" fill="none" stroke-linecap="round"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#B79FCB"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#B79FCB"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#B79FCB"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#B79FCB"/><circle cx="64" cy="42" r="26" fill="#B79FCB"/><path d="M 42 34 L 38 10 L 58 24 Z" fill="#B79FCB"/><path d="M 86 34 L 90 10 L 70 24 Z" fill="#B79FCB"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div><div class="cloud" style="background:#CFE8F3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><path d="M 68 100 Q 54 70 66 54" stroke="#8FC7DE" stroke-width="20" fill="none" stroke-linecap="round"/><ellipse cx="70" cy="104" rx="30" ry="24" fill="#8FC7DE"/><path d="M 42 98 Q 24 90 30 76 Q 46 86 42 98 Z" fill="#8FC7DE"/><circle cx="72" cy="54" r="17" fill="#8FC7DE"/><path d="M 86 56 L 100 52 L 86 62 Z" fill="#F7C56B"/>
+    <circle cx="65.54" cy="52.15" r="1.53" fill="#5B4B6E"/>
+    <circle cx="78.46" cy="52.15" r="1.53" fill="#5B4B6E"/>
+    <circle cx="61.018" cy="56.06" r="2.72" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="82.982" cy="56.06" r="2.72" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 69.28 57.76 Q 72 60.14 74.72 57.76" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <rect x="62" y="124" width="5" height="14" fill="#E8A87C"/><rect x="76" y="124" width="5" height="14" fill="#E8A87C"/></svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#CFE8F322; border:2px solid #CFE8F3;">
+        <p>A wolf was eating too fast when a bone got stuck in his throat. He begged every animal for help, promising a great reward. Crane, with her long thin neck and beak, agreed to try. She reached deep into Wolf's throat and pulled the bone out! 'Now, where is my reward?' asked Crane. Wolf laughed. 'Your reward is that you kept your head inside a wolf's mouth and lived to tell about it!' Crane learned that helping an unkind creature rarely brings thanks.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>throat</b> &mdash; <span>the inside of your neck</span></div><div class="vocab-bubble"><b>reward</b> &mdash; <span>something given for help or good work</span></div><div class="vocab-bubble"><b>agreed</b> &mdash; <span>said yes</span></div><div class="vocab-bubble"><b>rarely</b> &mdash; <span>not often</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What was stuck in Wolf's throat?<span class="answer-line"></span></li><li>How did Crane help him?<span class="answer-line"></span></li><li>Did Wolf keep his promise? How do you know?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Helping the unkind rarely brings thanks.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about a time you helped someone and how it felt.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 27 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#D9EAD3">28</div>
+        <h2>The Fir Tree and the Bramble</h2>
+        <div class="icons"><div class="cloud" style="background:#D9EAD3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><rect x="62" y="80" width="16" height="46" rx="6" fill="#C9A27A"/><path d="M 47.0 104 L 70 72 L 93.0 104 Z" fill="#B7D9A8"/><path d="M 51.0 84 L 70 52 L 89.0 84 Z" fill="#B7D9A8"/><path d="M 56.0 66 L 70 34 L 84.0 66 Z" fill="#B7D9A8"/><path d="M 61.0 50 L 70 18 L 79.0 50 Z" fill="#B7D9A8"/></svg></div><div class="cloud" style="background:#D9EAD3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><rect x="62" y="80" width="16" height="46" rx="6" fill="#C9A27A"/><line x1="70" y1="80" x2="100.0" y2="80.0" stroke="#B7D9A8" stroke-width="4" stroke-linecap="round"/><circle cx="100.0" cy="80.0" r="7" fill="#E8899B"/><line x1="70" y1="80" x2="85.0" y2="106.0" stroke="#B7D9A8" stroke-width="4" stroke-linecap="round"/><circle cx="85.0" cy="106.0" r="7" fill="#E8899B"/><line x1="70" y1="80" x2="55.0" y2="106.0" stroke="#B7D9A8" stroke-width="4" stroke-linecap="round"/><circle cx="55.0" cy="106.0" r="7" fill="#E8899B"/><line x1="70" y1="80" x2="40.0" y2="80.0" stroke="#B7D9A8" stroke-width="4" stroke-linecap="round"/><circle cx="40.0" cy="80.0" r="7" fill="#E8899B"/><line x1="70" y1="80" x2="55.0" y2="54.0" stroke="#B7D9A8" stroke-width="4" stroke-linecap="round"/><circle cx="55.0" cy="54.0" r="7" fill="#E8899B"/><line x1="70" y1="80" x2="85.0" y2="54.0" stroke="#B7D9A8" stroke-width="4" stroke-linecap="round"/><circle cx="85.0" cy="54.0" r="7" fill="#E8899B"/></svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#D9EAD322; border:2px solid #D9EAD3;">
+        <p>A tall fir tree looked down at a small, thorny bramble bush. 'You are so useless,' said Fir. 'People use my wood for houses and ships. What good are you?' The bramble said nothing. Later, woodcutters came with axes to chop down the fir tree for its wood. As Fir was falling, he cried out, 'If only I were a useless bramble, no one would want to cut me down!'</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>bramble</b> &mdash; <span>a thorny, prickly bush</span></div><div class="vocab-bubble"><b>useless</b> &mdash; <span>not helpful or valuable</span></div><div class="vocab-bubble"><b>woodcutters</b> &mdash; <span>people who cut down trees for wood</span></div><div class="vocab-bubble"><b>valuable</b> &mdash; <span>worth a lot</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What did Fir say about Bramble?<span class="answer-line"></span></li><li>What happened to the fir tree?<span class="answer-line"></span></li><li>What did the fir tree wish for at the end?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">What looks small can be just fine as it is.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about something small that is actually special.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 28 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#F7E3B5">29</div>
+        <h2>The Donkey and the Lapdog</h2>
+        <div class="icons"><div class="cloud" style="background:#F7E3B5"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#E9DFC9"/><circle cx="18" cy="88" r="10" fill="#E9DFC9"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#E9DFC9"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#E9DFC9"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#E9DFC9"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#E9DFC9"/><circle cx="64" cy="42" r="26" fill="#E9DFC9"/><ellipse cx="48" cy="2" rx="7" ry="24" fill="#E9DFC9" transform="rotate(-15 48 2)"/><ellipse cx="78" cy="0" rx="7" ry="24" fill="#E9DFC9" transform="rotate(12 78 0)"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div><div class="cloud" style="background:#F7E3B5"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="82" rx="46" ry="34" fill="#F2A48B"/><circle cx="18" cy="88" r="10" fill="#F2A48B"/><rect x="48" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="60" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="72" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><rect x="84" y="110" width="8" height="16" rx="4" fill="#F2A48B"/><circle cx="64" cy="42" r="26" fill="#F2A48B"/><circle cx="44" cy="20" r="11" fill="#F2A48B"/><circle cx="82" cy="18" r="11" fill="#F2A48B"/>
+    <circle cx="54.12" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="73.88" cy="38.7" r="2.34" fill="#5B4B6E"/>
+    <circle cx="47.204" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="80.79599999999999" cy="44.68" r="4.16" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 59.84 47.28 Q 64 50.92 68.16 47.28" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#F7E3B522; border:2px solid #F7E3B5;">
+        <p>A little lapdog jumped onto his owner's lap, licked his face, and got treats and hugs. A donkey watched from the barn and thought, 'That looks easy! I want treats and hugs too.' The next day, the donkey ran inside, jumped up, and put his big heavy hooves right on his owner's lap! The table crashed, and the owner was scared and hurt. The donkey learned that copying someone else does not always work.</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>lapdog</b> &mdash; <span>a small pet dog</span></div><div class="vocab-bubble"><b>hooves</b> &mdash; <span>the hard feet of animals like horses and donkeys</span></div><div class="vocab-bubble"><b>copying</b> &mdash; <span>doing the same thing as someone else</span></div><div class="vocab-bubble"><b>suits</b> &mdash; <span>is right for</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>What did the lapdog get from the owner?<span class="answer-line"></span></li><li>What did the donkey try to copy?<span class="answer-line"></span></li><li>Why didn't it work for the donkey?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Not everything that works for one, works for all.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about something that is right for you but maybe not for someone else.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 29 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+    <section class="sheet story">
+      <div class="story-head">
+        <div class="badge-num" style="background:#F5D3C3">30</div>
+        <h2>The Farmer and the Stork</h2>
+        <div class="icons"><div class="cloud" style="background:#F5D3C3"><svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><path d="M 68 100 Q 54 70 66 54" stroke="#8FC7DE" stroke-width="20" fill="none" stroke-linecap="round"/><ellipse cx="70" cy="104" rx="30" ry="24" fill="#8FC7DE"/><path d="M 42 98 Q 24 90 30 76 Q 46 86 42 98 Z" fill="#8FC7DE"/><circle cx="72" cy="54" r="17" fill="#8FC7DE"/><path d="M 86 56 L 100 52 L 86 62 Z" fill="#F7C56B"/>
+    <circle cx="65.54" cy="52.15" r="1.53" fill="#5B4B6E"/>
+    <circle cx="78.46" cy="52.15" r="1.53" fill="#5B4B6E"/>
+    <circle cx="61.018" cy="56.06" r="2.72" fill="#F7B5C4" opacity="0.7"/>
+    <circle cx="82.982" cy="56.06" r="2.72" fill="#F7B5C4" opacity="0.7"/>
+    <path d="M 69.28 57.76 Q 72 60.14 74.72 57.76" stroke="#5B4B6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <rect x="62" y="124" width="5" height="14" fill="#E8A87C"/><rect x="76" y="124" width="5" height="14" fill="#E8A87C"/></svg></div></div>
+      </div>
+
+      <div class="story-panel" style="background:#F5D3C322; border:2px solid #F5D3C3;">
+        <p>Some cranes were eating seeds from a farmer's field, so he set a trap. He caught the cranes, and one stork who was standing with them, though she had eaten nothing. 'Please let me go,' said Stork. 'I am not a crane, and I ate none of your seeds. I was only visiting my friends.' 'That may be true,' said the farmer, 'but I found you with the thieves, so you will share their punishment.'</p>
+      </div>
+
+      <div class="section-label"><span class="dot"></span>New Words</div>
+      <div class="vocab-row"><div class="vocab-bubble"><b>trap</b> &mdash; <span>a device used to catch an animal</span></div><div class="vocab-bubble"><b>punishment</b> &mdash; <span>a consequence for doing something wrong</span></div><div class="vocab-bubble"><b>company</b> &mdash; <span>the people or animals you spend time with</span></div><div class="vocab-bubble"><b>affect</b> &mdash; <span>to change or influence</span></div></div>
+
+      <div class="section-label"><span class="dot"></span>Let's Think</div>
+      <div class="qa"><ol><li>Why did the farmer set a trap in his field?<span class="answer-line"></span></li><li>Why was the stork caught too?<span class="answer-line"></span></li><li>What does this story teach about choosing friends?<span class="answer-line"></span></li></ol></div>
+
+      <div class="two-col">
+        <div class="trace-box">
+          <div class="section-label"><span class="dot"></span>Trace the Moral</div>
+          <div class="trace-word">Choose your company wisely.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+        <div class="write-box">
+          <div class="section-label"><span class="dot"></span>Now You Write</div>
+          <div class="prompt">Write about what makes a good friend to spend time with.</div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+
+      <div class="footer-tag">Little Wonders with Aesop &middot; Story 30 of 30 &middot; Rayene Medabis</div>
+    </section>
+    
+</body>
+</html>

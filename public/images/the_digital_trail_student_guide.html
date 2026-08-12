@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Digital Trail — Student Field Guide</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  :root{
+    --ink:#1B2A23;
+    --paper:#EEF0E6;
+    --paper-raised:#F7F8F2;
+    --forest:#2F4A3C;
+    --forest-dark:#22362B;
+    --rust:#C2542C;
+    --rust-soft:#F5DCCB;
+    --brass:#B68D40;
+    --slate:#5B6B62;
+    --line-subtle:#D9DCD0;
+    --good:#E4ECE2;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--paper);}
+  .ftrail-body{font-family:'Public Sans',system-ui,sans-serif;}
+  .ftrail-display{font-family:'Fraunces',Georgia,serif;}
+  .ftrail-mono{font-family:'IBM Plex Mono',monospace;}
+  .ftrail-scroll::-webkit-scrollbar{width:8px;}
+  .ftrail-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.18);border-radius:4px;}
+  @media (prefers-reduced-motion: reduce){
+    *{transition-duration:0.01ms !important; animation-duration:0.01ms !important;}
+  }
+  .section-page{display:none;}
+  .section-page.active{display:block;}
+  .nav-btn:hover{background:rgba(255,255,255,0.08);}
+  .scenario-option:hover{filter:brightness(0.98);}
+  .checklist-item:hover{background:rgba(0,0,0,0.03) !important;}
+  .reveal-item:hover{background:var(--paper-raised) !important;}
+  .faq-question:hover{filter:brightness(0.98);}
+  ol.waypoint-list{list-style:none;margin:0;padding:0;}
+  em{font-style:italic;}
+  strong{font-weight:600;}
+</style>
+</head>
+<body class="ftrail-body min-h-screen" style="color:var(--ink);">
+
+  <!-- Mobile top bar -->
+  <div id="mobile-topbar" class="md:hidden flex items-center justify-between px-4 py-3 sticky top-0 z-20" style="background:var(--forest);">
+    <button aria-label="Open menu" id="open-nav-btn" style="color:var(--paper);">
+      <i data-lucide="menu" style="width:22px;height:22px;"></i>
+    </button>
+    <span class="ftrail-display text-sm font-semibold" style="color:var(--paper);">The Digital Trail</span>
+    <span class="ftrail-mono text-xs" id="mobile-counter" style="color:var(--brass);">0/12</span>
+  </div>
+
+  <div class="flex flex-col md:flex-row min-h-screen">
+
+    <!-- Desktop sidebar -->
+    <aside class="hidden md:block w-72 shrink-0 sticky top-0 h-screen" id="sidebar-desktop"></aside>
+
+    <!-- Mobile overlay nav -->
+    <div id="mobile-nav-overlay" class="md:hidden fixed inset-0 z-30" style="display:none;">
+      <div class="flex h-full">
+        <div class="w-72 h-full" id="sidebar-mobile"></div>
+        <button id="overlay-bg-close" aria-label="Close menu" class="flex-1" style="background:rgba(0,0,0,0.4); border:none; padding:0;"></button>
+      </div>
+    </div>
+
+    <main class="flex-1 min-w-0">
+      <!-- Desktop top bar -->
+      <div class="hidden md:flex items-center justify-between px-8 py-4 sticky top-0 z-10" style="background:var(--paper); border-bottom:1px solid var(--line-subtle);">
+        <div class="ftrail-mono flex items-center gap-2 text-xs" style="color:var(--slate);">
+          <i data-lucide="map-pin" style="width:14px;height:14px;"></i>
+          <span id="current-label">Welcome</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i data-lucide="award" style="width:14px;height:14px;color:var(--brass);"></i>
+          <span class="ftrail-mono text-xs" style="color:var(--slate);">Trail Passport — <span id="desktop-counter">0/12</span> stops</span>
+        </div>
+      </div>
+
+      <div class="max-w-3xl mx-auto px-6 py-10 md:py-14">
+        <div id="content">
+
+          <!-- ============ COVER ============ -->
+          <div class="section-page active" data-id="cover">
+            <p class="ftrail-mono flex items-center gap-2 text-xs uppercase tracking-widest mb-4" style="color:var(--rust);">
+              <i data-lucide="compass" style="width:14px;height:14px;"></i>
+              Student Field Guide
+            </p>
+            <h1 class="ftrail-display text-4xl md:text-5xl font-bold leading-tight mb-4" style="color:var(--forest-dark);">The Digital Trail</h1>
+            <p class="ftrail-display text-lg md:text-xl italic leading-relaxed mb-8" style="color:var(--slate);">A field guide to online etiquette, your digital footprint, safe research, and finding your way around the Google tools you'll use for school.</p>
+            <div class="rounded-xl p-5 md:p-6 mb-8" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+              <p class="leading-relaxed mb-5" style="color:var(--ink);">Every school year, you leave a trail of digital footprints — emails you send, documents you create, comments you leave, searches you run. This guide is your map for walking that trail well: with good judgment, good habits, and a working knowledge of the tools that hold it all together.</p>
+              <p class="leading-relaxed" style="color:var(--ink);">Part One covers the habits that make you a good digital citizen. Part Two is your toolkit walkthrough — Gmail, Classroom, Docs, Slides, and the rest. Move through it at your own pace, or jump straight to whatever you need.</p>
+            </div>
+            <button data-goto="etiquette" class="inline-flex items-center gap-2 rounded-full px-6 py-3 font-medium transition-colors" style="background:var(--rust); color:var(--paper);">
+              Start the trail
+              <i data-lucide="arrow-right" style="width:18px;height:18px;"></i>
+            </button>
+            <div class="mt-16 pt-8 text-sm" style="border-top:1px solid var(--line-subtle); color:var(--slate);">
+              <p class="mb-1">Written by <strong style="color:var(--forest-dark);">Rayene Medabis</strong></p>
+              <p class="mb-1">TESOL-Certified Instructional Designer &amp; EFL Educator · M.Ed. in Didactics</p>
+              <p>© 2026 Rayene Medabis. All rights reserved. This guide may not be reproduced or distributed without permission.</p>
+            </div>
+          </div>
+
+          <!-- ============ ETIQUETTE ============ -->
+          <div class="section-page" data-id="etiquette">
+            <div class="mb-10">
+              <p class="ftrail-mono text-xs uppercase tracking-widest mb-3" style="color:var(--rust);">Part One · Stop 1</p>
+              <h2 class="ftrail-display text-3xl md:text-4xl font-bold mb-4" style="color:var(--forest-dark);">Online Etiquette</h2>
+              <p class="text-lg leading-relaxed" style="color:var(--slate);">How you sound in writing is how people decide who you are before they ever meet you.</p>
+            </div>
+
+            <p class="leading-relaxed mb-5" style="color:var(--ink);">There's no tone of voice in a text box, no facial expression in an email. All anyone has is the words you chose and how you arranged them — which means the same message can land as confident or rude, depending entirely on phrasing. Online etiquette isn't about being stiff or overly formal. It's about reading the room even when there's no room to read, and adjusting your tone to fit it.</p>
+
+            <h3 class="ftrail-display text-xl font-semibold mt-10 mb-3" style="color:var(--forest-dark);">Read the room before you write</h3>
+            <p class="leading-relaxed mb-5" style="color:var(--ink);">A message to your teacher, a comment on a classmate's shared doc, and a reply in a group chat all call for a different register — the level of formality your words carry. None of this means hiding who you are. It means a little code-switching: the version of you that emails a teacher can still be the same person who jokes around in the group chat. You're just choosing the right voice for the room you're in.</p>
+
+            <div class="grid sm:grid-cols-2 gap-3 my-6">
+              <div class="rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">Rule 1</span>
+                <div class="text-sm leading-relaxed" style="color:var(--ink);">
+                  <p class="font-semibold mb-1" style="color:var(--forest-dark);">Greet and sign off</p>
+                  <p>"Hi Ms. Carter," at the top and "Thank you, Amira" at the bottom turns a bare request into a message from a real person.</p>
+                </div>
+              </div>
+              <div class="rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">Rule 2</span>
+                <div class="text-sm leading-relaxed" style="color:var(--ink);">
+                  <p class="font-semibold mb-1" style="color:var(--forest-dark);">Skip the texting shorthand</p>
+                  <p>"u", "rn", "k" read as careless in a school email, even if they're completely normal in a text to a friend.</p>
+                </div>
+              </div>
+              <div class="rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">Rule 3</span>
+                <div class="text-sm leading-relaxed" style="color:var(--ink);">
+                  <p class="font-semibold mb-1" style="color:var(--forest-dark);">Say what you need clearly</p>
+                  <p>"Could you clarify the due date for the essay?" gets answered faster than a vague "I'm confused about the assignment."</p>
+                </div>
+              </div>
+              <div class="rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">Rule 4</span>
+                <div class="text-sm leading-relaxed" style="color:var(--ink);">
+                  <p class="font-semibold mb-1" style="color:var(--forest-dark);">All caps reads as shouting</p>
+                  <p>Save capital letters for actual emphasis, not entire sentences — it changes how calm or urgent your message feels.</p>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="ftrail-display text-xl font-semibold mt-10 mb-3" style="color:var(--forest-dark);">Same situation, different tone</h3>
+            <p class="leading-relaxed mb-5" style="color:var(--ink);">Here's the same request to a teacher, written two ways.</p>
+
+            <div class="grid sm:grid-cols-2 gap-3 my-6">
+              <div class="rounded-lg p-4" style="background:var(--good); border:1px solid var(--forest);">
+                <div class="flex items-center gap-2 mb-2">
+                  <i data-lucide="check-circle-2" style="width:16px;height:16px;color:var(--forest);"></i>
+                  <span class="ftrail-mono text-xs uppercase tracking-wide font-semibold" style="color:var(--forest-dark);">Smart move</span>
+                </div>
+                <p class="text-sm leading-relaxed" style="color:var(--ink);">"Hi Mr. Hassan, I wasn't able to finish the reading last night — would it be alright to send my response by tomorrow morning? Thank you, Yusuf"</p>
+              </div>
+              <div class="rounded-lg p-4" style="background:var(--rust-soft); border:1px solid var(--rust);">
+                <div class="flex items-center gap-2 mb-2">
+                  <i data-lucide="alert-triangle" style="width:16px;height:16px;color:var(--rust);"></i>
+                  <span class="ftrail-mono text-xs uppercase tracking-wide font-semibold" style="color:var(--forest-dark);">Risky move</span>
+                </div>
+                <p class="text-sm leading-relaxed" style="color:var(--ink);">"didnt finish the reading can i send it later"</p>
+              </div>
+            </div>
+
+            <p class="leading-relaxed mb-5" style="color:var(--ink);">Both messages ask for the same thing. Only one of them sounds like a student a teacher wants to extend a little grace to.</p>
+
+            <h3 class="ftrail-display text-xl font-semibold mt-10 mb-3" style="color:var(--forest-dark);">Disagreeing without being a jerk about it</h3>
+            <p class="leading-relaxed mb-5" style="color:var(--ink);">You'll push back on ideas online — in a shared doc's comments, a class discussion board, a group project chat. Disagreement is fine. It's often exactly what good work needs. The line is between disagreeing with an idea and attacking the person who said it. "I see it differently — here's why" keeps the conversation about the work. "That's just wrong" shuts it down.</p>
+
+            <div class="rounded-xl p-5 my-6 scenario-check" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+              <div class="flex items-start gap-2 mb-4">
+                <i data-lucide="help-circle" style="width:20px;height:20px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                <p class="font-medium leading-relaxed" style="color:var(--forest-dark);">A classmate leaves a comment on your shared doc that feels harsh. What's the smartest first move?</p>
+              </div>
+              <div class="space-y-2 scenario-options">
+                <button class="scenario-option w-full text-left rounded-lg px-4 py-3 text-sm transition-colors" data-good="false" style="background:var(--paper); border:1px solid var(--line-subtle); color:var(--ink);">Reply immediately, matching their tone</button>
+                <button class="scenario-option w-full text-left rounded-lg px-4 py-3 text-sm transition-colors" data-good="true" style="background:var(--paper); border:1px solid var(--line-subtle); color:var(--ink);">Step away, then reply once you can respond calmly</button>
+                <button class="scenario-option w-full text-left rounded-lg px-4 py-3 text-sm transition-colors" data-good="false" style="background:var(--paper); border:1px solid var(--line-subtle); color:var(--ink);">Delete their comment without responding</button>
+              </div>
+              <div class="scenario-feedback-container">
+                <div class="scenario-feedback" data-index="0" style="display:none; margin-top:0.75rem; gap:0.5rem; border-radius:0.5rem; padding:0.75rem; font-size:0.875rem;">
+                  <i data-lucide="alert-triangle" style="width:16px;height:16px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                  <span style="color:var(--ink);">Matching a harsh tone usually escalates things. Text moves fast, but it doesn't have to be answered fast.</span>
+                </div>
+                <div class="scenario-feedback" data-index="1" style="display:none; margin-top:0.75rem; gap:0.5rem; border-radius:0.5rem; padding:0.75rem; font-size:0.875rem;">
+                  <i data-lucide="check-circle-2" style="width:16px;height:16px;color:var(--forest); flex-shrink:0; margin-top:2px;"></i>
+                  <span style="color:var(--ink);">Exactly. A short pause is usually all it takes to write something you won't want to take back later.</span>
+                </div>
+                <div class="scenario-feedback" data-index="2" style="display:none; margin-top:0.75rem; gap:0.5rem; border-radius:0.5rem; padding:0.75rem; font-size:0.875rem;">
+                  <i data-lucide="alert-triangle" style="width:16px;height:16px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                  <span style="color:var(--ink);">Deleting it doesn't resolve anything, and it can read as avoiding the conversation entirely.</span>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="ftrail-display text-xl font-semibold mt-10 mb-3" style="color:var(--forest-dark);">The screenshot test</h3>
+            <p class="leading-relaxed mb-5" style="color:var(--ink);">Before sending anything that feels even slightly charged, ask: <strong>would I be okay with this being screenshotted and shown to someone else?</strong> If the honest answer is no, that's worth paying attention to. It doesn't mean you're doing something wrong — it might just mean the message needs a calmer draft, or a different format altogether (some things really are better said in person).</p>
+
+            <div class="rounded-xl p-5 my-6 scenario-check" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+              <div class="flex items-start gap-2 mb-4">
+                <i data-lucide="help-circle" style="width:20px;height:20px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                <p class="font-medium leading-relaxed" style="color:var(--forest-dark);">You're frustrated with a group member and about to send a sharp message in the project chat. What's the better call?</p>
+              </div>
+              <div class="space-y-2 scenario-options">
+                <button class="scenario-option w-full text-left rounded-lg px-4 py-3 text-sm transition-colors" data-good="true" style="background:var(--paper); border:1px solid var(--line-subtle); color:var(--ink);">Run it through the screenshot test before sending</button>
+                <button class="scenario-option w-full text-left rounded-lg px-4 py-3 text-sm transition-colors" data-good="false" style="background:var(--paper); border:1px solid var(--line-subtle); color:var(--ink);">Send it — they need to know how you feel right now</button>
+              </div>
+              <div class="scenario-feedback-container">
+                <div class="scenario-feedback" data-index="0" style="display:none; margin-top:0.75rem; gap:0.5rem; border-radius:0.5rem; padding:0.75rem; font-size:0.875rem;">
+                  <i data-lucide="check-circle-2" style="width:16px;height:16px;color:var(--forest); flex-shrink:0; margin-top:2px;"></i>
+                  <span style="color:var(--ink);">A quick pause to check your own message often changes how you end up phrasing it.</span>
+                </div>
+                <div class="scenario-feedback" data-index="1" style="display:none; margin-top:0.75rem; gap:0.5rem; border-radius:0.5rem; padding:0.75rem; font-size:0.875rem;">
+                  <i data-lucide="alert-triangle" style="width:16px;height:16px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                  <span style="color:var(--ink);">Frustration is valid, but a message sent in the heat of it is hard to walk back once it's out there.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============ FOOTPRINT ============ -->
+          <div class="section-page" data-id="footprint">
+            <div class="mb-10">
+              <p class="ftrail-mono text-xs uppercase tracking-widest mb-3" style="color:var(--rust);">Part One · Stop 2</p>
+              <h2 class="ftrail-display text-3xl md:text-4xl font-bold mb-4" style="color:var(--forest-dark);">Your Digital Footprint</h2>
+              <p class="text-lg leading-relaxed" style="color:var(--slate);">Everything you do online leaves a trace. Some of it you choose to leave. Some of it you don't.</p>
+            </div>
+
+            <p class="leading-relaxed mb-5" style="color:var(--ink);">Your <strong>active footprint</strong> is what you post on purpose — comments, photos, profiles, messages you send. Your <strong>passive footprint</strong> is what gets collected without you actively choosing it — sites tracking what you click, apps logging your location, search engines remembering what you searched. Both add up to the same thing: a version of you that exists online, built out of pieces you may not always remember leaving behind.</p>
+
+            <h3 class="ftrail-display text-xl font-semibold mt-10 mb-3" style="color:var(--forest-dark);">Where your footprint actually shows up</h3>
+            <p class="leading-relaxed mb-5" style="color:var(--ink);">Tap each one to see what it means in practice.</p>
+
+            <div class="grid sm:grid-cols-2 gap-3 my-6">
+              <button class="reveal-item text-left rounded-lg p-4 transition-colors" data-open="false" style="background:var(--paper); border:1px solid var(--line-subtle);">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="message-circle" style="width:16px;height:16px;color:var(--rust); flex-shrink:0;"></i>
+                  <span class="font-medium text-sm" style="color:var(--forest-dark);">Comments &amp; posts</span>
+                  <i data-lucide="chevron-down" class="reveal-chevron" style="margin-left:auto; width:14px; height:14px; color:var(--slate); flex-shrink:0; transition:transform .2s;"></i>
+                </div>
+                <p class="reveal-detail text-sm mt-3 leading-relaxed" style="display:none; color:var(--ink);">Public by default on most platforms, searchable, and screenshottable. A comment from two years ago can resurface with zero context attached.</p>
+              </button>
+              <button class="reveal-item text-left rounded-lg p-4 transition-colors" data-open="false" style="background:var(--paper); border:1px solid var(--line-subtle);">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="image" style="width:16px;height:16px;color:var(--rust); flex-shrink:0;"></i>
+                  <span class="font-medium text-sm" style="color:var(--forest-dark);">Photos &amp; tags</span>
+                  <i data-lucide="chevron-down" class="reveal-chevron" style="margin-left:auto; width:14px; height:14px; color:var(--slate); flex-shrink:0; transition:transform .2s;"></i>
+                </div>
+                <p class="reveal-detail text-sm mt-3 leading-relaxed" style="display:none; color:var(--ink);">Once someone else has a copy, you've lost control of where it ends up — even if you delete your own.</p>
+              </button>
+              <button class="reveal-item text-left rounded-lg p-4 transition-colors" data-open="false" style="background:var(--paper); border:1px solid var(--line-subtle);">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="search" style="width:16px;height:16px;color:var(--rust); flex-shrink:0;"></i>
+                  <span class="font-medium text-sm" style="color:var(--forest-dark);">Search history</span>
+                  <i data-lucide="chevron-down" class="reveal-chevron" style="margin-left:auto; width:14px; height:14px; color:var(--slate); flex-shrink:0; transition:transform .2s;"></i>
+                </div>
+                <p class="reveal-detail text-sm mt-3 leading-relaxed" style="display:none; color:var(--ink);">Logged and often used to shape the ads and content you see next — your curiosity becomes data.</p>
+              </button>
+              <button class="reveal-item text-left rounded-lg p-4 transition-colors" data-open="false" style="background:var(--paper); border:1px solid var(--line-subtle);">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="mail" style="width:16px;height:16px;color:var(--rust); flex-shrink:0;"></i>
+                  <span class="font-medium text-sm" style="color:var(--forest-dark);">School accounts</span>
+                  <i data-lucide="chevron-down" class="reveal-chevron" style="margin-left:auto; width:14px; height:14px; color:var(--slate); flex-shrink:0; transition:transform .2s;"></i>
+                </div>
+                <p class="reveal-detail text-sm mt-3 leading-relaxed" style="display:none; color:var(--ink);">Emails and documents tied to your real name, often visible to teachers, classmates, and administrators long after the assignment ends.</p>
+              </button>
+              <button class="reveal-item text-left rounded-lg p-4 transition-colors" data-open="false" style="background:var(--paper); border:1px solid var(--line-subtle);">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="users" style="width:16px;height:16px;color:var(--rust); flex-shrink:0;"></i>
+                  <span class="font-medium text-sm" style="color:var(--forest-dark);">Group chats</span>
+                  <i data-lucide="chevron-down" class="reveal-chevron" style="margin-left:auto; width:14px; height:14px; color:var(--slate); flex-shrink:0; transition:transform .2s;"></i>
+                </div>
+                <p class="reveal-detail text-sm mt-3 leading-relaxed" style="display:none; color:var(--ink);">Anything sent to a group can be screenshotted and forwarded by anyone in it, instantly, without your knowledge.</p>
+              </button>
+              <button class="reveal-item text-left rounded-lg p-4 transition-colors" data-open="false" style="background:var(--paper); border:1px solid var(--line-subtle);">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="star" style="width:16px;height:16px;color:var(--rust); flex-shrink:0;"></i>
+                  <span class="font-medium text-sm" style="color:var(--forest-dark);">Game &amp; app profiles</span>
+                  <i data-lucide="chevron-down" class="reveal-chevron" style="margin-left:auto; width:14px; height:14px; color:var(--slate); flex-shrink:0; transition:transform .2s;"></i>
+                </div>
+                <p class="reveal-detail text-sm mt-3 leading-relaxed" style="display:none; color:var(--ink);">Usernames, bios, and activity that can sometimes be traced back to other accounts you use, including school ones.</p>
+              </button>
+            </div>
+
+            <h3 class="ftrail-display text-xl font-semibold mt-10 mb-3" style="color:var(--forest-dark);">A quick gut check</h3>
+            <p class="leading-relaxed mb-5" style="color:var(--ink);">Run anything through this before you post it: <strong>who else can see this, and would I say it this way to their face?</strong> A teacher, a future you, a college admissions reader, a parent — picture them seeing it. If that thought makes you want to edit it first, that instinct is worth listening to.</p>
+
+            <div class="rounded-xl p-5 my-6 checklist-box" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+              <ul class="space-y-1">
+                <li><button class="checklist-item flex w-full items-start gap-3 text-left rounded-lg px-3 py-2 transition-colors" data-checked="false" style="background:transparent;"><span class="checklist-box-fill mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded" style="border:1.5px solid var(--slate); background:transparent;"><i data-lucide="check" class="checklist-check-icon" style="width:14px;height:14px;color:var(--paper); display:none;"></i></span><span class="checklist-text text-sm leading-relaxed" style="color:var(--ink);">I'd be okay with a teacher or parent seeing this</span></button></li>
+                <li><button class="checklist-item flex w-full items-start gap-3 text-left rounded-lg px-3 py-2 transition-colors" data-checked="false" style="background:transparent;"><span class="checklist-box-fill mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded" style="border:1.5px solid var(--slate); background:transparent;"><i data-lucide="check" class="checklist-check-icon" style="width:14px;height:14px;color:var(--paper); display:none;"></i></span><span class="checklist-text text-sm leading-relaxed" style="color:var(--ink);">It doesn't reveal anyone's private information without their okay</span></button></li>
+                <li><button class="checklist-item flex w-full items-start gap-3 text-left rounded-lg px-3 py-2 transition-colors" data-checked="false" style="background:transparent;"><span class="checklist-box-fill mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded" style="border:1.5px solid var(--slate); background:transparent;"><i data-lucide="check" class="checklist-check-icon" style="width:14px;height:14px;color:var(--paper); display:none;"></i></span><span class="checklist-text text-sm leading-relaxed" style="color:var(--ink);">I wouldn't be embarrassed if it resurfaced in five years</span></button></li>
+                <li><button class="checklist-item flex w-full items-start gap-3 text-left rounded-lg px-3 py-2 transition-colors" data-checked="false" style="background:transparent;"><span class="checklist-box-fill mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded" style="border:1.5px solid var(--slate); background:transparent;"><i data-lucide="check" class="checklist-check-icon" style="width:14px;height:14px;color:var(--paper); display:none;"></i></span><span class="checklist-text text-sm leading-relaxed" style="color:var(--ink);">It's not written in anger or sent in the heat of the moment</span></button></li>
+                <li><button class="checklist-item flex w-full items-start gap-3 text-left rounded-lg px-3 py-2 transition-colors" data-checked="false" style="background:transparent;"><span class="checklist-box-fill mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded" style="border:1.5px solid var(--slate); background:transparent;"><i data-lucide="check" class="checklist-check-icon" style="width:14px;height:14px;color:var(--paper); display:none;"></i></span><span class="checklist-text text-sm leading-relaxed" style="color:var(--ink);">I'm posting it because I want to, not because of pressure from someone else</span></button></li>
+              </ul>
+              <p class="ftrail-mono mt-3 text-xs checklist-counter" style="color:var(--slate);"><span class="checklist-done-count">0</span> / 5 checked</p>
+            </div>
+
+            <div class="mt-3 flex gap-2 rounded-lg p-3 text-sm" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+              <i data-lucide="lightbulb" style="width:16px;height:16px;color:var(--brass); flex-shrink:0; margin-top:2px;"></i>
+              <span style="color:var(--ink);">Deleted doesn't mean gone. Screenshots, cached pages, and other people's copies can outlast the delete button — which is exactly why it's worth pausing before you post, not just after.</span>
+            </div>
+          </div>
+
+          <!-- ============ RESEARCH ============ -->
+          <div class="section-page" data-id="research">
+            <div class="mb-10">
+              <p class="ftrail-mono text-xs uppercase tracking-widest mb-3" style="color:var(--rust);">Part One · Stop 3</p>
+              <h2 class="ftrail-display text-3xl md:text-4xl font-bold mb-4" style="color:var(--forest-dark);">Safe &amp; Smart Research</h2>
+              <p class="text-lg leading-relaxed" style="color:var(--slate);">Not everything that loads in a browser deserves to end up in your essay.</p>
+            </div>
+
+            <p class="leading-relaxed mb-5" style="color:var(--ink);">Good research isn't just about finding information — it's about finding information you can actually trust, and knowing how to tell the difference. That skill matters more now than it used to, with AI-generated pages and convincing-looking fakes mixed into the same search results as the real thing.</p>
+
+            <h3 class="ftrail-display text-xl font-semibold mt-10 mb-3" style="color:var(--forest-dark);">Four questions for any source</h3>
+
+            <div class="grid sm:grid-cols-2 gap-3 my-6">
+              <div class="rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">Who</span>
+                <div class="text-sm leading-relaxed" style="color:var(--ink);">
+                  <p class="font-semibold mb-1" style="color:var(--forest-dark);">Who wrote or published this?</p>
+                  <p>Real expertise has a name attached to it — a journalist, a researcher, an organization with a reputation to protect.</p>
+                </div>
+              </div>
+              <div class="rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">When</span>
+                <div class="text-sm leading-relaxed" style="color:var(--ink);">
+                  <p class="font-semibold mb-1" style="color:var(--forest-dark);">When was this published?</p>
+                  <p>A great article from ten years ago can still be outdated — check the date, especially for anything fast-moving.</p>
+                </div>
+              </div>
+              <div class="rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">Why</span>
+                <div class="text-sm leading-relaxed" style="color:var(--ink);">
+                  <p class="font-semibold mb-1" style="color:var(--forest-dark);">Why was this written?</p>
+                  <p>To inform, to sell, to persuade? A site trying to get you to buy something reads differently than one trying to explain something.</p>
+                </div>
+              </div>
+              <div class="rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">Proof</span>
+                <div class="text-sm leading-relaxed" style="color:var(--ink);">
+                  <p class="font-semibold mb-1" style="color:var(--forest-dark);">Can you find this somewhere else?</p>
+                  <p>If a claim is true, it's usually reported or confirmed in more than one place — not just the one page you landed on.</p>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="ftrail-display text-xl font-semibold mt-10 mb-3" style="color:var(--forest-dark);">What trustworthy actually looks like</h3>
+
+            <div class="grid sm:grid-cols-2 gap-3 my-6">
+              <div class="rounded-lg p-4" style="background:var(--good); border:1px solid var(--forest);">
+                <div class="flex items-center gap-2 mb-2">
+                  <i data-lucide="check-circle-2" style="width:16px;height:16px;color:var(--forest);"></i>
+                  <span class="ftrail-mono text-xs uppercase tracking-wide font-semibold" style="color:var(--forest-dark);">Trustworthy</span>
+                </div>
+                <p class="text-sm leading-relaxed" style="color:var(--ink);">Established news organizations, .edu and .gov sites, museums, encyclopedias with citations, and authors with visible credentials.</p>
+              </div>
+              <div class="rounded-lg p-4" style="background:var(--rust-soft); border:1px solid var(--rust);">
+                <div class="flex items-center gap-2 mb-2">
+                  <i data-lucide="alert-triangle" style="width:16px;height:16px;color:var(--rust);"></i>
+                  <span class="ftrail-mono text-xs uppercase tracking-wide font-semibold" style="color:var(--forest-dark);">Risky</span>
+                </div>
+                <p class="text-sm leading-relaxed" style="color:var(--ink);">Random blogs with no author listed, pages covered in pop-up ads, anything claiming a "secret" no one else reports, AI-generated content farms.</p>
+              </div>
+            </div>
+
+            <h3 class="ftrail-display text-xl font-semibold mt-10 mb-3" style="color:var(--forest-dark);">Staying safe while you search</h3>
+            <p class="leading-relaxed mb-5" style="color:var(--ink);">Research takes you to corners of the internet you don't normally visit, which means it's also where you're most likely to run into something sketchy. A little caution goes a long way.</p>
+
+            <div class="grid sm:grid-cols-2 gap-3 my-6">
+              <div class="rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">Watch for</span>
+                <div class="text-sm leading-relaxed" style="color:var(--ink);">A "Download" button that isn't where the actual file should be — that's almost always an ad, not your document.</div>
+              </div>
+              <div class="rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">Watch for</span>
+                <div class="text-sm leading-relaxed" style="color:var(--ink);">A pop-up claiming you've "won" something or need to "verify your account" right now. That's never real.</div>
+              </div>
+              <div class="rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">Watch for</span>
+                <div class="text-sm leading-relaxed" style="color:var(--ink);">Any site outside your actual school portal asking for your school email and password.</div>
+              </div>
+              <div class="rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">Watch for</span>
+                <div class="text-sm leading-relaxed" style="color:var(--ink);">A page that's oddly formatted, riddled with ads, or visibly broken — a sign to look elsewhere, not to push through.</div>
+              </div>
+            </div>
+
+            <div class="rounded-xl p-5 my-6 scenario-check" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+              <div class="flex items-start gap-2 mb-4">
+                <i data-lucide="help-circle" style="width:20px;height:20px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                <p class="font-medium leading-relaxed" style="color:var(--forest-dark);">You're researching for an essay and land on a site with a flashing "Your essay source is ready — Download Now" button. What's the smart move?</p>
+              </div>
+              <div class="space-y-2 scenario-options">
+                <button class="scenario-option w-full text-left rounded-lg px-4 py-3 text-sm transition-colors" data-good="false" style="background:var(--paper); border:1px solid var(--line-subtle); color:var(--ink);">Click it — it looks official enough</button>
+                <button class="scenario-option w-full text-left rounded-lg px-4 py-3 text-sm transition-colors" data-good="true" style="background:var(--paper); border:1px solid var(--line-subtle); color:var(--ink);">Close the tab and look for the source on a site you trust</button>
+                <button class="scenario-option w-full text-left rounded-lg px-4 py-3 text-sm transition-colors" data-good="false" style="background:var(--paper); border:1px solid var(--line-subtle); color:var(--ink);">Click it, but only skim what downloads</button>
+              </div>
+              <div class="scenario-feedback-container">
+                <div class="scenario-feedback" data-index="0" style="display:none; margin-top:0.75rem; gap:0.5rem; border-radius:0.5rem; padding:0.75rem; font-size:0.875rem;">
+                  <i data-lucide="alert-triangle" style="width:16px;height:16px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                  <span style="color:var(--ink);">Flashing "Download Now" buttons are a classic ad pattern, not a real source — clicking can lead to malware or junk content.</span>
+                </div>
+                <div class="scenario-feedback" data-index="1" style="display:none; margin-top:0.75rem; gap:0.5rem; border-radius:0.5rem; padding:0.75rem; font-size:0.875rem;">
+                  <i data-lucide="check-circle-2" style="width:16px;height:16px;color:var(--forest); flex-shrink:0; margin-top:2px;"></i>
+                  <span style="color:var(--ink);">Exactly right. If a source is real, you'll be able to find it again through a search or a trustworthy site.</span>
+                </div>
+                <div class="scenario-feedback" data-index="2" style="display:none; margin-top:0.75rem; gap:0.5rem; border-radius:0.5rem; padding:0.75rem; font-size:0.875rem;">
+                  <i data-lucide="alert-triangle" style="width:16px;height:16px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                  <span style="color:var(--ink);">Even a quick click can trigger a download you didn't want — it's safer not to engage with it at all.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============ BASECAMP ============ -->
+          <div class="section-page" data-id="basecamp">
+            <div class="mb-10">
+              <p class="ftrail-mono text-xs uppercase tracking-widest mb-3" style="color:var(--rust);">Part Two · Stop 1</p>
+              <h2 class="ftrail-display text-3xl md:text-4xl font-bold mb-4" style="color:var(--forest-dark);">Basecamp: Your Account</h2>
+              <p class="text-lg leading-relaxed" style="color:var(--slate);">One login. Every tool you need for school lives behind it.</p>
+            </div>
+
+            <p class="leading-relaxed mb-5" style="color:var(--ink);">Your school Google account is the basecamp for everything in this guide — Gmail, Classroom, Docs, Slides, Gemini. Get comfortable here first, and the rest of the trail gets a lot easier to walk.</p>
+
+            <ol class="waypoint-list my-8">
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">1</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Go to your portal, or to google.com</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">Your school may give you a specific login portal address. If not, google.com works the same way.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">2</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Click Sign In and enter your school email</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">This is the address your school gave you, not a personal one — it usually ends in your school's domain.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">3</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Enter your password</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">If you've forgotten it, don't keep guessing — ask your teacher or IT department to reset it for you.</p>
+                  <div class="mt-3 flex gap-2 rounded-lg p-3 text-sm" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                    <i data-lucide="lightbulb" style="width:16px;height:16px;color:var(--brass); flex-shrink:0; margin-top:2px;"></i>
+                    <span style="color:var(--ink);">Write your login down somewhere private and offline the first week. It's the single most common reason students lose access to their own work.</span>
+                  </div>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">4</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Find the app grid</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">The nine-dot icon in the top right corner is your <strong>portal</strong> to everything — Gmail, Drive, Docs, Slides, Classroom, Gemini.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">5</span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Pin what you use most</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">Bookmark Classroom and Drive in your browser — you'll be opening them daily.</p>
+                  <div class="mt-3 flex gap-2 rounded-lg p-3 text-sm" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                    <i data-lucide="lightbulb" style="width:16px;height:16px;color:var(--brass); flex-shrink:0; margin-top:2px;"></i>
+                    <span style="color:var(--ink);">A bookmark you click is faster than a portal you have to log into separately — once you're signed into your <strong>school Google account</strong>, the apps stay connected.</span>
+                  </div>
+                </div>
+              </li>
+            </ol>
+
+            <div class="rounded-xl overflow-hidden my-6" style="border:1px solid var(--line-subtle);">
+              <div class="flex items-center gap-1.5 px-3 py-2" style="background:var(--forest-dark);">
+                <span class="h-2.5 w-2.5 rounded-full" style="background:#E8A37E;"></span>
+                <span class="h-2.5 w-2.5 rounded-full" style="background:#D9DCD0;"></span>
+                <span class="h-2.5 w-2.5 rounded-full" style="background:#7C9385;"></span>
+                <span class="ftrail-mono ml-2 text-xs" style="color:var(--paper); opacity:.85;">yourname@yourschool.edu</span>
+              </div>
+              <div class="p-4" style="background:var(--paper);">
+                <div class="flex items-center justify-end gap-3">
+                  <span class="text-xs ftrail-mono" style="color:var(--slate);">yourname@yourschool.edu</span>
+                  <span class="flex h-9 w-9 items-center justify-center rounded-full" style="background:var(--forest);">
+                    <i data-lucide="layout-grid" style="width:18px;height:18px;color:var(--paper);"></i>
+                  </span>
+                </div>
+                <p class="text-xs mt-3" style="color:var(--slate);">Click that grid icon → Gmail, Drive, Docs, Slides, Classroom, and Gemini all open from here.</p>
+              </div>
+            </div>
+
+            <h3 class="ftrail-display text-xl font-semibold mt-10 mb-3" style="color:var(--forest-dark);">Your toolkit at a glance</h3>
+
+            <div class="grid sm:grid-cols-2 gap-3 my-6">
+              <div class="rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">Gmail</span>
+                <div class="text-sm leading-relaxed" style="color:var(--ink);">Email — for messaging teachers and classmates.</div>
+              </div>
+              <div class="rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">Classroom</span>
+                <div class="text-sm leading-relaxed" style="color:var(--ink);">Where assignments, due dates, and grades live.</div>
+              </div>
+              <div class="rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">Docs</span>
+                <div class="text-sm leading-relaxed" style="color:var(--ink);">Writing — essays, notes, anything text-based.</div>
+              </div>
+              <div class="rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">Slides</span>
+                <div class="text-sm leading-relaxed" style="color:var(--ink);">Presentations — for class projects and talks.</div>
+              </div>
+              <div class="rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">Drive</span>
+                <div class="text-sm leading-relaxed" style="color:var(--ink);">Storage — every file you make, saved automatically.</div>
+              </div>
+              <div class="rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">Gemini</span>
+                <div class="text-sm leading-relaxed" style="color:var(--ink);">AI assistant — useful for brainstorming and explaining, within your teacher's rules.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============ GMAIL ============ -->
+          <div class="section-page" data-id="gmail">
+            <div class="mb-10">
+              <p class="ftrail-mono text-xs uppercase tracking-widest mb-3" style="color:var(--rust);">Part Two · Stop 2</p>
+              <h2 class="ftrail-display text-3xl md:text-4xl font-bold mb-4" style="color:var(--forest-dark);">Gmail</h2>
+              <p class="text-lg leading-relaxed" style="color:var(--slate);">Emailing a teacher is a different skill than texting a friend — and it's worth getting right.</p>
+            </div>
+
+            <ol class="waypoint-list my-8">
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">1</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Open Gmail from the app grid</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">Your inbox is where teachers will reach you, so check it regularly — not just when you're expecting something.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">2</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Click Compose</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">The button in the top left opens a new message window.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">3</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Fill in To, then Subject</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">A clear subject line tells the reader what they're opening before they even read the message.</p>
+                  <div class="mt-3 flex gap-2 rounded-lg p-3 text-sm" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                    <i data-lucide="lightbulb" style="width:16px;height:16px;color:var(--brass); flex-shrink:0; margin-top:2px;"></i>
+                    <span style="color:var(--ink);">A specific subject line ("Question about Friday's essay deadline") gets opened before a vague one ("question").</span>
+                  </div>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">4</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Write a greeting, your message, and a sign-off</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">Keep it short and direct — say what you need within the first sentence or two.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">5</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Attach a file if needed</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">The paperclip icon at the bottom of the compose window lets you attach documents.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">6</span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Reread it once, then send</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">A ten-second reread catches typos and tone problems before they land in someone else's inbox.</p>
+                </div>
+              </li>
+            </ol>
+
+            <div class="rounded-xl overflow-hidden my-6" style="border:1px solid var(--line-subtle);">
+              <div class="flex items-center gap-1.5 px-3 py-2" style="background:var(--forest-dark);">
+                <span class="h-2.5 w-2.5 rounded-full" style="background:#E8A37E;"></span>
+                <span class="h-2.5 w-2.5 rounded-full" style="background:#D9DCD0;"></span>
+                <span class="h-2.5 w-2.5 rounded-full" style="background:#7C9385;"></span>
+                <span class="ftrail-mono ml-2 text-xs" style="color:var(--paper); opacity:.85;">New Message</span>
+              </div>
+              <div class="p-4" style="background:var(--paper);">
+                <div class="space-y-2 text-sm">
+                  <div class="flex gap-2" style="border-bottom:1px solid var(--line-subtle); padding-bottom:6px;">
+                    <span class="ftrail-mono w-16" style="color:var(--slate);">To</span>
+                    <span class="flex-1" style="color:var(--ink);">ms.carter@yourschool.edu</span>
+                  </div>
+                  <div class="flex gap-2" style="border-bottom:1px solid var(--line-subtle); padding-bottom:6px;">
+                    <span class="ftrail-mono w-16" style="color:var(--slate);">Subject</span>
+                    <span class="flex-1" style="color:var(--ink);">Question about Friday's essay deadline</span>
+                  </div>
+                  <div class="mt-3 leading-relaxed" style="color:var(--ink);">Hi Ms. Carter, I had a quick question about...</div>
+                  <div class="flex items-center justify-between mt-4">
+                    <i data-lucide="paperclip" style="width:16px;height:16px;color:var(--slate);"></i>
+                    <span class="px-4 py-1.5 rounded text-xs font-medium" style="background:var(--forest); color:var(--paper);">Send</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="ftrail-display text-xl font-semibold mt-10 mb-3" style="color:var(--forest-dark);">Reply, Reply All, or Forward — knowing the difference</h3>
+            <p class="leading-relaxed mb-5" style="color:var(--ink);"><strong>Reply</strong> goes only to the sender. <strong>Reply All</strong> goes to everyone on the original email — useful for group projects, risky for anything personal. <strong>Forward</strong> sends the email to someone new who wasn't part of the original thread. Pause before hitting Reply All on anything: the whole class doesn't need to see your individual question about an extension.</p>
+          </div>
+
+          <!-- ============ CLASSROOM ============ -->
+          <div class="section-page" data-id="classroom">
+            <div class="mb-10">
+              <p class="ftrail-mono text-xs uppercase tracking-widest mb-3" style="color:var(--rust);">Part Two · Stop 3</p>
+              <h2 class="ftrail-display text-3xl md:text-4xl font-bold mb-4" style="color:var(--forest-dark);">Google Classroom</h2>
+              <p class="text-lg leading-relaxed" style="color:var(--slate);">Mission control for everything your teacher assigns.</p>
+            </div>
+
+            <ol class="waypoint-list my-8">
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">1</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Join a class with a class code</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">Your teacher will give you a short code — click the + icon and enter it to join.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">2</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Know your three main tabs</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);"><strong>Stream</strong> for announcements, <strong>Classwork</strong> for assignments, <strong>People</strong> to see classmates and your teacher.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">3</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Open an assignment from Classwork</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">Click any assignment to see instructions, attached files, and the due date.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">4</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Check the due date</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">It's listed right under the assignment title — note whether it's a date, or a specific date and time.</p>
+                  <div class="mt-3 flex gap-2 rounded-lg p-3 text-sm" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                    <i data-lucide="lightbulb" style="width:16px;height:16px;color:var(--brass); flex-shrink:0; margin-top:2px;"></i>
+                    <span style="color:var(--ink);">Click "View your work" or the To-do list to see everything due across all your classes in one place, instead of checking each class separately.</span>
+                  </div>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">5</span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Check Grades once work is returned</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">Teacher feedback and scores appear in the Grades tab — and often as comments directly on your work.</p>
+                </div>
+              </li>
+            </ol>
+
+            <div class="rounded-xl overflow-hidden my-6" style="border:1px solid var(--line-subtle);">
+              <div class="flex items-center gap-1.5 px-3 py-2" style="background:var(--forest-dark);">
+                <span class="h-2.5 w-2.5 rounded-full" style="background:#E8A37E;"></span>
+                <span class="h-2.5 w-2.5 rounded-full" style="background:#D9DCD0;"></span>
+                <span class="h-2.5 w-2.5 rounded-full" style="background:#7C9385;"></span>
+                <span class="ftrail-mono ml-2 text-xs" style="color:var(--paper); opacity:.85;">English 9 — Classroom</span>
+              </div>
+              <div class="p-4" style="background:var(--paper);">
+                <div class="flex gap-4 text-xs ftrail-mono mb-3" style="color:var(--slate);">
+                  <span style="color:var(--forest-dark); font-weight:600; border-bottom:2px solid var(--rust); padding-bottom:4px;">Classwork</span>
+                  <span>Stream</span>
+                  <span>People</span>
+                  <span>Grades</span>
+                </div>
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between rounded-lg p-3" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                    <span class="text-sm" style="color:var(--ink);">Unit 3 · Reading Response</span>
+                    <span class="ftrail-mono text-xs px-2 py-0.5 rounded" style="background:var(--rust-soft); color:var(--rust);">Due Fri</span>
+                  </div>
+                  <div class="flex items-center justify-between rounded-lg p-3" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                    <span class="text-sm" style="color:var(--ink);">Unit 3 · Vocabulary Quiz</span>
+                    <span class="ftrail-mono text-xs px-2 py-0.5 rounded" style="background:var(--rust-soft); color:var(--rust);">Due Fri</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============ DOCS ============ -->
+          <div class="section-page" data-id="docs">
+            <div class="mb-10">
+              <p class="ftrail-mono text-xs uppercase tracking-widest mb-3" style="color:var(--rust);">Part Two · Stop 4</p>
+              <h2 class="ftrail-display text-3xl md:text-4xl font-bold mb-4" style="color:var(--forest-dark);">Google Docs</h2>
+              <p class="text-lg leading-relaxed" style="color:var(--slate);">Where your writing actually happens — and where it's saved without you having to think about it.</p>
+            </div>
+
+            <ol class="waypoint-list my-8">
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">1</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Create a new doc</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">From Drive, click New → Google Docs, or open one directly from a Classroom assignment.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">2</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Name it properly</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">Click "Untitled document" at the top left and give it a real name right away.</p>
+                  <div class="mt-3 flex gap-2 rounded-lg p-3 text-sm" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                    <i data-lucide="lightbulb" style="width:16px;height:16px;color:var(--brass); flex-shrink:0; margin-top:2px;"></i>
+                    <span style="color:var(--ink);">"Lastname_EssayTitle" beats "Untitled document" — your teacher should be able to find your file without opening it first.</span>
+                  </div>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">3</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Use real formatting</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">Headings, bullet points, and bold text from the toolbar — not all-caps or extra spacing — make your work easy to read.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">4</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Leave or respond to comments</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">Highlight text and click the comment icon — this is how teacher feedback usually arrives.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">5</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Use Suggesting mode for group work</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">It tracks your edits instead of overwriting someone else's words — switch it on from the pencil icon, top right.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">6</span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Check version history if something looks wrong</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">File → Version history lets you see and restore earlier drafts — nothing is ever truly lost.</p>
+                </div>
+              </li>
+            </ol>
+
+            <div class="mt-3 flex gap-2 rounded-lg p-3 text-sm" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+              <i data-lucide="lightbulb" style="width:16px;height:16px;color:var(--brass); flex-shrink:0; margin-top:2px;"></i>
+              <span style="color:var(--ink);">There's no Save button because you don't need one — Docs saves every change automatically, the moment you make it.</span>
+            </div>
+          </div>
+
+          <!-- ============ SLIDES ============ -->
+          <div class="section-page" data-id="slides">
+            <div class="mb-10">
+              <p class="ftrail-mono text-xs uppercase tracking-widest mb-3" style="color:var(--rust);">Part Two · Stop 5</p>
+              <h2 class="ftrail-display text-3xl md:text-4xl font-bold mb-4" style="color:var(--forest-dark);">Google Slides</h2>
+              <p class="text-lg leading-relaxed" style="color:var(--slate);">A presentation that's easy to follow beats one that's crammed with everything you know.</p>
+            </div>
+
+            <ol class="waypoint-list my-8">
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">1</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Create a new presentation</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">From Drive, click New → Google Slides, and name it right away.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">2</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Pick a layout per slide</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">Layout in the toolbar gives you pre-built structures — title slides, two columns, image-and-text.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">3</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Add your content</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">Keep text short — slides support what you say, they shouldn't replace it.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">4</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Use Speaker Notes</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">The space below each slide is for your talking points — things you'll say but don't need on screen.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">5</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Share it with your group</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">Click Share and add your teammates' school emails so everyone can edit together.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">6</span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Present</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">Click Present, top right, to go full screen for your class.</p>
+                  <div class="mt-3 flex gap-2 rounded-lg p-3 text-sm" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                    <i data-lucide="lightbulb" style="width:16px;height:16px;color:var(--brass); flex-shrink:0; margin-top:2px;"></i>
+                    <span style="color:var(--ink);">Use Presenter view to see your notes on your own screen while the class only sees the slide.</span>
+                  </div>
+                </div>
+              </li>
+            </ol>
+
+            <div class="rounded-lg p-4 my-6" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+              <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">Design tip</span>
+              <div class="text-sm leading-relaxed" style="color:var(--ink);">One idea per slide, a readable font size, and plenty of empty space. A slide your classmates can read from the back of the room is doing its job.</div>
+            </div>
+          </div>
+
+          <!-- ============ GEMINI ============ -->
+          <div class="section-page" data-id="gemini">
+            <div class="mb-10">
+              <p class="ftrail-mono text-xs uppercase tracking-widest mb-3" style="color:var(--rust);">Part Two · Stop 6</p>
+              <h2 class="ftrail-display text-3xl md:text-4xl font-bold mb-4" style="color:var(--forest-dark);">Gemini (AI)</h2>
+              <p class="text-lg leading-relaxed" style="color:var(--slate);">A useful tool for thinking through your work — not a shortcut around doing it.</p>
+            </div>
+
+            <p class="leading-relaxed mb-5" style="color:var(--ink);">Gemini is Google's AI assistant, available right from your app grid. Used well, it's genuinely helpful — for brainstorming, untangling a confusing concept, or getting unstuck on a first sentence. Used the wrong way, it can quietly replace the actual learning an assignment is meant to give you. The line between those two depends entirely on what your teacher allows and what you do with what it gives you.</p>
+
+            <h3 class="ftrail-display text-xl font-semibold mt-10 mb-3" style="color:var(--forest-dark);">What's generally fine vs. what isn't</h3>
+
+            <div class="grid sm:grid-cols-2 gap-3 my-6">
+              <div class="rounded-lg p-4" style="background:var(--good); border:1px solid var(--forest);">
+                <div class="flex items-center gap-2 mb-2">
+                  <i data-lucide="check-circle-2" style="width:16px;height:16px;color:var(--forest);"></i>
+                  <span class="ftrail-mono text-xs uppercase tracking-wide font-semibold" style="color:var(--forest-dark);">Generally fine</span>
+                </div>
+                <p class="text-sm leading-relaxed" style="color:var(--ink);">Asking it to explain a concept differently, brainstorm essay angles, check your grammar, or quiz you on material you've already studied.</p>
+              </div>
+              <div class="rounded-lg p-4" style="background:var(--rust-soft); border:1px solid var(--rust);">
+                <div class="flex items-center gap-2 mb-2">
+                  <i data-lucide="alert-triangle" style="width:16px;height:16px;color:var(--rust);"></i>
+                  <span class="ftrail-mono text-xs uppercase tracking-wide font-semibold" style="color:var(--forest-dark);">Not okay</span>
+                </div>
+                <p class="text-sm leading-relaxed" style="color:var(--ink);">Asking it to write your essay, solve your homework problems outright, or submit its answers as your own without saying so.</p>
+              </div>
+            </div>
+
+            <div class="rounded-lg p-4 my-6" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+              <span class="ftrail-mono inline-block text-xs uppercase tracking-wide mb-2 px-2 py-0.5 rounded" style="background:var(--brass); color:var(--paper);">The real rule</span>
+              <div class="text-sm leading-relaxed" style="color:var(--ink);">When in doubt, ask your teacher directly what's allowed for a specific assignment. Rules vary by class and by task, and "I assumed it was fine" doesn't hold up nearly as well as "I checked first."</div>
+            </div>
+
+            <h3 class="ftrail-display text-xl font-semibold mt-10 mb-3" style="color:var(--forest-dark);">Quick checks</h3>
+
+            <div class="rounded-xl p-5 my-6 scenario-check" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+              <div class="flex items-start gap-2 mb-4">
+                <i data-lucide="help-circle" style="width:20px;height:20px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                <p class="font-medium leading-relaxed" style="color:var(--forest-dark);">You're stuck on the first line of an essay. What's the smarter use of Gemini?</p>
+              </div>
+              <div class="space-y-2 scenario-options">
+                <button class="scenario-option w-full text-left rounded-lg px-4 py-3 text-sm transition-colors" data-good="true" style="background:var(--paper); border:1px solid var(--line-subtle); color:var(--ink);">Ask it for a few different ways to open an essay on your topic, then write your own</button>
+                <button class="scenario-option w-full text-left rounded-lg px-4 py-3 text-sm transition-colors" data-good="false" style="background:var(--paper); border:1px solid var(--line-subtle); color:var(--ink);">Ask it to write the whole essay and tweak a few words</button>
+              </div>
+              <div class="scenario-feedback-container">
+                <div class="scenario-feedback" data-index="0" style="display:none; margin-top:0.75rem; gap:0.5rem; border-radius:0.5rem; padding:0.75rem; font-size:0.875rem;">
+                  <i data-lucide="check-circle-2" style="width:16px;height:16px;color:var(--forest); flex-shrink:0; margin-top:2px;"></i>
+                  <span style="color:var(--ink);">That's using it as a brainstorming partner — the thinking and the final words are still yours.</span>
+                </div>
+                <div class="scenario-feedback" data-index="1" style="display:none; margin-top:0.75rem; gap:0.5rem; border-radius:0.5rem; padding:0.75rem; font-size:0.875rem;">
+                  <i data-lucide="alert-triangle" style="width:16px;height:16px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                  <span style="color:var(--ink);">A light edit on AI-written work is still submitting AI-written work — most teachers count this as academic dishonesty.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-xl p-5 my-6 scenario-check" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+              <div class="flex items-start gap-2 mb-4">
+                <i data-lucide="help-circle" style="width:20px;height:20px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                <p class="font-medium leading-relaxed" style="color:var(--forest-dark);">A math worksheet has you stuck on one problem. What's the better move?</p>
+              </div>
+              <div class="space-y-2 scenario-options">
+                <button class="scenario-option w-full text-left rounded-lg px-4 py-3 text-sm transition-colors" data-good="true" style="background:var(--paper); border:1px solid var(--line-subtle); color:var(--ink);">Ask Gemini to explain the method, then solve it yourself</button>
+                <button class="scenario-option w-full text-left rounded-lg px-4 py-3 text-sm transition-colors" data-good="false" style="background:var(--paper); border:1px solid var(--line-subtle); color:var(--ink);">Ask Gemini for the final answer and copy it down</button>
+              </div>
+              <div class="scenario-feedback-container">
+                <div class="scenario-feedback" data-index="0" style="display:none; margin-top:0.75rem; gap:0.5rem; border-radius:0.5rem; padding:0.75rem; font-size:0.875rem;">
+                  <i data-lucide="check-circle-2" style="width:16px;height:16px;color:var(--forest); flex-shrink:0; margin-top:2px;"></i>
+                  <span style="color:var(--ink);">This builds the actual skill — which is what the worksheet is checking for in the first place.</span>
+                </div>
+                <div class="scenario-feedback" data-index="1" style="display:none; margin-top:0.75rem; gap:0.5rem; border-radius:0.5rem; padding:0.75rem; font-size:0.875rem;">
+                  <i data-lucide="alert-triangle" style="width:16px;height:16px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                  <span style="color:var(--ink);">The answer without the method doesn't help on the next problem, or on the test.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-xl p-5 my-6 scenario-check" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+              <div class="flex items-start gap-2 mb-4">
+                <i data-lucide="help-circle" style="width:20px;height:20px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                <p class="font-medium leading-relaxed" style="color:var(--forest-dark);">Your teacher hasn't said whether AI tools are allowed for an assignment. What's the smart move?</p>
+              </div>
+              <div class="space-y-2 scenario-options">
+                <button class="scenario-option w-full text-left rounded-lg px-4 py-3 text-sm transition-colors" data-good="false" style="background:var(--paper); border:1px solid var(--line-subtle); color:var(--ink);">Assume it's fine since they didn't say no</button>
+                <button class="scenario-option w-full text-left rounded-lg px-4 py-3 text-sm transition-colors" data-good="true" style="background:var(--paper); border:1px solid var(--line-subtle); color:var(--ink);">Ask them directly before using it</button>
+              </div>
+              <div class="scenario-feedback-container">
+                <div class="scenario-feedback" data-index="0" style="display:none; margin-top:0.75rem; gap:0.5rem; border-radius:0.5rem; padding:0.75rem; font-size:0.875rem;">
+                  <i data-lucide="alert-triangle" style="width:16px;height:16px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                  <span style="color:var(--ink);">Silence isn't permission, and assignment rules vary a lot from class to class.</span>
+                </div>
+                <div class="scenario-feedback" data-index="1" style="display:none; margin-top:0.75rem; gap:0.5rem; border-radius:0.5rem; padding:0.75rem; font-size:0.875rem;">
+                  <i data-lucide="check-circle-2" style="width:16px;height:16px;color:var(--forest); flex-shrink:0; margin-top:2px;"></i>
+                  <span style="color:var(--ink);">A thirty-second question avoids a much bigger conversation later.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============ SUBMITTING ============ -->
+          <div class="section-page" data-id="submitting">
+            <div class="mb-10">
+              <p class="ftrail-mono text-xs uppercase tracking-widest mb-3" style="color:var(--rust);">Part Two · Stop 7</p>
+              <h2 class="ftrail-display text-3xl md:text-4xl font-bold mb-4" style="color:var(--forest-dark);">Submitting Assignments</h2>
+              <p class="text-lg leading-relaxed" style="color:var(--slate);">Finishing the work and turning it in are two different steps. Both have to happen.</p>
+            </div>
+
+            <ol class="waypoint-list my-8">
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">1</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Open the assignment in Classroom</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">Go to Classwork and click on the specific assignment.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">2</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Attach your work</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">Use Add or Create under "Your work" to attach a file or link an existing Doc.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">3</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Double-check it's the right file</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">Click into it briefly to confirm it's the finished version, not an old draft.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">4</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Click Turn In</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">The button is in the top right of the assignment screen — this is the step people forget.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">5</span>
+                  <span style="width:2px; flex:1; min-height:2.25rem; background:var(--line-subtle); margin-top:4px; margin-bottom:4px;"></span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Confirm the status changed</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">It should now say "Turned in" instead of "Assigned" or "Missing."</p>
+                  <div class="mt-3 flex gap-2 rounded-lg p-3 text-sm" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                    <i data-lucide="lightbulb" style="width:16px;height:16px;color:var(--brass); flex-shrink:0; margin-top:2px;"></i>
+                    <span style="color:var(--ink);">This status is the only proof that counts — having finished the work isn't the same thing as having submitted it.</span>
+                  </div>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <span class="ftrail-mono flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold" style="background:var(--forest); color:var(--paper);">6</span>
+                </div>
+                <div class="pb-8 flex-1 min-w-0">
+                  <h4 class="ftrail-display font-semibold text-lg mb-1" style="color:var(--forest-dark);">Need to fix something after turning in?</h4>
+                  <p class="leading-relaxed text-sm md:text-base" style="color:var(--ink);">Click "Unsubmit" to make edits, then turn it in again — just be mindful of the due date.</p>
+                </div>
+              </li>
+            </ol>
+
+            <h3 class="ftrail-display text-xl font-semibold mt-10 mb-3" style="color:var(--forest-dark);">Common questions</h3>
+
+            <div class="space-y-2 my-6">
+              <div class="faq-item rounded-lg overflow-hidden" data-open="false" style="border:1px solid var(--line-subtle);">
+                <button class="faq-question w-full flex items-center justify-between gap-3 px-4 py-3 text-left" style="background:var(--paper-raised);">
+                  <span class="font-medium text-sm" style="color:var(--forest-dark);">What if I submit the wrong file?</span>
+                  <i data-lucide="chevron-down" class="faq-chevron" style="width:18px;height:18px;color:var(--slate); flex-shrink:0; transition:transform .2s;"></i>
+                </button>
+                <div class="faq-answer px-4 py-3 text-sm leading-relaxed" style="display:none; background:var(--paper); color:var(--ink);">Unsubmit, remove the wrong file, attach the right one, and turn it in again before the deadline if you can.</div>
+              </div>
+              <div class="faq-item rounded-lg overflow-hidden" data-open="false" style="border:1px solid var(--line-subtle);">
+                <button class="faq-question w-full flex items-center justify-between gap-3 px-4 py-3 text-left" style="background:var(--paper-raised);">
+                  <span class="font-medium text-sm" style="color:var(--forest-dark);">It still says "Assigned" — did it go through?</span>
+                  <i data-lucide="chevron-down" class="faq-chevron" style="width:18px;height:18px;color:var(--slate); flex-shrink:0; transition:transform .2s;"></i>
+                </button>
+                <div class="faq-answer px-4 py-3 text-sm leading-relaxed" style="display:none; background:var(--paper); color:var(--ink);">No — that status means it has not been turned in yet. Go back in and click Turn In.</div>
+              </div>
+              <div class="faq-item rounded-lg overflow-hidden" data-open="false" style="border:1px solid var(--line-subtle);">
+                <button class="faq-question w-full flex items-center justify-between gap-3 px-4 py-3 text-left" style="background:var(--paper-raised);">
+                  <span class="font-medium text-sm" style="color:var(--forest-dark);">Can I still edit a Doc after turning it in?</span>
+                  <i data-lucide="chevron-down" class="faq-chevron" style="width:18px;height:18px;color:var(--slate); flex-shrink:0; transition:transform .2s;"></i>
+                </button>
+                <div class="faq-answer px-4 py-3 text-sm leading-relaxed" style="display:none; background:var(--paper); color:var(--ink);">Once turned in, Classroom locks it from further editing — you'd need to unsubmit first to make changes.</div>
+              </div>
+              <div class="faq-item rounded-lg overflow-hidden" data-open="false" style="border:1px solid var(--line-subtle);">
+                <button class="faq-question w-full flex items-center justify-between gap-3 px-4 py-3 text-left" style="background:var(--paper-raised);">
+                  <span class="font-medium text-sm" style="color:var(--forest-dark);">My internet died right at the deadline. What now?</span>
+                  <i data-lucide="chevron-down" class="faq-chevron" style="width:18px;height:18px;color:var(--slate); flex-shrink:0; transition:transform .2s;"></i>
+                </button>
+                <div class="faq-answer px-4 py-3 text-sm leading-relaxed" style="display:none; background:var(--paper); color:var(--ink);">Email your teacher right away explaining what happened, then submit the moment you're back online — a quick heads-up matters more than people think.</div>
+              </div>
+              <div class="faq-item rounded-lg overflow-hidden" data-open="false" style="border:1px solid var(--line-subtle);">
+                <button class="faq-question w-full flex items-center justify-between gap-3 px-4 py-3 text-left" style="background:var(--paper-raised);">
+                  <span class="font-medium text-sm" style="color:var(--forest-dark);">Do I need to attach a file if I wrote it directly in a Doc Classroom created for me?</span>
+                  <i data-lucide="chevron-down" class="faq-chevron" style="width:18px;height:18px;color:var(--slate); flex-shrink:0; transition:transform .2s;"></i>
+                </button>
+                <div class="faq-answer px-4 py-3 text-sm leading-relaxed" style="display:none; background:var(--paper); color:var(--ink);">No — that Doc is already linked to the assignment. You still need to click Turn In, though.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============ RESOURCES ============ -->
+          <div class="section-page" data-id="resources">
+            <div class="mb-10">
+              <p class="ftrail-mono text-xs uppercase tracking-widest mb-3" style="color:var(--rust);">Part Two · Stop 8</p>
+              <h2 class="ftrail-display text-3xl md:text-4xl font-bold mb-4" style="color:var(--forest-dark);">Academic Resources</h2>
+              <p class="text-lg leading-relaxed" style="color:var(--slate);">A few last stops worth knowing about, beyond the core toolkit.</p>
+            </div>
+
+            <p class="leading-relaxed mb-5" style="color:var(--ink);">Your school Drive isn't just storage — used well, it's a research and study tool in its own right. Google Scholar (scholar.google.com) gives you access to academic papers and citations, useful once you're working on more serious research projects. And Google's own search filters — Tools → Time → past year — help you sort recent, relevant results from outdated ones when a topic moves fast.</p>
+
+            <div class="rounded-xl p-5 my-6 checklist-box" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+              <h4 class="ftrail-display font-semibold mb-3" style="color:var(--forest-dark);">Drive housekeeping</h4>
+              <ul class="space-y-1">
+                <li><button class="checklist-item flex w-full items-start gap-3 text-left rounded-lg px-3 py-2 transition-colors" data-checked="false" style="background:transparent;"><span class="checklist-box-fill mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded" style="border:1.5px solid var(--slate); background:transparent;"><i data-lucide="check" class="checklist-check-icon" style="width:14px;height:14px;color:var(--paper); display:none;"></i></span><span class="checklist-text text-sm leading-relaxed" style="color:var(--ink);">Create folders by subject, not one giant pile of files</span></button></li>
+                <li><button class="checklist-item flex w-full items-start gap-3 text-left rounded-lg px-3 py-2 transition-colors" data-checked="false" style="background:transparent;"><span class="checklist-box-fill mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded" style="border:1.5px solid var(--slate); background:transparent;"><i data-lucide="check" class="checklist-check-icon" style="width:14px;height:14px;color:var(--paper); display:none;"></i></span><span class="checklist-text text-sm leading-relaxed" style="color:var(--ink);">Name files clearly, including the date or unit for ongoing work</span></button></li>
+                <li><button class="checklist-item flex w-full items-start gap-3 text-left rounded-lg px-3 py-2 transition-colors" data-checked="false" style="background:transparent;"><span class="checklist-box-fill mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded" style="border:1.5px solid var(--slate); background:transparent;"><i data-lucide="check" class="checklist-check-icon" style="width:14px;height:14px;color:var(--paper); display:none;"></i></span><span class="checklist-text text-sm leading-relaxed" style="color:var(--ink);">Star or pin files you're actively working on</span></button></li>
+                <li><button class="checklist-item flex w-full items-start gap-3 text-left rounded-lg px-3 py-2 transition-colors" data-checked="false" style="background:transparent;"><span class="checklist-box-fill mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded" style="border:1.5px solid var(--slate); background:transparent;"><i data-lucide="check" class="checklist-check-icon" style="width:14px;height:14px;color:var(--paper); display:none;"></i></span><span class="checklist-text text-sm leading-relaxed" style="color:var(--ink);">Empty the trash occasionally — deleted files still take up storage until you do</span></button></li>
+              </ul>
+              <p class="ftrail-mono mt-3 text-xs checklist-counter" style="color:var(--slate);"><span class="checklist-done-count">0</span> / 4 checked</p>
+            </div>
+
+            <p class="leading-relaxed mb-5" style="color:var(--ink);">None of these tools replace good judgment — they just make it easier to apply. The habits from Part One still matter just as much here: check your sources, mind your tone, and keep thinking about who might see what you create.</p>
+
+            <div class="mt-3 flex gap-2 rounded-lg p-3 text-sm" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+              <i data-lucide="lightbulb" style="width:16px;height:16px;color:var(--brass); flex-shrink:0; margin-top:2px;"></i>
+              <span style="color:var(--ink);">Whatever you find this way, run it through the same four questions from the research section: who, when, why, and can you find it somewhere else.</span>
+            </div>
+          </div>
+
+          <!-- ============ CHEATSHEET ============ -->
+          <div class="section-page" data-id="cheatsheet">
+            <div class="mb-10">
+              <p class="ftrail-mono text-xs uppercase tracking-widest mb-3" style="color:var(--rust);">Reference</p>
+              <h2 class="ftrail-display text-3xl md:text-4xl font-bold mb-4" style="color:var(--forest-dark);">Quick Reference</h2>
+              <p class="text-lg leading-relaxed" style="color:var(--slate);">Everything in this guide, condensed to one page.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-3 mb-12">
+              <div class="flex items-start gap-3 rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <i data-lucide="message-circle" style="width:18px;height:18px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                <div class="text-sm">
+                  <p class="font-semibold mb-1" style="color:var(--forest-dark);">Tone matters</p>
+                  <p style="color:var(--ink);">Greet, sign off, skip the shorthand.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <i data-lucide="footprints" style="width:18px;height:18px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                <div class="text-sm">
+                  <p class="font-semibold mb-1" style="color:var(--forest-dark);">Footprint check</p>
+                  <p style="color:var(--ink);">Would you say it to their face?</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <i data-lucide="search" style="width:18px;height:18px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                <div class="text-sm">
+                  <p class="font-semibold mb-1" style="color:var(--forest-dark);">Source check</p>
+                  <p style="color:var(--ink);">Who, when, why, and can you confirm it elsewhere.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <i data-lucide="log-in" style="width:18px;height:18px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                <div class="text-sm">
+                  <p class="font-semibold mb-1" style="color:var(--forest-dark);">Login</p>
+                  <p style="color:var(--ink);">School email + password, via the app grid.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <i data-lucide="mail" style="width:18px;height:18px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                <div class="text-sm">
+                  <p class="font-semibold mb-1" style="color:var(--forest-dark);">Gmail</p>
+                  <p style="color:var(--ink);">Clear subject line, reread before sending.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <i data-lucide="graduation-cap" style="width:18px;height:18px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                <div class="text-sm">
+                  <p class="font-semibold mb-1" style="color:var(--forest-dark);">Classroom</p>
+                  <p style="color:var(--ink);">Stream, Classwork, People — check due dates daily.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <i data-lucide="file-text" style="width:18px;height:18px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                <div class="text-sm">
+                  <p class="font-semibold mb-1" style="color:var(--forest-dark);">Docs</p>
+                  <p style="color:var(--ink);">Name it properly, it saves automatically.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <i data-lucide="presentation" style="width:18px;height:18px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                <div class="text-sm">
+                  <p class="font-semibold mb-1" style="color:var(--forest-dark);">Slides</p>
+                  <p style="color:var(--ink);">One idea per slide, use Speaker Notes.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <i data-lucide="sparkles" style="width:18px;height:18px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                <div class="text-sm">
+                  <p class="font-semibold mb-1" style="color:var(--forest-dark);">Gemini</p>
+                  <p style="color:var(--ink);">Ask your teacher first. Brainstorm, don't outsource.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <i data-lucide="upload-cloud" style="width:18px;height:18px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                <div class="text-sm">
+                  <p class="font-semibold mb-1" style="color:var(--forest-dark);">Submitting</p>
+                  <p style="color:var(--ink);">Always click Turn In — confirm the status changes.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 rounded-lg p-4" style="background:var(--paper-raised); border:1px solid var(--line-subtle);">
+                <i data-lucide="book-open" style="width:18px;height:18px;color:var(--rust); flex-shrink:0; margin-top:2px;"></i>
+                <div class="text-sm">
+                  <p class="font-semibold mb-1" style="color:var(--forest-dark);">Resources</p>
+                  <p style="color:var(--ink);">Keep Drive organized by subject.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-xl p-6" style="background:var(--forest);">
+              <p class="ftrail-display italic text-lg leading-relaxed mb-3" style="color:var(--paper);">Good digital habits aren't about fear or following rules for their own sake. They're about walking through these spaces — etiquette, footprint, research, your toolkit — with enough awareness that the trail you leave is one you'd be glad to look back on.</p>
+              <p class="text-sm" style="color:var(--paper); opacity:.85;">— Rayene Medabis</p>
+              <p class="text-xs mt-1" style="color:var(--paper); opacity:.65;">TESOL-Certified Instructional Designer &amp; EFL Educator · M.Ed. in Didactics</p>
+              <p class="text-xs mt-3" style="color:var(--paper); opacity:.65;">© 2026 Rayene Medabis. All rights reserved.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div id="page-nav" class="flex items-center justify-between mt-12 pt-6 gap-3" style="border-top:1px solid var(--line-subtle);"></div>
+      </div>
+
+      <div class="px-6 md:px-8 py-8 text-xs text-center" style="color:var(--slate);">
+        © 2026 Rayene Medabis — TESOL-Certified Instructional Designer &amp; EFL Educator, M.Ed. in Didactics. All rights reserved.
+      </div>
+    </main>
+  </div>
+
+<script>
+(function(){
+  var SECTIONS = [
+    {id:'cover', part:null, navLabel:'Welcome', icon:'compass'},
+    {id:'etiquette', part:1, navLabel:'Online Etiquette', icon:'message-circle'},
+    {id:'footprint', part:1, navLabel:'Digital Footprint', icon:'footprints'},
+    {id:'research', part:1, navLabel:'Safe & Smart Research', icon:'search'},
+    {id:'basecamp', part:2, navLabel:'Basecamp: Your Account', icon:'log-in'},
+    {id:'gmail', part:2, navLabel:'Gmail', icon:'mail'},
+    {id:'classroom', part:2, navLabel:'Google Classroom', icon:'graduation-cap'},
+    {id:'docs', part:2, navLabel:'Google Docs', icon:'file-text'},
+    {id:'slides', part:2, navLabel:'Google Slides', icon:'presentation'},
+    {id:'gemini', part:2, navLabel:'Gemini (AI)', icon:'sparkles'},
+    {id:'submitting', part:2, navLabel:'Submitting Assignments', icon:'upload-cloud'},
+    {id:'resources', part:2, navLabel:'Academic Resources', icon:'book-open'},
+    {id:'cheatsheet', part:'ref', navLabel:'Quick Reference', icon:'clipboard-list'}
+  ];
+
+  var activeId = 'cover';
+  var visited = {cover:true};
+
+  function escapeHtml(str){
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function contentSections(){
+    return SECTIONS.filter(function(s){ return s.part===1 || s.part===2; });
+  }
+  function visitedCount(){
+    return contentSections().filter(function(s){ return visited[s.id]; }).length;
+  }
+
+  function buildNavGroup(label, items){
+    var html = '<div class="mb-6"><p class="ftrail-mono px-3 mb-2 text-xs uppercase tracking-widest" style="color:var(--brass);">'+escapeHtml(label)+'</p><ul class="space-y-1">';
+    items.forEach(function(s){
+      var isActive = s.id === activeId;
+      var isVisited = !!visited[s.id];
+      html += '<li><button data-goto="'+s.id+'" class="nav-btn w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-left transition-colors" style="color:var(--paper); background:'+(isActive ? 'rgba(255,255,255,0.14)' : 'transparent')+'; font-weight:'+(isActive ? '600' : '400')+';">'
+        + '<i data-lucide="'+s.icon+'" style="width:16px;height:16px;flex-shrink:0;opacity:.9;"></i>'
+        + '<span class="flex-1">'+escapeHtml(s.navLabel)+'</span>'
+        + (isVisited ? '<i data-lucide="check" style="width:14px;height:14px;color:var(--brass);flex-shrink:0;"></i>' : '')
+        + '</button></li>';
+    });
+    html += '</ul></div>';
+    return html;
+  }
+
+  function buildSidebar(withClose){
+    var part1 = SECTIONS.filter(function(s){ return s.part===1; });
+    var part2 = SECTIONS.filter(function(s){ return s.part===2; });
+    var ref = SECTIONS.filter(function(s){ return s.part==='ref'; });
+    var html = '<div class="ftrail-scroll h-full overflow-y-auto px-3 py-6" style="background:var(--forest);">'
+      + '<div class="flex items-center justify-between px-3 mb-8">'
+      + '<button data-goto="cover" class="flex items-center gap-2">'
+      + '<i data-lucide="compass" style="width:20px;height:20px;color:var(--brass);flex-shrink:0;"></i>'
+      + '<span class="ftrail-display font-semibold" style="color:var(--paper);">The Digital Trail</span>'
+      + '</button>'
+      + (withClose ? '<button aria-label="Close menu" data-close-nav style="color:var(--paper);"><i data-lucide="x" style="width:20px;height:20px;"></i></button>' : '')
+      + '</div>'
+      + buildNavGroup('Part One · Your Digital Trail', part1)
+      + buildNavGroup('Part Two · Your Toolkit', part2)
+      + buildNavGroup('Reference', ref)
+      + '</div>';
+    return html;
+  }
+
+  function renderNav(){
+    document.getElementById('sidebar-desktop').innerHTML = buildSidebar(false);
+    document.getElementById('sidebar-mobile').innerHTML = buildSidebar(true);
+  }
+
+  function renderTopBars(){
+    var current = SECTIONS.find(function(s){ return s.id===activeId; });
+    var label = current ? current.navLabel : '';
+    document.getElementById('current-label').textContent = label;
+    var counterText = visitedCount() + '/' + contentSections().length;
+    document.getElementById('desktop-counter').textContent = counterText;
+    document.getElementById('mobile-counter').textContent = counterText;
+  }
+
+  function renderPageNav(){
+    var idx = SECTIONS.findIndex(function(s){ return s.id===activeId; });
+    var prev = idx > 0 ? SECTIONS[idx-1] : null;
+    var next = idx < SECTIONS.length-1 ? SECTIONS[idx+1] : null;
+    var html = '';
+    html += prev
+      ? '<button data-goto="'+prev.id+'" class="flex items-center gap-2 text-sm transition-colors" style="color:var(--slate);"><i data-lucide="arrow-left" style="width:16px;height:16px;"></i><span class="hidden sm:inline">'+escapeHtml(prev.navLabel)+'</span></button>'
+      : '<span></span>';
+    html += next
+      ? '<button data-goto="'+next.id+'" class="flex items-center gap-2 text-sm font-medium px-4 py-2.5 rounded-full transition-colors" style="background:var(--forest); color:var(--paper);"><span>Next: '+escapeHtml(next.navLabel)+'</span><i data-lucide="arrow-right" style="width:16px;height:16px;"></i></button>'
+      : '<span></span>';
+    document.getElementById('page-nav').innerHTML = html;
+  }
+
+  function closeMobileNav(){
+    document.getElementById('mobile-nav-overlay').style.display = 'none';
+  }
+  function openMobileNav(){
+    document.getElementById('mobile-nav-overlay').style.display = 'block';
+  }
+
+  function goTo(id){
+    if(!SECTIONS.some(function(s){ return s.id===id; })) return;
+    activeId = id;
+    visited[id] = true;
+    document.querySelectorAll('.section-page').forEach(function(el){
+      el.classList.toggle('active', el.dataset.id === id);
+    });
+    renderNav();
+    renderTopBars();
+    renderPageNav();
+    closeMobileNav();
+    window.scrollTo({top:0, behavior:'auto'});
+    if(window.lucide){ window.lucide.createIcons(); }
+  }
+
+  // Event delegation
+  document.addEventListener('click', function(e){
+    var gotoBtn = e.target.closest('[data-goto]');
+    if(gotoBtn){
+      goTo(gotoBtn.getAttribute('data-goto'));
+      return;
+    }
+    var closeBtn = e.target.closest('[data-close-nav]');
+    if(closeBtn){
+      closeMobileNav();
+      return;
+    }
+    if(e.target.id === 'overlay-bg-close'){
+      closeMobileNav();
+      return;
+    }
+
+    // Scenario check
+    var opt = e.target.closest('.scenario-option');
+    if(opt){
+      var container = opt.closest('.scenario-check');
+      var options = Array.prototype.slice.call(container.querySelectorAll('.scenario-option'));
+      var idx = options.indexOf(opt);
+      options.forEach(function(o){
+        o.style.background = 'var(--paper)';
+        o.style.borderColor = 'var(--line-subtle)';
+      });
+      var isGood = opt.getAttribute('data-good') === 'true';
+      opt.style.background = isGood ? 'var(--good)' : 'var(--rust-soft)';
+      opt.style.borderColor = isGood ? 'var(--forest)' : 'var(--rust)';
+      container.querySelectorAll('.scenario-feedback').forEach(function(f){
+        f.style.display = 'none';
+      });
+      var fb = container.querySelector('.scenario-feedback[data-index="'+idx+'"]');
+      if(fb){
+        fb.style.display = 'flex';
+        fb.style.background = isGood ? 'var(--good)' : 'var(--rust-soft)';
+      }
+      return;
+    }
+
+    // Checklist
+    var item = e.target.closest('.checklist-item');
+    if(item){
+      var box = item.closest('.checklist-box');
+      var checked = item.getAttribute('data-checked') === 'true';
+      item.setAttribute('data-checked', checked ? 'false' : 'true');
+      var fill = item.querySelector('.checklist-box-fill');
+      var icon = item.querySelector('.checklist-check-icon');
+      var text = item.querySelector('.checklist-text');
+      if(!checked){
+        fill.style.background = 'var(--forest)';
+        fill.style.borderColor = 'var(--forest)';
+        icon.style.display = 'inline-block';
+        text.style.textDecoration = 'line-through';
+        text.style.opacity = '0.55';
+      } else {
+        fill.style.background = 'transparent';
+        fill.style.borderColor = 'var(--slate)';
+        icon.style.display = 'none';
+        text.style.textDecoration = 'none';
+        text.style.opacity = '1';
+      }
+      var items = box.querySelectorAll('.checklist-item');
+      var doneCount = Array.prototype.filter.call(items, function(i){ return i.getAttribute('data-checked')==='true'; }).length;
+      box.querySelector('.checklist-done-count').textContent = doneCount;
+      return;
+    }
+
+    // Reveal grid
+    var revealBtn = e.target.closest('.reveal-item');
+    if(revealBtn){
+      var isOpen = revealBtn.getAttribute('data-open') === 'true';
+      revealBtn.setAttribute('data-open', isOpen ? 'false' : 'true');
+      revealBtn.style.background = isOpen ? 'var(--paper)' : 'var(--paper-raised)';
+      var detail = revealBtn.querySelector('.reveal-detail');
+      detail.style.display = isOpen ? 'none' : 'block';
+      var chevron = revealBtn.querySelector('.reveal-chevron');
+      chevron.style.transform = isOpen ? 'none' : 'rotate(180deg)';
+      return;
+    }
+
+    // FAQ accordion
+    var q = e.target.closest('.faq-question');
+    if(q){
+      var faqItem = q.closest('.faq-item');
+      var accordion = faqItem.parentElement;
+      var wasOpen = faqItem.getAttribute('data-open') === 'true';
+      accordion.querySelectorAll('.faq-item').forEach(function(it){
+        it.setAttribute('data-open', 'false');
+        it.querySelector('.faq-answer').style.display = 'none';
+        it.querySelector('.faq-chevron').style.transform = 'none';
+      });
+      if(!wasOpen){
+        faqItem.setAttribute('data-open', 'true');
+        faqItem.querySelector('.faq-answer').style.display = 'block';
+        faqItem.querySelector('.faq-chevron').style.transform = 'rotate(180deg)';
+      }
+      return;
+    }
+  });
+
+  document.getElementById('open-nav-btn').addEventListener('click', openMobileNav);
+
+  window.addEventListener('DOMContentLoaded', function(){
+    if(window.lucide){ window.lucide.createIcons(); }
+    goTo('cover');
+  });
+})();
+</script>
+</body>
+</html>

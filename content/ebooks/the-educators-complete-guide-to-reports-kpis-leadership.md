@@ -1,5 +1,6 @@
 ---
 title: The Educator's Complete Guide to Reports, KPIs & Leadership
+author: Rayene Medabis
 cover: /images/nn.png
 html_file: /images/educators-handbook-rayene-medabis.html
 tags:
@@ -36,21 +37,19 @@ problem: Teachers and school leaders are expected to be instructors, data
   fills that training gap with concrete, ready-to-apply frameworks, checklists,
   and templates instead of abstract theory.
 takeaways:
-  - "How to write clear, evidence-based professional reports (the
-    seven-section structure, correct tone and language, the
-    DATA-INSIGHT-ACTION framework, and a full self-audit checklist)"
-  - "How to define and use KPIs at the student, teacher, and institutional
-    level, including how to write SMART KPIs and build effective RAG-rated
-    dashboards"
-  - "A full toolkit of formative and summative assessment strategies, plus how
-    to choose and compare digital tracking tools and Learning Management
-    Systems"
-  - "How to run educational projects using the project lifecycle, RACI matrix,
-    Agile/Scrum methods, and a risk register"
-  - "How to build and execute a School Improvement Plan, lead change using
-    Kotter's 8-step model, and design effective CPD programs"
-  - "How to evaluate and integrate EdTech using the SAMR framework, and how to
+  - How to write clear, evidence-based professional reports (the seven-section
+    structure, correct tone and language, the DATA-INSIGHT-ACTION framework, and
+    a full self-audit checklist)
+  - How to define and use KPIs at the student, teacher, and institutional level,
+    including how to write SMART KPIs and build effective RAG-rated dashboards
+  - A full toolkit of formative and summative assessment strategies, plus how to
+    choose and compare digital tracking tools and Learning Management Systems
+  - How to run educational projects using the project lifecycle, RACI matrix,
+    Agile/Scrum methods, and a risk register
+  - How to build and execute a School Improvement Plan, lead change using
+    Kotter's 8-step model, and design effective CPD programs
+  - How to evaluate and integrate EdTech using the SAMR framework, and how to
     responsibly adopt AI tools for reporting, grading, lesson planning, and
-    early-warning analytics"
+    early-warning analytics
   - Key terminology and quick-reference KPI benchmarks for ongoing use
 ---

@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Out of Class — An English Practice Field Guide</title>
+<meta name="description" content="A practical field guide for practicing English outside the classroom, compiled by Rayene Medabis.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* ===================== TOKENS ===================== */
+:root{
+  --paper:        #EFEAD8;
+  --paper-dark:   #E2DBC1;
+  --paper-line:   #C9BB94;
+  --ink:          #272217;
+  --ink-soft:     #5B5440;
+  --forest:       #2F5233;
+  --forest-deep:  #1E3A23;
+  --gold:         #B9852A;
+  --gold-deep:    #8C6418;
+  --slate:        #355C70;
+  --slate-deep:   #234354;
+  --berry:        #7A3B4C;
+  --berry-deep:   #5B2839;
+  --paper-rgb:    239,234,216;
+  --shadow:       rgba(39,34,23,0.18);
+  --radius-sm:    4px;
+  --radius-md:    10px;
+  --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Consolas, monospace;
+  --serif: 'Lora', 'Iowan Old Style', 'Georgia', serif;
+}
+
+/* ===================== RESET ===================== */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *,*::before,*::after{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:16.5px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{ font-family:var(--mono); margin:0; color:var(--ink); letter-spacing:-0.01em; }
+p{ margin:0 0 1em; }
+ul,ol{ margin:0 0 1em; padding-left:1.3em; }
+a{ color:var(--slate-deep); text-decoration-thickness:1.5px; }
+img{ max-width:100%; display:block; }
+button{ font-family:inherit; cursor:pointer; }
+table{ border-collapse:collapse; width:100%; }
+:focus-visible{ outline:3px solid var(--gold-deep); outline-offset:2px; border-radius:2px; }
+
+/* texture: faint paper grain via layered gradients */
+body{
+  background-image:
+    radial-gradient(circle at 18% 8%, rgba(255,255,255,0.35), transparent 45%),
+    radial-gradient(circle at 82% 92%, rgba(0,0,0,0.05), transparent 50%);
+  background-attachment:fixed;
+}
+
+/* ===================== LAYOUT SHELL ===================== */
+.shell{
+  display:grid;
+  grid-template-columns:248px 1fr;
+  min-height:100vh;
+  align-items:start;
+}
+main.content{
+  min-width:0;
+  padding:0 0 4rem;
+}
+.wrap{
+  max-width:760px;
+  margin:0 auto;
+  padding:0 1.75rem;
+}
+
+/* ===================== SIDE NAV ===================== */
+.sidenav{
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow-y:auto;
+  background:var(--forest);
+  color:var(--paper);
+  padding:1.6rem 1.1rem 2rem;
+  border-right:3px solid var(--forest-deep);
+}
+.sidenav::-webkit-scrollbar{ width:8px; }
+.sidenav::-webkit-scrollbar-thumb{ background:var(--forest-deep); border-radius:4px; }
+.sidenav__brand{
+  font-family:var(--mono);
+  font-weight:700;
+  font-size:0.95rem;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--paper);
+  border-bottom:1px dashed rgba(239,234,216,0.4);
+  padding-bottom:0.9rem;
+  margin-bottom:0.4rem;
+  display:flex;
+  align-items:baseline;
+  gap:0.4em;
+}
+.sidenav__brand small{
+  display:block;
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:400;
+  text-transform:none;
+  letter-spacing:0;
+  color:rgba(239,234,216,0.75);
+  font-size:0.78rem;
+  margin-top:0.3rem;
+}
+.trail{
+  position:relative;
+  list-style:none;
+  margin:0.8rem 0 0;
+  padding:0 0 0 1.05rem;
+  border-left:2px dotted rgba(239,234,216,0.45);
+}
+.trail li{ margin:0; }
+.trail__link{
+  position:relative;
+  display:block;
+  padding:0.5rem 0.6rem;
+  margin:0.05rem 0;
+  border-radius:var(--radius-sm);
+  color:rgba(239,234,216,0.85);
+  text-decoration:none;
+  font-family:var(--mono);
+  font-size:0.83rem;
+  letter-spacing:0.01em;
+  transition:background-color .15s ease, color .15s ease, transform .15s ease;
+}
+.trail__link::before{
+  content:"";
+  position:absolute;
+  left:-1.32rem;
+  top:50%;
+  width:7px; height:7px;
+  background:var(--paper);
+  border:2px solid var(--forest);
+  border-radius:50%;
+  transform:translateY(-50%);
+}
+.trail__link:hover{ background:rgba(239,234,216,0.1); color:var(--paper); transform:translateX(2px); }
+.trail__link.is-active{ background:var(--gold); color:var(--forest-deep); font-weight:600; }
+.trail__link.is-active::before{ background:var(--gold); border-color:var(--paper); }
+
+.nav-toggle{
+  display:none;
+}
+
+/* ===================== COVER / HERO ===================== */
+.cover{
+  background:
+    linear-gradient(180deg, rgba(47,82,51,0.06), transparent 60%);
+  border-bottom:3px double var(--paper-line);
+  padding:3.4rem 0 2.6rem;
+}
+.cover__eyebrow{
+  font-family:var(--mono);
+  font-size:0.78rem;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--forest-deep);
+  font-weight:600;
+  margin-bottom:0.9rem;
+}
+.cover__title{
+  font-size:clamp(2.6rem, 7vw, 4.6rem);
+  line-height:0.96;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:-0.01em;
+  color:var(--ink);
+  margin:0 0 0.7rem;
+}
+.cover__title em{
+  font-style:normal;
+  color:var(--paper);
+  background:var(--forest);
+  padding:0 0.18em;
+  display:inline-block;
+  transform:rotate(-1deg);
+}
+.cover__subtitle{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:1.25rem;
+  color:var(--ink-soft);
+  max-width:34em;
+  margin-bottom:1.1rem;
+}
+.cover__byline{
+  font-family:var(--mono);
+  font-size:0.85rem;
+  color:var(--ink-soft);
+  border-top:1px dashed var(--paper-line);
+  padding-top:0.8rem;
+  margin-top:0.6rem;
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.4rem 1.4rem;
+}
+.cover__byline b{ color:var(--ink); }
+
+/* legend */
+.legend{
+  margin-top:1.8rem;
+  background:var(--paper-dark);
+  border:1px solid var(--paper-line);
+  border-radius:var(--radius-md);
+  padding:1.1rem 1.3rem 1.3rem;
+}
+.legend__title{
+  font-family:var(--mono);
+  font-size:0.78rem;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  color:var(--ink-soft);
+  margin-bottom:0.7rem;
+}
+.legend__row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.6rem 1.1rem;
+  align-items:center;
+  margin-bottom:0.9rem;
+}
+.legend__key{ display:flex; align-items:center; gap:0.45rem; font-family:var(--mono); font-size:0.82rem; color:var(--ink-soft); }
+
+/* stamp badges */
+.stamp{
+  display:inline-flex;
+  align-items:center;
+  font-family:var(--mono);
+  font-weight:700;
+  font-size:0.66rem;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  padding:0.22em 0.55em;
+  border-radius:3px;
+  border:1.5px solid currentColor;
+  transform:rotate(-2deg);
+  white-space:nowrap;
+}
+.stamp--beginner{ color:var(--gold-deep); background:rgba(185,133,42,0.13); }
+.stamp--intermediate{ color:var(--slate-deep); background:rgba(53,92,112,0.12); }
+.stamp--advanced{ color:var(--berry-deep); background:rgba(122,59,76,0.12); }
+.stamp--all{ color:var(--forest-deep); background:rgba(47,82,51,0.1); }
+
+/* filter controls */
+.filter{ display:flex; flex-wrap:wrap; gap:0.5rem; }
+.filter__btn{
+  font-family:var(--mono);
+  font-size:0.78rem;
+  font-weight:600;
+  letter-spacing:0.03em;
+  text-transform:uppercase;
+  background:transparent;
+  border:1.5px solid var(--ink-soft);
+  color:var(--ink-soft);
+  padding:0.4rem 0.85rem;
+  border-radius:999px;
+  transition:background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+.filter__btn:hover{ border-color:var(--forest-deep); color:var(--forest-deep); }
+.filter__btn.is-active{ background:var(--forest); border-color:var(--forest); color:var(--paper); }
+
+/* ===================== SECTIONS ===================== */
+.guide-section{
+  padding:3rem 0 0.6rem;
+  border-bottom:1px dashed var(--paper-line);
+}
+.guide-section:last-of-type{ border-bottom:none; }
+.section-head{ margin-bottom:1.6rem; }
+.section-head__eyebrow{
+  font-family:var(--mono);
+  font-size:0.75rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--slate-deep);
+  font-weight:700;
+  margin-bottom:0.5rem;
+}
+.section-head h2{
+  font-size:1.85rem;
+  text-transform:uppercase;
+  margin-bottom:0.55rem;
+}
+.section-head p{
+  font-size:1.05rem;
+  color:var(--ink-soft);
+  max-width:38em;
+}
+.sub-head{
+  font-family:var(--mono);
+  font-size:1.02rem;
+  text-transform:uppercase;
+  letter-spacing:0.02em;
+  margin:2rem 0 0.8rem;
+  padding-bottom:0.4rem;
+  border-bottom:2px solid var(--ink);
+  display:flex;
+  align-items:center;
+  gap:0.6rem;
+  flex-wrap:wrap;
+}
+
+/* ===================== CARDS ===================== */
+.card{
+  background:var(--paper-dark);
+  border:1px solid var(--paper-line);
+  border-radius:var(--radius-md);
+  padding:1.1rem 1.3rem;
+  margin-bottom:1rem;
+  position:relative;
+}
+.card h4{ font-size:0.95rem; text-transform:uppercase; margin-bottom:0.45rem; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap; }
+.card p:last-child{ margin-bottom:0; }
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+  gap:1rem;
+  margin:1rem 0 1.4rem;
+}
+
+/* dog-eared corner accent, used sparingly */
+.dogear{
+  position:relative;
+  overflow:hidden;
+}
+.dogear::after{
+  content:"";
+  position:absolute;
+  top:0; right:0;
+  border-width:0 22px 22px 0;
+  border-style:solid;
+  border-color:transparent var(--paper) transparent transparent;
+  filter:drop-shadow(-1px 1px 1px var(--shadow));
+}
+
+/* ===================== ACCORDIONS (details/summary) ===================== */
+details.flip{
+  background:var(--paper-dark);
+  border:1px solid var(--paper-line);
+  border-radius:var(--radius-md);
+  margin-bottom:0.7rem;
+  overflow:hidden;
+}
+details.flip > summary{
+  list-style:none;
+  cursor:pointer;
+  padding:0.85rem 1.2rem;
+  font-family:var(--mono);
+  font-weight:600;
+  font-size:0.92rem;
+  text-transform:uppercase;
+  letter-spacing:0.02em;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:0.8rem;
+}
+details.flip > summary::-webkit-details-marker{ display:none; }
+details.flip > summary::after{
+  content:"+";
+  font-size:1.3rem;
+  line-height:1;
+  color:var(--forest-deep);
+  flex-shrink:0;
+  transition:transform .18s ease;
+}
+details.flip[open] > summary::after{ content:"–"; }
+details.flip .flip__body{ padding:0.2rem 1.2rem 1.2rem; }
+details.flip .flip__body p:first-child{ margin-top:0; }
+
+/* word/idiom entry rows inside accordions */
+.entry-list{ list-style:none; margin:0; padding:0; }
+.entry-list li{
+  padding:0.6rem 0;
+  border-top:1px dotted var(--paper-line);
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:0.5rem;
+}
+.entry-list li:first-child{ border-top:none; }
+.entry-list .term{ font-family:var(--mono); font-weight:700; font-size:0.97rem; }
+.entry-list .def{ color:var(--ink-soft); flex-basis:100%; font-size:0.95rem; }
+.entry-list .ex{ font-style:italic; color:var(--ink-soft); flex-basis:100%; font-size:0.92rem; }
+
+/* ===================== TABLES ===================== */
+.ref-table{ margin:0.6rem 0 1.4rem; font-size:0.94rem; }
+.ref-table th, .ref-table td{
+  text-align:left;
+  padding:0.55rem 0.7rem;
+  border-bottom:1px dotted var(--paper-line);
+  vertical-align:top;
+}
+.ref-table thead th{
+  font-family:var(--mono);
+  font-size:0.74rem;
+  text-transform:uppercase;
+  letter-spacing:0.05em;
+  color:var(--paper);
+  background:var(--ink-soft);
+  border-bottom:none;
+}
+.ref-table tbody tr:hover{ background:rgba(47,82,51,0.05); }
+.ref-table td:first-child{ font-family:var(--mono); font-weight:600; white-space:nowrap; }
+
+/* ===================== SPEAK BUTTON ===================== */
+.speak{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:1.9rem; height:1.9rem;
+  border-radius:50%;
+  border:1.5px solid var(--slate-deep);
+  background:var(--paper);
+  color:var(--slate-deep);
+  font-size:0.85rem;
+  line-height:1;
+  flex-shrink:0;
+  transition:transform .12s ease, background-color .12s ease;
+}
+.speak:hover{ background:var(--slate-deep); color:var(--paper); transform:scale(1.07); }
+.speak[disabled]{ opacity:0.35; cursor:not-allowed; }
+.speak.is-playing{ animation:pulse 0.9s ease infinite; }
+@keyframes pulse{ 0%,100%{ box-shadow:0 0 0 0 rgba(53,92,112,0.4);} 50%{ box-shadow:0 0 0 5px rgba(53,92,112,0);} }
+.no-speech-note{ font-size:0.85rem; color:var(--ink-soft); font-style:italic; }
+
+/* ===================== QUIZ ===================== */
+.quiz{
+  background:var(--paper);
+  border:1.5px solid var(--ink);
+  border-radius:var(--radius-md);
+  padding:1.2rem 1.3rem 1.3rem;
+  margin:1.2rem 0 1.6rem;
+}
+.quiz__kicker{ font-family:var(--mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--berry-deep); font-weight:700; margin-bottom:0.5rem; }
+.quiz__q{ font-weight:600; margin-bottom:0.8rem; font-size:1.02rem; }
+.quiz__options{ list-style:none; margin:0 0 0.8rem; padding:0; display:flex; flex-direction:column; gap:0.5rem; }
+.quiz__opt{
+  display:block;
+  width:100%;
+  text-align:left;
+  background:var(--paper-dark);
+  border:1.5px solid var(--paper-line);
+  border-radius:var(--radius-sm);
+  padding:0.6rem 0.85rem;
+  font-family:var(--serif);
+  font-size:0.97rem;
+  color:var(--ink);
+  transition:border-color .12s ease, background-color .12s ease;
+}
+.quiz__opt:hover{ border-color:var(--slate-deep); }
+.quiz__opt.is-correct{ background:rgba(47,82,51,0.18); border-color:var(--forest-deep); font-weight:600; }
+.quiz__opt.is-wrong{ background:rgba(122,59,76,0.16); border-color:var(--berry-deep); text-decoration:line-through; }
+.quiz__feedback{ font-family:var(--mono); font-size:0.88rem; min-height:1.4em; }
+.quiz__feedback.show-correct{ color:var(--forest-deep); }
+.quiz__feedback.show-wrong{ color:var(--berry-deep); }
+
+/* ===================== ASSIGNMENT CALLOUT ===================== */
+.assignment{
+  position:relative;
+  background:var(--paper);
+  border:2px dashed var(--ink-soft);
+  border-radius:var(--radius-md);
+  padding:1.2rem 1.3rem 1.3rem;
+  margin:1.8rem 0 1rem;
+}
+.assignment__label{
+  position:absolute;
+  top:-0.85rem; left:1rem;
+  background:var(--gold);
+  color:#2a1c04;
+  font-family:var(--mono);
+  font-weight:700;
+  font-size:0.72rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  padding:0.25em 0.6em;
+  border-radius:3px;
+  transform:rotate(-2deg);
+  box-shadow:1px 2px 0 var(--shadow);
+}
+.assignment p:last-child{ margin-bottom:0; }
+.assignment p:first-child{ margin-top:0.4rem; }
+
+/* ===================== PLANNER ===================== */
+.planner-wrap{ overflow-x:auto; margin-bottom:1rem; }
+.planner-grid{ min-width:560px; font-size:0.88rem; }
+.planner-grid th, .planner-grid td{ text-align:center; padding:0.5rem 0.4rem; border-bottom:1px dotted var(--paper-line); }
+.planner-grid thead th{ font-family:var(--mono); font-size:0.72rem; text-transform:uppercase; color:var(--ink-soft); }
+.planner-grid td:first-child, .planner-grid th:first-child{ text-align:left; font-family:var(--mono); font-size:0.8rem; font-weight:600; }
+.planner-grid input[type="checkbox"]{ width:1.15rem; height:1.15rem; accent-color:var(--forest); cursor:pointer; }
+.planner-controls{ display:flex; flex-wrap:wrap; gap:0.8rem; align-items:center; margin:1rem 0; }
+.field-goal{ flex:1; min-width:220px; }
+.field-goal label{ display:block; font-family:var(--mono); font-size:0.75rem; text-transform:uppercase; color:var(--ink-soft); margin-bottom:0.3rem; }
+.field-goal input[type="text"]{
+  width:100%; font-family:var(--serif); font-size:0.97rem; padding:0.5rem 0.7rem;
+  border:1.5px solid var(--paper-line); border-radius:var(--radius-sm); background:var(--paper);
+}
+.btn{
+  font-family:var(--mono); font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:0.03em;
+  border:1.5px solid var(--ink); background:var(--ink); color:var(--paper);
+  padding:0.55rem 1.1rem; border-radius:var(--radius-sm);
+  transition:opacity .12s ease;
+}
+.btn:hover{ opacity:0.85; }
+.btn--ghost{ background:transparent; color:var(--ink); }
+.save-note{ font-family:var(--mono); font-size:0.78rem; color:var(--ink-soft); min-height:1.2em; }
+
+/* ===================== TRACKER ===================== */
+.tracker__group{ margin-bottom:1.6rem; }
+.tracker__bar{ height:10px; background:var(--paper-dark); border:1px solid var(--paper-line); border-radius:999px; overflow:hidden; margin-bottom:0.7rem; }
+.tracker__bar > span{ display:block; height:100%; background:var(--forest); width:0%; transition:width .25s ease; }
+.tracker__list{ list-style:none; margin:0; padding:0; }
+.tracker__list li{ display:flex; align-items:flex-start; gap:0.6rem; padding:0.4rem 0; }
+.tracker__list input[type="checkbox"]{ width:1.1rem; height:1.1rem; margin-top:0.2rem; accent-color:var(--forest); cursor:pointer; flex-shrink:0; }
+.tracker__list label{ cursor:pointer; }
+
+/* ===================== TOOLS DIRECTORY ===================== */
+.tool-card{ display:flex; gap:0.8rem; }
+.tool-card__icon{ font-size:1.5rem; flex-shrink:0; }
+.tool-card h4{ margin-bottom:0.2rem; }
+
+/* ===================== FOOTER ===================== */
+.colophon{
+  background:var(--forest);
+  color:rgba(239,234,216,0.92);
+  padding:2.4rem 0;
+  margin-top:1rem;
+}
+.colophon .wrap{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:1rem; align-items:flex-end; }
+.colophon b{ color:var(--paper); font-family:var(--mono); }
+.colophon p{ margin:0; font-size:0.88rem; color:rgba(239,234,216,0.75); }
+.colophon a{ color:var(--paper); }
+
+/* ===================== UTILITIES ===================== */
+.muted{ color:var(--ink-soft); }
+.small{ font-size:0.85rem; }
+.center{ text-align:center; }
+.mt-0{ margin-top:0; }
+[data-level]{ scroll-margin-top:1rem; }
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 880px){
+  .shell{ grid-template-columns:1fr; }
+  .sidenav{
+    position:fixed; z-index:40; top:0; left:0; height:100vh; width:78vw; max-width:300px;
+    transform:translateX(-100%);
+    transition:transform .2s ease;
+    box-shadow:4px 0 18px var(--shadow);
+  }
+  .sidenav.is-open{ transform:translateX(0); }
+  .nav-toggle{
+    display:flex; align-items:center; gap:0.5rem;
+    position:sticky; top:0; z-index:30;
+    width:100%; background:var(--forest); color:var(--paper);
+    font-family:var(--mono); font-weight:700; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.06em;
+    border:none; border-bottom:3px solid var(--forest-deep);
+    padding:0.9rem 1.2rem;
+  }
+  .nav-scrim{
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.35); z-index:35;
+  }
+  .nav-scrim.is-open{ display:block; }
+  .cover__title{ font-size:clamp(2.1rem, 11vw, 3rem); }
+}
+@media (max-width:540px){
+  .wrap{ padding:0 1.15rem; }
+  .card-grid{ grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="sidenav">☰ Guide Index</button>
+<div class="nav-scrim" id="navScrim"></div>
+
+<nav class="sidenav" id="sidenav" aria-label="Guide index">
+  <div class="sidenav__brand">📖 Out of Class<small>Field guide index</small></div>
+  <ul class="trail">
+    <li><a class="trail__link" href="#cover">Start here</a></li>
+    <li><a class="trail__link" href="#routine">Build your routine</a></li>
+    <li><a class="trail__link" href="#vocabulary">Vocabulary</a></li>
+    <li><a class="trail__link" href="#grammar">Grammar</a></li>
+    <li><a class="trail__link" href="#speaking-listening">Speaking &amp; listening</a></li>
+    <li><a class="trail__link" href="#pronunciation">Pronunciation</a></li>
+    <li><a class="trail__link" href="#reading-writing">Reading &amp; writing</a></li>
+    <li><a class="trail__link" href="#idioms">Idioms &amp; phrasal verbs</a></li>
+    <li><a class="trail__link" href="#planner">Weekly planner</a></li>
+    <li><a class="trail__link" href="#tracker">Progress tracker</a></li>
+    <li><a class="trail__link" href="#tools">Tools &amp; resources</a></li>
+    <li><a class="trail__link" href="#mindset">Mindset</a></li>
+  </ul>
+</nav>
+
+<main class="content" id="cover">
+
+<header class="cover">
+  <div class="wrap">
+    <div class="cover__eyebrow">A field guide for self-study</div>
+    <h1 class="cover__title">Out <em>of</em> Class</h1>
+    <p class="cover__subtitle">Practical, leveled, do-it-today methods for practicing English outside the classroom — vocabulary, grammar, speaking, listening, and pronunciation, with exercises you can start in the next five minutes.</p>
+    <div class="cover__byline">
+      <span><b>Collected &amp; compiled by</b> Rayene Medabis</span>
+      <span class="muted">·</span>
+      <span class="muted">For learners at every level</span>
+    </div>
+
+    <div class="legend">
+      <div class="legend__title">How to read this guide</div>
+      <p class="small mt-0" style="margin-bottom:0.9rem;">Every method, list, and exercise is stamped with a level. Use the stamps to find what fits you right now — and don't be afraid to peek at the level above yours.</p>
+      <div class="legend__row">
+        <span class="legend__key"><span class="stamp stamp--beginner">Beginner</span></span>
+        <span class="legend__key"><span class="stamp stamp--intermediate">Intermediate</span></span>
+        <span class="legend__key"><span class="stamp stamp--advanced">Advanced</span></span>
+        <span class="legend__key"><span class="stamp stamp--all">All levels</span></span>
+      </div>
+      <div class="legend__title">Show me</div>
+      <div class="filter" role="group" aria-label="Filter content by level">
+        <button class="filter__btn is-active" data-filter="all">Everything</button>
+        <button class="filter__btn" data-filter="beginner">Beginner</button>
+        <button class="filter__btn" data-filter="intermediate">Intermediate</button>
+        <button class="filter__btn" data-filter="advanced">Advanced</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="guide-section" id="routine" data-level="all">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head__eyebrow">Quick start</div>
+      <h2>Build your practice routine</h2>
+      <p>Twenty minutes a day, every day, beats three hours once a week. Your brain needs frequent, short contact with English to move words and patterns into long-term memory — this is why a routine matters more than any single method.</p>
+    </div>
+
+    <h3 class="sub-head">Pick your daily dose <span class="stamp stamp--all">All levels</span></h3>
+    <div class="planner-wrap">
+      <table class="ref-table">
+        <thead><tr><th>Level</th><th>Minutes / day</th><th>Suggested split</th></tr></thead>
+        <tbody>
+          <tr><td>Beginner</td><td>15–20 min</td><td>Vocabulary review (40%) · Listening (40%) · Speaking aloud (20%)</td></tr>
+          <tr><td>Intermediate</td><td>30–40 min</td><td>Listening/speaking (40%) · Reading (30%) · Vocabulary &amp; grammar (30%)</td></tr>
+          <tr><td>Advanced</td><td>45–60+ min</td><td>Real-world input — podcasts, articles, conversation (60%) · Targeted gaps (40%)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub-head">A sample 20-minute session <span class="stamp stamp--beginner">Beginner</span></h3>
+    <div class="card-grid">
+      <div class="card"><h4>0–5 min · Review</h4><p>Flip through yesterday's flashcards or word journal. Say each word out loud before checking the meaning.</p></div>
+      <div class="card"><h4>5–15 min · Input</h4><p>Listen to one short clip (a beginner podcast, a simple video) twice — once for the general idea, once while reading the transcript.</p></div>
+      <div class="card"><h4>15–20 min · Output</h4><p>Say three sentences out loud about your day, using one new word from today.</p></div>
+    </div>
+
+    <h3 class="sub-head">Make it stick <span class="stamp stamp--all">All levels</span></h3>
+    <ul>
+      <li><strong>Anchor it to a habit you already have</strong> — practice while your coffee brews, during your commute, or right after you brush your teeth.</li>
+      <li><strong>Lower the bar on hard days.</strong> A two-minute session that keeps the streak alive is worth more than a missed day "saved" for later.</li>
+      <li><strong>Batch the long stuff for weekends</strong> — extensive reading, a full movie without subtitles, a longer conversation exchange.</li>
+      <li><strong>Track it visibly.</strong> Use the <a href="#planner">weekly planner</a> further down this guide to log your sessions.</li>
+    </ul>
+
+    <div class="assignment">
+      <span class="assignment__label">Field assignment</span>
+      <p><strong>Right now:</strong> open your calendar or phone reminders and block out one fixed time slot for tomorrow. Name it "English — 20 min." A scheduled habit survives; a vague intention rarely does.</p>
+    </div>
+  </div>
+</section>
+
+<section class="guide-section" id="vocabulary" data-level="all">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head__eyebrow">Specimen collection</div>
+      <h2>Vocabulary</h2>
+      <p>Collecting words is like collecting specimens on a field trip: a word you only glance at gets forgotten by tomorrow, but one you handle, label, and use survives. This section gives you the methods first, then leveled word banks to start collecting from today.</p>
+    </div>
+
+    <h3 class="sub-head">Remember words for good <span class="stamp stamp--all">All levels</span></h3>
+    <div class="card-grid">
+      <div class="card">
+        <h4>Spaced repetition</h4>
+        <p>Review a new word on a growing schedule: day 1, day 2, day 4, day 7, day 14, day 30. Each review pushes it further into long-term memory. This is the single most efficient way to stop forgetting — it's why flashcard apps exist at all.</p>
+      </div>
+      <div class="card">
+        <h4>Keep a word journal</h4>
+        <p>For every new word, write: the word itself, a definition <em>in your own words</em>, an example sentence about your own life (not the dictionary's), and one "word friend" — a word it's commonly paired with.</p>
+      </div>
+      <div class="card">
+        <h4>Learn chunks, not single words</h4>
+        <p>Native speakers store language in ready-made blocks. Learn <strong>make a decision</strong>, not "make" and "decision" separately — that's why "do a mistake" sounds wrong even though both words are correct on their own.</p>
+      </div>
+    </div>
+
+    <h3 class="sub-head">Build your word bank by topic <span class="stamp stamp--all">All levels</span></h3>
+    <p class="muted small">Tap a topic to open it. Each entry has a 🔊 button — press it to hear the example sentence spoken aloud, then repeat it yourself.</p>
+
+    <details class="flip" data-level="beginner" open>
+      <summary><span>Daily life &amp; home <span class="stamp stamp--beginner">Beginner</span></span></summary>
+      <div class="flip__body">
+        <ul class="entry-list">
+          <li><span class="term">errand</span><button class="speak" data-say="I need to run a few errands this afternoon.">🔊</button><span class="def">a short trip to do a specific task, like shopping or posting a letter.</span><span class="ex">"I need to run a few errands this afternoon."</span></li>
+          <li><span class="term">chores</span><button class="speak" data-say="We split the chores evenly between us.">🔊</button><span class="def">small regular jobs around the house.</span><span class="ex">"We split the chores evenly between us."</span></li>
+          <li><span class="term">commute</span><button class="speak" data-say="My commute to work takes about forty minutes.">🔊</button><span class="def">the regular journey between home and work.</span><span class="ex">"My commute to work takes about forty minutes."</span></li>
+          <li><span class="term">neighborhood</span><button class="speak" data-say="It is a quiet neighborhood with a lot of trees.">🔊</button><span class="def">the area around where you live.</span><span class="ex">"It is a quiet neighborhood with a lot of trees."</span></li>
+          <li><span class="term">leftovers</span><button class="speak" data-say="I will have the leftovers for lunch tomorrow.">🔊</button><span class="def">food that remains after a meal.</span><span class="ex">"I will have the leftovers for lunch tomorrow."</span></li>
+          <li><span class="term">tidy up</span><button class="speak" data-say="Can you tidy up the kitchen before guests arrive?">🔊</button><span class="def">to make a space clean and organized.</span><span class="ex">"Can you tidy up the kitchen before guests arrive?"</span></li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="flip" data-level="beginner">
+      <summary><span>Numbers, time &amp; dates <span class="stamp stamp--beginner">Beginner</span></span></summary>
+      <div class="flip__body">
+        <ul class="entry-list">
+          <li><span class="term">a quarter to / past</span><button class="speak" data-say="It is a quarter to six.">🔊</button><span class="def">15 minutes before / after the hour.</span><span class="ex">"It is a quarter to six."</span></li>
+          <li><span class="term">in a fortnight</span><button class="speak" data-say="See you in a fortnight.">🔊</button><span class="def">in two weeks.</span><span class="ex">"See you in a fortnight."</span></li>
+          <li><span class="term">the day after tomorrow</span><button class="speak" data-say="The package arrives the day after tomorrow.">🔊</button><span class="def">two days from now.</span><span class="ex">"The package arrives the day after tomorrow."</span></li>
+          <li><span class="term">roughly / about</span><button class="speak" data-say="There were roughly thirty people at the party.">🔊</button><span class="def">approximately.</span><span class="ex">"There were roughly thirty people at the party."</span></li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="flip" data-level="intermediate">
+      <summary><span>Work &amp; study <span class="stamp stamp--intermediate">Intermediate</span></span></summary>
+      <div class="flip__body">
+        <ul class="entry-list">
+          <li><span class="term">deadline</span><button class="speak" data-say="We are working hard to meet the deadline.">🔊</button><span class="def">the time by which something must be finished.</span><span class="ex">"We are working hard to meet the deadline."</span></li>
+          <li><span class="term">workload</span><button class="speak" data-say="Her workload has doubled since the promotion.">🔊</button><span class="def">the amount of work you have to do.</span><span class="ex">"Her workload has doubled since the promotion."</span></li>
+          <li><span class="term">to procrastinate</span><button class="speak" data-say="I tend to procrastinate when a task feels boring.">🔊</button><span class="def">to delay doing something you should be doing.</span><span class="ex">"I tend to procrastinate when a task feels boring."</span></li>
+          <li><span class="term">to be swamped</span><button class="speak" data-say="Sorry for the late reply, I have been swamped at work.">🔊</button><span class="def">to have far too much to do.</span><span class="ex">"Sorry for the late reply, I have been swamped at work."</span></li>
+          <li><span class="term">a steep learning curve</span><button class="speak" data-say="The new software has a steep learning curve.">🔊</button><span class="def">something that takes a lot of effort to learn quickly.</span><span class="ex">"The new software has a steep learning curve."</span></li>
+          <li><span class="term">to touch base</span><button class="speak" data-say="Let's touch base again on Friday.">🔊</button><span class="def">to make brief contact to share an update.</span><span class="ex">"Let's touch base again on Friday."</span></li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="flip" data-level="intermediate">
+      <summary><span>Travel <span class="stamp stamp--intermediate">Intermediate</span></span></summary>
+      <div class="flip__body">
+        <ul class="entry-list">
+          <li><span class="term">itinerary</span><button class="speak" data-say="Our itinerary includes three cities in ten days.">🔊</button><span class="def">a planned route or schedule for a trip.</span><span class="ex">"Our itinerary includes three cities in ten days."</span></li>
+          <li><span class="term">layover</span><button class="speak" data-say="We have a four-hour layover in Istanbul.">🔊</button><span class="def">a stop between two flights.</span><span class="ex">"We have a four-hour layover in Istanbul."</span></li>
+          <li><span class="term">off the beaten path</span><button class="speak" data-say="We found a great restaurant off the beaten path.">🔊</button><span class="def">somewhere not many tourists go.</span><span class="ex">"We found a great restaurant off the beaten path."</span></li>
+          <li><span class="term">to wing it</span><button class="speak" data-say="We did not book anything in advance, we just winged it.">🔊</button><span class="def">to do something without much planning.</span><span class="ex">"We did not book anything in advance, we just winged it."</span></li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="flip" data-level="advanced">
+      <summary><span>Academic &amp; abstract ideas <span class="stamp stamp--advanced">Advanced</span></span></summary>
+      <div class="flip__body">
+        <ul class="entry-list">
+          <li><span class="term">to underpin</span><button class="speak" data-say="Trust underpins every successful partnership.">🔊</button><span class="def">to form the base or support for something.</span><span class="ex">"Trust underpins every successful partnership."</span></li>
+          <li><span class="term">a caveat</span><button class="speak" data-say="I will sign the contract, with one caveat.">🔊</button><span class="def">a warning or condition attached to a statement.</span><span class="ex">"I will sign the contract, with one caveat."</span></li>
+          <li><span class="term">to conflate</span><button class="speak" data-say="People often conflate confidence with competence.">🔊</button><span class="def">to wrongly treat two things as if they were one.</span><span class="ex">"People often conflate confidence with competence."</span></li>
+          <li><span class="term">a nuance</span><button class="speak" data-say="The translation lost some of the original nuance.">🔊</button><span class="def">a subtle difference in meaning or tone.</span><span class="ex">"The translation lost some of the original nuance."</span></li>
+          <li><span class="term">to substantiate</span><button class="speak" data-say="She could not substantiate her claim with evidence.">🔊</button><span class="def">to provide proof or evidence for a claim.</span><span class="ex">"She could not substantiate her claim with evidence."</span></li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="flip" data-level="advanced">
+      <summary><span>Nuance &amp; register <span class="stamp stamp--advanced">Advanced</span></span></summary>
+      <div class="flip__body">
+        <ul class="entry-list">
+          <li><span class="term">to downplay</span><button class="speak" data-say="He downplayed the risks of the investment.">🔊</button><span class="def">to make something seem less important than it is.</span><span class="ex">"He downplayed the risks of the investment."</span></li>
+          <li><span class="term">a euphemism</span><button class="speak" data-say="'Letting someone go' is a euphemism for firing them.">🔊</button><span class="def">a mild word used instead of a harsh or blunt one.</span><span class="ex">"'Letting someone go' is a euphemism for firing them."</span></li>
+          <li><span class="term">tongue-in-cheek</span><button class="speak" data-say="The comment was tongue-in-cheek, not a real complaint.">🔊</button><span class="def">said as a joke, not seriously.</span><span class="ex">"The comment was tongue-in-cheek, not a real complaint."</span></li>
+        </ul>
+      </div>
+    </details>
+
+    <div class="quiz" data-level="all">
+      <div class="quiz__kicker">Quick check · Collocations</div>
+      <p class="quiz__q">Which sentence uses the correct verb?</p>
+      <ul class="quiz__options">
+        <li><button class="quiz__opt" data-correct="false">She did a mistake during the presentation.</button></li>
+        <li><button class="quiz__opt" data-correct="true">She made a mistake during the presentation.</button></li>
+      </ul>
+      <p class="quiz__feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="assignment">
+      <span class="assignment__label">Field assignment</span>
+      <p><strong>Today:</strong> open one topic above that matches your level, pick three words you didn't know, and write one sentence for each about your real life. Press 🔊 and repeat the sentence out loud three times.</p>
+    </div>
+  </div>
+</section>
+
+<section class="guide-section" id="grammar" data-level="all">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head__eyebrow">Field notes</div>
+      <h2>Grammar</h2>
+      <p>You don't need a grammar textbook in your backpack — you need a map you can glance at when you forget which tense fits, and a short list of the mistakes that give learners away most often.</p>
+    </div>
+
+    <h3 class="sub-head">The tense map <span class="stamp stamp--all">All levels</span></h3>
+    <div class="planner-wrap">
+      <table class="ref-table">
+        <thead><tr><th>Level</th><th>Tense / form</th><th>Use it for</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr data-level="beginner"><td><span class="stamp stamp--beginner">Beg.</span></td><td>Present simple</td><td>Facts &amp; habits</td><td>"She works in a bank."</td></tr>
+          <tr data-level="beginner"><td><span class="stamp stamp--beginner">Beg.</span></td><td>Present continuous</td><td>Happening right now</td><td>"I'm writing an email right now."</td></tr>
+          <tr data-level="beginner"><td><span class="stamp stamp--beginner">Beg.</span></td><td>Past simple</td><td>Finished actions</td><td>"We watched a movie last night."</td></tr>
+          <tr data-level="intermediate"><td><span class="stamp stamp--intermediate">Int.</span></td><td>Present perfect</td><td>Experience / unfinished time</td><td>"I have visited Japan twice."</td></tr>
+          <tr data-level="intermediate"><td><span class="stamp stamp--intermediate">Int.</span></td><td>Past continuous</td><td>Background action interrupted</td><td>"I was cooking when she called."</td></tr>
+          <tr data-level="intermediate"><td><span class="stamp stamp--intermediate">Int.</span></td><td>Will / going to</td><td>Future plans &amp; predictions</td><td>"I'll call you tomorrow."</td></tr>
+          <tr data-level="intermediate"><td><span class="stamp stamp--intermediate">Int.</span></td><td>1st &amp; 2nd conditional</td><td>Real &amp; hypothetical situations</td><td>"If I had more time, I would travel more."</td></tr>
+          <tr data-level="advanced"><td><span class="stamp stamp--advanced">Adv.</span></td><td>Present perfect continuous</td><td>Ongoing action with duration</td><td>"I've been studying since six."</td></tr>
+          <tr data-level="advanced"><td><span class="stamp stamp--advanced">Adv.</span></td><td>Past perfect</td><td>The "earlier past"</td><td>"The show had already started when we arrived."</td></tr>
+          <tr data-level="advanced"><td><span class="stamp stamp--advanced">Adv.</span></td><td>3rd &amp; mixed conditional</td><td>Unreal past situations</td><td>"If I had known, I would have come earlier."</td></tr>
+          <tr data-level="advanced"><td><span class="stamp stamp--advanced">Adv.</span></td><td>Passive voice</td><td>The action matters more than who did it</td><td>"The bridge was built in 1932."</td></tr>
+          <tr data-level="advanced"><td><span class="stamp stamp--advanced">Adv.</span></td><td>Reported speech</td><td>Retelling what someone said</td><td>"She said she was tired."</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub-head">Mistakes that give learners away <span class="stamp stamp--all">All levels</span></h3>
+    <div class="card-grid">
+      <div class="card" data-level="beginner"><h4>Articles <span class="stamp stamp--beginner">Beg.</span></h4><p><s>I am engineer.</s><br><strong>I am an engineer.</strong> — singular countable nouns almost always need a/an/the.</p></div>
+      <div class="card" data-level="beginner"><h4>Subject–verb agreement <span class="stamp stamp--beginner">Beg.</span></h4><p><s>She don't like coffee.</s><br><strong>She doesn't like coffee.</strong> — he/she/it takes "does/doesn't" and an -s on the verb.</p></div>
+      <div class="card" data-level="intermediate"><h4>Prepositions of time <span class="stamp stamp--intermediate">Int.</span></h4><p><s>See you in Monday.</s><br><strong>See you on Monday.</strong> — use on for days/dates, in for months/years, at for clock times.</p></div>
+      <div class="card" data-level="intermediate"><h4>Countable vs. uncountable <span class="stamp stamp--intermediate">Int.</span></h4><p><s>I have many informations.</s><br><strong>I have a lot of information.</strong> — information, advice, news, and furniture have no plural.</p></div>
+      <div class="card" data-level="intermediate"><h4>Adjective order <span class="stamp stamp--intermediate">Int.</span></h4><p><s>a red big house</s><br><strong>a big red house</strong> — size usually comes before color.</p></div>
+      <div class="card" data-level="advanced"><h4>"Bored" vs. "boring" <span class="stamp stamp--advanced">Adv.</span></h4><p><s>I am boring in this meeting.</s><br><strong>I am bored in this meeting.</strong> — -ed describes how you feel; -ing describes what causes the feeling.</p></div>
+    </div>
+
+    <div class="quiz" data-level="all">
+      <div class="quiz__kicker">Quick check · Spot the error</div>
+      <p class="quiz__q">Which sentence is correct?</p>
+      <ul class="quiz__options">
+        <li><button class="quiz__opt" data-correct="false">I have lived here since five years.</button></li>
+        <li><button class="quiz__opt" data-correct="true">I have lived here for five years.</button></li>
+      </ul>
+      <p class="quiz__feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="assignment">
+      <span class="assignment__label">Field assignment</span>
+      <p><strong>Today:</strong> write five sentences about your week using one row from the tense map you don't normally use. Read them out loud — grammar that stays only on paper rarely becomes automatic.</p>
+    </div>
+  </div>
+</section>
+
+<section class="guide-section" id="speaking-listening" data-level="all">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head__eyebrow">Out in the open</div>
+      <h2>Speaking &amp; listening</h2>
+      <p>This is the pair most learners avoid practicing alone, because it feels like it needs another person. It doesn't. Every method below works solo, with nothing but your own voice and your phone.</p>
+    </div>
+
+    <h3 class="sub-head">Talk to yourself, on purpose <span class="stamp stamp--all">All levels</span></h3>
+    <p>Narrate what you're doing as you do it: "I'm making coffee. Now I'm putting the cup down." Describe your day on your commute, out loud or under your breath. This feels strange for about three days and then becomes completely normal — and it's the fastest way to notice exactly which words you're missing.</p>
+
+    <h3 class="sub-head">Shadowing: borrow a native speaker's mouth <span class="stamp stamp--intermediate">Intermediate</span></h3>
+    <p>Shadowing means speaking <em>at the same time</em> as a recording, copying its rhythm and melody, not just its words.</p>
+    <ol>
+      <li>Pick 30–60 seconds of audio at or slightly above your level, with a transcript.</li>
+      <li>Listen once for the general meaning.</li>
+      <li>Listen again while reading along.</li>
+      <li>Play it a third time and speak <em>with</em> it, a half-second behind, matching the speaker's stress and intonation rather than your own.</li>
+      <li>Repeat the same clip 3–5 times. It should feel easier and more natural each time.</li>
+    </ol>
+
+    <div class="card dogear" data-level="intermediate">
+      <h4>Try a shadowing clip now</h4>
+      <p>"I can't believe how quickly this year has gone by. It feels like just yesterday we were planning the summer trip, and now we're already talking about the holidays."</p>
+      <button class="speak" data-say="I can't believe how quickly this year has gone by. It feels like just yesterday we were planning the summer trip, and now we're already talking about the holidays.">🔊 Play at normal speed</button>
+    </div>
+
+    <h3 class="sub-head">Record yourself and listen back <span class="stamp stamp--all">All levels</span></h3>
+    <p>Use your phone's voice memo app to record yourself talking for one minute about anything. Listen back the next day, not immediately — with fresh ears you'll hear your own filler words, pacing, and pronunciation far more clearly. Keep a running note of one thing to fix each time, not ten.</p>
+
+    <h3 class="sub-head">Find a conversation partner <span class="stamp stamp--intermediate">Intermediate</span></h3>
+    <p>A language exchange works best with light structure: agree to split the time 50/50 between both languages, and bring two or three topics so you're never stuck choosing one on the spot. Here are starter prompts by level — press 🔊 to hear each one before your next call.</p>
+
+    <details class="flip" data-level="beginner">
+      <summary><span>Conversation starters <span class="stamp stamp--beginner">Beginner</span></span></summary>
+      <div class="flip__body">
+        <ul class="entry-list">
+          <li><span class="term">"What did you do this weekend?"</span><button class="speak" data-say="What did you do this weekend?">🔊</button></li>
+          <li><span class="term">"What's your favorite food, and why?"</span><button class="speak" data-say="What's your favorite food, and why?">🔊</button></li>
+          <li><span class="term">"Can you describe your morning routine?"</span><button class="speak" data-say="Can you describe your morning routine?">🔊</button></li>
+        </ul>
+      </div>
+    </details>
+    <details class="flip" data-level="intermediate">
+      <summary><span>Conversation starters <span class="stamp stamp--intermediate">Intermediate</span></span></summary>
+      <div class="flip__body">
+        <ul class="entry-list">
+          <li><span class="term">"What's a skill you'd like to learn, and why?"</span><button class="speak" data-say="What's a skill you'd like to learn, and why?">🔊</button></li>
+          <li><span class="term">"Would you rather live in a big city or the countryside?"</span><button class="speak" data-say="Would you rather live in a big city or the countryside?">🔊</button></li>
+          <li><span class="term">"What's a piece of advice you'd give your younger self?"</span><button class="speak" data-say="What's a piece of advice you'd give your younger self?">🔊</button></li>
+        </ul>
+      </div>
+    </details>
+    <details class="flip" data-level="advanced">
+      <summary><span>Conversation starters <span class="stamp stamp--advanced">Advanced</span></span></summary>
+      <div class="flip__body">
+        <ul class="entry-list">
+          <li><span class="term">"Should governments regulate social media more closely?"</span><button class="speak" data-say="Should governments regulate social media more closely?">🔊</button></li>
+          <li><span class="term">"Is it better to specialize deeply or be broadly competent?"</span><button class="speak" data-say="Is it better to specialize deeply in one skill, or be broadly competent in many?">🔊</button></li>
+          <li><span class="term">"How has technology changed the way you think — for better or worse?"</span><button class="speak" data-say="How has technology changed the way you think, for better or worse?">🔊</button></li>
+        </ul>
+      </div>
+    </details>
+
+    <h3 class="sub-head">Build a listening habit by level <span class="stamp stamp--all">All levels</span></h3>
+    <div class="card-grid">
+      <div class="card" data-level="beginner"><h4>Beginner</h4><p>Short clips (1–3 min) made for learners, slow and clearly enunciated. Turn on English subtitles — never your native language — and replay the same clip until it feels easy.</p></div>
+      <div class="card" data-level="intermediate"><h4>Intermediate</h4><p>Real podcasts and shows on topics you already enjoy. Keep English subtitles on for shows, drop them for podcasts once you can follow the gist.</p></div>
+      <div class="card" data-level="advanced"><h4>Advanced</h4><p>Native-speed news, interviews, and audiobooks with no subtitles at all. Let yourself miss occasional words — total comprehension isn't the goal, fluent tracking of meaning is.</p></div>
+    </div>
+
+    <div class="assignment">
+      <span class="assignment__label">Field assignment</span>
+      <p><strong>Today:</strong> record sixty seconds of yourself describing your day. Don't listen back until tomorrow — then note one specific thing to improve, and try the same sixty seconds again.</p>
+    </div>
+  </div>
+</section>
+
+<section class="guide-section" id="pronunciation" data-level="all">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head__eyebrow">Sound notes</div>
+      <h2>Pronunciation</h2>
+      <p>Clear pronunciation isn't about sounding "native" — it's about being effortless to understand. A handful of sounds and stress patterns cause most of the friction. This section uses American English throughout, with a 🔊 button on almost every example so you can hear it before you try it.</p>
+    </div>
+
+    <h3 class="sub-head">A few IPA symbols worth knowing <span class="stamp stamp--intermediate">Intermediate</span></h3>
+    <div class="planner-wrap">
+      <table class="ref-table">
+        <thead><tr><th>Symbol</th><th>Sounds like</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>/θ/</td><td>the unvoiced "th"</td><td><em>think</em>, <em>bath</em></td></tr>
+          <tr><td>/ð/</td><td>the voiced "th"</td><td><em>this</em>, <em>mother</em></td></tr>
+          <tr><td>/ʃ/</td><td>"sh"</td><td><em>shoe</em>, <em>nation</em></td></tr>
+          <tr><td>/tʃ/</td><td>"ch"</td><td><em>chair</em>, <em>watch</em></td></tr>
+          <tr><td>/dʒ/</td><td>soft "j"</td><td><em>jump</em>, <em>bridge</em></td></tr>
+          <tr><td>/ŋ/</td><td>"ng"</td><td><em>sing</em>, <em>thinking</em></td></tr>
+          <tr><td>/ɪ/ vs /iː/</td><td>short vs. long "i"</td><td><em>sit</em> vs. <em>seat</em></td></tr>
+          <tr><td>/ə/</td><td>the schwa — the most common unstressed vowel</td><td>the "a" in <em>banana</em></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub-head">Word stress can change meaning <span class="stamp stamp--intermediate">Intermediate</span></h3>
+    <p>Many two-syllable English words switch meaning depending on which syllable is stressed — usually noun (stress on the first syllable) versus verb (stress on the second).</p>
+    <table class="ref-table" data-level="intermediate">
+      <thead><tr><th>Word</th><th>As a noun</th><th>As a verb</th></tr></thead>
+      <tbody>
+        <tr><td>present</td><td><button class="speak" data-say="I got a present for my birthday.">🔊</button> PRE-sent — a gift</td><td><button class="speak" data-say="They will present the results tomorrow.">🔊</button> pre-SENT — to give/show</td></tr>
+        <tr><td>record</td><td><button class="speak" data-say="She broke the world record.">🔊</button> RE-cord — an achievement</td><td><button class="speak" data-say="Please record the meeting.">🔊</button> re-CORD — to capture audio</td></tr>
+        <tr><td>object</td><td><button class="speak" data-say="What is that object on the table?">🔊</button> OB-ject — a thing</td><td><button class="speak" data-say="I object to that decision.">🔊</button> ob-JECT — to disagree</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub-head">Sentence stress &amp; rhythm <span class="stamp stamp--advanced">Advanced</span></h3>
+    <p>English doesn't give every word equal weight. Content words (nouns, verbs, adjectives) carry the stress; function words (articles, prepositions, pronouns) get compressed and quiet. That contrast is what gives English its rhythm.</p>
+    <div class="card dogear">
+      <h4>Listen for the heavy beats</h4>
+      <p>"I <strong>think</strong> we should <strong>leave</strong> be<strong>fore</strong> it gets <strong>dark</strong>."</p>
+      <button class="speak" data-say="I think we should leave before it gets dark.">🔊 Play the sentence</button>
+    </div>
+    <p class="small muted">Yes/no questions usually rise at the end ("Are you coming? ↗"); statements and wh-questions usually fall ("Where are you going? ↘").</p>
+
+    <h3 class="sub-head">Connected speech: how English actually sounds <span class="stamp stamp--advanced">Advanced</span></h3>
+    <p>In casual speech, native speakers blend words together. Recognizing these is essential for listening, even though you wouldn't write them this way in anything formal.</p>
+    <table class="ref-table">
+      <thead><tr><th>Full form</th><th>Casual sound</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>going to</td><td>"gonna"</td><td><button class="speak" data-say="I'm gonna call you later.">🔊</button> "I'm gonna call you later."</td></tr>
+        <tr><td>want to</td><td>"wanna"</td><td><button class="speak" data-say="Do you wanna grab lunch?">🔊</button> "Do you wanna grab lunch?"</td></tr>
+        <tr><td>have to</td><td>"hafta"</td><td><button class="speak" data-say="I hafta go now.">🔊</button> "I hafta go now."</td></tr>
+        <tr><td>did you</td><td>"didja"</td><td><button class="speak" data-say="Didja see that?">🔊</button> "Didja see that?"</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub-head">Minimal pairs: sounds that confuse listeners <span class="stamp stamp--intermediate">Intermediate</span></h3>
+    <p>These word pairs differ by a single sound. Press 🔊 on both and say them back to back until you can hear — and make — the difference.</p>
+    <div class="planner-wrap">
+      <table class="ref-table">
+        <thead><tr><th>Contrast</th><th>Pair 1</th><th>Pair 2</th></tr></thead>
+        <tbody>
+          <tr><td>/v/ vs /w/</td><td><button class="speak" data-say="vine">🔊</button> vine</td><td><button class="speak" data-say="wine">🔊</button> wine</td></tr>
+          <tr><td>/r/ vs /l/</td><td><button class="speak" data-say="right">🔊</button> right</td><td><button class="speak" data-say="light">🔊</button> light</td></tr>
+          <tr><td>/θ/ vs /s/</td><td><button class="speak" data-say="think">🔊</button> think</td><td><button class="speak" data-say="sink">🔊</button> sink</td></tr>
+          <tr><td>/ɪ/ vs /iː/</td><td><button class="speak" data-say="sit">🔊</button> sit</td><td><button class="speak" data-say="seat">🔊</button> seat</td></tr>
+          <tr><td>/æ/ vs /ʌ/</td><td><button class="speak" data-say="cat">🔊</button> cat</td><td><button class="speak" data-say="cut">🔊</button> cut</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="quiz" data-level="intermediate">
+      <div class="quiz__kicker">Quick check · Minimal pairs</div>
+      <p class="quiz__q">"I'd like to buy a bottle of ___." Which word fits?</p>
+      <ul class="quiz__options">
+        <li><button class="quiz__opt" data-correct="false">vine</button></li>
+        <li><button class="quiz__opt" data-correct="true">wine</button></li>
+      </ul>
+      <p class="quiz__feedback" aria-live="polite"></p>
+    </div>
+
+    <h3 class="sub-head">Tongue twisters <span class="stamp stamp--all">All levels</span></h3>
+    <ul class="entry-list">
+      <li><span class="term">"She sells seashells by the seashore."</span><button class="speak" data-say="She sells seashells by the seashore.">🔊</button></li>
+      <li><span class="term">"Peter Piper picked a peck of pickled peppers."</span><button class="speak" data-say="Peter Piper picked a peck of pickled peppers.">🔊</button></li>
+      <li><span class="term">"How much wood would a woodchuck chuck if a woodchuck could chuck wood?"</span><button class="speak" data-say="How much wood would a woodchuck chuck if a woodchuck could chuck wood?">🔊</button></li>
+    </ul>
+
+    <div class="assignment">
+      <span class="assignment__label">Field assignment</span>
+      <p><strong>Today:</strong> pick one minimal pair from the table. Say each word five times, alternating, then record ten seconds of yourself saying both. Play it back — can you hear the difference you made?</p>
+    </div>
+  </div>
+</section>
+
+<section class="guide-section" id="reading-writing" data-level="all">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head__eyebrow">On the page</div>
+      <h2>Reading &amp; writing</h2>
+      <p>Reading and writing won't fix your accent, but they quietly build the vocabulary and sentence patterns that speaking depends on. A little, often, is enough.</p>
+    </div>
+
+    <h3 class="sub-head">Read for volume, not perfection <span class="stamp stamp--all">All levels</span></h3>
+    <p>Choose material where you already understand roughly 95–98% of the words. Keep reading through unfamiliar words instead of stopping for the dictionary every time — guess from context first, and only look up a word if it repeats and still blocks meaning. This is called extensive reading, and it works because volume builds intuition that rule-memorizing can't.</p>
+    <div class="card-grid">
+      <div class="card" data-level="beginner"><h4>Beginner</h4><p>Graded readers written for your level, or simplified news sites that control vocabulary and sentence length on purpose.</p></div>
+      <div class="card" data-level="intermediate"><h4>Intermediate</h4><p>Young-adult fiction, blog posts, or news articles on subjects you already know something about.</p></div>
+      <div class="card" data-level="advanced"><h4>Advanced</h4><p>Unsimplified novels, long-form journalism, opinion essays — anything you'd genuinely choose to read in your own language.</p></div>
+    </div>
+
+    <h3 class="sub-head">Daily journal prompts <span class="stamp stamp--all">All levels</span></h3>
+    <p>Five sentences a day, in a notebook or a notes app, builds more writing fluency than one long essay a month.</p>
+    <ul>
+      <li><span class="stamp stamp--beginner">Beg.</span> "What did you eat today, and what did you like or dislike about it?"</li>
+      <li><span class="stamp stamp--intermediate">Int.</span> "Describe a small decision you made today and why you chose it."</li>
+      <li><span class="stamp stamp--advanced">Adv.</span> "Argue for or against something you usually agree with — try the opposite side."</li>
+    </ul>
+
+    <h3 class="sub-head">A two-minute self-editing checklist <span class="stamp stamp--intermediate">Intermediate</span></h3>
+    <p>Before you consider anything "finished," scan it once for each of these:</p>
+    <ul>
+      <li>Does every sentence have a subject and a verb that agree (he <em>goes</em>, not he <em>go</em>)?</li>
+      <li>Did you stay in one tense unless you have a clear reason to switch?</li>
+      <li>Did you check a/an/the in front of every singular countable noun?</li>
+      <li>Are any sentences so long you lost track of your own point? Split them.</li>
+    </ul>
+
+    <div class="assignment">
+      <span class="assignment__label">Field assignment</span>
+      <p><strong>Today:</strong> write five sentences answering the journal prompt at your level. Tomorrow, reread them with the self-editing checklist before writing five new ones.</p>
+    </div>
+  </div>
+</section>
+
+<section class="guide-section" id="idioms" data-level="all">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head__eyebrow">Local color</div>
+      <h2>Idioms &amp; phrasal verbs</h2>
+      <p>This is the vocabulary that makes you sound like you actually live in the language, not just study it. Learn these the same way as the word banks above — as whole chunks, with their own example sentence.</p>
+    </div>
+
+    <details class="flip" data-level="beginner" open>
+      <summary><span>Everyday phrasal verbs <span class="stamp stamp--beginner">Beginner</span></span></summary>
+      <div class="flip__body">
+        <ul class="entry-list">
+          <li><span class="term">look for</span><button class="speak" data-say="I'm looking for my keys.">🔊</button><span class="def">to search for something.</span><span class="ex">"I'm looking for my keys."</span></li>
+          <li><span class="term">give up</span><button class="speak" data-say="Don't give up on your goals.">🔊</button><span class="def">to stop trying.</span><span class="ex">"Don't give up on your goals."</span></li>
+          <li><span class="term">figure out</span><button class="speak" data-say="I finally figured out the problem.">🔊</button><span class="def">to understand or solve something.</span><span class="ex">"I finally figured out the problem."</span></li>
+          <li><span class="term">put off</span><button class="speak" data-say="Don't put off your homework until the last minute.">🔊</button><span class="def">to postpone.</span><span class="ex">"Don't put off your homework until the last minute."</span></li>
+          <li><span class="term">run into</span><button class="speak" data-say="I ran into an old friend at the store.">🔊</button><span class="def">to meet someone by chance.</span><span class="ex">"I ran into an old friend at the store."</span></li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="flip" data-level="intermediate">
+      <summary><span>Talking about time <span class="stamp stamp--intermediate">Intermediate</span></span></summary>
+      <div class="flip__body">
+        <ul class="entry-list">
+          <li><span class="term">in the nick of time</span><button class="speak" data-say="We arrived in the nick of time.">🔊</button><span class="def">just before it's too late.</span><span class="ex">"We arrived in the nick of time."</span></li>
+          <li><span class="term">once in a blue moon</span><button class="speak" data-say="He visits his hometown once in a blue moon.">🔊</button><span class="def">very rarely.</span><span class="ex">"He visits his hometown once in a blue moon."</span></li>
+          <li><span class="term">around the clock</span><button class="speak" data-say="The team worked around the clock to fix the bug.">🔊</button><span class="def">all day and night, without stopping.</span><span class="ex">"The team worked around the clock to fix the bug."</span></li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="flip" data-level="intermediate">
+      <summary><span>Work &amp; productivity <span class="stamp stamp--intermediate">Intermediate</span></span></summary>
+      <div class="flip__body">
+        <ul class="entry-list">
+          <li><span class="term">get the ball rolling</span><button class="speak" data-say="Let's get the ball rolling on the new project.">🔊</button><span class="def">to start something.</span><span class="ex">"Let's get the ball rolling on the new project."</span></li>
+          <li><span class="term">cut corners</span><button class="speak" data-say="Don't cut corners on safety checks.">🔊</button><span class="def">to do something poorly or cheaply to save time/money.</span><span class="ex">"Don't cut corners on safety checks."</span></li>
+          <li><span class="term">on the same page</span><button class="speak" data-say="Before we start, let's make sure we're on the same page.">🔊</button><span class="def">in agreement, understanding things the same way.</span><span class="ex">"Before we start, let's make sure we're on the same page."</span></li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="flip" data-level="advanced">
+      <summary><span>Emotions &amp; social situations <span class="stamp stamp--advanced">Advanced</span></span></summary>
+      <div class="flip__body">
+        <ul class="entry-list">
+          <li><span class="term">bite the bullet</span><button class="speak" data-say="I bit the bullet and asked for a raise.">🔊</button><span class="def">to face something unpleasant with courage.</span><span class="ex">"I bit the bullet and asked for a raise."</span></li>
+          <li><span class="term">break the ice</span><button class="speak" data-say="He told a joke to break the ice.">🔊</button><span class="def">to ease tension in a social situation.</span><span class="ex">"He told a joke to break the ice."</span></li>
+          <li><span class="term">read between the lines</span><button class="speak" data-say="If you read between the lines, she's not happy with the decision.">🔊</button><span class="def">to understand a hidden or implied meaning.</span><span class="ex">"If you read between the lines, she's not happy with the decision."</span></li>
+          <li><span class="term">on thin ice</span><button class="speak" data-say="He's on thin ice after missing another deadline.">🔊</button><span class="def">in a risky position, close to trouble.</span><span class="ex">"He's on thin ice after missing another deadline."</span></li>
+        </ul>
+      </div>
+    </details>
+
+    <div class="assignment">
+      <span class="assignment__label">Field assignment</span>
+      <p><strong>Today:</strong> pick one idiom above and use it in a real conversation or message today, even if it feels forced. That single use is what turns it from "studied" to "yours."</p>
+    </div>
+  </div>
+</section>
+
+<section class="guide-section" id="planner" data-level="all">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head__eyebrow">Interactive</div>
+      <h2>Weekly planner</h2>
+      <p>Tick a box every time you practice a skill. This grid saves automatically as you go, so it's still here next time you open this guide.</p>
+    </div>
+
+    <div class="planner-controls">
+      <div class="field-goal">
+        <label for="weekGoal">This week's focus</label>
+        <input type="text" id="weekGoal" placeholder="e.g. Shadow one clip every morning">
+      </div>
+      <button class="btn btn--ghost" id="resetPlanner" type="button">Reset week</button>
+    </div>
+
+    <div class="planner-wrap">
+      <table class="planner-grid">
+        <thead><tr><th>Skill</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead>
+        <tbody>
+          <tr data-row="vocab"><td>Vocabulary</td>
+            <td><input type="checkbox" data-day="mon" aria-label="Vocabulary, Monday"></td>
+            <td><input type="checkbox" data-day="tue" aria-label="Vocabulary, Tuesday"></td>
+            <td><input type="checkbox" data-day="wed" aria-label="Vocabulary, Wednesday"></td>
+            <td><input type="checkbox" data-day="thu" aria-label="Vocabulary, Thursday"></td>
+            <td><input type="checkbox" data-day="fri" aria-label="Vocabulary, Friday"></td>
+            <td><input type="checkbox" data-day="sat" aria-label="Vocabulary, Saturday"></td>
+            <td><input type="checkbox" data-day="sun" aria-label="Vocabulary, Sunday"></td>
+          </tr>
+          <tr data-row="grammar"><td>Grammar</td>
+            <td><input type="checkbox" data-day="mon" aria-label="Grammar, Monday"></td>
+            <td><input type="checkbox" data-day="tue" aria-label="Grammar, Tuesday"></td>
+            <td><input type="checkbox" data-day="wed" aria-label="Grammar, Wednesday"></td>
+            <td><input type="checkbox" data-day="thu" aria-label="Grammar, Thursday"></td>
+            <td><input type="checkbox" data-day="fri" aria-label="Grammar, Friday"></td>
+            <td><input type="checkbox" data-day="sat" aria-label="Grammar, Saturday"></td>
+            <td><input type="checkbox" data-day="sun" aria-label="Grammar, Sunday"></td>
+          </tr>
+          <tr data-row="speaking"><td>Speaking</td>
+            <td><input type="checkbox" data-day="mon" aria-label="Speaking, Monday"></td>
+            <td><input type="checkbox" data-day="tue" aria-label="Speaking, Tuesday"></td>
+            <td><input type="checkbox" data-day="wed" aria-label="Speaking, Wednesday"></td>
+            <td><input type="checkbox" data-day="thu" aria-label="Speaking, Thursday"></td>
+            <td><input type="checkbox" data-day="fri" aria-label="Speaking, Friday"></td>
+            <td><input type="checkbox" data-day="sat" aria-label="Speaking, Saturday"></td>
+            <td><input type="checkbox" data-day="sun" aria-label="Speaking, Sunday"></td>
+          </tr>
+          <tr data-row="listening"><td>Listening</td>
+            <td><input type="checkbox" data-day="mon" aria-label="Listening, Monday"></td>
+            <td><input type="checkbox" data-day="tue" aria-label="Listening, Tuesday"></td>
+            <td><input type="checkbox" data-day="wed" aria-label="Listening, Wednesday"></td>
+            <td><input type="checkbox" data-day="thu" aria-label="Listening, Thursday"></td>
+            <td><input type="checkbox" data-day="fri" aria-label="Listening, Friday"></td>
+            <td><input type="checkbox" data-day="sat" aria-label="Listening, Saturday"></td>
+            <td><input type="checkbox" data-day="sun" aria-label="Listening, Sunday"></td>
+          </tr>
+          <tr data-row="pronunciation"><td>Pronunciation</td>
+            <td><input type="checkbox" data-day="mon" aria-label="Pronunciation, Monday"></td>
+            <td><input type="checkbox" data-day="tue" aria-label="Pronunciation, Tuesday"></td>
+            <td><input type="checkbox" data-day="wed" aria-label="Pronunciation, Wednesday"></td>
+            <td><input type="checkbox" data-day="thu" aria-label="Pronunciation, Thursday"></td>
+            <td><input type="checkbox" data-day="fri" aria-label="Pronunciation, Friday"></td>
+            <td><input type="checkbox" data-day="sat" aria-label="Pronunciation, Saturday"></td>
+            <td><input type="checkbox" data-day="sun" aria-label="Pronunciation, Sunday"></td>
+          </tr>
+          <tr data-row="reading"><td>Reading/writing</td>
+            <td><input type="checkbox" data-day="mon" aria-label="Reading and writing, Monday"></td>
+            <td><input type="checkbox" data-day="tue" aria-label="Reading and writing, Tuesday"></td>
+            <td><input type="checkbox" data-day="wed" aria-label="Reading and writing, Wednesday"></td>
+            <td><input type="checkbox" data-day="thu" aria-label="Reading and writing, Thursday"></td>
+            <td><input type="checkbox" data-day="fri" aria-label="Reading and writing, Friday"></td>
+            <td><input type="checkbox" data-day="sat" aria-label="Reading and writing, Saturday"></td>
+            <td><input type="checkbox" data-day="sun" aria-label="Reading and writing, Sunday"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="save-note" id="plannerSaveNote"></p>
+  </div>
+</section>
+
+<section class="guide-section" id="tracker" data-level="all">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head__eyebrow">Interactive</div>
+      <h2>Progress tracker</h2>
+      <p>A simple self-assessment, not a test. Check off what feels true right now — your answers save automatically, so you can come back in a month and see how much has shifted.</p>
+    </div>
+
+    <div class="tracker__group" data-level="beginner">
+      <h3 class="sub-head">Beginner can-dos <span class="stamp stamp--beginner">Beginner</span></h3>
+      <div class="tracker__bar"><span id="barBeg"></span></div>
+      <ul class="tracker__list">
+        <li><input type="checkbox" id="tr-beg-1"><label for="tr-beg-1">I can introduce myself and answer simple personal questions.</label></li>
+        <li><input type="checkbox" id="tr-beg-2"><label for="tr-beg-2">I can talk about my daily routine using the present simple.</label></li>
+        <li><input type="checkbox" id="tr-beg-3"><label for="tr-beg-3">I can order food or shop using basic phrases.</label></li>
+        <li><input type="checkbox" id="tr-beg-4"><label for="tr-beg-4">I can understand short, simple spoken instructions.</label></li>
+        <li><input type="checkbox" id="tr-beg-5"><label for="tr-beg-5">I can write a short message describing my day.</label></li>
+        <li><input type="checkbox" id="tr-beg-6"><label for="tr-beg-6">I can ask someone to repeat or explain when I don't understand.</label></li>
+      </ul>
+    </div>
+
+    <div class="tracker__group" data-level="intermediate">
+      <h3 class="sub-head">Intermediate can-dos <span class="stamp stamp--intermediate">Intermediate</span></h3>
+      <div class="tracker__bar"><span id="barInt"></span></div>
+      <ul class="tracker__list">
+        <li><input type="checkbox" id="tr-int-1"><label for="tr-int-1">I can describe past experiences, choosing correctly between present perfect and past simple.</label></li>
+        <li><input type="checkbox" id="tr-int-2"><label for="tr-int-2">I can follow a podcast or show at a slightly reduced speed.</label></li>
+        <li><input type="checkbox" id="tr-int-3"><label for="tr-int-3">I can hold a ten-minute conversation on a familiar topic.</label></li>
+        <li><input type="checkbox" id="tr-int-4"><label for="tr-int-4">I can write a short paragraph giving my opinion with reasons.</label></li>
+        <li><input type="checkbox" id="tr-int-5"><label for="tr-int-5">I can use common phrasal verbs and idioms appropriately.</label></li>
+        <li><input type="checkbox" id="tr-int-6"><label for="tr-int-6">I can understand the main points of native-speed speech on familiar topics.</label></li>
+      </ul>
+    </div>
+
+    <div class="tracker__group" data-level="advanced">
+      <h3 class="sub-head">Advanced can-dos <span class="stamp stamp--advanced">Advanced</span></h3>
+      <div class="tracker__bar"><span id="barAdv"></span></div>
+      <ul class="tracker__list">
+        <li><input type="checkbox" id="tr-adv-1"><label for="tr-adv-1">I can follow native-speed podcasts, news, or films without subtitles.</label></li>
+        <li><input type="checkbox" id="tr-adv-2"><label for="tr-adv-2">I can discuss abstract or complex topics with some nuance.</label></li>
+        <li><input type="checkbox" id="tr-adv-3"><label for="tr-adv-3">I can adjust my tone for formal versus casual situations.</label></li>
+        <li><input type="checkbox" id="tr-adv-4"><label for="tr-adv-4">I can write a structured, well-argued essay or report.</label></li>
+        <li><input type="checkbox" id="tr-adv-5"><label for="tr-adv-5">I can understand humor, sarcasm, and cultural references.</label></li>
+        <li><input type="checkbox" id="tr-adv-6"><label for="tr-adv-6">I can use more advanced grammar accurately — mixed conditionals, inversion, passive constructions.</label></li>
+      </ul>
+    </div>
+    <p class="save-note" id="trackerSaveNote"></p>
+  </div>
+</section>
+
+<section class="guide-section" id="tools" data-level="all">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head__eyebrow">Equipment list</div>
+      <h2>Tools &amp; resources</h2>
+      <p>You don't need every tool here — pick one per category and stick with it long enough to feel its effect. These are independent products, not affiliated with this guide; check current pricing and features yourself before committing.</p>
+    </div>
+
+    <h3 class="sub-head">Vocabulary &amp; flashcards <span class="stamp stamp--all">All levels</span></h3>
+    <div class="card-grid">
+      <div class="tool-card card"><span class="tool-card__icon">🗂️</span><div><h4>Anki</h4><p>A spaced-repetition flashcard app — build your own decks from your word journal.</p></div></div>
+      <div class="tool-card card"><span class="tool-card__icon">🗂️</span><div><h4>Quizlet</h4><p>Flashcards with ready-made sets and several study/game modes.</p></div></div>
+    </div>
+
+    <h3 class="sub-head">Grammar &amp; writing help <span class="stamp stamp--intermediate">Intermediate</span></h3>
+    <div class="card-grid">
+      <div class="tool-card card"><span class="tool-card__icon">✍️</span><div><h4>Grammarly</h4><p>Flags grammar, punctuation, and tone issues as you write.</p></div></div>
+      <div class="tool-card card"><span class="tool-card__icon">📖</span><div><h4>Cambridge / Merriam-Webster Dictionary</h4><p>Online dictionaries with example sentences and audio pronunciation.</p></div></div>
+    </div>
+
+    <h3 class="sub-head">Listening sources <span class="stamp stamp--all">All levels</span></h3>
+    <div class="card-grid">
+      <div class="tool-card card"><span class="tool-card__icon">🎧</span><div><h4>BBC Learning English / VOA Learning English</h4><p>Audio and video made specifically for learners, organized by level.</p></div></div>
+      <div class="tool-card card"><span class="tool-card__icon">🎙️</span><div><h4>TED &amp; TED-Ed</h4><p>Short talks with transcripts on almost any subject — good for intermediate and up.</p></div></div>
+      <div class="tool-card card"><span class="tool-card__icon">🎶</span><div><h4>Any podcast app</h4><p>Once you can follow the gist, switch to real-world podcasts on topics you already enjoy.</p></div></div>
+    </div>
+
+    <h3 class="sub-head">Speaking &amp; exchange <span class="stamp stamp--intermediate">Intermediate</span></h3>
+    <div class="card-grid">
+      <div class="tool-card card"><span class="tool-card__icon">💬</span><div><h4>Tandem / HelloTalk</h4><p>Language-exchange apps for text, voice, or video calls with native speakers learning your language.</p></div></div>
+      <div class="tool-card card"><span class="tool-card__icon">🗣️</span><div><h4>Local conversation clubs</h4><p>Search for free English-practice meetups in your city or university.</p></div></div>
+    </div>
+
+    <h3 class="sub-head">Reading sources <span class="stamp stamp--all">All levels</span></h3>
+    <div class="card-grid">
+      <div class="tool-card card"><span class="tool-card__icon">📰</span><div><h4>News in Levels / Simple Wikipedia</h4><p>The same kind of content as regular news and encyclopedia sites, rewritten in simpler language.</p></div></div>
+      <div class="tool-card card"><span class="tool-card__icon">📚</span><div><h4>Graded readers</h4><p>Short books from major publishers, leveled specifically for learners — ask a librarian or bookstore for "graded readers."</p></div></div>
+    </div>
+
+    <div class="assignment">
+      <span class="assignment__label">Field assignment</span>
+      <p><strong>This week:</strong> install or bookmark exactly one new tool from this list — the one for the skill you've been avoiding most.</p>
+    </div>
+  </div>
+</section>
+
+<section class="guide-section" id="mindset" data-level="all">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head__eyebrow">Last page</div>
+      <h2>Mindset</h2>
+      <p>Progress in a language is rarely a straight line — plateaus are normal, not a sign you're doing it wrong. A few mental habits make the difference between learners who keep going and learners who quit at the plateau.</p>
+    </div>
+    <ul>
+      <li><strong>Practice just above your level.</strong> Input that's a little harder than what you already know teaches you something; input that's far too hard just frustrates you.</li>
+      <li><strong>Consistency beats intensity.</strong> Fifteen minutes, five days a week, will take you further than one exhausting Sunday session.</li>
+      <li><strong>Treat mistakes as data, not failure.</strong> Notice it, fix it once, move on. Dwelling on an error wastes more time than the error itself.</li>
+      <li><strong>Use English for things you already love.</strong> Gaming, cooking videos, music, sports commentary — motivation follows genuine interest far better than any worksheet.</li>
+      <li><strong>Track small wins.</strong> That's exactly what the planner and tracker in this guide are for — progress is easier to see in checkboxes than in memory.</li>
+    </ul>
+    <p class="muted" style="margin-top:1.4rem;"><em>Every conversation, every clumsy sentence, every replayed clip is a specimen collected. Keep collecting.</em></p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer class="colophon">
+  <div class="wrap">
+    <div>
+      <p><b>Out of Class</b> — a field guide for practicing English beyond the classroom.</p>
+      <p>Compiled by <b>Rayene Medabis</b>.</p>
+    </div>
+    <p class="small">An original, independently compiled study resource. Any product or brand names mentioned belong to their respective owners and are included only as practice suggestions.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- Mobile nav toggle ---------- */
+  var navToggle = document.getElementById('navToggle');
+  var sidenav = document.getElementById('sidenav');
+  var navScrim = document.getElementById('navScrim');
+  function closeNav(){
+    sidenav.classList.remove('is-open');
+    navScrim.classList.remove('is-open');
+    navToggle.setAttribute('aria-expanded','false');
+  }
+  function openNav(){
+    sidenav.classList.add('is-open');
+    navScrim.classList.add('is-open');
+    navToggle.setAttribute('aria-expanded','true');
+  }
+  if(navToggle){
+    navToggle.addEventListener('click', function(){
+      if(sidenav.classList.contains('is-open')){ closeNav(); } else { openNav(); }
+    });
+  }
+  if(navScrim){ navScrim.addEventListener('click', closeNav); }
+  document.querySelectorAll('.trail__link').forEach(function(link){
+    link.addEventListener('click', closeNav);
+  });
+
+  /* ---------- Scrollspy ---------- */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.trail__link'));
+  var sectionsToWatch = navLinks.map(function(link){
+    var id = link.getAttribute('href').slice(1);
+    return document.getElementById(id);
+  }).filter(Boolean);
+
+  function setActive(id){
+    navLinks.forEach(function(link){
+      link.classList.toggle('is-active', link.getAttribute('href') === '#' + id);
+    });
+  }
+  if('IntersectionObserver' in window && sectionsToWatch.length){
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){ setActive(entry.target.id); }
+      });
+    }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+    sectionsToWatch.forEach(function(sec){ observer.observe(sec); });
+  }
+
+  /* ---------- Level filter ---------- */
+  var filterBtns = Array.prototype.slice.call(document.querySelectorAll('.filter__btn'));
+  function applyFilter(level){
+    document.querySelectorAll('[data-level]').forEach(function(el){
+      var levels = (el.getAttribute('data-level') || '').split(/\s+/);
+      var show = (level === 'all') || levels.indexOf('all') !== -1 || levels.indexOf(level) !== -1;
+      el.style.display = show ? '' : 'none';
+    });
+  }
+  filterBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      filterBtns.forEach(function(b){ b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      applyFilter(btn.getAttribute('data-filter'));
+    });
+  });
+
+  /* ---------- Text-to-speech ---------- */
+  var canSpeak = ('speechSynthesis' in window);
+  document.querySelectorAll('.speak').forEach(function(btn){
+    if(!canSpeak){
+      btn.disabled = true;
+      btn.title = 'Voice playback is not supported in this browser.';
+      return;
+    }
+    btn.addEventListener('click', function(){
+      var text = btn.getAttribute('data-say') || btn.textContent;
+      try{
+        window.speechSynthesis.cancel();
+        var utter = new SpeechSynthesisUtterance(text);
+        utter.lang = 'en-US';
+        utter.rate = 0.92;
+        btn.classList.add('is-playing');
+        utter.onend = function(){ btn.classList.remove('is-playing'); };
+        utter.onerror = function(){ btn.classList.remove('is-playing'); };
+        window.speechSynthesis.speak(utter);
+      }catch(e){
+        btn.classList.remove('is-playing');
+      }
+    });
+  });
+
+  /* ---------- Quizzes ---------- */
+  document.querySelectorAll('.quiz').forEach(function(quiz){
+    var feedback = quiz.querySelector('.quiz__feedback');
+    var opts = Array.prototype.slice.call(quiz.querySelectorAll('.quiz__opt'));
+    var answered = false;
+    opts.forEach(function(opt){
+      opt.addEventListener('click', function(){
+        if(answered) return;
+        answered = true;
+        var correct = opt.getAttribute('data-correct') === 'true';
+        opts.forEach(function(o){
+          if(o.getAttribute('data-correct') === 'true'){ o.classList.add('is-correct'); }
+        });
+        if(!correct){ opt.classList.add('is-wrong'); }
+        if(feedback){
+          feedback.textContent = correct ? 'Correct — nice catch.' : 'Not quite — the correct answer is highlighted above.';
+          feedback.className = 'quiz__feedback ' + (correct ? 'show-correct' : 'show-wrong');
+        }
+      });
+    });
+  });
+
+  /* ---------- Persistent storage helpers ---------- */
+  var hasStorage = (typeof window.storage !== 'undefined' && window.storage !== null);
+
+  async function loadKey(key){
+    if(!hasStorage) return null;
+    try{
+      var res = await window.storage.get(key, false);
+      return res ? res.value : null;
+    }catch(e){ return null; }
+  }
+  async function saveKey(key, value){
+    if(!hasStorage) return false;
+    try{
+      var res = await window.storage.set(key, value, false);
+      return !!res;
+    }catch(e){ return false; }
+  }
+
+  /* ---------- Weekly planner persistence ---------- */
+  (function initPlanner(){
+    var note = document.getElementById('plannerSaveNote');
+    var goalInput = document.getElementById('weekGoal');
+    var checkboxes = Array.prototype.slice.call(document.querySelectorAll('.planner-grid input[type="checkbox"]'));
+    var resetBtn = document.getElementById('resetPlanner');
+    var STORAGE_KEY = 'weekly-planner';
+
+    function setNote(text){ if(note) note.textContent = text; }
+
+    function readState(){
+      var state = { goal: goalInput ? goalInput.value : '', checks: {} };
+      checkboxes.forEach(function(cb, i){
+        state.checks[i] = cb.checked;
+      });
+      return state;
+    }
+    function applyState(state){
+      if(!state) return;
+      if(goalInput && typeof state.goal === 'string') goalInput.value = state.goal;
+      checkboxes.forEach(function(cb, i){
+        cb.checked = !!(state.checks && state.checks[i]);
+      });
+    }
+    var saveTimer = null;
+    function scheduleSave(){
+      setNote(hasStorage ? 'Saving…' : 'Not saved — this view can\'t store data, but the grid still works for this session.');
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(function(){
+        saveKey(STORAGE_KEY, JSON.stringify(readState())).then(function(ok){
+          if(hasStorage) setNote(ok ? 'Saved ✓' : 'Could not save — your changes will be lost on reload.');
+        });
+      }, 400);
+    }
+
+    loadKey(STORAGE_KEY).then(function(raw){
+      if(raw){
+        try{ applyState(JSON.parse(raw)); }catch(e){}
+      }
+      if(hasStorage) setNote('Saved ✓');
+    });
+
+    checkboxes.forEach(function(cb){ cb.addEventListener('change', scheduleSave); });
+    if(goalInput) goalInput.addEventListener('input', scheduleSave);
+    if(resetBtn){
+      resetBtn.addEventListener('click', function(){
+        checkboxes.forEach(function(cb){ cb.checked = false; });
+        if(goalInput) goalInput.value = '';
+        scheduleSave();
+      });
+    }
+  })();
+
+  /* ---------- Progress tracker persistence ---------- */
+  (function initTracker(){
+    var note = document.getElementById('trackerSaveNote');
+    var groups = {
+      beg: { ids: ['tr-beg-1','tr-beg-2','tr-beg-3','tr-beg-4','tr-beg-5','tr-beg-6'], bar: document.getElementById('barBeg') },
+      int: { ids: ['tr-int-1','tr-int-2','tr-int-3','tr-int-4','tr-int-5','tr-int-6'], bar: document.getElementById('barInt') },
+      adv: { ids: ['tr-adv-1','tr-adv-2','tr-adv-3','tr-adv-4','tr-adv-5','tr-adv-6'], bar: document.getElementById('barAdv') }
+    };
+    var STORAGE_KEY = 'self-assessment';
+
+    function setNote(text){ if(note) note.textContent = text; }
+
+    function updateBars(){
+      Object.keys(groups).forEach(function(key){
+        var group = groups[key];
+        var total = group.ids.length;
+        var checked = group.ids.filter(function(id){
+          var el = document.getElementById(id);
+          return el && el.checked;
+        }).length;
+        if(group.bar) group.bar.style.width = Math.round((checked/total)*100) + '%';
+      });
+    }
+
+    function readState(){
+      var state = {};
+      Object.keys(groups).forEach(function(key){
+        groups[key].ids.forEach(function(id){
+          var el = document.getElementById(id);
+          state[id] = !!(el && el.checked);
+        });
+      });
+      return state;
+    }
+    function applyState(state){
+      if(!state) return;
+      Object.keys(state).forEach(function(id){
+        var el = document.getElementById(id);
+        if(el) el.checked = !!state[id];
+      });
+    }
+
+    var saveTimer = null;
+    function scheduleSave(){
+      updateBars();
+      setNote(hasStorage ? 'Saving…' : 'Not saved — this view can\'t store data, but checks still work for this session.');
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(function(){
+        saveKey(STORAGE_KEY, JSON.stringify(readState())).then(function(ok){
+          if(hasStorage) setNote(ok ? 'Saved ✓' : 'Could not save — your changes will be lost on reload.');
+        });
+      }, 400);
+    }
+
+    loadKey(STORAGE_KEY).then(function(raw){
+      if(raw){
+        try{ applyState(JSON.parse(raw)); }catch(e){}
+      }
+      updateBars();
+      if(hasStorage) setNote('Saved ✓');
+    });
+
+    Object.keys(groups).forEach(function(key){
+      groups[key].ids.forEach(function(id){
+        var el = document.getElementById(id);
+        if(el) el.addEventListener('change', scheduleSave);
+      });
+    });
+  })();
+
+})();
+</script>
+</body>
+</html>
+

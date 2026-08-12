@@ -295,7 +295,15 @@ export default function Cv() {
                     <div>
                       <p className="font-heading font-semibold text-base text-[#111] mb-[2px]">{exp.role}</p>
                       <p className="font-mono text-[0.72rem] text-[#B8709C] italic tracking-[0.05em] mb-[0.6rem]">{exp.company}</p>
-                      <p className="font-body text-[0.88rem] leading-[1.72] text-[#4b5563] m-0">{exp.description}</p>
+                      <ul className="font-body text-[0.88rem] leading-[1.72] text-[#4b5563] m-0 pl-5 flex flex-col gap-[0.4rem] list-disc marker:text-[#B8709C]">
+  {exp.description
+    .split(/\r?\n/)
+    .map((line) => line.replace(/^-\s*/, "").trim())
+    .filter(Boolean)
+    .map((point, j) => (
+      <li key={j}>{point}</li>
+    ))}
+</ul>
                     </div>
                   </div>
                 ))}

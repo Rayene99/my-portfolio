@@ -1,5 +1,6 @@
 ---
 title: "Conflict Resolution & Negotiation: A Practitioner's Handbook"
+author: Rayene Medabis
 cover: /images/jjj.png
 html_file: /images/conflict-resolution-handbook.html
 tags:
@@ -38,29 +39,28 @@ problem: "Educational institutions are unusually conflict-prone — high-stakes,
   instantly). This handbook gives them a field-tested, practical alternative to
   both."
 takeaways:
-  - "How to distinguish types of conflict (task, relationship, process,
-    structural) and why schools/training centers are especially prone to them"
-  - "Their own default conflict-handling style (via an interactive
+  - How to distinguish types of conflict (task, relationship, process,
+    structural) and why schools/training centers are especially prone to them
+  - Their own default conflict-handling style (via an interactive
     Thomas-Kilmann-based self-assessment) and when each style is or isn't
-    appropriate"
-  - "Active listening and Non-Violent Communication (Observe–Feel–Need–Request)
-    to lower defensiveness in hard conversations"
+    appropriate
+  - Active listening and Non-Violent Communication (Observe–Feel–Need–Request)
+    to lower defensiveness in hard conversations
   - How to reframe blame-based language into need-based language, and which
     phrases to avoid entirely
-  - "The Harvard Principled Negotiation model (separate people from the
-    problem, focus on interests not positions, generate options, use
-    objective criteria) and how to identify their BATNA"
-  - "How to recognize the \"escalation ladder\" early and use the STOP
-    technique to de-escalate conflict in real time"
+  - The Harvard Principled Negotiation model (separate people from the problem,
+    focus on interests not positions, generate options, use objective criteria)
+    and how to identify their BATNA
+  - How to recognize the "escalation ladder" early and use the STOP technique to
+    de-escalate conflict in real time
   - How and when to bring in a mediator, and the five-stage mediation process
   - "How to navigate specific real-world scenarios: co-teacher disagreements,
-    supervisor feedback conflicts, cross-cultural friction, policy pushback,
-    and values-based clashes"
+    supervisor feedback conflicts, cross-cultural friction, policy pushback, and
+    values-based clashes"
   - How to properly document resolution agreements so verbal agreements don't
     dissolve into disputes later
-  - "How to build a psychologically safe, conflict-resilient team culture
-    through working agreements, retrospectives, and clear escalation
-    pathways"
-  - "Ready-to-use scripts for opening hard conversations, receiving feedback,
-    breaking impasses, and requesting a pause"
+  - How to build a psychologically safe, conflict-resilient team culture through
+    working agreements, retrospectives, and clear escalation pathways
+  - Ready-to-use scripts for opening hard conversations, receiving feedback,
+    breaking impasses, and requesting a pause
 ---

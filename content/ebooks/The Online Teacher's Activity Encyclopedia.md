@@ -1,5 +1,6 @@
 ---
 title: The Online Teacher's Activity Encyclopedia
+author: Rayene Medabis
 cover: /images/ii.png
 html_file: /images/the-online-teacher-s-activity-encyclopedia-1-.html
 tags:
