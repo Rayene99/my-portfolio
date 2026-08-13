@@ -160,14 +160,14 @@ export default function SecureFileViewer({ src, title, onClose }) {
     if (needsInjectedDoc) {
       if (error) {
         return (
-          <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af" }}>
+          <div style={{ flex: 1, minHeight: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af" }}>
             Couldn't load this file.
           </div>
         );
       }
       if (doc === null) {
         return (
-          <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af" }}>
+          <div style={{ flex: 1, minHeight: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af" }}>
             Loading…
           </div>
         );
@@ -177,7 +177,7 @@ export default function SecureFileViewer({ src, title, onClose }) {
           srcDoc={doc}
           title={title}
           sandbox="allow-scripts"
-          style={{ flex: 1, border: "none", width: "100%" }}
+          style={{ flex: 1, minHeight: 0, border: "none", width: "100%" }}
         />
       );
     }
@@ -186,9 +186,15 @@ export default function SecureFileViewer({ src, title, onClose }) {
       // Rendered directly in our own DOM (not an iframe), so the
       // contextmenu/dragstart/select-none handlers on the wrapper below
       // apply to it natively — no injection needed.
+      // minHeight/minWidth: 0 override the flex-item default of
+      // min-height/width: auto, which otherwise forces this wrapper to
+      // grow to the image's native size and lets the outer modal's
+      // overflow:hidden silently crop it instead of letting maxHeight:100%
+      // on the <img> actually scale it down to fit.
       return (
         <div style={{
-          flex: 1, display: "flex", alignItems: "center", justifyContent: "center",
+          flex: 1, minHeight: 0, minWidth: 0,
+          display: "flex", alignItems: "center", justifyContent: "center",
           background: "#f4efe7", overflow: "auto", padding: "1rem",
         }}>
           <img
@@ -196,7 +202,8 @@ export default function SecureFileViewer({ src, title, onClose }) {
             alt={title}
             draggable={false}
             style={{
-              maxWidth: "100%", maxHeight: "100%", objectFit: "contain",
+              maxWidth: "100%", maxHeight: "100%", width: "auto", height: "auto",
+              objectFit: "contain",
               userSelect: "none", WebkitUserSelect: "none", pointerEvents: "none",
             }}
           />
@@ -205,15 +212,17 @@ export default function SecureFileViewer({ src, title, onClose }) {
     }
 
     if (isVideo) {
-      // Rendered natively via <video>, same rationale as isImage above —
-      // no iframe/proxy needed since the browser streams the src directly
-      // (range requests happen at the network layer, not through fetch/JS).
+      // Same minHeight/minWidth: 0 fix as isImage above — without it, a
+      // video whose native resolution exceeds the modal's available space
+      // pushes the wrapper past 90vh and gets clipped by the modal's
+      // overflow:hidden instead of scaling down to fit fully in view.
       // controlsList="nodownload" hides the download button in Chromium-
       // based browsers only; like the PDF case below, this is a deterrent,
       // not real protection — the underlying src URL is still reachable.
       return (
         <div style={{
-          flex: 1, display: "flex", alignItems: "center", justifyContent: "center",
+          flex: 1, minHeight: 0, minWidth: 0,
+          display: "flex", alignItems: "center", justifyContent: "center",
           background: "#000",
         }}>
           <video
@@ -221,7 +230,10 @@ export default function SecureFileViewer({ src, title, onClose }) {
             controls
             controlsList="nodownload"
             onContextMenu={(e) => e.preventDefault()}
-            style={{ maxWidth: "100%", maxHeight: "100%" }}
+            style={{
+              maxWidth: "100%", maxHeight: "100%", width: "auto", height: "auto",
+              objectFit: "contain",
+            }}
           />
         </div>
       );
@@ -238,7 +250,7 @@ export default function SecureFileViewer({ src, title, onClose }) {
         <iframe
           src={`${src}#toolbar=0&navpanes=0&scrollbar=0`}
           title={title}
-          style={{ flex: 1, border: "none", width: "100%" }}
+          style={{ flex: 1, minHeight: 0, border: "none", width: "100%" }}
         />
       );
     }
@@ -246,7 +258,7 @@ export default function SecureFileViewer({ src, title, onClose }) {
     if (isLegacyDoc) {
       return (
         <div style={{
-          flex: 1, display: "flex", flexDirection: "column", gap: "0.5rem",
+          flex: 1, minHeight: 0, display: "flex", flexDirection: "column", gap: "0.5rem",
           alignItems: "center", justifyContent: "center", color: "#9ca3af",
           fontFamily: "var(--font-mono)", fontSize: "0.8rem", textAlign: "center", padding: "2rem",
         }}>
@@ -258,7 +270,7 @@ export default function SecureFileViewer({ src, title, onClose }) {
     // Unrecognized file type — no safe way to render/protect it inline.
     return (
       <div style={{
-        flex: 1, display: "flex", flexDirection: "column", gap: "0.5rem",
+        flex: 1, minHeight: 0, display: "flex", flexDirection: "column", gap: "0.5rem",
         alignItems: "center", justifyContent: "center", color: "#9ca3af",
         fontFamily: "var(--font-mono)", fontSize: "0.8rem", textAlign: "center", padding: "2rem",
       }}>
@@ -288,6 +300,7 @@ export default function SecureFileViewer({ src, title, onClose }) {
           padding: "0.9rem 1.25rem", borderBottom: "1px solid #eee",
           fontFamily: "var(--font-mono)", fontSize: "0.75rem",
           letterSpacing: "0.08em", textTransform: "uppercase", color: "#533178",
+          flexShrink: 0,
         }}>
           <span>{title}</span>
           <button
