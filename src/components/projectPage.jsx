@@ -2,11 +2,29 @@ import { useState } from "react";
 import { projects } from "../lib/content";
 import SecureFileViewer from "./SecureFileViewer";
 
+const VIEWABLE_EXTENSIONS = ["mp4", "webm", "mov", "ogg", "m4v", "pdf", "docx", "html", "htm", "png", "jpg", "jpeg", "gif", "webp", "svg", "avif"];
+
+function getExtension(src) {
+  if (!src) return "";
+  const clean = src.split("?")[0].split("#")[0];
+  const parts = clean.split(".");
+  return parts.length > 1 ? parts.pop().toLowerCase() : "";
+}
+
 function resolveLink(item) {
   if (item.file) return { type: "file", href: item.file };
   if (item.link) {
     const internal = !item.link.startsWith("http://") && !item.link.startsWith("https://");
-    return { type: internal ? "internal" : "external", href: item.link };
+    if (internal) return { type: "internal", href: item.link };
+    // A direct link to a file type SecureFileViewer knows how to render
+    // (video, pdf, docx, image, etc.) should open in the in-page viewer,
+    // not as a raw external link — GitHub Releases (and many CDNs) serve
+    // those with a forced-download header instead of playing/displaying
+    // inline in a new tab.
+    if (VIEWABLE_EXTENSIONS.includes(getExtension(item.link))) {
+      return { type: "file", href: item.link };
+    }
+    return { type: "external", href: item.link };
   }
   return null;
 }
@@ -262,7 +280,8 @@ export default function ProjectPage() {
   const activeProject = projects[activeIndex];
 
   function openInternal(item) {
-    setViewerSrc(item.file || item.link);
+    const resolved = resolveLink(item);
+    setViewerSrc(resolved?.href || item.file || item.link);
     setViewerTitle(item.title);
   }
 
