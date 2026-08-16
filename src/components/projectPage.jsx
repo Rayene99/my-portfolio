@@ -298,10 +298,30 @@ export default function ProjectPage() {
 
       <div className="max-w-[1100px] mx-auto px-8 pb-24 grid grid-cols-[200px_1fr] gap-0 items-start">
         <aside className="sticky top-20 pr-8 border-r border-[rgba(93,68,128,0.18)] self-start">
-          <nav className="flex flex-col gap-[0.15rem]">
-            <p className="font-mono text-[0.62rem] tracking-[0.12em] uppercase text-[#9ca3af] mb-3 m-0">
-              {projects.length} project{projects.length !== 1 ? "s" : ""}
-            </p>
+          <style>{`
+            .project-nav-scroll::-webkit-scrollbar { width: 6px; }
+            .project-nav-scroll::-webkit-scrollbar-track { background: transparent; }
+            .project-nav-scroll::-webkit-scrollbar-thumb {
+              background: rgba(93,68,128,0.25);
+              border-radius: 999px;
+            }
+            .project-nav-scroll::-webkit-scrollbar-thumb:hover {
+              background: rgba(93,68,128,0.45);
+            }
+            .project-nav-scroll {
+              scrollbar-width: thin;
+              scrollbar-color: rgba(93,68,128,0.25) transparent;
+            }
+          `}</style>
+
+          <p className="font-mono text-[0.62rem] tracking-[0.12em] uppercase text-[#9ca3af] mb-3 m-0">
+            {projects.length} project{projects.length !== 1 ? "s" : ""}
+          </p>
+
+          <nav
+            className="project-nav-scroll flex flex-col gap-[0.15rem] overflow-y-auto pr-2"
+            style={{ maxHeight: "calc(100vh - 160px)" }}
+          >
             {projects.map((p, i) => (
               <ProjectNavButton key={i} item={p} index={i} active={i === activeIndex} onClick={() => setActiveIndex(i)} />
             ))}
