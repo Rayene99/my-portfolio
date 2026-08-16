@@ -33,11 +33,11 @@ function ProjectNavButton({ item, index, active, onClick }) {
   return (
     <button
       onClick={onClick}
-      className="relative bg-transparent border-none cursor-pointer text-left py-[0.45rem] w-full transition-colors duration-200"
+      className="relative bg-transparent border-none cursor-pointer text-left py-[0.45rem] pl-3 w-full transition-colors duration-200"
     >
       {active && (
         <span
-          className="absolute right-[-2rem] top-1/2 -translate-y-1/2 w-[3px] h-[18px] rounded-sm"
+          className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-[18px] rounded-sm"
           style={{ background: "linear-gradient(180deg, #5D4480, #B8709C)" }}
         />
       )}
@@ -299,18 +299,24 @@ export default function ProjectPage() {
       <div className="max-w-[1100px] mx-auto px-8 pb-24 grid grid-cols-[200px_1fr] gap-0 items-start">
         <aside className="sticky top-20 pr-8 border-r border-[rgba(93,68,128,0.18)] self-start">
           <style>{`
-            .project-nav-scroll::-webkit-scrollbar { width: 6px; }
-            .project-nav-scroll::-webkit-scrollbar-track { background: transparent; }
+            .project-nav-scroll {
+              scrollbar-width: thin;
+              scrollbar-color: #8B6BAE transparent;
+            }
+            .project-nav-scroll::-webkit-scrollbar {
+              width: 12px;
+            }
+            .project-nav-scroll::-webkit-scrollbar-track {
+              background: transparent;
+            }
             .project-nav-scroll::-webkit-scrollbar-thumb {
-              background: rgba(93,68,128,0.25);
+              background-image: linear-gradient(180deg, #5D4480, #B8709C);
+              background-clip: padding-box;
+              border: 4px solid transparent;
               border-radius: 999px;
             }
             .project-nav-scroll::-webkit-scrollbar-thumb:hover {
-              background: rgba(93,68,128,0.45);
-            }
-            .project-nav-scroll {
-              scrollbar-width: thin;
-              scrollbar-color: rgba(93,68,128,0.25) transparent;
+              background-image: linear-gradient(180deg, #6D50A0, #D4849A);
             }
           `}</style>
 
@@ -318,7 +324,7 @@ export default function ProjectPage() {
             {projects.length} project{projects.length !== 1 ? "s" : ""}
           </p>
 
-         <nav className="flex flex-col gap-[0.15rem] overflow-y-auto overflow-x-hidden max-h-[70vh]">
+          <nav className="project-nav-scroll flex flex-col gap-[0.15rem] pl-4 pr-3 overflow-y-auto overflow-x-hidden max-h-[70vh]">
             {projects.map((p, i) => (
               <ProjectNavButton key={i} item={p} index={i} active={i === activeIndex} onClick={() => setActiveIndex(i)} />
             ))}
