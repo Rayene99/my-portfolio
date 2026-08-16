@@ -7,11 +7,11 @@ function EbookNavButton({ item, index, active, onClick }) {
   return (
     <button
       onClick={onClick}
-      className="relative bg-transparent border-none cursor-pointer text-left py-[0.45rem] w-full transition-colors duration-200"
+      className="relative bg-transparent border-none cursor-pointer text-left py-[0.45rem] pl-3 w-full transition-colors duration-200"
     >
       {active && (
         <span
-          className="absolute right-[-2rem] top-1/2 -translate-y-1/2 w-[3px] h-[18px] rounded-sm"
+          className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-[18px] rounded-sm"
           style={{ background: "linear-gradient(180deg, #5D4480, #B8709C)" }}
         />
       )}
@@ -256,19 +256,42 @@ export default function EbookPage() {
         </div>
       </div>
 
-      <div className="max-w-[1100px] mx-auto px-8 pb-24 grid grid-cols-[200px_1fr] gap-0 items-start">
-        <aside className="sticky top-20 pr-8 border-r border-[rgba(93,68,128,0.18)] self-start">
-          <nav className="flex flex-col gap-[0.15rem]">
-            <p className="font-mono text-[0.62rem] tracking-[0.12em] uppercase text-[#9ca3af] mb-3 m-0">
-              {ebooks.length} ebook{ebooks.length !== 1 ? "s" : ""}
-            </p>
+      <div className="max-w-[1150px] mx-auto px-8 pb-24 grid grid-cols-[280px_1fr] gap-0 items-start">
+        <aside className="sticky top-20 pr-6 border-r border-[rgba(93,68,128,0.18)] self-start">
+          <style>{`
+            .ebook-nav-scroll {
+              scrollbar-width: thin;
+              scrollbar-color: #8B6BAE transparent;
+            }
+            .ebook-nav-scroll::-webkit-scrollbar {
+              width: 12px;
+            }
+            .ebook-nav-scroll::-webkit-scrollbar-track {
+              background: transparent;
+            }
+            .ebook-nav-scroll::-webkit-scrollbar-thumb {
+              background-image: linear-gradient(180deg, #5D4480, #B8709C);
+              background-clip: padding-box;
+              border: 4px solid transparent;
+              border-radius: 999px;
+            }
+            .ebook-nav-scroll::-webkit-scrollbar-thumb:hover {
+              background-image: linear-gradient(180deg, #6D50A0, #D4849A);
+            }
+          `}</style>
+
+          <p className="font-mono text-[0.62rem] tracking-[0.12em] uppercase text-[#9ca3af] mb-3 m-0">
+            {ebooks.length} ebook{ebooks.length !== 1 ? "s" : ""}
+          </p>
+
+          <nav className="ebook-nav-scroll flex flex-col gap-[0.15rem] pl-4 pr-3 overflow-y-auto overflow-x-hidden max-h-[70vh]">
             {ebooks.map((eb, i) => (
               <EbookNavButton key={i} item={eb} index={i} active={i === activeIndex} onClick={() => setActiveIndex(i)} />
             ))}
           </nav>
         </aside>
 
-        <main className="pl-10 pt-8">
+        <main className="pl-8 pt-8">
           <EbookViewer key={activeIndex} item={activeEbook} index={activeIndex} onRead={() => openEbook(activeEbook)} />
         </main>
       </div>
