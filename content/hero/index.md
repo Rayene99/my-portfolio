@@ -1,21 +1,24 @@
 ---
 name: "Rayene Medabis "
-tagline: TESOL-Certified Teacher | Google Certified Educator | ELT Trainer |
-  Curriculum & Instructional Designer | English teacher
+tagline: Curriculum & Instructional Designer | Learning Experience Specialist |
+  ELT Trainer
 intro: >-
-  I'm a curriculum and instructional designer with an M.Ed and 5+ years of
-  experience building learning systems across the MENA region and Europe. My
-  background is in English language education, but the core of my work has
-  always been instructional design: translating complex content into structured,
-  measurable learning experiences.
+  I'm a Curriculum & Instructional Designer with 5 years of experience building
+  learning systems across the EMENA region. My work spans the full instructional
+  design lifecycle: needs analysis, curriculum architecture, learning objective
+  design, storyboarding, and formative/summative assessment, grounded in ADDIE,
+  SAM, Bloom's Taxonomy, Andragogy, and Kirkpatrick's Four Levels of Evaluation.
 
 
-  Over the past several years I've designed full scope-and-sequence curricula and unit plans, developed ESP syllabi including intensive medical English modules for healthcare professionals, and built assessment frameworks, binary rubrics and frequency-count checklists, specifically to standardize grading and remove evaluator subjectivity. I've also led teacher training and mentoring programs, observation and feedback cycles, and onboarding systems for new educators, which means I design not just content but the systems that keep quality consistent across teams.
+  Over the past few years I've moved from classroom teaching into curriculum design, teacher training, and instructional leadership, and I've stayed close to all three. I design syllabi and assessment frameworks for adult, young-learner, and ESP tracks; I create and design practitioner handbooks and multi-week training programmes on ELT methodology, teacher development, and AI integration in education; and I build the operational tools that make instructional quality measurable, KPI and reporting frameworks, early-risk learner identification systems, criterion-referenced grading rubrics, and an accessibility-audit dashboard for course materials.
 
 
-  My skill set spans the full instructional design lifecycle (ADDIE, SAM, Bloom's Taxonomy, Andragogy): needs analysis, curriculum architecture, learning objective design, formative and summative assessment, and blended/hybrid content development for both synchronous and asynchronous delivery. I work comfortably across LMS platforms, Google Workspace, Canva, Adobe Captivate, and Articulate 360, and I hold Google Certified Educator (Levels 1 & 2) and Gemini Certified Educator credentials.
+  I led teacher training and mentoring for a cohort of 30+ teachers, raising their average performance scores from 49% to 87% within three months, the result of structured observation cycles, competency-based feedback, and individualized development plans rather than one-off workshops.
 
 
-  I'm currently transitioning from classroom-facing education into learning & development, applying the same instructional design rigor to corporate and institutional training contexts. 
+  I'm the author of several self-published practitioner guides on Amazon covering instructional design, online teaching, and curriculum development, and I hold TESOL certification, a Master's in Didactics, and Google Certified Educator (Level 1 & 2) credentials, alongside recent training in AI applications for instructional design.
+
+
+  Recently relocated to Muscat, Oman, where I continue to design curriculum and instructional systems remotely while exploring full-time Instructional Design, Curriculum Design, and Learning Experience Design roles.
 photo: /images/output-image.png
 ---
