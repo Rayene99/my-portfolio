@@ -114,3 +114,31 @@ p {
   font-family: var(--font-heading);
   color: var(--color-text);
 }
+
+/* Global thin gradient scrollbar (Firefox) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #8B6BAE transparent;
+}
+
+/* Global thin gradient scrollbar (Chrome/Safari/Edge) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 0; /* kills horizontal scrollbar thickness everywhere */
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #5D4480, #B8709C);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #6D50A0, #D4849A);
+}
+
+/* Explicitly hide horizontal scrollbars anywhere they'd appear */
+::-webkit-scrollbar:horizontal {
+  display: none;
+  height: 0;
+}
