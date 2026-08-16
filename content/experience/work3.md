@@ -1,8 +1,8 @@
 ---
 company: Follow Me Academy
 role: Curriculum & Instructional Designer
-start_date: 2024-01-01
-end_date: 2026-07-21
+start_date: 2023-01-01
+end_date: ""
 location: Remote
 ---
 - Designed 28+ syllabi and curricula across adult, young-learner, and ESP tracks (language centers, medical professionals, HR managers), applying needs analysis and aligning content to global proficiency frameworks (CEFR).
