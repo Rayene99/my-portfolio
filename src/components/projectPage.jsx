@@ -318,10 +318,7 @@ export default function ProjectPage() {
             {projects.length} project{projects.length !== 1 ? "s" : ""}
           </p>
 
-          <nav
-            className="project-nav-scroll flex flex-col gap-[0.15rem] overflow-y-auto pr-2"
-            style={{ maxHeight: "calc(100vh - 160px)" }}
-          >
+         <nav className="flex flex-col gap-[0.15rem] overflow-y-auto overflow-x-hidden max-h-[70vh]">
             {projects.map((p, i) => (
               <ProjectNavButton key={i} item={p} index={i} active={i === activeIndex} onClick={() => setActiveIndex(i)} />
             ))}
