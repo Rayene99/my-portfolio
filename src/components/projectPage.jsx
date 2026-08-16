@@ -296,8 +296,8 @@ export default function ProjectPage() {
         </div>
       </div>
 
-      <div className="max-w-[1100px] mx-auto px-8 pb-24 grid grid-cols-[200px_1fr] gap-0 items-start">
-        <aside className="sticky top-20 pr-8 border-r border-[rgba(93,68,128,0.18)] self-start">
+      <div className="max-w-[1150px] mx-auto px-8 pb-24 grid grid-cols-[280px_1fr] gap-0 items-start">
+        <aside className="sticky top-20 pr-6 border-r border-[rgba(93,68,128,0.18)] self-start">
           <style>{`
             .project-nav-scroll {
               scrollbar-width: thin;
@@ -331,7 +331,7 @@ export default function ProjectPage() {
           </nav>
         </aside>
 
-        <main className="pl-10 pt-8">
+        <main className="pl-8 pt-8">
           <ProjectViewer key={activeIndex} item={activeProject} index={activeIndex} onOpenInternal={openInternal} />
         </main>
       </div>
