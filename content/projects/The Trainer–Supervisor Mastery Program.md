@@ -1,5 +1,5 @@
 ---
-title: The Trainer–Supervisor Mastery Program
+title: The Trainer-Supervisor Mastery Program
 image: /images/yy.png
 file: /images/trainer_supervisor_mastery_program_rayene_medabis-1-.pdf
 tags:
