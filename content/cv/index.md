@@ -10,37 +10,6 @@ summary: Results-driven English language educator and instructional leader with
   building scalable instructional systems that serve diverse learner
   populations.
 experience:
-  - role: Educational Consultant
-    company: Self-Employed (Freelance)
-    dates: 03/2024 – Present
-    description: >-
-      - Architected comprehensive language curricula for various proficiency
-      levels, specifically designed to engage learners through life-skills-based
-      themes.
-
-      - Pioneered a communicative, skills-first methodology that prioritizes functional language use and critical thinking over rote grammar instruction.
-
-      - Developed specialized English for Specific Purposes (ESP) syllabi, including intensive medical English modules tailored for healthcare professionals.
-
-      - Synthesized complex academic content into accessible, "human-centric" learning materials to improve student engagement and retention.
-
-      - Curated story-driven lesson formats to provide a consistent and immersive narrative framework for long-term courses.
-
-      - Spearheaded teacher observation and feedback cycles, utilizing data-driven rubrics to improve instructional quality across a multi-person teaching team.
-
-      - Facilitated professional development workshops and guest-hosted training sessions to mentor educators on modern pedagogical practices.
-
-      - Managed cross-functional teams of lesson creators, overseeing the production and quality assurance of educational prototypes and digital assets.
-
-      - Consulted on institutional branding and thought leadership, developing content strategies to position educational organizations as industry leaders.
-
-      - Engineered objective assessment frameworks using binary rubrics and frequency-count checklists to eliminate teacher subjectivity and ensure grading accuracy.
-
-      - Conducted rigorous curriculum audits, producing detailed reports on project alignment, pedagogical strengths, and areas for strategic improvement.
-
-      - Designed summative and formative assessments focused on measurable communicative actions and real-world task performance.
-
-      - Optimized educational workflows by implementing standardized templates and documentation processes for curriculum development teams.
   - role: Curriculum & Instructional Designer
     company: Follow Me Academy
     dates: 01/2023 – Present
@@ -103,7 +72,7 @@ experience:
 
       - Provided detailed written feedback reports to learners and instructors, highlighting strengths and actionable areas for improvement.
   - role: Special Education Teacher
-    company: Self-Employed (Freelance)
+    company: Follow Me Academy
     dates: 09/2023 – 12/2024
     description: >-
       - Designed highly individualized learning plans (ILPs) for neurodiverse
@@ -115,6 +84,37 @@ experience:
       - Collaborated with parents and guardians through regular progress reviews, providing clear recommendations and home extension activities.
 
       - Tracked and documented student performance data over time to refine instructional strategies and demonstrate evidence of growth to families.
+  - role: Educational Consultant
+    company: Follow Me Academy
+    dates: 01/2024 – 04/2026
+    description: >-
+      - Architected comprehensive language curricula for various proficiency
+      levels, specifically designed to engage learners through life-skills-based
+      themes.
+
+      - Pioneered a communicative, skills-first methodology that prioritizes functional language use and critical thinking over rote grammar instruction.
+
+      - Developed specialized English for Specific Purposes (ESP) syllabi, including intensive medical English modules tailored for healthcare professionals.
+
+      - Synthesized complex academic content into accessible, "human-centric" learning materials to improve student engagement and retention.
+
+      - Curated story-driven lesson formats to provide a consistent and immersive narrative framework for long-term courses.
+
+      - Spearheaded teacher observation and feedback cycles, utilizing data-driven rubrics to improve instructional quality across a multi-person teaching team.
+
+      - Facilitated professional development workshops and guest-hosted training sessions to mentor educators on modern pedagogical practices.
+
+      - Managed cross-functional teams of lesson creators, overseeing the production and quality assurance of educational prototypes and digital assets.
+
+      - Consulted on institutional branding and thought leadership, developing content strategies to position educational organizations as industry leaders.
+
+      - Engineered objective assessment frameworks using binary rubrics and frequency-count checklists to eliminate teacher subjectivity and ensure grading accuracy.
+
+      - Conducted rigorous curriculum audits, producing detailed reports on project alignment, pedagogical strengths, and areas for strategic improvement.
+
+      - Designed summative and formative assessments focused on measurable communicative actions and real-world task performance.
+
+      - Optimized educational workflows by implementing standardized templates and documentation processes for curriculum development teams.
   - role: English Tutor
     company: Self-Employed (Freelance)
     dates: 11/2020 – 09/2024
@@ -202,6 +202,9 @@ certifications:
     issuer: Google
     year: "2026"
     image: /images/gemini-2026-07-21-at-2.52.03-pm.jpeg
+  - name: Certified Teacher Trainer
+    issuer: EC English
+    year: "2024"
 recommendations:
   - name: Ramzi Zouaghi
     title: English Teacher & Teacher Trainer
