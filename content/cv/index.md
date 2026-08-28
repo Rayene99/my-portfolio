@@ -43,7 +43,7 @@ experience:
       - Optimized educational workflows by implementing standardized templates and documentation processes for curriculum development teams.
   - role: Curriculum & Instructional Designer
     company: Follow Me Academy
-    dates: 01/2024 – Present
+    dates: 01/2023 – Present
     description: >-
       - Designed and implemented specialized syllabi for adult and young
       learners, ensuring full alignment with global frameworks.
